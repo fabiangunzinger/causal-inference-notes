@@ -1,0 +1,14 @@
+# Introduction
+
+## Paradigms
+### Neyman-Rubin causal model
+### Directed Acyclic Graphs
+
+## Fundamental problem of causal inference
+
+## Sources of bias
+From @king2006dangers, section 3.2 onwards
+1. Omitted variable bias
+2. Posttreatment bias (including variables in X that are result of T)
+3. Interpolation bias ()
+4. Extrapolation bias

@@ -1,0 +1,3 @@
+# Useful resources
+
+- [Getting to decisions faster in A/B tests -- useful literature review of various moderl approaches to A/B testing](https://aurimas.eu/blog/2023/01/getting-to-decisions-faster-in-a-b-tests-part-1-literature-review/?utm_campaign=Data_Elixir&utm_source=Data_Elixir_423)

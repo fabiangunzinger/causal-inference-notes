@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Online Experiments",
+    "section": "",
+    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books."
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee Collaboration (2015) for additional discussion of literate programming.\n\n\n\n\nCollaboration, Open Science. 2015. “Estimating the Reproducibility of Psychological Science.” Science 349 (6251): aac4716."
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "2  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever."
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Collaboration, Open Science. 2015. “Estimating the Reproducibility\nof Psychological Science.” Science 349 (6251): aac4716."
+  },
+  {
+    "objectID": "fundamentals.html",
+    "href": "fundamentals.html",
+    "title": "Fundamentals",
+    "section": "",
+    "text": "Some fundamentals here"
+  },
+  {
+    "objectID": "philosophy.html",
+    "href": "philosophy.html",
+    "title": "Fundamentals",
+    "section": "",
+    "text": "Some fundamentals here"
+  },
+  {
+    "objectID": "practice.html",
+    "href": "practice.html",
+    "title": "Practice",
+    "section": "",
+    "text": "This part covers issues that arise in practice when we attempt to estimate causal effects."
+  },
+  {
+    "objectID": "ci_introduction.html#fundamental-problem-of-causal-inference",
+    "href": "ci_introduction.html#fundamental-problem-of-causal-inference",
+    "title": "4  Introduction",
+    "section": "4.1 Fundamental problem of causal inference",
+    "text": "4.1 Fundamental problem of causal inference"
+  },
+  {
+    "objectID": "ci_introduction.html#sources-of-bias",
+    "href": "ci_introduction.html#sources-of-bias",
+    "title": "4  Introduction",
+    "section": "4.2 Sources of bias",
+    "text": "4.2 Sources of bias\nFrom King and Zeng (2006), section 3.2 onwards 1. Omitted variable bias 2. Posttreatment bias (including variables in X that are result of T) 3. Interpolation bias () 4. Extrapolation bias\n\n\n\n\nKing, Gary, and Langche Zeng. 2006. “The Dangers of Extreme Counterfactuals.” Political Analysis 14 (2): 131–59."
+  }
+]

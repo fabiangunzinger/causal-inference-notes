@@ -1,0 +1,38 @@
+project:
+  type: book
+
+book:
+  title: "Online Experiments"
+  author: "Fabian Gunzinger"
+  date: "9/28/2023"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - part: philosophy.qmd
+      chapters:
+        - epistemology.qmd
+        - ethics.qmd
+    - part: causal_inference.qmd
+      chapters:
+        - ci_introduction.qmd
+        - statistics.qmd
+    - part: practice.qmd
+      chapters:
+        - practical_issues.qmd
+    - part: quasi_experiments.qmd
+      chapters:
+        - regression_discontinuity.qmd
+    - summary.qmd
+    - useful_resources.qmd
+    - references.qmd
+
+bibliography: fabib.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

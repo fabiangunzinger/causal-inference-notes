@@ -1,0 +1,12 @@
+# Regression discontinuity design
+
+## Use cases
+- Identifiable forcing variable
+
+## Considerations
+- Functional form: use local linear methods
+- Choice of bandwidth: use asymptotic expansion
+- Assessing  (internal) validity: use suplementary analysis
+- Assessing external validity: assess credibility of extrapolation to other subpopulations
+
+Notes based on @athey2017state
