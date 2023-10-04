@@ -8,19 +8,20 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - part: philosophy.qmd
+    - part: introduction.qmd
       chapters:
         - epistemology.qmd
         - ethics.qmd
-    - part: causal_inference.qmd
-      chapters:
-        - ci_introduction.qmd
+        - fundamental_problem.qmd
+        - potential_outcomes.qmd
+        - dags.qmd
         - statistics.qmd
-    - part: practice.qmd
+    - part: experiments.qmd
       chapters:
         - practical_issues.qmd
     - part: quasi_experiments.qmd
       chapters:
+        - matching.qmd
         - regression_discontinuity.qmd
     - summary.qmd
     - useful_resources.qmd

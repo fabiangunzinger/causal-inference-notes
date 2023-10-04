@@ -1,10 +1,4 @@
-# Introduction
-
-## Paradigms
-### Neyman-Rubin causal model
-### Directed Acyclic Graphs
-
-## Fundamental problem of causal inference
+# Fundamental problem of causal inference
 
 ## Sources of bias
 From @king2006dangers, section 3.2 onwards
