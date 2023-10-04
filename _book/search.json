@@ -61,5 +61,47 @@
     "title": "4  Introduction",
     "section": "4.2 Sources of bias",
     "text": "4.2 Sources of bias\nFrom King and Zeng (2006), section 3.2 onwards 1. Omitted variable bias 2. Posttreatment bias (including variables in X that are result of T) 3. Interpolation bias () 4. Extrapolation bias\n\n\n\n\nKing, Gary, and Langche Zeng. 2006. “The Dangers of Extreme Counterfactuals.” Political Analysis 14 (2): 131–59."
+  },
+  {
+    "objectID": "fundamental_problem.html#sources-of-bias",
+    "href": "fundamental_problem.html#sources-of-bias",
+    "title": "4  Fundamental problem of causal inference",
+    "section": "4.1 Sources of bias",
+    "text": "4.1 Sources of bias\nFrom King and Zeng (2006), section 3.2 onwards 1. Omitted variable bias 2. Posttreatment bias (including variables in X that are result of T) 3. Interpolation bias () 4. Extrapolation bias\n\n\n\n\nKing, Gary, and Langche Zeng. 2006. “The Dangers of Extreme Counterfactuals.” Political Analysis 14 (2): 131–59."
+  },
+  {
+    "objectID": "dags.html",
+    "href": "dags.html",
+    "title": "6  Directed Acyclic Graphs",
+    "section": "",
+    "text": "A confounder is a variable that simultaneously affects the treatment indicator and the outcome (the same as an omitted variable).\nA collider is a variable that is simultaneously affected by the treatment indicator and the outcome.\nA backdoor path is a path from the treatment indicator to the outcome via a confounder.\nThere are two ways to close a backdoor path:\n\nControl for the confounder if it is available\nHave a collider on the backdoor path\n\nAn analysis design meets the backdoor criterion if all backdoor paths are closed, in which case we have isolated a causal effect."
+  },
+  {
+    "objectID": "regression_discontinuity.html#use-cases",
+    "href": "regression_discontinuity.html#use-cases",
+    "title": "10  Regression discontinuity design",
+    "section": "10.1 Use cases",
+    "text": "10.1 Use cases\n\nIdentifiable forcing variable"
+  },
+  {
+    "objectID": "regression_discontinuity.html#considerations",
+    "href": "regression_discontinuity.html#considerations",
+    "title": "10  Regression discontinuity design",
+    "section": "10.2 Considerations",
+    "text": "10.2 Considerations\n\nFunctional form: use local linear methods\nChoice of bandwidth: use asymptotic expansion\nAssessing (internal) validity: use suplementary analysis\nAssessing external validity: assess credibility of extrapolation to other subpopulations\n\nNotes based on Athey and Imbens (2017)\n\n\n\n\nAthey, Susan, and Guido W Imbens. 2017. “The State of Applied Econometrics: Causality and Policy Evaluation.” Journal of Economic Perspectives 31 (2): 3–32."
+  },
+  {
+    "objectID": "useful_resources.html",
+    "href": "useful_resources.html",
+    "title": "12  Useful resources",
+    "section": "",
+    "text": "Getting to decisions faster in A/B tests – useful literature review of various moderl approaches to A/B testing"
+  },
+  {
+    "objectID": "matching.html",
+    "href": "matching.html",
+    "title": "9  Matching",
+    "section": "",
+    "text": "ad"
   }
 ]
