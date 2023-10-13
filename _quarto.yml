@@ -2,30 +2,29 @@ project:
   type: book
 
 book:
-  title: "Online Experiments"
+  title: "Causal inference notes"
   author: "Fabian Gunzinger"
   date: "9/28/2023"
   chapters:
     - index.qmd
-    - intro.qmd
+    - chapters/intro.qmd
     - part: introduction.qmd
       chapters:
-        - epistemology.qmd
-        - ethics.qmd
-        - fundamental_problem.qmd
-        - potential_outcomes.qmd
-        - dags.qmd
-        - statistics.qmd
-    - part: experiments.qmd
+        - chapters/epistemology.qmd
+        - chapters/ethics.qmd
+        - chapters/fundamental_problem.qmd
+        - chapters/potential_outcomes.qmd
+        - chapters/dags.qmd
+        - chapters/statistics.qmd
+    - part: chapters/experiments.qmd
       chapters:
-        - practical_issues.qmd
-    - part: quasi_experiments.qmd
+        - chapters/practical_issues.qmd
+    - part: chapters/quasi_experiments.qmd
       chapters:
-        - matching.qmd
-        - regression_discontinuity.qmd
-    - summary.qmd
-    - useful_resources.qmd
-    - references.qmd
+        - chapters/matching.qmd
+        - chapters/regression_discontinuity.qmd
+    - chapters/useful_resources.qmd
+    - chapters/references.qmd
 
 bibliography: fabib.bib
 
