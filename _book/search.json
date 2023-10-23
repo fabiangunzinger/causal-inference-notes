@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Online Experiments",
+    "title": "Causal inference notes",
     "section": "",
     "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books."
   },
@@ -61,5 +61,110 @@
     "title": "4  Introduction",
     "section": "4.2 Sources of bias",
     "text": "4.2 Sources of bias\nFrom King and Zeng (2006), section 3.2 onwards 1. Omitted variable bias 2. Posttreatment bias (including variables in X that are result of T) 3. Interpolation bias () 4. Extrapolation bias\n\n\n\n\nKing, Gary, and Langche Zeng. 2006. “The Dangers of Extreme Counterfactuals.” Political Analysis 14 (2): 131–59."
+  },
+  {
+    "objectID": "fundamental_problem.html#sources-of-bias",
+    "href": "fundamental_problem.html#sources-of-bias",
+    "title": "4  Fundamental problem of causal inference",
+    "section": "4.1 Sources of bias",
+    "text": "4.1 Sources of bias\nFrom King and Zeng (2006), section 3.2 onwards 1. Omitted variable bias 2. Posttreatment bias (including variables in X that are result of T) 3. Interpolation bias () 4. Extrapolation bias\n\n\n\n\nKing, Gary, and Langche Zeng. 2006. “The Dangers of Extreme Counterfactuals.” Political Analysis 14 (2): 131–59."
+  },
+  {
+    "objectID": "dags.html",
+    "href": "dags.html",
+    "title": "6  Directed Acyclic Graphs",
+    "section": "",
+    "text": "A confounder is a variable that simultaneously affects the treatment indicator and the outcome (the same as an omitted variable).\nA collider is a variable that is simultaneously affected by the treatment indicator and the outcome.\nA backdoor path is a path from the treatment indicator to the outcome via a confounder.\nThere are two ways to close a backdoor path:\n\nControl for the confounder if it is available\nHave a collider on the backdoor path\n\nAn analysis design meets the backdoor criterion if all backdoor paths are closed, in which case we have isolated a causal effect."
+  },
+  {
+    "objectID": "regression_discontinuity.html#use-cases",
+    "href": "regression_discontinuity.html#use-cases",
+    "title": "10  Regression discontinuity design",
+    "section": "10.1 Use cases",
+    "text": "10.1 Use cases\n\nIdentifiable forcing variable"
+  },
+  {
+    "objectID": "regression_discontinuity.html#considerations",
+    "href": "regression_discontinuity.html#considerations",
+    "title": "10  Regression discontinuity design",
+    "section": "10.2 Considerations",
+    "text": "10.2 Considerations\n\nFunctional form: use local linear methods\nChoice of bandwidth: use asymptotic expansion\nAssessing (internal) validity: use suplementary analysis\nAssessing external validity: assess credibility of extrapolation to other subpopulations\n\nNotes based on Athey and Imbens (2017)\n\n\n\n\nAthey, Susan, and Guido W Imbens. 2017. “The State of Applied Econometrics: Causality and Policy Evaluation.” Journal of Economic Perspectives 31 (2): 3–32."
+  },
+  {
+    "objectID": "useful_resources.html",
+    "href": "useful_resources.html",
+    "title": "12  Useful resources",
+    "section": "",
+    "text": "Getting to decisions faster in A/B tests – useful literature review of various moderl approaches to A/B testing"
+  },
+  {
+    "objectID": "matching.html",
+    "href": "matching.html",
+    "title": "9  Matching",
+    "section": "",
+    "text": "ad"
+  },
+  {
+    "objectID": "practical_issues.html",
+    "href": "practical_issues.html",
+    "title": "8  Practical issues",
+    "section": "",
+    "text": "For useful set of rules of thumb, see Kohavi papers as well as this CUPED post\nFor great outline of experiment platform and used methods see this Uber post.\n\nNotes from larsen2023statistical\n\nReasons for insufficient power\n\nTreatment effect is homogenously distributed across entire user base but very small\nFeature affects only small number of users, so overall effect is highly attenuated\nTreatment effect on known subgroups is of interest"
+  },
+  {
+    "objectID": "chapters/intro.html",
+    "href": "chapters/intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee Collaboration (2015) for additional discussion of literate programming.\n\n\n\n\nCollaboration, Open Science. 2015. “Estimating the Reproducibility of Psychological Science.” Science 349 (6251): aac4716."
+  },
+  {
+    "objectID": "chapters/fundamental_problem.html#sources-of-bias",
+    "href": "chapters/fundamental_problem.html#sources-of-bias",
+    "title": "4  Fundamental problem of causal inference",
+    "section": "4.1 Sources of bias",
+    "text": "4.1 Sources of bias\nFrom King and Zeng (2006), section 3.2 onwards 1. Omitted variable bias 2. Posttreatment bias (including variables in X that are result of T) 3. Interpolation bias () 4. Extrapolation bias\n\n\n\n\nKing, Gary, and Langche Zeng. 2006. “The Dangers of Extreme Counterfactuals.” Political Analysis 14 (2): 131–59."
+  },
+  {
+    "objectID": "chapters/dags.html",
+    "href": "chapters/dags.html",
+    "title": "6  Directed Acyclic Graphs",
+    "section": "",
+    "text": "A confounder is a variable that simultaneously affects the treatment indicator and the outcome (the same as an omitted variable).\nA collider is a variable that is simultaneously affected by the treatment indicator and the outcome.\nA backdoor path is a path from the treatment indicator to the outcome via a confounder.\nThere are two ways to close a backdoor path:\n\nControl for the confounder if it is available\nHave a collider on the backdoor path\n\nAn analysis design meets the backdoor criterion if all backdoor paths are closed, in which case we have isolated a causal effect."
+  },
+  {
+    "objectID": "chapters/practical_issues.html",
+    "href": "chapters/practical_issues.html",
+    "title": "8  Practical issues",
+    "section": "",
+    "text": "For useful set of rules of thumb, see Kohavi papers as well as this CUPED post\nFor great outline of experiment platform and used methods see this Uber post.\n\nNotes from larsen2023statistical\n\nReasons for insufficient power\n\nTreatment effect is homogenously distributed across entire user base but very small\nFeature affects only small number of users, so overall effect is highly attenuated\nTreatment effect on known subgroups is of interest"
+  },
+  {
+    "objectID": "chapters/regression_discontinuity.html#use-cases",
+    "href": "chapters/regression_discontinuity.html#use-cases",
+    "title": "10  Regression discontinuity design",
+    "section": "10.1 Use cases",
+    "text": "10.1 Use cases\n\nIdentifiable forcing variable"
+  },
+  {
+    "objectID": "chapters/regression_discontinuity.html#considerations",
+    "href": "chapters/regression_discontinuity.html#considerations",
+    "title": "10  Regression discontinuity design",
+    "section": "10.2 Considerations",
+    "text": "10.2 Considerations\n\nFunctional form: use local linear methods\nChoice of bandwidth: use asymptotic expansion\nAssessing (internal) validity: use suplementary analysis\nAssessing external validity: assess credibility of extrapolation to other subpopulations\n\nNotes based on Athey and Imbens (2017)\n\n\n\n\nAthey, Susan, and Guido W Imbens. 2017. “The State of Applied Econometrics: Causality and Policy Evaluation.” Journal of Economic Perspectives 31 (2): 3–32."
+  },
+  {
+    "objectID": "chapters/references.html",
+    "href": "chapters/references.html",
+    "title": "References",
+    "section": "",
+    "text": "Athey, Susan, and Guido W Imbens. 2017. “The State of Applied\nEconometrics: Causality and Policy Evaluation.” Journal of\nEconomic Perspectives 31 (2): 3–32.\n\n\nCollaboration, Open Science. 2015. “Estimating the Reproducibility\nof Psychological Science.” Science 349 (6251): aac4716.\n\n\nKing, Gary, and Langche Zeng. 2006. “The Dangers of Extreme\nCounterfactuals.” Political Analysis 14 (2): 131–59."
+  },
+  {
+    "objectID": "chapters/useful_resources.html",
+    "href": "chapters/useful_resources.html",
+    "title": "11  Useful resources",
+    "section": "",
+    "text": "Getting to decisions faster in A/B tests – useful literature review of various moderl approaches to A/B testing"
   }
 ]

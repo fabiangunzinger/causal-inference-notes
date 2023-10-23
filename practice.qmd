@@ -1,3 +1,0 @@
-# Practice
-
-This part covers issues that arise in practice when we attempt to estimate causal effects.
