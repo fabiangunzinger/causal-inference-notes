@@ -1,6 +1,7 @@
 todo
 - [x] Set up provisional book structure
 - [x] Move existing material from other places
-- [ ] Push to Github
+- [x] Push to Github
+- [ ] Integrate jupyter experiment notes
 - [ ] Publish book on website
 
