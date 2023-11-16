@@ -135,23 +135,23 @@
   {
     "objectID": "chapters/practical_issues.html",
     "href": "chapters/practical_issues.html",
-    "title": "8  Practical issues",
+    "title": "11  Practical issues",
     "section": "",
     "text": "For useful set of rules of thumb, see Kohavi papers as well as this CUPED post\nFor great outline of experiment platform and used methods see this Uber post.\n\nNotes from larsen2023statistical\n\nReasons for insufficient power\n\nTreatment effect is homogenously distributed across entire user base but very small\nFeature affects only small number of users, so overall effect is highly attenuated\nTreatment effect on known subgroups is of interest"
   },
   {
     "objectID": "chapters/regression_discontinuity.html#use-cases",
     "href": "chapters/regression_discontinuity.html#use-cases",
-    "title": "10  Regression discontinuity design",
-    "section": "10.1 Use cases",
-    "text": "10.1 Use cases\n\nIdentifiable forcing variable"
+    "title": "13  Regression discontinuity design",
+    "section": "13.1 Use cases",
+    "text": "13.1 Use cases\n\nIdentifiable forcing variable"
   },
   {
     "objectID": "chapters/regression_discontinuity.html#considerations",
     "href": "chapters/regression_discontinuity.html#considerations",
-    "title": "10  Regression discontinuity design",
-    "section": "10.2 Considerations",
-    "text": "10.2 Considerations\n\nFunctional form: use local linear methods\nChoice of bandwidth: use asymptotic expansion\nAssessing (internal) validity: use suplementary analysis\nAssessing external validity: assess credibility of extrapolation to other subpopulations\n\nNotes based on Athey and Imbens (2017)\n\n\n\n\nAthey, Susan, and Guido W Imbens. 2017. “The State of Applied Econometrics: Causality and Policy Evaluation.” Journal of Economic Perspectives 31 (2): 3–32."
+    "title": "13  Regression discontinuity design",
+    "section": "13.2 Considerations",
+    "text": "13.2 Considerations\n\nFunctional form: use local linear methods\nChoice of bandwidth: use asymptotic expansion\nAssessing (internal) validity: use suplementary analysis\nAssessing external validity: assess credibility of extrapolation to other subpopulations\n\nNotes based on Athey and Imbens (2017)\n\n\n\n\nAthey, Susan, and Guido W Imbens. 2017. “The State of Applied Econometrics: Causality and Policy Evaluation.” Journal of Economic Perspectives 31 (2): 3–32."
   },
   {
     "objectID": "chapters/references.html",
@@ -166,5 +166,40 @@
     "title": "11  Useful resources",
     "section": "",
     "text": "Getting to decisions faster in A/B tests – useful literature review of various moderl approaches to A/B testing"
+  },
+  {
+    "objectID": "chapters/projection.html",
+    "href": "chapters/projection.html",
+    "title": "8  Projection",
+    "section": "",
+    "text": "A projection is a transformation of a vector onto a subspace. There are different types of projections, but the one that’s relevant for us here is orthogonal projection.\n\\[\n\\begin{aligned}\n\\alpha &= \\beta \\\\\n&= \\delta\n\\end{aligned}\n\\]\npython -m pip install rosalie\n\nimport pandas as pd\ndf = pd.DataFrame({'a': [1, 2, 3]})\ndf.head()\n\n\n\n\n\n\n\n\na\n\n\n\n\n0\n1\n\n\n1\n2\n\n\n2\n3"
+  },
+  {
+    "objectID": "chapters/projection.html#projection-in-1-d",
+    "href": "chapters/projection.html#projection-in-1-d",
+    "title": "8  Projection",
+    "section": "8.1 Projection in 1-D",
+    "text": "8.1 Projection in 1-D\nProjecting a vector in two-dimensional space onto a line through the origin is a nice way to build an understanding for what a projection does.2"
+  },
+  {
+    "objectID": "chapters/projection.html#references",
+    "href": "chapters/projection.html#references",
+    "title": "8  Projection",
+    "section": "8.3 References",
+    "text": "8.3 References\n\nStrang linalg lectures"
+  },
+  {
+    "objectID": "chapters/projection.html#footnotes",
+    "href": "chapters/projection.html#footnotes",
+    "title": "8  Projection",
+    "section": "",
+    "text": "A subspace is a subset of a vector space that is itself a vector space in which any possible linear combination of two vectors in the space is also in the space. For instance, a 2-dimensional plane is a subspace of \\(\\mathbb{R}^3\\) if it contains all possible linear combinations of any 2-dimensional vectors. For this to be the case, the plane has to go through the origin – the point (0, 0, 0) – to contain linear combinations with the zero scalar. Similarly, a line that goes through the origin is also a valid subspace, since any linear combination of two vectors that lie on the line will also lie on the line.↩︎\nA line through the origin is a subspace of a two-dimensional vector because it is 1-dimensional (and thus a subset of the 2-dimensional vector space) and because all possible linear combinations of vectors on the line will also lie on the line (see discussion on subspace above).↩︎"
+  },
+  {
+    "objectID": "chapters/projection.html#projection-onto-1-d",
+    "href": "chapters/projection.html#projection-onto-1-d",
+    "title": "8  Projection",
+    "section": "8.1 Projection onto 1-D",
+    "text": "8.1 Projection onto 1-D\nProjecting a vector in two-dimensional space onto a line through the origin is a nice way to build an understanding for what a projection does.2\nSay we want to orthogonally project the vector \\(b\\) onto the line \\(a\\), and we will call the resulting projection \\(p\\). Hence, \\(p\\) is the point on \\(a\\) that is nearest to the (tip of) the vector \\(b\\). We can think of the line \\(a\\) as a base vector \\(a\\) and a scalar, \\(x\\), so that choosing a suitable \\(x\\) allows us to reach any point on the line. Finding \\(p\\) then boils down to finding the value of \\(x\\) that gets us to that point of the line \\(a\\) that is closest to \\(b\\).\nWe can find \\(p\\) in different ways.\nUsing calculus:\nMinimising the distance between the (tip of) the vector, \\(b\\), and the projection, \\(p\\), is akin to solving the following problem:\n\\[\n\\begin{aligned}\nargmin_{x} \\sqrt{\\sum_{i=1}^2{(b_i - p_i)^2}} &= argmin_{x} \\sum_{i=1}^2{(b_i - p_i)^2} \\\\\n&= argmin_{x} \\sum_{i=1}^2{(b_i - xa_i)^2} \\\\\n&= argmin_{x} (b - xa)'(b - xa) \\\\\n\\end{aligned}\n\\]\nSetting the derivative with respect to \\(x\\) to zero we get:\n\\[\n\\begin{aligned}\n\\frac{d}{dx} (b - xa)'(b - xa) &= (-a)'(b - xa) + (b - xa)'(-a) & \\\\\n&= -a'b + xa'a - a'b + xa'a \\\\\n&= -2a'b + 2xa'a = 0\n\\end{aligned}\n\\]\nSolving for \\(x\\) we get:\n\\[\n\\begin{aligned}\n-2a'b + 2xa'a &= 0 \\\\\nxa'a &= a'b \\\\\nx &= (a'a)^{-1}a'b\n\\end{aligned}\n\\]\nHence, given that \\(p = ax\\), we have:\n\\[\n\\begin{aligned}\np &= ax &= a(a'a)^{-1}a'b\n\\end{aligned}\n\\]\n[todo: insert figure here]"
   }
 ]

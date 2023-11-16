@@ -8,21 +8,31 @@ book:
   chapters:
     - index.qmd
     - chapters/intro.qmd
+
     - part: introduction.qmd
       chapters:
         - chapters/epistemology.qmd
         - chapters/ethics.qmd
         - chapters/fundamental_problem.qmd
+    
+    - part: fundamentals.qmd
+      chapters:
         - chapters/potential_outcomes.qmd
         - chapters/dags.qmd
         - chapters/statistics.qmd
+        - chapters/projection.qmd
+        - chapters/fwl.qmd
+        - chapters/regression.qmd
+
     - part: chapters/experiments.qmd
       chapters:
         - chapters/practical_issues.qmd
+
     - part: chapters/quasi_experiments.qmd
       chapters:
         - chapters/matching.qmd
         - chapters/regression_discontinuity.qmd
+
     - chapters/useful_resources.qmd
     - chapters/references.qmd
 
@@ -33,6 +43,8 @@ format:
     theme: cosmo
   pdf:
     documentclass: scrreprt
+jupyter: python3
+
 
 
 
