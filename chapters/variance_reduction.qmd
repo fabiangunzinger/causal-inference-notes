@@ -1,0 +1,58 @@
+# Variance reduction
+
+## Why reduce variance?
+
+## CUPED
+
+Use from blog post...
+
+New framing
+
+- Relation to other approaches
+
+  - Is CUPED regression adjustment? Identical to regression only in simple case (show FWL link -- have separate post on understanding FWL with relevant regression examples)
+
+  - Is CUPED DiD? (based on Courthoud) -- same if theta = 1
+
+- Features of CUPED
+
+  - Also permits non-linear adjustments (i.e. not reliant on linearity assumptions in OLS)
+
+- Variance reduction of CUPED: Add section on how CUPED reduces std error or estimator and, via rule of thumb for sample size requirement, increases power! (See my VR talk notes)
+
+Resources:
+- https://bookdown.org/ts_robinson1994/10EconometricTheorems/frisch.html
+- https://www.evanmiller.org/you-cant-spell-cuped-without-frisch-waugh-lovell.html
+- https://towardsdatascience.com/understanding-cuped-a822523641af
+- https://en.wikipedia.org/wiki/Linear_regression
+
+CUPED is a re-invention of multiple linear regression. Evan Miller ([here](https://www.evanmiller.org/you-cant-spell-cuped-without-frisch-waugh-lovell.html)) and Matteo Courthoud ([here](https://towardsdatascience.com/understanding-cuped-a822523641af)) make similar points in their excellent posts on the topic, but -- given my starting point -- neither quite helped me fully understand what is going on. This post is my attempt to do that.
+
+In particular, I think that to really understand the connection between multiple linear regression and CUPED, you have to understand the linear algebra of the Frisch-Waugh-Lowell theorem (FWL) rather than just knowing that that theorem says, and to understand that, you have to understand the concept of a projection. The latter two are both well explained in Thomas S. Robinson's wonderful online book [10 Fundamental Theorems for Econometrics](https://bookdown.org/ts_robinson1994/10EconometricTheorems/), on which I draw heavily.
+
+So, here we go.
+
+```{python}
+import numpy as np
+import pandas as pd
+import statsmodels.formula.api as smf
+
+import src.helpers as hp
+
+%load_ext autoreload
+%autoreload 2
+```
+
+```{python}
+df_raw = (pd.read_parquet('~/tmp/oneweb-ie.parquet')
+          .set_index('date', drop=False)
+          .sort_index()
+)
+
+df = (df_raw
+      .pipe(hp.add_pre_metric_value)
+      .pipe(hp.add_treat_effect, effect=1.05)
+)
+df.head(3)
+```
+

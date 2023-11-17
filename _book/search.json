@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Causal inference notes",
     "section": "",
-    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books."
+    "text": "In this space I want to collect my notes on causal inference."
   },
   {
     "objectID": "intro.html",
@@ -163,7 +163,7 @@
   {
     "objectID": "chapters/useful_resources.html",
     "href": "chapters/useful_resources.html",
-    "title": "11  Useful resources",
+    "title": "3  Useful resources",
     "section": "",
     "text": "Getting to decisions faster in A/B tests – useful literature review of various moderl approaches to A/B testing"
   },
@@ -185,21 +185,105 @@
     "objectID": "chapters/projection.html#references",
     "href": "chapters/projection.html#references",
     "title": "8  Projection",
-    "section": "8.3 References",
-    "text": "8.3 References\n\nStrang linalg lectures"
+    "section": "8.5 References",
+    "text": "8.5 References\n\nGilbert Strang’s linear algebra lectures at MIT\n10 Fundamental Theorems for Econometrics"
   },
   {
     "objectID": "chapters/projection.html#footnotes",
     "href": "chapters/projection.html#footnotes",
-    "title": "8  Projection",
+    "title": "2  Projection",
     "section": "",
-    "text": "A subspace is a subset of a vector space that is itself a vector space in which any possible linear combination of two vectors in the space is also in the space. For instance, a 2-dimensional plane is a subspace of \\(\\mathbb{R}^3\\) if it contains all possible linear combinations of any 2-dimensional vectors. For this to be the case, the plane has to go through the origin – the point (0, 0, 0) – to contain linear combinations with the zero scalar. Similarly, a line that goes through the origin is also a valid subspace, since any linear combination of two vectors that lie on the line will also lie on the line.↩︎\nA line through the origin is a subspace of a two-dimensional vector because it is 1-dimensional (and thus a subset of the 2-dimensional vector space) and because all possible linear combinations of vectors on the line will also lie on the line (see discussion on subspace above).↩︎"
+    "text": "A subspace is a subset of a vector space that is itself a vector space in which any possible linear combination of two vectors in the space is also in the space. For instance, a 2-dimensional plane is a subspace of \\(\\mathbb{R}^3\\) if it contains all possible linear combinations of any 2-dimensional vectors. For this to be the case, the plane has to go through the origin – the point (0, 0, 0) – to contain linear combinations with the zero scalar. Similarly, a line that goes through the origin is also a valid subspace, since any linear combination of two vectors that lie on the line will also lie on the line.↩︎\nThe Euclidean distance between two points \\(x\\) and \\(\\bar{x}\\) in \\(\\mathbb{R}^N\\) is defined as \\(\\sqrt{\\sum_{i=1}^N{(\\bar{x_i} - x_i})^2}\\).↩︎\nA line through the origin is a subspace of a two-dimensional vector because it is 1-dimensional (and thus a subset of the 2-dimensional vector) and because all possible linear combinations of vectors on the line will also lie on the line (the line needs to pass through the origin for this latter statement to be true, see the footnote on subspaces).↩︎\nTODO explain concept of orthogonality and why it is equivalent to the dot-product being zero.↩︎\nTODO show what happens if we define \\(p = xa\\) instead of \\(p = ax\\)↩︎"
   },
   {
     "objectID": "chapters/projection.html#projection-onto-1-d",
     "href": "chapters/projection.html#projection-onto-1-d",
     "title": "8  Projection",
     "section": "8.1 Projection onto 1-D",
-    "text": "8.1 Projection onto 1-D\nProjecting a vector in two-dimensional space onto a line through the origin is a nice way to build an understanding for what a projection does.2\nSay we want to orthogonally project the vector \\(b\\) onto the line \\(a\\), and we will call the resulting projection \\(p\\). Hence, \\(p\\) is the point on \\(a\\) that is nearest to the (tip of) the vector \\(b\\). We can think of the line \\(a\\) as a base vector \\(a\\) and a scalar, \\(x\\), so that choosing a suitable \\(x\\) allows us to reach any point on the line. Finding \\(p\\) then boils down to finding the value of \\(x\\) that gets us to that point of the line \\(a\\) that is closest to \\(b\\).\nWe can find \\(p\\) in different ways.\nUsing calculus:\nMinimising the distance between the (tip of) the vector, \\(b\\), and the projection, \\(p\\), is akin to solving the following problem:\n\\[\n\\begin{aligned}\nargmin_{x} \\sqrt{\\sum_{i=1}^2{(b_i - p_i)^2}} &= argmin_{x} \\sum_{i=1}^2{(b_i - p_i)^2} \\\\\n&= argmin_{x} \\sum_{i=1}^2{(b_i - xa_i)^2} \\\\\n&= argmin_{x} (b - xa)'(b - xa) \\\\\n\\end{aligned}\n\\]\nSetting the derivative with respect to \\(x\\) to zero we get:\n\\[\n\\begin{aligned}\n\\frac{d}{dx} (b - xa)'(b - xa) &= (-a)'(b - xa) + (b - xa)'(-a) & \\\\\n&= -a'b + xa'a - a'b + xa'a \\\\\n&= -2a'b + 2xa'a = 0\n\\end{aligned}\n\\]\nSolving for \\(x\\) we get:\n\\[\n\\begin{aligned}\n-2a'b + 2xa'a &= 0 \\\\\nxa'a &= a'b \\\\\nx &= (a'a)^{-1}a'b\n\\end{aligned}\n\\]\nHence, given that \\(p = ax\\), we have:\n\\[\n\\begin{aligned}\np &= ax &= a(a'a)^{-1}a'b\n\\end{aligned}\n\\]\n[todo: insert figure here]"
+    "text": "8.1 Projection onto 1-D\nProjecting a vector in two-dimensional space onto a line that goes through the origin is a nice way to build an understanding for what a projection does.3\nSay we want to orthogonally project the vector \\(b\\) onto a line defined by another vector, \\(a\\), and we will call the resulting projection \\(p\\). Hence, \\(p\\) is the point on the line defined by \\(a\\) that is nearest to the (tip of) the vector \\(b\\).\nWe can think of the line as being generated by scaling vector \\(a\\) with a scalar \\(x\\), so that choosing a suitable \\(x\\) allows us to reach any point on the line. Finding \\(p\\) then boils down to finding the value of \\(x\\) that gets us to that point of the line that is closest to \\(b\\). We can thus write \\(p = ax\\).\n[todo: insert figure here]\nLet’s start by finding \\(p\\). We can find it in different ways.\nUsing calculus:\nMinimising the distance between the (tip of) the vector, \\(b\\), and the projection, \\(p\\), is akin to solving the following problem:\n\\[\n\\begin{aligned}\nargmin_{x} \\sqrt{\\sum_{i=1}^2{(b_i - p_i)^2}} &= argmin_{x} \\sum_{i=1}^2{(b_i - p_i)^2} \\\\\n&= argmin_{x} \\sum_{i=1}^2{(b_i - xa_i)^2} \\\\\n&= argmin_{x} (b - xa)'(b - xa),\n\\end{aligned}\n\\]\nCalculating the derivative with respect to \\(x\\) to zero we get:\n\\[\n\\begin{aligned}\n\\frac{d}{dx} (b - xa)'(b - xa) &= (-a)'(b - xa) + (b - xa)'(-a) & \\\\\n&= -a'b + xa'a - a'b + xa'a \\\\\n&= -2a'b + 2xa'a = 0\n\\end{aligned}\n\\]\nSolving for \\(x\\) we get:\n\\[\n\\begin{aligned}\n-2a'b + 2xa'a &= 0 \\\\\nxa'a &= a'b \\\\\nx &= (a'a)^{-1}a'b\n\\end{aligned}\n\\]\nHence, given that \\(p = ax\\), we have:\n\\[\n\\begin{aligned}\np = ax = \\underbrace{a(a'a)^{-1}a'}_\\text{$P_a$}b,\n\\end{aligned}\n\\]\nwhere \\(P_a\\) is the projection matrix.\nLet’s reflect for a moment what this all means. In general, pre-multiplying a vector by a matrix transforms the vector in a particular way. When we perform orthogonal projection, we pre-multiply a vector by a matrix that transforms the vector into that point on a subspace that it closest to the original vector. In our case here, pre-multiplying our initial vector \\(b\\) by the projection matrix \\(P_a\\) transforms \\(b\\) into that point on \\(a\\) that is closest to \\(b\\), which we call \\(p\\). Given that we define “nearest” using the Euclidean distance, it makes sense that the projection matrix would emerge out of the solution to the minimisation problem of finding the point on the subspace that minimises the Euclidean distance to the original vector.\nUsing basic geometry:\nWe could also find \\(p\\) using our understanding of basic geometry. Looking at the figure above, it is intuitively obvious that the shortest path between the tip of \\(b\\) and the projection \\(p\\) onto \\(a\\) is that which is perpendicular to the line \\(a\\). The path between \\(b\\) and \\(p\\) is simply \\(b - p\\). In linear algebra terms, we thus want that path to be orthogonal to the line \\(a\\).4\nHence, we want:\n\\[\n\\begin{aligned}\na'(b - p) &= 0 \\\\\na'(b - xa) &= 0 \\\\\na'b - xa'a &= 0 \\\\\nxa'a &= a'b \\\\\nx &= (a'a)^{-1}a'b\n\\end{aligned}\n\\]\nSo that, again, we have:5\n\\[\np = ax = \\underbrace{a(a'a)^{-1}a'}_\\text{$P_a$}b,\n\\]"
+  },
+  {
+    "objectID": "chapters/projection.html#projection-onto-2-d-and-n-d.",
+    "href": "chapters/projection.html#projection-onto-2-d-and-n-d.",
+    "title": "8  Projection",
+    "section": "8.3 Projection onto 2-D and N-D.",
+    "text": "8.3 Projection onto 2-D and N-D."
+  },
+  {
+    "objectID": "chapters/projection.html#useful-resources",
+    "href": "chapters/projection.html#useful-resources",
+    "title": "8  Projection",
+    "section": "8.3 Useful resources",
+    "text": "8.3 Useful resources"
+  },
+  {
+    "objectID": "chapters/projection.html#why-project",
+    "href": "chapters/projection.html#why-project",
+    "title": "2  Projection",
+    "section": "2.2 Why project?",
+    "text": "2.2 Why project?\nProjection is useful because it allows us to approximately solve systems of linear equations that have no exact solution. Imagine we have the following system of equations:\n\\[\n\\begin{align*}\na_{11}x_1 + a_{12}x_2 + \\cdots + a_{1k}x_k &= b_1 \\\\\na_{21}x_1 + a_{22}x_2 + \\cdots + a_{2k}x_k &= b_2 \\\\\n\\vdots \\\\\na_{n1}x_1 + a_{n2}x_2 + \\cdots + a_{nk}x_k &= b_n\n\\end{align*}\n\\]\nwhich we can write more compactly in matrix form as:\n\\[\nAx = b.\n\\]\nIf \\(n &gt; k\\), the system is overdetermined – it has more constarints (equations) than degrees of freedom (variables) – and might not have a solution. In this case, it can be useful to solve\n\\[\nAx = \\hat{b},\n\\]\nwhere \\(\\hat{b}\\) is the orthogonal projection of \\(b\\) onto the vector space spanned by \\(A\\), called the span or column space of \\(A\\). Using orthogonal projection in this case achieves two things: it guarantees a solution because \\(\\hat{b}\\) lies on the same space as \\(Ax\\) – they both lie on the subspace spanned by the columns of \\(A\\) – and is makes \\(\\hat{p}\\) the best approximation to \\(b\\) in that it is closest to it in terms of the Euclidean distance."
+  },
+  {
+    "objectID": "chapters/projection.html#projecting-from-2-d-onto-1-d",
+    "href": "chapters/projection.html#projecting-from-2-d-onto-1-d",
+    "title": "2  Projection",
+    "section": "2.1 Projecting from 2-D onto 1-D",
+    "text": "2.1 Projecting from 2-D onto 1-D\nProjecting a vector in two-dimensional space onto a line that goes through the origin is a nice way to build an understanding for what a projection does.3\nSay we want to orthogonally project the vector \\(b\\) onto a line defined by another vector, \\(a\\), and we will call the resulting projection \\(p\\). Hence, \\(p\\) is the point on the line defined by \\(a\\) that is nearest to the (tip of) the vector \\(b\\).\nWe can think of the line as being generated by scaling vector \\(a\\) with a scalar \\(x\\), so that choosing a suitable \\(x\\) allows us to reach any point on the line. Finding \\(p\\) then boils down to finding the value of \\(x\\) that gets us to that point of the line that is closest to \\(b\\). We can thus write \\(p = ax\\).\n[todo: insert figure here]\nLet’s start by finding \\(p\\). We can find it in different ways.\nUsing calculus:\nMinimising the distance between the (tip of) the vector, \\(b\\), and the projection, \\(p\\), is akin to solving the following problem:\n\\[\n\\begin{aligned}\nargmin_{x} \\sqrt{\\sum_{i=1}^2{(b_i - p_i)^2}} &= argmin_{x} \\sum_{i=1}^2{(b_i - p_i)^2} \\\\\n&= argmin_{x} \\sum_{i=1}^2{(b_i - xa_i)^2} \\\\\n&= argmin_{x} (b - xa)'(b - xa),\n\\end{aligned}\n\\]\nCalculating the derivative with respect to \\(x\\) to zero we get:\n\\[\n\\begin{aligned}\n\\frac{d}{dx} (b - xa)'(b - xa) &= (-a)'(b - xa) + (b - xa)'(-a) & \\\\\n&= -a'b + xa'a - a'b + xa'a \\\\\n&= -2a'b + 2xa'a = 0\n\\end{aligned}\n\\]\nSolving for \\(x\\) we get:\n\\[\n\\begin{aligned}\n-2a'b + 2xa'a &= 0 \\\\\nxa'a &= a'b \\\\\nx &= (a'a)^{-1}a'b\n\\end{aligned}\n\\]\nHence, given that \\(p = ax\\), we have:\n\\[\n\\begin{aligned}\np = ax = \\underbrace{a(a'a)^{-1}a'}_\\text{$P_a$}b,\n\\end{aligned}\n\\]\nwhere \\(P_a\\) is the projection matrix.\nLet’s reflect for a moment what this all means. In general, pre-multiplying a vector by a matrix transforms the vector in a particular way. When we perform orthogonal projection, we pre-multiply a vector by a matrix that transforms the vector into that point on a subspace that it closest to the original vector. In our case here, pre-multiplying our initial vector \\(b\\) by the projection matrix \\(P_a\\) transforms \\(b\\) into that point on \\(a\\) that is closest to \\(b\\), which we call \\(p\\). Given that we define “nearest” using the Euclidean distance, it makes sense that the projection matrix would emerge out of the solution to the minimisation problem of finding the point on the subspace that minimises the Euclidean distance to the original vector.\nUsing basic geometry:\nWe could also find \\(p\\) using our understanding of basic geometry. Looking at the figure above, it is intuitively obvious that the shortest path between the tip of \\(b\\) and the projection \\(p\\) onto \\(a\\) is that which is perpendicular to the line \\(a\\). The path between \\(b\\) and \\(p\\) is simply \\(b - p\\). In linear algebra terms, we thus want that path to be orthogonal to the line \\(a\\).4\nHence, we want:\n\\[\n\\begin{aligned}\na'(b - p) &= 0 \\\\\na'(b - xa) &= 0 \\\\\na'b - xa'a &= 0 \\\\\nxa'a &= a'b \\\\\nx &= (a'a)^{-1}a'b\n\\end{aligned}\n\\]\nSo that, again, we have:5\n\\[\np = ax = \\underbrace{a(a'a)^{-1}a'}_\\text{$P_a$}b.\n\\]\nThis also makes clear why this type of projection is called “orthogonal projection”: we want to project a vector onto a subspace in such a way that the distance between the original vector and the subspace is minimal. The resulting projection will be a point on the suspace such that a vector from that point to the original vector is orthogonal to the subspace. Intuitively, this is the case because the shortest path between the vector and the subspace will be that which is perpendicular to the subspace, and orthogonality is the generalisation of the notion of perpendicularity."
+  },
+  {
+    "objectID": "chapters/projection.html#projection-from-3-d-onto-2-d",
+    "href": "chapters/projection.html#projection-from-3-d-onto-2-d",
+    "title": "8  Projection",
+    "section": "8.3 Projection from 3-D onto 2-D",
+    "text": "8.3 Projection from 3-D onto 2-D\nOur starting point is similar to the 2-D onto 1-D example above, but our vector \\(b\\) is now 3-dimensional and the subspace we project it onto is now not a 1-dimensional line but a 2-dimensional plane. Hence, \\(p\\) is now a point in the 3-dimensional space that lies on the 2-dimensional subspace. Above, we defined \\(p\\) as \\(p = ax\\), where \\(a\\) was the scalar that characterised the line and \\(x\\) the scalar that helped us move along that line. Similarly, we now have \\(p = Ax\\), where \\(A\\) is a 2 x 2 matrix, the two columns of which are the base vectors of the 2-dimensional subspace.\nWe can still go about finding \\(p\\) in the same way as above:\n\\[\n\\begin{aligned}\nargmin_{x} (b - Ax)'(b - Ax) \\\\\n\\frac{d}{dx} (b - Ax)'(b - Ax) &= -2A'(b - Ax) = 0\n\\end{aligned}\n\\]\nSolving for \\(x\\) we get: \\[\n\\begin{aligned}\n-2A'(b - Ax) &= 0 \\\\\n-A'b + A'Ax &= 0 \\\\\nA'Ax &= A'b \\\\\nx &= (A'A)^{-1}A'b\n\\end{aligned}\n\\]\nThe last step above works only if \\(A'A\\) is actually invertible, which is the case if \\(A\\) has full rank, which is the case if none of its columns can be constructed from a linear combination of any other columns. (A visual way to think about this is the following: the columns of a matrix are the basis vectors of its column space. The rank is the number of dimensions of that column space. Full rank means that the column space has as many dimensions as there are columns.)"
+  },
+  {
+    "objectID": "chapters/projection.html#projection-from-3-d-onto-2-d-and-projecting-onto-n-d",
+    "href": "chapters/projection.html#projection-from-3-d-onto-2-d-and-projecting-onto-n-d",
+    "title": "2  Projection",
+    "section": "2.3 Projection from 3-D onto 2-D and projecting onto N-D",
+    "text": "2.3 Projection from 3-D onto 2-D and projecting onto N-D\nOur starting point is similar to the 2-D onto 1-D example above, but our vector \\(b\\) is now 3-dimensional and the subspace we project it onto is now not a 1-dimensional line but a 2-dimensional plane. Hence, \\(p\\) is now a point in the 3-dimensional space that lies on the 2-dimensional subspace. Above, we defined \\(p\\) as \\(p = ax\\), where \\(a\\) was the scalar that characterised the line and \\(x\\) the scalar that helped us move along that line. Similarly, we now have \\(p = Ax\\), where \\(A\\) is a 2 x 2 matrix, the two columns of which are the base vectors of the 2-dimensional subspace.\nWe can still go about finding \\(p\\) in the same way as above:\n\\[\n\\begin{aligned}\nargmin_{x} (b - Ax)'(b - Ax) \\\\\n\\frac{d}{dx} (b - Ax)'(b - Ax) &= -2A'(b - Ax) = 0\n\\end{aligned}\n\\]\nSolving for \\(x\\) we get: \\[\n\\begin{aligned}\n-2A'(b - Ax) &= 0 \\\\\n-A'b + A'Ax &= 0 \\\\\nA'Ax &= A'b \\\\\nx &= (A'A)^{-1}A'b\n\\end{aligned}\n\\]\nThe last step above works only if \\(A'A\\) is actually invertible, which is the case if \\(A\\) has full rank, which is the case if none of its columns can be constructed from a linear combination of any other columns. (A visual way to think about this is the following: the columns of a matrix are the basis vectors of its column space. The rank is the number of dimensions of that column space. Full rank means that the column space has as many dimensions as there are columns.)\nThe math above generalises directly to projections onto N-dimensional space. All that changes is that \\(b\\), \\(A\\), \\(x\\), and \\(p\\) are higher-dimensional objects, and that visualising what’s happening becomes rather mind-bending."
+  },
+  {
+    "objectID": "chapters/projection.html#useful-references",
+    "href": "chapters/projection.html#useful-references",
+    "title": "2  Projection",
+    "section": "2.4 Useful references",
+    "text": "2.4 Useful references\n\nGilbert Strang’s linear algebra lectures at MIT\n10 Fundamental Theorems for Econometrics"
+  },
+  {
+    "objectID": "chapters/regression.html#the-setup",
+    "href": "chapters/regression.html#the-setup",
+    "title": "3  Regression",
+    "section": "3.2 The setup",
+    "text": "3.2 The setup\nWe usually start with data of the form \\(\\{y_i, x_{i1}, \\cdots, x_{ik}\\}_{i=1}^N\\), where we observe an outcome variable \\(y_i\\) and a set of \\(k\\) explanatory variables \\(x_i = (x_{i1}, \\cdots, x_{ik})\\) for each unit \\(i\\) in the dataset. We think that it might be reasonable to think of the outcome being linearly related to the regressors, so that, for each unit in our dataset, we can write the following linear equation:\n\\[\ny_{i} = \\beta_{1}x_{i1} + \\beta_{2}x_{i2} + ... + \\beta_{k}x_{ik} + \\epsilon_{i}\n\\]\n\n[!NOTE] Notice what makes this a “linear” equation:\n\n\nThe highest power to which any regressor is raised is 1\nThe coefficients are constants, not variables\nRegressors are related to one another using addition and subtraction only\nThe resulting line (in 2-D space), plane (in 3-D space) and hyperplane (in N-D space) are linear (the term linear equation originates from the simple case where there are two regressors, one of which is a constant, in which case we get a straight line in a Cartesian plane.)\n\nTODO: discuss all the assumptions we’re making here.\nTODO: Discuss the Angist & Pischke view of linear regression being good approximation even if relationship is not linear.\n\nWe thus have a system of \\(n\\) linear equations\nCan rewrite in vector notation\nCan rewrite in matrix notation"
+  },
+  {
+    "objectID": "chapters/regression.html#classic-motivation",
+    "href": "chapters/regression.html#classic-motivation",
+    "title": "3  Regression",
+    "section": "3.3 Classic motivation",
+    "text": "3.3 Classic motivation"
+  },
+  {
+    "objectID": "chapters/regression.html#linear-algebra-motivation",
+    "href": "chapters/regression.html#linear-algebra-motivation",
+    "title": "3  Regression",
+    "section": "3.4 Linear algebra motivation",
+    "text": "3.4 Linear algebra motivation\n\\[\nY_1 = \\beta_0 + \\beta_1 X_{1_1} + \\beta_2 X_{2_1} + \\ldots + \\beta_k X_{k_1} + \\varepsilon_1 \\\\\nY_2 = \\beta_0 + \\beta_1 X_{1_2} + \\beta_2 X_{2_2} + \\ldots + \\beta_k X_{k_2} + \\varepsilon_2 \\\\\nY_n = \\beta_0 + \\beta_1 X_{1_n} + \\beta_2 X_{2_n} + \\ldots + \\beta_k X_{k_n} + \\varepsilon_n \\\\\n\\]"
+  },
+  {
+    "objectID": "chapters/regression.html#resources",
+    "href": "chapters/regression.html#resources",
+    "title": "3  Regression",
+    "section": "3.5 Resources",
+    "text": "3.5 Resources\n\nHayashi, Wooldridge, Verbeek, online resources\n\nUse stuff from cuped blog post\n\nWhat does this mean in the context of linear regression? In the context of linear regression, with a covariance matrix \\(X\\), the projection matrix is \\(P = X(X'X)^{-1}X'\\). The coefficient estimates are given by:\n\\[\n\\hat{\\beta} = (X'X)^{-1}X'y.\n\\]\nand the predicted values are given by:\n\\[\n\\hat{y} = X\\hat{\\beta} = X(X'X)^{-1}X'y = Py.\n\\]\nThis tells us that the fitted values in a linear regression are a projection of the vector of observed outcomes, \\(y\\), onto the subspace spanned by \\(X\\).\nFinally, the residuals of the linear model are:\n\\[\n\\hat{\\epsilon} = y - \\hat{y} = y - X\\hat{\\beta} = y - X(X'X)^{-1}X'y = My,\n\\]\nwhere \\(M = I - X(X'X)^{-1}X'\\). Hence, \\(M\\) is called the residual-maker matrix because it is the matrix that, when pre-multiplied to the vector \\(y\\), returns the vector of residuals."
+  },
+  {
+    "objectID": "chapters/regression.html#glossary",
+    "href": "chapters/regression.html#glossary",
+    "title": "3  Regression",
+    "section": "3.1 Glossary",
+    "text": "3.1 Glossary\nTODO: - Linear regression vs OLS"
   }
 ]
