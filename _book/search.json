@@ -256,7 +256,7 @@
     "href": "chapters/regression.html#the-setup",
     "title": "3  Regression",
     "section": "3.2 The setup",
-    "text": "3.2 The setup\nWe usually start with data of the form \\(\\{y_i, x_{i1}, \\cdots, x_{ik}\\}_{i=1}^N\\), where we observe an outcome variable \\(y_i\\) and a set of \\(k\\) explanatory variables \\(x_i = (x_{i1}, \\cdots, x_{ik})\\) for each unit \\(i\\) in the dataset. We think that it might be reasonable to think of the outcome being linearly related to the regressors, so that, for each unit in our dataset, we can write the following linear equation:\n\\[\ny_{i} = \\beta_{1}x_{i1} + \\beta_{2}x_{i2} + ... + \\beta_{k}x_{ik} + \\epsilon_{i}\n\\]\n\n[!NOTE] Notice what makes this a “linear” equation:\n\n\nThe highest power to which any regressor is raised is 1\nThe coefficients are constants, not variables\nRegressors are related to one another using addition and subtraction only\nThe resulting line (in 2-D space), plane (in 3-D space) and hyperplane (in N-D space) are linear (the term linear equation originates from the simple case where there are two regressors, one of which is a constant, in which case we get a straight line in a Cartesian plane.)\n\nTODO: discuss all the assumptions we’re making here.\nTODO: Discuss the Angist & Pischke view of linear regression being good approximation even if relationship is not linear.\n\nWe thus have a system of \\(n\\) linear equations\nCan rewrite in vector notation\nCan rewrite in matrix notation"
+    "text": "3.2 The setup\nWe usually start with data of the form \\(\\{y_i, x_{i1}, \\cdots, x_{ik}\\}_{i=1}^N\\), where we observe an outcome variable \\(y_i\\) and a set of \\(k\\) explanatory variables \\(x_i = (x_{i1}, \\cdots, x_{ik})\\) for each unit \\(i\\) in the dataset. We think that it might be reasonable to think of the outcome being linearly related to the regressors, so that, for each unit in our dataset, we can write the following linear equation:\n\\[\ny_{i} = \\beta_{1}x_{i1} + \\beta_{2}x_{i2} + ... + \\beta_{k}x_{ik} + \\epsilon_{i}\n\\]\nThis says that the outcome \\(y\\) can be thought of as a linear combination of all explanatory variables plus some error term.\nTODO: What makes this a “linear” equation: - The highest power to which any regressor is raised is 1 - The coefficients are constants, not variables - Regressors are related to one another using addition and subtraction only - The resulting line (in 2-D space), plane (in 3-D space) and hyperplane (in N-D space) are linear (the term linear equation originates from the simple case where there are two regressors, one of which is a constant, in which case we get a straight line in a Cartesian plane.)\nTODO: discuss all the assumptions we’re making here.\nTODO: Discuss the Angist & Pischke view of linear regression being good approximation even if relationship is not linear.\nWe thus have a system of linear equations of the form\n\\[\n\\begin{aligned}\ny_1 = \\beta_0 + \\beta_1 x_{1_1} + \\beta_2 x_{2_1} + \\ldots + \\beta_k x_{k_1} + \\epsilon_1 \\\\\ny_2 = \\beta_0 + \\beta_1 x_{1_2} + \\beta_2 x_{2_2} + \\ldots + \\beta_k x_{k_2} + \\epsilon_2 \\\\\n\\vdots\\\\\ny_n = \\beta_0 + \\beta_1 x_{1_n} + \\beta_2 x_{2_n} + \\ldots + \\beta_k x_{k_n} + \\epsilon_n \\\\\n\\end{aligned}\n\\]\nwhich we can rewrite in vector notation as\n\\[\n\\begin{aligned}\ny_1 = x_1'\\beta + \\epsilon_1 \\\\\ny_2 = x_2'\\beta + \\epsilon_2 \\\\\n\\vdots\\\\\ny_n = x_n'\\beta + \\epsilon_n,\n\\end{aligned}\n\\]\nwhere \\[\nx_i' = (x_{i1}, x_{i2}, \\ldots, x_{ik})\n\\]\nis a \\(1 \\times k\\) row vector that contains all \\(k\\) explanatory variables for each unit \\(i\\) and \\[ \\beta =\n\\begin{pmatrix}\n  \\beta_{1}\\\\\n  \\beta_{2}\\\\\n  \\vdots \\\\\n  \\beta_{k}\n\\end{pmatrix}\n\\]\nis a \\(k \\times 1\\) column vector that contains all \\(k\\) regression coefficients.\nTo be even more succinct, we can stack all n equations to get the matrix notation: \\[\n\\begin{equation}\ny = X\\beta + \\epsilon,\n\\end{equation}\n\\]\nwhere \\(\\beta\\) is defined as above,\n\\[ y =\n\\begin{pmatrix}\n  y_{1}\\\\\n  y_{2}\\\\\n  \\vdots \\\\\n  y_{k}\n\\end{pmatrix}\n\\]\nis a \\(n \\times 1\\) vector containing the \\(n\\) outcome variables, one for each unit in the data,\n\\[ X =\n\\begin{pmatrix}\n  x_{1}' \\\\\n  x_{2}' \\\\\n  \\vdots \\\\\n  x_{n}''\n\\end{pmatrix}\n=\n\\begin{pmatrix}\n  x_{1,1} & x_{1,2} & \\cdots & x_{1,k} \\\\\n  x_{2,1} & x_{2,2} & \\cdots & x_{2,k} \\\\\n  \\vdots  & \\vdots  & \\ddots & \\vdots  \\\\\n  x_{n,1} & x_{n,2} & \\cdots & x_{n,k}\n\\end{pmatrix}\n\\]\nis an \\(n \\times k\\) matrix that contains all \\(n\\) row vectors \\(x_i'\\) stacked on top of each other, and\n\\[ \\epsilon =\n\\begin{pmatrix}\n  \\epsilon_{1}\\\\\n  \\epsilon_{2}\\\\\n  \\vdots \\\\\n  \\epsilon_{k}\n\\end{pmatrix}\n\\]\na column vector containing the \\(n\\) error terms.\n## The problem\nSo, what do we want to do here? We have data on an outcome variable \\(y\\) and explanatory variables \\(x\\) for each unit \\(i\\), and we think that it is reasonable to think that this data is generated by a process whereby \\(y\\) is the result of a linear combination of the \\(x\\)s plus some noise, which we capture in the error term. The challenge is to find the right linear combination."
   },
   {
     "objectID": "chapters/regression.html#classic-motivation",
@@ -270,14 +270,14 @@
     "href": "chapters/regression.html#linear-algebra-motivation",
     "title": "3  Regression",
     "section": "3.4 Linear algebra motivation",
-    "text": "3.4 Linear algebra motivation\n\\[\nY_1 = \\beta_0 + \\beta_1 X_{1_1} + \\beta_2 X_{2_1} + \\ldots + \\beta_k X_{k_1} + \\varepsilon_1 \\\\\nY_2 = \\beta_0 + \\beta_1 X_{1_2} + \\beta_2 X_{2_2} + \\ldots + \\beta_k X_{k_2} + \\varepsilon_2 \\\\\nY_n = \\beta_0 + \\beta_1 X_{1_n} + \\beta_2 X_{2_n} + \\ldots + \\beta_k X_{k_n} + \\varepsilon_n \\\\\n\\]"
+    "text": "3.4 Linear algebra motivation"
   },
   {
     "objectID": "chapters/regression.html#resources",
     "href": "chapters/regression.html#resources",
     "title": "3  Regression",
     "section": "3.5 Resources",
-    "text": "3.5 Resources\n\nHayashi, Wooldridge, Verbeek, online resources\n\nUse stuff from cuped blog post\n\nWhat does this mean in the context of linear regression? In the context of linear regression, with a covariance matrix \\(X\\), the projection matrix is \\(P = X(X'X)^{-1}X'\\). The coefficient estimates are given by:\n\\[\n\\hat{\\beta} = (X'X)^{-1}X'y.\n\\]\nand the predicted values are given by:\n\\[\n\\hat{y} = X\\hat{\\beta} = X(X'X)^{-1}X'y = Py.\n\\]\nThis tells us that the fitted values in a linear regression are a projection of the vector of observed outcomes, \\(y\\), onto the subspace spanned by \\(X\\).\nFinally, the residuals of the linear model are:\n\\[\n\\hat{\\epsilon} = y - \\hat{y} = y - X\\hat{\\beta} = y - X(X'X)^{-1}X'y = My,\n\\]\nwhere \\(M = I - X(X'X)^{-1}X'\\). Hence, \\(M\\) is called the residual-maker matrix because it is the matrix that, when pre-multiplied to the vector \\(y\\), returns the vector of residuals."
+    "text": "3.5 Resources\n\nHayashi, Wooldridge, Verbeek, online resources"
   },
   {
     "objectID": "chapters/regression.html#glossary",
@@ -285,5 +285,26 @@
     "title": "3  Regression",
     "section": "3.1 Glossary",
     "text": "3.1 Glossary\nTODO: - Linear regression vs OLS"
+  },
+  {
+    "objectID": "chapters/regression.html#classic-motivation-of-the-solution",
+    "href": "chapters/regression.html#classic-motivation-of-the-solution",
+    "title": "3  Regression",
+    "section": "3.3 Classic motivation of the solution",
+    "text": "3.3 Classic motivation of the solution\nTODO"
+  },
+  {
+    "objectID": "chapters/regression.html#linear-algebra-motivation-of-the-solution",
+    "href": "chapters/regression.html#linear-algebra-motivation-of-the-solution",
+    "title": "3  Regression",
+    "section": "3.4 Linear algebra motivation of the solution",
+    "text": "3.4 Linear algebra motivation of the solution\nNotice how our problem here is exactly akin to the motivation for orthogonal projection discussed in Chapter 2. There we had a system of linear equations of the form\n\\[\nAx = b\n\\]\nwhich was overdetermined because the number of equations exceeded the number of unknowns. Our setup is equivalent. We have \\(n\\) equations and \\(k\\) unknowns (the \\(\\beta\\)s), so that – in practice – there will be no solution to the system:\n\\[\nX\\beta = y.\n\\]\nIn other words, there is no choice of \\(\\beta\\) that would linearly combine all the explanatory variables in each equation such that the result would be exactly \\(y\\). We account for this by adding the error term \\(\\epsilon\\), so that we have\n\\[\nX\\beta + \\epsilon = y.\n\\]\nWhat we do, now, is to say that we want to find that linear combination of the explanatory variables that is closest to \\(y\\), so that \\(\\epsilon\\) is as small as possible, which is the same as finding the orthogonal projection of \\(y\\) onto \\(X\\), which, traditionally, we call \\(\\hat{y}\\).\nThe solution is then the same as in Chapter 2:1\n\\[\n\\begin{aligned}\nX'\\epsilon &= 0 \\\\\nX'(y - \\hat{y}) &= 0 \\\\\nX'(y - X\\beta) &= 0 \\\\\nX'y - X'X\\beta &= 0 \\\\\nX'X\\beta &= X'y \\\\\n\\beta &= (X'X)^{-1}X'y\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "chapters/regression.html#footnotes",
+    "href": "chapters/regression.html#footnotes",
+    "title": "3  Regression",
+    "section": "",
+    "text": "One thing I would always wonder about in textbook is how I knew that the condition was \\(X'\\epsilon\\) instead of \\(\\epsilon'X\\). The answer is that in cases where order doesn’t matter, texts tend to choose what is more convenient for the math. We could solve \\(\\epsilon'X\\): \\[\n\\begin{aligned}\n\\epsilon'X &= 0 \\\\\n(y - \\hat{y})'X &= 0 \\\\\n(y - X\\beta)'X &= 0 \\\\\n(y' - \\beta'X')X &= 0 \\\\\ny'X - \\beta'X'X &= 0 \\\\\n\\beta'X'X &= y'X \\\\\n(\\beta'X'X)' &= (y'X)' \\\\\nX'X\\beta &= X'y \\\\\n\\beta &= (X'X)^{-1}X'y\n\\end{aligned}\n\\] which gets us to the same result but in more steps.↩︎"
   }
 ]

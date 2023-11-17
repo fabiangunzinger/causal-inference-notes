@@ -142,8 +142,8 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#glossary" id="toc-glossary" class="nav-link active" data-scroll-target="#glossary"><span class="header-section-number">3.1</span> Glossary</a></li>
   <li><a href="#the-setup" id="toc-the-setup" class="nav-link" data-scroll-target="#the-setup"><span class="header-section-number">3.2</span> The setup</a></li>
-  <li><a href="#classic-motivation" id="toc-classic-motivation" class="nav-link" data-scroll-target="#classic-motivation"><span class="header-section-number">3.3</span> Classic motivation</a></li>
-  <li><a href="#linear-algebra-motivation" id="toc-linear-algebra-motivation" class="nav-link" data-scroll-target="#linear-algebra-motivation"><span class="header-section-number">3.4</span> Linear algebra motivation</a></li>
+  <li><a href="#classic-motivation-of-the-solution" id="toc-classic-motivation-of-the-solution" class="nav-link" data-scroll-target="#classic-motivation-of-the-solution"><span class="header-section-number">3.3</span> Classic motivation of the solution</a></li>
+  <li><a href="#linear-algebra-motivation-of-the-solution" id="toc-linear-algebra-motivation-of-the-solution" class="nav-link" data-scroll-target="#linear-algebra-motivation-of-the-solution"><span class="header-section-number">3.4</span> Linear algebra motivation of the solution</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">3.5</span> Resources</a></li>
   </ul>
 </nav>
@@ -189,32 +189,112 @@ ul.task-list li input[type="checkbox"] {
 <p><span class="math display">\[
 y_{i} = \beta_{1}x_{i1} + \beta_{2}x_{i2} + ... + \beta_{k}x_{ik} + \epsilon_{i}
 \]</span></p>
-<blockquote class="blockquote">
-<p>[!NOTE] Notice what makes this a “linear” equation:</p>
-</blockquote>
-<ul>
-<li><p>The highest power to which any regressor is raised is 1</p></li>
-<li><p>The coefficients are constants, not variables</p></li>
-<li><p>Regressors are related to one another using addition and subtraction only</p></li>
-<li><p>The resulting line (in 2-D space), plane (in 3-D space) and hyperplane (in N-D space) are linear (the term linear equation originates from the simple case where there are two regressors, one of which is a constant, in which case we get a straight line in a Cartesian plane.)</p></li>
-</ul>
+<p>This says that the outcome <span class="math inline">\(y\)</span> can be thought of as a linear combination of all explanatory variables plus some error term.</p>
+<p>TODO: What makes this a “linear” equation: - The highest power to which any regressor is raised is 1 - The coefficients are constants, not variables - Regressors are related to one another using addition and subtraction only - The resulting line (in 2-D space), plane (in 3-D space) and hyperplane (in N-D space) are linear (the term linear equation originates from the simple case where there are two regressors, one of which is a constant, in which case we get a straight line in a Cartesian plane.)</p>
 <p>TODO: discuss all the assumptions we’re making here.</p>
 <p>TODO: Discuss the Angist &amp; Pischke view of linear regression being good approximation even if relationship is not linear.</p>
-<ul>
-<li><p>We thus have a system of <span class="math inline">\(n\)</span> linear equations</p></li>
-<li><p>Can rewrite in vector notation</p></li>
-<li><p>Can rewrite in matrix notation</p></li>
-</ul>
-</section>
-<section id="classic-motivation" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="classic-motivation"><span class="header-section-number">3.3</span> Classic motivation</h2>
-</section>
-<section id="linear-algebra-motivation" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="linear-algebra-motivation"><span class="header-section-number">3.4</span> Linear algebra motivation</h2>
+<p>We thus have a system of linear equations of the form</p>
 <p><span class="math display">\[
-Y_1 = \beta_0 + \beta_1 X_{1_1} + \beta_2 X_{2_1} + \ldots + \beta_k X_{k_1} + \varepsilon_1 \\
-Y_2 = \beta_0 + \beta_1 X_{1_2} + \beta_2 X_{2_2} + \ldots + \beta_k X_{k_2} + \varepsilon_2 \\
-Y_n = \beta_0 + \beta_1 X_{1_n} + \beta_2 X_{2_n} + \ldots + \beta_k X_{k_n} + \varepsilon_n \\
+\begin{aligned}
+y_1 = \beta_0 + \beta_1 x_{1_1} + \beta_2 x_{2_1} + \ldots + \beta_k x_{k_1} + \epsilon_1 \\
+y_2 = \beta_0 + \beta_1 x_{1_2} + \beta_2 x_{2_2} + \ldots + \beta_k x_{k_2} + \epsilon_2 \\
+\vdots\\
+y_n = \beta_0 + \beta_1 x_{1_n} + \beta_2 x_{2_n} + \ldots + \beta_k x_{k_n} + \epsilon_n \\
+\end{aligned}
+\]</span></p>
+<p>which we can rewrite in vector notation as</p>
+<p><span class="math display">\[
+\begin{aligned}
+y_1 = x_1'\beta + \epsilon_1 \\
+y_2 = x_2'\beta + \epsilon_2 \\
+\vdots\\
+y_n = x_n'\beta + \epsilon_n,
+\end{aligned}
+\]</span></p>
+<p>where <span class="math display">\[
+x_i' = (x_{i1}, x_{i2}, \ldots, x_{ik})
+\]</span></p>
+<p>is a <span class="math inline">\(1 \times k\)</span> row vector that contains all <span class="math inline">\(k\)</span> explanatory variables for each unit <span class="math inline">\(i\)</span> and <span class="math display">\[ \beta =
+\begin{pmatrix}
+  \beta_{1}\\
+  \beta_{2}\\
+  \vdots \\
+  \beta_{k}
+\end{pmatrix}
+\]</span></p>
+<p>is a <span class="math inline">\(k \times 1\)</span> column vector that contains all <span class="math inline">\(k\)</span> regression coefficients.</p>
+<p>To be even more succinct, we can stack all n equations to get the matrix notation: <span class="math display">\[
+\begin{equation}
+y = X\beta + \epsilon,
+\end{equation}
+\]</span></p>
+<p>where <span class="math inline">\(\beta\)</span> is defined as above,</p>
+<p><span class="math display">\[ y =
+\begin{pmatrix}
+  y_{1}\\
+  y_{2}\\
+  \vdots \\
+  y_{k}
+\end{pmatrix}
+\]</span></p>
+<p>is a <span class="math inline">\(n \times 1\)</span> vector containing the <span class="math inline">\(n\)</span> outcome variables, one for each unit in the data,</p>
+<p><span class="math display">\[ X =
+\begin{pmatrix}
+  x_{1}' \\
+  x_{2}' \\
+  \vdots \\
+  x_{n}''
+\end{pmatrix}
+=
+\begin{pmatrix}
+  x_{1,1} &amp; x_{1,2} &amp; \cdots &amp; x_{1,k} \\
+  x_{2,1} &amp; x_{2,2} &amp; \cdots &amp; x_{2,k} \\
+  \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+  x_{n,1} &amp; x_{n,2} &amp; \cdots &amp; x_{n,k}
+\end{pmatrix}
+\]</span></p>
+<p>is an <span class="math inline">\(n \times k\)</span> matrix that contains all <span class="math inline">\(n\)</span> row vectors <span class="math inline">\(x_i'\)</span> stacked on top of each other, and</p>
+<p><span class="math display">\[ \epsilon =
+\begin{pmatrix}
+  \epsilon_{1}\\
+  \epsilon_{2}\\
+  \vdots \\
+  \epsilon_{k}
+\end{pmatrix}
+\]</span></p>
+<p>a column vector containing the <span class="math inline">\(n\)</span> error terms.</p>
+<p>##&nbsp;The problem</p>
+<p>So, what do we want to do here? We have data on an outcome variable <span class="math inline">\(y\)</span> and explanatory variables <span class="math inline">\(x\)</span> for each unit <span class="math inline">\(i\)</span>, and we think that it is reasonable to think that this data is generated by a process whereby <span class="math inline">\(y\)</span> is the result of a linear combination of the <span class="math inline">\(x\)</span>s plus some noise, which we capture in the error term. The challenge is to find the right linear combination.</p>
+</section>
+<section id="classic-motivation-of-the-solution" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="classic-motivation-of-the-solution"><span class="header-section-number">3.3</span> Classic motivation of the solution</h2>
+<p>TODO</p>
+</section>
+<section id="linear-algebra-motivation-of-the-solution" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="linear-algebra-motivation-of-the-solution"><span class="header-section-number">3.4</span> Linear algebra motivation of the solution</h2>
+<p>Notice how our problem here is exactly akin to the motivation for orthogonal projection discussed in <a href="projection.html"><span>Chapter&nbsp;2</span></a>. There we had a system of linear equations of the form</p>
+<p><span class="math display">\[
+Ax = b
+\]</span></p>
+<p>which was overdetermined because the number of equations exceeded the number of unknowns. Our setup is equivalent. We have <span class="math inline">\(n\)</span> equations and <span class="math inline">\(k\)</span> unknowns (the <span class="math inline">\(\beta\)</span>s), so that – in practice – there will be no solution to the system:</p>
+<p><span class="math display">\[
+X\beta = y.
+\]</span></p>
+<p>In other words, there is no choice of <span class="math inline">\(\beta\)</span> that would linearly combine all the explanatory variables in each equation such that the result would be exactly <span class="math inline">\(y\)</span>. We account for this by adding the error term <span class="math inline">\(\epsilon\)</span>, so that we have</p>
+<p><span class="math display">\[
+X\beta + \epsilon = y.
+\]</span></p>
+<p>What we do, now, is to say that we want to find that linear combination of the explanatory variables that is closest to <span class="math inline">\(y\)</span>, so that <span class="math inline">\(\epsilon\)</span> is as small as possible, which is the same as finding the orthogonal projection of <span class="math inline">\(y\)</span> onto <span class="math inline">\(X\)</span>, which, traditionally, we call <span class="math inline">\(\hat{y}\)</span>.</p>
+<p>The solution is then the same as in <a href="projection.html"><span>Chapter&nbsp;2</span></a>:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p><span class="math display">\[
+\begin{aligned}
+X'\epsilon &amp;= 0 \\
+X'(y - \hat{y}) &amp;= 0 \\
+X'(y - X\beta) &amp;= 0 \\
+X'y - X'X\beta &amp;= 0 \\
+X'X\beta &amp;= X'y \\
+\beta &amp;= (X'X)^{-1}X'y
+\end{aligned}
 \]</span></p>
 </section>
 <section id="resources" class="level2" data-number="3.5">
@@ -222,25 +302,26 @@ Y_n = \beta_0 + \beta_1 X_{1_n} + \beta_2 X_{2_n} + \ldots + \beta_k X_{k_n} + \
 <ul>
 <li>Hayashi, Wooldridge, Verbeek, online resources</li>
 </ul>
-<p>Use stuff from cuped blog post</p>
-<hr>
-<p>What does this mean in the context of linear regression? In the context of linear regression, with a covariance matrix <span class="math inline">\(X\)</span>, the projection matrix is <span class="math inline">\(P = X(X'X)^{-1}X'\)</span>. The coefficient estimates are given by:</p>
-<p><span class="math display">\[
-\hat{\beta} = (X'X)^{-1}X'y.
-\]</span></p>
-<p>and the predicted values are given by:</p>
-<p><span class="math display">\[
-\hat{y} = X\hat{\beta} = X(X'X)^{-1}X'y = Py.
-\]</span></p>
-<p>This tells us that the fitted values in a linear regression are a projection of the vector of observed outcomes, <span class="math inline">\(y\)</span>, onto the subspace spanned by <span class="math inline">\(X\)</span>.</p>
-<p>Finally, the residuals of the linear model are:</p>
-<p><span class="math display">\[
-\hat{\epsilon} = y - \hat{y} = y - X\hat{\beta} = y - X(X'X)^{-1}X'y = My,
-\]</span></p>
-<p>where <span class="math inline">\(M = I - X(X'X)^{-1}X'\)</span>. Hence, <span class="math inline">\(M\)</span> is called the residual-maker matrix because it is the matrix that, when pre-multiplied to the vector <span class="math inline">\(y\)</span>, returns the vector of residuals.</p>
-<hr>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>One thing I would always wonder about in textbook is how I knew that the condition was <span class="math inline">\(X'\epsilon\)</span> instead of <span class="math inline">\(\epsilon'X\)</span>. The answer is that in cases where order doesn’t matter, texts tend to choose what is more convenient for the math. We could solve <span class="math inline">\(\epsilon'X\)</span>: <span class="math display">\[
+\begin{aligned}
+\epsilon'X &amp;= 0 \\
+(y - \hat{y})'X &amp;= 0 \\
+(y - X\beta)'X &amp;= 0 \\
+(y' - \beta'X')X &amp;= 0 \\
+y'X - \beta'X'X &amp;= 0 \\
+\beta'X'X &amp;= y'X \\
+(\beta'X'X)' &amp;= (y'X)' \\
+X'X\beta &amp;= X'y \\
+\beta &amp;= (X'X)^{-1}X'y
+\end{aligned}
+\]</span> which gets us to the same result but in more steps.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

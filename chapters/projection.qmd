@@ -1,4 +1,4 @@
-# Projection
+# Projection {#sec-projection}
 
 A projection is a transformation of a vector onto a subspace.[^subspace]
 
