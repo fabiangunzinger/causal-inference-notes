@@ -2,7 +2,114 @@
 
 ## Why reduce variance?
 
+
+
+## Regression adjustment
+
+Regression adjustment reduces variance by adding additional regressors to the regression model used to evaluate an experiment.
+
+**How it works**
+
+To evaluate an experiment where we have, for each unit $i$, an outcome metric $y_i$ and a treatment assignment indicator $d_i$ we would estimate the following linear regression model using OLS:
+
+$$
+y_i = \alpha + \beta d_i + \epsilon_i,
+$$
+
+where $\epsilon_i$ is the error term, and where the estimate of $\beta$ is the estimate of our treatment effect. If we have an additional variable, $x_i$, that is correlated with $y_i$ but uncorrelated with $d_i$ (just as in the discussion of CUPED above), we can add that to the right hand side of our regression model and estimate:
+
+$$
+\begin{equation}
+y_i = \alpha + \beta_1 d_i + \beta_2 x_i + \mu_i.
+\end{equation}
+$$
+
+If $x$ is uncorrelated with the treatment assignment then $\beta = \beta_1$, so the treatment effect estimate will remain unchanged, which is good. And if $x$ is correlated with $y$, then the standard error of the treatment effect estimate will again be lower, thus increasing power.
+
+**Link to CUPED**
+
+How does regression adjustment differ from CUPED? It turns out that in the simple cases discussed above, it doesn't -- the two approaches are identical! Seeing why requires a few steps.
+
+First, we know (from the Frisch-Waugh-Lowell [theorem](https://en.wikipedia.org/wiki/Frisch%E2%80%93Waugh%E2%80%93Lovell_theorem)) that if we were to estimate the alternative model 
+
+$$
+\begin{equation}
+\tilde{y}_i = \alpha + \beta_1^* \tilde{d}_i + \epsilon_i,
+\end{equation}
+$$
+
+where $\tilde{y}_i$ is the residual from regressing $y$ on $x$, and $\tilde{d}_i$ the residual from regressing $d$ on $x$, we would find that $\beta_1^* = \beta_1$. That is, the two models are identical.
+
+Second, to obtain $\tilde{y}$, we first estimate
+
+$$
+y = \alpha + \delta x_i + u_i,
+$$
+
+and then calculate $\tilde{y} = y - \delta x$ (the calculation of $\tilde{d}_i$ works analogously). Given that this is a simple regression model, we know that $\delta = \frac{cov(y, x)}{var(x)}$ so that 
+
+$$
+\tilde{y} = y - \frac{cov(y, x)}{var(x)}x.
+$$
+
+Finally, above in our discussion of CUPED we have seen that the CUPED-adjusted outcome metric $\tilde{y}$ is defined in exactly the same way. Hence, to evaluate an experiment with a CUPED-adjusted outcome, we would estimate the model:
+
+$$
+\tilde{y}_i = \alpha + \beta^* d_i + \epsilon_i^*,
+$$
+
+Notice that the only difference to model (2) is that we don't adjust the treatment assignment -- we use $d_i$ instead of $\tilde{d}_i$. But if the treatment assignment is random, then $cov(d, x) = 0$ so that the adjustment has no effect and we have $\tilde{d}_i = d_i$. Hence, the two approaches are the same.
+
+In general, regression adjustment and CUPED are identical if two conditions hold: (1) the treatment indicator is independent of $x$, and (2) we use a linear CUPED adjustment. In the context of experimentation, where treatment is random, and with the classical (linear) CUPED adjustment discussed above, this is always the case.
+
+The reason why in practice we get a don't get the exact same result is that the covariance of $d$ and $x$ is only approximately 0, hence providing very similar, but not identical results.
+
+
 ## CUPED
+
+CUPED stands for "Controlled experiments Using Pre-Experiment Data", and reduces variance by partialling out as much variance as possible from the outcome metric using appropriate available data, usually data from the pre-experiment period -- hence the name.
+
+**How it works**
+
+Imagine that in addition to our outcome metric $y$, we have access to another variable, $x$, which is correlated with $y$ but uncorrelated with the treatment assignment of our experiment -- the most obvious candidate that has been found to work well is pre-experiment data of the metric of interest.
+
+We can then create a new variable 
+
+$$
+\tilde{y} = y - \theta x,
+$$
+
+where -- it turns out -- the optimal choice for $\theta$ is $\frac{cov(y, x)}{var(x)}$, which we can easily calculate from the available data.
+
+This is useful because it can be shown that if we now evaluate our experiment using $\tilde{y}$ instead of $y$, the treatment estimate will be the same but it's standard error will be lower, which will increase power. The standard error of the treatment effect estimate is lower because the variance of $\tilde{y}$ is lower than that of $y$ whenever $cov(y, x) \neq 0$, that is, whenever $x$ and $y$ are indeed correlated. To be precise, we have:
+
+$$
+var(\tilde{y}) = var(y)(1 - \rho^2),
+$$
+
+where $\rho$ is the Pearson correlation between $x$ and $y$:
+
+$$
+\rho = \frac{cov(y, x)}{var(x)var(y)}.
+$$
+
+### Useful resources
+
+- [Deng et al. 2013 -- original CUPED paper](https://www.exp-platform.com/Documents/2013-02-CUPED-ImprovingSensitivityOfControlledExperiments.pdf) -- the original paper
+
+- [Variance reduction section of Deng's causal inference book](https://alexdeng.github.io/causal/sensitivity.html#vrreg) -- more in-depth discussion of some aspects of CUPED and its link to regression adjustment
+
+- [You can't spell CUPED without Frisch-Waugh-Lovell](https://www.evanmiller.org/you-cant-spell-cuped-without-frisch-waugh-lovell.html) -- good post exploring link to FWL theorem
+
+- [Understanding CUPED](https://towardsdatascience.com/understanding-cuped-a822523641af) -- good post exploring link to multiple regression (also using FWL theorem) and DiD.
+
+- [CUPED on Statsig](https://blog.statsig.com/cuped-on-statsig-d57f23122d0e)
+
+- EPPO posts on CUPED [here](https://www.geteppo.com/blog/reducing-experiment-durations) and [here](https://www.geteppo.com/blog/bending-time-in-experimentation)
+
+
+
+
 
 Use from blog post...
 
@@ -30,29 +137,5 @@ CUPED is a re-invention of multiple linear regression. Evan Miller ([here](https
 
 In particular, I think that to really understand the connection between multiple linear regression and CUPED, you have to understand the linear algebra of the Frisch-Waugh-Lowell theorem (FWL) rather than just knowing that that theorem says, and to understand that, you have to understand the concept of a projection. The latter two are both well explained in Thomas S. Robinson's wonderful online book [10 Fundamental Theorems for Econometrics](https://bookdown.org/ts_robinson1994/10EconometricTheorems/), on which I draw heavily.
 
-So, here we go.
 
-```{python}
-import numpy as np
-import pandas as pd
-import statsmodels.formula.api as smf
-
-import src.helpers as hp
-
-%load_ext autoreload
-%autoreload 2
-```
-
-```{python}
-df_raw = (pd.read_parquet('~/tmp/oneweb-ie.parquet')
-          .set_index('date', drop=False)
-          .sort_index()
-)
-
-df = (df_raw
-      .pipe(hp.add_pre_metric_value)
-      .pipe(hp.add_treat_effect, effect=1.05)
-)
-df.head(3)
-```
 
