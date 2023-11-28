@@ -7,8 +7,11 @@ book:
   date: "9/28/2023"
   chapters:
     - index.qmd
+
     - chapters/projection.qmd
+    - chapters/fisher.qmd
     - chapters/regression.qmd
+    - chapters/variance_reduction.qmd
 
 
     # - part: introduction.qmd

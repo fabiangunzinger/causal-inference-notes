@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 4&nbsp; Regression</title>
+<title>Causal inference notes - 3&nbsp; Fisher’s exact P-value</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,8 +83,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/variance_reduction.html" rel="next">
-<link href="../chapters/fisher.html" rel="prev">
+<link href="../chapters/regression.html" rel="next">
+<link href="../chapters/projection.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -75,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/regression.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/fisher.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher's exact P-value</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -114,13 +167,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher’s approach</span></span></a>
+  <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/regression.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/regression.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
   </div>
 </li>
@@ -152,11 +205,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#glossary" id="toc-glossary" class="nav-link active" data-scroll-target="#glossary"><span class="header-section-number">4.1</span> Glossary</a></li>
-  <li><a href="#the-setup" id="toc-the-setup" class="nav-link" data-scroll-target="#the-setup"><span class="header-section-number">4.2</span> The setup</a></li>
-  <li><a href="#classic-motivation-of-the-solution" id="toc-classic-motivation-of-the-solution" class="nav-link" data-scroll-target="#classic-motivation-of-the-solution"><span class="header-section-number">4.3</span> Classic motivation of the solution</a></li>
-  <li><a href="#linear-algebra-motivation-of-the-solution" id="toc-linear-algebra-motivation-of-the-solution" class="nav-link" data-scroll-target="#linear-algebra-motivation-of-the-solution"><span class="header-section-number">4.4</span> Linear algebra motivation of the solution</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">4.5</span> Resources</a></li>
+  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link active" data-scroll-target="#useful-resources"><span class="header-section-number">3.1</span> Useful resources</a></li>
   </ul>
 </nav>
     </div>
@@ -165,7 +214,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value</span></h1>
 </div>
 
 
@@ -180,160 +229,165 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Linear regression is by far the most often used method to estimate relationships between outcomes and explanatory variables in applied econometrics and – probably – all of applied social science. In this article I want to to two things: define the related terminology that is often used but not defined (OLS, linear equation, etc.) and – mainly – explain a less frequently taught and understand way to think about linear regression, that in terms of its linear algebra.</p>
-<p>There are, of course, a lot of very good resources on linear regression and OLS, and I list my favourite ones at the bottom. But none of them quite tie everything together in the way I was looking for.</p>
-<p>There are two ways to understand linear regression: one is to think of the variables involved as dimensions and of each row as a data point – this is the way the problem is usually motivated in introductory econometrics classes. The other is the linear algebra approach – to think of each row of data as a dimension, and to think of the variable as vectors in the space formed by those dimensions.</p>
-<p>The first approach straightforwardly links to the intuition of minimising squares, which is useful. It’s the one I have learned and relied on most of my life. The second one, though, provides an alternative and very powerful way to understand what linear regression does. And, importantly, understanding the linear algebra notation simplifies much of the notation and manipulations, and opens the way to much of the literature of econometric theory, such as an understanding of the Frisch-Waugh-Lowell theorem, which was the impetus for me to dig into the linear algebra of OLS.</p>
-<p>In this post I want to cover the following:</p>
-<ul>
-<li><p>Understand all the terminology related to linear regression so we fully know what we’re talking about</p></li>
-<li><p>Understand the matrix representation of linear regression</p></li>
-<li><p>Understand how we can think of the least squares solution as a projection</p></li>
-<li><p>Understand why this is a very useful way of seeing things</p></li>
-</ul>
-<section id="glossary" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="glossary"><span class="header-section-number">4.1</span> Glossary</h2>
-<p>TODO: - Linear regression vs OLS</p>
-</section>
-<section id="the-setup" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="the-setup"><span class="header-section-number">4.2</span> The setup</h2>
-<p>We usually start with data of the form <span class="math inline">\(\{y_i, x_{i1}, \cdots, x_{ik}\}_{i=1}^N\)</span>, where we observe an outcome variable <span class="math inline">\(y_i\)</span> and a set of <span class="math inline">\(k\)</span> explanatory variables <span class="math inline">\(x_i = (x_{i1}, \cdots, x_{ik})\)</span> for each unit <span class="math inline">\(i\)</span> in the dataset. We think that it might be reasonable to think of the outcome being linearly related to the regressors, so that, for each unit in our dataset, we can write the following linear equation:</p>
+<p>Fisher’s aim in his original work on experimentation was to asses the <em>sharp (or exact) null hypothesis</em> – the hypothesis that a treatment had no effect whatsoever, meaning that the potential outcomes for being treated and not treated are the same for each unit in the data.[^order]</p>
+<p>Unter that null hypothesis the unobserved potential outcomes are thus known (they are the same as the observed outcome), and we can use the randomisation distribution to easily calculate P-values. We can calculate P-values by calculating the test statistic for all possible assignments, and then calculate the probability that the test-statistic is as extreme or more extreme than the value of the test statistic we observe given the actual assignment.</p>
+<p>Let’s look at an example (copied from <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>). We have a sample of six units, three assigned to treatment (<span class="math inline">\(w_i = 1\)</span>) and three to control (<span class="math inline">\(w_i = 0\)</span>). For each of the six units the value we observe is the potential outcome corresponding to their treatment status.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(y_i(0)\)</span></th>
+<th><span class="math inline">\(y_i(1)\)</span></th>
+<th><span class="math inline">\(w_i\)</span></th>
+<th><span class="math inline">\(y_i^{obs}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>?</td>
+<td>3</td>
+<td>1</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>?</td>
+<td>5</td>
+<td>1</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>?</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>4</td>
+<td>?</td>
+<td>0</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>0</td>
+<td>?</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>1</td>
+<td>?</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>This table highlights the fundamental problem of causal inference: that for each unit, we can only ever observe one potential outcome. However, Fisher’s sharp null hypothesis asserts that:</p>
 <p><span class="math display">\[
-y_{i} = \beta_{1}x_{i1} + \beta_{2}x_{i2} + ... + \beta_{k}x_{ik} + \epsilon_{i}
+H_0: y_i(1) = y_i(0) \quad \text{for $i = 1, \dots, 6$}.
 \]</span></p>
-<p>This says that the outcome <span class="math inline">\(y\)</span> can be thought of as a linear combination of all explanatory variables plus some error term.</p>
-<p>TODO: What makes this a “linear” equation: - The highest power to which any regressor is raised is 1 - The coefficients are constants, not variables - Regressors are related to one another using addition and subtraction only - The resulting line (in 2-D space), plane (in 3-D space) and hyperplane (in N-D space) are linear (the term linear equation originates from the simple case where there are two regressors, one of which is a constant, in which case we get a straight line in a Cartesian plane.)</p>
-<p>TODO: discuss all the assumptions we’re making here.</p>
-<p>TODO: Discuss the Angist &amp; Pischke view of linear regression being good approximation even if relationship is not linear.</p>
-<p>We thus have a system of linear equations of the form</p>
+<p>This makes filling in the missing values trivial:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(y_i(0)\)</span></th>
+<th><span class="math inline">\(y_i(1)\)</span></th>
+<th><span class="math inline">\(w_i\)</span></th>
+<th><span class="math inline">\(y_i^{obs}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>(3)</td>
+<td>3</td>
+<td>1</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>(5)</td>
+<td>5</td>
+<td>1</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>(0)</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>4</td>
+<td>(4)</td>
+<td>0</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>0</td>
+<td>(0)</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>1</td>
+<td>(1)</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>As our test statistic, we use the absolute value of the difference in average outcome by treatment status, <span class="math inline">\(T(w, y^{obs}) = |\bar{y}_t^{obs} - \bar{y}_c^{obs}|\)</span>, which is a function of the random assignment <span class="math inline">\(w\)</span> and the observed values <span class="math inline">\(y^{obs}\)</span>.</p>
+<p>For our little experiment above, we can calculate the test statistic easily as:</p>
 <p><span class="math display">\[
 \begin{aligned}
-y_1 = \beta_0 + \beta_1 x_{1_1} + \beta_2 x_{2_1} + \ldots + \beta_k x_{k_1} + \epsilon_1 \\
-y_2 = \beta_0 + \beta_1 x_{1_2} + \beta_2 x_{2_2} + \ldots + \beta_k x_{k_2} + \epsilon_2 \\
-\vdots\\
-y_n = \beta_0 + \beta_1 x_{1_n} + \beta_2 x_{2_n} + \ldots + \beta_k x_{k_n} + \epsilon_n \\
+T^{obs} &amp;= |(y_1^{obs} + y_2^{obs} + y_3^{obs})/3 - (y_4^{obs} + y_5^{obs} + y_6^{obs})/3| \\
+&amp;= |(3 + 5 + 0)/3 - (4 + 0 + 1)/3| \\
+&amp;= 8/3 - 5/3 \\
+&amp;= 1
 \end{aligned}
 \]</span></p>
-<p>which we can rewrite in vector notation as</p>
-<p><span class="math display">\[
-\begin{aligned}
-y_1 = x_1'\beta + \epsilon_1 \\
-y_2 = x_2'\beta + \epsilon_2 \\
-\vdots\\
-y_n = x_n'\beta + \epsilon_n,
-\end{aligned}
-\]</span></p>
-<p>where <span class="math display">\[
-x_i' = (x_{i1}, x_{i2}, \ldots, x_{ik})
-\]</span></p>
-<p>is a <span class="math inline">\(1 \times k\)</span> row vector that contains all <span class="math inline">\(k\)</span> explanatory variables for each unit <span class="math inline">\(i\)</span> and <span class="math display">\[ \beta =
-\begin{pmatrix}
-  \beta_{1}\\
-  \beta_{2}\\
-  \vdots \\
-  \beta_{k}
-\end{pmatrix}
-\]</span></p>
-<p>is a <span class="math inline">\(k \times 1\)</span> column vector that contains all <span class="math inline">\(k\)</span> regression coefficients.</p>
-<p>To be even more succinct, we can stack all n equations to get the matrix notation: <span class="math display">\[
-\begin{equation}
-y = X\beta + \epsilon,
-\end{equation}
-\]</span></p>
-<p>where <span class="math inline">\(\beta\)</span> is defined as above,</p>
-<p><span class="math display">\[ y =
-\begin{pmatrix}
-  y_{1}\\
-  y_{2}\\
-  \vdots \\
-  y_{k}
-\end{pmatrix}
-\]</span></p>
-<p>is a <span class="math inline">\(n \times 1\)</span> vector containing the <span class="math inline">\(n\)</span> outcome variables, one for each unit in the data,</p>
-<p><span class="math display">\[ X =
-\begin{pmatrix}
-  x_{1}' \\
-  x_{2}' \\
-  \vdots \\
-  x_{n}''
-\end{pmatrix}
-=
-\begin{pmatrix}
-  x_{1,1} &amp; x_{1,2} &amp; \cdots &amp; x_{1,k} \\
-  x_{2,1} &amp; x_{2,2} &amp; \cdots &amp; x_{2,k} \\
-  \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
-  x_{n,1} &amp; x_{n,2} &amp; \cdots &amp; x_{n,k}
-\end{pmatrix}
-\]</span></p>
-<p>is an <span class="math inline">\(n \times k\)</span> matrix that contains all <span class="math inline">\(n\)</span> row vectors <span class="math inline">\(x_i'\)</span> stacked on top of each other, and</p>
-<p><span class="math display">\[ \epsilon =
-\begin{pmatrix}
-  \epsilon_{1}\\
-  \epsilon_{2}\\
-  \vdots \\
-  \epsilon_{k}
-\end{pmatrix}
-\]</span></p>
-<p>a column vector containing the <span class="math inline">\(n\)</span> error terms.</p>
-<p>##&nbsp;The problem</p>
-<p>So, what do we want to do here? We have data on an outcome variable <span class="math inline">\(y\)</span> and explanatory variables <span class="math inline">\(x\)</span> for each unit <span class="math inline">\(i\)</span>, and we think that it is reasonable to think that this data is generated by a process whereby <span class="math inline">\(y\)</span> is the result of a linear combination of the <span class="math inline">\(x\)</span>s plus some noise, which we capture in the error term. The challenge is to find the right linear combination.</p>
-</section>
-<section id="classic-motivation-of-the-solution" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="classic-motivation-of-the-solution"><span class="header-section-number">4.3</span> Classic motivation of the solution</h2>
-<p>TODO</p>
-</section>
-<section id="linear-algebra-motivation-of-the-solution" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="linear-algebra-motivation-of-the-solution"><span class="header-section-number">4.4</span> Linear algebra motivation of the solution</h2>
-<p>Notice how our problem here is exactly akin to the motivation for orthogonal projection discussed in <a href="projection.html"><span>Chapter&nbsp;2</span></a>. There we had a system of linear equations of the form</p>
-<p><span class="math display">\[
-Ax = b
-\]</span></p>
-<p>which was overdetermined because the number of equations exceeded the number of unknowns. Our setup is equivalent. We have <span class="math inline">\(n\)</span> equations and <span class="math inline">\(k\)</span> unknowns (the <span class="math inline">\(\beta\)</span>s), so that – in practice – there will be no solution to the system:</p>
-<p><span class="math display">\[
-X\beta = y.
-\]</span></p>
-<p>In other words, there is no choice of <span class="math inline">\(\beta\)</span> that would linearly combine all the explanatory variables in each equation such that the result would be exactly <span class="math inline">\(y\)</span>. We account for this by adding the error term <span class="math inline">\(\epsilon\)</span>, so that we have</p>
-<p><span class="math display">\[
-X\beta + \epsilon = y.
-\]</span></p>
-<p>What we do, now, is to say that we want to find that linear combination of the explanatory variables that is closest to <span class="math inline">\(y\)</span>, so that <span class="math inline">\(\epsilon\)</span> is as small as possible, which is the same as finding the orthogonal projection of <span class="math inline">\(y\)</span> onto <span class="math inline">\(X\)</span>, which, traditionally, we call <span class="math inline">\(\hat{y}\)</span>.</p>
-<p>The solution is then the same as in <a href="projection.html"><span>Chapter&nbsp;2</span></a>:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p><span class="math display">\[
-\begin{aligned}
-X'\epsilon &amp;= 0 \\
-X'(y - \hat{y}) &amp;= 0 \\
-X'(y - X\beta) &amp;= 0 \\
-X'y - X'X\beta &amp;= 0 \\
-X'X\beta &amp;= X'y \\
-\beta &amp;= (X'X)^{-1}X'y
-\end{aligned}
-\]</span></p>
-</section>
-<section id="resources" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="resources"><span class="header-section-number">4.5</span> Resources</h2>
-<ul>
-<li>Hayashi, Wooldridge, Verbeek, online resources</li>
-</ul>
+<p>To calculate the P-value, we need the distribution of test statistics under all possible random assignments. There are <span class="math inline">\(\begin{psmallmatrix}6\\3\end{psmallmatrix} = 20\)</span> different assignments, and we can calculate the distribution using Python:</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> combinations</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">1</span>]) </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>idx <span class="op">=</span> <span class="bu">range</span>(<span class="bu">len</span>(y))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> []</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> w <span class="kw">in</span> combinations(idx, <span class="dv">3</span>):</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    w1 <span class="op">=</span> <span class="bu">list</span>(w)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    w0 <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(idx) <span class="op">-</span> <span class="bu">set</span>(w))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    ts.append(<span class="bu">abs</span>(np.mean(y[w1]) <span class="op">-</span> np.mean(y[w0])))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>np.mean([t <span class="op">&gt;=</span> <span class="dv">1</span> <span class="cf">for</span> t <span class="kw">in</span> ts])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>0.5</code></pre>
+</div>
+</div>
+<p>The P-value indicates that if there is no treatment effect, we’d expect a value of the test statistic equal to 1 or even larger in 50 out of 100 random experiments.</p>
+<p>[^order] Compare this to the null hypothesis we more frequently test in experiments, namely, that there is no treatment effect on average. This later hypothesis is less strict (or sharp) than Fisher’s, but arguably of more practical interest most of the time.</p>
+<section id="useful-resources" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">3.1</span> Useful resources</h2>
+<p><span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span></p>
 
 
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>One thing I would always wonder about in textbook is how I knew that the condition was <span class="math inline">\(X'\epsilon\)</span> instead of <span class="math inline">\(\epsilon'X\)</span>. The answer is that in cases where order doesn’t matter, texts tend to choose what is more convenient for the math. We could solve <span class="math inline">\(\epsilon'X\)</span>: <span class="math display">\[
-\begin{aligned}
-\epsilon'X &amp;= 0 \\
-(y - \hat{y})'X &amp;= 0 \\
-(y - X\beta)'X &amp;= 0 \\
-(y' - \beta'X')X &amp;= 0 \\
-y'X - \beta'X'X &amp;= 0 \\
-\beta'X'X &amp;= y'X \\
-(\beta'X'X)' &amp;= (y'X)' \\
-X'X\beta &amp;= X'y \\
-\beta &amp;= (X'X)^{-1}X'y
-\end{aligned}
-\]</span> which gets us to the same result but in more steps.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-imbens2015causal" class="csl-entry" role="listitem">
+Imbens, Guido W, and Donald B Rubin. 2015. <em>Causal Inference in Statistics, Social, and Biomedical Sciences</em>. Cambridge University Press.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -572,13 +626,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/fisher.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher’s approach</span></span>
+      <a href="../chapters/projection.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Projection</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/variance_reduction.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Variance reduction</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/regression.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

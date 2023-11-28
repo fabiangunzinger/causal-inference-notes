@@ -1,0 +1,74 @@
+# Fisher's exact P-value
+
+Fisher's aim in his original work on experimentation was to asses the *sharp (or exact) null hypothesis* -- the hypothesis that a treatment had no effect whatsoever, meaning that the potential outcomes for being treated and not treated are the same for each unit in the data.[^hypothesis]
+
+Unter that null hypothesis the unobserved potential outcomes are thus known (they are the same as the observed outcome), and we can use the randomisation distribution to easily calculate P-values. We can calculate P-values by calculating the test statistic for all possible assignments, and then calculate the probability that the test-statistic is as extreme or more extreme than the value of the test statistic we observe given the actual assignment.
+
+Let's look at an example (copied from @imbens2015causal). We have a sample of six units, three assigned to treatment ($w_i = 1$) and three to control ($w_i = 0$). For each of the six units the value we observe is the potential outcome corresponding to their treatment status.
+
+|   | $y_i(0)$ | $y_i(1)$ | $w_i$ | $y_i^{obs}$ |
+|---|----------|----------|-------|-------------|
+| 1 | ?        | 3        | 1     | 3           |
+| 2 | ?        | 5        | 1     | 5           |
+| 3 | ?        | 0        | 1     | 0           |
+| 4 | 4        | ?        | 0     | 4           |
+| 5 | 0        | ?        | 0     | 0           |
+| 6 | 1        | ?        | 0     | 1           |
+
+This table highlights the fundamental problem of causal inference: that for each unit, we can only ever observe one potential outcome. However, Fisher's sharp null hypothesis asserts that:
+
+$$
+H_0: y_i(1) = y_i(0) \quad \text{for $i = 1, \dots, 6$}. 
+$$
+
+This makes filling in the missing values trivial:
+
+|   | $y_i(0)$ | $y_i(1)$ | $w_i$ | $y_i^{obs}$ |
+|---|----------|----------|-------|-------------|
+| 1 | (3)        | 3        | 1     | 3           |
+| 2 | (5)        | 5        | 1     | 5           |
+| 3 | (0)        | 0        | 1     | 0           |
+| 4 | 4        | (4)        | 0     | 4           |
+| 5 | 0        | (0)        | 0     | 0           |
+| 6 | 1        | (1)        | 0     | 1           |
+
+As our test statistic, we use the absolute value of the difference in average outcome by treatment status, $T(w, y^{obs}) = |\bar{y}_t^{obs} - \bar{y}_c^{obs}|$, which is a function of the random assignment $w$ and the observed values $y^{obs}$.
+
+For our little experiment above, we can calculate the test statistic easily as:
+
+$$
+\begin{aligned}
+T^{obs} &= |(y_1^{obs} + y_2^{obs} + y_3^{obs})/3 - (y_4^{obs} + y_5^{obs} + y_6^{obs})/3| \\
+&= |(3 + 5 + 0)/3 - (4 + 0 + 1)/3| \\
+&= 8/3 - 5/3 \\
+&= 1
+\end{aligned}
+$$
+
+To calculate the P-value, we need the distribution of test statistics under all possible random assignments. There are $\begin{psmallmatrix}6\\3\end{psmallmatrix} = 20$ different assignments, and we can calculate the distribution using Python:
+
+```{python}
+import numpy as np
+from itertools import combinations
+
+y = np.array([3, 5, 0, 4, 0, 1]) 
+idx = range(len(y))
+
+ts = []
+for w in combinations(idx, 3):
+    w1 = list(w)
+    w0 = list(set(idx) - set(w))
+    ts.append(abs(np.mean(y[w1]) - np.mean(y[w0])))
+
+np.mean([t >= 1 for t in ts])
+```
+
+The P-value indicates that if there is no treatment effect, we'd expect a value of the test statistic equal to 1 or even larger in 50 out of 100 random experiments.
+
+
+[^hypothesis] Compare this to the null hypothesis we more frequently test in experiments, namely, that there is no treatment effect on average. This later hypothesis is less strict (or sharp) than Fisher's, but arguably of more practical interest most of the time.
+
+
+## Useful resources
+
+@imbens2015causal

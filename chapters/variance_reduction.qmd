@@ -2,11 +2,57 @@
 
 ## Why reduce variance?
 
+TODO:
+- Explain that we wanna increase power (refer to power section)
+- Reducing variance is one way to increase power (often the only feasible one)
+
+The estimand of interest is the population average treatment effect:
+
+$$
+\tau = \bar{y}_t - \bar{y}_c.
+$$
+
+Under random treatment assignment, an unbiased estimator of $\tau$ is the difference in means between treatment and control units in the sample:
+
+$$
+\hat{\tau}^{dif} = \bar{y}_t^{obs} - \bar{y}_c^{obs}.
+$$
+
+The variance of $\hat{\tau}^{dif}$ is given by:
+
+$$
+\mathbb{V}(\hat{\tau}^{dif}) = \frac{s_t}{N_t} + \frac{s_c}{N_c},
+$$
+
+where
+
+$$
+s_t = \frac{1}{N_t - 1}\sum_{\text{i:d=1}}(y_i - \bar{y}_t^{obs})^2, \quad s_c = \frac{1}{N_c - 1}\sum_{\text{i:d=0}}(y_i - \bar{y}_c^{obs})^2.
+$$
+
+Hence: for a given sample size, we can reduce $\mathbb{V}(\hat{\tau}^{dif})$ by reducing the variance in the outcome metric, $Y$ -- this is the variance we are trying to reduce.
+
+## What about the variance-bias trade-off?
+
+Discuss why we can reduce variance without increasing bias.
+
+
+
+## Stratification
+
+TODO
+
+### Useful resources
+
+- [Deng et al. 2013 -- original CUPED paper](https://www.exp-platform.com/Documents/2013-02-CUPED-ImprovingSensitivityOfControlledExperiments.pdf) -- the original paper
+
+- [Five ways to reduce variance in A/B testing](https://bytepawn.com/five-ways-to-reduce-variance-in-ab-testing.html#five-ways-to-reduce-variance-in-ab-testing)
+
 
 
 ## Regression adjustment
 
-Regression adjustment reduces variance by adding additional regressors to the regression model used to evaluate an experiment.
+Regression adjustment reduces variance by adding additional regressors to the regression model used to evaluate an experiment in order to reduce residual variance.
 
 **How it works**
 
@@ -16,7 +62,7 @@ $$
 y_i = \alpha + \beta d_i + \epsilon_i,
 $$
 
-where $\epsilon_i$ is the error term, and where the estimate of $\beta$ is the estimate of our treatment effect. If we have an additional variable, $x_i$, that is correlated with $y_i$ but uncorrelated with $d_i$ (just as in the discussion of CUPED above), we can add that to the right hand side of our regression model and estimate:
+where $\epsilon_i$ is the error term, and where the estimate of $\beta$ is the estimate of our average treatment effect. If we have an additional variable, $x_i$, that is correlated with $y_i$ but uncorrelated with $d_i$, we can add that to the right hand side of our regression model and estimate:
 
 $$
 \begin{equation}
@@ -24,11 +70,156 @@ y_i = \alpha + \beta_1 d_i + \beta_2 x_i + \mu_i.
 \end{equation}
 $$
 
-If $x$ is uncorrelated with the treatment assignment then $\beta = \beta_1$, so the treatment effect estimate will remain unchanged, which is good. And if $x$ is correlated with $y$, then the standard error of the treatment effect estimate will again be lower, thus increasing power.
+If $x$ is uncorrelated with the treatment assignment then $\beta = \beta_1$, so the average treatment effect estimate will remain unchanged, which is good. And if $x$ is correlated with $y$, then the standard error of the average treatment effect estimate will again be lower, which increases power.
 
-**Link to CUPED**
+### Useful resources
 
-How does regression adjustment differ from CUPED? It turns out that in the simple cases discussed above, it doesn't -- the two approaches are identical! Seeing why requires a few steps.
+- Imbens & Rubin, Causal Inference for Statistics, Social, and Biomedical Sciences, Chapter 7 [link](https://www.cambridge.org/core/books/causal-inference-for-statistics-social-and-biomedical-sciences/71126BE90C58F1A431FE9B2DD07938AB)
+
+
+## CUPED
+
+CUPED stands for "Controlled experiments Using Pre-Experiment Data", and reduces variance by partialling out outcome metric variance based on pre-experiment data.
+
+### How CUPED works
+
+CUPED supposes that in addition to an outcome metric $y$, we also have access to another variable, $x$, which is correlated with $y$ but uncorrelated with the treatment assignment of our experiment. Pre-experiment data of the outcome metric is a good candidate for $x$ when it is available -- it's what's commonly used, and where the method gets its name from. With that in hand, notice that we can write
+
+
+
+
+
+
+
+ -- the most obvious candidate that has been found to work well is pre-experiment data of the metric of interest.
+
+We can then create a new variable 
+
+$$
+\tilde{y} = y - \theta x,
+$$
+
+where -- it turns out -- the optimal choice for $\theta$ is $\frac{cov(y, x)}{var(x)}$, which we can easily calculate from the available data.
+
+This is useful because it can be shown that if we now evaluate our experiment using $\tilde{y}$ instead of $y$, the treatment estimate will be the same but it's standard error will be lower, which will increase power. The standard error of the treatment effect estimate is lower because the variance of $\tilde{y}$ is lower than that of $y$ whenever $cov(y, x) \neq 0$, that is, whenever $x$ and $y$ are indeed correlated. To be precise, we have:
+
+$$
+var(\tilde{y}) = var(y)(1 - \rho^2),
+$$
+
+where $\rho$ is the Pearson correlation between $x$ and $y$:
+
+$$
+\rho = \frac{cov(y, x)}{var(x)var(y)}.
+$$
+
+
+
+
+
+Presentation notes:
+
+- Assume that in addition to our outcome variable $Y$, we have access to another random variable, $X$, which is independent of the treatment assignment and has known expectation $\mathbb{E}X$.
+
+- We can then define $\bar{Y}^{cuped} = \bar{Y} - \theta \bar{X} + \theta \mathbb{E}X$ for both treatment and control groups, and compare avearge outcomes in this adjusted metric.
+
+- Our new estimator is: $\hat{\tau}^{cuped} = \bar{Y}^{cuped}_t - \bar{Y}^{cuped}_c$.
+
+- $\hat{\tau}^{cuped}$ is unbiased since $\mathbb{E}\left[\hat{\tau}^{cuped}\right] = \bar{Y}_t - \bar{Y}_c = \tau$ (proof in appendix below).
+
+- If treatment effects are small (which, in practice, they usually are) and for an optimal choice of $\theta$: $\mathbb{V}\left(\hat{\tau}^{cuped}\right) \simeq \left(\frac{s_t}{N_t} + \frac{s_c}{N_c}\right)\left(1 - \rho^2\right)$, where $\rho$ is the correlation coefficient of $Y$ and $X$.
+
+- Hence: $\frac{\mathbb{V}(\hat{\tau}^{cuped})}{\mathbb{V}(\hat{\tau}^{dif})} = 1 - \rho^2$ -- the higher the correlation between $Y$ and $X$, the more CUPED reduces the variance of our treatment estimate.
+
+
+$\hat{\tau}^{cuped}$ is unbiased:
+
+$$
+\begin{align*}
+\mathbb{E}\left[\hat{\tau}^{cuped}\right] &= \mathbb{E}\left[\bar{Y}^{cuped}_t - \bar{Y}^{cuped}_c\right] \\
+&= \mathbb{E}\left[\left(\bar{Y}_t - \theta \bar{X}_t + \theta \mathbb{E}X\right) - \left(\bar{Y}_c - \theta \bar{X}_c + \theta \mathbb{E}X\right)\right] \\
+&= \mathbb{E}\left[\left(\bar{Y}_t - \theta \bar{X}_t\right) - \left(\bar{Y}_c - \theta \bar{X}_c\right)\right] \\
+&= \mathbb{E}\left[\bar{Y}_t - \bar{Y}_c\right] \\
+&= \mathbb{E}\left[\frac{1}{N_t}\sum_{\text{i:T=1}}Y_i- \frac{1}{N_c}\sum_{\text{i:T=0}}Y_i\right] \\
+&= \frac{1}{N_t} N_t \mathbb{E}Y_t - \frac{1}{N_c} N_c \mathbb{E}Y_c \\
+&= \mathbb{E}Y_t - \mathbb{E}Y_c \\
+&= \bar{Y}_t - \bar{Y}_c \\
+&= \tau
+\end{align*}
+$$
+
+
+$\hat{\tau}^{cuped}$ has variance:
+
+$$
+\begin{align*}
+\mathbb{V}\left(\hat{\tau}^{cuped}\right) &= \mathbb{V}\left(\bar{Y}^{cuped}_t - \bar{Y}^{cuped}_c\right) \\
+&= \mathbb{V}\left(\bar{Y}^{cuped}_t\right) + \mathbb{V}\left(\bar{Y}^{cuped}_c\right) \\
+&= \mathbb{V}\left(\bar{Y}_t - \theta \bar{X}_t + \theta \mathbb{E}X\right) + \mathbb{V}\left(\bar{Y}_c - \theta \bar{X}_c + \theta
+\mathbb{E}X\right) \\
+&= \mathbb{V}\left(\bar{Y}_t - \theta \bar{X}_t\right) + \mathbb{V}\left(\bar{Y}_c - \theta \bar{X}_c\right) \\
+&= \frac{1}{N_t}\mathbb{V}\left(Y_t - \theta X_t\right) + \frac{1}{N_c}\mathbb{V}\left(Y_c - \theta X_c\right) \\
+&= \frac{1}{N_t}\left[\mathbb{V}(Y_t) + \theta^2 \mathbb{V}(X_t) - 2\theta Cov(Y_t, X_t)\right] + \frac{1}{N_c}\left[\mathbb{V}(Y_c) + \theta^2 \mathbb{V}(X_c) - 2\theta Cov(Y_c, X_c)\right]
+\end{align*}
+$$
+
+This is minimised for:
+
+$$
+\theta^* = \frac{Cov(Y_t, X_t) + Cov(Y_c, X_c)}{\mathbb{V}(X_t) + \mathbb{V}(X_c)}
+$$
+
+In practice, a common approach is to pool the data to get:
+
+$$
+\begin{align*}
+\theta^*_p &= \frac{Cov(Y, X) + Cov(Y, X)}{\mathbb{V}(X) + \mathbb{V}(X)}\\
+&= \frac{Cov(Y, X)}{\mathbb{V}(X)},
+\end{align*}
+$$
+
+and to assume that $\mathbb{V}(X_t) \simeq \mathbb{V}(X_t)$, and $Cov(Y_t, X_t) \simeq Cov(Y_c, X_c)$, which is reasonable as long as the treatment effect is not too large (see discussion towards the end [here](https://alexdeng.github.io/causal/sensitivity.html#vrreg)). If, in addition, we let $\rho = Cor(X, Y)$, then we have
+
+$$
+\begin{align*}
+\mathbb{V}\left(\hat{\tau}^{cuped}\right) &\simeq \frac{1}{N_t}\left[\mathbb{V}(Y_t) + (\theta^*_p)^2 \mathbb{V}(X) - 2 \theta^*_p Cov(Y, X)\right] + \frac{1}{N_c}\left[\mathbb{V}(Y_c) + (\theta^*_p)^2 \mathbb{V}(X) - 2 \theta^*_p Cov(Y, X)\right]\\
+&= \frac{1}{N_t}\left[\mathbb{V}(Y_t) + \left(\frac{Cov(Y, X)}{\mathbb{V}(X)}\right)^2 \mathbb{V}(X) - 2 \left(\frac{Cov(Y, X)}{\mathbb{V}(X)}\right) Cov(Y, X)\right] + \frac{1}{N_c}\left[\mathbb{V}(Y_c) + \left(\frac{Cov(Y, X)}{\mathbb{V}(X)}\right)^2 \mathbb{V}(X) - 2 \left(\frac{Cov(Y, X)}{\mathbb{V}(X)}\right) Cov(Y, X)\right]\\
+&= \frac{1}{N_t}\left[\mathbb{V}(Y_t) - \frac{Cov(Y, X)^2}{\mathbb{V}(X)}\right] + \frac{1}{N_c}\left[\mathbb{V}(Y_c) - \frac{Cov(Y, X)^2}{\mathbb{V}(X)}\right]\\
+&= \frac{1}{N_t}\left[\mathbb{V}(Y_t) - \frac{\left(\rho\sqrt{\mathbb{V}(X)}\sqrt{\mathbb{V}(Y)}\right)^2}{\mathbb{V}(X)}\right] + \frac{1}{N_c}\left[\mathbb{V}(Y_c) - \frac{\left(\rho\sqrt{\mathbb{V}(X)}\sqrt{\mathbb{V}(Y)}\right)^2}{\mathbb{V}(X)}\right]\\
+&= \frac{1}{N_t}\left[\mathbb{V}(Y_t) - \rho^2\mathbb{V}(Y)\right] + \frac{1}{N_c}\left[\mathbb{V}(Y_c) - \rho^2\mathbb{V}(Y)\right]\\
+&= \frac{\mathbb{V}(Y_t)}{N_t}(1 - \rho^2) + \frac{\mathbb{V}(Y_c)}{N_c}(1 - \rho^2)\\
+&= \left[\frac{\mathbb{V}(Y_t)}{N_t} + \frac{\mathbb{V}(Y_c)}{N_c}\right]\left(1 - \rho^2\right)
+\end{align*}
+$$
+
+
+In practice, we use the sample variances $s_t = \frac{1}{N_t - 1}\sum_{\text{i:T=1}}\left(Y_i - \bar{Y}_t^{obs}\right)^2$ and $s_c = \frac{1}{N_c - 1}\sum_{\text{i:T=0}}\left(Y_i - \bar{Y}_c^{obs}\right)^2$ as unbiased estimators for the variances of treatment and control outcomes, and a sample estimate of the correlation coefficient, $\rho$.
+
+
+**Things to notice**
+
+- The main "trick" CUPED relies on for unbiasedness is the fact that we don't actually have to know $\mathbb{E}X$ to obtain an unbiased estimator since it cancels out when we take the difference of two CUPED-adjusted variables.
+
+- Any fixed value of $\theta$ will give us an unbiased estimator of $\tau$, so pooling the data and assuming equal variances and covariances in the treatment and control groups, as we did to calculate the variance, effect the degree of variance reduction only. If we didn't make these assumptions, the factor by which CUPED reduces variance would be a more complicated term than $\left(1 - \rho^2\right)$, involving separte variances and covariances from the treatment and control groups.
+
+### Features of CUPED
+
+- Also permits non-linear adjustments (i.e. not reliant on linearity assumptions in OLS)
+
+- Reduces biase (see statsic post)
+
+
+### Is CUPED regression adjustment?
+
+todo:
+- Is CUPED regression adjustment? Identical to regression only in simple case (show FWL link -- have separate post on understanding FWL with relevant regression examples)
+
+- Take inclusion of constant into accound (centering variables, but doesn't change correlations)
+
+- Show that in multiple regression, var(Y_adjusted) = var(y_unadjusted)(1 - R^2) -- so, CUPED result is just a specieal case where k = 1, in which case R^2 = rho. 
+
+
+It turns out that in the simple cases discussed above, it doesn't -- the two approaches are identical! Seeing why requires a few steps.
 
 First, we know (from the Frisch-Waugh-Lowell [theorem](https://en.wikipedia.org/wiki/Frisch%E2%80%93Waugh%E2%80%93Lovell_theorem)) that if we were to estimate the alternative model 
 
@@ -65,33 +256,23 @@ In general, regression adjustment and CUPED are identical if two conditions hold
 The reason why in practice we get a don't get the exact same result is that the covariance of $d$ and $x$ is only approximately 0, hence providing very similar, but not identical results.
 
 
-## CUPED
 
-CUPED stands for "Controlled experiments Using Pre-Experiment Data", and reduces variance by partialling out as much variance as possible from the outcome metric using appropriate available data, usually data from the pre-experiment period -- hence the name.
+### Is CUPED DiD?
 
-**How it works**
+- Is CUPED DiD? (based on Courthoud) -- same if theta = 1
 
-Imagine that in addition to our outcome metric $y$, we have access to another variable, $x$, which is correlated with $y$ but uncorrelated with the treatment assignment of our experiment -- the most obvious candidate that has been found to work well is pre-experiment data of the metric of interest.
 
-We can then create a new variable 
+### Non-linear extensions
 
-$$
-\tilde{y} = y - \theta x,
-$$
 
-where -- it turns out -- the optimal choice for $\theta$ is $\frac{cov(y, x)}{var(x)}$, which we can easily calculate from the available data.
+## Blog post notes
 
-This is useful because it can be shown that if we now evaluate our experiment using $\tilde{y}$ instead of $y$, the treatment estimate will be the same but it's standard error will be lower, which will increase power. The standard error of the treatment effect estimate is lower because the variance of $\tilde{y}$ is lower than that of $y$ whenever $cov(y, x) \neq 0$, that is, whenever $x$ and $y$ are indeed correlated. To be precise, we have:
+CUPED is a re-invention of multiple linear regression. Evan Miller ([here](https://www.evanmiller.org/you-cant-spell-cuped-without-frisch-waugh-lovell.html)) and Matteo Courthoud ([here](https://towardsdatascience.com/understanding-cuped-a822523641af)) make similar points in their excellent posts on the topic, but -- given my starting point -- neither quite helped me fully understand what is going on. This post is my attempt to do that.
 
-$$
-var(\tilde{y}) = var(y)(1 - \rho^2),
-$$
+In particular, I think that to really understand the connection between multiple linear regression and CUPED, you have to understand the linear algebra of the Frisch-Waugh-Lowell theorem (FWL) rather than just knowing that that theorem says, and to understand that, you have to understand the concept of a projection.
 
-where $\rho$ is the Pearson correlation between $x$ and $y$:
+- The motivation for CUPED seems to be a bit of a strawman: that regression adjustment relies on assumption that expectation of Y conditional on X is linear. Imbens and Rubin in 7.5 show that this is not required. Neither is homoskedasticity, or, rather, this should hold anyways given randomisation. Study chapter 7.
 
-$$
-\rho = \frac{cov(y, x)}{var(x)var(y)}.
-$$
 
 ### Useful resources
 
@@ -103,39 +284,35 @@ $$
 
 - [Understanding CUPED](https://towardsdatascience.com/understanding-cuped-a822523641af) -- good post exploring link to multiple regression (also using FWL theorem) and DiD.
 
+- [Reducing variance in A/B testing with CUPED](https://bytepawn.com/reducing-variance-in-ab-testing-with-cuped.html#reducing-variance-in-ab-testing-with-cuped)
+
 - [CUPED on Statsig](https://blog.statsig.com/cuped-on-statsig-d57f23122d0e)
 
-- EPPO posts on CUPED [here](https://www.geteppo.com/blog/reducing-experiment-durations) and [here](https://www.geteppo.com/blog/bending-time-in-experimentation)
+
+## CUPAC
+
+- CUPED can be extended to (make notation consistent with CUPED)
+
+$$
+y' = y - \theta \bar{f(X)} + \theta E(f(X))
+$$
+
+- In above, it can be shown that optimal $f(X) = E(Y|X)$ (show this).
+
+- CUPED, which is effectively regression adjustment, uses best linear predictor.
+
+- CUPAC extends this to non-linear predictors, generating $\hat{y} = g(X) = E(Y|X)$.
 
 
 
+## Useful resources
 
+- [Five ways to reduce variance in A/B testing](https://bytepawn.com/five-ways-to-reduce-variance-in-ab-testing.html#five-ways-to-reduce-variance-in-ab-testing)
 
-Use from blog post...
+- [Online Experiments Tricks — Variance Reduction](https://towardsdatascience.com/online-experiments-tricks-variance-reduction-291b6032dcd7)
 
-New framing
+- [CUPED, CUPAC, and Other Ways to Reduce Variance in an Experiment](https://j-sephb-lt-n.github.io/exploring_statistics/cuped_cupac_and_other_variance_reduction_techniques.html)
 
-- Relation to other approaches
+- [Don't use a t-test for A/B testing](https://towardsdatascience.com/dont-use-a-t-test-for-a-b-testing-e4d2ef7ab9b6)
 
-  - Is CUPED regression adjustment? Identical to regression only in simple case (show FWL link -- have separate post on understanding FWL with relevant regression examples)
-
-  - Is CUPED DiD? (based on Courthoud) -- same if theta = 1
-
-- Features of CUPED
-
-  - Also permits non-linear adjustments (i.e. not reliant on linearity assumptions in OLS)
-
-- Variance reduction of CUPED: Add section on how CUPED reduces std error or estimator and, via rule of thumb for sample size requirement, increases power! (See my VR talk notes)
-
-Resources:
-- https://bookdown.org/ts_robinson1994/10EconometricTheorems/frisch.html
-- https://www.evanmiller.org/you-cant-spell-cuped-without-frisch-waugh-lovell.html
-- https://towardsdatascience.com/understanding-cuped-a822523641af
-- https://en.wikipedia.org/wiki/Linear_regression
-
-CUPED is a re-invention of multiple linear regression. Evan Miller ([here](https://www.evanmiller.org/you-cant-spell-cuped-without-frisch-waugh-lovell.html)) and Matteo Courthoud ([here](https://towardsdatascience.com/understanding-cuped-a822523641af)) make similar points in their excellent posts on the topic, but -- given my starting point -- neither quite helped me fully understand what is going on. This post is my attempt to do that.
-
-In particular, I think that to really understand the connection between multiple linear regression and CUPED, you have to understand the linear algebra of the Frisch-Waugh-Lowell theorem (FWL) rather than just knowing that that theorem says, and to understand that, you have to understand the concept of a projection. The latter two are both well explained in Thomas S. Robinson's wonderful online book [10 Fundamental Theorems for Econometrics](https://bookdown.org/ts_robinson1994/10EconometricTheorems/), on which I draw heavily.
-
-
-
+- [Variance Reduction in Experiments — Part 1: Intuition -- see also part 2](https://towardsdatascience.com/variance-reduction-in-experiments-part-1-intuition-68b270a0df71)
