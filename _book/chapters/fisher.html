@@ -376,20 +376,24 @@ T^{obs} &amp;= |(y_1^{obs} + y_2^{obs} + y_3^{obs})/3 - (y_4^{obs} + y_5^{obs} +
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> []</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> w <span class="kw">in</span> combinations(idx, <span class="dv">3</span>):</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    w1 <span class="op">=</span> <span class="bu">list</span>(w)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    w0 <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(idx) <span class="op">-</span> <span class="bu">set</span>(w))</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    ts.append(<span class="bu">abs</span>(np.mean(y[w1]) <span class="op">-</span> np.mean(y[w0])))</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>sns.histplot(ts)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    w0, w1 <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(idx) <span class="op">-</span> <span class="bu">set</span>(w)), <span class="bu">list</span>(w)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    y0, y1 <span class="op">=</span> y[w0], y[w1]</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> <span class="bu">abs</span>(np.mean(y1) <span class="op">-</span> np.mean(y0))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    ts.append(t)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>sns.histplot(ts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>&lt;Axes: ylabel='Count'&gt;</code></pre>
+</div>
 <div class="cell-output cell-output-display">
-<p><img src="fisher_files/figure-html/cell-2-output-1.png" width="576" height="411"></p>
+<p><img src="fisher_files/figure-html/cell-2-output-2.png" width="576" height="411"></p>
 </div>
 </div>
 <p>With that distribution in hand, we can easily calculate the P-value:</p>
 <div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.mean([t <span class="op">&gt;=</span> <span class="dv">1</span> <span class="cf">for</span> t <span class="kw">in</span> ts])</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.mean([t <span class="op">&gt;=</span> <span class="dv">1</span> <span class="cf">for</span> t <span class="kw">in</span> ts])</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>0.5</code></pre>
 </div>
 </div>

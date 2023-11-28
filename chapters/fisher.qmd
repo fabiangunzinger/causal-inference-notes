@@ -61,9 +61,10 @@ idx = range(len(y))
 
 ts = []
 for w in combinations(idx, 3):
-    w1 = list(w)
-    w0 = list(set(idx) - set(w))
-    ts.append(abs(np.mean(y[w1]) - np.mean(y[w0])))
+    w0, w1 = list(set(idx) - set(w)), list(w)
+    y0, y1 = y[w0], y[w1]
+    t = abs(np.mean(y1) - np.mean(y0))
+    ts.append(t)
 
 sns.histplot(ts);
 ```
