@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 3&nbsp; Fisher’s exact P-value approach</title>
+<title>Causal inference notes - 4&nbsp; Neyman’s repeated sampling approach</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,60 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -83,8 +30,8 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/neyman.html" rel="next">
-<link href="../chapters/projection.html" rel="prev">
+<link href="../chapters/regression.html" rel="next">
+<link href="../chapters/fisher.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -114,8 +61,6 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -128,7 +73,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/fisher.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher's exact P-value approach</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/neyman.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Neyman's repeated sampling approach</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -167,13 +112,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
   </div>
 </li>
@@ -207,20 +152,14 @@ div.csl-indent {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link active" data-scroll-target="#useful-resources"><span class="header-section-number">3.1</span> Useful resources</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></h1>
 </div>
 
 
@@ -235,177 +174,8 @@ div.csl-indent {
 
 </header>
 
-<p>These are my notes from reading chapter 5 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>.</p>
-<p>Fisher’s aim in his original work on experimentation was to asses the <em>sharp (or exact) null hypothesis</em> – the hypothesis that a treatment had no effect whatsoever, meaning that the potential outcomes for being treated and not treated are the same for each unit in the data.[^hypothesis]</p>
-<p>Unter that null hypothesis, the unobserved potential outcomes are known – they are the same as the observed outcome – and we can use the randomisation distribution to calculate P-values. We can calculate P-values by calculating the test statistic for all possible assignments, and then calculate the probability that the test-statistic is as extreme or more extreme than the value of the test statistic in our experiment.</p>
-<p>Let’s look at an example. We have a sample of six units, three assigned to treatment (<span class="math inline">\(w_i = 1\)</span>) and three to control (<span class="math inline">\(w_i = 0\)</span>). For each of the six units the value we observe is the potential outcome corresponding to the treatment status.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th></th>
-<th><span class="math inline">\(y_i(0)\)</span></th>
-<th><span class="math inline">\(y_i(1)\)</span></th>
-<th><span class="math inline">\(w_i\)</span></th>
-<th><span class="math inline">\(y_i^{obs}\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>?</td>
-<td>3</td>
-<td>1</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>?</td>
-<td>5</td>
-<td>1</td>
-<td>5</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>?</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>4</td>
-<td>?</td>
-<td>0</td>
-<td>4</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>0</td>
-<td>?</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>1</td>
-<td>?</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>This table highlights the fundamental problem of causal inference – we can only ever observe one potential outcome for each unit.</p>
-<p>However, Fisher’s sharp null hypothesis asserts that:</p>
-<p><span class="math display">\[
-H_0: y_i(1) = y_i(0) \quad \text{for $i = 1, \dots, 6$},
-\]</span></p>
-<p>which makes filling in the missing values trivial:</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th></th>
-<th><span class="math inline">\(y_i(0)\)</span></th>
-<th><span class="math inline">\(y_i(1)\)</span></th>
-<th><span class="math inline">\(w_i\)</span></th>
-<th><span class="math inline">\(y_i^{obs}\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>(3)</td>
-<td>3</td>
-<td>1</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>(5)</td>
-<td>5</td>
-<td>1</td>
-<td>5</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>(0)</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>4</td>
-<td>(4)</td>
-<td>0</td>
-<td>4</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>0</td>
-<td>(0)</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>1</td>
-<td>(1)</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>There are a number of different test statistics we could use (and <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span> discuss and compare an number of them). Following the book, for this example I use the absolute value of the difference in average outcome by treatment status, <span class="math inline">\(T(w, y^{obs}) = |\bar{y}_t^{obs} - \bar{y}_c^{obs}|\)</span>, which is a function of the random assignment <span class="math inline">\(w\)</span> and the observed values <span class="math inline">\(y^{obs}\)</span>.</p>
-<p>For our little experiment above, we can calculate the test statistic easily as:</p>
-<p><span class="math display">\[
-\begin{aligned}
-T^{obs} &amp;= |(y_1^{obs} + y_2^{obs} + y_3^{obs})/3 - (y_4^{obs} + y_5^{obs} + y_6^{obs})/3| \\
-&amp;= |(3 + 5 + 0)/3 - (4 + 0 + 1)/3| \\
-&amp;= 8/3 - 5/3 \\
-&amp;= 1
-\end{aligned}
-\]</span></p>
-<p>To calculate the P-value, we need the distribution of test statistics under all possible random assignments. There are <span class="math inline">\(\begin{psmallmatrix}6\\3\end{psmallmatrix} = 20\)</span> different assignments, and we can calculate the distribution using Python:</p>
-<div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> combinations</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">1</span>])</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>idx <span class="op">=</span> <span class="bu">range</span>(<span class="bu">len</span>(y))</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> []</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> w <span class="kw">in</span> combinations(idx, <span class="dv">3</span>):</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    w1 <span class="op">=</span> <span class="bu">list</span>(w)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    w0 <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(idx) <span class="op">-</span> <span class="bu">set</span>(w))</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    ts.append(<span class="bu">abs</span>(np.mean(y[w1]) <span class="op">-</span> np.mean(y[w0])))</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>sns.histplot(ts)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="fisher_files/figure-html/cell-2-output-1.png" width="576" height="411"></p>
-</div>
-</div>
-<p>With that distribution in hand, we can easily calculate the P-value:</p>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.mean([t <span class="op">&gt;=</span> <span class="dv">1</span> <span class="cf">for</span> t <span class="kw">in</span> ts])</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
-<pre><code>0.5</code></pre>
-</div>
-</div>
-<p>The P-value indicates that if there is no treatment effect, we’d expect a value of the test statistic equal to 1 or even larger in 50 out of 100 random experiments.</p>
-<p>[^hypothesis] Compare this to the null hypothesis we more frequently test in experiments, namely, that there is no treatment effect on average. This later hypothesis is less strict (or sharp) than Fisher’s, but arguably of more practical interest most of the time.</p>
-<section id="useful-resources" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">3.1</span> Useful resources</h2>
-<p><span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span></p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
-<div id="ref-imbens2015causal" class="csl-entry" role="listitem">
-Imbens, Guido W, and Donald B Rubin. 2015. <em>Causal Inference in Statistics, Social, and Biomedical Sciences</em>. Cambridge University Press.
-</div>
-</div>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -643,13 +413,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/projection.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Projection</span></span>
+      <a href="../chapters/fisher.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/neyman.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/regression.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
