@@ -2,11 +2,22 @@
 
 These are my notes from reading chapter 5 in @imbens2015causal.
 
-Fisher's aim in his original work on experimentation was to asses the *sharp (or exact) null hypothesis* -- the hypothesis that a treatment had no effect whatsoever, meaning that the potential outcomes for being treated and not treated are the same for each unit in the data.[^hypothesis]
+Fisher's aim in his original work on experimentation was to asses the *sharp (or exact) null hypothesis* -- the hypothesis that a treatment had no effect whatsoever, meaning that the potential outcomes for being treated and not treated are the same for each unit in the data. (Compared to the null hypothesis that there is no treatment effect on average, which we use more frequently in experiments, Fisher's hypothesis is stricter -- of, if you like, sharper -- but the former is, arguably, of more practical interest in most cases.)
 
-Unter that null hypothesis, the unobserved potential outcomes are known -- they are the same as the observed outcome -- and we can use the randomisation distribution to calculate P-values. We can calculate P-values by calculating the test statistic for all possible assignments, and then calculate the probability that the test-statistic is as extreme or more extreme than the value of the test statistic in our experiment.
+Unter that null hypothesis, the unobserved potential outcomes are known -- they are the same as the observed outcome -- and we can use the randomisation distribution to calculate P-values. The randomisation distribution is the distribution of values of the test statistic based on all possible assignment vectors. We can calculate P-values by calculating the test statistic for all possible assignments, and then calculate the probability that the test-statistic is as extreme or more extreme than the value of the test statistic in our experiment.
 
-Let's look at an example. We have a sample of six units, three assigned to treatment ($w_i = 1$) and three to control ($w_i = 0$). For each of the six units the value we observe is the potential outcome corresponding to the treatment status.
+Three important points about the approach:
+
+- The key point about the sharp null hypothesis is that it allows us to impute all unobserved potential outcomes, not that the treatment effect is zero. The postulated treatment effect could thus be any deterministic function of the available data (e.g. an additive or multiplicative homogenous effect or a function of observed covariates).
+
+- The only source of randomness in this framework is the randomness introduced by randomisation, meaning there is no randomness from sampling because we are interested in conclusions about the specific sample at hand, not about a superpopulation.
+
+- The approach is truly non-parametric in that it doesn't rely on a model of outcomes at all. In particular, we don't model the distribution of test statistic values but calculate it directly. We can do that because we know the assignment mechanism, which is known by definition in a completely randomised experiment, and because of the strict null hypothesis, which allows us to solve the fundamental problem of causal inference by imputing the unobserved potential values.
+
+
+## A simple example
+
+We have a sample of six units, three assigned to treatment ($w_i = 1$) and three to control ($w_i = 0$). For each of the six units the value we observe is the potential outcome corresponding to the treatment status.
 
 |   | $y_i(0)$ | $y_i(1)$ | $w_i$ | $y_i^{obs}$ |
 |---|----------|----------|-------|-------------|
@@ -76,11 +87,7 @@ p = np.mean([t >= 1 for t in ts])
 p
 ```
 
-The P-value indicates that if there is no treatment effect, we'd expect a value of the test statistic equal to 1 or even larger in 50 out of 100 random experiments.
-
-
-[^hypothesis] Compare this to the null hypothesis we more frequently test in experiments, namely, that there is no treatment effect on average. This later hypothesis is less strict (or sharp) than Fisher's, but arguably of more practical interest most of the time.
-
+The P-value indicates that if there is no treatment effect, we'd expect a value of the test statistic equal to 1 or even larger in 50 out of 100 random experiments, which does not provide any evidencen against the null hypothesis.
 
 ## Useful resources
 
