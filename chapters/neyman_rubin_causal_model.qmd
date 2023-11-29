@@ -59,3 +59,11 @@ $$
 ## Stable unit treatment value assumption
 
 ## The assignment mechanism
+
+## Finite sample vs super-population perspective
+
+There are two ways to perform inference:
+
+- When using the finite sample perspective, the $N$ units in the experiment sample are treated as the entire population of interest. Hence, there is no notion of randomisation due to sampling from a larger population, and all the randomness in the outcomes is due to randomness generates by the assignment mechanism.
+
+- When treating the $N$ units in the sample as a random sample from a larger super-population, then in addition to randomness from the randomisation, we also have randomness from the sampling.

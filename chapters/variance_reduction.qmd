@@ -280,6 +280,11 @@ In particular, I think that to really understand the connection between multiple
 
 - [Variance reduction section of Deng's causal inference book](https://alexdeng.github.io/causal/sensitivity.html#vrreg) -- more in-depth discussion of some aspects of CUPED and its link to regression adjustment
 
+- [Improving the Sensitivity of Online Controlled
+Experiments: Case Studies at Netflix](https://www.kdd.org/kdd2016/papers/files/adp0945-xieA.pdf)
+
+- [How Booking.com increases the power of online experiments with CUPED](https://booking.ai/how-booking-com-increases-the-power-of-online-experiments-with-cuped-995d186fff1d)
+
 - [You can't spell CUPED without Frisch-Waugh-Lovell](https://www.evanmiller.org/you-cant-spell-cuped-without-frisch-waugh-lovell.html) -- good post exploring link to FWL theorem
 
 - [Understanding CUPED](https://towardsdatascience.com/understanding-cuped-a822523641af) -- good post exploring link to multiple regression (also using FWL theorem) and DiD.
@@ -302,6 +307,22 @@ $$
 - CUPED, which is effectively regression adjustment, uses best linear predictor.
 
 - CUPAC extends this to non-linear predictors, generating $\hat{y} = g(X) = E(Y|X)$.
+
+
+Questions:
+
+- How is y adjusted?
+- What is theta?
+- How is g(x) generated?
+  - Model type
+  - Features
+  - Data used
+
+
+### Useful resources
+
+- [Control Using Predictions as Covariates in Switchback Experiments]([file:///Users/fabian.gunzinger/Downloads/code_final_draft1.pdf](https://www.researchgate.net/publication/345698207_Control_Using_Predictions_as_Covariates_in_Switchback_Experiments))
+
 
 
 

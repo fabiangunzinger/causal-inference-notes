@@ -1,0 +1,5 @@
+# Switchback experiments
+
+## Useful resources
+
+- [Experiment Rigor for Switchback Experiment Analysis](https://doordash.engineering/2019/02/20/experiment-rigor-for-switchback-experiment-analysis/)

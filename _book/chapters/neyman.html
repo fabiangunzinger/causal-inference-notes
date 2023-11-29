@@ -250,7 +250,7 @@ div.csl-indent {
 = \frac{S_c^2}{N_c} + \frac{S_t^2}{N_t} - \frac{S_{ct}^2}{N},
 \tag{5.3}\]</span></span></p>
 <p>where:</p>
-<p><span class="math display">\[\begin{align}
+<p>$$ <span class="math display">\[\begin{align}
 S_c^2 &amp;= \frac{1}{N - 1}\sum_{i=1}^{N}\left(Y_i(0) - \bar{Y}(0)\right)^2 \\
 
 S_t^2 &amp;= \frac{1}{N - 1}\sum_{i=1}^{N}\left(Y_i(1) - \bar{Y}(1)\right)^2 \\
@@ -258,7 +258,7 @@ S_t^2 &amp;= \frac{1}{N - 1}\sum_{i=1}^{N}\left(Y_i(1) - \bar{Y}(1)\right)^2 \\
 S_{ct}^2 &amp;= \frac{1}{N - 1}\sum_{i=1}^{N}\left(Y_i(1) - Y_i(0) - (\bar{Y}(1) - \bar{Y}(0))\right)^2 \\
 
 &amp;= \frac{1}{N - 1}\sum_{i=1}^{N}\left(Y_i(1) - Y_i(0) - \tau_{fs}\right)^2 \\
-\end{align}\]</span></p>
+\end{align}\]</span> $$</p>
 <p>If the unit level treatment effects <span class="math inline">\(Y_(1) - Y_i(0)\)</span> are constant, then the below is an unbiased estimator for the sampling variance (see Theorem 6.3 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>):</p>
 <p><span id="eq-neyman-sampvar-est"><span class="math display">\[
 \hat{\mathbb{V}}^{neyman} = \frac{s_c^2}{N_c} + \frac{s_t^2}{N_t},
