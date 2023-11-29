@@ -13,6 +13,7 @@ book:
     - chapters/neyman.qmd
     - chapters/regression.qmd
     - chapters/variance_reduction.qmd
+    - chapters/stats_for_business.qmd
 
     # - part: introduction.qmd
     #   chapters:

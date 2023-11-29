@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 5&nbsp; Variance reduction</title>
+<title>Causal inference notes - 7&nbsp; Variance reduction</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/useful_resources.html" rel="next">
+<link href="../chapters/stats_for_business.html" rel="next">
 <link href="../chapters/regression.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -75,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/variance_reduction.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Variance reduction</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/variance_reduction.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variance reduction</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -114,26 +114,44 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher’s approach</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/variance_reduction.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/stats_for_business.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stats for business</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/useful_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Useful resources</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Useful resources</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -152,27 +170,27 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#why-reduce-variance" id="toc-why-reduce-variance" class="nav-link active" data-scroll-target="#why-reduce-variance"><span class="header-section-number">5.1</span> Why reduce variance?</a></li>
-  <li><a href="#what-about-the-variance-bias-trade-off" id="toc-what-about-the-variance-bias-trade-off" class="nav-link" data-scroll-target="#what-about-the-variance-bias-trade-off"><span class="header-section-number">5.2</span> What about the variance-bias trade-off?</a></li>
-  <li><a href="#stratification" id="toc-stratification" class="nav-link" data-scroll-target="#stratification"><span class="header-section-number">5.3</span> Stratification</a>
+  <li><a href="#why-reduce-variance" id="toc-why-reduce-variance" class="nav-link active" data-scroll-target="#why-reduce-variance"><span class="header-section-number">7.1</span> Why reduce variance?</a></li>
+  <li><a href="#what-about-the-variance-bias-trade-off" id="toc-what-about-the-variance-bias-trade-off" class="nav-link" data-scroll-target="#what-about-the-variance-bias-trade-off"><span class="header-section-number">7.2</span> What about the variance-bias trade-off?</a></li>
+  <li><a href="#stratification" id="toc-stratification" class="nav-link" data-scroll-target="#stratification"><span class="header-section-number">7.3</span> Stratification</a>
   <ul class="collapse">
-  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">5.3.1</span> Useful resources</a></li>
+  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">7.3.1</span> Useful resources</a></li>
   </ul></li>
-  <li><a href="#regression-adjustment" id="toc-regression-adjustment" class="nav-link" data-scroll-target="#regression-adjustment"><span class="header-section-number">5.4</span> Regression adjustment</a>
+  <li><a href="#regression-adjustment" id="toc-regression-adjustment" class="nav-link" data-scroll-target="#regression-adjustment"><span class="header-section-number">7.4</span> Regression adjustment</a>
   <ul class="collapse">
-  <li><a href="#useful-resources-1" id="toc-useful-resources-1" class="nav-link" data-scroll-target="#useful-resources-1"><span class="header-section-number">5.4.1</span> Useful resources</a></li>
+  <li><a href="#useful-resources-1" id="toc-useful-resources-1" class="nav-link" data-scroll-target="#useful-resources-1"><span class="header-section-number">7.4.1</span> Useful resources</a></li>
   </ul></li>
-  <li><a href="#cuped" id="toc-cuped" class="nav-link" data-scroll-target="#cuped"><span class="header-section-number">5.5</span> CUPED</a>
+  <li><a href="#cuped" id="toc-cuped" class="nav-link" data-scroll-target="#cuped"><span class="header-section-number">7.5</span> CUPED</a>
   <ul class="collapse">
-  <li><a href="#how-cuped-works" id="toc-how-cuped-works" class="nav-link" data-scroll-target="#how-cuped-works"><span class="header-section-number">5.5.1</span> How CUPED works</a></li>
-  <li><a href="#features-of-cuped" id="toc-features-of-cuped" class="nav-link" data-scroll-target="#features-of-cuped"><span class="header-section-number">5.5.2</span> Features of CUPED</a></li>
-  <li><a href="#is-cuped-regression-adjustment" id="toc-is-cuped-regression-adjustment" class="nav-link" data-scroll-target="#is-cuped-regression-adjustment"><span class="header-section-number">5.5.3</span> Is CUPED regression adjustment?</a></li>
-  <li><a href="#is-cuped-did" id="toc-is-cuped-did" class="nav-link" data-scroll-target="#is-cuped-did"><span class="header-section-number">5.5.4</span> Is CUPED DiD?</a></li>
-  <li><a href="#non-linear-extensions" id="toc-non-linear-extensions" class="nav-link" data-scroll-target="#non-linear-extensions"><span class="header-section-number">5.5.5</span> Non-linear extensions</a></li>
+  <li><a href="#how-cuped-works" id="toc-how-cuped-works" class="nav-link" data-scroll-target="#how-cuped-works"><span class="header-section-number">7.5.1</span> How CUPED works</a></li>
+  <li><a href="#features-of-cuped" id="toc-features-of-cuped" class="nav-link" data-scroll-target="#features-of-cuped"><span class="header-section-number">7.5.2</span> Features of CUPED</a></li>
+  <li><a href="#is-cuped-regression-adjustment" id="toc-is-cuped-regression-adjustment" class="nav-link" data-scroll-target="#is-cuped-regression-adjustment"><span class="header-section-number">7.5.3</span> Is CUPED regression adjustment?</a></li>
+  <li><a href="#is-cuped-did" id="toc-is-cuped-did" class="nav-link" data-scroll-target="#is-cuped-did"><span class="header-section-number">7.5.4</span> Is CUPED DiD?</a></li>
+  <li><a href="#non-linear-extensions" id="toc-non-linear-extensions" class="nav-link" data-scroll-target="#non-linear-extensions"><span class="header-section-number">7.5.5</span> Non-linear extensions</a></li>
   </ul></li>
-  <li><a href="#blog-post-notes" id="toc-blog-post-notes" class="nav-link" data-scroll-target="#blog-post-notes"><span class="header-section-number">5.6</span> Blog post notes</a></li>
-  <li><a href="#cupac" id="toc-cupac" class="nav-link" data-scroll-target="#cupac"><span class="header-section-number">5.7</span> CUPAC</a></li>
-  <li><a href="#useful-resources-2" id="toc-useful-resources-2" class="nav-link" data-scroll-target="#useful-resources-2"><span class="header-section-number">5.8</span> Useful resources</a></li>
+  <li><a href="#blog-post-notes" id="toc-blog-post-notes" class="nav-link" data-scroll-target="#blog-post-notes"><span class="header-section-number">7.6</span> Blog post notes</a></li>
+  <li><a href="#cupac" id="toc-cupac" class="nav-link" data-scroll-target="#cupac"><span class="header-section-number">7.7</span> CUPAC</a></li>
+  <li><a href="#useful-resources-2" id="toc-useful-resources-2" class="nav-link" data-scroll-target="#useful-resources-2"><span class="header-section-number">7.8</span> Useful resources</a></li>
   </ul>
 </nav>
     </div>
@@ -181,7 +199,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Variance reduction</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variance reduction</span></h1>
 </div>
 
 
@@ -196,8 +214,8 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="why-reduce-variance" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="why-reduce-variance"><span class="header-section-number">5.1</span> Why reduce variance?</h2>
+<section id="why-reduce-variance" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="why-reduce-variance"><span class="header-section-number">7.1</span> Why reduce variance?</h2>
 <p>TODO: - Explain that we wanna increase power (refer to power section) - Reducing variance is one way to increase power (often the only feasible one)</p>
 <p>The estimand of interest is the population average treatment effect:</p>
 <p><span class="math display">\[
@@ -217,23 +235,23 @@ s_t = \frac{1}{N_t - 1}\sum_{\text{i:d=1}}(y_i - \bar{y}_t^{obs})^2, \quad s_c =
 \]</span></p>
 <p>Hence: for a given sample size, we can reduce <span class="math inline">\(\mathbb{V}(\hat{\tau}^{dif})\)</span> by reducing the variance in the outcome metric, <span class="math inline">\(Y\)</span> – this is the variance we are trying to reduce.</p>
 </section>
-<section id="what-about-the-variance-bias-trade-off" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="what-about-the-variance-bias-trade-off"><span class="header-section-number">5.2</span> What about the variance-bias trade-off?</h2>
+<section id="what-about-the-variance-bias-trade-off" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="what-about-the-variance-bias-trade-off"><span class="header-section-number">7.2</span> What about the variance-bias trade-off?</h2>
 <p>Discuss why we can reduce variance without increasing bias.</p>
 </section>
-<section id="stratification" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="stratification"><span class="header-section-number">5.3</span> Stratification</h2>
+<section id="stratification" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="stratification"><span class="header-section-number">7.3</span> Stratification</h2>
 <p>TODO</p>
-<section id="useful-resources" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">5.3.1</span> Useful resources</h3>
+<section id="useful-resources" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">7.3.1</span> Useful resources</h3>
 <ul>
 <li><p><a href="https://www.exp-platform.com/Documents/2013-02-CUPED-ImprovingSensitivityOfControlledExperiments.pdf">Deng et al.&nbsp;2013 – original CUPED paper</a> – the original paper</p></li>
 <li><p><a href="https://bytepawn.com/five-ways-to-reduce-variance-in-ab-testing.html#five-ways-to-reduce-variance-in-ab-testing">Five ways to reduce variance in A/B testing</a></p></li>
 </ul>
 </section>
 </section>
-<section id="regression-adjustment" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="regression-adjustment"><span class="header-section-number">5.4</span> Regression adjustment</h2>
+<section id="regression-adjustment" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="regression-adjustment"><span class="header-section-number">7.4</span> Regression adjustment</h2>
 <p>Regression adjustment reduces variance by adding additional regressors to the regression model used to evaluate an experiment in order to reduce residual variance.</p>
 <p><strong>How it works</strong></p>
 <p>To evaluate an experiment where we have, for each unit <span class="math inline">\(i\)</span>, an outcome metric <span class="math inline">\(y_i\)</span> and a treatment assignment indicator <span class="math inline">\(d_i\)</span> we would estimate the following linear regression model using OLS:</p>
@@ -247,18 +265,18 @@ y_i = \alpha + \beta_1 d_i + \beta_2 x_i + \mu_i.
 \end{equation}
 \]</span></p>
 <p>If <span class="math inline">\(x\)</span> is uncorrelated with the treatment assignment then <span class="math inline">\(\beta = \beta_1\)</span>, so the average treatment effect estimate will remain unchanged, which is good. And if <span class="math inline">\(x\)</span> is correlated with <span class="math inline">\(y\)</span>, then the standard error of the average treatment effect estimate will again be lower, which increases power.</p>
-<section id="useful-resources-1" class="level3" data-number="5.4.1">
-<h3 data-number="5.4.1" class="anchored" data-anchor-id="useful-resources-1"><span class="header-section-number">5.4.1</span> Useful resources</h3>
+<section id="useful-resources-1" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="useful-resources-1"><span class="header-section-number">7.4.1</span> Useful resources</h3>
 <ul>
 <li>Imbens &amp; Rubin, Causal Inference for Statistics, Social, and Biomedical Sciences, Chapter 7 <a href="https://www.cambridge.org/core/books/causal-inference-for-statistics-social-and-biomedical-sciences/71126BE90C58F1A431FE9B2DD07938AB">link</a></li>
 </ul>
 </section>
 </section>
-<section id="cuped" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="cuped"><span class="header-section-number">5.5</span> CUPED</h2>
+<section id="cuped" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="cuped"><span class="header-section-number">7.5</span> CUPED</h2>
 <p>CUPED stands for “Controlled experiments Using Pre-Experiment Data”, and reduces variance by partialling out outcome metric variance based on pre-experiment data.</p>
-<section id="how-cuped-works" class="level3" data-number="5.5.1">
-<h3 data-number="5.5.1" class="anchored" data-anchor-id="how-cuped-works"><span class="header-section-number">5.5.1</span> How CUPED works</h3>
+<section id="how-cuped-works" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="how-cuped-works"><span class="header-section-number">7.5.1</span> How CUPED works</h3>
 <p>CUPED supposes that in addition to an outcome metric <span class="math inline">\(y\)</span>, we also have access to another variable, <span class="math inline">\(x\)</span>, which is correlated with <span class="math inline">\(y\)</span> but uncorrelated with the treatment assignment of our experiment. Pre-experiment data of the outcome metric is a good candidate for <span class="math inline">\(x\)</span> when it is available – it’s what’s commonly used, and where the method gets its name from. With that in hand, notice that we can write</p>
 <p>– the most obvious candidate that has been found to work well is pre-experiment data of the metric of interest.</p>
 <p>We can then create a new variable</p>
@@ -339,15 +357,15 @@ var(\tilde{y}) = var(y)(1 - \rho^2),
 <li><p>Any fixed value of <span class="math inline">\(\theta\)</span> will give us an unbiased estimator of <span class="math inline">\(\tau\)</span>, so pooling the data and assuming equal variances and covariances in the treatment and control groups, as we did to calculate the variance, effect the degree of variance reduction only. If we didn’t make these assumptions, the factor by which CUPED reduces variance would be a more complicated term than <span class="math inline">\(\left(1 - \rho^2\right)\)</span>, involving separte variances and covariances from the treatment and control groups.</p></li>
 </ul>
 </section>
-<section id="features-of-cuped" class="level3" data-number="5.5.2">
-<h3 data-number="5.5.2" class="anchored" data-anchor-id="features-of-cuped"><span class="header-section-number">5.5.2</span> Features of CUPED</h3>
+<section id="features-of-cuped" class="level3" data-number="7.5.2">
+<h3 data-number="7.5.2" class="anchored" data-anchor-id="features-of-cuped"><span class="header-section-number">7.5.2</span> Features of CUPED</h3>
 <ul>
 <li><p>Also permits non-linear adjustments (i.e.&nbsp;not reliant on linearity assumptions in OLS)</p></li>
 <li><p>Reduces biase (see statsic post)</p></li>
 </ul>
 </section>
-<section id="is-cuped-regression-adjustment" class="level3" data-number="5.5.3">
-<h3 data-number="5.5.3" class="anchored" data-anchor-id="is-cuped-regression-adjustment"><span class="header-section-number">5.5.3</span> Is CUPED regression adjustment?</h3>
+<section id="is-cuped-regression-adjustment" class="level3" data-number="7.5.3">
+<h3 data-number="7.5.3" class="anchored" data-anchor-id="is-cuped-regression-adjustment"><span class="header-section-number">7.5.3</span> Is CUPED regression adjustment?</h3>
 <p>todo: - Is CUPED regression adjustment? Identical to regression only in simple case (show FWL link – have separate post on understanding FWL with relevant regression examples)</p>
 <ul>
 <li><p>Take inclusion of constant into accound (centering variables, but doesn’t change correlations)</p></li>
@@ -377,18 +395,18 @@ y = \alpha + \delta x_i + u_i,
 <p>In general, regression adjustment and CUPED are identical if two conditions hold: (1) the treatment indicator is independent of <span class="math inline">\(x\)</span>, and (2) we use a linear CUPED adjustment. In the context of experimentation, where treatment is random, and with the classical (linear) CUPED adjustment discussed above, this is always the case.</p>
 <p>The reason why in practice we get a don’t get the exact same result is that the covariance of <span class="math inline">\(d\)</span> and <span class="math inline">\(x\)</span> is only approximately 0, hence providing very similar, but not identical results.</p>
 </section>
-<section id="is-cuped-did" class="level3" data-number="5.5.4">
-<h3 data-number="5.5.4" class="anchored" data-anchor-id="is-cuped-did"><span class="header-section-number">5.5.4</span> Is CUPED DiD?</h3>
+<section id="is-cuped-did" class="level3" data-number="7.5.4">
+<h3 data-number="7.5.4" class="anchored" data-anchor-id="is-cuped-did"><span class="header-section-number">7.5.4</span> Is CUPED DiD?</h3>
 <ul>
 <li>Is CUPED DiD? (based on Courthoud) – same if theta = 1</li>
 </ul>
 </section>
-<section id="non-linear-extensions" class="level3" data-number="5.5.5">
-<h3 data-number="5.5.5" class="anchored" data-anchor-id="non-linear-extensions"><span class="header-section-number">5.5.5</span> Non-linear extensions</h3>
+<section id="non-linear-extensions" class="level3" data-number="7.5.5">
+<h3 data-number="7.5.5" class="anchored" data-anchor-id="non-linear-extensions"><span class="header-section-number">7.5.5</span> Non-linear extensions</h3>
 </section>
 </section>
-<section id="blog-post-notes" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="blog-post-notes"><span class="header-section-number">5.6</span> Blog post notes</h2>
+<section id="blog-post-notes" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="blog-post-notes"><span class="header-section-number">7.6</span> Blog post notes</h2>
 <p>CUPED is a re-invention of multiple linear regression. Evan Miller (<a href="https://www.evanmiller.org/you-cant-spell-cuped-without-frisch-waugh-lovell.html">here</a>) and Matteo Courthoud (<a href="https://towardsdatascience.com/understanding-cuped-a822523641af">here</a>) make similar points in their excellent posts on the topic, but – given my starting point – neither quite helped me fully understand what is going on. This post is my attempt to do that.</p>
 <p>In particular, I think that to really understand the connection between multiple linear regression and CUPED, you have to understand the linear algebra of the Frisch-Waugh-Lowell theorem (FWL) rather than just knowing that that theorem says, and to understand that, you have to understand the concept of a projection.</p>
 <ul>
@@ -404,8 +422,8 @@ y = \alpha + \delta x_i + u_i,
 <li><p><a href="https://blog.statsig.com/cuped-on-statsig-d57f23122d0e">CUPED on Statsig</a></p></li>
 </ul>
 </section>
-<section id="cupac" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="cupac"><span class="header-section-number">5.7</span> CUPAC</h2>
+<section id="cupac" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="cupac"><span class="header-section-number">7.7</span> CUPAC</h2>
 <ul>
 <li>CUPED can be extended to (make notation consistent with CUPED)</li>
 </ul>
@@ -418,8 +436,8 @@ y' = y - \theta \bar{f(X)} + \theta E(f(X))
 <li><p>CUPAC extends this to non-linear predictors, generating <span class="math inline">\(\hat{y} = g(X) = E(Y|X)\)</span>.</p></li>
 </ul>
 </section>
-<section id="useful-resources-2" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="useful-resources-2"><span class="header-section-number">5.8</span> Useful resources</h2>
+<section id="useful-resources-2" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="useful-resources-2"><span class="header-section-number">7.8</span> Useful resources</h2>
 <ul>
 <li><p><a href="https://bytepawn.com/five-ways-to-reduce-variance-in-ab-testing.html#five-ways-to-reduce-variance-in-ab-testing">Five ways to reduce variance in A/B testing</a></p></li>
 <li><p><a href="https://towardsdatascience.com/online-experiments-tricks-variance-reduction-291b6032dcd7">Online Experiments Tricks — Variance Reduction</a></p></li>
@@ -668,12 +686,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/regression.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/useful_resources.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Useful resources</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/stats_for_business.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Stats for business</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
