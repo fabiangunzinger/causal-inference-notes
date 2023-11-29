@@ -17,7 +17,7 @@ Three important points about the approach:
 
 ## A simple example
 
-We have a sample of six units, three assigned to treatment ($w_i = 1$) and three to control ($w_i = 0$). For each of the six units the value we observe is the potential outcome corresponding to the treatment status.
+We have a sample of six units, three assigned to treatment ($w_i = 1$) and three to control ($w_i = 0$). The first two columns in the table show the (unobserved) potential outcomes under control and treatment status, the third and fourth column show the observed treatment status and outcome. For each of the six units the outcome value we observe is the potential outcome corresponding to the treatment status.
 
 |   | $y_i(0)$ | $y_i(1)$ | $w_i$ | $y_i^{obs}$ |
 |---|----------|----------|-------|-------------|

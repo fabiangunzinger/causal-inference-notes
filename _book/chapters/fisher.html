@@ -211,7 +211,8 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link active" data-scroll-target="#useful-resources"><span class="header-section-number">3.1</span> Useful resources</a></li>
+  <li><a href="#a-simple-example" id="toc-a-simple-example" class="nav-link active" data-scroll-target="#a-simple-example"><span class="header-section-number">3.1</span> A simple example</a></li>
+  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">3.2</span> Useful resources</a></li>
   </ul>
 </nav>
     </div>
@@ -236,9 +237,17 @@ div.csl-indent {
 </header>
 
 <p>These are my notes from reading chapter 5 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>.</p>
-<p>Fisher’s aim in his original work on experimentation was to asses the <em>sharp (or exact) null hypothesis</em> – the hypothesis that a treatment had no effect whatsoever, meaning that the potential outcomes for being treated and not treated are the same for each unit in the data.[^hypothesis]</p>
-<p>Unter that null hypothesis, the unobserved potential outcomes are known – they are the same as the observed outcome – and we can use the randomisation distribution to calculate P-values. We can calculate P-values by calculating the test statistic for all possible assignments, and then calculate the probability that the test-statistic is as extreme or more extreme than the value of the test statistic in our experiment.</p>
-<p>Let’s look at an example. We have a sample of six units, three assigned to treatment (<span class="math inline">\(w_i = 1\)</span>) and three to control (<span class="math inline">\(w_i = 0\)</span>). For each of the six units the value we observe is the potential outcome corresponding to the treatment status.</p>
+<p>Fisher’s aim in his original work on experimentation was to asses the <em>sharp (or exact) null hypothesis</em> – the hypothesis that a treatment had no effect whatsoever, meaning that the potential outcomes for being treated and not treated are the same for each unit in the data. (Compared to the null hypothesis that there is no treatment effect on average, which we use more frequently in experiments, Fisher’s hypothesis is stricter – of, if you like, sharper – but the former is, arguably, of more practical interest in most cases.)</p>
+<p>Unter that null hypothesis, the unobserved potential outcomes are known – they are the same as the observed outcome – and we can use the randomisation distribution to calculate P-values. The randomisation distribution is the distribution of values of the test statistic based on all possible assignment vectors. We can calculate P-values by calculating the test statistic for all possible assignments, and then calculate the probability that the test-statistic is as extreme or more extreme than the value of the test statistic in our experiment.</p>
+<p>Three important points about the approach:</p>
+<ul>
+<li><p>The key point about the sharp null hypothesis is that it allows us to impute all unobserved potential outcomes, not that the treatment effect is zero. The postulated treatment effect could thus be any deterministic function of the available data (e.g.&nbsp;an additive or multiplicative homogenous effect or a function of observed covariates).</p></li>
+<li><p>The only source of randomness in this framework is the randomness introduced by randomisation, meaning there is no randomness from sampling because we are interested in conclusions about the specific sample at hand, not about a superpopulation.</p></li>
+<li><p>The approach is truly non-parametric in that it doesn’t rely on a model of outcomes at all. In particular, we don’t model the distribution of test statistic values but calculate it directly. We can do that because we know the assignment mechanism, which is known by definition in a completely randomised experiment, and because of the strict null hypothesis, which allows us to solve the fundamental problem of causal inference by imputing the unobserved potential values.</p></li>
+</ul>
+<section id="a-simple-example" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="a-simple-example"><span class="header-section-number">3.1</span> A simple example</h2>
+<p>We have a sample of six units, three assigned to treatment (<span class="math inline">\(w_i = 1\)</span>) and three to control (<span class="math inline">\(w_i = 0\)</span>). For each of the six units the value we observe is the potential outcome corresponding to the treatment status.</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -394,10 +403,10 @@ T^{obs} &amp;= |(y_1^{obs} + y_2^{obs} + y_3^{obs})/3 - (y_4^{obs} + y_5^{obs} +
 <pre><code>0.5</code></pre>
 </div>
 </div>
-<p>The P-value indicates that if there is no treatment effect, we’d expect a value of the test statistic equal to 1 or even larger in 50 out of 100 random experiments.</p>
-<p>[^hypothesis] Compare this to the null hypothesis we more frequently test in experiments, namely, that there is no treatment effect on average. This later hypothesis is less strict (or sharp) than Fisher’s, but arguably of more practical interest most of the time.</p>
-<section id="useful-resources" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">3.1</span> Useful resources</h2>
+<p>The P-value indicates that if there is no treatment effect, we’d expect a value of the test statistic equal to 1 or even larger in 50 out of 100 random experiments, which does not provide any evidencen against the null hypothesis.</p>
+</section>
+<section id="useful-resources" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">3.2</span> Useful resources</h2>
 <p><span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span></p>
 
 
