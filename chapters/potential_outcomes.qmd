@@ -1,1 +1,0 @@
-# Neyman-Rubin causal model

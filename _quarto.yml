@@ -8,6 +8,7 @@ book:
   chapters:
     - index.qmd
     - chapters/projection.qmd
+    - chapters/neyman_rubin_causal_model.qmd
     - chapters/fisher.qmd
     - chapters/neyman.qmd
     - chapters/regression.qmd
@@ -21,7 +22,7 @@ book:
     
     # - part: fundamentals.qmd
     #   chapters:
-    #     - chapters/potential_outcomes.qmd
+
     #     - chapters/dags.qmd
     #     - chapters/statistics.qmd
     #     - chapters/projection.qmd

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 4&nbsp; Regression</title>
+<title>Causal inference notes - 6&nbsp; Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../chapters/variance_reduction.html" rel="next">
-<link href="../chapters/fisher.html" rel="prev">
+<link href="../chapters/neyman.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -75,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/regression.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/regression.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Regression</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -114,26 +114,38 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher’s approach</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/regression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/variance_reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/useful_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Useful resources</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Useful resources</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -152,11 +164,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#glossary" id="toc-glossary" class="nav-link active" data-scroll-target="#glossary"><span class="header-section-number">4.1</span> Glossary</a></li>
-  <li><a href="#the-setup" id="toc-the-setup" class="nav-link" data-scroll-target="#the-setup"><span class="header-section-number">4.2</span> The setup</a></li>
-  <li><a href="#classic-motivation-of-the-solution" id="toc-classic-motivation-of-the-solution" class="nav-link" data-scroll-target="#classic-motivation-of-the-solution"><span class="header-section-number">4.3</span> Classic motivation of the solution</a></li>
-  <li><a href="#linear-algebra-motivation-of-the-solution" id="toc-linear-algebra-motivation-of-the-solution" class="nav-link" data-scroll-target="#linear-algebra-motivation-of-the-solution"><span class="header-section-number">4.4</span> Linear algebra motivation of the solution</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">4.5</span> Resources</a></li>
+  <li><a href="#glossary" id="toc-glossary" class="nav-link active" data-scroll-target="#glossary"><span class="header-section-number">6.1</span> Glossary</a></li>
+  <li><a href="#the-setup" id="toc-the-setup" class="nav-link" data-scroll-target="#the-setup"><span class="header-section-number">6.2</span> The setup</a></li>
+  <li><a href="#classic-motivation-of-the-solution" id="toc-classic-motivation-of-the-solution" class="nav-link" data-scroll-target="#classic-motivation-of-the-solution"><span class="header-section-number">6.3</span> Classic motivation of the solution</a></li>
+  <li><a href="#linear-algebra-motivation-of-the-solution" id="toc-linear-algebra-motivation-of-the-solution" class="nav-link" data-scroll-target="#linear-algebra-motivation-of-the-solution"><span class="header-section-number">6.4</span> Linear algebra motivation of the solution</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">6.5</span> Resources</a></li>
   </ul>
 </nav>
     </div>
@@ -165,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Regression</span></h1>
 </div>
 
 
@@ -191,12 +203,12 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Understand how we can think of the least squares solution as a projection</p></li>
 <li><p>Understand why this is a very useful way of seeing things</p></li>
 </ul>
-<section id="glossary" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="glossary"><span class="header-section-number">4.1</span> Glossary</h2>
+<section id="glossary" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="glossary"><span class="header-section-number">6.1</span> Glossary</h2>
 <p>TODO: - Linear regression vs OLS</p>
 </section>
-<section id="the-setup" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="the-setup"><span class="header-section-number">4.2</span> The setup</h2>
+<section id="the-setup" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="the-setup"><span class="header-section-number">6.2</span> The setup</h2>
 <p>We usually start with data of the form <span class="math inline">\(\{y_i, x_{i1}, \cdots, x_{ik}\}_{i=1}^N\)</span>, where we observe an outcome variable <span class="math inline">\(y_i\)</span> and a set of <span class="math inline">\(k\)</span> explanatory variables <span class="math inline">\(x_i = (x_{i1}, \cdots, x_{ik})\)</span> for each unit <span class="math inline">\(i\)</span> in the dataset. We think that it might be reasonable to think of the outcome being linearly related to the regressors, so that, for each unit in our dataset, we can write the following linear equation:</p>
 <p><span class="math display">\[
 y_{i} = \beta_{1}x_{i1} + \beta_{2}x_{i2} + ... + \beta_{k}x_{ik} + \epsilon_{i}
@@ -278,12 +290,12 @@ y = X\beta + \epsilon,
 <p>##&nbsp;The problem</p>
 <p>So, what do we want to do here? We have data on an outcome variable <span class="math inline">\(y\)</span> and explanatory variables <span class="math inline">\(x\)</span> for each unit <span class="math inline">\(i\)</span>, and we think that it is reasonable to think that this data is generated by a process whereby <span class="math inline">\(y\)</span> is the result of a linear combination of the <span class="math inline">\(x\)</span>s plus some noise, which we capture in the error term. The challenge is to find the right linear combination.</p>
 </section>
-<section id="classic-motivation-of-the-solution" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="classic-motivation-of-the-solution"><span class="header-section-number">4.3</span> Classic motivation of the solution</h2>
+<section id="classic-motivation-of-the-solution" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="classic-motivation-of-the-solution"><span class="header-section-number">6.3</span> Classic motivation of the solution</h2>
 <p>TODO</p>
 </section>
-<section id="linear-algebra-motivation-of-the-solution" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="linear-algebra-motivation-of-the-solution"><span class="header-section-number">4.4</span> Linear algebra motivation of the solution</h2>
+<section id="linear-algebra-motivation-of-the-solution" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="linear-algebra-motivation-of-the-solution"><span class="header-section-number">6.4</span> Linear algebra motivation of the solution</h2>
 <p>Notice how our problem here is exactly akin to the motivation for orthogonal projection discussed in <a href="projection.html"><span>Chapter&nbsp;2</span></a>. There we had a system of linear equations of the form</p>
 <p><span class="math display">\[
 Ax = b
@@ -309,8 +321,8 @@ X'X\beta &amp;= X'y \\
 \end{aligned}
 \]</span></p>
 </section>
-<section id="resources" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="resources"><span class="header-section-number">4.5</span> Resources</h2>
+<section id="resources" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="resources"><span class="header-section-number">6.5</span> Resources</h2>
 <ul>
 <li>Hayashi, Wooldridge, Verbeek, online resources</li>
 </ul>
@@ -572,13 +584,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/fisher.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher’s approach</span></span>
+      <a href="../chapters/neyman.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/variance_reduction.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Variance reduction</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variance reduction</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

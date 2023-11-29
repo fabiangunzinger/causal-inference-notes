@@ -19,9 +19,9 @@ Three important points about the approach:
 
 ## A simple example
 
-We have a sample of six units, three assigned to treatment ($w_i = 1$) and three to control ($w_i = 0$). The first two columns in the table show the (unobserved) potential outcomes under control and treatment status, the third and fourth column show the observed treatment status and outcome. For each of the six units the outcome value we observe is the potential outcome corresponding to the treatment status.
+We have a sample of six units, three assigned to treatment ($W_i = 1$) and three to control ($W_i = 0$). The first two columns in the table show the (unobserved) potential outcomes under control and treatment status, the third and fourth column show the observed treatment status and outcome. For each of the six units the outcome value we observe is the potential outcome corresponding to the treatment status.
 
-|   | $y_i(0)$ | $y_i(1)$ | $w_i$ | $y_i^{obs}$ |
+|   | $Y_i(0)$ | $Y_i(1)$ | $W_i$ | $Y_i^{obs}$ |
 |---|----------|----------|-------|-------------|
 | 1 | ?        | 3        | 1     | 3           |
 | 2 | ?        | 5        | 1     | 5           |
@@ -35,12 +35,12 @@ This table highlights the fundamental problem of causal inference -- we can only
 However, Fisher's sharp null hypothesis asserts that:
 
 $$
-H_0: y_i(1) = y_i(0) \quad \text{for $i = 1, \dots, 6$},
+H_0: Y_i(1) = Y_i(0) \quad \text{for $i = 1, \dots, 6$},
 $$
 
 which makes filling in the missing values trivial:
 
-|   | $y_i(0)$ | $y_i(1)$ | $w_i$ | $y_i^{obs}$ |
+|   | $Y_i(0)$ | $Y_i(1)$ | $W_i$ | $Y_i^{obs}$ |
 |---|----------|----------|-------|-------------|
 | 1 | (3)        | 3        | 1     | 3           |
 | 2 | (5)        | 5        | 1     | 5           |
@@ -49,13 +49,13 @@ which makes filling in the missing values trivial:
 | 5 | 0        | (0)        | 0     | 0           |
 | 6 | 1        | (1)        | 0     | 1           |
 
-There are a number of different test statistics we could use (and @imbens2015causal discuss and compare an number of them). Following the book, for this example I use the absolute value of the difference in average outcome by treatment status, $T(w, y^{obs}) = |\bar{y}_t^{obs} - \bar{y}_c^{obs}|$, which is a function of the random assignment $w$ and the observed values $y^{obs}$.
+There are a number of different test statistics we could use (and @imbens2015causal discuss and compare an number of them). Following the book, for this example I use the absolute value of the difference in average outcome by treatment status, $T(W, Y^{obs}) = |\bar{Y}_t^{obs} - \bar{Y}_c^{obs}|$, which is a function of the random assignment $W$ and the observed values $Y^{obs}$.
 
 For our little experiment above, we can calculate the test statistic easily as:
 
 $$
 \begin{aligned}
-T^{obs} &= |(y_1^{obs} + y_2^{obs} + y_3^{obs})/3 - (y_4^{obs} + y_5^{obs} + y_6^{obs})/3| \\
+T^{obs} &= |(Y_1^{obs} + Y_2^{obs} + Y_3^{obs})/3 - (Y_4^{obs} + Y_5^{obs} + Y_6^{obs})/3| \\
 &= |(3 + 5 + 0)/3 - (4 + 0 + 1)/3| \\
 &= 8/3 - 5/3 \\
 &= 1

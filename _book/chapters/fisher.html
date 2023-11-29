@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 3&nbsp; Fisher’s exact P-value approach</title>
+<title>Causal inference notes - 4&nbsp; Fisher’s exact P-value approach</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -84,7 +84,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../chapters/neyman.html" rel="next">
-<link href="../chapters/projection.html" rel="prev">
+<link href="../chapters/neyman_rubin_causal_model.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -128,7 +128,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/fisher.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher's exact P-value approach</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/fisher.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fisher's exact P-value approach</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -167,32 +167,38 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/variance_reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/useful_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Useful resources</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Useful resources</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -211,8 +217,8 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#a-simple-example" id="toc-a-simple-example" class="nav-link active" data-scroll-target="#a-simple-example"><span class="header-section-number">3.1</span> A simple example</a></li>
-  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">3.2</span> Useful resources</a></li>
+  <li><a href="#a-simple-example" id="toc-a-simple-example" class="nav-link active" data-scroll-target="#a-simple-example"><span class="header-section-number">4.1</span> A simple example</a></li>
+  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">4.2</span> Useful resources</a></li>
   </ul>
 </nav>
     </div>
@@ -221,7 +227,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-fisher" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></h1>
+<h1 class="title"><span id="sec-fisher" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></h1>
 </div>
 
 
@@ -246,17 +252,17 @@ div.csl-indent {
 <li><p>The approach is truly non-parametric in that it doesn’t rely on a model of outcomes at all. In particular, we don’t model the distribution of test statistic values but calculate it directly. We can do that because we know the assignment mechanism, which is known by definition in a completely randomised experiment, and because of the strict null hypothesis, which allows us to solve the fundamental problem of causal inference by imputing the unobserved potential values.</p></li>
 <li><p><span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span> point out that while Fisher’s approach is often a good starting point, we are often concerned not only with learning that a treatment has some effect for some individual (which is what rejecting the sharp null hypothesis implies) but with estimating an average treatment effect without worrying about variations of the effect. For this, we need to rely on <a href="../chapters/neyman.html">Neyman’s approach</a>.</p></li>
 </ul>
-<section id="a-simple-example" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="a-simple-example"><span class="header-section-number">3.1</span> A simple example</h2>
-<p>We have a sample of six units, three assigned to treatment (<span class="math inline">\(w_i = 1\)</span>) and three to control (<span class="math inline">\(w_i = 0\)</span>). The first two columns in the table show the (unobserved) potential outcomes under control and treatment status, the third and fourth column show the observed treatment status and outcome. For each of the six units the outcome value we observe is the potential outcome corresponding to the treatment status.</p>
+<section id="a-simple-example" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="a-simple-example"><span class="header-section-number">4.1</span> A simple example</h2>
+<p>We have a sample of six units, three assigned to treatment (<span class="math inline">\(W_i = 1\)</span>) and three to control (<span class="math inline">\(W_i = 0\)</span>). The first two columns in the table show the (unobserved) potential outcomes under control and treatment status, the third and fourth column show the observed treatment status and outcome. For each of the six units the outcome value we observe is the potential outcome corresponding to the treatment status.</p>
 <table class="table">
 <thead>
 <tr class="header">
 <th></th>
-<th><span class="math inline">\(y_i(0)\)</span></th>
-<th><span class="math inline">\(y_i(1)\)</span></th>
-<th><span class="math inline">\(w_i\)</span></th>
-<th><span class="math inline">\(y_i^{obs}\)</span></th>
+<th><span class="math inline">\(Y_i(0)\)</span></th>
+<th><span class="math inline">\(Y_i(1)\)</span></th>
+<th><span class="math inline">\(W_i\)</span></th>
+<th><span class="math inline">\(Y_i^{obs}\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -307,17 +313,17 @@ div.csl-indent {
 <p>This table highlights the fundamental problem of causal inference – we can only ever observe one potential outcome for each unit.</p>
 <p>However, Fisher’s sharp null hypothesis asserts that:</p>
 <p><span class="math display">\[
-H_0: y_i(1) = y_i(0) \quad \text{for $i = 1, \dots, 6$},
+H_0: Y_i(1) = Y_i(0) \quad \text{for $i = 1, \dots, 6$},
 \]</span></p>
 <p>which makes filling in the missing values trivial:</p>
 <table class="table">
 <thead>
 <tr class="header">
 <th></th>
-<th><span class="math inline">\(y_i(0)\)</span></th>
-<th><span class="math inline">\(y_i(1)\)</span></th>
-<th><span class="math inline">\(w_i\)</span></th>
-<th><span class="math inline">\(y_i^{obs}\)</span></th>
+<th><span class="math inline">\(Y_i(0)\)</span></th>
+<th><span class="math inline">\(Y_i(1)\)</span></th>
+<th><span class="math inline">\(W_i\)</span></th>
+<th><span class="math inline">\(Y_i^{obs}\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -365,11 +371,11 @@ H_0: y_i(1) = y_i(0) \quad \text{for $i = 1, \dots, 6$},
 </tr>
 </tbody>
 </table>
-<p>There are a number of different test statistics we could use (and <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span> discuss and compare an number of them). Following the book, for this example I use the absolute value of the difference in average outcome by treatment status, <span class="math inline">\(T(w, y^{obs}) = |\bar{y}_t^{obs} - \bar{y}_c^{obs}|\)</span>, which is a function of the random assignment <span class="math inline">\(w\)</span> and the observed values <span class="math inline">\(y^{obs}\)</span>.</p>
+<p>There are a number of different test statistics we could use (and <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span> discuss and compare an number of them). Following the book, for this example I use the absolute value of the difference in average outcome by treatment status, <span class="math inline">\(T(W, Y^{obs}) = |\bar{Y}_t^{obs} - \bar{Y}_c^{obs}|\)</span>, which is a function of the random assignment <span class="math inline">\(W\)</span> and the observed values <span class="math inline">\(Y^{obs}\)</span>.</p>
 <p>For our little experiment above, we can calculate the test statistic easily as:</p>
 <p><span class="math display">\[
 \begin{aligned}
-T^{obs} &amp;= |(y_1^{obs} + y_2^{obs} + y_3^{obs})/3 - (y_4^{obs} + y_5^{obs} + y_6^{obs})/3| \\
+T^{obs} &amp;= |(Y_1^{obs} + Y_2^{obs} + Y_3^{obs})/3 - (Y_4^{obs} + Y_5^{obs} + Y_6^{obs})/3| \\
 &amp;= |(3 + 5 + 0)/3 - (4 + 0 + 1)/3| \\
 &amp;= 8/3 - 5/3 \\
 &amp;= 1
@@ -400,14 +406,14 @@ T^{obs} &amp;= |(y_1^{obs} + y_2^{obs} + y_3^{obs})/3 - (y_4^{obs} + y_5^{obs} +
 <div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.mean([t <span class="op">&gt;=</span> <span class="dv">1</span> <span class="cf">for</span> t <span class="kw">in</span> ts])</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>0.5</code></pre>
 </div>
 </div>
 <p>The P-value indicates that if there is no treatment effect, we’d expect a value of the test statistic equal to 1 or even larger in 50 out of 100 random experiments, which does not provide any evidencen against the null hypothesis.</p>
 </section>
-<section id="useful-resources" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">3.2</span> Useful resources</h2>
+<section id="useful-resources" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">4.2</span> Useful resources</h2>
 <p><span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span></p>
 
 
@@ -654,13 +660,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/projection.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Projection</span></span>
+      <a href="../chapters/neyman_rubin_causal_model.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/neyman.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 5&nbsp; Neyman’s repeated sampling approach</title>
+<title>Causal inference notes - 3&nbsp; Neyman-Rubin causal model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/regression.html" rel="next">
-<link href="../chapters/fisher.html" rel="prev">
+<link href="../chapters/fisher.html" rel="next">
+<link href="../chapters/projection.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -61,6 +61,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -73,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/neyman.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman's repeated sampling approach</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/neyman_rubin_causal_model.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -112,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
   </div>
 </li>
@@ -124,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
   </div>
 </li>
@@ -158,14 +160,23 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#potential-outcomes" id="toc-potential-outcomes" class="nav-link active" data-scroll-target="#potential-outcomes"><span class="header-section-number">3.1</span> Potential outcomes</a></li>
+  <li><a href="#causal-estimands" id="toc-causal-estimands" class="nav-link" data-scroll-target="#causal-estimands"><span class="header-section-number">3.2</span> Causal estimands</a></li>
+  <li><a href="#stable-unit-treatment-value-assumption" id="toc-stable-unit-treatment-value-assumption" class="nav-link" data-scroll-target="#stable-unit-treatment-value-assumption"><span class="header-section-number">3.3</span> Stable unit treatment value assumption</a></li>
+  <li><a href="#the-assignment-mechanism" id="toc-the-assignment-mechanism" class="nav-link" data-scroll-target="#the-assignment-mechanism"><span class="header-section-number">3.4</span> The assignment mechanism</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-neyman" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></h1>
 </div>
 
 
@@ -180,8 +191,60 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="potential-outcomes" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="potential-outcomes"><span class="header-section-number">3.1</span> Potential outcomes</h2>
+</section>
+<section id="causal-estimands" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="causal-estimands"><span class="header-section-number">3.2</span> Causal estimands</h2>
+<ul>
+<li><p>We have a population of units <span class="math inline">\(i = 1, \dots, N\)</span>.</p></li>
+<li><p>Each unit in the population can be exposed to one of two treatments, which are identical across units, so that <span class="math inline">\(\mathbb{T}_i = \mathbb{T} = \{0, 1\}\)</span>.</p></li>
+<li><p>Each unit <span class="math inline">\(i\)</span> has potential outcomes <span class="math inline">\(Y_i(0)\)</span> and <span class="math inline">\(Y_i(1)\)</span> corresponding to each of the two possible treatments.</p></li>
+<li><p>Unit-level causal effects are given by comparisons of <span class="math inline">\(Y_i(0)\)</span> and <span class="math inline">\(Y_i(1)\)</span>, often expressed as a simple difference:</p></li>
+</ul>
+<p><span class="math display">\[
+Y_i(1) - Y_i(0).
+\]</span></p>
+<ul>
+<li><p>We often want to summarise unit-level treatment effects, to which effect we can calculate many different causal estimands.</p></li>
+<li><p>The average treatment effect over the entire population (the finite sample) is defined as:</p></li>
+</ul>
+<p><span class="math display">\[
+\tau_{fs} = \frac{1}{N}\sum_{i=1}^N \left(Y_i(1) - Y_i(0)\right).
+\]</span></p>
+<ul>
+<li><p>We can generalise this in a number of ways.</p></li>
+<li><p>We can focus only on a subset of the population, which can also happen in different ways.</p></li>
+<li><p>We can condition on covariates, such as when we focus only on women: <span class="math display">\[
+\tau_{fs, f} = \frac{1}{N_f}\sum_{i: X_i = f} \left(Y_i(1) - Y_i(0)\right), \quad \text{where $X_i = \{m , f\}$ and $N_f = \sum_{i=1}^N \mathbb{1}_{X_i = f}$}
+\]</span></p></li>
+<li><p>We can condition on treatment status, such as when we focus only on units that were exposed to the treatment:</p></li>
+</ul>
+<p><span class="math display">\[
+\tau_{fs, t} = \frac{1}{N_t}\sum_{i: W_i = 1} \left(Y_i(1) - Y_i(0)\right), \quad \text{where $W_i = \{0 , 1\}$ and $N_t = \sum_{i=1}^N \mathbb{1}_{W_i = 1}$}
+\]</span></p>
+<ul>
+<li>We can condition on potential outcomes, such as when we focus only on units with positive potential outcomes (e.g.&nbsp;positive earnings) regardless of treatment status:</li>
+</ul>
+<p><span class="math display">\[
+\tau_{fs, pos} = \frac{1}{N_{pos}}\sum_{i: Y_i(0)&gt;0, Y_i(1)&gt;0} \left(Y_i(1) - Y_i(0)\right), \quad \text{where $N_{post} = \sum_{i=1}^N \mathbb{1}_{Y_i(0)&gt;0, Y_i(1)&gt;0}$}
+\]</span></p>
+<ul>
+<li><p>We can also generalise the estimand by focusing on more general functions of the potential outcomes (e.g.&nbsp;we may focus on the median outcome of the entire population or a subpopulation).</p></li>
+<li><p>In all these cases, we can write the causal estimand as a row-exchangeable function (a function that takes vectors or matrices as arguments and the result of which does not change if the rows in its input are permuted):</p></li>
+</ul>
+<p><span class="math display">\[
+\tau = \tau(Y(0), Y(1), X, W)
+\]</span></p>
+</section>
+<section id="stable-unit-treatment-value-assumption" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="stable-unit-treatment-value-assumption"><span class="header-section-number">3.3</span> Stable unit treatment value assumption</h2>
+</section>
+<section id="the-assignment-mechanism" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="the-assignment-mechanism"><span class="header-section-number">3.4</span> The assignment mechanism</h2>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -419,13 +482,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/fisher.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span>
+      <a href="../chapters/projection.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Projection</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/regression.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/fisher.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
