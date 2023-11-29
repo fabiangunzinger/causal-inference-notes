@@ -1,4 +1,4 @@
-# Fisher's exact P-value approach
+# Fisher's exact P-value approach {#sec-fisher}
 
 These are my notes from reading chapter 5 in @imbens2015causal.
 
@@ -13,6 +13,8 @@ Three important points about the approach:
 - The only source of randomness in this framework is the randomness introduced by randomisation, meaning there is no randomness from sampling because we are interested in conclusions about the specific sample at hand, not about a superpopulation.
 
 - The approach is truly non-parametric in that it doesn't rely on a model of outcomes at all. In particular, we don't model the distribution of test statistic values but calculate it directly. We can do that because we know the assignment mechanism, which is known by definition in a completely randomised experiment, and because of the strict null hypothesis, which allows us to solve the fundamental problem of causal inference by imputing the unobserved potential values.
+
+- @imbens2015causal point out that while Fisher's approach is often a good starting point, we are often concerned not only with learning that a treatment has some effect for some individual (which is what rejecting the sharp null hypothesis implies) but with estimating an average treatment effect without worrying about variations of the effect. For this, we need to rely on [Neyman's approach](neyman.qmd).
 
 
 ## A simple example

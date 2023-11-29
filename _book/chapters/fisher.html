@@ -221,7 +221,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></h1>
+<h1 class="title"><span id="sec-fisher" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></h1>
 </div>
 
 
@@ -244,10 +244,11 @@ div.csl-indent {
 <li><p>The key point about the sharp null hypothesis is that it allows us to impute all unobserved potential outcomes, not that the treatment effect is zero. The postulated treatment effect could thus be any deterministic function of the available data (e.g.&nbsp;an additive or multiplicative homogenous effect or a function of observed covariates).</p></li>
 <li><p>The only source of randomness in this framework is the randomness introduced by randomisation, meaning there is no randomness from sampling because we are interested in conclusions about the specific sample at hand, not about a superpopulation.</p></li>
 <li><p>The approach is truly non-parametric in that it doesn’t rely on a model of outcomes at all. In particular, we don’t model the distribution of test statistic values but calculate it directly. We can do that because we know the assignment mechanism, which is known by definition in a completely randomised experiment, and because of the strict null hypothesis, which allows us to solve the fundamental problem of causal inference by imputing the unobserved potential values.</p></li>
+<li><p><span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span> point out that while Fisher’s approach is often a good starting point, we are often concerned not only with learning that a treatment has some effect for some individual (which is what rejecting the sharp null hypothesis implies) but with estimating an average treatment effect without worrying about variations of the effect. For this, we need to rely on <a href="../chapters/neyman.html">Neyman’s approach</a>.</p></li>
 </ul>
 <section id="a-simple-example" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="a-simple-example"><span class="header-section-number">3.1</span> A simple example</h2>
-<p>We have a sample of six units, three assigned to treatment (<span class="math inline">\(w_i = 1\)</span>) and three to control (<span class="math inline">\(w_i = 0\)</span>). For each of the six units the value we observe is the potential outcome corresponding to the treatment status.</p>
+<p>We have a sample of six units, three assigned to treatment (<span class="math inline">\(w_i = 1\)</span>) and three to control (<span class="math inline">\(w_i = 0\)</span>). The first two columns in the table show the (unobserved) potential outcomes under control and treatment status, the third and fourth column show the observed treatment status and outcome. For each of the six units the outcome value we observe is the potential outcome corresponding to the treatment status.</p>
 <table class="table">
 <thead>
 <tr class="header">
