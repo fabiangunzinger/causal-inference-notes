@@ -460,5 +460,19 @@
     "title": "3  Neyman-Rubin causal model",
     "section": "3.4 The assignment mechanism",
     "text": "3.4 The assignment mechanism"
+  },
+  {
+    "objectID": "chapters/neyman.html",
+    "href": "chapters/neyman.html",
+    "title": "5  Neyman’s repeated sampling approach",
+    "section": "",
+    "text": "In a setting with \\(i = 1, \\dots, N\\) units with fixed potential outcomes \\(Y_i(0)\\) and \\(Y_i(1)\\), where the only random component is the random assignment, captured by the assignment vector \\(W\\), Neyman was interested in the population average treatment effect:\n\\[\n\\tau_{fs} = \\frac{1}{N}\\sum_{i=1}^N \\left(Y_i(1) - Y_i(0)\\right) = \\bar{Y}(1) - \\bar{Y}(0),\n\\tag{5.1}\\]\nwhere \\(\\bar{Y}(1) = \\frac{1}{N}\\sum_{i=1}^N Y_i(1)\\) and \\(\\bar{Y}(0) = \\frac{1}{N}\\sum_{i=1}^N Y_i(0)\\). This is our estimand of interest.\nIf we have data from a completely randomised experiment in which \\(N_t = \\sum_{i=1}^N W_i\\) units are allocated to treatment and the remaining \\(N_c = \\sum_{i=1}^N (1-W_i)\\) to control, then a natural estimator for Equation 5.1 is the"
+  },
+  {
+    "objectID": "chapters/neyman.html#footnotes",
+    "href": "chapters/neyman.html#footnotes",
+    "title": "5  Neyman’s repeated sampling approach",
+    "section": "",
+    "text": "Note that this is the same setting as in Fisher’s approach↩︎"
   }
 ]

@@ -1,4 +1,42 @@
 # Neyman's repeated sampling approach {#sec-neyman}
 
+## Estimator for the average treatment effect
+
+In a setting with $i = 1, \dots, N$ units with fixed potential outcomes $Y_i(0)$ and $Y_i(1)$, where the only random component is the random assignment, captured by the assignment vector $W$[^setting], Neyman was interested in the population average treatment effect:
+
+$$
+\begin{aligned}
+\tau_{fs} &= \frac{1}{N}\sum_{i=1}^N \left(Y_i(1) - Y_i(0)\right) \\
+&= \frac{1}{N}\sum_{i=1}^N Y_i(1) - \frac{1}{N}\sum_{i=1}^N Y_i(0) \\
+&= \bar{Y}(1) - \bar{Y}(0).
+\end{aligned}
+$$ {#eq-neyman-estimand}
+
+This is our estimand of interest.
+
+If we have data from a completely randomised experiment in which $N_t = \sum_{i=1}^N W_i$ units are allocated to treatment and the remaining $N_c = \sum_{i=1}^N (1-W_i)$ to control, then a natural estimator for @eq-neyman-estimand is the difference in the averages of the treatment and control units:
+
+$$
+\begin{aligned}
+\hat{\tau}^{dif} &= \frac{1}{N_t}\sum_{i:W_i=1} Y_i^{obs} - \frac{1}{N_c}\sum_{i:W_i=0} Y_i^{obs} \\
+&= \bar{Y}_t^{obs} - \bar{Y}_c^{obs}.
+\end{aligned}
+$$ {#eq-neyman-estimator}
+
+This estimator is unbiased (see Proof of Theorem 6.1 in @imbens2015causal for the proof).
 
 
+## Confidence interval for the average treatment estimator
+
+Neyman was also interested in creating confidence intervals for the treatment effect estimate. This involves three steps:
+
+1. Derive the sampling variance of the estimator for the average treatment effect (i.e. for the estimator defined in @eq-neyman-estimator).
+
+2. Develop estimators for this sampling variance.
+
+3. Appeal to a central limit argument for the large sample normality of $\hat{\tau}$ over its randomisation distribution and use its estimated sampling variance from step 2 to create a large-sample confidence interval for $\tau_{fs}$.
+
+
+
+
+[^setting]: Note that this is the same setting as in [Fisher's approach](fisher.qmd)

@@ -4,6 +4,8 @@
 
 - For great outline of experiment platform and used methods see [this](https://www.uber.com/en-GB/blog/xp/) Uber post.
 
+- See rule of thumbs in you can't spell cuped without wfl blog post
+
 Notes from larsen2023statistical
 
 - Reasons for insufficient power

@@ -1,6 +1,28 @@
 # Matching
 
+## Aim and use case
+
+- Preprocess observational data such that it resembles more closely data that would have resulted from a perfectly blocked (and possibly randomised) experiment, and thus break the relationship between outcomes and pre-treatment controls.
+
+## Considerations
+
+- Balance checks: successful matching removes the relationship between outcomes and pre-treatment controls that's often inherent in non-experimental data. To check whetehr this succeeded, we need to check that the distribution of pre-treatment controls is the same within matched treatment and control units.
+
+- Analysis: using difference in mean test is only appropriate if we performed exact matching, which is often not feasible. For all other forms of matching, use model with controls to estimate treatment effects.
+
+## Software
+
+- @stuart2011matchit
 
 
+## Matching vs synthetic controls vs regression
+
+Based on excellent discussion in introduction to @abadie2021penalized.
+
+Synthetic control vs nearest-neighbour matching:
+
+- Similarities: Weights for control units are positive, sum to one, and are often sparse. This allows for interpretability of the weights.
+
+- Differences: synthetic control doesn't impose a fixed number of control units, and, instead of using a simple average of the control units with equal weights, it creates a control unit using a weighted average of all control units such as to minimise the discrepancy between treated and control units in the values of the matching variables.
 
 
