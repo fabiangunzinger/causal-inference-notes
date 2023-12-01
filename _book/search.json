@@ -521,14 +521,21 @@
     "objectID": "chapters/cupac.html#thoughts",
     "href": "chapters/cupac.html#thoughts",
     "title": "8  CUPAC",
-    "section": "8.1 Thoughts",
-    "text": "8.1 Thoughts\n\nThere are two approaches: predict the experiment-time outcome or predict the pre-experiment value.\nIf you do the former, then you need features that are unaffected by the treatment. This means that for reach metric and each experiment, you need to collect features that meet this requirement. This will be different for each metric and experiment because whether a feature is impacted by the treatment depends on the specific experiment (i.e. where in the funnel the feature is active). Hence, building this into a pipeline in an automated way would be an enormous endeavour, if it’s possible at all.\nHence, this approach is really only viable in a very specialised setting where you keep running the same type of experiment, and thus have to build and train the model manually and only once (this is how it’s being used for courier experiments)"
+    "section": "8.2 Thoughts",
+    "text": "8.2 Thoughts\n\nThere are two approaches: predict the experiment-time outcome or predict the pre-experiment value.\nIf you do the former, then you need features that are unaffected by the treatment. This means that for reach metric and each experiment, you need to collect features that meet this requirement. This will be different for each metric and experiment because for many features, whether or not the feature is impacted by the treatment depends on the specific experiment (i.e. where in the funnel the feature is active). This could be solved by finding, for each metric of interest, a set of features that are always independent of the treatment (such as distance between restaurant and customer, or the type of browser used by a customer), but it’s not at all clear that finding a set of features with good predictive properties is possible for all our metrics. Hence, building this into a pipeline in an automated way would be an enormous endeavour, if it’s possible at all.\nThis approach is thus really only viable in a very specialised setting where you keep running the same type of experiment, and thus have to build and train the model manually and only once (this is how it’s being used for courier experiments).\nTo ensure that features really are independent of treatment condition, they actively monitor correlations for each running experiment.\nTang et al. (2000) gives the example of reducing average daily delivery time, where a delivery-level covariate that is unaffected by treatment is distance between restaurant and customer."
   },
   {
     "objectID": "chapters/cupac.html#disadvantages",
     "href": "chapters/cupac.html#disadvantages",
     "title": "8  CUPAC",
-    "section": "8.2 Disadvantages",
-    "text": "8.2 Disadvantages\n\n8.2.1 Useful resources\n\nControl Using Predictions as Covariates in Switchback Experiments\n\n\n\n\n\nTang, Yixin, Caixia Huang, David Kastelman, and Jared Bauman. 2000. “Control Using Predictions as Covariates in Switchback Experiments.”"
+    "section": "8.3 Disadvantages",
+    "text": "8.3 Disadvantages\n\n8.3.1 Useful resources\n\nControl Using Predictions as Covariates in Switchback Experiments\n\n\n\n\n\nTang, Yixin, Caixia Huang, David Kastelman, and Jared Bauman. 2000. “Control Using Predictions as Covariates in Switchback Experiments.”"
+  },
+  {
+    "objectID": "chapters/cupac.html#advantages",
+    "href": "chapters/cupac.html#advantages",
+    "title": "8  CUPAC",
+    "section": "8.1 Advantages",
+    "text": "8.1 Advantages\n\nCan be used for metrics that have no pre-experiment data (if you have variables that correlate with the metric and are unaffected by the treatment)"
   }
 ]

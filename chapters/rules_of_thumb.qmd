@@ -1,15 +1,10 @@
-# Practical issues
+# Rules of thumb
+
+Here, I want to collect rules of thumb that are useful for experiment design.
 
 - For useful set of rules of thumb, see Kohavi papers as well as [this](https://www.evanmiller.org/you-cant-spell-cuped-without-frisch-waugh-lovell.html#:~:text=So%20you're%20running%20experiments,faster%2C%20somehow%2C%20using%20math.) CUPED post 
 
 - For great outline of experiment platform and used methods see [this](https://www.uber.com/en-GB/blog/xp/) Uber post.
 
 - See rule of thumbs in you can't spell cuped without wfl blog post
-
-Notes from larsen2023statistical
-
-- Reasons for insufficient power
-    - Treatment effect is homogenously distributed across entire user base but very small
-    - Feature affects only small number of users, so overall effect is highly attenuated
-    - Treatment effect on known subgroups is of interest
 
