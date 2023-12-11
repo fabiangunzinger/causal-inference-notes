@@ -144,8 +144,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/cupac.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">CUPAC</span></span></a>
+  <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -156,8 +156,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/misc_topics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Miscellaneous topics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/useful_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Useful resources</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Useful resources</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -178,9 +184,10 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#potential-outcomes" id="toc-potential-outcomes" class="nav-link active" data-scroll-target="#potential-outcomes"><span class="header-section-number">3.1</span> Potential outcomes</a></li>
   <li><a href="#causal-estimands" id="toc-causal-estimands" class="nav-link" data-scroll-target="#causal-estimands"><span class="header-section-number">3.2</span> Causal estimands</a></li>
-  <li><a href="#stable-unit-treatment-value-assumption" id="toc-stable-unit-treatment-value-assumption" class="nav-link" data-scroll-target="#stable-unit-treatment-value-assumption"><span class="header-section-number">3.3</span> Stable unit treatment value assumption</a></li>
+  <li><a href="#stable-unit-treatment-value-assumption-sutva" id="toc-stable-unit-treatment-value-assumption-sutva" class="nav-link" data-scroll-target="#stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">3.3</span> Stable unit treatment value assumption (SUTVA)</a></li>
   <li><a href="#the-assignment-mechanism" id="toc-the-assignment-mechanism" class="nav-link" data-scroll-target="#the-assignment-mechanism"><span class="header-section-number">3.4</span> The assignment mechanism</a></li>
   <li><a href="#finite-sample-vs-super-population-perspective" id="toc-finite-sample-vs-super-population-perspective" class="nav-link" data-scroll-target="#finite-sample-vs-super-population-perspective"><span class="header-section-number">3.5</span> Finite sample vs super-population perspective</a></li>
+  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">3.6</span> Useful resources</a></li>
   </ul>
 </nav>
     </div>
@@ -250,8 +257,23 @@ Y_i(1) - Y_i(0).
 \tau = \tau(Y(0), Y(1), X, W)
 \]</span></p>
 </section>
-<section id="stable-unit-treatment-value-assumption" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="stable-unit-treatment-value-assumption"><span class="header-section-number">3.3</span> Stable unit treatment value assumption</h2>
+<section id="stable-unit-treatment-value-assumption-sutva" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">3.3</span> Stable unit treatment value assumption (SUTVA)</h2>
+<ul>
+<li>SUTVA has two components: no interference, and no hidden variations of treatments.</li>
+</ul>
+<p><strong>No interference</strong></p>
+<ul>
+<li><p>The no interference assumption states that a unit’s potential outcumes are independent of the treatment assignment of all other units.</p></li>
+<li><p>This will be violated if there are network effects: if the behaviour of units is mutually dependent. For instance: if my wife and I both use an online photo-sharing service and my wife sees a new feature that we both like while I’m in the control group, we might stil share the same number of family photos but start sharing them all on her account instead of mine. This creates an artificial treatment effect because if I had also had access to the new feature, we might not have changed our behaviour at all, while, during the experiment, her sharing volume went up while mine went down, suggesting the existent of a positive effect.</p></li>
+<li><p>Another case where the no interference assumption can be violated is in the form of general equilibrium effects. A classic example is the effect of further education: the effect of my doing a PhD in statistics on my earnings while nobody else changes their behaviour (the partial-equilibrium effect) is surely different from the outcome of my earnings if suddenly everyone decided to do a PhD in statistics (the general-equilibrium effect).</p></li>
+<li><p>The two violations capture the two different ways interference can lead to incorrect results: interference can happen and bias our results either during the experiment or once the feature is fully rolled out. In either case, the treatment of some unit has an externality on other units.</p></li>
+</ul>
+<p><strong>No hidden treatment variations</strong></p>
+<ul>
+<li><p>The second component, no hidden treatment variation, states that a unit receiving a specific treatment level cannot receive different forms of that treatment level. This does <em>not</em> mean that the form of the treatment level has to be the same for each unit, but only that a given treatment level is well specified for a given unit. To use Imbens and Rubin’s aspirin example: suppose we test the effect of aspirin on reducing headaches but have old and new aspirins which vary in strength, so that we effectively have three possible treatment statuses: no aspirin (control), weak aspirin, and strong aspirin. SUTVA does <em>not</em> require that all treatment units either get the weak or the strong aspirin, but requires that each unit can only receive one or the other in case they are treated, so that there is no ambiguity what form of the treatment a given unit will receive in case it is treated. (It would be permissible to have the treatment be randomly weak or strong, but this is not relevant in my world.)</p></li>
+<li><p>Essentially, both parts of SUTVA ensure the same thing: that <span class="math inline">\(Y_i(w)\)</span> is well defined: that it does not depend on the treatment status of other units, and that, for each possible treatment level, <span class="math inline">\(w\)</span>, the precise form of that treatment level is well specified.</p></li>
+</ul>
 </section>
 <section id="the-assignment-mechanism" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="the-assignment-mechanism"><span class="header-section-number">3.4</span> The assignment mechanism</h2>
@@ -263,6 +285,9 @@ Y_i(1) - Y_i(0).
 <li><p>When using the finite sample perspective, the <span class="math inline">\(N\)</span> units in the experiment sample are treated as the entire population of interest. Hence, there is no notion of randomisation due to sampling from a larger population, and all the randomness in the outcomes is due to randomness generates by the assignment mechanism.</p></li>
 <li><p>When treating the <span class="math inline">\(N\)</span> units in the sample as a random sample from a larger super-population, then in addition to randomness from the randomisation, we also have randomness from the sampling.</p></li>
 </ul>
+</section>
+<section id="useful-resources" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">3.6</span> Useful resources</h2>
 
 
 </section>

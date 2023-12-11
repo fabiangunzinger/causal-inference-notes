@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 8&nbsp; CUPAC</title>
+<title>Causal inference notes - 9&nbsp; CUPAC</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -50,7 +50,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../chapters/stats_for_business.html" rel="next">
-<link href="../chapters/variance_reduction.html" rel="prev">
+<link href="../chapters/cuped.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -94,7 +94,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/cupac.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">CUPAC</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/cupac.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">CUPAC</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -163,20 +163,32 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/cuped.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">CUPED</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/cupac.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">CUPAC</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">CUPAC</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/stats_for_business.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stats for business</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stats for business</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/misc_topics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Miscellaneous topics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/useful_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Useful resources</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Useful resources</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -195,11 +207,11 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#advantages" id="toc-advantages" class="nav-link active" data-scroll-target="#advantages"><span class="header-section-number">8.1</span> Advantages</a></li>
-  <li><a href="#thoughts" id="toc-thoughts" class="nav-link" data-scroll-target="#thoughts"><span class="header-section-number">8.2</span> Thoughts</a></li>
-  <li><a href="#disadvantages" id="toc-disadvantages" class="nav-link" data-scroll-target="#disadvantages"><span class="header-section-number">8.3</span> Disadvantages</a>
+  <li><a href="#advantages" id="toc-advantages" class="nav-link active" data-scroll-target="#advantages"><span class="header-section-number">9.1</span> Advantages</a></li>
+  <li><a href="#thoughts" id="toc-thoughts" class="nav-link" data-scroll-target="#thoughts"><span class="header-section-number">9.2</span> Thoughts</a></li>
+  <li><a href="#disadvantages" id="toc-disadvantages" class="nav-link" data-scroll-target="#disadvantages"><span class="header-section-number">9.3</span> Disadvantages</a>
   <ul class="collapse">
-  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">8.3.1</span> Useful resources</a></li>
+  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">9.3.1</span> Useful resources</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -209,7 +221,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">CUPAC</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">CUPAC</span></h1>
 </div>
 
 
@@ -236,14 +248,14 @@ y' = y - \theta \bar{f(X)} + \theta E(f(X))
 <li><p>CUPED, which is effectively regression adjustment, uses best linear predictor.</p></li>
 <li><p>CUPAC extends this to non-linear predictors, generating <span class="math inline">\(\hat{y} = g(X) = E(Y|X)\)</span>.</p></li>
 </ul>
-<section id="advantages" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="advantages"><span class="header-section-number">8.1</span> Advantages</h2>
+<section id="advantages" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="advantages"><span class="header-section-number">9.1</span> Advantages</h2>
 <ul>
 <li>Can be used for metrics that have no pre-experiment data (if you have variables that correlate with the metric and are unaffected by the treatment)</li>
 </ul>
 </section>
-<section id="thoughts" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="thoughts"><span class="header-section-number">8.2</span> Thoughts</h2>
+<section id="thoughts" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="thoughts"><span class="header-section-number">9.2</span> Thoughts</h2>
 <ul>
 <li><p>There are two approaches: predict the experiment-time outcome or predict the pre-experiment value.</p></li>
 <li><p>If you do the former, then you need features that are unaffected by the treatment. This means that for reach metric and each experiment, you need to collect features that meet this requirement. This will be different for each metric and experiment because for many features, whether or not the feature is impacted by the treatment depends on the specific experiment (i.e.&nbsp;where in the funnel the feature is active). This could be solved by finding, for each metric of interest, a set of features that are always independent of the treatment (such as distance between restaurant and customer, or the type of browser used by a customer), but it’s not at all clear that finding a set of features with good predictive properties is possible for all our metrics. Hence, building this into a pipeline in an automated way would be an enormous endeavour, if it’s possible at all.</p></li>
@@ -252,10 +264,10 @@ y' = y - \theta \bar{f(X)} + \theta E(f(X))
 <li><p><span class="citation" data-cites="tang2000control">Tang et al. (<a href="references.html#ref-tang2000control" role="doc-biblioref">2000</a>)</span> gives the example of reducing average daily delivery time, where a delivery-level covariate that is unaffected by treatment is distance between restaurant and customer.</p></li>
 </ul>
 </section>
-<section id="disadvantages" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="disadvantages"><span class="header-section-number">8.3</span> Disadvantages</h2>
-<section id="useful-resources" class="level3" data-number="8.3.1">
-<h3 data-number="8.3.1" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">8.3.1</span> Useful resources</h3>
+<section id="disadvantages" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="disadvantages"><span class="header-section-number">9.3</span> Disadvantages</h2>
+<section id="useful-resources" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">9.3.1</span> Useful resources</h3>
 <ul>
 <li><a href="[file:///Users/fabian.gunzinger/Downloads/code_final_draft1.pdf](https://www.researchgate.net/publication/345698207_Control_Using_Predictions_as_Covariates_in_Switchback_Experiments)">Control Using Predictions as Covariates in Switchback Experiments</a></li>
 </ul>
@@ -505,13 +517,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/variance_reduction.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variance reduction</span></span>
+      <a href="../chapters/cuped.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">CUPED</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/stats_for_business.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stats for business</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stats for business</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
