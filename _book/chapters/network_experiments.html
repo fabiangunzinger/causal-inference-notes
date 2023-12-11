@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -176,7 +195,21 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-problem" id="toc-the-problem" class="nav-link active" data-scroll-target="#the-problem"><span class="header-section-number">8.1</span> The problem</a></li>
+  <li><a href="#types-of-interferance" id="toc-types-of-interferance" class="nav-link" data-scroll-target="#types-of-interferance"><span class="header-section-number">8.2</span> Types of interferance</a></li>
+  <li><a href="#dealing-with-interaction-effects" id="toc-dealing-with-interaction-effects" class="nav-link" data-scroll-target="#dealing-with-interaction-effects"><span class="header-section-number">8.3</span> Dealing with interaction effects</a>
+  <ul class="collapse">
+  <li><a href="#design-based-approaches" id="toc-design-based-approaches" class="nav-link" data-scroll-target="#design-based-approaches"><span class="header-section-number">8.3.1</span> Design-based approaches</a></li>
+  <li><a href="#analysis-based-approaches" id="toc-analysis-based-approaches" class="nav-link" data-scroll-target="#analysis-based-approaches"><span class="header-section-number">8.3.2</span> Analysis-based approaches</a></li>
+  </ul></li>
+  <li><a href="#measuring-interaction-effects" id="toc-measuring-interaction-effects" class="nav-link" data-scroll-target="#measuring-interaction-effects"><span class="header-section-number">8.4</span> Measuring interaction effects</a></li>
+  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">8.5</span> Useful resources</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -200,17 +233,39 @@ ul.task-list li input[type="checkbox"] {
 
 <ul>
 <li><p>Network experiments are experiments where there the treatment status of units might determine the outcome of other units, thus violating the <a href="../chapters/neyman_rubin_causal_model.html## Stable unit treatment value assumption (SUTVA)">SUTVA assumption</a></p></li>
-<li><p>Ways to measure the strength of interaction effects</p>
+<li><p><span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="references.html#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span> cite a large number of papers that provide more details on these approaches and provide solutions to some of the challenges.</p></li>
+</ul>
+<section id="the-problem" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="the-problem"><span class="header-section-number">8.1</span> The problem</h2>
 <ul>
-<li><p>Overall approach: if there are no interaction effects, different estimands should be the same</p></li>
-<li><p>Design side: run clauster and unit-level experiment side-by-side. Different results imply presence of interaction effects</p></li>
-<li><p>Analysis side: 1) exposure modelling / reweighting 2) use of focal units</p></li>
-</ul></li>
-<li><p>Ways to deal with interaction effects:</p>
+<li><p>Interference creates bias in standard ATE estimators.</p></li>
+<li><p>Fundamentally, this happens because with interference, the ATE is not an estimate of what would happen if all units were treated (which is what standard ATE estimates are estimating).</p></li>
+</ul>
+</section>
+<section id="types-of-interferance" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="types-of-interferance"><span class="header-section-number">8.2</span> Types of interferance</h2>
+<p><span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="references.html#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span> differentiate between:</p>
 <ul>
-<li><p>Randomise at the level at which general-equilibrium effects play out. There are two challenges with this:</p>
+<li><p>Network interference: all units in the population are the same but they interact with each other. In particular, interference happens when the treatment status of users in a social network mutually determines their outcome (e.g.&nbsp;one user being assigned to a new messenger service might increase messaging for that individual’s friends who are in control)</p></li>
+<li><p>Marketplace interference: there are at least two types of units that form an online marketplace (i.e.&nbsp;sellers and buyers), and interference often happens when units compete for finite resources (e.g.&nbsp;uber customers hailing a finite amount of drivers, JET restaurants relying on a finite number of drivers). Examples are ride hailing, job matching, ads marketplaces, education platforms, and food delivery, which is an example of a three-sided marketplace.</p></li>
+<li><p>A particular typs of interference is “cannibalisation”, whereby the increase in the desired behaviour in the treatment group is solely or (under partial cannibalisation) partially due to a shift of the behaviour from control units to treatment units. This usually happens if units share a common pool of a fixed resource (e.g.&nbsp;a fixe number of uber drivers, a fixed number of items to buy at an auction) and the treatment makes it easier or more attractive for the treatment units to engage in the behaviour, which then leaves fewer resources to the control. In other words, it’s in zero-sum contexts. See <span class="citation" data-cites="liu2020trustworthy">Liu, Mao, and Kang (<a href="references.html#ref-liu2020trustworthy" role="doc-biblioref">2020</a>)</span></p></li>
+</ul>
+</section>
+<section id="dealing-with-interaction-effects" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="dealing-with-interaction-effects"><span class="header-section-number">8.3</span> Dealing with interaction effects</h2>
 <ul>
-<li><p>Finding the appropriate level at which to randomise/cluster: effectively, you need to find the clusters between which there is no interactions, so that externalities don’t spill across cluster boundaries. Examples:</p>
+<li><p>There are a number of different approaches (see, e.g.&nbsp;discussion in <span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="references.html#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span>)</p></li>
+<li><p>What they share in common is that they all address the fundamental problem: that units that interact with one another are not all in the same treatment group, as they would be if everyone were in the same treatment group (as standard ATE estimaors assume).</p></li>
+<li><p>There are two broad approaches: those that adjust the design, and those that adjust the analysis.</p></li>
+</ul>
+<section id="design-based-approaches" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="design-based-approaches"><span class="header-section-number">8.3.1</span> Design-based approaches</h3>
+<section id="cluster-based-randomisation-approaches" class="level4" data-number="8.3.1.1">
+<h4 data-number="8.3.1.1" class="anchored" data-anchor-id="cluster-based-randomisation-approaches"><span class="header-section-number">8.3.1.1</span> Cluster-based randomisation approaches</h4>
+<ul>
+<li><p>This approache first splits the units into clusters that are disjoint (or as disjoint as possible). Randomisation then happens at the cluster level, and all units within a cluster receive the same treatment.</p></li>
+<li><p>Because units will interact only (or mostly) with units that have the same treatment status as they themselves, this design provides a better counterfacturals for the all-treated and all-controlled alternatives.</p></li>
+<li><p>One challenge is creating clusters: effectively, you need to find the clusters between which there is no interactions, so that externalities don’t spill across cluster boundaries. Examples:</p>
 <ul>
 <li><p>Geographical clustering:</p>
 <ul>
@@ -222,13 +277,59 @@ ul.task-list li input[type="checkbox"] {
 <li>To test a feature in a social-network app: create graphs of user interactions, and partition the graph such that there is maximal within-group interaction and minimal between group interaction</li>
 </ul></li>
 </ul></li>
-<li><p>Ensuring you have enough effective sample size: if the outcomes of users within a group are correlated, then randomising at a level higher than the unit reduces effective sample size. In the extreme case, where within group correlation is perfect, your effective sample size is the number of groups, not the number of units.</p></li>
-</ul></li>
-<li><p>Can also measure network effects by administring different levels of the treatment (Duflo paper)</p></li>
-</ul></li>
+<li><p>Another challenge is ensuring you have enough effective sample size: if the outcomes of users within a group are correlated, then randomising at a level higher than the unit reduces effective sample size. In the extreme case, where within group correlation is perfect, your effective sample size is the number of groups, not the number of units.</p></li>
+</ul>
+</section>
+<section id="ego-clusters" class="level4" data-number="8.3.1.2">
+<h4 data-number="8.3.1.2" class="anchored" data-anchor-id="ego-clusters"><span class="header-section-number">8.3.1.2</span> Ego-clusters</h4>
+<ul>
+<li>Instead of traditional clusters, create much smaller, unit-based clusters.</li>
+</ul>
+</section>
+<section id="switchback-experiments" class="level4" data-number="8.3.1.3">
+<h4 data-number="8.3.1.3" class="anchored" data-anchor-id="switchback-experiments"><span class="header-section-number">8.3.1.3</span> Switchback experiments</h4>
+<ul>
+<li><p>An approach often used to deal with marketplace interferance, whereby all units are frequently switched from being in control to being in treatment.</p></li>
+<li><p>There could be carry-over issues with this, but this can be dealt with by using “burn-in” periods.</p></li>
+<li><p>Another issue is that, like cluster-randomisation, switchbacks also suffer from lower power.</p></li>
+</ul>
+</section>
+</section>
+<section id="analysis-based-approaches" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="analysis-based-approaches"><span class="header-section-number">8.3.2</span> Analysis-based approaches</h3>
+<ul>
+<li>Analysis based approaches model the interference and then adjust the analysis accordingly. See last paragraph of section 6 in <span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="references.html#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span> for details.</li>
+</ul>
+</section>
+</section>
+<section id="measuring-interaction-effects" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="measuring-interaction-effects"><span class="header-section-number">8.4</span> Measuring interaction effects</h2>
+<ul>
+<li><p>Overall approach: if there are no interaction effects, different estimands should be the same</p></li>
+<li><p>Design side: run clauster and unit-level experiment side-by-side. Different results imply presence of interaction effects</p></li>
+<li><p>Analysis side: 1) exposure modelling / reweighting 2) use of focal units</p></li>
+</ul>
+</section>
+<section id="useful-resources" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">8.5</span> Useful resources</h2>
+<ul>
+<li><p><span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="references.html#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span>, in section 6, provides a recent review of the literature.</p></li>
+<li><p><span class="citation" data-cites="karrer2021network">Karrer et al. (<a href="references.html#ref-karrer2021network" role="doc-biblioref">2021</a>)</span> describe network experimentation at Meta.</p></li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-karrer2021network" class="csl-entry" role="listitem">
+Karrer, Brian, Liang Shi, Monica Bhole, Matt Goldman, Tyrone Palmer, Charlie Gelman, Mikael Konutgan, and Feng Sun. 2021. <span>“Network Experimentation at Scale.”</span> In <em>Proceedings of the 27th Acm Sigkdd Conference on Knowledge Discovery &amp; Data Mining</em>, 3106–16.
+</div>
+<div id="ref-larsen2023statistical" class="csl-entry" role="listitem">
+Larsen, Nicholas, Jonathan Stallrich, Srijan Sengupta, Alex Deng, Ron Kohavi, and Nathaniel T Stevens. 2023. <span>“Statistical Challenges in Online Controlled Experiments: A Review of a/b Testing Methodology.”</span> <em>The American Statistician</em>, 1–15.
+</div>
+<div id="ref-liu2020trustworthy" class="csl-entry" role="listitem">
+Liu, Min, Jialiang Mao, and Kang Kang. 2020. <span>“Trustworthy Online Marketplace Experimentation with Budget-Split Design.”</span> <em>arXiv Preprint arXiv:2012.08724</em>.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

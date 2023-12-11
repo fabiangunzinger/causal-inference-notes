@@ -158,12 +158,12 @@
     "href": "chapters/references.html",
     "title": "References",
     "section": "",
-    "text": "Imbens, Guido W, and Donald B Rubin. 2015. Causal Inference in\nStatistics, Social, and Biomedical Sciences. Cambridge University\nPress."
+    "text": "Imbens, Guido W, and Donald B Rubin. 2015. Causal Inference in\nStatistics, Social, and Biomedical Sciences. Cambridge University\nPress.\n\n\nKarrer, Brian, Liang Shi, Monica Bhole, Matt Goldman, Tyrone Palmer,\nCharlie Gelman, Mikael Konutgan, and Feng Sun. 2021. “Network\nExperimentation at Scale.” In Proceedings of the 27th Acm\nSigkdd Conference on Knowledge Discovery & Data Mining,\n3106–16."
   },
   {
     "objectID": "chapters/useful_resources.html",
     "href": "chapters/useful_resources.html",
-    "title": "3  Useful resources",
+    "title": "11  Useful resources",
     "section": "",
     "text": "Getting to decisions faster in A/B tests – useful literature review of various moderl approaches to A/B testing"
   },
@@ -541,9 +541,9 @@
   {
     "objectID": "chapters/misc_topics.html#causal-inference-vs-prediction",
     "href": "chapters/misc_topics.html#causal-inference-vs-prediction",
-    "title": "9  Miscellaneous topics",
-    "section": "9.1 Causal inference vs prediction",
-    "text": "9.1 Causal inference vs prediction\n\nPrediction is about finding the most likely outcome based on a set of (existing) covariates. Causal inference is about finding the effect of a change in a covariate on the outcome.\nThe difference is profound: when predicting, you take the features as a given and predict outcomes based on them – you’re asking: “given existing features, what outcome can I expect?”. When you perform causal inference, you want to know what would happen if you were to change one of the covariates – you’re asking “if I were to change one covariate in a certain way, what outcome could I expect?”.\nCausal inference is about manipulating covariates – to paraphrase Donald Rubin: there is no causality without manipulation.\nTechnically, what this really comes down to is that in prediction, you don’t care about selection bias, whereas in causal inference that’s the main thing you care about.\nThis also means that the role of goodness of fit is very different: for prediction, it’s obviously very important – if your model explains only a very small part of the variation in the outcome, it won’t be very good at predicting outcomes. In causal inference, goodness of fit doesn’t matter because your aim is not to predict, but to know how the outcome changes if you change a covariate. So, you can have very low goodness of fit (lots of things outside the model predicting outcomes), but if you can precisely estimate your treatment effect, that’s very valuable (you learn that regardless of all the many other factors that determine the outcome, changing a covariate in a certain way tends to change outcomes in a certain way.)"
+    "title": "10  Miscellaneous topics",
+    "section": "10.1 Causal inference vs prediction",
+    "text": "10.1 Causal inference vs prediction\n\nPrediction is about finding the most likely outcome based on a set of (existing) covariates. Causal inference is about finding the effect of a change in a covariate on the outcome.\nThe difference is profound: when predicting, you take the features as a given and predict outcomes based on them – you’re asking: “given existing features, what outcome can I expect?”. When you perform causal inference, you want to know what would happen if you were to change one of the covariates – you’re asking “if I were to change one covariate in a certain way, what outcome could I expect?”.\nCausal inference is about manipulating covariates – to paraphrase Donald Rubin: there is no causality without manipulation.\nTechnically, what this really comes down to is that in prediction, you don’t care about selection bias, whereas in causal inference that’s the main thing you care about.\nThis also means that the role of goodness of fit is very different: for prediction, it’s obviously very important – if your model explains only a very small part of the variation in the outcome, it won’t be very good at predicting outcomes. In causal inference, goodness of fit doesn’t matter because your aim is not to predict, but to know how the outcome changes if you change a covariate. So, you can have very low goodness of fit (lots of things outside the model predicting outcomes), but if you can precisely estimate your treatment effect, that’s very valuable (you learn that regardless of all the many other factors that determine the outcome, changing a covariate in a certain way tends to change outcomes in a certain way.)"
   },
   {
     "objectID": "chapters/neyman_rubin_causal_model.html#stable-unit-treatment-value-assumption-sutva",
@@ -565,5 +565,47 @@
     "title": "8  Network experiments",
     "section": "",
     "text": "Network experiments are experiments where there the treatment status of units might determine the outcome of other units, thus violating the SUTVA assumption\nWays to measure the strength of interaction effects\n\nOverall approach: if there are no interaction effects, different estimands should be the same\nDesign side: run clauster and unit-level experiment side-by-side. Different results imply presence of interaction effects\nAnalysis side: 1) exposure modelling / reweighting 2) use of focal units\n\nWays to deal with interaction effects:\n\nRandomise at the level at which general-equilibrium effects play out. There are two challenges with this:\n\nFinding the appropriate level at which to randomise/cluster: effectively, you need to find the clusters between which there is no interactions, so that externalities don’t spill across cluster boundaries. Examples:\n\nGeographical clustering:\n\nto experiment on currier behaviour in a food delivery network: randomise at a level at which curriers don’t interact (such as a part of a large city, or even between cities).\nIn a online-dating network, clusters may be geographical regions between which there is little interaction between users (i.e. locations to far away for people to wanting to find partners)\n\nsocial/interaction-graph-clustering:\n\nTo test a feature in a social-network app: create graphs of user interactions, and partition the graph such that there is maximal within-group interaction and minimal between group interaction\n\n\nEnsuring you have enough effective sample size: if the outcomes of users within a group are correlated, then randomising at a level higher than the unit reduces effective sample size. In the extreme case, where within group correlation is perfect, your effective sample size is the number of groups, not the number of units.\n\nCan also measure network effects by administring different levels of the treatment (Duflo paper)"
+  },
+  {
+    "objectID": "chapters/network_experiments.html#the-problem",
+    "href": "chapters/network_experiments.html#the-problem",
+    "title": "8  Network experiments",
+    "section": "8.1 The problem",
+    "text": "8.1 The problem\n\nInterference creates bias in standard ATE estimators.\nFundamentally, this happens because with interference, the ATE is not an estimate of what would happen if all units were treated (which is what standard ATE estimates are estimating)."
+  },
+  {
+    "objectID": "chapters/network_experiments.html#measuring-interaction-effects",
+    "href": "chapters/network_experiments.html#measuring-interaction-effects",
+    "title": "8  Network experiments",
+    "section": "8.4 Measuring interaction effects",
+    "text": "8.4 Measuring interaction effects\n\nOverall approach: if there are no interaction effects, different estimands should be the same\nDesign side: run clauster and unit-level experiment side-by-side. Different results imply presence of interaction effects\nAnalysis side: 1) exposure modelling / reweighting 2) use of focal units"
+  },
+  {
+    "objectID": "chapters/network_experiments.html#dealing-with-interaction-effects",
+    "href": "chapters/network_experiments.html#dealing-with-interaction-effects",
+    "title": "8  Network experiments",
+    "section": "8.3 Dealing with interaction effects",
+    "text": "8.3 Dealing with interaction effects\n\nThere are a number of different approaches (see, e.g. discussion in Larsen et al. (2023))\nWhat they share in common is that they all address the fundamental problem: that units that interact with one another are not all in the same treatment group, as they would be if everyone were in the same treatment group (as standard ATE estimaors assume).\nThere are two broad approaches: those that adjust the design, and those that adjust the analysis.\n\n\n8.3.1 Design-based approaches\n\n8.3.1.1 Cluster-based randomisation approaches\n\nThis approache first splits the units into clusters that are disjoint (or as disjoint as possible). Randomisation then happens at the cluster level, and all units within a cluster receive the same treatment.\nBecause units will interact only (or mostly) with units that have the same treatment status as they themselves, this design provides a better counterfacturals for the all-treated and all-controlled alternatives.\nOne challenge is creating clusters: effectively, you need to find the clusters between which there is no interactions, so that externalities don’t spill across cluster boundaries. Examples:\n\nGeographical clustering:\n\nto experiment on currier behaviour in a food delivery network: randomise at a level at which curriers don’t interact (such as a part of a large city, or even between cities).\nIn a online-dating network, clusters may be geographical regions between which there is little interaction between users (i.e. locations to far away for people to wanting to find partners)\n\nsocial/interaction-graph-clustering:\n\nTo test a feature in a social-network app: create graphs of user interactions, and partition the graph such that there is maximal within-group interaction and minimal between group interaction\n\n\nAnother challenge is ensuring you have enough effective sample size: if the outcomes of users within a group are correlated, then randomising at a level higher than the unit reduces effective sample size. In the extreme case, where within group correlation is perfect, your effective sample size is the number of groups, not the number of units.\n\n\n\n8.3.1.2 Ego-clusters\n\nInstead of traditional clusters, create much smaller, unit-based clusters.\n\n\n\n8.3.1.3 Switchback experiments\n\nAn approach often used to deal with marketplace interferance, whereby all units are frequently switched from being in control to being in treatment.\nThere could be carry-over issues with this, but this can be dealt with by using “burn-in” periods.\nAnother issue is that, like cluster-randomisation, switchbacks also suffer from lower power.\n\n\n\n\n8.3.2 Analysis-based approaches\n\nAnalysis based approaches model the interference and then adjust the analysis accordingly. See last paragraph of section 6 in Larsen et al. (2023) for details."
+  },
+  {
+    "objectID": "chapters/network_experiments.html#approaches-in-practice",
+    "href": "chapters/network_experiments.html#approaches-in-practice",
+    "title": "8  Network experiments",
+    "section": "8.4 Approaches in practice",
+    "text": "8.4 Approaches in practice\n\nKarrer et al. (2021) describe network experimentation at Meta\n\n\n\n\n\nKarrer, Brian, Liang Shi, Monica Bhole, Matt Goldman, Tyrone Palmer, Charlie Gelman, Mikael Konutgan, and Feng Sun. 2021. “Network Experimentation at Scale.” In Proceedings of the 27th Acm Sigkdd Conference on Knowledge Discovery & Data Mining, 3106–16."
+  },
+  {
+    "objectID": "chapters/network_experiments.html#types-of-interferance",
+    "href": "chapters/network_experiments.html#types-of-interferance",
+    "title": "8  Network experiments",
+    "section": "8.2 Types of interferance",
+    "text": "8.2 Types of interferance\nLarsen et al. (2023) differentiate between:\n\nNetwork interference: all units in the population are the same but they interact with each other. In particular, interference happens when the treatment status of users in a social network mutually determines their outcome (e.g. one user being assigned to a new messenger service might increase messaging for that individual’s friends who are in control)\nMarketplace interference: there are at least two types of units that form an online marketplace (i.e. sellers and buyers), and interference often happens when units compete for finite resources (e.g. uber customers hailing a finite amount of drivers, JET restaurants relying on a finite number of drivers). Examples are ride hailing, job matching, ads marketplaces, education platforms, and food delivery, which is an example of a three-sided marketplace.\nA particular typs of interference is “cannibalisation”, whereby the increase in the desired behaviour in the treatment group is solely or (under partial cannibalisation) partially due to a shift of the behaviour from control units to treatment units. This usually happens if units share a common pool of a fixed resource (e.g. a fixe number of uber drivers, a fixed number of items to buy at an auction) and the treatment makes it easier or more attractive for the treatment units to engage in the behaviour, which then leaves fewer resources to the control. In other words, it’s in zero-sum contexts. See Liu, Mao, and Kang (2020)"
+  },
+  {
+    "objectID": "chapters/network_experiments.html#useful-resources",
+    "href": "chapters/network_experiments.html#useful-resources",
+    "title": "8  Network experiments",
+    "section": "8.5 Useful resources",
+    "text": "8.5 Useful resources\n\nLarsen et al. (2023), in section 6, provides a recent review of the literature.\nKarrer et al. (2021) describe network experimentation at Meta.\n\n\n\n\n\nKarrer, Brian, Liang Shi, Monica Bhole, Matt Goldman, Tyrone Palmer, Charlie Gelman, Mikael Konutgan, and Feng Sun. 2021. “Network Experimentation at Scale.” In Proceedings of the 27th Acm Sigkdd Conference on Knowledge Discovery & Data Mining, 3106–16.\n\n\nLarsen, Nicholas, Jonathan Stallrich, Srijan Sengupta, Alex Deng, Ron Kohavi, and Nathaniel T Stevens. 2023. “Statistical Challenges in Online Controlled Experiments: A Review of a/b Testing Methodology.” The American Statistician, 1–15.\n\n\nLiu, Min, Jialiang Mao, and Kang Kang. 2020. “Trustworthy Online Marketplace Experimentation with Budget-Split Design.” arXiv Preprint arXiv:2012.08724."
   }
 ]
