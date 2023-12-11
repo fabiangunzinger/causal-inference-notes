@@ -135,23 +135,23 @@
   {
     "objectID": "chapters/practical_issues.html",
     "href": "chapters/practical_issues.html",
-    "title": "8  Practical issues",
+    "title": "9  Practical issues",
     "section": "",
     "text": "For useful set of rules of thumb, see Kohavi papers as well as this CUPED post\nFor great outline of experiment platform and used methods see this Uber post.\n\nNotes from larsen2023statistical\n\nReasons for insufficient power\n\nTreatment effect is homogenously distributed across entire user base but very small\nFeature affects only small number of users, so overall effect is highly attenuated\nTreatment effect on known subgroups is of interest"
   },
   {
     "objectID": "chapters/regression_discontinuity.html#use-cases",
     "href": "chapters/regression_discontinuity.html#use-cases",
-    "title": "10  Regression discontinuity design",
-    "section": "10.1 Use cases",
-    "text": "10.1 Use cases\n\nIdentifiable forcing variable"
+    "title": "11  Regression discontinuity design",
+    "section": "11.1 Use cases",
+    "text": "11.1 Use cases\n\nIdentifiable forcing variable"
   },
   {
     "objectID": "chapters/regression_discontinuity.html#considerations",
     "href": "chapters/regression_discontinuity.html#considerations",
-    "title": "10  Regression discontinuity design",
-    "section": "10.2 Considerations",
-    "text": "10.2 Considerations\n\nFunctional form: use local linear methods\nChoice of bandwidth: use asymptotic expansion\nAssessing (internal) validity: use suplementary analysis\nAssessing external validity: assess credibility of extrapolation to other subpopulations\n\nNotes based on Athey and Imbens (2017)\n\n\n\n\nAthey, Susan, and Guido W Imbens. 2017. “The State of Applied Econometrics: Causality and Policy Evaluation.” Journal of Economic Perspectives 31 (2): 3–32."
+    "title": "11  Regression discontinuity design",
+    "section": "11.2 Considerations",
+    "text": "11.2 Considerations\n\nFunctional form: use local linear methods\nChoice of bandwidth: use asymptotic expansion\nAssessing (internal) validity: use suplementary analysis\nAssessing external validity: assess credibility of extrapolation to other subpopulations\n\nNotes based on Athey and Imbens (2017)\n\n\n\n\nAthey, Susan, and Guido W Imbens. 2017. “The State of Applied Econometrics: Causality and Policy Evaluation.” Journal of Economic Perspectives 31 (2): 3–32."
   },
   {
     "objectID": "chapters/references.html",
@@ -163,7 +163,7 @@
   {
     "objectID": "chapters/useful_resources.html",
     "href": "chapters/useful_resources.html",
-    "title": "11  Useful resources",
+    "title": "12  Useful resources",
     "section": "",
     "text": "Getting to decisions faster in A/B tests – useful literature review of various moderl approaches to A/B testing"
   }

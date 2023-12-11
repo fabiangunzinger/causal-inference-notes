@@ -16,6 +16,11 @@ book:
         - chapters/potential_outcomes.qmd
         - chapters/dags.qmd
         - chapters/statistics.qmd
+
+    - part: foundations.qmd
+      chapters:
+        - ols.qmd
+
     - part: chapters/experiments.qmd
       chapters:
         - chapters/practical_issues.qmd
