@@ -13,10 +13,12 @@ book:
     - chapters/neyman.qmd
     - chapters/regression.qmd
     - chapters/variance_reduction.qmd
-    - chapters/cupded.qmd
-    - chapters/cupac.qmd
+    # - chapters/cuped.qmd
+    # - chapters/cupac.qmd
+    # - chapters/variance-weighted-estimation.qmd
+    - chapters/network_experiments.qmd
     - chapters/stats_for_business.qmd
-
+    - chapters/misc_topics.qmd
     # - part: introduction.qmd
     #   chapters:
     #     - chapters/epistemology.qmd

@@ -2,20 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<title>Causal inference notes - 12&nbsp; Useful resources</title>
-=======
-<title>Causal inference notes - 3&nbsp; Useful resources</title>
->>>>>>> 4db5bd567e50617152677384ed39b8b967817f17
-=======
-<title>Causal inference notes - 11&nbsp; Useful resources</title>
->>>>>>> 5a8bcdddcc98a44239b27ded81a5e170b26f9bad
+<title>Causal inference notes - 8&nbsp; Network experiments</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -28,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -38,8 +49,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/references.html" rel="next">
-<link href="../chapters/misc_topics.html" rel="prev">
+<link href="../chapters/stats_for_business.html" rel="next">
+<link href="../chapters/variance_reduction.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -65,8 +76,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -82,18 +92,10 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/useful_resources.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Useful resources</span></a></li></ol></nav>
-=======
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/useful_resources.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Useful resources</span></a></li></ol></nav>
->>>>>>> 4db5bd567e50617152677384ed39b8b967817f17
-=======
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/useful_resources.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Useful resources</span></a></li></ol></nav>
->>>>>>> 5a8bcdddcc98a44239b27ded81a5e170b26f9bad
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/network_experiments.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Network experiments</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -127,101 +129,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
   </div>
 </li>
-<<<<<<< HEAD
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">ethics.html</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/fundamental_problem.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fundamental problem of causal inference</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/potential_outcomes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/dags.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Directed Acyclic Graphs</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">statistics.html</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../foundations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Foundations</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../ols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">OLS</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../chapters/experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Experiments</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/practical_issues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../chapters/quasi_experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Quasi experiments</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/matching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Matching</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/regression_discontinuity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Regression discontinuity design</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/useful_resources.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Useful resources</span></span></a>
-=======
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link">
@@ -254,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
   </div>
 </li>
@@ -272,13 +179,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/useful_resources.html" class="sidebar-item-text sidebar-link active">
-<<<<<<< HEAD
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Useful resources</span></span></a>
->>>>>>> 4db5bd567e50617152677384ed39b8b967817f17
-=======
+  <a href="../chapters/useful_resources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Useful resources</span></span></a>
->>>>>>> 5a8bcdddcc98a44239b27ded81a5e170b26f9bad
   </div>
 </li>
         <li class="sidebar-item">
@@ -293,22 +195,28 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-problem" id="toc-the-problem" class="nav-link active" data-scroll-target="#the-problem"><span class="header-section-number">8.1</span> The problem</a></li>
+  <li><a href="#types-of-interferance" id="toc-types-of-interferance" class="nav-link" data-scroll-target="#types-of-interferance"><span class="header-section-number">8.2</span> Types of interferance</a></li>
+  <li><a href="#dealing-with-interaction-effects" id="toc-dealing-with-interaction-effects" class="nav-link" data-scroll-target="#dealing-with-interaction-effects"><span class="header-section-number">8.3</span> Dealing with interaction effects</a>
+  <ul class="collapse">
+  <li><a href="#design-based-approaches" id="toc-design-based-approaches" class="nav-link" data-scroll-target="#design-based-approaches"><span class="header-section-number">8.3.1</span> Design-based approaches</a></li>
+  <li><a href="#analysis-based-approaches" id="toc-analysis-based-approaches" class="nav-link" data-scroll-target="#analysis-based-approaches"><span class="header-section-number">8.3.2</span> Analysis-based approaches</a></li>
+  </ul></li>
+  <li><a href="#measuring-interaction-effects" id="toc-measuring-interaction-effects" class="nav-link" data-scroll-target="#measuring-interaction-effects"><span class="header-section-number">8.4</span> Measuring interaction effects</a></li>
+  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">8.5</span> Useful resources</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Useful resources</span></h1>
-=======
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Useful resources</span></h1>
->>>>>>> 4db5bd567e50617152677384ed39b8b967817f17
-=======
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Useful resources</span></h1>
->>>>>>> 5a8bcdddcc98a44239b27ded81a5e170b26f9bad
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Network experiments</span></h1>
 </div>
 
 
@@ -324,10 +232,104 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <ul>
-<li><a href="https://aurimas.eu/blog/2023/01/getting-to-decisions-faster-in-a-b-tests-part-1-literature-review/?utm_campaign=Data_Elixir&amp;utm_source=Data_Elixir_423">Getting to decisions faster in A/B tests – useful literature review of various moderl approaches to A/B testing</a></li>
+<li><p>Network experiments are experiments where there the treatment status of units might determine the outcome of other units, thus violating the <a href="../chapters/neyman_rubin_causal_model.html## Stable unit treatment value assumption (SUTVA)">SUTVA assumption</a></p></li>
+<li><p><span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="references.html#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span> cite a large number of papers that provide more details on these approaches and provide solutions to some of the challenges.</p></li>
+</ul>
+<section id="the-problem" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="the-problem"><span class="header-section-number">8.1</span> The problem</h2>
+<ul>
+<li><p>Interference creates bias in standard ATE estimators.</p></li>
+<li><p>Fundamentally, this happens because with interference, the ATE is not an estimate of what would happen if all units were treated (which is what standard ATE estimates are estimating).</p></li>
+</ul>
+</section>
+<section id="types-of-interferance" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="types-of-interferance"><span class="header-section-number">8.2</span> Types of interferance</h2>
+<p><span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="references.html#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span> differentiate between:</p>
+<ul>
+<li><p>Network interference: all units in the population are the same but they interact with each other. In particular, interference happens when the treatment status of users in a social network mutually determines their outcome (e.g.&nbsp;one user being assigned to a new messenger service might increase messaging for that individual’s friends who are in control)</p></li>
+<li><p>Marketplace interference: there are at least two types of units that form an online marketplace (i.e.&nbsp;sellers and buyers), and interference often happens when units compete for finite resources (e.g.&nbsp;uber customers hailing a finite amount of drivers, JET restaurants relying on a finite number of drivers). Examples are ride hailing, job matching, ads marketplaces, education platforms, and food delivery, which is an example of a three-sided marketplace.</p></li>
+<li><p>A particular typs of interference is “cannibalisation”, whereby the increase in the desired behaviour in the treatment group is solely or (under partial cannibalisation) partially due to a shift of the behaviour from control units to treatment units. This usually happens if units share a common pool of a fixed resource (e.g.&nbsp;a fixe number of uber drivers, a fixed number of items to buy at an auction) and the treatment makes it easier or more attractive for the treatment units to engage in the behaviour, which then leaves fewer resources to the control. In other words, it’s in zero-sum contexts. See <span class="citation" data-cites="liu2020trustworthy">Liu, Mao, and Kang (<a href="references.html#ref-liu2020trustworthy" role="doc-biblioref">2020</a>)</span></p></li>
+</ul>
+</section>
+<section id="dealing-with-interaction-effects" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="dealing-with-interaction-effects"><span class="header-section-number">8.3</span> Dealing with interaction effects</h2>
+<ul>
+<li><p>There are a number of different approaches (see, e.g.&nbsp;discussion in <span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="references.html#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span>)</p></li>
+<li><p>What they share in common is that they all address the fundamental problem: that units that interact with one another are not all in the same treatment group, as they would be if everyone were in the same treatment group (as standard ATE estimaors assume).</p></li>
+<li><p>There are two broad approaches: those that adjust the design, and those that adjust the analysis.</p></li>
+</ul>
+<section id="design-based-approaches" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="design-based-approaches"><span class="header-section-number">8.3.1</span> Design-based approaches</h3>
+<section id="cluster-based-randomisation-approaches" class="level4" data-number="8.3.1.1">
+<h4 data-number="8.3.1.1" class="anchored" data-anchor-id="cluster-based-randomisation-approaches"><span class="header-section-number">8.3.1.1</span> Cluster-based randomisation approaches</h4>
+<ul>
+<li><p>This approache first splits the units into clusters that are disjoint (or as disjoint as possible). Randomisation then happens at the cluster level, and all units within a cluster receive the same treatment.</p></li>
+<li><p>Because units will interact only (or mostly) with units that have the same treatment status as they themselves, this design provides a better counterfacturals for the all-treated and all-controlled alternatives.</p></li>
+<li><p>One challenge is creating clusters: effectively, you need to find the clusters between which there is no interactions, so that externalities don’t spill across cluster boundaries. Examples:</p>
+<ul>
+<li><p>Geographical clustering:</p>
+<ul>
+<li><p>to experiment on currier behaviour in a food delivery network: randomise at a level at which curriers don’t interact (such as a part of a large city, or even between cities).</p></li>
+<li><p>In a online-dating network, clusters may be geographical regions between which there is little interaction between users (i.e.&nbsp;locations to far away for people to wanting to find partners)</p></li>
+</ul></li>
+<li><p>social/interaction-graph-clustering:</p>
+<ul>
+<li>To test a feature in a social-network app: create graphs of user interactions, and partition the graph such that there is maximal within-group interaction and minimal between group interaction</li>
+</ul></li>
+</ul></li>
+<li><p>Another challenge is ensuring you have enough effective sample size: if the outcomes of users within a group are correlated, then randomising at a level higher than the unit reduces effective sample size. In the extreme case, where within group correlation is perfect, your effective sample size is the number of groups, not the number of units.</p></li>
+</ul>
+</section>
+<section id="ego-clusters" class="level4" data-number="8.3.1.2">
+<h4 data-number="8.3.1.2" class="anchored" data-anchor-id="ego-clusters"><span class="header-section-number">8.3.1.2</span> Ego-clusters</h4>
+<ul>
+<li>Instead of traditional clusters, create much smaller, unit-based clusters.</li>
+</ul>
+</section>
+<section id="switchback-experiments" class="level4" data-number="8.3.1.3">
+<h4 data-number="8.3.1.3" class="anchored" data-anchor-id="switchback-experiments"><span class="header-section-number">8.3.1.3</span> Switchback experiments</h4>
+<ul>
+<li><p>An approach often used to deal with marketplace interferance, whereby all units are frequently switched from being in control to being in treatment.</p></li>
+<li><p>There could be carry-over issues with this, but this can be dealt with by using “burn-in” periods.</p></li>
+<li><p>Another issue is that, like cluster-randomisation, switchbacks also suffer from lower power.</p></li>
+</ul>
+</section>
+</section>
+<section id="analysis-based-approaches" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="analysis-based-approaches"><span class="header-section-number">8.3.2</span> Analysis-based approaches</h3>
+<ul>
+<li>Analysis based approaches model the interference and then adjust the analysis accordingly. See last paragraph of section 6 in <span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="references.html#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span> for details.</li>
+</ul>
+</section>
+</section>
+<section id="measuring-interaction-effects" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="measuring-interaction-effects"><span class="header-section-number">8.4</span> Measuring interaction effects</h2>
+<ul>
+<li><p>Overall approach: if there are no interaction effects, different estimands should be the same</p></li>
+<li><p>Design side: run clauster and unit-level experiment side-by-side. Different results imply presence of interaction effects</p></li>
+<li><p>Analysis side: 1) exposure modelling / reweighting 2) use of focal units</p></li>
+</ul>
+</section>
+<section id="useful-resources" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">8.5</span> Useful resources</h2>
+<ul>
+<li><p><span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="references.html#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span>, in section 6, provides a recent review of the literature.</p></li>
+<li><p><span class="citation" data-cites="karrer2021network">Karrer et al. (<a href="references.html#ref-karrer2021network" role="doc-biblioref">2021</a>)</span> describe network experimentation at Meta.</p></li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-karrer2021network" class="csl-entry" role="listitem">
+Karrer, Brian, Liang Shi, Monica Bhole, Matt Goldman, Tyrone Palmer, Charlie Gelman, Mikael Konutgan, and Feng Sun. 2021. <span>“Network Experimentation at Scale.”</span> In <em>Proceedings of the 27th Acm Sigkdd Conference on Knowledge Discovery &amp; Data Mining</em>, 3106–16.
+</div>
+<div id="ref-larsen2023statistical" class="csl-entry" role="listitem">
+Larsen, Nicholas, Jonathan Stallrich, Srijan Sengupta, Alex Deng, Ron Kohavi, and Nathaniel T Stevens. 2023. <span>“Statistical Challenges in Online Controlled Experiments: A Review of a/b Testing Methodology.”</span> <em>The American Statistician</em>, 1–15.
+</div>
+<div id="ref-liu2020trustworthy" class="csl-entry" role="listitem">
+Liu, Min, Jialiang Mao, and Kang Kang. 2020. <span>“Trustworthy Online Marketplace Experimentation with Budget-Split Design.”</span> <em>arXiv Preprint arXiv:2012.08724</em>.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -565,23 +567,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <a href="../chapters/regression_discontinuity.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Regression discontinuity design</span></span>
-=======
-      <a href="../chapters/projection.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Projection</span></span>
->>>>>>> 4db5bd567e50617152677384ed39b8b967817f17
-=======
-      <a href="../chapters/misc_topics.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Miscellaneous topics</span></span>
->>>>>>> 5a8bcdddcc98a44239b27ded81a5e170b26f9bad
+      <a href="../chapters/variance_reduction.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variance reduction</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/references.html" class="pagination-link">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/stats_for_business.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stats for business</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
