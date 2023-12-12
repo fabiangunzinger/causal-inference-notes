@@ -1,0 +1,27 @@
+# Synthetic control
+
+## Use case
+
+- The classic use case is a setting where a single aggregated unit (school district, city, region, country) has been treated and we have data on a relatively small number of possible comparison units. In such a case, synthetic control creates a control unit as a weighted average of the available comparison units, which can result in a better control group than if a single such unit were used as a control (as in a traditional DiD setting).
+
+## Considerations
+
+- Weighing function to create controls: @abadie2010synthetic use minimal distance, @doudchenko2016balancing use show that alternatives like best subset regression, LASSO, and elastic nets perform better in settings with a large number of potential control units.
+
+- Functional form: @athey2006identificaiton provide non-linear alternative.
+
+
+## Synthetic control vs regression:
+
+  - Similarities: both effectively use weights
+
+- Regression weights are implicit and much harder to interpret.
+
+
+
+## R packages
+
+- [Synth](https://dspace.mit.edu/handle/1721.1/71234) R implementation by Abadie and co-authors.
+
+- [tidysynth](https://github.com/edunford/tidysynth) Nice looking improved implementation of Synth
+

@@ -1,0 +1,37 @@
+# Small samples
+
+- Small samples can be a problem because they lower our statistical power
+
+- For a given significance level and power, we can increase power by
+  - Increasing the sample size
+  - Change the effect size
+  - Reduce outcome metric variance
+
+- Increasing the sample size is precisely what we sometimes cannot do, so let's focus on the other two.
+
+Approaches to change effect size
+
+- Choose outcome metrics that can be moved
+
+- Make treatment stronger (if possible)
+
+Reduce outcome metric variance
+
+- Reduce noise by using variance reduction technique (see separate note)
+  
+- Reduce noise by averaging observations over time (see beyond baseline paper)
+
+- Reduce noise by making sample as homogeous as possible
+
+    - Drop outliers
+
+    - Drop cluster that is very different in size from others
+
+- Reduce noise by ensuring balance ex-ante (e.g. matching)
+
+
+## Useful resources
+
+- [David McKenzie on 7 ways to improve power without increasing n](https://blogs.worldbank.org/impactevaluations/seven-ways-improve-statistical-power-your-experiment-without-increasing-n)
+
+- [David McKenzie - Beyond baseline and follow-up: The case for more T in experiments](https://drive.google.com/file/d/18-ucbI3H7tgOy5PuOw_pVAJMykQgFDmM/view)

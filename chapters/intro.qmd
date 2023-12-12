@@ -1,5 +1,2 @@
 # Introduction
 
-This is a book created from markdown and executable code.
-
-See @open2015estimating for additional discussion of literate programming.

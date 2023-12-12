@@ -1,0 +1,201 @@
+# Regression
+
+Linear regression is by far the most often used method to estimate relationships between outcomes and explanatory variables in applied econometrics and -- probably -- all of applied social science. In this article I want to to two things: define the related terminology that is often used but not defined (OLS, linear equation, etc.) and -- mainly -- explain a less frequently taught and understand way to think about linear regression, that in terms of its linear algebra.
+
+There are, of course, a lot of very good resources on linear regression and OLS, and I list my favourite ones at the bottom. But none of them quite tie everything together in the way I was looking for.
+
+There are two ways to understand linear regression: one is to think of the variables involved as dimensions and of each row as a data point -- this is the way the problem is usually motivated in introductory econometrics classes. The other is the linear algebra approach -- to think of each row of data as a dimension, and to think of the variable as vectors in the space formed by those dimensions.
+
+The first approach straightforwardly links to the intuition of minimising squares, which is useful. It's the one I have learned and relied on most of my life. The second one, though, provides an alternative and very powerful way to understand what linear regression does. And, importantly, understanding the linear algebra notation simplifies much of the notation and manipulations, and opens the way to much of the literature of econometric theory, such as an understanding of the Frisch-Waugh-Lowell theorem, which was the impetus for me to dig into the linear algebra of OLS.
+
+In this post I want to cover the following:
+
+-   Understand all the terminology related to linear regression so we fully know what we're talking about
+
+-   Understand the matrix representation of linear regression
+
+-   Understand how we can think of the least squares solution as a projection
+
+-   Understand why this is a very useful way of seeing things
+
+
+## Glossary
+
+TODO:
+- Linear regression vs OLS
+
+## The setup
+
+We usually start with data of the form $\{y_i, x_{i1}, \cdots, x_{ik}\}_{i=1}^N$, where we observe an outcome variable $y_i$ and a set of $k$ explanatory variables $x_i = (x_{i1}, \cdots, x_{ik})$ for each unit $i$ in the dataset. We think that it might be reasonable to think of the outcome being linearly related to the regressors, so that, for each unit in our dataset, we can write the following linear equation:
+
+$$
+y_{i} = \beta_{1}x_{i1} + \beta_{2}x_{i2} + ... + \beta_{k}x_{ik} + \epsilon_{i} 
+$$
+
+This says that the outcome $y$ can be thought of as a linear combination of all explanatory variables plus some error term.
+
+TODO: What makes this a "linear" equation:
+- The highest power to which any regressor is raised is 1
+- The coefficients are constants, not variables
+- Regressors are related to one another using addition and subtraction only
+- The resulting line (in 2-D space), plane (in 3-D space) and hyperplane (in N-D space) are linear (the term linear equation originates from the simple case where there are two regressors, one of which is a constant, in which case we get a straight line in a Cartesian plane.)
+
+TODO: discuss all the assumptions we're making here.
+
+TODO: Discuss the Angist & Pischke view of linear regression being good approximation even if relationship is not linear.
+
+
+We thus have a system of linear equations of the form
+
+$$
+\begin{aligned}
+y_1 = \beta_0 + \beta_1 x_{1_1} + \beta_2 x_{2_1} + \ldots + \beta_k x_{k_1} + \epsilon_1 \\
+y_2 = \beta_0 + \beta_1 x_{1_2} + \beta_2 x_{2_2} + \ldots + \beta_k x_{k_2} + \epsilon_2 \\
+\vdots\\
+y_n = \beta_0 + \beta_1 x_{1_n} + \beta_2 x_{2_n} + \ldots + \beta_k x_{k_n} + \epsilon_n \\
+\end{aligned}
+$$
+
+which we can rewrite in vector notation as
+
+$$
+\begin{aligned}
+y_1 = x_1'\beta + \epsilon_1 \\
+y_2 = x_2'\beta + \epsilon_2 \\
+\vdots\\
+y_n = x_n'\beta + \epsilon_n,
+\end{aligned}
+$$
+
+where 
+$$
+x_i' = (x_{i1}, x_{i2}, \ldots, x_{ik})
+$$
+
+is a $1 \times k$ row vector that contains all $k$ explanatory variables for each unit $i$ and
+$$ \beta = 
+ \begin{pmatrix}
+  \beta_{1}\\
+  \beta_{2}\\
+  \vdots \\
+  \beta_{k} 
+ \end{pmatrix}
+$$
+
+is a $k \times 1$ column vector that contains all $k$ regression coefficients.
+
+To be even more succinct, we can stack all n equations to get the matrix notation:
+$$
+\begin{equation}
+y = X\beta + \epsilon,
+\end{equation}
+$$
+
+where $\beta$ is defined as above,
+
+$$ y = 
+ \begin{pmatrix}
+  y_{1}\\
+  y_{2}\\
+  \vdots \\
+  y_{k} 
+ \end{pmatrix}
+$$
+
+is a $n \times 1$ vector containing the $n$ outcome variables, one for each unit in the data,
+
+$$ X = 
+ \begin{pmatrix}
+  x_{1}' \\
+  x_{2}' \\
+  \vdots \\
+  x_{n}'' 
+ \end{pmatrix}
+ = 
+ \begin{pmatrix}
+  x_{1,1} & x_{1,2} & \cdots & x_{1,k} \\
+  x_{2,1} & x_{2,2} & \cdots & x_{2,k} \\
+  \vdots  & \vdots  & \ddots & \vdots  \\
+  x_{n,1} & x_{n,2} & \cdots & x_{n,k} 
+ \end{pmatrix}
+$$
+
+is an $n \times k$ matrix that contains all $n$ row vectors $x_i'$ stacked on top of each other, and
+
+$$ \epsilon = 
+ \begin{pmatrix}
+  \epsilon_{1}\\
+  \epsilon_{2}\\
+  \vdots \\
+  \epsilon_{k} 
+ \end{pmatrix}
+$$
+
+a column vector containing the $n$ error terms.
+
+## The problem
+
+So, what do we want to do here? We have data on an outcome variable $y$ and explanatory variables $x$ for each unit $i$, and we think that it is reasonable to think that this data is generated by a process whereby $y$ is the result of a linear combination of the $x$s plus some noise, which we capture in the error term. The challenge is to find the right linear combination.
+
+## Classic motivation of the solution
+
+TODO
+
+
+## Linear algebra motivation of the solution
+
+Notice how our problem here is exactly akin to the motivation for orthogonal projection discussed in @sec-projection. There we had a system of linear equations of the form
+
+$$
+Ax = b
+$$
+
+which was overdetermined because the number of equations exceeded the number of unknowns. Our setup is equivalent. We have $n$ equations and $k$ unknowns (the $\beta$s), so that -- in practice -- there will be no solution to the system:
+
+$$
+X\beta = y.
+$$
+
+In other words, there is no choice of $\beta$ that would linearly combine all the explanatory variables in each equation such that the result would be exactly $y$. We account for this by adding the error term $\epsilon$, so that we have
+
+$$
+X\beta + \epsilon = y.
+$$
+
+What we do, now, is to say that we want to find that linear combination of the explanatory variables that is closest to $y$, so that $\epsilon$ is as small as possible, which is the same as finding the orthogonal projection of $y$ onto $X$, which, traditionally, we call $\hat{y}$.
+
+The solution is then the same as in @sec-projection:[^order]
+
+$$
+\begin{aligned}
+X'\epsilon &= 0 \\
+X'(y - \hat{y}) &= 0 \\
+X'(y - X\beta) &= 0 \\
+X'y - X'X\beta &= 0 \\
+X'X\beta &= X'y \\
+\beta &= (X'X)^{-1}X'y
+\end{aligned}
+$$
+
+
+
+## Resources
+
+- Hayashi, Wooldridge, Verbeek, online resources
+
+
+[^order]: One thing I would always wonder about in textbook is how I knew that the condition was $X'\epsilon$ instead of $\epsilon'X$. The answer is that in cases where order doesn't matter, texts tend to choose what is more convenient for the math. We could solve $\epsilon'X$:
+$$
+\begin{aligned}
+\epsilon'X &= 0 \\
+(y - \hat{y})'X &= 0 \\
+(y - X\beta)'X &= 0 \\
+(y' - \beta'X')X &= 0 \\
+y'X - \beta'X'X &= 0 \\
+\beta'X'X &= y'X \\
+(\beta'X'X)' &= (y'X)' \\
+X'X\beta &= X'y \\
+\beta &= (X'X)^{-1}X'y
+\end{aligned}
+$$
+which gets us to the same result but in more steps.

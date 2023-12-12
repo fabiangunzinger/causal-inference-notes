@@ -1,0 +1,93 @@
+# Variance reduction
+
+## Why reduce variance?
+
+TODO:
+- Explain that we wanna increase power (refer to power section)
+- Reducing variance is one way to increase power (often the only feasible one)
+
+The estimand of interest is the population average treatment effect:
+
+$$
+\tau = \bar{y}_t - \bar{y}_c.
+$$
+
+Under random treatment assignment, an unbiased estimator of $\tau$ is the difference in means between treatment and control units in the sample:
+
+$$
+\hat{\tau}^{dif} = \bar{y}_t^{obs} - \bar{y}_c^{obs}.
+$$
+
+The variance of $\hat{\tau}^{dif}$ is given by:
+
+$$
+\mathbb{V}(\hat{\tau}^{dif}) = \frac{s_t}{N_t} + \frac{s_c}{N_c},
+$$
+
+where
+
+$$
+s_t = \frac{1}{N_t - 1}\sum_{\text{i:d=1}}(y_i - \bar{y}_t^{obs})^2, \quad s_c = \frac{1}{N_c - 1}\sum_{\text{i:d=0}}(y_i - \bar{y}_c^{obs})^2.
+$$
+
+Hence: for a given sample size, we can reduce $\mathbb{V}(\hat{\tau}^{dif})$ by reducing the variance in the outcome metric, $Y$ -- this is the variance we are trying to reduce.
+
+## What about the variance-bias trade-off?
+
+Discuss why we can reduce variance without increasing bias.
+
+
+
+## Stratification
+
+TODO
+
+### Useful resources
+
+- [Deng et al. 2013 -- original CUPED paper](https://www.exp-platform.com/Documents/2013-02-CUPED-ImprovingSensitivityOfControlledExperiments.pdf) -- the original paper
+
+- [Five ways to reduce variance in A/B testing](https://bytepawn.com/five-ways-to-reduce-variance-in-ab-testing.html#five-ways-to-reduce-variance-in-ab-testing)
+
+
+
+## Regression adjustment
+
+Regression adjustment reduces variance by adding additional regressors to the regression model used to evaluate an experiment in order to reduce residual variance.
+
+**How it works**
+
+To evaluate an experiment where we have, for each unit $i$, an outcome metric $y_i$ and a treatment assignment indicator $d_i$ we would estimate the following linear regression model using OLS:
+
+$$
+y_i = \alpha + \beta d_i + \epsilon_i,
+$$
+
+where $\epsilon_i$ is the error term, and where the estimate of $\beta$ is the estimate of our average treatment effect. If we have an additional variable, $x_i$, that is correlated with $y_i$ but uncorrelated with $d_i$, we can add that to the right hand side of our regression model and estimate:
+
+$$
+\begin{equation}
+y_i = \alpha + \beta_1 d_i + \beta_2 x_i + \mu_i.
+\end{equation}
+$$
+
+If $x$ is uncorrelated with the treatment assignment then $\beta = \beta_1$, so the average treatment effect estimate will remain unchanged, which is good. And if $x$ is correlated with $y$, then the standard error of the average treatment effect estimate will again be lower, which increases power.
+
+### Useful resources
+
+- Imbens & Rubin, Causal Inference for Statistics, Social, and Biomedical Sciences, Chapter 7 [link](https://www.cambridge.org/core/books/causal-inference-for-statistics-social-and-biomedical-sciences/71126BE90C58F1A431FE9B2DD07938AB)
+
+
+
+
+
+## Useful resources
+
+- [Five ways to reduce variance in A/B testing](https://bytepawn.com/five-ways-to-reduce-variance-in-ab-testing.html#five-ways-to-reduce-variance-in-ab-testing)
+
+- [Online Experiments Tricks — Variance Reduction](https://towardsdatascience.com/online-experiments-tricks-variance-reduction-291b6032dcd7)
+
+- [CUPED, CUPAC, and Other Ways to Reduce Variance in an Experiment](https://j-sephb-lt-n.github.io/exploring_statistics/cuped_cupac_and_other_variance_reduction_techniques.html)
+
+- [Don't use a t-test for A/B testing](https://towardsdatascience.com/dont-use-a-t-test-for-a-b-testing-e4d2ef7ab9b6)
+
+- [Variance Reduction in Experiments — Part 1: Intuition -- see also part 2](https://towardsdatascience.com/variance-reduction-in-experiments-part-1-intuition-68b270a0df71)
