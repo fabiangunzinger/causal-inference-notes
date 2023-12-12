@@ -1,0 +1,6 @@
+# Gossary
+
+Business lingo I tend to forget.
+
+
+- CTR: click-though rate

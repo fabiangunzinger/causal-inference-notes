@@ -1,16 +1,15 @@
 # Network experiments
 
-- Network experiments are experiments where there the treatment status of units might determine the outcome of other units, thus violating the [SUTVA assumption](neyman_rubin_causal_model.qmd## Stable unit treatment value assumption (SUTVA)
-)
+- Network experiments are experiments in which the outcome of some units is affected by the treatment status of other units.
 
-- @larsen2023statistical cite a large number of papers that provide more details on these approaches and provide solutions to some of the challenges.
+- This violates [SUTVA](neyman_rubin_causal_model.qmd## Stable unit treatment value assumption (SUTVA)).
 
 
 ## The problem
 
 - Interference creates bias in standard ATE estimators.
 
-- Fundamentally, this happens because with interference, the ATE is not an estimate of what would happen if all units were treated (which is what standard ATE estimates are estimating).
+- Fundamentally, this happens because with interference, the ATE is no longer an unbiased estimate of the difference between a world where everyone is treated and nobody is treated, which is what standard ATE estimates are estimating.
 
 
 ## Types of interferance
@@ -19,7 +18,7 @@
 
 - Network interference: all units in the population are the same but they interact with each other. In particular, interference happens when the treatment status of users in a social network mutually determines their outcome (e.g. one user being assigned to a new messenger service might increase messaging for that individual's friends who are in control)
 
-- Marketplace interference: there are at least two types of units that form an online marketplace (i.e. sellers and buyers), and interference often happens when units compete for finite resources (e.g. uber customers hailing a finite amount of drivers, JET restaurants relying on a finite number of drivers). Examples are ride hailing, job matching, ads marketplaces, education platforms, and food delivery, which is an example of a three-sided marketplace. 
+- Marketplace interference: there are at least two types of units that form an online marketplace (i.e. sellers and buyers), and interference often happens when units compete for finite resources. Examples are ride hailing (customers competing for a finite number of rides), job matching (job hunters competing for a finite number of jobs), ads marketplaces (marketers competing for a fixed number of adds), education platforms, and food delivery (customers and restaurants competing for a fixed number of riders), which is an example of a three-sided marketplace. 
 
 - A particular typs of interference is "cannibalisation", whereby the increase in the desired behaviour in the treatment group is solely or (under partial cannibalisation) partially due to a shift of the behaviour from control units to treatment units. This usually happens if units share a common pool of a fixed resource (e.g. a fixe number of uber drivers, a fixed number of items to buy at an auction) and the treatment makes it easier or more attractive for the treatment units to engage in the behaviour, which then leaves fewer resources to the control. In other words, it's in zero-sum contexts. See @liu2020trustworthy
 
