@@ -1,0 +1,3 @@
+# Culture
+
+- @thomke2020building on how to build an experimentation culture, based on Booking.com

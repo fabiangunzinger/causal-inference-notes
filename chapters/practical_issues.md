@@ -1,13 +1,24 @@
 # Practical issues
 
-There are a lot of things that can make life hard for online experimenters.
+There are a lot of things that can impact the degree to which online experiments are useful.
 
 
 ## Budget effects in Ads
 
+- On an adds platform, a treatment might perform very well during an experiment in that it makes marketers launch more adds. But once scaled up may do less well because the increased traffic might exhaust marketer's budgets, leading them to reduce adds launched.
+
+
 ## Feedback loops from personalisation
 
+- Treatments might behave differently during experimentation and once they are scaled up if the performance of a feature is a function of the size of the audience it is exposed to (an example could be a recommendation algorithm, which performs better and better as it is being used more).
+
+
 ## Cannibalisation and crossover
+
+- There are two types of cannibalisation: one is the reduction in the use of a company's product as a result of the introduction or changes in a different product. This can be addressed by having guardrail metrics in an experiment (i.e. for Meta, if you add a feature to Instagram, ensure that key metrics for facebook stay stable).
+
+- The other type is within a single experiment, in the context where there are different types of units in an online marketplace and where treatment units cannibalise demand of control units becaues they compete both for the same fixed stock of resources of the other type of unit in the marketplace.
+
 
 ## Seasonality
 
@@ -29,13 +40,29 @@ There are a lot of things that can make life hard for online experimenters.
 
 ## Novelty and learning effects
 
-Challenge: behaviour might change abruptly and temporarily in response to a new feature (novelty effect) or it might take a while for behaviour fully adapt to a new feature (learning effects). In both cases, the results from a relatively short experiment will not provide a representative picture of the long-run effects of a feature.
+- Challenge: behaviour might change abruptly and temporarily in response to a new feature (novelty or "burn in" effect) or it might take a while for behaviour fully adapt to a new feature (learning effects). In both cases, the results from a relatively short experiment will not provide a representative picture of the long-run effects of a feature.
 
-Solution: measure long-term effects (by running experiments for longer) or, at least, estimate dynamic treatment effects to see the evolution of the treatment effect. 
+- Examples: Increasing number of adds shows on Google led to increase in add revenue initially but then decrease of clicks in the long term because it increased add blindness @hohnhold2015focusing
 
-Examples:
+- Solutions:
 
-- Increasing number of adds shows on Google led to increase in add revenue initially but then decrease of clicks in the long term because it increased add blindness @hohnhold2015focusing
+  - Measure long-term effects (by running experiments for longer)
+
+  - Have a "holdout" group of users that isn't exposed to any changes for a pre-set period of time (a month, a quarter), to measure long-term effects
+
+  - Estimate dynamic treatment effects to see the evolution of the treatment effect
+
+
+
+## What if you want to implement a feature right away?
+
+- There are situations where you feel very confident that a feature works well and you don't want to wait a week or two to implement it.
+
+- Pinterest uses what they call "holdout experiments" in such cases, whereby 99% of users are exposed to the new feature and the remaining 1% act as the control (see @king2020power for more). In effect, this is a reversal of how experimentation typically happens.
+
+- You will want to use this approach sparingly, because the whole point of using experiments is that we usually can't know the effect of a feature, even when we think we do (rember the [CRASH trial](https://pubmed.ncbi.nlm.nih.gov/15936423/)).
+
+- But I really like the idea, because sometimes there really are cases in practice where you can be pretty certain that waiting for results is a waste of time (e.g. if you have an online shop and move from list of items without pictures to a grid-view with pictures). In such a situation, running a holdout experiment can help you be certain that the direction of the effect is what you expected, and also provide an estimate for the magnitude of the effect.
 
 
 ## Non-representative users in experiment
@@ -48,6 +75,7 @@ Possible scenarios:
 
 - Heavy-user bias: heavy users are more likely to be bucketed in an experiment, biasing the results relative to the overall effect of a feature. Depending on the context, this can be an issue.
 
+- Solution: run experiments for longer (thought this comes with opportunity costs, and will increase cookie churn)
 
 ## Interaction effects
 
@@ -55,10 +83,6 @@ Possible scenarios:
 
 - However, with large sample sizes, this should not generally be a problem because effects of different experiments average out between treatment and control group.
 
-
-## General solutions
-
-- Running experiments for longer (thought this comes with opportunity costs, and will increase cookie churn)
 
 
 ## Resources

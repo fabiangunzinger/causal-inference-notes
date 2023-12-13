@@ -13,7 +13,9 @@ Notes from @larsen2023statistical
 
 ## Calculating power
 
-See @zhou2023all
+- See @zhou2023all for comprehensive overview
+
+- See @bojinov2023design, section 5, for simulation results for switchbacks and generally good approach to simulation to emulate
 
 
 ## Cluster-randomised experiments

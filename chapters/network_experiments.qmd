@@ -15,14 +15,13 @@
 - Marketplace interference. Suppose we have a network composed of two of more types of nodes which interact with each other, and where, from the perspective of each type of node, the number of other nodes is finite, so that each type of node competes for interactions with a fixed number of nodes of the other type. Examples include ride hailing, where drivers compete for customers and customers for available rides; ads marketplaces, where marketers compete for slots and platforms with slots for marketers; or food delivery services, where riders compete for orders and customers who place orders for riders (food delivery services, such as Deliveroo, are three-sided marketplaces, managing the interaction of restaurants, riders, and customers). In such a marketplace experimentation is challenging because treatment and control groups compete for a fixed pool of resources, so that an increase in behaviour for the treatment group must lead to a decrease in the decreate of the behaviour for the control group. This "cannibalisation" effect exaggerates the actual treatment effect. (See @liu2020trustworthy for more.)
 
 
-## Dealing with interaction effects
+## Dealing with interference
 
 - There are a number of different approaches (see, e.g. discussion in @larsen2023statistical)
 
 - What they share in common is that they all address the fundamental problem, which is that under the presence of interaction effects, the difference in outcomes between the treatment and the control group is not an accurate representation of the two counterfactual states of the world where everyone is and isn't exposed to the treatment, which is what standard ATE estimators measure.
 
 - There are two broad ways to tackle the problem: we can adjust the design to limit interference in the first place, or we can model interference and adjust the analysis.
-
 
 ### Design-based approaches
 
@@ -63,7 +62,7 @@
 
 ### Analysis-based approaches
 
-- Analysis based approaches model the interference and then adjust the analysis accordingly. See last paragraph of section 6 in @larsen2023statistical for details.
+- Analysis based approaches model the interference and then adjust the analysis accordingly. See last paragraph of section 6 in @larsen2023statistical for details. Also, @bojinov2023design, in their introduction, differentiate between approaches that rely on game theoretic, Markov Chain, and network approachs to model interference.
 
 
 ## Measuring interaction effects

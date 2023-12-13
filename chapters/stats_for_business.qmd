@@ -1,8 +1,8 @@
 # Stats for business
 
-In some business organisations there is a prevailing wisdom that "science" often in the form of A/B testing (which is the digital version of controlled experiments) makes making decisions harder by slowing them down, which wastes important time.
+- In some business organisations there is a prevailing wisdom that "science" often in the form of A/B testing (which is the digital version of controlled experiments) makes making decisions harder by slowing them down, which wastes important time.
 
-One of the main jobs of an experimentation specialist in an organisation is to help people understand why running experiments is crucial. In this space, I want to gather my evolving thoughts on this topic with the aim of crafting an increasingly convincing argument.
+- One of the main jobs of an experimentation specialist in an organisation is to help people understand why running experiments is crucial. In this space, I want to gather my evolving thoughts on this topic with the aim of crafting an increasingly convincing argument.
 
 Relevant thoughts:
 
@@ -16,4 +16,7 @@ Relevant thoughts:
 
 - How do we define identity of executives or product managers: not around knowing what is true or what works or what customers want, but around coming up with good hypotheses, being willing to learn from data, and strong at iterating on features based on data and past experience.
 
+Is experimentation worth it?
+
+- @king2020power on how Pinterest was able to build a machine-learning system that is 20% better at detecting policy-violating content thanks to incremental testing that experimentation allows.
 
