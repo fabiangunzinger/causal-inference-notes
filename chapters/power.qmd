@@ -1,10 +1,22 @@
 # Power
 
-Notes from larsen2023statistical
+## What is Power
+
+## Reasons for insufficient power
+
+Notes from @larsen2023statistical
 
 - Reasons for insufficient power
     - Treatment effect is homogenously distributed across entire user base but very small
     - Feature affects only small number of users, so overall effect is highly attenuated
     - Treatment effect on known subgroups is of interest
 
+## Calculating power
+
+See @zhou2023all
+
+
+## Cluster-randomised experiments
+
+See @reich2012empirical
 
