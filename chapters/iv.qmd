@@ -1,0 +1,4 @@
+# Instrumental variables
+
+- For regression coefficients to have a causal interpretation we need all variables included in the regression to be independent of the error term. This is often not the case. Sometimes we can find an instrument to deal with this. The instrument is a variable that is 1) correlated with the variable of interest, so that it is informative, and 2) uncorrelated to the error term, so that it is valid. If we find such a variable, we can tease out the part of the variable of interest that is due to random variation in the instrument and estimate the effect of this on the outcome variable.
+

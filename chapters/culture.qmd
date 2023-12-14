@@ -1,3 +1,7 @@
 # Culture
 
 - @thomke2020building on how to build an experimentation culture, based on Booking.com
+
+- @bojinov2020importance section 3 on how to scale quasi-experiments, based on LinkedIn
+
+

@@ -1,0 +1,348 @@
+# Project design
+
+Here, I want to capture my process for how to scope and design a new analysis in an industry setting. This is a framework I loosely use at work, and try to follow quite closely during "product sense" interviews.
+
+- Overall, we're looking for an approach that is
+
+  - systematic
+  - comprehensive
+  - feasible
+
+
+## Framework
+
+Clarify -- start by asking questions.
+
+- What is objective here? -- If necessary, spell out loud to get confirmation.
+
+- Problem type: what kind of problem am I dealing with? Descriptive? Predictive? Causal inference? - State out loud to get confirmation.
+
+- Definitions: understand all the key contepts relevant to the question? (Metric, feature, product, user segment, etc.) - State these explicitly to get confirmation 
+
+- What are my implicit assumptions?
+
+- Gather more information
+  - What is the objective?
+  - What data can I access?
+
+- Eliminate irrelevant data
+  - Should I focus on all customers or just on Region X?
+
+Assume -- narrow down the problem.
+
+- Make assumptions that make the problem concrete and solveable.
+
+- Have the stakeholder confirm those assumptions so you're on the same page.
+
+
+Design -- think about suitable method.
+
+- Think about possible causes, methods to use, and what we'd need to use them
+
+- See [Quasi-experiments chapter](quasi_experiments.qmd) for how to select method.
+
+
+Plan -- create an analysis plan.
+
+- Outcome metric (1-2 primary, 1 guardrail)
+
+- Evaluation Method
+
+- Discuss different options and their pros and cons.
+
+- Make a suggestion, give rationale, discuss challenges/limitations and how we can handle them.
+
+
+Execute -- carry out the plan.
+
+- Walk the interviewer through the steps.
+
+- Think about edge cases.
+
+
+Review -- tie solution to the business objective.
+
+- What do the results mean in terms of the initial business objective?
+
+- Provide recommendation
+
+- Evaluate solution, and whether there are any steps you could have added or removed to improve it. 
+
+
+## Examples
+
+- There are different types of questions, and the framework can be flexibly adapted to suite a given question. Some items may not be relevant, some have to be interpreted broadly.
+
+
+### Evaluate success of a product
+
+
+How would you measure FB newsfeed health?
+How would you measure the success of a product?
+How would you measure the success of Mentions, FB's app for celebrities?
+How would you tell whether a new Instagram feature is doing well?
+How would you evaluate the success of a new job-recommendation algorithm? 
+
+- How would you determine whether making a field mandatory for employers when posting job adds is beneficial? (Opportunity sizing)
+
+
+  - Source: @bojinov2020importance
+
+  Background:
+
+  - LinkedIn knows that more information provided by an empoloyer for a job posting correlates with higher view-to-apply rates (VTA). So they are thinking about which fields to make mandatory. For this task, we're focusing on finding out the potential value of providing a job title.
+
+  Clarify:
+
+  - This is an opportunity sizing task in that we are trying to understand what the potential is for a change to increase our metric of interest, and find which change provides the largest opportunity to do so.
+
+  - It's a causal question, because we want to know how much VTA would change if a certain field were mandatory.
+
+  - What kind of data do we have access to? Cross section with posting as a unit and available fields as columns?
+
+  - Is VTA the one metric we're going to care about here?
+
+  Assume:
+
+  - Can I assume that fields can't be changed after the initial posting (i.e. that the treatment is absorbing)?
+
+  Plan:
+
+  - The naive way of going about this is to compare the differene in VTA ratios between ads that do and don't provide a job title.
+
+  - The problem with this is that it's likely that there are confounding variables that simultaneously determine whether a company provides a job title and the VTA ratio. An obvious one is company calibre, with better companies being able to afford better resources HR staff and being more attravtive to work for.
+
+  - What we want, is to compare ads that are very similar in all observable characteristics except for the job title. This will approximate the data from an experiment, and allows us to compare likes with likes. The only assumption we then have to make is that there are no unobserved confounders. We can think about that a bit more later on.
+
+  - Given our context here, matching is a good solution.
+
+  - When using matching, we ...
+
+      - Define closeness metric (robustness test several)
+
+      - Match
+
+      - Evaluate balance
+
+      - Perform analysis
+
+  Execute:
+
+  - We'd now just do the above
+
+  Review:
+
+  - We've found that effect of adding job title is X%. We'll now want to do the same exercise for other fields we're thinking about, to get a ranking of their potential.
+
+  - We'll then want to decide how many fields we want to make mandatory. Ideally, we'd do this using an experiment (one arm with top 1 required, one with top 2 required, ... up to top n, with n being something sensible based on our understanding of customers).
+
+  - Given our context, matching seems like best approach. Given how much data we have, unobserved confounders don't seem a big problem. Can try to think of one...
+
+
+### Identify problem
+
+75% of iOS users use Instagram, but only 30% of Android users do. How would you investigate the discrepancy?
+
+
+
+
+Creation of FB user groups has dropped by 20%. What do you do? 
+
+- Clarify
+
+  - Timing (view time series)
+    - Recently vs persistent
+    - Sudden vs gradual
+  
+  - Segments
+    - Regional?
+    - By user demographics
+    - Platform 
+
+  - Seasonality
+    - Holiday season
+    - Wknd
+    - ...
+
+
+  - Have we noticed change elsewhere?
+
+- Assume?
+
+- Design
+
+  - If possible, decompose the metric into components to see root of problem
+    - Eg daily active users = existing + new + resurrected - churned 
+
+  - User driven
+
+    - Forced to change (check news)
+      - Natural disaster
+      - War
+      - ...
+
+    - Deliberate change 
+      - Want to move behaviour offline (can check whether it's industry wide trend)
+
+    - Behaviour moved elsewhere
+      - New competitor (find out)
+      - New product/campaign of existing competitor (find out)
+      - Cannibalisation of internal product (find out)
+
+  - Platform driven
+    
+    - UI
+    - Data
+    - Algorithms
+
+
+- Plan
+
+  - Investigate in order of most probably, most simple first
+
+- Execute?
+- Review
+  - Limitations
+  - 
+
+
+Clarify
+- Globally? In a certain country?
+- Among all or certain cohorts?
+
+Assume
+- ? 
+
+Design
+
+- Check whether globally or in certain countries or cohorts
+
+- Possible causes
+  
+  - User driven
+
+    - Create fewer groups
+
+      - Movement to encourage real-world interaction
+      - ...
+
+    - Create groups elsewhere
+      - There is new competitor
+      - Existing competitor got better
+      - Cannibalisation of different Meta product
+
+  - Platform driven
+
+    - UI change makes ceating groups harder
+    - Groups are less useful
+    - ...
+
+
+Plan 
+
+- ....
+
+
+At Lyft, we have noticed that average ETA has gone up by 3 minutes. How would you investigate the problem?
+
+- Clarify
+
+  - How precisely is ETA defined? Referring to pickup or dropoff? Since booking confirmation? - Say out loud to get confirmation.
+
+  - Has gone up since when? How?
+
+- Assume?
+
+- Design
+
+  - Change in marketplace
+    - Increase customer demand
+    - Decreased drivers
+
+  - Change on platform
+    - New algorithm?
+
+
+At Meta, how would you investigate a 10% drop in friendship requests?
+
+  - Clarify
+
+    - Recenty?
+    - For how long?
+    - How persistent?
+    - Where? Globally? Only certain segments?
+    - What does time - series look like?
+    - Any obvious explanations? Like holidays?
+    - Happened before?
+    - 
+
+  - Assume?
+
+  - Design
+
+    - User driven
+
+      - Forced to create fewer friends
+        - Natural disaster
+        - War
+        - ...
+
+      - Wanna have fewer online friends
+        - Move towards real-life friends
+
+      - Have online friends elsewhere
+        - New competitor
+        - Existing competitor with new product
+        - Meta cannibalising FB
+
+    - Platform driven
+      - Harder to send requests
+      - Less value from friends
+      - ...
+
+  - Plan
+    - Start by what's most plausible and quickest
+
+
+
+
+### Launch or not?
+
+PM want to double number of ads in FB Newsfeed. How would you test whether this is a good idea?
+
+
+How would you set up an expriment to test the success of a new Instagram feature? How would you decide on whether or not to launch if engagement went down for one cohort and up for everone else.
+
+
+
+### How would you improve a product?
+
+How would you improve FB
+
+- Clarify
+  - What metric do we care about? Retention? Engagement? Revenue?
+  - What feature do we want to focus on? Newsfeed? What's on your mind posting? 
+  - Dimensions for improvement
+    - Build new feature or improve existing one?
+    - Improve for everyone of certain segments
+- Assume
+  - I'm gonna focus on "What's on your mind" posting, focusing on engagement, in particular, avg number of postings per user per month.
+- Design
+  - Approach 1: User journey map: Identify friction in user journey by checking "funnel conversion" from navigate to feature, start typing, abandon, etc, then approach appropriately (inform, help complete, remind of draft, ...)
+  - Approach 2: User segmentation: study why some users don't post as much and try to encourage more engagement. 
+- Plan 
+  - Prioritise ideas:
+    - Maximise impact: do some analysis wou'd be impacted and estimate business impact (opportunity sizing)
+    - Minimise effort: focus on those closest do desired behaviour (abandoned posting)
+
+  - Metric of success 
+  - How to design experiment to test effect
+
+
+How would you improve accuracy of birthday data?
+
+
+
+
+
+
