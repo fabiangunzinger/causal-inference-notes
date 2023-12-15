@@ -11,28 +11,37 @@ Here, I want to capture my process for how to scope and design a new analysis in
 
 ## Framework
 
+- For all these steps, talk out alound, ask for clafification, and make my assumptions and conclusions explicit to get confirmation.
+
 Clarify -- start by asking questions.
 
-- What is objective here? -- If necessary, spell out loud to get confirmation.
+- Definitions
+  - What precisely are the conteps mentioned (check each part of speech)
+  - How do we measure them (metrics)?
 
-- Problem type: what kind of problem am I dealing with? Descriptive? Predictive? Causal inference? - State out loud to get confirmation.
+- Objective
+  - Opportunity scoping?
+  - Problem identification?
+  - Success evaluation?
+  - Launch decision?
 
-- Definitions: understand all the key contepts relevant to the question? (Metric, feature, product, user segment, etc.) - State these explicitly to get confirmation 
+- Problem type
+  - Descriptive?
+  - Predictive?
+  - Causal inference?
 
-- What are my implicit assumptions?
+- W-questions
+  - When did this start?
+  - Whom do we observe the problem for?
+  - Whom do we want to solve the problem for?
+  - What does the time-series look like (gradual vs sudden, temporary vs persistent)?
+  - ...
 
-- Gather more information
-  - What is the objective?
-  - What data can I access?
+- Constraints
+  - Do I have required data?
+  - Do I need more info? 
 
-- Eliminate irrelevant data
-  - Should I focus on all customers or just on Region X?
-
-Assume -- narrow down the problem.
-
-- Make assumptions that make the problem concrete and solveable.
-
-- Have the stakeholder confirm those assumptions so you're on the same page.
+- Reformulate problem in precise terms given what I've learned -- this is the basis for what follows!
 
 
 Design -- think about suitable method.
@@ -40,6 +49,36 @@ Design -- think about suitable method.
 - Think about possible causes, methods to use, and what we'd need to use them
 
 - See [Quasi-experiments chapter](quasi_experiments.qmd) for how to select method.
+
+
+
+- For problem identification
+  - All segments? regions?
+  - Look at time series to study nature of change 
+
+  - Possible causes
+    - User driven
+      - Exetrnal cause
+        - App store creates friction for download of our app
+        - Natural disaster
+        - ...
+      - Internal cause
+        - Reduction
+          - New trend/movement
+        - Shift
+          - To competitor
+          - Caniballisaiton
+
+    - Platform driven
+      - Data
+        - Capturing
+          - Warehouse bugs
+        - Display
+          - Dashboard issue
+      - UI
+        - Friction
+      - Algo
+
 
 
 Plan -- create an analysis plan.
@@ -76,9 +115,48 @@ Review -- tie solution to the business objective.
 
 ### Evaluate success of a product
 
-
 How would you measure FB newsfeed health?
+- Clarify
+  - What is the ultimate objective?
+  - What kind of problem? Descriptive  
+  - How do we define health? Engagement? Positivity? Let's say engagement.
+  - How do we measure engagement? Let's say shares.
+  - Health when? Now? In the past?
+  - For whom? Everyone globally? Certain segments? Countries?
+  - Healthy compared to what?
+- Assume
+  - Focus on mom-change in newsfeed engagement, as measured by avg number of shares per user, for users under age 30 in UK, by time spent on site segments.
+  - mom rather than dod or wow to smooth out noise from news events
+- Design
+  - Calculate monthly averages globally and for specific segments (top 1 pct, top 10 pct, top 50 pct, rest)
+- Execute
+  - ...
+- Review
+  - Tie back 
+
 How would you measure the success of a product?
+
+- Clarify
+  - Definitions
+    - Product: something like WhatsApp, or a single feature? Let's say a single feature. Let's say group chats.
+    - Success:
+      - Causal impact on engagement
+      - Metric: avg number of messages per user per day (MPD), guardrail: proportion of msgs flagged as spam or harmful 
+  - Objective
+    - We show impact of group feature on whatsapp engagement
+  - Problem type:
+    - Causal inference with observational data 
+
+  - Reformulate:
+    - We want to estimate by how much groups feature has increased whatsapp MPD since it's launch in Jan 2022.
+
+- Design
+  - Overall approach: find quasi-experiment in data
+  - Methods
+    - 
+
+
+
 How would you measure the success of Mentions, FB's app for celebrities?
 How would you tell whether a new Instagram feature is doing well?
 How would you evaluate the success of a new job-recommendation algorithm? 

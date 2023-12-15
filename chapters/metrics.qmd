@@ -8,7 +8,7 @@ The choice of metrics to consider when evaluating an experiment is not trivial. 
 
 - Secondary
 
-- Guardrail
+- Guardrail: ensures that improvements in primary metrics don't come at the cost of quality/experience/something else -- basically to avoid unintended consequences
 
 
 ## How to select metrics
@@ -44,6 +44,17 @@ The choice of metrics to consider when evaluating an experiment is not trivial. 
 Guardrail metrics
 - Bounce rate (proportion of site visitors who leave after seeing only the first page)
 - Cancellation rate
+- 
+
+
+## Ways to think about Metrics
+
+- From Meta 
+  - Topline metric: e.g. daily active users
+  - Feature/product team northstar: e.g. total buyers for buyer-facing side of marketplace
+  - Guardrail metric: number of messages flagges as spam or harmful in msg app
+
+
 
 ## Misc issues
 
