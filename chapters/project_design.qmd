@@ -53,8 +53,10 @@ Design -- think about suitable method.
 
 
 - For problem identification
-  - All segments? regions?
-  - Look at time series to study nature of change 
+
+  - Narrow down source of problem
+    - How is affected by change?
+    - How did change happen?
 
   - Possible causes
     - User driven

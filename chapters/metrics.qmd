@@ -4,16 +4,59 @@ The choice of metrics to consider when evaluating an experiment is not trivial. 
 
 ## Types of metrics
 
-- Primary
+- Northstar -- company wide, directly aligned with mission, the one metric that best represents how company creates value for its customers
 
-- Secondary
+    - Amazon example: avg monthly purchases per user
+
+- Primary -- capture goal of particular team/product/initiative
+
+    - Amazon buyer focused team: number of high-quality sellers that join platform per month.
+
+- Supporting/Tracking/Input -- indicators that the primary or NS metric are moving in the right direction (particularly useful as leading indicators)
+
+  - Amazon example: emails sent to HQ sellers, emails opened, 
 
 - Guardrail: ensures that improvements in primary metrics don't come at the cost of quality/experience/something else -- basically to avoid unintended consequences
+
+    - Amazon example: average number of purchases per day (to check that influx of sellers doesn't lead to paralysis for buysers)
+
+
+## What makes a good Metric
+
+- Meaningful (reflect goals of company, product)
+- Measurable ()
+- Moveable (with low delay)
+- Interpretable (not too complicated, easy to communicate and understand)
+- Not gameable (violate Goodhart's law)
 
 
 ## How to select metrics
 
-- Look at BIT bluebook for overall framework for how to think about metrics (specificity etc)
+- NSM and primary based on main company/product goal, focus on criteria above
+
+- Support and guardrails trickier. Use AAAERRR Framework
+
+
+## AAAERRR
+
+- Awareness (how many aware of product)
+
+- Acquisition (how many use product)
+
+- Activation (how many are realizing value of product -- e.g. 10 friends in 7 days on FB / stored at least 1 file on a device on Dropbox)
+
+- Engagement (breath and frequencey of engagement)
+
+- Revenue (how many are paying for product)
+
+- Retention/renewal (how many are coming back)
+
+- Referral (how many are becoming advocates)
+
+
+
+todo
+
 
 - Look at Spotify confidence
 
@@ -59,3 +102,8 @@ Guardrail metrics
 ## Misc issues
 
 - Selecting the wrong metric can lead to misleading results. @kohavi2012trusworthy provide a memorable example from an experiment at Bing: the experiment increased revenue by user because search results were poorer, leading users to make more searches and lead them to click on more adds. This is good in the short-term. But in the long term, users will surely get frustrated by the poorer search results. A better metric would have been one that directly captures the quality of the search results, such as sessions per user. Lesson: have a primary metric that directly captures the thing you want to improve. Use higher level-metrics such as revenue as guardrails.
+
+
+## Useful resources
+
+- [Defining Product Metrics— The Ultimate Guide [Part 1 of 2](https://towardsdatascience.com/defining-product-metrics-the-ultimate-guide-part-1-of-2-585b8c63fcef)
