@@ -44,7 +44,7 @@ book:
     #     - chapters/matching.qmd
     #     - chapters/regression_discontinuity.qmd
 
-    - chapters/useful_resources.qmd
+    # - chapters/useful_resources.qmd
     - chapters/references.qmd
 
 bibliography: fabib.bib

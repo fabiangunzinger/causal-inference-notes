@@ -9,6 +9,17 @@ Here, I want to capture my process for how to scope and design a new analysis in
   - feasible
 
 
+## Types of questions
+
+- Identify source of problem
+- Evaluate success of product
+- Launch or no launch
+- How would you improve Product
+
+
+
+
+
 ## Framework
 
 - For all these steps, talk out alound, ask for clafification, and make my assumptions and conclusions explicit to get confirmation.
@@ -30,6 +41,15 @@ Clarify -- start by asking questions.
   - Predictive?
   - Causal inference?
 
+- Constraints
+  - Do I have required data?
+  - Do I need more info? 
+
+- Reformulate problem in precise terms given what I've learned -- this is the basis for what follows!
+
+
+Understand nature of problem
+
 - W-questions
   - When did this start?
   - Whom do we observe the problem for?
@@ -37,11 +57,7 @@ Clarify -- start by asking questions.
   - What does the time-series look like (gradual vs sudden, temporary vs persistent)?
   - ...
 
-- Constraints
-  - Do I have required data?
-  - Do I need more info? 
 
-- Reformulate problem in precise terms given what I've learned -- this is the basis for what follows!
 
 
 Design -- think about suitable method.
@@ -108,6 +124,10 @@ Review -- tie solution to the business objective.
 - Provide recommendation
 
 - Evaluate solution, and whether there are any steps you could have added or removed to improve it. 
+
+
+
+
 
 
 ## Examples
