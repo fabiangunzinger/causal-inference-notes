@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 3&nbsp; Neyman-Rubin causal model</title>
+<title>Causal inference notes - 2&nbsp; Neyman-Rubin causal model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../chapters/fisher.html" rel="next">
-<link href="../chapters/projection.html" rel="prev">
+<link href="../index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -76,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/neyman_rubin_causal_model.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/neyman_rubin_causal_model.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -109,62 +109,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/variance_reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/stats_for_business.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Stats for business</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/misc_topics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Miscellaneous topics</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/useful_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Useful resources</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -183,12 +141,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#potential-outcomes" id="toc-potential-outcomes" class="nav-link active" data-scroll-target="#potential-outcomes"><span class="header-section-number">3.1</span> Potential outcomes</a></li>
-  <li><a href="#causal-estimands" id="toc-causal-estimands" class="nav-link" data-scroll-target="#causal-estimands"><span class="header-section-number">3.2</span> Causal estimands</a></li>
-  <li><a href="#stable-unit-treatment-value-assumption-sutva" id="toc-stable-unit-treatment-value-assumption-sutva" class="nav-link" data-scroll-target="#stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">3.3</span> Stable unit treatment value assumption (SUTVA)</a></li>
-  <li><a href="#the-assignment-mechanism" id="toc-the-assignment-mechanism" class="nav-link" data-scroll-target="#the-assignment-mechanism"><span class="header-section-number">3.4</span> The assignment mechanism</a></li>
-  <li><a href="#finite-sample-vs-super-population-perspective" id="toc-finite-sample-vs-super-population-perspective" class="nav-link" data-scroll-target="#finite-sample-vs-super-population-perspective"><span class="header-section-number">3.5</span> Finite sample vs super-population perspective</a></li>
-  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">3.6</span> Useful resources</a></li>
+  <li><a href="#potential-outcomes" id="toc-potential-outcomes" class="nav-link active" data-scroll-target="#potential-outcomes"><span class="header-section-number">2.1</span> Potential outcomes</a></li>
+  <li><a href="#causal-estimands" id="toc-causal-estimands" class="nav-link" data-scroll-target="#causal-estimands"><span class="header-section-number">2.2</span> Causal estimands</a></li>
+  <li><a href="#stable-unit-treatment-value-assumption-sutva" id="toc-stable-unit-treatment-value-assumption-sutva" class="nav-link" data-scroll-target="#stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">2.3</span> Stable unit treatment value assumption (SUTVA)</a></li>
+  <li><a href="#the-assignment-mechanism" id="toc-the-assignment-mechanism" class="nav-link" data-scroll-target="#the-assignment-mechanism"><span class="header-section-number">2.4</span> The assignment mechanism</a></li>
+  <li><a href="#finite-sample-vs-super-population-perspective" id="toc-finite-sample-vs-super-population-perspective" class="nav-link" data-scroll-target="#finite-sample-vs-super-population-perspective"><span class="header-section-number">2.5</span> Finite sample vs super-population perspective</a></li>
+  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">2.6</span> Useful resources</a></li>
   </ul>
 </nav>
     </div>
@@ -197,7 +155,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></h1>
 </div>
 
 
@@ -212,11 +170,11 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="potential-outcomes" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="potential-outcomes"><span class="header-section-number">3.1</span> Potential outcomes</h2>
+<section id="potential-outcomes" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="potential-outcomes"><span class="header-section-number">2.1</span> Potential outcomes</h2>
 </section>
-<section id="causal-estimands" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="causal-estimands"><span class="header-section-number">3.2</span> Causal estimands</h2>
+<section id="causal-estimands" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="causal-estimands"><span class="header-section-number">2.2</span> Causal estimands</h2>
 <ul>
 <li><p>We have a population of units <span class="math inline">\(i = 1, \dots, N\)</span>.</p></li>
 <li><p>Each unit in the population can be exposed to one of two treatments, which are identical across units, so that <span class="math inline">\(\mathbb{T}_i = \mathbb{T} = \{0, 1\}\)</span>.</p></li>
@@ -258,8 +216,8 @@ Y_i(1) - Y_i(0).
 \tau = \tau(Y(0), Y(1), X, W)
 \]</span></p>
 </section>
-<section id="stable-unit-treatment-value-assumption-sutva" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">3.3</span> Stable unit treatment value assumption (SUTVA)</h2>
+<section id="stable-unit-treatment-value-assumption-sutva" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">2.3</span> Stable unit treatment value assumption (SUTVA)</h2>
 <ul>
 <li>SUTVA has two components: no interference, and no hidden variations of treatments.</li>
 </ul>
@@ -276,19 +234,19 @@ Y_i(1) - Y_i(0).
 <li><p>Essentially, both parts of SUTVA ensure the same thing: that <span class="math inline">\(Y_i(w)\)</span> is well defined: that it does not depend on the treatment status of other units, and that, for each possible treatment level, <span class="math inline">\(w\)</span>, the precise form of that treatment level is well specified.</p></li>
 </ul>
 </section>
-<section id="the-assignment-mechanism" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="the-assignment-mechanism"><span class="header-section-number">3.4</span> The assignment mechanism</h2>
+<section id="the-assignment-mechanism" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="the-assignment-mechanism"><span class="header-section-number">2.4</span> The assignment mechanism</h2>
 </section>
-<section id="finite-sample-vs-super-population-perspective" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="finite-sample-vs-super-population-perspective"><span class="header-section-number">3.5</span> Finite sample vs super-population perspective</h2>
+<section id="finite-sample-vs-super-population-perspective" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="finite-sample-vs-super-population-perspective"><span class="header-section-number">2.5</span> Finite sample vs super-population perspective</h2>
 <p>There are two ways to perform inference:</p>
 <ul>
 <li><p>When using the finite sample perspective, the <span class="math inline">\(N\)</span> units in the experiment sample are treated as the entire population of interest. Hence, there is no notion of randomisation due to sampling from a larger population, and all the randomness in the outcomes is due to randomness generates by the assignment mechanism.</p></li>
 <li><p>When treating the <span class="math inline">\(N\)</span> units in the sample as a random sample from a larger super-population, then in addition to randomness from the randomisation, we also have randomness from the sampling.</p></li>
 </ul>
 </section>
-<section id="useful-resources" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">3.6</span> Useful resources</h2>
+<section id="useful-resources" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">2.6</span> Useful resources</h2>
 
 
 </section>
@@ -529,13 +487,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/projection.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Projection</span></span>
+      <a href="../index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/fisher.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

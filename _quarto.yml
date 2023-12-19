@@ -8,7 +8,7 @@ book:
   chapters:
     - index.qmd
     # - chapters/projection.qmd
-    # - chapters/neyman_rubin_causal_model.qmd
+    - chapters/neyman_rubin_causal_model.qmd
     # - chapters/fisher.qmd
     # - chapters/neyman.qmd
     # - chapters/regression.qmd
@@ -16,9 +16,9 @@ book:
     # - chapters/cuped.qmd
     # - chapters/cupac.qmd
     # - chapters/variance-weighted-estimation.qmd
-    - chapters/network_experiments.qmd
-    - chapters/switchbacks.qmd
-    - chapters/quasi_experiments.qmd
+    # - chapters/network_experiments.qmd
+    # - chapters/switchbacks.qmd
+    # - chapters/quasi_experiments.qmd
     # - chapters/stats_for_business.qmd
     # - chapters/misc_topics.qmd
     # - part: introduction.qmd
