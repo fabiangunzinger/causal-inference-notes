@@ -45,6 +45,8 @@
 
 - Another challenge is ensuring you have enough effective sample size: if the outcomes of users within a group are correlated, then randomising at a level higher than the unit reduces effective sample size. In the extreme case, where within group correlation is perfect, your effective sample size is the number of groups, not the number of units. See 
 
+- How to adjust standard errors? See @abadie2023should and @de2024level
+
 
 #### Ego-clusters
 
