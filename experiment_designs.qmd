@@ -1,0 +1,16 @@
+# Experiment designs
+
+- See BIT blue book section 5
+
+- Classic RCT
+- Clustered
+- Step-wedge 
+- Wait-list design
+- Factorial design 
+
+
+## Choosing number of units per arm
+
+- Show that equal split maximises power (use power formula and show that power is max for p = 1-p )
+
+- 

@@ -5,41 +5,10 @@
 - @bojinov2020importance have a useful decision tree: is the question of interest descriptive, predictive, or causal in nature? If causal, can you run an experiment? If not, use a QE approach.
 
 
-## What QE method to use?
+## QE methods overview tabls
 
-- Complete with stuff from Quizlet and lit
+- Complete once notes on methods are drafted
 
-| Method                    	| Assumptions (*key)                       	| Requirements                                	| Examples                                     	| Other 	|
-|---------------------------	|------------------------------------------	|---------------------------------------------	|----------------------------------------------	|-------	|
-| Regression                	| No omitted variables                     	| All relevant covariates                     	|                                              	|       	|
-| Matching                  	| No unobserved heterogeneity              	| All relevant covariates                     	| Opportunity sizing making field mandatory    	|       	|
-| Panel data                	| No time-varying unobserved heterogeneity 	| Panel data                                  	| Effect of clicking like button on engagement 	|       	|
-| IV                        	| Valid and informative instrument         	| Instrument                                  	|                                              	|       	|
-| Regression discontinuity  	| Exogenous cutoff in forcing variable     	| Forcing variable with exogenous cutoff      	|                                              	|       	|
-| Difference-in-differences 	| Parallel trends                          	| Comparison group with parallel pre-trend    	| Pricing study                                	|       	|
-| Synthetic control         	|                                          	| Comparison groups to form synthetic control 	| Pricing study                                	|       	|
-| Interrupted time-series   	|                                          	|                                             	|                                              	|       	|
-
-
-
-
-## Stages of QE study
-
-- Based on @stuart2010matching
-
-- Overall goal is to create a dataset that mimics data from a randomised experiment as closely as possibe. Hence, to create data where treatment and control groups are as similar as possible on all observable covariates so that the only difference between them is the treatment.
-
-- Design stage (with matching in mind, but holds more generally for synthetic control, regression discontinuity, diff in diff):
-
-    - Define "similarity" between treatment and control group
-
-    - Select similar control group based on above definition
-
-    - Validate similarity between treatment and control
-
-- Analysis stage
-
-    - Analyse the data
-
-
-
+| Method | Assumptions | Data requirements | Comparison group |  Power  | Other |
+|--- |--- |--- |--- |--- | --- |
+| Matching | ... | ... | ... | ... | ... |

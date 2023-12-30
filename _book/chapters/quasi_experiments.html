@@ -50,7 +50,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../chapters/references.html" rel="next">
-<link href="../chapters/switchbacks.html" rel="prev">
+<link href="../chapters/metrics.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -126,14 +126,14 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
+  <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/switchbacks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span></a>
+  <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -159,8 +159,7 @@ div.csl-indent {
    
   <ul>
   <li><a href="#how-to-decide-when-to-use-qes-in-practice" id="toc-how-to-decide-when-to-use-qes-in-practice" class="nav-link active" data-scroll-target="#how-to-decide-when-to-use-qes-in-practice"><span class="header-section-number">4.1</span> How to decide when to use QEs in practice?</a></li>
-  <li><a href="#what-qe-method-to-use" id="toc-what-qe-method-to-use" class="nav-link" data-scroll-target="#what-qe-method-to-use"><span class="header-section-number">4.2</span> What QE method to use?</a></li>
-  <li><a href="#stages-of-qe-study" id="toc-stages-of-qe-study" class="nav-link" data-scroll-target="#stages-of-qe-study"><span class="header-section-number">4.3</span> Stages of QE study</a></li>
+  <li><a href="#qe-methods-overview-tabls" id="toc-qe-methods-overview-tabls" class="nav-link" data-scroll-target="#qe-methods-overview-tabls"><span class="header-section-number">4.2</span> QE methods overview tabls</a></li>
   </ul>
 </nav>
     </div>
@@ -190,112 +189,46 @@ div.csl-indent {
 <li><span class="citation" data-cites="bojinov2020importance">Bojinov, Chen, and Liu (<a href="references.html#ref-bojinov2020importance" role="doc-biblioref">2020</a>)</span> have a useful decision tree: is the question of interest descriptive, predictive, or causal in nature? If causal, can you run an experiment? If not, use a QE approach.</li>
 </ul>
 </section>
-<section id="what-qe-method-to-use" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="what-qe-method-to-use"><span class="header-section-number">4.2</span> What QE method to use?</h2>
+<section id="qe-methods-overview-tabls" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="qe-methods-overview-tabls"><span class="header-section-number">4.2</span> QE methods overview tabls</h2>
 <ul>
-<li>Complete with stuff from Quizlet and lit</li>
+<li>Complete once notes on methods are drafted</li>
 </ul>
 <table class="table">
 <colgroup>
 <col style="width: 16%">
-<col style="width: 25%">
-<col style="width: 26%">
-<col style="width: 27%">
-<col style="width: 4%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Method</th>
-<th>Assumptions (*key)</th>
-<th>Requirements</th>
-<th>Examples</th>
+<th>Assumptions</th>
+<th>Data requirements</th>
+<th>Comparison group</th>
+<th>Power</th>
 <th>Other</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Regression</td>
-<td>No omitted variables</td>
-<td>All relevant covariates</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
 <td>Matching</td>
-<td>No unobserved heterogeneity</td>
-<td>All relevant covariates</td>
-<td>Opportunity sizing making field mandatory</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Panel data</td>
-<td>No time-varying unobserved heterogeneity</td>
-<td>Panel data</td>
-<td>Effect of clicking like button on engagement</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>IV</td>
-<td>Valid and informative instrument</td>
-<td>Instrument</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Regression discontinuity</td>
-<td>Exogenous cutoff in forcing variable</td>
-<td>Forcing variable with exogenous cutoff</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Difference-in-differences</td>
-<td>Parallel trends</td>
-<td>Comparison group with parallel pre-trend</td>
-<td>Pricing study</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Synthetic control</td>
-<td></td>
-<td>Comparison groups to form synthetic control</td>
-<td>Pricing study</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Interrupted time-series</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="stages-of-qe-study" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="stages-of-qe-study"><span class="header-section-number">4.3</span> Stages of QE study</h2>
-<ul>
-<li><p>Based on <span class="citation" data-cites="stuart2010matching">Stuart (<a href="references.html#ref-stuart2010matching" role="doc-biblioref">2010</a>)</span></p></li>
-<li><p>Overall goal is to create a dataset that mimics data from a randomised experiment as closely as possibe. Hence, to create data where treatment and control groups are as similar as possible on all observable covariates so that the only difference between them is the treatment.</p></li>
-<li><p>Design stage (with matching in mind, but holds more generally for synthetic control, regression discontinuity, diff in diff):</p>
-<ul>
-<li><p>Define “similarity” between treatment and control group</p></li>
-<li><p>Select similar control group based on above definition</p></li>
-<li><p>Validate similarity between treatment and control</p></li>
-</ul></li>
-<li><p>Analysis stage</p>
-<ul>
-<li>Analyse the data</li>
-</ul></li>
-</ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-bojinov2020importance" class="csl-entry" role="listitem">
 Bojinov, Iavor, Albert Chen, and Min Liu. 2020. <span>“The Importance of Being Causal.”</span> <em>Harvard Data Science Review</em> 2 (3): 6.
-</div>
-<div id="ref-stuart2010matching" class="csl-entry" role="listitem">
-Stuart, Elizabeth A. 2010. <span>“Matching Methods for Causal Inference: A Review and a Look Forward.”</span> <em>Statistical Science: A Review Journal of the Institute of Mathematical Statistics</em> 25 (1): 1.
 </div>
 </div>
 </section>
@@ -536,8 +469,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/switchbacks.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span>
+      <a href="../chapters/metrics.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metrics</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

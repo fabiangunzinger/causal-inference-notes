@@ -1,0 +1,4 @@
+# Multiple-hypothesis corrections
+
+- See BIT blue book 4.3 for nice explanation of BH
+

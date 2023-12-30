@@ -79,6 +79,10 @@ If $x$ is uncorrelated with the treatment assignment then $\beta = \beta_1$, so 
 
 
 
+## Other methods
+
+- [Variance Reduction Using In-Experiment Data: Efficient and Targeted Online Measurement for Sparse and Delayed Outcomes](https://alexdeng.github.io/public/files/kdd2023-inexp.pdf)
+
 
 ## Useful resources
 

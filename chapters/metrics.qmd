@@ -1,57 +1,47 @@
 # Metrics
 
-The choice of metrics to consider when evaluating an experiment is not trivial. In field experiments, collecting data can be very costly, which puts an automatic limit to the number of metrics collected. In online experiments, the number of metrics we could look at is vast.
+## Why good metrics matter
+
+- Good metrics ensure that everyone works towards the same goal in a way that is reliable and transparent -- they ensure coherence across the company.
+
+- Good metrics increase the probability that our evaluations detect a change if there is one -- they have high sensitivity.
 
 
+## Types of metric -- by use
 
-## Notes on rodden2010measuring 
+**North Star metric**
+- Company wide, directly aligned with mission, the one metric that best represents how company creates value for its customers
+- Amazon example: avg monthly purchases per user
 
-- Key challenge in CHI is creation of user-experience metrics based on large-scale data.
+**Primary metrics / Overall evaluation criterion (OEC)**
+- Capture goal of particular team/product/initiative/service and help it move towards the North Star
+- This metric will change over time as the service matures and as it becomes more closely aligned/correlated with the North Star
+- Example for Amazon buyer focused team: number of high-quality sellers that join platform per month.
+- This is very similar or even identical to what Kohavi et al call the Overall Evaluation Criterion (OEC)
 
-- Traditional PULSE metrics (Page views, Uptime, Latency, Seven-day active users, Earnings) are useful and related to user-experience, but limited because they are indirect and can be ambiguous (are more page views a sign of an increase in engagement or in confusion?) and provide limited insight (seven-day active users shows user-base volume but nothing about product commitment)
+**Supporting metrics**
+- Indicators that the primary or NS metric are moving in the right direction (particularly useful as leading indicators)
+- Amazon example: emails sent to high-quality sellers, emails opened, etc.
 
-- Authors propose HEART metrics (Happiness, Engagement, Adoption, Retention, Task success) to complement traditional metrics and remedy their shortcomings.
+**Guardrail metrics**:
+- Ensure that improvements in primary metrics don't come at the cost of quality/experience/something else -- basically to avoid unintended consequences
+- Amazon example: average number of purchases per day (to check that influx of sellers doesn't lead to paralysis for buysers)
+- @deng2016data argue that the main feature of a good guardrail metric should be directionality, so that we can be sure that if we get a signal, it points in the right direction in terms of user experience
 
-- Happiness
-  - Measured using bipolar scale in-product survey
-  - Shows that users liked redesign of personalised homepage after initial dip (also shows value of dynamic treatment effects)
-
-- Engagement
-  - E.g. number of visits per user per week
-  - Helped Gmail team see proportion of users who visited more than 5 times per week.
-
-Adoption and retention
-  - E.g. how many new accounts created (adoption), how many users from seven-day active users 3 weeks ago are still in that set (retention).
-  - Helped Google Finance team distinguish between new and recurring users during 2008 meltdown.
-
-Task success
-  - E.g. progress in optimal path (signup)
-  - Helped Google maps team see that users could adopt search to single-box so they could drop double-box version.
-
-Overall process
-- Define Goals for feature (e.g. improve efficiency)
-- Define Signals (fewer undos or erases)
-- Define Metrics (average number of undos per session)
+**Debug metrics**:
+- @deng2016data mention debug metrics as a way to get additional informaiton about the movement of our primary metrics.
+- They can be useful when showing the individual components of combo metrics, or the numerator and denominator of ratio metrics.
 
 
+## Types of online metrics -- by "nature"
 
-## Types of metrics
+Based on @deng2016data
 
-- Northstar -- company wide, directly aligned with mission, the one metric that best represents how company creates value for its customers
+- Type 1: Business Report Driven Metrics: Business report driven metrics, like Revenue per User and Monthly Active Users, focus on long-term goals of online services. These metrics are vital for business assessments but are less actionable for short-term product improvements. For example, improving search results in a service like Bing might decrease short-term revenue per user, highlighting the need for longer-term experimentation to truly assess impacts.
 
-    - Amazon example: avg monthly purchases per user
+- Type 2: Simple Heuristic Based Metrics: Simple heuristic based metrics, such as Click-Through Rate and user activity counts, offer direct insights into user interaction with online services. While actionable, they can be misleading in terms of user experience and business goals. For instance, higher CTR due to misleading content can negatively impact user experience and, subsequently, the service's market share. These metrics are suitable for early-stage services but may not align with real user experience improvements in more mature stages.
 
-- Primary -- capture goal of particular team/product/initiative
-
-    - Amazon buyer focused team: number of high-quality sellers that join platform per month.
-
-- Supporting/Tracking/Input -- indicators that the primary or NS metric are moving in the right direction (particularly useful as leading indicators)
-
-  - Amazon example: emails sent to HQ sellers, emails opened, 
-
-- Guardrail: ensures that improvements in primary metrics don't come at the cost of quality/experience/something else -- basically to avoid unintended consequences
-
-    - Amazon example: average number of purchases per day (to check that influx of sellers doesn't lead to paralysis for buysers)
+- Type 3: User-Behavior-Driven Metrics: User-behavior-driven metrics, derived from user satisfaction and frustration models, aim to directly measure user experience and its impact on long-term service success. They are complex, involving detailed analysis of user behavior, like considering both clicks and dwell time for assessing search satisfaction. These metrics are sensitive and actionable for agile experiments, offering a more nuanced understanding of user interaction than simpler metrics.
 
 
 ## What makes a good Metric
@@ -63,14 +53,55 @@ Overall process
 - Not gameable (violate Goodhart's law)
 
 
-## How to select metrics
+## Developing good metrics
 
-- NSM and primary based on main company/product goal, focus on criteria above
+- @deng2016data recommend using two criteria to evaluate the quality of a metric: directionality and sensitivity. Directionality requires that a move of the metric in one direction consistently captures the direction of the user experience. In practice, the direction of a metric, such as queries per user can be ambiguous. Sensitivity requires that the metric picks up changes in the user experience such that we can identify it as part of an experiment. We can think of them as the direction and the size of a vector: the more directly it points towards the North Star, and the closer it gets, the better. These two criteria also allow us to qualitatively compare different metrics and decide which one(s) to use as our OEC.
 
-- Support and guardrails trickier. Use AAAERRR Framework
+- @deng2016data propose two ways to evalute directionality and sensitivity. First, we can use a validation corpus: a collection of prior experiments for which we know the effect on user experience, and which we can then use to test sensitivity and directionality of our metrics. The second, if no validation corpus is available, is degeneration experiments, whereby we deliberately degenerate the user experence in a way that is acceptable and doesn't harm long-term user experience, and then measure directionality and sensitivity of the metrics.
+
+## Understanding metric sensitivity
+
+- @deng2016data point out that detecting a treatment effect has two components:
+
+$$
+P(\text{detecting treatment effect on the metric}) = P(H_1) \times P(p \leq \alpha | H_1) 
+$$
+
+- $P(H_1)$ is the probability the movement probability -- the probability that the metric moves
+
+- $P(p \leq \alpha | H_1)$ is power
+
+- The authors point out that understanding which component produces a lack of sensitivity is crucial. Because if it's movement probability, we might need a different metric, whereas with a lack of power, variance reduction might help.
+
+- Examples for metrics with low movement probability might be "number of sessions per user" for a search engine, since daily search needs are limited, and changing user engagement is difficult in the short-term. An example for a metric with low power is "Revenue per user", due to very high variance.
 
 
-## AAAERRR
+
+
+
+
+
+
+## Frameworks for defining Metrics
+
+### AARRR
+The pirate metrics (summary [here](https://500hats.typepad.com/500blogs/2007/09/startup-metrics.html), slides [here](https://www.slideshare.net/dmc500hats/startup-metrics-for-pirates-long-version))
+
+- Acquisition: user comes to site from various channels
+
+- Activation: user has good experience on first visit 
+
+- Retention: user comes back to site
+
+- Referral: user likes site enough to recommend it to someone
+
+- Revenue: user conducts some monetisation behaviour 
+
+![AARRR example conversion metrics. Source: 500hats.typepad.com/500blogs/2007/09/startup-metrics.html](inputs/aarrr-example-conv-metrics.png)
+
+
+### AAAERRR
+An extension of the pirate metrics.
 
 - Awareness (how many aware of product)
 
@@ -88,10 +119,16 @@ Overall process
 
 
 
-todo
 
 
-- Look at Spotify confidence
+
+## How to select metrics
+
+- NSM and primary based on main company/product goal, focus on criteria above
+
+- Support and guardrails trickier. Use AAAERRR Framework
+
+- To ensure coherence across all workstreams in a company, metrics used at all levels have to contribute to the same overall goal, which is captured by the company's North Star.
 
 - Primary metric something that directly captures what you wanna improve? Guardrails general health metrics you don't want to go down (e.g. revenue, conversion)? Based on Kohavi anecdote below
 
@@ -136,6 +173,37 @@ Guardrail metrics
 
 - Selecting the wrong metric can lead to misleading results. @kohavi2012trusworthy provide a memorable example from an experiment at Bing: the experiment increased revenue by user because search results were poorer, leading users to make more searches and lead them to click on more adds. This is good in the short-term. But in the long term, users will surely get frustrated by the poorer search results. A better metric would have been one that directly captures the quality of the search results, such as sessions per user. Lesson: have a primary metric that directly captures the thing you want to improve. Use higher level-metrics such as revenue as guardrails.
 
+## Combining metrics into a signal 
+
+
+## Notes on rodden2010measuring 
+
+- Key challenge in CHI is creation of user-experience metrics based on large-scale data.
+
+- Traditional PULSE metrics (Page views, Uptime, Latency, Seven-day active users, Earnings) are useful and related to user-experience, but limited because they are indirect and can be ambiguous (are more page views a sign of an increase in engagement or in confusion?) and provide limited insight (seven-day active users shows user-base volume but nothing about product commitment)
+
+- Authors propose HEART metrics (Happiness, Engagement, Adoption, Retention, Task success) to complement traditional metrics and remedy their shortcomings.
+
+- Happiness
+  - Measured using bipolar scale in-product survey
+  - Shows that users liked redesign of personalised homepage after initial dip (also shows value of dynamic treatment effects)
+
+- Engagement
+  - E.g. number of visits per user per week
+  - Helped Gmail team see proportion of users who visited more than 5 times per week.
+
+Adoption and retention
+  - E.g. how many new accounts created (adoption), how many users from seven-day active users 3 weeks ago are still in that set (retention).
+  - Helped Google Finance team distinguish between new and recurring users during 2008 meltdown.
+
+Task success
+  - E.g. progress in optimal path (signup)
+  - Helped Google maps team see that users could adopt search to single-box so they could drop double-box version.
+
+Overall process
+- Define Goals for feature (e.g. improve efficiency)
+- Define Signals (fewer undos or erases)
+- Define Metrics (average number of undos per session)
 
 
 

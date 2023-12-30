@@ -7,43 +7,43 @@ book:
   date: "9/28/2023"
   chapters:
     - index.qmd
+
+    # Math foundations
     # - chapters/projection.qmd
+
+    # Statistics foundations
+    # - chapters/regression.qmd
+    # - chapters/fwl.qmd
+
+    # Causal inference foundations
+    # - chapters/epistemology.qmd
+    # - chapters/ethics.qmd
+    # - chapters/fundamental_problem.qmd
     - chapters/neyman_rubin_causal_model.qmd
     # - chapters/fisher.qmd
     # - chapters/neyman.qmd
-    # - chapters/regression.qmd
+    # - chapters/dags.qmd
+
+    # Experiments in practice
+    # - chapters/experiment_designs.qmd
+    # - chapters/stats_for_business.qmd
     # - chapters/variance_reduction.qmd
     # - chapters/cuped.qmd
     # - chapters/cupac.qmd
     # - chapters/variance-weighted-estimation.qmd
     # - chapters/network_experiments.qmd
     # - chapters/switchbacks.qmd
+    - chapters/metrics.qmd
+
+    # Quasi-experiments in practice
     # - chapters/quasi_experiments.qmd
-    # - chapters/stats_for_business.qmd
+    # - chapters/matching.qmd
+    # - chapters/regression_discontinuity.qmd
+
+    # Misc.
+    # - chapters/practical_issues.qmd
+    # - chapters/multiple_hypothesis_correction.qmd
     # - chapters/misc_topics.qmd
-    # - part: introduction.qmd
-    #   chapters:
-    #     - chapters/epistemology.qmd
-    #     - chapters/ethics.qmd
-    #     - chapters/fundamental_problem.qmd
-    
-    # - part: fundamentals.qmd
-    #   chapters:
-
-    #     - chapters/dags.qmd
-    #     - chapters/statistics.qmd
-    #     - chapters/projection.qmd
-    #     - chapters/fwl.qmd
-    
-    # - part: chapters/experiments.qmd
-    #   chapters:
-    #     - chapters/practical_issues.qmd
-
-    # - part: chapters/quasi_experiments.qmd
-    #   chapters:
-    #     - chapters/matching.qmd
-    #     - chapters/regression_discontinuity.qmd
-
     # - chapters/useful_resources.qmd
     - chapters/references.qmd
 
