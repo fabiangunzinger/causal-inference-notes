@@ -158,7 +158,7 @@ div.csl-indent {
   <li><a href="#types-of-metric-by-use" id="toc-types-of-metric-by-use" class="nav-link" data-scroll-target="#types-of-metric-by-use"><span class="header-section-number">3.2</span> Types of metric – by use</a></li>
   <li><a href="#types-of-online-metrics-by-nature" id="toc-types-of-online-metrics-by-nature" class="nav-link" data-scroll-target="#types-of-online-metrics-by-nature"><span class="header-section-number">3.3</span> Types of online metrics – by “nature”</a></li>
   <li><a href="#what-makes-a-good-metric" id="toc-what-makes-a-good-metric" class="nav-link" data-scroll-target="#what-makes-a-good-metric"><span class="header-section-number">3.4</span> What makes a good Metric</a></li>
-  <li><a href="#developing-good-metrics" id="toc-developing-good-metrics" class="nav-link" data-scroll-target="#developing-good-metrics"><span class="header-section-number">3.5</span> Developing good metrics</a></li>
+  <li><a href="#developing-and-evaluating-good-metrics" id="toc-developing-and-evaluating-good-metrics" class="nav-link" data-scroll-target="#developing-and-evaluating-good-metrics"><span class="header-section-number">3.5</span> Developing and evaluating good metrics</a></li>
   <li><a href="#understanding-metric-sensitivity" id="toc-understanding-metric-sensitivity" class="nav-link" data-scroll-target="#understanding-metric-sensitivity"><span class="header-section-number">3.6</span> Understanding metric sensitivity</a></li>
   <li><a href="#frameworks-for-defining-metrics" id="toc-frameworks-for-defining-metrics" class="nav-link" data-scroll-target="#frameworks-for-defining-metrics"><span class="header-section-number">3.7</span> Frameworks for defining Metrics</a>
   <ul class="collapse">
@@ -229,9 +229,16 @@ div.csl-indent {
 <li>Not gameable (violate Goodhart’s law)</li>
 </ul>
 </section>
-<section id="developing-good-metrics" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="developing-good-metrics"><span class="header-section-number">3.5</span> Developing good metrics</h2>
+<section id="developing-and-evaluating-good-metrics" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="developing-and-evaluating-good-metrics"><span class="header-section-number">3.5</span> Developing and evaluating good metrics</h2>
 <ul>
+<li><p><span class="citation" data-cites="deng2016data">Deng and Shi (<a href="references.html#ref-deng2016data" role="doc-biblioref">2016</a>)</span> suggest a three-step process to develop user-behaviour-driven metrics:</p>
+<ol type="1">
+<li><p>Formulate a hypothesis based on a simple model of user behaviour (e.g.&nbsp;social network users who like, comment, and share more have a better user-experience)</p></li>
+<li><p>Conduct user studies to create labelled data against which the original model can be tested (e.g.&nbsp;conduct user surveys and test whether users who like, comment, and share more report a better experience)</p></li>
+<li><p>Design online metrics based on insights from step 2 and assess their directionality and sensitivity as discussed below (e.g.&nbsp;create a metric called “meaningful engagement” and test whether it has high directionality and sensitivity in past experiments)</p></li>
+</ol>
+<p>In doing this, remember to:</p></li>
 <li><p><span class="citation" data-cites="deng2016data">Deng and Shi (<a href="references.html#ref-deng2016data" role="doc-biblioref">2016</a>)</span> recommend using two criteria to evaluate the quality of a metric: directionality and sensitivity. Directionality requires that a move of the metric in one direction consistently captures the direction of the user experience. In practice, the direction of a metric, such as queries per user can be ambiguous. Sensitivity requires that the metric picks up changes in the user experience such that we can identify it as part of an experiment. We can think of them as the direction and the size of a vector: the more directly it points towards the North Star, and the closer it gets, the better. These two criteria also allow us to qualitatively compare different metrics and decide which one(s) to use as our OEC.</p></li>
 <li><p><span class="citation" data-cites="deng2016data">Deng and Shi (<a href="references.html#ref-deng2016data" role="doc-biblioref">2016</a>)</span> propose two ways to evalute directionality and sensitivity. First, we can use a validation corpus: a collection of prior experiments for which we know the effect on user experience, and which we can then use to test sensitivity and directionality of our metrics. The second, if no validation corpus is available, is degeneration experiments, whereby we deliberately degenerate the user experence in a way that is acceptable and doesn’t harm long-term user experience, and then measure directionality and sensitivity of the metrics.</p></li>
 </ul>
@@ -244,6 +251,12 @@ div.csl-indent {
 <p><span class="math display">\[
 P(\text{detecting treatment effect on the metric}) = P(H_1) \times P(p \leq \alpha | H_1)
 \]</span></p>
+<ul>
+<li><p><span class="math inline">\(P(H_1)\)</span> is the probability the movement probability – the probability that the metric moves</p></li>
+<li><p><span class="math inline">\(P(p \leq \alpha | H_1)\)</span> is power</p></li>
+<li><p>The authors point out that understanding which component produces a lack of sensitivity is crucial. Because if it’s movement probability, we might need a different metric, whereas with a lack of power, variance reduction might help.</p></li>
+<li><p>Examples for metrics with low movement probability might be “number of sessions per user” for a search engine, since daily search needs are limited, and changing user engagement is difficult in the short-term. An example for a metric with low power is “Revenue per user”, due to very high variance.</p></li>
+</ul>
 </section>
 <section id="frameworks-for-defining-metrics" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="frameworks-for-defining-metrics"><span class="header-section-number">3.7</span> Frameworks for defining Metrics</h2>
