@@ -2,6 +2,10 @@
 
 There are a lot of things that can impact the degree to which online experiments are useful.
 
+todo:
+- Look at @kohavi2009controlled and @kohavi2007practical (a shorter version of the former)
+
+
 
 ## Budget effects in Ads
 
