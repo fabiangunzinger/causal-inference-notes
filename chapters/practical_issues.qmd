@@ -3,7 +3,21 @@
 There are a lot of things that can impact the degree to which online experiments are useful.
 
 todo:
+- Recast these issues in terms of threads to internal and external validity
 - Look at @kohavi2009controlled and @kohavi2007practical (a shorter version of the former)
+
+
+## Internal validity
+
+- Ensures that the results from the experiment are correct for the context at hand (i.e. there are no mistakes in randomisation or treatment administration)
+
+## External validity
+
+- Ensures that the results from the experiment generalise to other contexts (i.e. other time periods, other regions, other user groups)
+
+
+
+
 
 
 
@@ -24,11 +38,20 @@ todo:
 - The other type is within a single experiment, in the context where there are different types of units in an online marketplace and where treatment units cannibalise demand of control units becaues they compete both for the same fixed stock of resources of the other type of unit in the marketplace.
 
 
+## Day-of-week effects
+
+- See below
+
+
 ## Seasonality
 
 - Seasonality comes in many forms: day of week effects, week of year effects, season effects, holiday effects, etc.
 
-- The challenge is that, potentially, user behaviour might differ on certain days or over certain time periods. Whether it is really a problem depends on the context. One aspect that is often forgotten here is that seasonality, first and foremost, is about a shift in levels -- activity on LinkedIn might go down during the summer months. What we usually want to measure, however, is the difference between treatment and control units. Hence, if you don't have reason to believe that the effect of the treatment is different during a particular season (e.g. because you think it's additive), then seasonality might not be a problem for you.
+- The challenge is that, potentially, user behaviour might differ on certain days or over certain time periods either because we get different users or because users change their behaviour.
+
+- Whether it is really a problem depends on the context. One aspect that is often forgotten here is that seasonality, first and foremost, is about a shift in levels -- activity on LinkedIn might go down during the summer months. What we usually want to measure, however, is the difference between treatment and control units. Hence, if you don't have reason to believe that the effect of the treatment is different during a particular season (e.g. because you think it's additive), then seasonality might not be a problem for you.
+
+- Having said that, it's actually quite likely that with either different users or different behaviour by the same users, users might react differently to featore on different days. So it really is a thread to external validity, and we thus should usually care about it.
 
 - Solution: design your experiment so as to take seasonality into account. E.g. run your experiment for at least one week to account for day of week effects (that's generally a good idea), don't run crucial experiments during the holiday season or on major holidays or discard data from such periods, etc. 
 

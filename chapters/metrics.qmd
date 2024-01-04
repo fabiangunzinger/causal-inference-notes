@@ -53,9 +53,12 @@ Different contributions in the literature and different companies use different 
 
 - Guardrails that protect the business ensure that improving one part of the platform don't come at the cost of quality/experience/something else -- they basically try to guard against unintended consequences
 
+  - Latency would be an example
+
 - @deng2016data argue that the main feature of a good guardrail metric should be directionality, so that we can be sure that if we get a signal, it points in the right direction in terms of user experience (in contrast to debug metrics, which should have good sensitivity)
 
 - Amazon example: average number of purchases per day (to check that influx of sellers doesn't lead to paralysis for buysers)
+
 
 
 ### Other metrics

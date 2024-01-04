@@ -23,16 +23,15 @@ book:
     # - chapters/ethics.qmd
     # - chapters/fundamental_problem.qmd
     - chapters/neyman_rubin_causal_model.qmd
-    - chapters/fisher.qmd
-    - chapters/neyman.qmd
+    # - chapters/fisher.qmd
+    # - chapters/neyman.qmd
+    # - chapters/regression_for_experiments.qmd
     # - chapters/dags.qmd
 
     # Experiments in practice
     # - chapters/experiment_designs.qmd
     - chapters/end_to_end_example.qmd
-
     - chapters/metrics.qmd
-
     # - chapters/variance_reduction.qmd
     # - chapters/cuped.qmd
     # - chapters/network_experiments.qmd

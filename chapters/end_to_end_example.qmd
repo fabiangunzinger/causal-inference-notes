@@ -3,7 +3,7 @@
 For now, this is heavily based on Chapter 2 in @kohavi2020trustworthy.
 
 
-## Before launch
+## Pre-design
 
 Define the proposed change
 
@@ -14,7 +14,7 @@ Define the proposed change
 
 Define how you'd implement the change
 
-- We use painted door approach
+- We use painted door approach, and design two different treatment (one with additional field, one with popup)
 
 
 Define your goal metric (OEC)
@@ -28,6 +28,7 @@ Define your goal metric (OEC)
   - Power (indicator has lower variance than revenue and thus higher power)
 
 - See @sec-metrics for more details
+
 
 Decide which users to focus on 
 
@@ -43,9 +44,31 @@ Formulate hypothesis
 - General template: "[proposed change] will [hypothesised effect] on [OEC] for [selected sample]".
 
 
-Decide on statistical significance level and desired level of power
+Decide on statistical significance level, desired level of power, and MDE
 
-- We use 0.05 and 0.8
+- They are the key parameters to our experiment
+
+- We use conventioal values of 0.05 and 0.8 for stat sifnificance and power, and 1 percent change for MDE.
+
+- To determine MDE, consider
+
+  - Cost of launching the change
+
+    - Cost of fully building out feature (can be 0 when fully built out for experiment or high if we use painted door)
+
+    - Cost of maintaining new code (new code has higher bugs, may increase code complexity and maintenance)
+
+    - Other costs: e.g. does CPU utilization increase?
+
+- To determine significance level and power, consider:
+
+  - Cost of not launching positive feature vs cost of launching harmful feature
+
+  - How long will feature be in effect?
+
+  - How widely will it be deployed?
+
+  - How many users will see it (i.e. where in funnel is it?)
 
 
 Decide on the MDE 
@@ -59,6 +82,142 @@ Decide on the MDE
   - Size of service (the larger, the smaller a change still generates a lot of revenue)
 
   - Cost of implementing/maintaining the feature (e.g. feature development, code maintenance, etc.)
+
+
+
+
+
+
+## Experiment design
+
+Decide on randomisation
+
+  - We use users
+
+Decide on target population
+
+  - We target all users
+
+  - Could target only users in some countries or other subgroups
+
+
+Decide on variant split
+
+- We use 34/33/33 split
+
+- Generally, equal proportions have highest power
+
+- But if we have many treatments, allocating more users to control is advisable (describe why)
+
+
+Decide experiment size (number of unique units)
+
+  - We want 80 percent power to detect at least a 1 percent change in revenue per user -- we'll use a power analysis to determine required size.
+
+  - Factors that determine length
+
+    - High vs low variance metric (e.g. binary has higher power due to lower variance)
+
+    - MDES
+
+    - Significance level
+
+  - Other factors to consider
+
+    - How save is experiment? If risky, ramp-up more slowly
+
+    - Do we need to share traffic with other experiments?
+
+Decide experiment duration
+
+  - We'll make sure to run the experiment for at least a week to guard against day-of-week effects, and we'll check for novely and learning effects and run the experiment for longer if needed
+
+  - Factors to consider
+
+    - More units generally leads to higher power (unless with cumulative metrics such as counts where variance increases with duration), though in a concave way -- this is related to size requirement above
+
+    - Day of week effect (run for at least a week)
+
+    - Seasonality
+
+      - Need to ensure results not driven by reasonality in any of the places experiment is run
+
+      - One aspect of external validity (in terms of time)
+
+    - Novelty and learning effects (run experiment for longer until we see stable effects)
+
+## Running experiment
+
+- We need
+
+  - Instrumentation (lots of how users behave on the site and what experiment variant they were assigned to)
+
+  - Infrastructure to implement experiment (feature flagging and variant assignment)
+
+## Interpreting results
+
+- Sanity checks
+
+  - Before looking at results, we check guardrail and invariant metrics to be confident about internal validity
+
+  - Trust-related guardrails
+
+    - SRM
+
+  - Organisational guardrails
+
+    - E.g. latency
+
+- Experiment results
+
+  - We find that both treatments significantly reduce revenue per user
+
+  - Digging shows that it's because of fewer checkouts (we could see that by having indicator and revenue conditional on spend as debug metrics)
+
+## Decision making
+
+- Adding coupon field reduces revenue per user by 7 percent
+
+- Hence, marketing campaign of coupons would not only have to cover campaign costs, but also reduction due to additional coupon field
+
+- Marketing study found that sending coupons increases revenue per user by about 3 percent
+
+- Hence, we won't run the campaign
+
+Different hypothetical cases:
+
+- Neither statistically nor practically significant
+
+  - Iterate or abandon
+
+- Statistically and practically significant
+
+  - Launch
+
+- Stat sig but not practically sig
+
+  - Benefits don't outweigh costs (or else practical sig boundary would be lower) -- don't launch
+
+- Not stat or practically significant
+
+  - Try to rerun/run for longer to get more power
+  - If need to, launch if statsig and point estimate is also practically sig but with ci beyond practically sig boundary
+
+
+
+- Case 4:
+
+  - Not enough data to draw conclusion
+  - Run follow up test with higher power -- run for longer
+
+- Case 5:
+
+  - Repeat with more power if possible -- run for longer
+
+- Case 6:
+
+  - Run for longer to get more power
+  - Launch would be reasonable, if you can't wait
 
 
 
