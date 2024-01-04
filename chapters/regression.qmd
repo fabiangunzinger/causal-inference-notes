@@ -1,5 +1,12 @@
 # Regression
 
+todo:
+- Use DAaidson and MacKinnon metrics book: nicely separates mechanics of ols with statistical interpretation. Do the same. 
+
+
+
+
+
 Linear regression is by far the most often used method to estimate relationships between outcomes and explanatory variables in applied econometrics and -- probably -- all of applied social science. In this article I want to to two things: define the related terminology that is often used but not defined (OLS, linear equation, etc.) and -- mainly -- explain a less frequently taught and understand way to think about linear regression, that in terms of its linear algebra.
 
 There are, of course, a lot of very good resources on linear regression and OLS, and I list my favourite ones at the bottom. But none of them quite tie everything together in the way I was looking for.
@@ -199,3 +206,10 @@ X'X\beta &= X'y \\
 \end{aligned}
 $$
 which gets us to the same result but in more steps.
+
+
+## Misc. questions
+
+### Normality of error term
+
+- Why should error term be normal? One way to think about it is that we can think of the error term as the sum of many independent error terms. By the CLT, the distribution of the error term is then well approximated by a normal distribution. (In the CLT language, an error term for a single unit in the sample is a single sum of independent variables, and the distribution of all these errors can be approximated by a normal distribution)

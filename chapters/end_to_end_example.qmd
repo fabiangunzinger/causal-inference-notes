@@ -1,0 +1,66 @@
+# End-to-end example
+
+For now, this is heavily based on Chapter 2 in @kohavi2020trustworthy.
+
+
+## Before launch
+
+Define the proposed change
+
+- We want to test the effect of adding coupon field to the checkout page
+
+- For ideas and possible concerns of certain ideas, you should check the literature and have a look at [GoodUI](https://goodui.org)
+
+
+Define how you'd implement the change
+
+- We use painted door approach
+
+
+Define your goal metric (OEC)
+
+- Revenue per user
+
+- In general, this depends on:
+
+  - What precisely we want to test (e.g. does feature hurt amount spent or whether user abandons checkout?)
+
+  - Power (indicator has lower variance than revenue and thus higher power)
+
+- See @sec-metrics for more details
+
+Decide which users to focus on 
+
+- We use users who start the checkout process (i.e. land on the checkout page)
+
+- In general, it's useful to think about the user experience funnel, and then think about where in the funnel the change is visible. More often than not, this is the relevant step at which to trigger users into the experiment.
+
+
+Formulate hypothesis
+
+- "Adding a coupon field to the checkout page will reduce revenue per user for users who start the checkout process".
+
+- General template: "[proposed change] will [hypothesised effect] on [OEC] for [selected sample]".
+
+
+Decide on statistical significance level and desired level of power
+
+- We use 0.05 and 0.8
+
+
+Decide on the MDE 
+
+- We use a 1 percent change
+
+- This is equivalent to asking "what counts as a practically relevant change?" To answer that, consider:
+
+  - Maturity of service (the more mature, the smaller a change can be expected)
+
+  - Size of service (the larger, the smaller a change still generates a lot of revenue)
+
+  - Cost of implementing/maintaining the feature (e.g. feature development, code maintenance, etc.)
+
+
+
+
+

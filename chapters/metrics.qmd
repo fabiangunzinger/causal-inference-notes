@@ -1,4 +1,4 @@
-# Metrics
+# Metrics {#sec-metrics}
 
 
 ## Why good metrics matter
@@ -32,7 +32,7 @@ Different contributions in the literature and different companies use different 
 
 ### Driver metrics
 
-- Also "surrogate metrics", "predictive metrics"
+- Also "surrogate metrics", "predictive metrics", "proxy metrics"
 
 - Capture the movement of factors contributing to the organisation's goal
 
@@ -113,6 +113,8 @@ Different contributions in the literature and different companies use different 
 
 ## Developing and evaluating good metrics
 
+- See @richardson2023pareto for a great paper on how to develop ideal proxy metrics (i.e. metrics that aren't directly the North Star). @duan2021online also seems promising. 
+
 - @deng2016data suggest a three-step process to develop user-behaviour-driven metrics:
 
   1. Formulate a hypothesis based on a simple model of user behaviour (e.g. social network users who like, comment, and share more have a better user-experience)
@@ -158,6 +160,8 @@ $$
 
 - Examples for metrics with low movement probability might be "number of sessions per user" for a search engine, since daily search needs are limited, and changing user engagement is difficult in the short-term. An example for a metric with low power is "Revenue per user", due to very high variance.
 
+- See also @richardson2023pareto for a better exposition of the entire point.
+
 
 ## How to select metrics
 
@@ -171,8 +175,9 @@ $$
 
 - @bojinov2020importance mention that LinkedIn has four company wide success metrics and many product specific ones. So, presumably we'd use company-wide ones as guardrails. Question is, what are good product-specific metrics? Good in the sense that they have a positive impact on business-wide metrics? Can use causal inference (e.g. IV) to test effect (see section 2.1 in @bojinov2020importance)
 
+- Have an OEC that directly captuers what you want to measure. Selecting the wrong metric can lead to misleading results. @kohavi2012trusworthy provide a memorable example from an experiment at Bing: the experiment increased revenue by user because search results were poorer, leading users to make more searches and lead them to click on more adds. This is good in the short-term. But in the long term, users will surely get frustrated by the poorer search results. A better metric would have been one that directly captures the quality of the search results, such as sessions per user. Lesson: have an OEC that directly captures the thing you want to improve, and use higher level-metrics such as revenue as guardrails.
 
-
+- Normalise metrics by sample size. E.g. user revenue per user rather than variant-level revenue (since the latter is dependent on number of users, which can vary between variants).
 
 ## Frameworks for creating driver metrics
 
@@ -291,12 +296,6 @@ Guardrail metrics
 
 
 
-## Misc issues
-
-- Selecting the wrong metric can lead to misleading results. @kohavi2012trusworthy provide a memorable example from an experiment at Bing: the experiment increased revenue by user because search results were poorer, leading users to make more searches and lead them to click on more adds. This is good in the short-term. But in the long term, users will surely get frustrated by the poorer search results. A better metric would have been one that directly captures the quality of the search results, such as sessions per user. Lesson: have a primary metric that directly captures the thing you want to improve. Use higher level-metrics such as revenue as guardrails.
-
-
-
 
 
 ## Other metric taxonomies 
@@ -312,72 +311,3 @@ Guardrail metrics
   - Type 3: User-Behavior-Driven Metrics: User-behavior-driven metrics, derived from user satisfaction and frustration models, aim to directly measure user experience and its impact on long-term service success. They are complex, involving detailed analysis of user behavior, like considering both clicks and dwell time for assessing search satisfaction. These metrics are sensitive and actionable for agile experiments, offering a more nuanced understanding of user interaction than simpler metrics.
 
 
-## Case study: Meta
-
-Metrics in quarterly earnings presentation:
-
-- Advertising revenue (by user geography) -- $33bn
-- Revenue (by user geography) -- $34bn
-- Net income -- $11bn
-
-- Family daily active people (DAP) -- 3.1bn
-- Family monthly active people (MAP) -- 3.9bn
-- DAP / MAP -- 80%
-
-- Family average revenue per person per quarter (ARPP) -- $8.7
-
-- Facebook daily active users (DAU) -- 2bn
-- Facebook monthly active users (MAU) -- 3bn
-- DAU / MAU -- 68%
-- Facebook average regenue per user (ARPU) -- $11
-
-
-Definitions: 
-- We define a daily active person (DAP) as a registered and logged-in user of Facebook, Instagram, Messenger, and/or WhatsApp (collectively, our "Family" of products) who visited at least one of these Family products through a mobile device application or using a web or mobile browser on a given day.
-
-- We define average revenue per person (ARPP) as our total revenue during a given quarter, divided by the average of the number of MAP at the beginning and end of the quarter. While ARPP includes all sources of revenue, the number of MAP used in this calculation only includes users of our Family products as described in the definition of MAP in the previous slide.
-
-Limitations of key data
-
-- The numbers for our key metrics are calculated using internal company data based on the activity of user accounts.
-
-- We report our estimates of the numbers of our daily active people (DAP), monthly active people (MAP), and average revenue per person (ARPP) (collectively, our "Family metrics") based on the activity of users who visited at least one of Facebook, Instagram, Messenger, and WhatsApp (collectively, our "Family" of products) during the applicable period of measurement.
-
-- We have historically reported the numbers of our daily active users (DAUs), monthly active users (MAUs), and average revenue per user (ARPU) (collectively, our "Facebook metrics") based on user activity only on Facebook and Messenger and not on our other products.
-
-- We believe our Family metrics better reflect the size of our community and the fact that many people are using more than one of our products. As a result, over time we intend to report our Family metrics as key metrics in place of DAUs, MAUs, and ARPU.
-
-- While these numbers are based on what we believe to be reasonable estimates of our user base for the applicable period of measurement, there are inherent challenges in measuring usage of our products across large online and mobile populations around the world. The methodologies used to measure these metrics require significant judgment and are also susceptible to algorithm or other technical errors. In addition, we are continually seeking to improve our estimates of our user base, and such estimates may change due to improvements or changes in our methodology. We regularly review our processes for calculating these metrics, and from time to time we discover inaccuracies in our metrics or make adjustments to improve their accuracy, which can result in adjustments to our historical metrics. Our ability to recalculate our historical metrics may be impacted by data limitations or other factors that require us to apply different methodologies for such adjustments. We generally do not intend to update previously disclosed Family metrics for any such inaccuracies or adjustments that are within the error margins disclosed below.
-
-- In addition, our Family metrics and Facebook metrics estimates will differ from estimates published by third parties due to differences in methodology or other factors such as data limitations or other challenges in measuring large online and mobile populations. For example, our Family metrics estimates in some instances exceed estimates of addressable online and mobile populations that are based on data published by third parties.
-
-Family Metrics
-
-- Many people in our community have user accounts on more than one of our products, and some people have multiple user accounts within an individual product. Accordingly, for our Family metrics, we do not seek to count the total number of user accounts across our products because we believe that would not reflect the actual size of our community. Rather, our Family metrics represent our estimates of the number of unique people using at least one of Facebook, Instagram, Messenger, and WhatsApp.
-
-- We do not require people to use a common identifier or link their accounts to use multiple products in our Family, and therefore must seek to attribute multiple user accounts within and across products to individual people. To calculate these metrics, we rely upon complex techniques, algorithms and machine learning models that seek to count the individual people behind user accounts, including by matching multiple user accounts within an individual product and across multiple products when we believe they are attributable to a single person, and counting such group of accounts as one person. These techniques and models require significant judgment, are subject to data and other limitations discussed below, and inherently are subject to statistical variances and uncertainties.
-
-- We estimate the potential error in our Family metrics primarily based on user survey data, which itself is subject to error as well. While we expect the error margin for our Family metrics to vary from period to period, we estimate that such margin generally will be approximately 3% of our worldwide MAP.
-
-- At our scale, it is very difficult to attribute multiple user accounts within and across products to individual people, and it is possible that the actual numbers of unique people using our products may vary significantly from our estimates, potentially beyond our estimated error margins. As a result, it is also possible that our Family metrics may indicate changes or trends in user numbers that do not match actual changes or trends.
-
-- To calculate our estimates of Family DAP and MAP, we currently use a series of machine learning models that are developed based on internal reviews of limited samples of user accounts and calibrated against user survey data. We apply significant judgment in designing these models and calculating these estimates. For example, to match user accounts within individual products and across multiple products, we use data signals such as similar device information, IP addresses, and user names. We also calibrate our models against data from periodic user surveys of varying sizes and frequency across our products, which are inherently subject to error. The timing and results of such user surveys have in the past contributed, and may in the future contribute, to changes in our reported Family metrics from period to period. In addition, our data limitations may affect our understanding of certain details of our business and increase the risk of error for our Family metrics estimates. Our techniques and models rely on a variety of data signals from different products, and we rely on more limited data signals for some products compared to others. For example, as a result of limited visibility into encrypted products, we have fewer data signals from WhatsApp user accounts and primarily rely on phone numbers and device information to match WhatsApp user accounts with accounts on our other products. Similarly, although Messenger Kids users are included in our Family metrics, we do not seek to match their accounts with accounts on our other applications for purposes of calculating DAP and MAP. 
-
-- Any loss of access to data signals we use in our process for calculating Family metrics, whether as a result of our own product decisions, actions by third-party browser or mobile platforms, regulatory or legislative requirements, or other factors, also may impact the stability or accuracy of our reported Family metrics, as well as our ability to report these metrics at all.
-
-- Our estimates of Family metrics also may change as our methodologies evolve, including through the application of new data signals or technologies, product changes, or other improvements in our user surveys, algorithms, or machine learning that may improve our ability to match accounts within and across our products or otherwise evaluate the broad population of our users. In addition, such evolution may allow us to identify previously undetected violating accounts (as defined below).
-
-- We regularly evaluate our Family metrics to estimate the percentage of our MAP consisting solely of "violating" accounts. We define "violating" accounts as accounts which we believe are intended to be used for purposes that violate our terms of service, including bots and spam. In the fourth quarter of 2022, we estimated that approximately 3% of our worldwide MAP consisted solely of violating accounts. Such estimation is based on an internal review of a limited sample of accounts, and we apply significant judgment in making this determination. For example, we look for account information and behaviors associated with Facebook and Instagram accounts that appear to be inauthentic to the reviewers, but we have limited visibility into WhatsApp user activity due to encryption. In addition, if we believe an individual person has one or more violating accounts, we do not include such person in our violating accounts estimation as long as we believe they have one account that does not constitute a violating account. From time to time, we disable certain user accounts, make product changes, or take other actions to reduce the number of violating accounts among our users, which may also reduce our DAP and MAP estimates in a particular period. We intend to disclose our estimates of the percentage of our MAP consisting solely of violating accounts on an annual basis. Violating accounts are very difficult to measure at our scale, and it is possible that the actual number of violating accounts may vary significantly from our estimates.
-
-- The numbers of Family DAP and MAP discussed in this presentation, as well as ARPP, do not include users on our other products, unless they would otherwise qualify as DAP or MAP, respectively, based on their other activities on our Family products.
-
-Facebook Metrics
-
-- We regularly evaluate our Facebook metrics to estimate the number of "duplicate" and "false" accounts among our MAUs. A duplicate account is one that a user maintains in addition to his or her principal account. We divide "false" accounts into two categories: (1) user-misclassified accounts, where users have created personal profiles for a business, organization, or non- human entity such as a pet (such entities are permitted on Facebook using a Page rather than a personal profile under our terms of service); and (2) violating accounts, which represent user profiles that we believe are intended to be used for purposes that violate our terms of service, such as bots and spam. The estimates of duplicate and false accounts are based on an internal review of a limited sample of accounts, and we apply significant judgment in making this determination. For example, to identify duplicate accounts we use data signals such as identical IP addresses and similar user names, and to identify false accounts we look for names that appear to be fake or other behavior that appears inauthentic to the reviewers. Any loss of access to data signals we use in this process, whether as a result of our own product decisions, actions by third-party browser or mobile platforms, regulatory or legislative requirements, or other factors, also may impact the stability or accuracy of our estimates of duplicate and false accounts. Our estimates also may change as our methodologies evolve, including through the application of new data signals or technologies or product changes that may allow us to identify previously undetected duplicate or false accounts and may improve our ability to evaluate a broader population of our users. Duplicate and false accounts are very difficult to measure at our scale, and it is possible that the actual number of duplicate and false accounts may vary significantly from our estimates.
-
-- In the fourth quarter of 2022, we estimated that duplicate accounts may have represented approximately 11% of our worldwide MAUs. We believe the percentage of duplicate accounts is meaningfully higher in developing markets such as the Philippines and Vietnam, as compared to more developed markets. In the fourth quarter of 2022, we estimated that false accounts may have represented approximately 4-5% of our worldwide MAUs. Our estimation of false accounts can vary as a result of episodic spikes in the creation of such accounts, which we have seen originate more frequently in specific countries such as Indonesia, Nigeria, and Vietnam. From time to time, we disable certain user accounts, make product changes, or take other actions to reduce the number of duplicate or false accounts among our users, which may also reduce our DAU and MAU estimates in a particular period. We intend to disclose our estimates of the number of duplicate and false accounts among our MAUs on an annual basis.
-
-- The numbers of DAUs and MAUs discussed in this presentation, as well as ARPU, do not include users on Instagram, WhatsApp, or our other products, unless they would otherwise qualify as DAUs or MAUs, respectively, based on their other activities on Facebook.
-
-User Geography
-- Our data regarding the geographic location of our users is estimated based on a number of factors, such as the user's IP address and self-disclosed location. These factors may not always accurately reflect the user's actual location. For example, a user may appear to be accessing Facebook from the location of the proxy server that the user connects to rather than from the user's actual location. The methodologies used to measure our metrics are also susceptible to algorithm or other technical errors, and our estimates for revenue by user location and revenue by user device are also affected by these factors.

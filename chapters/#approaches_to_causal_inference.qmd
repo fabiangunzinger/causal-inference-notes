@@ -1,4 +1,12 @@
-# Directed Acyclic Graphs
+# Approaches to causal inference
+
+## Neyman-Rubin
+
+- See separate section
+
+## Perl
+
+## Directed Acyclic Graphs
 
 - A *confounder* is a variable that simultaneously affects the treatment indicator and the outcome (the same as an omitted variable).
 - A *collider* is a variable that is simultaneously affected by the treatment indicator and the outcome.
@@ -7,3 +15,8 @@
   - Control for the confounder if it is available
   - Have a collider on the backdoor path
 - An analysis design meets the *backdoor criterion* if all backdoor paths are closed, in which case we have isolated a causal effect.
+
+
+## Thought experiments
+
+- See @heckman2023econometric

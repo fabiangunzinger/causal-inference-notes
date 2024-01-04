@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 5&nbsp; Neyman’s repeated sampling approach</title>
+<title>Causal inference notes - 6&nbsp; End-to-end example</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -49,8 +49,8 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/references.html" rel="next">
-<link href="../chapters/fisher.html" rel="prev">
+<link href="../chapters/metrics.html" rel="next">
+<link href="../chapters/neyman.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,8 +81,6 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -95,7 +93,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/neyman.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman's repeated sampling approach</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/end_to_end_example.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">End-to-end example</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -146,8 +144,20 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/end_to_end_example.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">End-to-end example</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -166,9 +176,7 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#estimator-for-the-average-treatment-effect" id="toc-estimator-for-the-average-treatment-effect" class="nav-link active" data-scroll-target="#estimator-for-the-average-treatment-effect"><span class="header-section-number">5.1</span> Estimator for the average treatment effect</a></li>
-  <li><a href="#estimator-of-the-variance-of-the-average-treatment-effect-estimator" id="toc-estimator-of-the-variance-of-the-average-treatment-effect-estimator" class="nav-link" data-scroll-target="#estimator-of-the-variance-of-the-average-treatment-effect-estimator"><span class="header-section-number">5.2</span> Estimator of the variance of the average treatment effect estimator</a></li>
-  <li><a href="#further-notes" id="toc-further-notes" class="nav-link" data-scroll-target="#further-notes"><span class="header-section-number">5.3</span> Further notes</a></li>
+  <li><a href="#before-launch" id="toc-before-launch" class="nav-link active" data-scroll-target="#before-launch"><span class="header-section-number">6.1</span> Before launch</a></li>
   </ul>
 </nav>
     </div>
@@ -177,7 +185,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-neyman" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">End-to-end example</span></h1>
 </div>
 
 
@@ -192,83 +200,59 @@ div.csl-indent {
 
 </header>
 
-<p>These are my notes from reading chapter 6 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>.</p>
-<section id="estimator-for-the-average-treatment-effect" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="estimator-for-the-average-treatment-effect"><span class="header-section-number">5.1</span> Estimator for the average treatment effect</h2>
-<p>In a setting with <span class="math inline">\(i = 1, \dots, N\)</span> units with fixed potential outcomes <span class="math inline">\(Y_i(0)\)</span> and <span class="math inline">\(Y_i(1)\)</span>, where the only random component is the random assignment, captured by the assignment vector <span class="math inline">\(W\)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, Neyman was interested in the population average treatment effect:</p>
-<p><span id="eq-neyman-estimand"><span class="math display">\[
-\tau_{fs} = \frac{1}{N}\sum_{i=1}^N \left(Y_i(1) - Y_i(0)\right) = \bar{Y}(1) - \bar{Y}(0),
-\tag{5.1}\]</span></span></p>
-<p>where</p>
-<p><span class="math display">\[
-\bar{Y}(1) = \frac{1}{N}\sum_{i=1}^N Y_i(1) \qquad \bar{Y}(0) = \frac{1}{N}\sum_{i=1}^N Y_i(0).
-\]</span></p>
-<p>This is our estimand of interest.</p>
-<p>If we have data from a completely randomised experiment in which <span class="math inline">\(N_t = \sum_{i=1}^N W_i\)</span> units are allocated to treatment and the remaining <span class="math inline">\(N_c = \sum_{i=1}^N (1-W_i)\)</span> to control, then a natural estimator for <a href="#eq-neyman-estimand">Equation&nbsp;<span>5.1</span></a> is the difference in the averages of the treatment and control units:</p>
-<p><span id="eq-neyman-estimator"><span class="math display">\[
-\hat{\tau}^{dif} = \bar{Y}_t^{obs} - \bar{Y}_c^{obs}.
-\tag{5.2}\]</span></span></p>
-<p>where</p>
-<p><span class="math display">\[
-\bar{Y}_t^{obs} = \frac{1}{N_t}\sum_{i:W_i=1} Y_i^{obs} \qquad \bar{Y}_c^{obs} = \frac{1}{N_c}\sum_{i:W_i=0} Y_i^{obs}
-\]</span></p>
-<p>This estimator is unbiased (see Proof of Theorem 6.1 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span> for the proof).</p>
-</section>
-<section id="estimator-of-the-variance-of-the-average-treatment-effect-estimator" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="estimator-of-the-variance-of-the-average-treatment-effect-estimator"><span class="header-section-number">5.2</span> Estimator of the variance of the average treatment effect estimator</h2>
-<p>Estimating the variance of the average treatment estimator <span class="math inline">\(\hat{tau}^{dif}\)</span> involves two steps:</p>
-<ol type="1">
-<li><p>Derive the sampling variance of the estimator for the average treatment effect (i.e.&nbsp;for the estimator defined in <a href="#eq-neyman-estimator">Equation&nbsp;<span>5.2</span></a>).</p></li>
-<li><p>Develop estimators for this sampling variance.</p></li>
-</ol>
-<p>The sampling variance of <span class="math inline">\(\hat{\tau}^{dif}\)</span> is (see Theorem 6.2 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>):</p>
-<p><span id="eq-neyman-sampvar"><span class="math display">\[
-\mathbb{V}_W \left(\bar{Y}_t^{obs} - \bar{Y}_c^{obs}\right)
-= \frac{S_c^2}{N_c} + \frac{S_t^2}{N_t} - \frac{S_{ct}^2}{N},
-\tag{5.3}\]</span></span></p>
-<p>where:</p>
-<p>$$ <span class="math display">\[\begin{align}
-S_c^2 &amp;= \frac{1}{N - 1}\sum_{i=1}^{N}\left(Y_i(0) - \bar{Y}(0)\right)^2 \\
-
-S_t^2 &amp;= \frac{1}{N - 1}\sum_{i=1}^{N}\left(Y_i(1) - \bar{Y}(1)\right)^2 \\
-
-S_{ct}^2 &amp;= \frac{1}{N - 1}\sum_{i=1}^{N}\left(Y_i(1) - Y_i(0) - (\bar{Y}(1) - \bar{Y}(0))\right)^2 \\
-
-&amp;= \frac{1}{N - 1}\sum_{i=1}^{N}\left(Y_i(1) - Y_i(0) - \tau_{fs}\right)^2 \\
-\end{align}\]</span> $$</p>
-<p>If the unit level treatment effects <span class="math inline">\(Y_(1) - Y_i(0)\)</span> are constant, then the below is an unbiased estimator for the sampling variance (see Theorem 6.3 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>):</p>
-<p><span id="eq-neyman-sampvar-est"><span class="math display">\[
-\hat{\mathbb{V}}^{neyman} = \frac{s_c^2}{N_c} + \frac{s_t^2}{N_t},
-\tag{5.4}\]</span></span></p>
-<p>where:</p>
-<p><span class="math display">\[
-s_c^2 = \frac{1}{N_c - 1}\sum_{i:W_i=0}\left(Y_i(0) - \bar{Y}_c^{obs}\right)^2 \qquad s_t^2 = \frac{1}{N_t - 1}\sum_{i:W_i=1}\left(Y_i(1) - \bar{Y}_t^{obs}\right)^2
-\]</span></p>
-<p>There are other estimators, but <span class="math inline">\(\hat{\mathbb{V}}^{neyman}\)</span> is the most commonly used because:</p>
+<p>For now, this is heavily based on Chapter 2 in <span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="references.html#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span>.</p>
+<section id="before-launch" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="before-launch"><span class="header-section-number">6.1</span> Before launch</h2>
+<p>Define the proposed change</p>
 <ul>
-<li><p>It is conservative (because it ignores the last term in <a href="#eq-neyman-sampvar">Equation&nbsp;<span>5.3</span></a>)</p></li>
-<li><p>It is always an unbiased estimator of <a href="#eq-neyman-sampvar">Equation&nbsp;<span>5.3</span></a> under the super-population perspective</p></li>
+<li><p>We want to test the effect of adding coupon field to the checkout page</p></li>
+<li><p>For ideas and possible concerns of certain ideas, you should check the literature and have a look at <a href="https://goodui.org">GoodUI</a></p></li>
 </ul>
-</section>
-<section id="further-notes" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="further-notes"><span class="header-section-number">5.3</span> Further notes</h2>
+<p>Define how you’d implement the change</p>
 <ul>
-<li><p>The Neyman approach can incorporate discrete covariates by partitioning sample into subgroups, calculating subgroup treatment effects, and aggregating the subgroup treatment effects using a subgroup-size weighted average.</p></li>
-<li><p>However, it cannot handle cases where there are covariate values for which only treatment or control units are observed. In this case, we need to build a model for potential outcomes (e.g.&nbsp;by using regression analysis).</p></li>
+<li>We use painted door approach</li>
+</ul>
+<p>Define your goal metric (OEC)</p>
+<ul>
+<li><p>Revenue per user</p></li>
+<li><p>In general, this depends on:</p>
+<ul>
+<li><p>What precisely we want to test (e.g.&nbsp;does feature hurt amount spent or whether user abandons checkout?)</p></li>
+<li><p>Power (indicator has lower variance than revenue and thus higher power)</p></li>
+</ul></li>
+<li><p>See <span class="quarto-unresolved-ref">?sec-metrics</span></p></li>
+</ul>
+<p>Decide which users to focus on</p>
+<ul>
+<li><p>We use users who start the checkout process (i.e.&nbsp;land on the checkout page)</p></li>
+<li><p>In general, it’s useful to think about the user experience funnel, and then think about where in the funnel the change is visible. More often than not, this is the relevant step at which to trigger users into the experiment.</p></li>
+</ul>
+<p>Formulate hypothesis</p>
+<ul>
+<li><p>“Adding a coupon field to the checkout page will reduce revenue per user for users who start the checkout process”.</p></li>
+<li><p>General template: “[proposed change] will [hypothesised effect] on [OEC] for [selected sample]”.</p></li>
+</ul>
+<p>Decide on statistical significance level and desired level of power</p>
+<ul>
+<li>We use 0.05 and 0.8</li>
+</ul>
+<p>Decide on the MDE</p>
+<ul>
+<li><p>We use a 1 percent change</p></li>
+<li><p>This is equivalent to asking “what counts as a practically relevant change?” To answer that, consider:</p>
+<ul>
+<li><p>Maturity of service (the more mature, the smaller a change can be expected)</p></li>
+<li><p>Size of service (the larger, the smaller a change still generates a lot of revenue)</p></li>
+<li><p>Cost of implementing/maintaining the feature (e.g.&nbsp;feature development, code maintenance, etc.)</p></li>
+</ul></li>
 </ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
-<div id="ref-imbens2015causal" class="csl-entry" role="listitem">
-Imbens, Guido W, and Donald B Rubin. 2015. <em>Causal Inference in Statistics, Social, and Biomedical Sciences</em>. Cambridge University Press.
+<div id="ref-kohavi2020trustworthy" class="csl-entry" role="listitem">
+Kohavi, Ron, Diane Tang, and Ya Xu. 2020. <em>Trustworthy Online Controlled Experiments: A Practical Guide to a/b Testing</em>. Cambridge University Press.
 </div>
 </div>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>Note that this is the same setting as in <a href="../chapters/fisher.html">Fisher’s approach</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->
@@ -507,13 +491,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/fisher.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span>
+      <a href="../chapters/neyman.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/references.html" class="pagination-link">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/metrics.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Metrics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

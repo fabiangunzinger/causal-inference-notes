@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 3&nbsp; Metrics</title>
+<title>Causal inference notes - 7&nbsp; Metrics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -50,7 +50,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../chapters/references.html" rel="next">
-<link href="../chapters/neyman_rubin_causal_model.html" rel="prev">
+<link href="../chapters/end_to_end_example.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -95,7 +95,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/metrics.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metrics</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/metrics.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Metrics</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -128,14 +128,38 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/end_to_end_example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">End-to-end example</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -154,25 +178,36 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#why-good-metrics-matter" id="toc-why-good-metrics-matter" class="nav-link active" data-scroll-target="#why-good-metrics-matter"><span class="header-section-number">3.1</span> Why good metrics matter</a></li>
-  <li><a href="#metric-taxonomy" id="toc-metric-taxonomy" class="nav-link" data-scroll-target="#metric-taxonomy"><span class="header-section-number">3.2</span> Metric taxonomy</a></li>
-  <li><a href="#what-makes-a-good-metric" id="toc-what-makes-a-good-metric" class="nav-link" data-scroll-target="#what-makes-a-good-metric"><span class="header-section-number">3.3</span> What makes a good Metric</a></li>
-  <li><a href="#developing-and-evaluating-good-metrics" id="toc-developing-and-evaluating-good-metrics" class="nav-link" data-scroll-target="#developing-and-evaluating-good-metrics"><span class="header-section-number">3.4</span> Developing and evaluating good metrics</a></li>
-  <li><a href="#metrics-for-experimentation" id="toc-metrics-for-experimentation" class="nav-link" data-scroll-target="#metrics-for-experimentation"><span class="header-section-number">3.5</span> Metrics for experimentation</a></li>
-  <li><a href="#understanding-metric-sensitivity" id="toc-understanding-metric-sensitivity" class="nav-link" data-scroll-target="#understanding-metric-sensitivity"><span class="header-section-number">3.6</span> Understanding metric sensitivity</a></li>
-  <li><a href="#how-to-select-metrics" id="toc-how-to-select-metrics" class="nav-link" data-scroll-target="#how-to-select-metrics"><span class="header-section-number">3.7</span> How to select metrics</a></li>
-  <li><a href="#frameworks-for-creating-driver-metrics" id="toc-frameworks-for-creating-driver-metrics" class="nav-link" data-scroll-target="#frameworks-for-creating-driver-metrics"><span class="header-section-number">3.8</span> Frameworks for creating driver metrics</a>
+  <li><a href="#why-good-metrics-matter" id="toc-why-good-metrics-matter" class="nav-link active" data-scroll-target="#why-good-metrics-matter"><span class="header-section-number">7.1</span> Why good metrics matter</a></li>
+  <li><a href="#metric-taxonomy" id="toc-metric-taxonomy" class="nav-link" data-scroll-target="#metric-taxonomy"><span class="header-section-number">7.2</span> Metric taxonomy</a>
   <ul class="collapse">
-  <li><a href="#pirate-metrics-aarrr" id="toc-pirate-metrics-aarrr" class="nav-link" data-scroll-target="#pirate-metrics-aarrr"><span class="header-section-number">3.8.1</span> Pirate metrics (AARRR)</a></li>
-  <li><a href="#aaaerrr" id="toc-aaaerrr" class="nav-link" data-scroll-target="#aaaerrr"><span class="header-section-number">3.8.2</span> AAAERRR</a></li>
-  <li><a href="#pulse" id="toc-pulse" class="nav-link" data-scroll-target="#pulse"><span class="header-section-number">3.8.3</span> PULSE</a></li>
-  <li><a href="#heart" id="toc-heart" class="nav-link" data-scroll-target="#heart"><span class="header-section-number">3.8.4</span> HEART</a></li>
+  <li><a href="#goal-metrics" id="toc-goal-metrics" class="nav-link" data-scroll-target="#goal-metrics"><span class="header-section-number">7.2.1</span> Goal metrics</a></li>
+  <li><a href="#driver-metrics" id="toc-driver-metrics" class="nav-link" data-scroll-target="#driver-metrics"><span class="header-section-number">7.2.2</span> Driver metrics</a></li>
+  <li><a href="#guardrail-metrics" id="toc-guardrail-metrics" class="nav-link" data-scroll-target="#guardrail-metrics"><span class="header-section-number">7.2.3</span> Guardrail metrics</a></li>
+  <li><a href="#other-metrics" id="toc-other-metrics" class="nav-link" data-scroll-target="#other-metrics"><span class="header-section-number">7.2.4</span> Other metrics</a></li>
+  <li><a href="#metrics-at-different-levels-of-the-organisation" id="toc-metrics-at-different-levels-of-the-organisation" class="nav-link" data-scroll-target="#metrics-at-different-levels-of-the-organisation"><span class="header-section-number">7.2.5</span> Metrics at different levels of the organisation</a></li>
   </ul></li>
-  <li><a href="#common-metrics" id="toc-common-metrics" class="nav-link" data-scroll-target="#common-metrics"><span class="header-section-number">3.9</span> Common metrics</a></li>
-  <li><a href="#ways-to-think-about-metrics" id="toc-ways-to-think-about-metrics" class="nav-link" data-scroll-target="#ways-to-think-about-metrics"><span class="header-section-number">3.10</span> Ways to think about Metrics</a></li>
-  <li><a href="#misc-issues" id="toc-misc-issues" class="nav-link" data-scroll-target="#misc-issues"><span class="header-section-number">3.11</span> Misc issues</a></li>
-  <li><a href="#combining-metrics-into-a-signal" id="toc-combining-metrics-into-a-signal" class="nav-link" data-scroll-target="#combining-metrics-into-a-signal"><span class="header-section-number">3.12</span> Combining metrics into a signal</a></li>
-  <li><a href="#other-metric-taxonomies" id="toc-other-metric-taxonomies" class="nav-link" data-scroll-target="#other-metric-taxonomies"><span class="header-section-number">3.13</span> Other metric taxonomies</a></li>
+  <li><a href="#what-makes-a-good-metric" id="toc-what-makes-a-good-metric" class="nav-link" data-scroll-target="#what-makes-a-good-metric"><span class="header-section-number">7.3</span> What makes a good Metric</a>
+  <ul class="collapse">
+  <li><a href="#stedii" id="toc-stedii" class="nav-link" data-scroll-target="#stedii"><span class="header-section-number">7.3.1</span> STEDII</a></li>
+  <li><a href="#other-characteristics" id="toc-other-characteristics" class="nav-link" data-scroll-target="#other-characteristics"><span class="header-section-number">7.3.2</span> Other characteristics</a></li>
+  <li><a href="#different-priorities-for-different-metric-types" id="toc-different-priorities-for-different-metric-types" class="nav-link" data-scroll-target="#different-priorities-for-different-metric-types"><span class="header-section-number">7.3.3</span> Different priorities for different metric types</a></li>
+  </ul></li>
+  <li><a href="#developing-and-evaluating-good-metrics" id="toc-developing-and-evaluating-good-metrics" class="nav-link" data-scroll-target="#developing-and-evaluating-good-metrics"><span class="header-section-number">7.4</span> Developing and evaluating good metrics</a></li>
+  <li><a href="#combining-metrics-into-a-signal-creating-an-oec" id="toc-combining-metrics-into-a-signal-creating-an-oec" class="nav-link" data-scroll-target="#combining-metrics-into-a-signal-creating-an-oec"><span class="header-section-number">7.5</span> Combining metrics into a signal / creating an OEC</a></li>
+  <li><a href="#understanding-metric-sensitivity" id="toc-understanding-metric-sensitivity" class="nav-link" data-scroll-target="#understanding-metric-sensitivity"><span class="header-section-number">7.6</span> Understanding metric sensitivity</a></li>
+  <li><a href="#how-to-select-metrics" id="toc-how-to-select-metrics" class="nav-link" data-scroll-target="#how-to-select-metrics"><span class="header-section-number">7.7</span> How to select metrics</a></li>
+  <li><a href="#frameworks-for-creating-driver-metrics" id="toc-frameworks-for-creating-driver-metrics" class="nav-link" data-scroll-target="#frameworks-for-creating-driver-metrics"><span class="header-section-number">7.8</span> Frameworks for creating driver metrics</a>
+  <ul class="collapse">
+  <li><a href="#pirate-metrics-aarrr" id="toc-pirate-metrics-aarrr" class="nav-link" data-scroll-target="#pirate-metrics-aarrr"><span class="header-section-number">7.8.1</span> Pirate metrics (AARRR)</a></li>
+  <li><a href="#aaaerrr" id="toc-aaaerrr" class="nav-link" data-scroll-target="#aaaerrr"><span class="header-section-number">7.8.2</span> AAAERRR</a></li>
+  <li><a href="#pulse" id="toc-pulse" class="nav-link" data-scroll-target="#pulse"><span class="header-section-number">7.8.3</span> PULSE</a></li>
+  <li><a href="#heart" id="toc-heart" class="nav-link" data-scroll-target="#heart"><span class="header-section-number">7.8.4</span> HEART</a></li>
+  </ul></li>
+  <li><a href="#common-metrics" id="toc-common-metrics" class="nav-link" data-scroll-target="#common-metrics"><span class="header-section-number">7.9</span> Common metrics</a></li>
+  <li><a href="#ways-to-think-about-metrics" id="toc-ways-to-think-about-metrics" class="nav-link" data-scroll-target="#ways-to-think-about-metrics"><span class="header-section-number">7.10</span> Ways to think about Metrics</a></li>
+  <li><a href="#other-metric-taxonomies" id="toc-other-metric-taxonomies" class="nav-link" data-scroll-target="#other-metric-taxonomies"><span class="header-section-number">7.11</span> Other metric taxonomies</a></li>
+  <li><a href="#case-study-meta" id="toc-case-study-meta" class="nav-link" data-scroll-target="#case-study-meta"><span class="header-section-number">7.12</span> Case study: Meta</a></li>
   </ul>
 </nav>
     </div>
@@ -181,7 +216,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metrics</span></h1>
+<h1 class="title"><span id="sec-metrics" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Metrics</span></span></h1>
 </div>
 
 
@@ -196,18 +231,19 @@ div.csl-indent {
 
 </header>
 
-<section id="why-good-metrics-matter" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="why-good-metrics-matter"><span class="header-section-number">3.1</span> Why good metrics matter</h2>
+<section id="why-good-metrics-matter" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="why-good-metrics-matter"><span class="header-section-number">7.1</span> Why good metrics matter</h2>
 <ul>
 <li><p>Good metrics ensure that everyone works towards the same goal in a way that is reliable, transparent, and provides accountability – they ensure coherence across the company.</p></li>
 <li><p>Good metrics increase the probability that our evaluations detect a change if there is one – they have high sensitivity.</p></li>
 </ul>
 </section>
-<section id="metric-taxonomy" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="metric-taxonomy"><span class="header-section-number">3.2</span> Metric taxonomy</h2>
+<section id="metric-taxonomy" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="metric-taxonomy"><span class="header-section-number">7.2</span> Metric taxonomy</h2>
 <p>Different contributions in the literature and different companies use different ways to classify metrics. So so the same type of metrics will have different names and the same name will be used for different types of metrics across contexts. What matters is less the labels, but an understanding of the different functions metric can serve and how different types of metric relate to one another.</p>
 <p><span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="references.html#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span> classify metrics into goal metrics, driver metrics, and guardrail metrics. I find this useful and use it as the basis of how I think about metrics.</p>
-<p><strong>Goal metrics</strong></p>
+<section id="goal-metrics" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="goal-metrics"><span class="header-section-number">7.2.1</span> Goal metrics</h3>
 <ul>
 <li><p>Also “success metrics” or “North Star” metrics</p></li>
 <li><p>Directly aligned with the organisation’s mission and represents how it creates value for its customers</p></li>
@@ -216,7 +252,9 @@ div.csl-indent {
 <li><p>An organisation usually has only very few or even just one</p></li>
 <li><p>Examples: “average monthly purchases” for Amazon.</p></li>
 </ul>
-<p><strong>Driver metrics</strong></p>
+</section>
+<section id="driver-metrics" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="driver-metrics"><span class="header-section-number">7.2.2</span> Driver metrics</h3>
 <ul>
 <li><p>Also “surrogate metrics”, “predictive metrics”</p></li>
 <li><p>Capture the movement of factors contributing to the organisation’s goal</p></li>
@@ -225,7 +263,9 @@ div.csl-indent {
 <li><p>Will change over time as the service matures and as it becomes more closely aligned/correlated with the North Star</p></li>
 <li><p>Example for Amazon buyer focused team: number of high-quality sellers that join platform per month.</p></li>
 </ul>
-<p><strong>Guardrail metrics</strong></p>
+</section>
+<section id="guardrail-metrics" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="guardrail-metrics"><span class="header-section-number">7.2.3</span> Guardrail metrics</h3>
 <ul>
 <li><p><span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="references.html#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span> divide guardrails into two types: those protecting the business and those ensuring internal validity of experiment results</p></li>
 <li><p>The main guardrail to ensure internal validity is smaple ratio mismatch (SRM). Others are discussed in chapter 21 in <span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="references.html#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span></p></li>
@@ -233,7 +273,9 @@ div.csl-indent {
 <li><p><span class="citation" data-cites="deng2016data">Deng and Shi (<a href="references.html#ref-deng2016data" role="doc-biblioref">2016</a>)</span> argue that the main feature of a good guardrail metric should be directionality, so that we can be sure that if we get a signal, it points in the right direction in terms of user experience (in contrast to debug metrics, which should have good sensitivity)</p></li>
 <li><p>Amazon example: average number of purchases per day (to check that influx of sellers doesn’t lead to paralysis for buysers)</p></li>
 </ul>
-<p>There are also other useful metric types:</p>
+</section>
+<section id="other-metrics" class="level3" data-number="7.2.4">
+<h3 data-number="7.2.4" class="anchored" data-anchor-id="other-metrics"><span class="header-section-number">7.2.4</span> Other metrics</h3>
 <p><strong>Supporting metrics</strong></p>
 <ul>
 <li><p>Indicators that the primary or NS metric are moving in the right direction (particularly useful as leading indicators)</p></li>
@@ -245,18 +287,44 @@ div.csl-indent {
 <li><p>They can be useful when showing the individual components of combo metrics, or the numerator and denominator of ratio metrics.</p></li>
 </ul>
 </section>
-<section id="what-makes-a-good-metric" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="what-makes-a-good-metric"><span class="header-section-number">3.3</span> What makes a good Metric</h2>
+<section id="metrics-at-different-levels-of-the-organisation" class="level3" data-number="7.2.5">
+<h3 data-number="7.2.5" class="anchored" data-anchor-id="metrics-at-different-levels-of-the-organisation"><span class="header-section-number">7.2.5</span> Metrics at different levels of the organisation</h3>
 <ul>
-<li>Meaningful (reflect goals of company, product)</li>
-<li>Measurable ()</li>
-<li>Moveable (with low delay)</li>
-<li>Interpretable (not too complicated, easy to communicate and understand)</li>
-<li>Not gameable (violate Goodhart’s law)</li>
+<li><p>Above, I have defined goal, driver, and guardrail metrics in reference to the organisation.</p></li>
+<li><p>But they can be defined at each level within an organisation, too.</p></li>
+<li><p>The challenge is to make sure that definitions across metric types and organisation levels cohere.</p></li>
+<li><p>Figure 6.1 in <span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="references.html#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span> is a useful way to visualise this: it shows a large arrow containing many small arrows inside. This can represent goal metrics (large arrow) and driver metrics (small arrows) or organisational metrics (large arrows) and team metrics (small arrows). In each case, we want to make sure that the direction of the small arrows is as aligned as possible with the large arrow.</p></li>
 </ul>
 </section>
-<section id="developing-and-evaluating-good-metrics" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="developing-and-evaluating-good-metrics"><span class="header-section-number">3.4</span> Developing and evaluating good metrics</h2>
+</section>
+<section id="what-makes-a-good-metric" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="what-makes-a-good-metric"><span class="header-section-number">7.3</span> What makes a good Metric</h2>
+<section id="stedii" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="stedii"><span class="header-section-number">7.3.1</span> STEDII</h3>
+</section>
+<section id="other-characteristics" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="other-characteristics"><span class="header-section-number">7.3.2</span> Other characteristics</h3>
+<ul>
+<li><p>Meaningful (reflect goals of company, product)</p></li>
+<li><p>Measurable ()</p></li>
+<li><p>Moveable (with low delay)</p></li>
+<li><p>Interpretable (not too complicated, easy to communicate and understand)</p></li>
+<li><p>Not gameable (violate Goodhart’s law)</p></li>
+</ul>
+</section>
+<section id="different-priorities-for-different-metric-types" class="level3" data-number="7.3.3">
+<h3 data-number="7.3.3" class="anchored" data-anchor-id="different-priorities-for-different-metric-types"><span class="header-section-number">7.3.3</span> Different priorities for different metric types</h3>
+<ul>
+<li><p><span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="references.html#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span></p>
+<ul>
+<li>For goals: simple and stable</li>
+<li>For drivers: aligned with goal, actionable and relevant, sensitive, resistant to gaming</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="developing-and-evaluating-good-metrics" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="developing-and-evaluating-good-metrics"><span class="header-section-number">7.4</span> Developing and evaluating good metrics</h2>
 <ul>
 <li><p><span class="citation" data-cites="deng2016data">Deng and Shi (<a href="references.html#ref-deng2016data" role="doc-biblioref">2016</a>)</span> suggest a three-step process to develop user-behaviour-driven metrics:</p>
 <ol type="1">
@@ -277,11 +345,11 @@ div.csl-indent {
 </ul></li>
 </ul>
 </section>
-<section id="metrics-for-experimentation" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="metrics-for-experimentation"><span class="header-section-number">3.5</span> Metrics for experimentation</h2>
+<section id="combining-metrics-into-a-signal-creating-an-oec" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="combining-metrics-into-a-signal-creating-an-oec"><span class="header-section-number">7.5</span> Combining metrics into a signal / creating an OEC</h2>
 </section>
-<section id="understanding-metric-sensitivity" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="understanding-metric-sensitivity"><span class="header-section-number">3.6</span> Understanding metric sensitivity</h2>
+<section id="understanding-metric-sensitivity" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="understanding-metric-sensitivity"><span class="header-section-number">7.6</span> Understanding metric sensitivity</h2>
 <ul>
 <li><span class="citation" data-cites="deng2016data">Deng and Shi (<a href="references.html#ref-deng2016data" role="doc-biblioref">2016</a>)</span> point out that detecting a treatment effect has two components:</li>
 </ul>
@@ -295,21 +363,23 @@ P(\text{detecting treatment effect on the metric}) = P(H_1) \times P(p \leq \alp
 <li><p>Examples for metrics with low movement probability might be “number of sessions per user” for a search engine, since daily search needs are limited, and changing user engagement is difficult in the short-term. An example for a metric with low power is “Revenue per user”, due to very high variance.</p></li>
 </ul>
 </section>
-<section id="how-to-select-metrics" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="how-to-select-metrics"><span class="header-section-number">3.7</span> How to select metrics</h2>
+<section id="how-to-select-metrics" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="how-to-select-metrics"><span class="header-section-number">7.7</span> How to select metrics</h2>
 <ul>
 <li><p>NSM and primary based on main company/product goal, focus on criteria above</p></li>
 <li><p>Support and guardrails trickier. Use AAAERRR Framework</p></li>
 <li><p>To ensure coherence across all workstreams in a company, metrics used at all levels have to contribute to the same overall goal, which is captured by the company’s North Star.</p></li>
 <li><p>Primary metric something that directly captures what you wanna improve? Guardrails general health metrics you don’t want to go down (e.g.&nbsp;revenue, conversion)? Based on Kohavi anecdote below</p></li>
 <li><p><span class="citation" data-cites="bojinov2020importance">Bojinov, Chen, and Liu (<a href="references.html#ref-bojinov2020importance" role="doc-biblioref">2020</a>)</span> mention that LinkedIn has four company wide success metrics and many product specific ones. So, presumably we’d use company-wide ones as guardrails. Question is, what are good product-specific metrics? Good in the sense that they have a positive impact on business-wide metrics? Can use causal inference (e.g.&nbsp;IV) to test effect (see section 2.1 in <span class="citation" data-cites="bojinov2020importance">Bojinov, Chen, and Liu (<a href="references.html#ref-bojinov2020importance" role="doc-biblioref">2020</a>)</span>)</p></li>
+<li><p>Have an OEC that directly captuers what you want to measure. Selecting the wrong metric can lead to misleading results. <span class="citation" data-cites="kohavi2012trusworthy">(<a href="references.html#ref-kohavi2012trusworthy" role="doc-biblioref"><strong>kohavi2012trusworthy?</strong></a>)</span> provide a memorable example from an experiment at Bing: the experiment increased revenue by user because search results were poorer, leading users to make more searches and lead them to click on more adds. This is good in the short-term. But in the long term, users will surely get frustrated by the poorer search results. A better metric would have been one that directly captures the quality of the search results, such as sessions per user. Lesson: have an OEC that directly captures the thing you want to improve, and use higher level-metrics such as revenue as guardrails.</p></li>
+<li><p>Normalise metrics by sample size. E.g. user revenue per user rather than variant-level revenue (since the latter is dependent on number of users, which can vary between variants).</p></li>
 </ul>
 </section>
-<section id="frameworks-for-creating-driver-metrics" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="frameworks-for-creating-driver-metrics"><span class="header-section-number">3.8</span> Frameworks for creating driver metrics</h2>
+<section id="frameworks-for-creating-driver-metrics" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="frameworks-for-creating-driver-metrics"><span class="header-section-number">7.8</span> Frameworks for creating driver metrics</h2>
 <p>Driver metrics represent quantitative measures of the factors that drive an organisation’s success. The following frameworks help us think about those drivers of success.</p>
-<section id="pirate-metrics-aarrr" class="level3" data-number="3.8.1">
-<h3 data-number="3.8.1" class="anchored" data-anchor-id="pirate-metrics-aarrr"><span class="header-section-number">3.8.1</span> Pirate metrics (AARRR)</h3>
+<section id="pirate-metrics-aarrr" class="level3" data-number="7.8.1">
+<h3 data-number="7.8.1" class="anchored" data-anchor-id="pirate-metrics-aarrr"><span class="header-section-number">7.8.1</span> Pirate metrics (AARRR)</h3>
 <p>Developed by Dave McClure, the pirate metrics (summary <a href="https://500hats.typepad.com/500blogs/2007/09/startup-metrics.html">here</a>, slides <a href="https://www.slideshare.net/dmc500hats/startup-metrics-for-pirates-long-version">here</a>) classify driver metrics into:</p>
 <ul>
 <li><p>Acquisition (the user comes to our site from various channels)</p></li>
@@ -326,8 +396,8 @@ P(\text{detecting treatment effect on the metric}) = P(H_1) \times P(p \leq \alp
 </figure>
 </div>
 </section>
-<section id="aaaerrr" class="level3" data-number="3.8.2">
-<h3 data-number="3.8.2" class="anchored" data-anchor-id="aaaerrr"><span class="header-section-number">3.8.2</span> AAAERRR</h3>
+<section id="aaaerrr" class="level3" data-number="7.8.2">
+<h3 data-number="7.8.2" class="anchored" data-anchor-id="aaaerrr"><span class="header-section-number">7.8.2</span> AAAERRR</h3>
 <p>An extension of the pirate metrics.</p>
 <ul>
 <li><p>Awareness (how many aware of product)</p></li>
@@ -339,8 +409,8 @@ P(\text{detecting treatment effect on the metric}) = P(H_1) \times P(p \leq \alp
 <li><p>Referral (how many are becoming advocates)</p></li>
 </ul>
 </section>
-<section id="pulse" class="level3" data-number="3.8.3">
-<h3 data-number="3.8.3" class="anchored" data-anchor-id="pulse"><span class="header-section-number">3.8.3</span> PULSE</h3>
+<section id="pulse" class="level3" data-number="7.8.3">
+<h3 data-number="7.8.3" class="anchored" data-anchor-id="pulse"><span class="header-section-number">7.8.3</span> PULSE</h3>
 <ul>
 <li><p>Page views</p></li>
 <li><p>Uptime</p></li>
@@ -349,8 +419,8 @@ P(\text{detecting treatment effect on the metric}) = P(H_1) \times P(p \leq \alp
 <li><p>Earnings</p></li>
 </ul>
 </section>
-<section id="heart" class="level3" data-number="3.8.4">
-<h3 data-number="3.8.4" class="anchored" data-anchor-id="heart"><span class="header-section-number">3.8.4</span> HEART</h3>
+<section id="heart" class="level3" data-number="7.8.4">
+<h3 data-number="7.8.4" class="anchored" data-anchor-id="heart"><span class="header-section-number">7.8.4</span> HEART</h3>
 <ul>
 <li><p>Developed by <span class="citation" data-cites="rodden2010measuring">Rodden, Hutchinson, and Fu (<a href="references.html#ref-rodden2010measuring" role="doc-biblioref">2010</a>)</span>, the authors address shortcomings of the PULSE framework.</p></li>
 <li><p>Key challenge in CHI is creation of user-experience metrics based on large-scale data.</p></li>
@@ -379,8 +449,8 @@ P(\text{detecting treatment effect on the metric}) = P(H_1) \times P(p \leq \alp
 </ul>
 </section>
 </section>
-<section id="common-metrics" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="common-metrics"><span class="header-section-number">3.9</span> Common metrics</h2>
+<section id="common-metrics" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="common-metrics"><span class="header-section-number">7.9</span> Common metrics</h2>
 <ul>
 <li>Conversion rate</li>
 <li>Number of bookings</li>
@@ -404,8 +474,8 @@ P(\text{detecting treatment effect on the metric}) = P(H_1) \times P(p \leq \alp
 </ul>
 <p>Guardrail metrics - Bounce rate (proportion of site visitors who leave after seeing only the first page) - Cancellation rate -</p>
 </section>
-<section id="ways-to-think-about-metrics" class="level2" data-number="3.10">
-<h2 data-number="3.10" class="anchored" data-anchor-id="ways-to-think-about-metrics"><span class="header-section-number">3.10</span> Ways to think about Metrics</h2>
+<section id="ways-to-think-about-metrics" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="ways-to-think-about-metrics"><span class="header-section-number">7.10</span> Ways to think about Metrics</h2>
 <ul>
 <li>From Meta
 <ul>
@@ -415,17 +485,8 @@ P(\text{detecting treatment effect on the metric}) = P(H_1) \times P(p \leq \alp
 </ul></li>
 </ul>
 </section>
-<section id="misc-issues" class="level2" data-number="3.11">
-<h2 data-number="3.11" class="anchored" data-anchor-id="misc-issues"><span class="header-section-number">3.11</span> Misc issues</h2>
-<ul>
-<li>Selecting the wrong metric can lead to misleading results. <span class="citation" data-cites="kohavi2012trusworthy">(<a href="references.html#ref-kohavi2012trusworthy" role="doc-biblioref"><strong>kohavi2012trusworthy?</strong></a>)</span> provide a memorable example from an experiment at Bing: the experiment increased revenue by user because search results were poorer, leading users to make more searches and lead them to click on more adds. This is good in the short-term. But in the long term, users will surely get frustrated by the poorer search results. A better metric would have been one that directly captures the quality of the search results, such as sessions per user. Lesson: have a primary metric that directly captures the thing you want to improve. Use higher level-metrics such as revenue as guardrails.</li>
-</ul>
-</section>
-<section id="combining-metrics-into-a-signal" class="level2" data-number="3.12">
-<h2 data-number="3.12" class="anchored" data-anchor-id="combining-metrics-into-a-signal"><span class="header-section-number">3.12</span> Combining metrics into a signal</h2>
-</section>
-<section id="other-metric-taxonomies" class="level2" data-number="3.13">
-<h2 data-number="3.13" class="anchored" data-anchor-id="other-metric-taxonomies"><span class="header-section-number">3.13</span> Other metric taxonomies</h2>
+<section id="other-metric-taxonomies" class="level2" data-number="7.11">
+<h2 data-number="7.11" class="anchored" data-anchor-id="other-metric-taxonomies"><span class="header-section-number">7.11</span> Other metric taxonomies</h2>
 <p><strong>Business report vs heuristic vs user-behaviour</strong></p>
 <ul>
 <li><p><span class="citation" data-cites="deng2016data">Deng and Shi (<a href="references.html#ref-deng2016data" role="doc-biblioref">2016</a>)</span> use a different classification altogether:</p>
@@ -435,6 +496,55 @@ P(\text{detecting treatment effect on the metric}) = P(H_1) \times P(p \leq \alp
 <li><p>Type 3: User-Behavior-Driven Metrics: User-behavior-driven metrics, derived from user satisfaction and frustration models, aim to directly measure user experience and its impact on long-term service success. They are complex, involving detailed analysis of user behavior, like considering both clicks and dwell time for assessing search satisfaction. These metrics are sensitive and actionable for agile experiments, offering a more nuanced understanding of user interaction than simpler metrics.</p></li>
 </ul></li>
 </ul>
+</section>
+<section id="case-study-meta" class="level2" data-number="7.12">
+<h2 data-number="7.12" class="anchored" data-anchor-id="case-study-meta"><span class="header-section-number">7.12</span> Case study: Meta</h2>
+<p>Metrics in quarterly earnings presentation:</p>
+<ul>
+<li><p>Advertising revenue (by user geography) – $33bn</p></li>
+<li><p>Revenue (by user geography) – $34bn</p></li>
+<li><p>Net income – $11bn</p></li>
+<li><p>Family daily active people (DAP) – 3.1bn</p></li>
+<li><p>Family monthly active people (MAP) – 3.9bn</p></li>
+<li><p>DAP / MAP – 80%</p></li>
+<li><p>Family average revenue per person per quarter (ARPP) – $8.7</p></li>
+<li><p>Facebook daily active users (DAU) – 2bn</p></li>
+<li><p>Facebook monthly active users (MAU) – 3bn</p></li>
+<li><p>DAU / MAU – 68%</p></li>
+<li><p>Facebook average regenue per user (ARPU) – $11</p></li>
+</ul>
+<p>Definitions: - We define a daily active person (DAP) as a registered and logged-in user of Facebook, Instagram, Messenger, and/or WhatsApp (collectively, our “Family” of products) who visited at least one of these Family products through a mobile device application or using a web or mobile browser on a given day.</p>
+<ul>
+<li>We define average revenue per person (ARPP) as our total revenue during a given quarter, divided by the average of the number of MAP at the beginning and end of the quarter. While ARPP includes all sources of revenue, the number of MAP used in this calculation only includes users of our Family products as described in the definition of MAP in the previous slide.</li>
+</ul>
+<p>Limitations of key data</p>
+<ul>
+<li><p>The numbers for our key metrics are calculated using internal company data based on the activity of user accounts.</p></li>
+<li><p>We report our estimates of the numbers of our daily active people (DAP), monthly active people (MAP), and average revenue per person (ARPP) (collectively, our “Family metrics”) based on the activity of users who visited at least one of Facebook, Instagram, Messenger, and WhatsApp (collectively, our “Family” of products) during the applicable period of measurement.</p></li>
+<li><p>We have historically reported the numbers of our daily active users (DAUs), monthly active users (MAUs), and average revenue per user (ARPU) (collectively, our “Facebook metrics”) based on user activity only on Facebook and Messenger and not on our other products.</p></li>
+<li><p>We believe our Family metrics better reflect the size of our community and the fact that many people are using more than one of our products. As a result, over time we intend to report our Family metrics as key metrics in place of DAUs, MAUs, and ARPU.</p></li>
+<li><p>While these numbers are based on what we believe to be reasonable estimates of our user base for the applicable period of measurement, there are inherent challenges in measuring usage of our products across large online and mobile populations around the world. The methodologies used to measure these metrics require significant judgment and are also susceptible to algorithm or other technical errors. In addition, we are continually seeking to improve our estimates of our user base, and such estimates may change due to improvements or changes in our methodology. We regularly review our processes for calculating these metrics, and from time to time we discover inaccuracies in our metrics or make adjustments to improve their accuracy, which can result in adjustments to our historical metrics. Our ability to recalculate our historical metrics may be impacted by data limitations or other factors that require us to apply different methodologies for such adjustments. We generally do not intend to update previously disclosed Family metrics for any such inaccuracies or adjustments that are within the error margins disclosed below.</p></li>
+<li><p>In addition, our Family metrics and Facebook metrics estimates will differ from estimates published by third parties due to differences in methodology or other factors such as data limitations or other challenges in measuring large online and mobile populations. For example, our Family metrics estimates in some instances exceed estimates of addressable online and mobile populations that are based on data published by third parties.</p></li>
+</ul>
+<p>Family Metrics</p>
+<ul>
+<li><p>Many people in our community have user accounts on more than one of our products, and some people have multiple user accounts within an individual product. Accordingly, for our Family metrics, we do not seek to count the total number of user accounts across our products because we believe that would not reflect the actual size of our community. Rather, our Family metrics represent our estimates of the number of unique people using at least one of Facebook, Instagram, Messenger, and WhatsApp.</p></li>
+<li><p>We do not require people to use a common identifier or link their accounts to use multiple products in our Family, and therefore must seek to attribute multiple user accounts within and across products to individual people. To calculate these metrics, we rely upon complex techniques, algorithms and machine learning models that seek to count the individual people behind user accounts, including by matching multiple user accounts within an individual product and across multiple products when we believe they are attributable to a single person, and counting such group of accounts as one person. These techniques and models require significant judgment, are subject to data and other limitations discussed below, and inherently are subject to statistical variances and uncertainties.</p></li>
+<li><p>We estimate the potential error in our Family metrics primarily based on user survey data, which itself is subject to error as well. While we expect the error margin for our Family metrics to vary from period to period, we estimate that such margin generally will be approximately 3% of our worldwide MAP.</p></li>
+<li><p>At our scale, it is very difficult to attribute multiple user accounts within and across products to individual people, and it is possible that the actual numbers of unique people using our products may vary significantly from our estimates, potentially beyond our estimated error margins. As a result, it is also possible that our Family metrics may indicate changes or trends in user numbers that do not match actual changes or trends.</p></li>
+<li><p>To calculate our estimates of Family DAP and MAP, we currently use a series of machine learning models that are developed based on internal reviews of limited samples of user accounts and calibrated against user survey data. We apply significant judgment in designing these models and calculating these estimates. For example, to match user accounts within individual products and across multiple products, we use data signals such as similar device information, IP addresses, and user names. We also calibrate our models against data from periodic user surveys of varying sizes and frequency across our products, which are inherently subject to error. The timing and results of such user surveys have in the past contributed, and may in the future contribute, to changes in our reported Family metrics from period to period. In addition, our data limitations may affect our understanding of certain details of our business and increase the risk of error for our Family metrics estimates. Our techniques and models rely on a variety of data signals from different products, and we rely on more limited data signals for some products compared to others. For example, as a result of limited visibility into encrypted products, we have fewer data signals from WhatsApp user accounts and primarily rely on phone numbers and device information to match WhatsApp user accounts with accounts on our other products. Similarly, although Messenger Kids users are included in our Family metrics, we do not seek to match their accounts with accounts on our other applications for purposes of calculating DAP and MAP.</p></li>
+<li><p>Any loss of access to data signals we use in our process for calculating Family metrics, whether as a result of our own product decisions, actions by third-party browser or mobile platforms, regulatory or legislative requirements, or other factors, also may impact the stability or accuracy of our reported Family metrics, as well as our ability to report these metrics at all.</p></li>
+<li><p>Our estimates of Family metrics also may change as our methodologies evolve, including through the application of new data signals or technologies, product changes, or other improvements in our user surveys, algorithms, or machine learning that may improve our ability to match accounts within and across our products or otherwise evaluate the broad population of our users. In addition, such evolution may allow us to identify previously undetected violating accounts (as defined below).</p></li>
+<li><p>We regularly evaluate our Family metrics to estimate the percentage of our MAP consisting solely of “violating” accounts. We define “violating” accounts as accounts which we believe are intended to be used for purposes that violate our terms of service, including bots and spam. In the fourth quarter of 2022, we estimated that approximately 3% of our worldwide MAP consisted solely of violating accounts. Such estimation is based on an internal review of a limited sample of accounts, and we apply significant judgment in making this determination. For example, we look for account information and behaviors associated with Facebook and Instagram accounts that appear to be inauthentic to the reviewers, but we have limited visibility into WhatsApp user activity due to encryption. In addition, if we believe an individual person has one or more violating accounts, we do not include such person in our violating accounts estimation as long as we believe they have one account that does not constitute a violating account. From time to time, we disable certain user accounts, make product changes, or take other actions to reduce the number of violating accounts among our users, which may also reduce our DAP and MAP estimates in a particular period. We intend to disclose our estimates of the percentage of our MAP consisting solely of violating accounts on an annual basis. Violating accounts are very difficult to measure at our scale, and it is possible that the actual number of violating accounts may vary significantly from our estimates.</p></li>
+<li><p>The numbers of Family DAP and MAP discussed in this presentation, as well as ARPP, do not include users on our other products, unless they would otherwise qualify as DAP or MAP, respectively, based on their other activities on our Family products.</p></li>
+</ul>
+<p>Facebook Metrics</p>
+<ul>
+<li><p>We regularly evaluate our Facebook metrics to estimate the number of “duplicate” and “false” accounts among our MAUs. A duplicate account is one that a user maintains in addition to his or her principal account. We divide “false” accounts into two categories: (1) user-misclassified accounts, where users have created personal profiles for a business, organization, or non- human entity such as a pet (such entities are permitted on Facebook using a Page rather than a personal profile under our terms of service); and (2) violating accounts, which represent user profiles that we believe are intended to be used for purposes that violate our terms of service, such as bots and spam. The estimates of duplicate and false accounts are based on an internal review of a limited sample of accounts, and we apply significant judgment in making this determination. For example, to identify duplicate accounts we use data signals such as identical IP addresses and similar user names, and to identify false accounts we look for names that appear to be fake or other behavior that appears inauthentic to the reviewers. Any loss of access to data signals we use in this process, whether as a result of our own product decisions, actions by third-party browser or mobile platforms, regulatory or legislative requirements, or other factors, also may impact the stability or accuracy of our estimates of duplicate and false accounts. Our estimates also may change as our methodologies evolve, including through the application of new data signals or technologies or product changes that may allow us to identify previously undetected duplicate or false accounts and may improve our ability to evaluate a broader population of our users. Duplicate and false accounts are very difficult to measure at our scale, and it is possible that the actual number of duplicate and false accounts may vary significantly from our estimates.</p></li>
+<li><p>In the fourth quarter of 2022, we estimated that duplicate accounts may have represented approximately 11% of our worldwide MAUs. We believe the percentage of duplicate accounts is meaningfully higher in developing markets such as the Philippines and Vietnam, as compared to more developed markets. In the fourth quarter of 2022, we estimated that false accounts may have represented approximately 4-5% of our worldwide MAUs. Our estimation of false accounts can vary as a result of episodic spikes in the creation of such accounts, which we have seen originate more frequently in specific countries such as Indonesia, Nigeria, and Vietnam. From time to time, we disable certain user accounts, make product changes, or take other actions to reduce the number of duplicate or false accounts among our users, which may also reduce our DAU and MAU estimates in a particular period. We intend to disclose our estimates of the number of duplicate and false accounts among our MAUs on an annual basis.</p></li>
+<li><p>The numbers of DAUs and MAUs discussed in this presentation, as well as ARPU, do not include users on Instagram, WhatsApp, or our other products, unless they would otherwise qualify as DAUs or MAUs, respectively, based on their other activities on Facebook.</p></li>
+</ul>
+<p>User Geography - Our data regarding the geographic location of our users is estimated based on a number of factors, such as the user’s IP address and self-disclosed location. These factors may not always accurately reflect the user’s actual location. For example, a user may appear to be accessing Facebook from the location of the proxy server that the user connects to rather than from the user’s actual location. The methodologies used to measure our metrics are also susceptible to algorithm or other technical errors, and our estimates for revenue by user location and revenue by user device are also affected by these factors.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -689,8 +799,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/neyman_rubin_causal_model.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span>
+      <a href="../chapters/end_to_end_example.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">End-to-end example</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
