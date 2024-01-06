@@ -168,7 +168,28 @@ $$
 
 ## How to select metrics
 
-- NSM and primary based on main company/product goal, focus on criteria above
+- NSM -- what is essence of company? How can we capture it?
+
+- Driver metrics
+
+  - In general, want product/service metrics that capture essence/goal/value proposition of product and drive company mission/NSM
+
+  - E.g. for mature product, might wanna focus on engagement rather than activation/growth
+
+  - Is there one single NSM for product/service (i.e. #of txns for Marketplace)
+
+  - Questions to think about
+
+    - How does the product work, exactly? (Do we know if transaction happens?)
+
+    - What is essence of product? (Give everyone opportunity to sell things and help locals find what they need)
+
+    - What are its goals? (Product pretty mature, so maybe engagement rather than growth)
+
+    - What would success look like? (We facilitate a lot of transactions)
+
+    - How do users get value from it? (Sellers sell things quickly, buyers find things quickly)
+
 
 - Support and guardrails trickier. Use AAAERRR Framework
 
@@ -181,6 +202,28 @@ $$
 - Have an OEC that directly captuers what you want to measure. Selecting the wrong metric can lead to misleading results. @kohavi2012trusworthy provide a memorable example from an experiment at Bing: the experiment increased revenue by user because search results were poorer, leading users to make more searches and lead them to click on more adds. This is good in the short-term. But in the long term, users will surely get frustrated by the poorer search results. A better metric would have been one that directly captures the quality of the search results, such as sessions per user. Lesson: have an OEC that directly captures the thing you want to improve, and use higher level-metrics such as revenue as guardrails.
 
 - Normalise metrics by sample size. E.g. user revenue per user rather than variant-level revenue (since the latter is dependent on number of users, which can vary between variants).
+
+
+Guardrail metrics
+
+- Customer experience
+
+  - Latency
+
+  - Very poor experinece (i.e. no search results, threads, harassment)
+
+- ...
+
+- Cannibalisation of similar products in our ecosystem (i.e. WhatsApp impact on Messenger)
+
+
+### How to think about risks of a given set of metrics?
+
+- Think about what I've focuse on (i.e. engagement for a mature product)
+
+- The risk is then that we neglect stages earlier in the funnel (e.g. acquisition in areas where the product doesn't do as well) and later in the funnel (i.e. we might wanna think about monetisation)
+
+
 
 ## Frameworks for creating driver metrics
 
@@ -276,8 +319,24 @@ An extension of the pirate metrics.
   - Time spent per user per day
 
 - Retention
-  - Daily active users (DAU)
+
+  - Daily active users (DAU, useful to measure intensity of usage)
+
+  - Weekly active users (WAU)
+
+  - Monthly active users (MAU, user engages frequently)
+
+  - Stickiness (DAU / MAU)
+
   - Churn rate (percentage of users who stop using the service within a given period)
+
+  - Retention rate (1 - churn rate)
+
+  - 28-day retention rate (% who still use it 28-days after 
+  
+  - Time spent on product
+
+  - Session frequency
 
 - Revenue
   - Average revenue per user (ARPE)
@@ -287,16 +346,7 @@ An extension of the pirate metrics.
 Guardrail metrics
 - Bounce rate (proportion of site visitors who leave after seeing only the first page)
 - Cancellation rate
-- 
-
-
-## Ways to think about Metrics
-
-- From Meta 
-  - Topline metric: e.g. daily active users
-  - Feature/product team northstar: e.g. total buyers for buyer-facing side of marketplace
-  - Guardrail metric: number of messages flagges as spam or harmful in msg app
-
+- Number of messages flagged as spam/harmful
 
 
 
@@ -312,5 +362,3 @@ Guardrail metrics
   - Type 2: Simple Heuristic Based Metrics: Simple heuristic based metrics, such as Click-Through Rate and user activity counts, offer direct insights into user interaction with online services. While actionable, they can be misleading in terms of user experience and business goals. For instance, higher CTR due to misleading content can negatively impact user experience and, subsequently, the service's market share. These metrics are suitable for early-stage services but may not align with real user experience improvements in more mature stages.
 
   - Type 3: User-Behavior-Driven Metrics: User-behavior-driven metrics, derived from user satisfaction and frustration models, aim to directly measure user experience and its impact on long-term service success. They are complex, involving detailed analysis of user behavior, like considering both clicks and dwell time for assessing search satisfaction. These metrics are sensitive and actionable for agile experiments, offering a more nuanced understanding of user interaction than simpler metrics.
-
-

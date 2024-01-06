@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -121,14 +140,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
+  <a href="../chapters/end_to_end_example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">End-to-end example</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
+  <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -159,7 +178,8 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#commonly-used-probability-distributions" id="toc-commonly-used-probability-distributions" class="nav-link" data-scroll-target="#commonly-used-probability-distributions"><span class="header-section-number">2.9.1</span> Commonly used probability distributions</a></li>
   </ul></li>
-  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources"><span class="header-section-number">2.10</span> Sources</a></li>
+  <li><a href="#p-values-how-to-draw-statistical-conclusions" id="toc-p-values-how-to-draw-statistical-conclusions" class="nav-link" data-scroll-target="#p-values-how-to-draw-statistical-conclusions"><span class="header-section-number">2.10</span> p-values – how to draw statistical conclusions ?</a></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources"><span class="header-section-number">2.11</span> Sources</a></li>
   </ul>
 </nav>
     </div>
@@ -423,13 +443,25 @@ print(f"{'Bootstrap se:':20} {np.mean(resample_means.std()):.3f}")
 </table>
 </section>
 </section>
-<section id="sources" class="level2" data-number="2.10">
-<h2 data-number="2.10" class="anchored" data-anchor-id="sources"><span class="header-section-number">2.10</span> Sources</h2>
+<section id="p-values-how-to-draw-statistical-conclusions" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="p-values-how-to-draw-statistical-conclusions"><span class="header-section-number">2.10</span> p-values – how to draw statistical conclusions ?</h2>
+<p>Limitations of reliying on pvap - Arbitrary cutoff - No appreciation for variation of coefficient – focus on ci instead (see <span class="citation" data-cites="romer2020praise">Romer (<a href="references.html#ref-romer2020praise" role="doc-biblioref">2020</a>)</span>, <span class="citation" data-cites="imbens2021statistical">Imbens (<a href="references.html#ref-imbens2021statistical" role="doc-biblioref">2021</a>)</span>) - Multiple hypothesis testing (actual) – report and apply MHT-correction - Multiple hypothesis testing (potential <a href="https://statmodeling.stat.columbia.edu/2016/03/07/29212/">Gelman post</a>)</p>
+</section>
+<section id="sources" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="sources"><span class="header-section-number">2.11</span> Sources</h2>
 <ul>
 <li><a href="https://learning.oreilly.com/library/view/practical-statistics-for/9781492072935/">Practical statistics for data science</a> –&gt;</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-imbens2021statistical" class="csl-entry" role="listitem">
+Imbens, Guido W. 2021. <span>“Statistical Significance, p-Values, and the Reporting of Uncertainty.”</span> <em>Journal of Economic Perspectives</em> 35 (3): 157–74.
+</div>
+<div id="ref-romer2020praise" class="csl-entry" role="listitem">
+Romer, David. 2020. <span>“In Praise of Confidence Intervals.”</span> In <em>AEA Papers and Proceedings</em>, 110:55–60.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

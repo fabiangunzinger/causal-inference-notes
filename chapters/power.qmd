@@ -13,6 +13,20 @@
 - Metric variance
 
 
+## How to increase power
+
+- Power can be increased trivially by lowering the significance level, which we often don't want to do, or by increasing sample size, which we're often trying to avoid.
+
+- Increase effect size
+
+    - Ensure that only users who are exposed to the change are in the data to avoid dilution of the effect
+
+- Reduce metric variance
+
+    - 
+
+
+
 ## Reasons for insufficient power
 
 Notes from @larsen2023statistical

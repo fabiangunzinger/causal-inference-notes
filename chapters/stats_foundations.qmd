@@ -249,6 +249,15 @@ Limitations of reliying on pvap
 - Multiple hypothesis testing (potential [Gelman post](https://statmodeling.stat.columbia.edu/2016/03/07/29212/))
 
 
+## False positive rate vs false discovery rate
+
+- The false positive rate is $P(significant result|no true effect)$
+
+- The false discovery rate is $P(no true effect|significant result)$ (this is precision)
+
+- 
+
+
 ## Sources
 
 - [Practical statistics for data science](https://learning.oreilly.com/library/view/practical-statistics-for/9781492072935/) -->

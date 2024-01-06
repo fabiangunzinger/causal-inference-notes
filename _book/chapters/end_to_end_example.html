@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 6&nbsp; End-to-end example</title>
+<title>Causal inference notes - 2&nbsp; End-to-end example</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -50,7 +50,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../chapters/metrics.html" rel="next">
-<link href="../chapters/neyman.html" rel="prev">
+<link href="../index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -93,7 +93,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/end_to_end_example.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">End-to-end example</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/end_to_end_example.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">End-to-end example</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -126,38 +126,14 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/end_to_end_example.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">End-to-end example</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">End-to-end example</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -176,7 +152,12 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#before-launch" id="toc-before-launch" class="nav-link active" data-scroll-target="#before-launch"><span class="header-section-number">6.1</span> Before launch</a></li>
+  <li><a href="#clarify" id="toc-clarify" class="nav-link active" data-scroll-target="#clarify"><span class="header-section-number">2.1</span> Clarify</a></li>
+  <li><a href="#pre-design" id="toc-pre-design" class="nav-link" data-scroll-target="#pre-design"><span class="header-section-number">2.2</span> Pre-design</a></li>
+  <li><a href="#experiment-design" id="toc-experiment-design" class="nav-link" data-scroll-target="#experiment-design"><span class="header-section-number">2.3</span> Experiment design</a></li>
+  <li><a href="#running-experiment" id="toc-running-experiment" class="nav-link" data-scroll-target="#running-experiment"><span class="header-section-number">2.4</span> Running experiment</a></li>
+  <li><a href="#interpreting-results" id="toc-interpreting-results" class="nav-link" data-scroll-target="#interpreting-results"><span class="header-section-number">2.5</span> Interpreting results</a></li>
+  <li><a href="#decision-making" id="toc-decision-making" class="nav-link" data-scroll-target="#decision-making"><span class="header-section-number">2.6</span> Decision making</a></li>
   </ul>
 </nav>
     </div>
@@ -185,7 +166,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">End-to-end example</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">End-to-end example</span></h1>
 </div>
 
 
@@ -200,9 +181,34 @@ div.csl-indent {
 
 </header>
 
-<p>For now, this is heavily based on Chapter 2 in <span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="references.html#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span>.</p>
-<section id="before-launch" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="before-launch"><span class="header-section-number">6.1</span> Before launch</h2>
+<ul>
+<li><p>This is my framework for how I drive a discussion with a PM who want to test a new feature.</p></li>
+<li><p>I use it as a checklist for consistency, as a way to build in best-practices and lessons learned over the years, and to ensure I don’t forget anything (which I’m prone to!).</p></li>
+<li><p>Obviously, I adapt the framework depending on the context – depending on what precisely is needed, how much I know about the product and the feature.</p></li>
+<li><p>I also use this in interviews because, really, these are about showing how you do the job.</p></li>
+<li><p>The experiment-centered part of this is based on Chapter 2 in <span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="references.html#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span>.</p></li>
+</ul>
+<section id="clarify" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="clarify"><span class="header-section-number">2.1</span> Clarify</h2>
+<p>Understand the ask</p>
+<ul>
+<li><p>What does each term mean?</p></li>
+<li><p>What is our objective here?</p></li>
+</ul>
+<p>Understand the product</p>
+<ul>
+<li><p>What does the product do?</p></li>
+<li><p>What is its purpose?</p></li>
+<li><p>How precisely does it work?</p></li>
+</ul>
+<p>Describe my approach</p>
+<ul>
+<li><p>In order to design an evaluation approach, we’ll first have to make a few decisions together about what we care about as part of the test.</p></li>
+<li><p>Based on these, I’ll then propose a design and evaluation approach.</p></li>
+</ul>
+</section>
+<section id="pre-design" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="pre-design"><span class="header-section-number">2.2</span> Pre-design</h2>
 <p>Define the proposed change</p>
 <ul>
 <li><p>We want to test the effect of adding coupon field to the checkout page</p></li>
@@ -210,7 +216,7 @@ div.csl-indent {
 </ul>
 <p>Define how you’d implement the change</p>
 <ul>
-<li>We use painted door approach</li>
+<li>We use painted door approach, and design two different treatment (one with additional field, one with popup)</li>
 </ul>
 <p>Define your goal metric (OEC)</p>
 <ul>
@@ -220,7 +226,7 @@ div.csl-indent {
 <li><p>What precisely we want to test (e.g.&nbsp;does feature hurt amount spent or whether user abandons checkout?)</p></li>
 <li><p>Power (indicator has lower variance than revenue and thus higher power)</p></li>
 </ul></li>
-<li><p>See <span class="quarto-unresolved-ref">?sec-metrics</span></p></li>
+<li><p>See <a href="metrics.html"><span>Chapter&nbsp;3</span></a> for more details</p></li>
 </ul>
 <p>Decide which users to focus on</p>
 <ul>
@@ -232,9 +238,26 @@ div.csl-indent {
 <li><p>“Adding a coupon field to the checkout page will reduce revenue per user for users who start the checkout process”.</p></li>
 <li><p>General template: “[proposed change] will [hypothesised effect] on [OEC] for [selected sample]”.</p></li>
 </ul>
-<p>Decide on statistical significance level and desired level of power</p>
+<p>Decide on statistical significance level, desired level of power, and MDE</p>
 <ul>
-<li>We use 0.05 and 0.8</li>
+<li><p>They are the key parameters to our experiment</p></li>
+<li><p>We use conventioal values of 0.05 and 0.8 for stat sifnificance and power, and 1 percent change for MDE.</p></li>
+<li><p>To determine MDE, consider</p>
+<ul>
+<li><p>Cost of launching the change</p>
+<ul>
+<li><p>Cost of fully building out feature (can be 0 when fully built out for experiment or high if we use painted door)</p></li>
+<li><p>Cost of maintaining new code (new code has higher bugs, may increase code complexity and maintenance)</p></li>
+<li><p>Other costs: e.g.&nbsp;does CPU utilization increase?</p></li>
+</ul></li>
+</ul></li>
+<li><p>To determine significance level and power, consider:</p>
+<ul>
+<li><p>Cost of not launching positive feature vs cost of launching harmful feature</p></li>
+<li><p>How long will feature be in effect?</p></li>
+<li><p>How widely will it be deployed?</p></li>
+<li><p>How many users will see it (i.e.&nbsp;where in funnel is it?)</p></li>
+</ul></li>
 </ul>
 <p>Decide on the MDE</p>
 <ul>
@@ -245,6 +268,115 @@ div.csl-indent {
 <li><p>Size of service (the larger, the smaller a change still generates a lot of revenue)</p></li>
 <li><p>Cost of implementing/maintaining the feature (e.g.&nbsp;feature development, code maintenance, etc.)</p></li>
 </ul></li>
+</ul>
+<p>Agree on decision-making process:</p>
+<ul>
+<li><p>Find a criteria that completely determines the launch/no-launch decision, i.e.&nbsp;such that meeting the criteria is a clear launch.</p></li>
+<li><p>For experiment, the criteria is the relationship between the OEC and the MDE.</p></li>
+<li><p>Validate these criteria with PM/leadership.</p></li>
+<li><p>Use traffic light system to classify your results: green is launch, red is no-launch, amber is need more info/data (see below)</p></li>
+</ul>
+</section>
+<section id="experiment-design" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="experiment-design"><span class="header-section-number">2.3</span> Experiment design</h2>
+<p>Decide on randomisation</p>
+<ul>
+<li>We use users</li>
+</ul>
+<p>Decide on target population</p>
+<ul>
+<li><p>We target all users</p></li>
+<li><p>Could target only users in some countries or other subgroups</p></li>
+</ul>
+<p>Decide on variant split</p>
+<ul>
+<li><p>We use 34/33/33 split</p></li>
+<li><p>Generally, equal proportions have highest power</p></li>
+<li><p>But if we have many treatments, allocating more users to control is advisable (describe why)</p></li>
+</ul>
+<p>Decide experiment size (number of unique units)</p>
+<ul>
+<li><p>We want 80 percent power to detect at least a 1 percent change in revenue per user – we’ll use a power analysis to determine required size.</p></li>
+<li><p>Factors that determine length</p>
+<ul>
+<li><p>High vs low variance metric (e.g.&nbsp;binary has higher power due to lower variance)</p></li>
+<li><p>MDES</p></li>
+<li><p>Significance level</p></li>
+</ul></li>
+<li><p>Other factors to consider</p>
+<ul>
+<li><p>How save is experiment? If risky, ramp-up more slowly</p></li>
+<li><p>Do we need to share traffic with other experiments?</p></li>
+</ul></li>
+</ul>
+<p>Decide experiment duration</p>
+<ul>
+<li><p>We’ll make sure to run the experiment for at least a week to guard against day-of-week effects, and we’ll check for novely and learning effects and run the experiment for longer if needed</p></li>
+<li><p>Factors to consider</p>
+<ul>
+<li><p>More units generally leads to higher power (unless with cumulative metrics such as counts where variance increases with duration), though in a concave way – this is related to size requirement above</p></li>
+<li><p>Day of week effect (run for at least a week)</p></li>
+<li><p>Seasonality</p>
+<ul>
+<li><p>Need to ensure results not driven by reasonality in any of the places experiment is run</p></li>
+<li><p>One aspect of external validity (in terms of time)</p></li>
+</ul></li>
+<li><p>Novelty and learning effects (run experiment for longer until we see stable effects)</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="running-experiment" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="running-experiment"><span class="header-section-number">2.4</span> Running experiment</h2>
+<ul>
+<li><p>We need</p>
+<ul>
+<li><p>Instrumentation (lots of how users behave on the site and what experiment variant they were assigned to)</p></li>
+<li><p>Infrastructure to implement experiment (feature flagging and variant assignment)</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="interpreting-results" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="interpreting-results"><span class="header-section-number">2.5</span> Interpreting results</h2>
+<ul>
+<li><p>Sanity checks</p>
+<ul>
+<li><p>Before looking at results, we check guardrail and invariant metrics to be confident about internal validity</p></li>
+<li><p>Trust-related guardrails</p>
+<ul>
+<li>SRM</li>
+</ul></li>
+<li><p>Organisational guardrails</p>
+<ul>
+<li>E.g. latency</li>
+</ul></li>
+</ul></li>
+<li><p>Experiment results</p>
+<ul>
+<li><p>We find that both treatments significantly reduce revenue per user</p></li>
+<li><p>Digging shows that it’s because of fewer checkouts (we could see that by having indicator and revenue conditional on spend as debug metrics)</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="decision-making" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="decision-making"><span class="header-section-number">2.6</span> Decision making</h2>
+<ul>
+<li><p>Adding coupon field reduces revenue per user by 7 percent</p></li>
+<li><p>Hence, marketing campaign of coupons would not only have to cover campaign costs, but also reduction due to additional coupon field</p></li>
+<li><p>Marketing study found that sending coupons increases revenue per user by about 3 percent</p></li>
+<li><p>Hence, we won’t run the campaign</p></li>
+</ul>
+<p>Different hypothetical cases:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../inputs/decision_scenarios.png" class="img-fluid figure-img" style="width:75.0%"></p>
+<figcaption class="figure-caption">Possible decision scenarios. Source: <span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="references.html#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span></figcaption>
+</figure>
+</div>
+<ul>
+<li><p>Scenario 1: Neither SS nor PS – iterate or abandon</p></li>
+<li><p>Scenario 2: SS and PS – launch</p></li>
+<li><p>Scenario 3: SS but not PS with narrow CI – no lunch</p></li>
+<li><p>Scenario 4-6: CI so wide that SS and possibly even PS point estimate coule be null, or where small point estimate could still be SS and PS – run for longer or rerun with higher power ideally, else make decision based on risk/reward.</p></li>
 </ul>
 
 
@@ -491,13 +623,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/neyman.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span>
+      <a href="../index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/metrics.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Metrics</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metrics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

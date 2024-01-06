@@ -15,14 +15,14 @@ book:
     # - chapters/approaches_to_causal_inference.qmd
 
     # Statistics foundations
-    - chapters/stats_foundations.qmd
+    # - chapters/stats_foundations.qmd
     # - chapters/regression.qmd
 
     # Causal inference foundations
     # - chapters/epistemology.qmd
     # - chapters/ethics.qmd
     # - chapters/fundamental_problem.qmd
-    - chapters/neyman_rubin_causal_model.qmd
+    # - chapters/neyman_rubin_causal_model.qmd
     # - chapters/fisher.qmd
     # - chapters/neyman.qmd
     # - chapters/regression_for_experiments.qmd

@@ -1,6 +1,39 @@
 # End-to-end example
 
-For now, this is heavily based on Chapter 2 in @kohavi2020trustworthy.
+- This is my framework for how I drive a discussion with a PM who want to test a new feature.
+
+- I use it as a checklist for consistency, as a way to build in best-practices and lessons learned over the years, and to ensure I don't forget anything (which I'm prone to!).
+
+- Obviously, I adapt the framework depending on the context -- depending on what precisely is needed, how much I know about the product and the feature.
+
+- I also use this in interviews because, really, these are about showing how you do the job.
+
+- The experiment-centered part of this is based on Chapter 2 in @kohavi2020trustworthy.
+
+
+
+## Clarify
+
+Understand the ask
+
+- What does each term mean?
+
+- What is our objective here?
+
+Understand the product
+
+- What does the product do?
+
+- What is its purpose?
+
+- How precisely does it work?
+
+Describe my approach
+
+- In order to design an evaluation approach, we'll first have to make a few decisions together about what we care about as part of the test.
+
+- Based on these, I'll then propose a design and evaluation approach.
+
 
 
 ## Pre-design
@@ -84,8 +117,15 @@ Decide on the MDE
   - Cost of implementing/maintaining the feature (e.g. feature development, code maintenance, etc.)
 
 
+Agree on decision-making process:
 
+- Find a criteria that completely determines the launch/no-launch decision, i.e. such that meeting the criteria is a clear launch.
 
+- For experiment, the criteria is the relationship between the OEC and the MDE.
+
+- Validate these criteria with PM/leadership.
+
+- Use traffic light system to classify your results: green is launch, red is no-launch, amber is need more info/data (see below)
 
 
 ## Experiment design
@@ -184,42 +224,15 @@ Decide experiment duration
 
 - Hence, we won't run the campaign
 
+
 Different hypothetical cases:
 
-- Neither statistically nor practically significant
+![Possible decision scenarios. Source: @kohavi2020trustworthy](../inputs/decision_scenarios.png){width=75%}
 
-  - Iterate or abandon
+- Scenario 1: Neither SS nor PS -- iterate or abandon
 
-- Statistically and practically significant
+- Scenario 2: SS and PS -- launch
 
-  - Launch
+- Scenario 3: SS but not PS with narrow CI -- no lunch
 
-- Stat sig but not practically sig
-
-  - Benefits don't outweigh costs (or else practical sig boundary would be lower) -- don't launch
-
-- Not stat or practically significant
-
-  - Try to rerun/run for longer to get more power
-  - If need to, launch if statsig and point estimate is also practically sig but with ci beyond practically sig boundary
-
-
-
-- Case 4:
-
-  - Not enough data to draw conclusion
-  - Run follow up test with higher power -- run for longer
-
-- Case 5:
-
-  - Repeat with more power if possible -- run for longer
-
-- Case 6:
-
-  - Run for longer to get more power
-  - Launch would be reasonable, if you can't wait
-
-
-
-
-
+- Scenario 4-6: CI so wide that SS and possibly even PS point estimate coule be null, or where small point estimate could still be SS and PS -- run for longer or rerun with higher power ideally, else make decision based on risk/reward.
