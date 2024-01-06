@@ -1,16 +1,22 @@
-# Power
+# Power {#sec-power}
+
 
 ## What is Power
+
 
 ## What determines power
 
 - Significance level
 
-- Sample size
-
 - Effect size
 
-- Metric variance
+- Standard error
+
+    - Sample size
+
+    - Variant allocation proportion
+
+    - Metric variance
 
 
 ## How to increase power
@@ -19,33 +25,96 @@
 
 - Increase effect size
 
-    - Ensure that only users who are exposed to the change are in the data to avoid dilution of the effect
+  - Ensure that only users who are exposed to the change are in the data to avoid dilution of the effect
+
+- Optimally allocate variance proportions
+
+  - Usually equal for highest power
+
+  - Show why with many treatment variants, higher share in control is better
 
 - Reduce metric variance
-
-    - 
-
-
-
-## Reasons for insufficient power
-
-Notes from @larsen2023statistical
-
-- Reasons for insufficient power
-    - Treatment effect is homogenously distributed across entire user base but very small
-
-    - Feature affects only small number of users, so overall effect is highly attenuated
-
-    - Treatment effect on known subgroups is of interest
-
-## Calculating power
-
-- See @zhou2023all for comprehensive overview
-
-- See @bojinov2023design, section 5, for simulation results for switchbacks and generally good approach to simulation to emulate
+  
+  - Choose metric with low variance (e.g. indicator)
+  
+  - Use variance reduction technique
+  
+  - Only include triggered users
 
 
-## Cluster-randomised experiments
+## How to choose key parameters
 
-See @reich2012empirical
+### MDE
 
+- What are you balancing here? The size of the effect you are able to identify and the time it takes to do it.
+
+- All else equal, the smaller a change you want to be able to detect, the longer it will take for the experiment to run because you need more sample size.
+
+- The relevant question to ask here is "what counts as a practically relevant change?"
+
+- To answer that, consider:
+
+  - Maturity of service (the more mature, the smaller a change can be expected)
+
+  - Size of service (the larger, the smaller a change still generates a lot of revenue)
+
+  - Cost of change that need ot be covered
+
+    - Cost of fully building out feature for launch (can be 0 when fully built out for experiment or high if we use painted door)
+
+    - Cost of maintaining new code (new code has higher bugs, may increase code complexity and maintenance)
+
+    - Other costs: e.g. does CPU utilization increase?
+
+
+### Significance level
+
+- What are you balancing here? The probabilities of making a type I and type II error.
+
+- The higher significance level, the less likely we are to implement useless features (to make a Type I error) but the more likely we are to no implement useful features (to make a Type II error).
+
+- Hence, gotta balance cost of implementing useless feature and cost of not implementing useful feature.
+
+- Things that play into this:
+
+  - How long will feature be in effect (less long lowers risk of implementing)?
+
+  - How widely will it be deployed (less widely lowers risk of implementing)?
+
+  - How many users will see it / where in the funnel is it (later in funnel lowers risk of implementation)
+
+- What to do in practice:
+
+    - Start from baseline values ($alpha = 0.05$)
+
+    - Adjust depending on balance of risks
+
+### Power
+
+- What are you balancing here? The risk of making a Type II error and the time you have to wait for your results.
+
+- All else equal, the higher a level or power you want, the longer you'll have to run the experiment to accumulate the requried sample size.
+
+- Factors to consider:
+
+  - How costly is it to not implement a useful feature.
+
+
+
+## Useful resources
+
+- @larsen2023statistical for general overview
+- @zhou2023all for comprehensive overview of how to calculate power
+- @bojinov2023design, section 5, for simulation results for switchbacks and generally good approach to simulation to emulate
+- @reich2012empirical power calcs for cluster-randomised experiments
+
+
+## Q&A
+
+Questions:
+
+1. Longer experiment duration generally increases power. Can you think of a scenario where this is not the case?
+
+Answers:
+
+1. When using a cumulative metric such as number of likes, the variance of which will increase the longer the experiment runs, which will increase the standard error of our treatment effect estimate and lower our power. Remember that $SE(\hat{\tau}) = \sqrt{\frac{1}{P(1-P)}\frac{\sigma^2}{N}}$. So, whether this happens depends on what happens to $\frac{\sigma^2}{N}$, as experiment duration increases. A decrease in power is plausible -- likely, even! -- because $N$ will increase in a concave fashion over the course of the experiment duration (some users keep coming back), while $\sigma^2$ is likely to grow faster than linearly, which causes the ratio to increase and power to decrease. 

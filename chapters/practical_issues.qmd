@@ -17,10 +17,6 @@ todo:
 
 
 
-
-
-
-
 ## Budget effects in Ads
 
 - On an adds platform, a treatment might perform very well during an experiment in that it makes marketers launch more adds. But once scaled up may do less well because the increased traffic might exhaust marketer's budgets, leading them to reduce adds launched.

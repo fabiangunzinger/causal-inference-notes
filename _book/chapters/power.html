@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 2&nbsp; End-to-end example</title>
+<title>Causal inference notes - 3&nbsp; Power</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -49,8 +49,8 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/metrics.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../chapters/references.html" rel="next">
+<link href="../chapters/metrics.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,6 +81,8 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -93,7 +95,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/end_to_end_example.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">End-to-end example</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/power.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Power</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -126,20 +128,14 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/end_to_end_example.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">End-to-end example</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+  <a href="../chapters/power.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Power</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -158,12 +154,17 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#clarify" id="toc-clarify" class="nav-link active" data-scroll-target="#clarify"><span class="header-section-number">2.1</span> Clarify</a></li>
-  <li><a href="#pre-design" id="toc-pre-design" class="nav-link" data-scroll-target="#pre-design"><span class="header-section-number">2.2</span> Pre-design</a></li>
-  <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design"><span class="header-section-number">2.3</span> Design</a></li>
-  <li><a href="#running-experiment" id="toc-running-experiment" class="nav-link" data-scroll-target="#running-experiment"><span class="header-section-number">2.4</span> Running experiment</a></li>
-  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis"><span class="header-section-number">2.5</span> Analysis</a></li>
-  <li><a href="#decision-making" id="toc-decision-making" class="nav-link" data-scroll-target="#decision-making"><span class="header-section-number">2.6</span> Decision making</a></li>
+  <li><a href="#what-is-power" id="toc-what-is-power" class="nav-link active" data-scroll-target="#what-is-power"><span class="header-section-number">3.1</span> What is Power</a></li>
+  <li><a href="#what-determines-power" id="toc-what-determines-power" class="nav-link" data-scroll-target="#what-determines-power"><span class="header-section-number">3.2</span> What determines power</a></li>
+  <li><a href="#how-to-increase-power" id="toc-how-to-increase-power" class="nav-link" data-scroll-target="#how-to-increase-power"><span class="header-section-number">3.3</span> How to increase power</a></li>
+  <li><a href="#how-to-choose-key-parameters" id="toc-how-to-choose-key-parameters" class="nav-link" data-scroll-target="#how-to-choose-key-parameters"><span class="header-section-number">3.4</span> How to choose key parameters</a>
+  <ul class="collapse">
+  <li><a href="#mde" id="toc-mde" class="nav-link" data-scroll-target="#mde"><span class="header-section-number">3.4.1</span> MDE</a></li>
+  <li><a href="#significance-level" id="toc-significance-level" class="nav-link" data-scroll-target="#significance-level"><span class="header-section-number">3.4.2</span> Significance level</a></li>
+  <li><a href="#power" id="toc-power" class="nav-link" data-scroll-target="#power"><span class="header-section-number">3.4.3</span> Power</a></li>
+  </ul></li>
+  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">3.5</span> Useful resources</a></li>
+  <li><a href="#qa" id="toc-qa" class="nav-link" data-scroll-target="#qa"><span class="header-section-number">3.6</span> Q&amp;A</a></li>
   </ul>
 </nav>
     </div>
@@ -172,7 +173,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">End-to-end example</span></h1>
+<h1 class="title"><span id="sec-power" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Power</span></span></h1>
 </div>
 
 
@@ -187,188 +188,128 @@ div.csl-indent {
 
 </header>
 
-<section id="clarify" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="clarify"><span class="header-section-number">2.1</span> Clarify</h2>
-<p>Understand the ask</p>
-<ul>
-<li><p>What does each term mean?</p></li>
-<li><p>What is our objective here?</p></li>
-</ul>
-<p>Understand the product</p>
-<ul>
-<li><p>What does the product do?</p></li>
-<li><p>What is its purpose?</p></li>
-<li><p>How precisely does it work?</p></li>
-</ul>
-<p>Describe my approach</p>
-<ul>
-<li><p>In order to design an evaluation approach, we’ll first have to make a few decisions together about what we care about as part of the test.</p></li>
-<li><p>Based on these, I’ll then propose a design and evaluation approach.</p></li>
-</ul>
+<section id="what-is-power" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="what-is-power"><span class="header-section-number">3.1</span> What is Power</h2>
 </section>
-<section id="pre-design" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="pre-design"><span class="header-section-number">2.2</span> Pre-design</h2>
-<p>Understand the change</p>
+<section id="what-determines-power" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="what-determines-power"><span class="header-section-number">3.2</span> What determines power</h2>
 <ul>
-<li><p>What is it?</p></li>
-<li><p>What problem is it trying to solve?</p></li>
-<li><p>Are there any concerns (for ideas and possible concerns of certain ideas, you should check the literature and have a look at <a href="https://goodui.org">GoodUI</a>)</p></li>
-</ul>
-<p>Understand the intervention</p>
-<ul>
-<li><p>How do we implement the feature?</p></li>
-<li><p>Do we implement different versions / have multiple treatments?</p></li>
-</ul>
-<p>Define metrics</p>
-<ul>
-<li><p>OEC, secondary, guardrails, debug</p></li>
-<li><p>Factors to consider</p>
-<ul>
-<li><p>What metric best captures behaviour we want to measure?</p></li>
-<li><p>Power</p></li>
-<li></li>
-</ul></li>
-<li><p>See <a href="metrics.html"><span>Chapter&nbsp;3</span></a> for more details</p></li>
-</ul>
-<p>Target audience</p>
-<ul>
-<li><p>Who is target audience?</p></li>
-<li><p>Any units to exclude?</p></li>
-<li><p>In general, it’s useful to think about the user experience funnel, and then think about where in the funnel the change is visible. More often than not, this is the relevant step at which to trigger users into the experiment.</p></li>
-</ul>
-<p>Formulate hypothesis</p>
-<ul>
-<li><p>“Adding a coupon field to the checkout page will reduce revenue per user for users who start the checkout process”.</p></li>
-<li><p>General template: “[proposed change] will [hypothesised effect] on [OEC] for [selected sample]”.</p></li>
-</ul>
-<p>Decide on statistical significance level, desired level of power, and MDE</p>
-<ul>
-<li><p>They are the key parameters to our experiment</p></li>
-<li><p>We use conventioal values of 0.05 and 0.8 for stat sifnificance and power, and 1 percent change for MDE.</p></li>
-</ul>
-<p>Decide on the MDE</p>
-<ul>
-<li>We use a 1 percent change</li>
-</ul>
-<p>Agree on decision-making process:</p>
-<ul>
-<li><p>Find a criteria that completely determines the launch/no-launch decision, i.e.&nbsp;such that meeting the criteria is a clear launch.</p></li>
-<li><p>For experiment, the criteria is the relationship between the OEC and the MDE.</p></li>
-<li><p>Validate these criteria with PM/leadership.</p></li>
-<li><p>Use traffic light system to classify your results: green is launch, red is no-launch, amber is need more info/data (see below)</p></li>
-</ul>
-</section>
-<section id="design" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="design"><span class="header-section-number">2.3</span> Design</h2>
-<p>Randomisation</p>
-<ul>
-<li><p>Randomisation unit</p></li>
-<li><p>Assignment mechanism</p></li>
-<li><p>Variant split</p>
-<ul>
-<li><p>Generally, equal proportions have highest power</p></li>
-<li><p>But if we have many treatments, allocating more users to control is advisable (describe why)</p></li>
-</ul></li>
-</ul>
-<p>Experiment size</p>
-<ul>
-<li><p>Given required power, MDE, and significance level, use power calculation to determine minimum size.</p></li>
-<li><p>See <a href="power.html"><span>Chapter&nbsp;4</span></a> for factors to consider that can affect power.</p></li>
-<li><p>Factors that determine power</p>
-<ul>
-<li><p>High vs low variance metric (e.g.&nbsp;binary has higher power due to lower variance)</p></li>
-<li><p>MDES</p></li>
 <li><p>Significance level</p></li>
-</ul></li>
-<li><p>Other factors to consider</p>
+<li><p>Effect size</p></li>
+<li><p>Standard error</p>
 <ul>
-<li><p>How save is experiment? If risky, ramp-up more slowly</p></li>
-<li><p>Do we need to share traffic with other experiments?</p></li>
-</ul></li>
-</ul>
-<p>Experiment duration</p>
-<ul>
-<li><p>We’ll make sure to run the experiment for at least a week to guard against day-of-week effects, and we’ll check for novely and learning effects and run the experiment for longer if needed</p></li>
-<li><p>Factors to consider</p>
-<ul>
-<li><p>More units generally leads to higher power (unless with cumulative metrics such as counts where variance increases with duration), though in a concave way – this is related to size requirement above</p></li>
-<li><p>Day of week effect (run for at least a week)</p></li>
-<li><p>Seasonality</p>
-<ul>
-<li><p>Need to ensure results not driven by reasonality in any of the places experiment is run</p></li>
-<li><p>One aspect of external validity (in terms of time)</p></li>
-</ul></li>
-<li><p>Novelty and learning effects (run experiment for longer until we see stable effects)</p></li>
-</ul></li>
-</ul>
-<p>Analysis</p>
-<ul>
-<li><p>Analysis approach (Fisher, Neyman, regression?)</p></li>
-<li><p>Corrections (MHT)?</p></li>
-</ul>
-<p>Timeline</p>
-<ul>
-<li>Discuss and agree upon timaline</li>
-</ul>
-<p>Limitations</p>
-<ul>
-<li>Think of possible limitations</li>
-</ul>
-<p>Risks</p>
-<ul>
-<li><p>Implementation</p></li>
-<li><p>Statistical</p></li>
-<li><p>Ethical</p></li>
-<li><p>Project management</p></li>
-</ul>
-</section>
-<section id="running-experiment" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="running-experiment"><span class="header-section-number">2.4</span> Running experiment</h2>
-<ul>
-<li><p>We need</p>
-<ul>
-<li><p>Instrumentation (lots of how users behave on the site and what experiment variant they were assigned to)</p></li>
-<li><p>Infrastructure to implement experiment (feature flagging and variant assignment)</p></li>
+<li><p>Sample size</p></li>
+<li><p>Variant allocation proportion</p></li>
+<li><p>Metric variance</p></li>
 </ul></li>
 </ul>
 </section>
-<section id="analysis" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="analysis"><span class="header-section-number">2.5</span> Analysis</h2>
-<p>Sanity checks</p>
+<section id="how-to-increase-power" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="how-to-increase-power"><span class="header-section-number">3.3</span> How to increase power</h2>
 <ul>
-<li>Check guardrail and invariant metrics to ensure internal validity</li>
-</ul>
-<p>Evaluation</p>
+<li><p>Power can be increased trivially by lowering the significance level, which we often don’t want to do, or by increasing sample size, which we’re often trying to avoid.</p></li>
+<li><p>Increase effect size</p>
 <ul>
-<li>Run evaluation</li>
+<li>Ensure that only users who are exposed to the change are in the data to avoid dilution of the effect</li>
+</ul></li>
+<li><p>Optimally allocate variance proportions</p>
+<ul>
+<li><p>Usually equal for highest power</p></li>
+<li><p>Show why with many treatment variants, higher share in control is better</p></li>
+</ul></li>
+<li><p>Reduce metric variance</p>
+<ul>
+<li><p>Choose metric with low variance (e.g.&nbsp;indicator)</p></li>
+<li><p>Use variance reduction technique</p></li>
+<li><p>Only include triggered users</p></li>
+</ul></li>
 </ul>
 </section>
-<section id="decision-making" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="decision-making"><span class="header-section-number">2.6</span> Decision making</h2>
+<section id="how-to-choose-key-parameters" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="how-to-choose-key-parameters"><span class="header-section-number">3.4</span> How to choose key parameters</h2>
+<section id="mde" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="mde"><span class="header-section-number">3.4.1</span> MDE</h3>
 <ul>
-<li><p>Adding coupon field reduces revenue per user by 7 percent</p></li>
-<li><p>Hence, marketing campaign of coupons would not only have to cover campaign costs, but also reduction due to additional coupon field</p></li>
-<li><p>Marketing study found that sending coupons increases revenue per user by about 3 percent</p></li>
-<li><p>Hence, we won’t run the campaign</p></li>
-</ul>
-<p>Different hypothetical cases:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../inputs/decision_scenarios.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<figcaption class="figure-caption">Possible decision scenarios. Source: <span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="references.html#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span></figcaption>
-</figure>
-</div>
+<li><p>What are you balancing here? The size of the effect you are able to identify and the time it takes to do it.</p></li>
+<li><p>All else equal, the smaller a change you want to be able to detect, the longer it will take for the experiment to run because you need more sample size.</p></li>
+<li><p>The relevant question to ask here is “what counts as a practically relevant change?”</p></li>
+<li><p>To answer that, consider:</p>
 <ul>
-<li><p>Scenario 1: Neither SS nor PS – iterate or abandon</p></li>
-<li><p>Scenario 2: SS and PS – launch</p></li>
-<li><p>Scenario 3: SS but not PS with narrow CI – no lunch</p></li>
-<li><p>Scenario 4-6: CI so wide that SS and possibly even PS point estimate coule be null, or where small point estimate could still be SS and PS – run for longer or rerun with higher power ideally, else make decision based on risk/reward.</p></li>
+<li><p>Maturity of service (the more mature, the smaller a change can be expected)</p></li>
+<li><p>Size of service (the larger, the smaller a change still generates a lot of revenue)</p></li>
+<li><p>Cost of change that need ot be covered</p>
+<ul>
+<li><p>Cost of fully building out feature for launch (can be 0 when fully built out for experiment or high if we use painted door)</p></li>
+<li><p>Cost of maintaining new code (new code has higher bugs, may increase code complexity and maintenance)</p></li>
+<li><p>Other costs: e.g.&nbsp;does CPU utilization increase?</p></li>
+</ul></li>
+</ul></li>
 </ul>
+</section>
+<section id="significance-level" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="significance-level"><span class="header-section-number">3.4.2</span> Significance level</h3>
+<ul>
+<li><p>What are you balancing here? The probabilities of making a type I and type II error.</p></li>
+<li><p>The higher significance level, the less likely we are to implement useless features (to make a Type I error) but the more likely we are to no implement useful features (to make a Type II error).</p></li>
+<li><p>Hence, gotta balance cost of implementing useless feature and cost of not implementing useful feature.</p></li>
+<li><p>Things that play into this:</p>
+<ul>
+<li><p>How long will feature be in effect (less long lowers risk of implementing)?</p></li>
+<li><p>How widely will it be deployed (less widely lowers risk of implementing)?</p></li>
+<li><p>How many users will see it / where in the funnel is it (later in funnel lowers risk of implementation)</p></li>
+</ul></li>
+<li><p>What to do in practice:</p>
+<ul>
+<li><p>Start from baseline values (<span class="math inline">\(alpha = 0.05\)</span>)</p></li>
+<li><p>Adjust depending on balance of risks</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="power" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="power"><span class="header-section-number">3.4.3</span> Power</h3>
+<ul>
+<li><p>What are you balancing here? The risk of making a Type II error and the time you have to wait for your results.</p></li>
+<li><p>All else equal, the higher a level or power you want, the longer you’ll have to run the experiment to accumulate the requried sample size.</p></li>
+<li><p>Factors to consider:</p>
+<ul>
+<li>How costly is it to not implement a useful feature.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="useful-resources" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">3.5</span> Useful resources</h2>
+<ul>
+<li><span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="references.html#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span> for general overview</li>
+<li><span class="citation" data-cites="zhou2023all">Zhou, Lu, and Shallah (<a href="references.html#ref-zhou2023all" role="doc-biblioref">2023</a>)</span> for comprehensive overview of how to calculate power</li>
+<li><span class="citation" data-cites="bojinov2023design">Bojinov, Simchi-Levi, and Zhao (<a href="references.html#ref-bojinov2023design" role="doc-biblioref">2023</a>)</span>, section 5, for simulation results for switchbacks and generally good approach to simulation to emulate</li>
+<li><span class="citation" data-cites="reich2012empirical">Reich et al. (<a href="references.html#ref-reich2012empirical" role="doc-biblioref">2012</a>)</span> power calcs for cluster-randomised experiments</li>
+</ul>
+</section>
+<section id="qa" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="qa"><span class="header-section-number">3.6</span> Q&amp;A</h2>
+<p>Questions:</p>
+<ol type="1">
+<li>Longer experiment duration generally increases power. Can you think of a scenario where this is not the case?</li>
+</ol>
+<p>Answers:</p>
+<ol type="1">
+<li>When using a cumulative metric such as number of likes, the variance of which will increase the longer the experiment runs, which will increase the standard error of our treatment effect estimate and lower our power. Remember that <span class="math inline">\(SE(\hat{\tau}) = \sqrt{\frac{1}{P(1-P)}\frac{\sigma^2}{N}}\)</span>. So, whether this happens depends on what happens to <span class="math inline">\(\frac{\sigma^2}{N}\)</span>, as experiment duration increases. A decrease in power is plausible – likely, even! – because <span class="math inline">\(N\)</span> will increase in a concave fashion over the course of the experiment duration (some users keep coming back), while <span class="math inline">\(\sigma^2\)</span> is likely to grow faster than linearly, which causes the ratio to increase and power to decrease.</li>
+</ol>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
-<div id="ref-kohavi2020trustworthy" class="csl-entry" role="listitem">
-Kohavi, Ron, Diane Tang, and Ya Xu. 2020. <em>Trustworthy Online Controlled Experiments: A Practical Guide to a/b Testing</em>. Cambridge University Press.
+<div id="ref-bojinov2023design" class="csl-entry" role="listitem">
+Bojinov, Iavor, David Simchi-Levi, and Jinglong Zhao. 2023. <span>“Design and Analysis of Switchback Experiments.”</span> <em>Management Science</em> 69 (7): 3759–77.
+</div>
+<div id="ref-larsen2023statistical" class="csl-entry" role="listitem">
+Larsen, Nicholas, Jonathan Stallrich, Srijan Sengupta, Alex Deng, Ron Kohavi, and Nathaniel T Stevens. 2023. <span>“Statistical Challenges in Online Controlled Experiments: A Review of a/b Testing Methodology.”</span> <em>The American Statistician</em>, 1–15.
+</div>
+<div id="ref-reich2012empirical" class="csl-entry" role="listitem">
+Reich, Nicholas G, Jessica A Myers, Daniel Obeng, Aaron M Milstone, and Trish M Perl. 2012. <span>“Empirical Power and Sample Size Calculations for Cluster-Randomized and Cluster-Randomized Crossover Studies.”</span> <em>PloS One</em> 7 (4): e35564.
+</div>
+<div id="ref-zhou2023all" class="csl-entry" role="listitem">
+Zhou, Jing, Jiannan Lu, and Anas Shallah. 2023. <span>“All about Sample-Size Calculations for a/b Testing: Novel Extensions and Practical Guide.”</span> <em>arXiv Preprint arXiv:2305.16459</em>.
 </div>
 </div>
 </section>
@@ -609,13 +550,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span>
+      <a href="../chapters/metrics.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Metrics</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/metrics.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metrics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

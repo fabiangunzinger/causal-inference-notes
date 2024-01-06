@@ -27,7 +27,7 @@ Different contributions in the literature and different companies use different 
 
 - An organisation usually has only very few or even just one
 
-- Examples: "average monthly purchases" for Amazon.
+- Examples: "average monthly purchases" for Amazon, MAP for Meta
 
 
 ### Driver metrics

@@ -26,12 +26,14 @@ book:
     # - chapters/fisher.qmd
     # - chapters/neyman.qmd
     # - chapters/regression_for_experiments.qmd
+    # - chapters/sampling_vs_randomisation_uncertainty.qmd
+    # - chapters/experiment_analysis.qmd
     # - chapters/dags.qmd
 
     # Experiments in practice
     # - chapters/experiment_designs.qmd
-    - chapters/end_to_end_example.qmd
     - chapters/metrics.qmd
+    - chapters/power.qmd
     # - chapters/variance_reduction.qmd
     # - chapters/cuped.qmd
     # - chapters/network_experiments.qmd
