@@ -36,11 +36,12 @@ book:
     - chapters/metrics.qmd
     - chapters/power.qmd
     - chapters/threats_to_validity.qmd
-    # - chapters/practical_issues.qmd
+    - chapters/practical_issues.qmd
     # - chapters/variance_reduction.qmd
     # - chapters/cuped.qmd
-    # - chapters/network_experiments.qmd
-    # - chapters/switchbacks.qmd
+    - chapters/network_experiments.qmd
+    - chapters/switchbacks.qmd
+    - chapters/heterogeneous_treatment_effects.qmd
 
     # Quasi-experiments in practice
     # - chapters/quasi_experiments.qmd

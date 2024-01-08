@@ -10,9 +10,15 @@
 
 ## Metric taxonomy
 
-Different contributions in the literature and different companies use different ways to classify metrics. So so the same type of metrics will have different names and the same name will be used for different types of metrics across contexts. What matters is less the labels, but an understanding of the different functions metric can serve and how different types of metric relate to one another.
+- Different contributions in the literature and different companies use different ways to classify metrics. So so the same type of metrics will have different names and the same name will be used for different types of metrics across contexts. What matters is less the labels, but an understanding of the different functions metric can serve and how different types of metric relate to one another.
 
-@kohavi2020trustworthy classify metrics into goal metrics, driver metrics, and guardrail metrics. I find this useful and use it as the basis of how I think about metrics.
+- @kohavi2020trustworthy classify metrics into goal metrics, driver metrics, and guardrail metrics. I find this useful and use it as the basis of how I think about metrics, but also add supporting and debug metrics.
+
+- While I talk about these metrics below mainly as defined at the company level, they can be defined at each level within an organisation. 
+
+- The challenge is to make sure that definitions across metric types and organisation levels cohere. Figure 6.1 in @kohavi2020trustworthy is a useful way to visualise this: it shows a large arrow containing many small arrows inside. This can represent goal metrics (large arrow) and driver metrics (small arrows) or organisational metrics (large arrows) and team metrics (small arrows). In each case, we want to make sure that the direction of the small arrows is as aligned as possible with the large arrow.
+
+![Useful visual metaphor for aligning organisation level metrics with lower-level metrics](../inputs/metric_alignment.png){width=75%}
 
 
 ### Goal metrics
@@ -51,67 +57,58 @@ Different contributions in the literature and different companies use different 
 
 - The main guardrail to ensure internal validity is smaple ratio mismatch (SRM). Others are discussed in chapter 21 in @kohavi2020trustworthy
 
-- Guardrails that protect the business ensure that improving one part of the platform don't come at the cost of quality/experience/something else -- they basically try to guard against unintended consequences
-
-  - Latency would be an example
+- Guardrails that protect the business ensure that improving one part of the platform don't come at the cost of quality/experience/something else -- they basically try to guard against unintended consequences (an example would be site latency)
 
 - @deng2016data argue that the main feature of a good guardrail metric should be directionality, so that we can be sure that if we get a signal, it points in the right direction in terms of user experience (in contrast to debug metrics, which should have good sensitivity)
 
 - Amazon example: average number of purchases per day (to check that influx of sellers doesn't lead to paralysis for buysers)
 
 
-
-### Other metrics
-
-**Supporting metrics**
+### Supporting metrics
 
 - Indicators that the primary or NS metric are moving in the right direction (particularly useful as leading indicators)
 
 - Amazon example: emails sent to high-quality sellers, emails opened, etc.
 
-**Debug metrics**:
+
+### Debug metrics
 
 - @deng2016data mention debug metrics as a way to get additional informaiton about the movement of our primary metrics.
 
 - They can be useful when showing the individual components of combo metrics, or the numerator and denominator of ratio metrics.
 
 
-### Metrics at different levels of the organisation
-
-- Above, I have defined goal, driver, and guardrail metrics in reference to the organisation.
-
-- But they can be defined at each level within an organisation, too.
-
-- The challenge is to make sure that definitions across metric types and organisation levels cohere.
-
-- Figure 6.1 in @kohavi2020trustworthy is a useful way to visualise this: it shows a large arrow containing many small arrows inside. This can represent goal metrics (large arrow) and driver metrics (small arrows) or organisational metrics (large arrows) and team metrics (small arrows). In each case, we want to make sure that the direction of the small arrows is as aligned as possible with the large arrow.
-
-
 ## What makes a good Metric
 
+- What makes a good metric in general varies of the type of matric we're talking about.
 
-### STEDII
+- @kohavi2020trustworthy argues that a good goal or North Star metric is simple and stable. A good driver metrics, especially one which we would use for experimentation (is there ever an argument to be made for a driver metric that you wouldn't want to use for experimentation?), we have a few more criteria.
 
+- A good starting point to think about characteristics of a good metric for experimentation is the [STEDII framework](https://www.microsoft.com/en-us/research/group/experimentation-platform-exp/articles/stedii-properties-of-a-good-metric/) from Microsoft's experimentation platform. But I find it quite incomplete, and augment it with other measures mentioned in @kohavi2020trustworthy.
 
-### Other characteristics
+Key:
 
-- Meaningful (reflect goals of company, product)
+- Meaningful: does it reflect the goal of the company/product (check is direction of change aligned with change in quality)
 
-- Measurable ()
+- Measurable: not everything is measurable (e.g. post-purchase satisfaction)
 
-- Moveable (with low delay)
+- Attributable: we must be able to attribute changes in the metrics to experiment variants (not possible with data from third party data proviers)
 
-- Interpretable (not too complicated, easy to communicate and understand)
+- Sensitive and timely: ensures we can detect a change in a timely manner (check that metric variance is low, and that we have historically observed change in the metric)
 
-- Not gameable (violate Goodhart's law)
+- Trustworthy: is the metric reliable for what we want to measure (is data collection reliable? is it not gameable[^goodhartslaw]?)
 
+- Interpretable and actionable: do we know what a change in the metric means? can we easily interpret it?
 
-### Different priorities for different metric types
+- Directionality: does the measure consitently go in the same direction for a change that means the same?
 
-- @kohavi2020trustworthy
+Further conserns:
 
-  - For goals: simple and stable 
-  - For drivers: aligned with goal, actionable and relevant, sensitive, resistant to gaming 
+- Efficient: can we use the metric at scale? (check cost of metric use)
+
+- Debuggable: can we investigate anomalies (can we decompose metric?)
+
+- Inclusive and fair: do we know blindspots and limitations? do we have segments to check impact of most vulnerable segments? 
 
 
 ## Developing and evaluating good metrics
@@ -145,25 +142,13 @@ Different contributions in the literature and different companies use different 
 
 ## Combining metrics into a signal / creating an OEC
 
+- We often consider multiple key metrics, and have a mental model of the trade-offs we are willing to accept (i.e. how much churn are we willing to accept as long as other users compensate for loss)?
 
+- An OEC is a way to formally state these trade-offs by creating a single metric as a weighted average of all key metrics.
 
-## Understanding metric sensitivity
+- Possible approaches
 
-- @deng2016data point out that detecting a treatment effect has two components:
-
-$$
-P(\text{detecting treatment effect on the metric}) = P(H_1) \times P(p \leq \alpha | H_1) 
-$$
-
-- $P(H_1)$ is the probability the movement probability -- the probability that the metric moves
-
-- $P(p \leq \alpha | H_1)$ is power
-
-- The authors point out that understanding which component produces a lack of sensitivity is crucial. Because if it's movement probability, we might need a different metric, whereas with a lack of power, variance reduction might help.
-
-- Examples for metrics with low movement probability might be "number of sessions per user" for a search engine, since daily search needs are limited, and changing user engagement is difficult in the short-term. An example for a metric with low power is "Revenue per user", due to very high variance.
-
-- See also @richardson2023pareto for a better exposition of the entire point.
+  - Normalise each metrics to between 0 and 1 and assign a weight to each
 
 
 ## How to select metrics
@@ -202,6 +187,16 @@ $$
 - Have an OEC that directly captuers what you want to measure. Selecting the wrong metric can lead to misleading results. @kohavi2012trusworthy provide a memorable example from an experiment at Bing: the experiment increased revenue by user because search results were poorer, leading users to make more searches and lead them to click on more adds. This is good in the short-term. But in the long term, users will surely get frustrated by the poorer search results. A better metric would have been one that directly captures the quality of the search results, such as sessions per user. Lesson: have an OEC that directly captures the thing you want to improve, and use higher level-metrics such as revenue as guardrails.
 
 - Normalise metrics by sample size. E.g. user revenue per user rather than variant-level revenue (since the latter is dependent on number of users, which can vary between variants).
+
+- Adam D'Angelo on metrics [here](https://www.youtube.com/watch?v=zsBjAuexPq4)
+
+  - What to measure? Focus on users who are getting value today
+    - Active users (active if getting value)
+    - Revenue (implies they get value)
+    - Transactions (for marketplace)
+
+  - In general, if you have two groups, focus on metric that unifies them (i.e. for marketplace, transactions captures value for sellers and buyers)
+
 
 
 Guardrail metrics
@@ -364,11 +359,30 @@ Guardrail metrics
   - Type 3: User-Behavior-Driven Metrics: User-behavior-driven metrics, derived from user satisfaction and frustration models, aim to directly measure user experience and its impact on long-term service success. They are complex, involving detailed analysis of user behavior, like considering both clicks and dwell time for assessing search satisfaction. These metrics are sensitive and actionable for agile experiments, offering a more nuanced understanding of user interaction than simpler metrics.
 
 
-Adam D'Angelo on metrics [here](https://www.youtube.com/watch?v=zsBjAuexPq4)
 
-- What to measure? Focus on users who are getting value today
-  - Active users (active if getting value)
-  - Revenue (implies they get value)
-  - Transactions (for marketplace)
 
-- In general, if you have two groups, focus on metric that unifies them (i.e. for marketplace, transactions captures value for sellers and buyers)
+
+
+## Metric sensitivity decomposition
+
+- @deng2016data point out that detecting a treatment effect has two components:
+
+$$
+P(\text{detecting treatment effect on the metric}) = P(H_1) \times P(p \leq \alpha | H_1) 
+$$
+
+- $P(H_1)$ is moveability of the metric
+
+- $P(p \leq \alpha | H_1)$ is power
+
+- The authors point out that understanding which component produces a lack of sensitivity is crucial. Because if it's movement probability, we might need a different metric, whereas with a lack of power, variance reduction might help.
+
+- Examples for metrics with low movement probability might be "number of sessions per user" for a search engine, since daily search needs are limited, and changing user engagement is difficult in the short-term. An example for a metric with low power is "Revenue per user", due to very high variance.
+
+- See also @richardson2023pareto for a more rigorous exposition of the point.
+
+- Think about this more. I'm not convinced we don't just care about power.
+
+
+
+[^goodhartslaw]: A metric that isn't gameable defies [Goodhart's law](https://en.wikipedia.org/wiki/Goodhart's_law), which is what we want.

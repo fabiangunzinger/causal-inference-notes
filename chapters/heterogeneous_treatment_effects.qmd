@@ -1,11 +1,8 @@
 # Heterogeneous treatment effects
 
+- Focusing only on mean outcomes can be detrimental in the long-term, especially in contexts where metrics are driven heavily by a small subset of superusers [@bojinov2020avoid]
 
-- Based on @bojinov2020avoid
-
-- Focusing only on mean outcomes can be detrimental in the long-term, especially in contexts where metrics are driven heavily by a small subset of superusers.
-
-- In such cases, focusing on the average effectively builds products for superusers, which can be a missed opportunity because increasing the engagement of infrequent users is often one of the largest opportunities for growth.
+- In such cases, focusing on the average effectively builds products for superusers, which can be a missed opportunity because increasing the engagement of infrequent users and ensuring they don't churn is often one of the largest opportunities for growth.
 
 - Solutions:
 
@@ -16,4 +13,29 @@
   - Account for group-specific behaviour (slice experiment results by country, main individual characteristics, and track share of top-line metrics contributed by top 1% of users)
 
   - Segment key markets (e.g. build versions of the product suitable for particular needs -- e.g. LinkedIn Light built to cater for Indian users on slower 3G networks).
+
+
+## Good segments
+
+- Market or country
+- Device or platform
+- Time of day or day of week
+- User type (new vs existing, high-use vs low-use)
+- Account characteristics (single vs joint account)
+
+
+## Issues to be aware of
+
+- Users changing segment can lead to misleading results: if I make changes on feature F, and compare users of F with those who don't use F. Suppose avg of sessions per wk is 20 for users, 10 for non-users. Now suppose that my change makes everyone with 15 sessions per wk who previously used F to stop using F. Avg for users of F will increase, that for non-users will also increase. But this has nothing to do with overall avg sessions per wk, which could go in any direction. -- Solution: if possible, only look at segments that are fixed before the start of the experiment. If you cannot do that, then beware of this issue, and look at aggregate metrics.
+
+- Simpson's paradox
+
+
+## Simpson's paradox
+
+...
+
+## Resources
+
+- @bojinov2020avoid
 
