@@ -1,80 +1,7 @@
 # Practical issues
 
-There are a lot of things that can impact the degree to which online experiments are useful.
-
 todo:
-- Recast these issues in terms of threads to internal and external validity
 - Look at @kohavi2009controlled and @kohavi2007practical (a shorter version of the former)
-
-
-## Internal validity
-
-- Ensures that the results from the experiment are correct for the context at hand (i.e. there are no mistakes in randomisation or treatment administration)
-
-## External validity
-
-- Ensures that the results from the experiment generalise to other contexts (i.e. other time periods, other regions, other user groups)
-
-
-
-## Budget effects in Ads
-
-- On an adds platform, a treatment might perform very well during an experiment in that it makes marketers launch more adds. But once scaled up may do less well because the increased traffic might exhaust marketer's budgets, leading them to reduce adds launched.
-
-
-## Feedback loops from personalisation
-
-- Treatments might behave differently during experimentation and once they are scaled up if the performance of a feature is a function of the size of the audience it is exposed to (an example could be a recommendation algorithm, which performs better and better as it is being used more).
-
-
-## Cannibalisation and crossover
-
-- There are two types of cannibalisation: one is the reduction in the use of a company's product as a result of the introduction or changes in a different product. This can be addressed by having guardrail metrics in an experiment (i.e. for Meta, if you add a feature to Instagram, ensure that key metrics for facebook stay stable).
-
-- The other type is within a single experiment, in the context where there are different types of units in an online marketplace and where treatment units cannibalise demand of control units becaues they compete both for the same fixed stock of resources of the other type of unit in the marketplace.
-
-
-## Day-of-week effects
-
-- See below
-
-
-## Seasonality
-
-- Seasonality comes in many forms: day of week effects, week of year effects, season effects, holiday effects, etc.
-
-- The challenge is that, potentially, user behaviour might differ on certain days or over certain time periods either because we get different users or because users change their behaviour.
-
-- Whether it is really a problem depends on the context. One aspect that is often forgotten here is that seasonality, first and foremost, is about a shift in levels -- activity on LinkedIn might go down during the summer months. What we usually want to measure, however, is the difference between treatment and control units. Hence, if you don't have reason to believe that the effect of the treatment is different during a particular season (e.g. because you think it's additive), then seasonality might not be a problem for you.
-
-- Having said that, it's actually quite likely that with either different users or different behaviour by the same users, users might react differently to featore on different days. So it really is a thread to external validity, and we thus should usually care about it.
-
-- Solution: design your experiment so as to take seasonality into account. E.g. run your experiment for at least one week to account for day of week effects (that's generally a good idea), don't run crucial experiments during the holiday season or on major holidays or discard data from such periods, etc. 
-
-- What to take into account depends on your context. So understand the relevant seasonality for you (if you're a travel app, consider seasonality of travel demand, if you're an e-commerce site, consider seasonality of shopping behaviour)
-
-
-## Differences in time-to-action between users
-
-- Some users may engage with a new features immediately, others might take a while and then react differently to it.
-
-- When running experiments for a very short time, we might thus get a biased picture of the overall effect of the feature.
-
-
-## Novelty and learning effects
-
-- Challenge: behaviour might change abruptly and temporarily in response to a new feature (novelty or "burn in" effect) or it might take a while for behaviour fully adapt to a new feature (learning effects). In both cases, the results from a relatively short experiment will not provide a representative picture of the long-run effects of a feature.
-
-- Examples: Increasing number of adds shows on Google led to increase in add revenue initially but then decrease of clicks in the long term because it increased add blindness @hohnhold2015focusing
-
-- Solutions:
-
-  - Measure long-term effects (by running experiments for longer)
-
-  - Have a "holdout" group of users that isn't exposed to any changes for a pre-set period of time (a month, a quarter), to measure long-term effects
-
-  - Estimate dynamic treatment effects to see the evolution of the treatment effect
-
 
 
 ## What if you want to implement a feature right away?
@@ -88,28 +15,6 @@ todo:
 - But I really like the idea, because sometimes there really are cases in practice where you can be pretty certain that waiting for results is a waste of time (e.g. if you have an online shop and move from list of items without pictures to a grid-view with pictures). In such a situation, running a holdout experiment can help you be certain that the direction of the effect is what you expected, and also provide an estimate for the magnitude of the effect.
 
 
-## Non-representative users in experiment
-
-Possible scenarios:
-
-- Our marketing department launches an add campaign and attracts a lot of unusual users to the site temporarily.
-
-- A competitor does the same and temporarily takes a ways users from our site.
-
-- Heavy-user bias: heavy users are more likely to be bucketed in an experiment, biasing the results relative to the overall effect of a feature. Depending on the context, this can be an issue.
-
-- Solution: run experiments for longer (thought this comes with opportunity costs, and will increase cookie churn)
-
-## Interaction effects
-
-- Users can be simultaneously part of multiple experiments, so that what we measure for reach of them is really the effect of the interaction of all of them. This means that, if only some features are implemented, the results after roll out could be different from those observed during the experiment period.
-
-- However, with large sample sizes, this should not generally be a problem because effects of different experiments average out between treatment and control group.
-
-
-
 ## Resources
 
 - [Forbes article on when not to trust your A/B tests](https://www.forbes.com/sites/quora/2015/06/19/when-should-ab-testing-not-be-trusted-to-make-decisions/)
-
-- [Dennis Meisner discussing threats to external validity](https://towardsdatascience.com/ab-testing-when-external-validity-messes-with-your-results-888197b6bc7b)

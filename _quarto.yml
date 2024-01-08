@@ -31,9 +31,12 @@ book:
     # - chapters/dags.qmd
 
     # Experiments in practice
+    # - chapters/guiding_principles.qmd
     # - chapters/experiment_designs.qmd
     - chapters/metrics.qmd
     - chapters/power.qmd
+    - chapters/threats_to_validity.qmd
+    # - chapters/practical_issues.qmd
     # - chapters/variance_reduction.qmd
     # - chapters/cuped.qmd
     # - chapters/network_experiments.qmd
@@ -45,7 +48,6 @@ book:
     # - chapters/regression_discontinuity.qmd
 
     # Misc.
-    # - chapters/practical_issues.qmd
     # - chapters/multiple_hypothesis_correction.qmd
     # - chapters/misc_topics.qmd
     # - chapters/useful_resources.qmd

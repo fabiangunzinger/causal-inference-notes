@@ -253,9 +253,12 @@ Limitations of reliying on pvap
 
 - The false positive rate is $P(significant result|no true effect)$
 
-- The false discovery rate is $P(no true effect|significant result)$ (this is precision)
+- The false discovery rate is $P(no true effect|significant result)$ 
 
-- 
+
+## Confidence interval interpretations
+
+- 95% CI for control and treatment overlap. Does this imply treatment is not significant?
 
 
 ## Sources
