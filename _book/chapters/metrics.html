@@ -306,15 +306,23 @@ div.csl-indent {
 <ul>
 <li><p>What makes a good metric in general varies of the type of matric we’re talking about.</p></li>
 <li><p><span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="references.html#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span> argues that a good goal or North Star metric is simple and stable. A good driver metrics, especially one which we would use for experimentation (is there ever an argument to be made for a driver metric that you wouldn’t want to use for experimentation?), we have a few more criteria.</p></li>
-<li><p>A good starting point to think about characteristics of a good metric for experimentation is the <a href="https://www.microsoft.com/en-us/research/group/experimentation-platform-exp/articles/stedii-properties-of-a-good-metric/">STEDII framework</a> from Microsoft’s experimentation platform.</p></li>
-<li><p>I appended “meaningful” to it, which the original framework captures in trustworthy, which seems a little contrived.</p></li>
-<li><p>Sensitive: ensures we can detect a change (check that metric variance is low, and that we have historically observed change in the metric)</p></li>
+<li><p>A good starting point to think about characteristics of a good metric for experimentation is the <a href="https://www.microsoft.com/en-us/research/group/experimentation-platform-exp/articles/stedii-properties-of-a-good-metric/">STEDII framework</a> from Microsoft’s experimentation platform. But I find it quite incomplete, and augment it with other measures mentioned in <span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="references.html#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span>.</p></li>
+</ul>
+<p>Key:</p>
+<ul>
+<li><p>Meaningful: does it reflect the goal of the company/product (check is direction of change aligned with change in quality)</p></li>
+<li><p>Measurable: not everything is measurable (e.g.&nbsp;post-purchase satisfaction)</p></li>
+<li><p>Attributable: we must be able to attribute changes in the metrics to experiment variants (not possible with data from third party data proviers)</p></li>
+<li><p>Sensitive and timely: ensures we can detect a change in a timely manner (check that metric variance is low, and that we have historically observed change in the metric)</p></li>
 <li><p>Trustworthy: is the metric reliable for what we want to measure (is data collection reliable? is it not gameable<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>?)</p></li>
+<li><p>Interpretable and actionable: do we know what a change in the metric means? can we easily interpret it?</p></li>
+<li><p>Directionality: does the measure consitently go in the same direction for a change that means the same?</p></li>
+</ul>
+<p>Further conserns:</p>
+<ul>
 <li><p>Efficient: can we use the metric at scale? (check cost of metric use)</p></li>
 <li><p>Debuggable: can we investigate anomalies (can we decompose metric?)</p></li>
-<li><p>Interpretable and actionable: do we know what a change in the metric means? (can we easily interpret it? does it have directionality?)</p></li>
 <li><p>Inclusive and fair: do we know blindspots and limitations? do we have segments to check impact of most vulnerable segments?</p></li>
-<li><p>Meaningful: does it reflect the goal of the company/product (check is direction of change aligned with change in quality)</p></li>
 </ul>
 </section>
 <section id="developing-and-evaluating-good-metrics" class="level2" data-number="2.4">
@@ -342,6 +350,14 @@ div.csl-indent {
 </section>
 <section id="combining-metrics-into-a-signal-creating-an-oec" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="combining-metrics-into-a-signal-creating-an-oec"><span class="header-section-number">2.5</span> Combining metrics into a signal / creating an OEC</h2>
+<ul>
+<li><p>We often consider multiple key metrics, and have a mental model of the trade-offs we are willing to accept (i.e.&nbsp;how much churn are we willing to accept as long as other users compensate for loss)?</p></li>
+<li><p>An OEC is a way to formally state these trade-offs by creating a single metric as a weighted average of all key metrics.</p></li>
+<li><p>Possible approaches</p>
+<ul>
+<li>Normalise each metrics to between 0 and 1 and assign a weight to each</li>
+</ul></li>
+</ul>
 </section>
 <section id="how-to-select-metrics" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="how-to-select-metrics"><span class="header-section-number">2.6</span> How to select metrics</h2>

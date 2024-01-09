@@ -182,7 +182,10 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#resources" id="toc-resources" class="nav-link active" data-scroll-target="#resources"><span class="header-section-number">8.1</span> Resources</a></li>
+  <li><a href="#good-segments" id="toc-good-segments" class="nav-link active" data-scroll-target="#good-segments"><span class="header-section-number">8.1</span> Good segments</a></li>
+  <li><a href="#issues-to-be-aware-of" id="toc-issues-to-be-aware-of" class="nav-link" data-scroll-target="#issues-to-be-aware-of"><span class="header-section-number">8.2</span> Issues to be aware of</a></li>
+  <li><a href="#simpsons-paradox" id="toc-simpsons-paradox" class="nav-link" data-scroll-target="#simpsons-paradox"><span class="header-section-number">8.3</span> Simpson’s paradox</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">8.4</span> Resources</a></li>
   </ul>
 </nav>
     </div>
@@ -217,8 +220,34 @@ div.csl-indent {
 <li><p>Segment key markets (e.g.&nbsp;build versions of the product suitable for particular needs – e.g.&nbsp;LinkedIn Light built to cater for Indian users on slower 3G networks).</p></li>
 </ul></li>
 </ul>
-<section id="resources" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="resources"><span class="header-section-number">8.1</span> Resources</h2>
+<section id="good-segments" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="good-segments"><span class="header-section-number">8.1</span> Good segments</h2>
+<ul>
+<li>Market or country</li>
+<li>Device or platform</li>
+<li>Time of day or day of week</li>
+<li>User type (new vs existing, high-use vs low-use)</li>
+<li>Account characteristics (single vs joint account)</li>
+</ul>
+</section>
+<section id="issues-to-be-aware-of" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="issues-to-be-aware-of"><span class="header-section-number">8.2</span> Issues to be aware of</h2>
+<ul>
+<li><p>Users changing segment can lead to misleading results: if I make changes on feature F, and compare users of F with those who don’t use F. Suppose avg of sessions per wk is 20 for users, 10 for non-users. Now suppose that my change makes everyone with 15 sessions per wk who previously used F to stop using F. Avg for users of F will increase, that for non-users will also increase. But this has nothing to do with overall avg sessions per wk, which could go in any direction. – Solution: if possible, only look at segments that are fixed before the start of the experiment. If you cannot do that, then beware of this issue, and look at aggregate metrics.</p></li>
+<li><p>Simpson’s paradox</p></li>
+</ul>
+</section>
+<section id="simpsons-paradox" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="simpsons-paradox"><span class="header-section-number">8.3</span> Simpson’s paradox</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../inputs/simpsons_paradox.gif" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Pace~svwiki, CC BY-SA 4.0 <a href="https://creativecommons.org/licenses/by-sa/4.0" class="uri">https://creativecommons.org/licenses/by-sa/4.0</a>, via Wikimedia Commons</figcaption>
+</figure>
+</div>
+</section>
+<section id="resources" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="resources"><span class="header-section-number">8.4</span> Resources</h2>
 <ul>
 <li><span class="citation" data-cites="bojinov2020avoid">Bojinov, Saint-Jacques, and Tingley (<a href="references.html#ref-bojinov2020avoid" role="doc-biblioref">2020</a>)</span></li>
 </ul>
