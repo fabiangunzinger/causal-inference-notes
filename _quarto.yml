@@ -33,7 +33,9 @@ book:
     # Experiments in practice
     # - chapters/guiding_principles.qmd
     # - chapters/experiment_designs.qmd
+    - chapters/experiment_stats.qmd
     - chapters/metrics.qmd
+    # - chapters/decision_making.qmd
     - chapters/power.qmd
     - chapters/threats_to_validity.qmd
     - chapters/practical_issues.qmd
@@ -51,6 +53,7 @@ book:
     # Misc.
     # - chapters/multiple_hypothesis_correction.qmd
     # - chapters/misc_topics.qmd
+    # - chapters/ethics.qmd
     # - chapters/useful_resources.qmd
     - chapters/references.qmd
 

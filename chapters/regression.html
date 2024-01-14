@@ -45,10 +45,23 @@ ul.task-list li input[type="checkbox"] {
 
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Regression</h1>
+</div>
 
 
-<section id="regression" class="level1">
-<h1>Regression</h1>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
 <p>todo: - Use DAaidson and MacKinnon metrics book: nicely separates mechanics of ols with statistical interpretation. Do the same.</p>
 <p>Linear regression is by far the most often used method to estimate relationships between outcomes and explanatory variables in applied econometrics and – probably – all of applied social science. In this article I want to to two things: define the related terminology that is often used but not defined (OLS, linear equation, etc.) and – mainly – explain a less frequently taught and understand way to think about linear regression, that in terms of its linear algebra.</p>
 <p>There are, of course, a lot of very good resources on linear regression and OLS, and I list my favourite ones at the bottom. But none of them quite tie everything together in the way I was looking for.</p>
@@ -187,12 +200,17 @@ X'X\beta &amp;= X'y \\
 </section>
 <section id="misc.-questions" class="level2">
 <h2 class="anchored" data-anchor-id="misc.-questions">Misc. questions</h2>
+</section>
+<section id="testing-the-assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="testing-the-assumptions">Testing the assumptions</h2>
+<ul>
+<li>Based on <a href="https://github.com/erykml/medium_articles/blob/master/Statistics/linear_regression_assumptions.ipynb">this</a></li>
+</ul>
 <section id="normality-of-error-term" class="level3">
 <h3 class="anchored" data-anchor-id="normality-of-error-term">Normality of error term</h3>
 <ul>
 <li>Why should error term be normal? One way to think about it is that we can think of the error term as the sum of many independent error terms. By the CLT, the distribution of the error term is then well approximated by a normal distribution. (In the CLT language, an error term for a single unit in the sample is a single sum of independent variables, and the distribution of all these errors can be approximated by a normal distribution)</li>
 </ul>
-</section>
 </section>
 </section>
 

@@ -1,0 +1,4 @@
+# Decision-making
+
+- How should you set the significance level, power, and the MDE?
+

@@ -25,6 +25,11 @@
 
 ### Design-based approaches
 
+#### Split resources
+
+- If shared resources cause the issue (e.g. budget for ads), then splitting the resources is an option (i.e. 50% of resources for a variance that gets 50% of the traffig)
+
+
 #### Cluster-based randomisation approaches
 
 - This approache first splits the units into clusters that are disjoint (or as disjoint as possible). Randomisation then happens at the cluster level, and all units within a cluster receive the same treatment.
@@ -43,7 +48,9 @@
 
     - To test a feature in a social-network app: create graphs of user interactions, and partition the graph such that there is maximal within-group interaction and minimal between group interaction
 
-- Another challenge is ensuring you have enough effective sample size: if the outcomes of users within a group are correlated, then randomising at a level higher than the unit reduces effective sample size. In the extreme case, where within group correlation is perfect, your effective sample size is the number of groups, not the number of units. See 
+- Another challenge is ensuring you have enough effective sample size: if the outcomes of users within a group are correlated, then randomising at a level higher than the unit reduces effective sample size. In the extreme case, where within group correlation is perfect, your effective sample size is the number of groups, not the number of units.
+
+- Effectively, we face a variance-bias tradeoff: the fewer clusters we have the larger and more isolated they are, which leads to low bias but large variance and vice versa. 
 
 - How to adjust standard errors? See @abadie2023should and @de2024level
 
@@ -51,6 +58,8 @@
 #### Ego-clusters
 
 - Instead of traditional clusters, create much smaller, unit-based clusters. See @saint2019using
+
+- Basically: you create clusters based on a central node (the ego) and its direct links (the alters), and randomise egos and alters seprately.
 
 
 #### Switchback experiments

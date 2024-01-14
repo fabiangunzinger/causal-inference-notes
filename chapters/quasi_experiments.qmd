@@ -1,5 +1,14 @@
 # Quasi-experiments
 
+## Limits of quasi-experiments
+
+- @kohavi2020trustworthy in sidebar on p. 147 cite a number of great studies that comper obervational causal studies to experiments and generally find that the former perform poorly.
+
+- There is also a useful list [here](https://experimentguide.com/refuted_observational_studies/)
+
+
+
+
 ## How to decide when to use QEs in practice?
 
 - @bojinov2020importance have a useful decision tree: is the question of interest descriptive, predictive, or causal in nature? If causal, can you run an experiment? If not, use a QE approach.

@@ -1,0 +1,15 @@
+# Ethics
+
+Some useful principles to consider, based on reading chapter 9 in @kohavi2020trustworthy
+
+- Only test changes that Company policy would allow you to roll out to 100 percent of users i.e. for Meta, deliberately showing them negative content wouldn't qualify. Personally I'm not sure I agree. I think in the Meta example, it would be useful to understand the effect of exposure to negative content. I'm not gonna think about this deeply now, but I think adapting the rule to not showing levels of content users couldn't organically be exposed to on the platform might be more useful. In the Meta example, this would allow for studying the effect of negative content in a systematic way without making the experience worse for treatment users than it actually is for some users (and could well be for treatment users, too). The reason for my willingness to entertain to go further is that there is a potentially large benefit to understanding harm. Yes, there might be some cost in the very short term (and you'd obviously want ot bound that cost somehow, as I proposed above, in order to guard against slippery slopes), but if the insights gained allow you to prevent large harm indefinitely later, then that's worth considering. Two other thoughts: motivation clearly matters here. And: the possibility of a slippery slope is not generally an argument to not do something -- often, as here -- there are quite natural and objective ways to draw a line on how far one would be willing to go.
+
+- Aim for equipoise: this is a situation where, ex-ante, there is no grounds to favour one variant over another. This is the normal case. (The term is borrowed from clinical trial, where clinical equipoise is the assumption in an RCT that no drug is ex-ante better than another).
+
+- Some worthwhile experiments violate equipoise: increasing latency, disabling feature, showing more adds, all aim to help us collect data which can be useful to make tradeoffs later on, which, ultimately, can benefit users.
+
+- Beware of behavioural experiments and deception.
+
+- Presumptive consent: ask a small subset of users whether they would be okay participating and if they do, assume that the sentiment would generalise.
+
+- Different from clinical trials, subjects in online trials usually have the opportunity to switch service (for sth like FB, this might be difficult).

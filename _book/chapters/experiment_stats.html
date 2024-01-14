@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 8&nbsp; Heterogeneous treatment effects</title>
+<title>Causal inference notes - 2&nbsp; Statistics of online experiments</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -49,8 +49,8 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/references.html" rel="next">
-<link href="../chapters/switchbacks.html" rel="prev">
+<link href="../chapters/metrics.html" rel="next">
+<link href="../index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,6 +81,8 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -93,7 +95,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/heterogeneous_treatment_effects.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/experiment_stats.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -126,44 +128,50 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/experiment_stats.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Power</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/threats_to_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/practical_issues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/switchbacks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/heterogeneous_treatment_effects.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span></a>
+  <a href="../chapters/heterogeneous_treatment_effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -178,23 +186,14 @@ div.csl-indent {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#good-segments" id="toc-good-segments" class="nav-link active" data-scroll-target="#good-segments"><span class="header-section-number">8.1</span> Good segments</a></li>
-  <li><a href="#issues-to-be-aware-of" id="toc-issues-to-be-aware-of" class="nav-link" data-scroll-target="#issues-to-be-aware-of"><span class="header-section-number">8.2</span> Issues to be aware of</a></li>
-  <li><a href="#simpsons-paradox" id="toc-simpsons-paradox" class="nav-link" data-scroll-target="#simpsons-paradox"><span class="header-section-number">8.3</span> Simpson’s paradox</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">8.4</span> Resources</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></h1>
 </div>
 
 
@@ -209,69 +208,45 @@ div.csl-indent {
 
 </header>
 
-<ul>
-<li><p>Focusing only on mean outcomes can be detrimental in the long-term, especially in contexts where metrics are driven heavily by a small subset of superusers <span class="citation" data-cites="bojinov2020avoid">(<a href="references.html#ref-bojinov2020avoid" role="doc-biblioref">Bojinov, Saint-Jacques, and Tingley 2020</a>)</span></p></li>
-<li><p>In such cases, focusing on the average effectively builds products for superusers, which can be a missed opportunity because increasing the engagement of infrequent users and ensuring they don’t churn is often one of the largest opportunities for growth.</p></li>
-<li><p>Solutions:</p>
-<ul>
-<li><p>Use metrics and approaches that reflect the needs of different customer segments (e.g.&nbsp;specially designed metric, <a href="https://netflixtechblog.com/interleaving-in-online-experiments-at-netflix-a04ee392ec55">interleaving</a>)</p></li>
-<li><p>Measure impact across different levels of technical access (e.g.&nbsp;slice experiment results based on type of device (latest or older), speed of internet connection (check percentiles))</p></li>
-<li><p>Account for group-specific behaviour (slice experiment results by country, main individual characteristics, and track share of top-line metrics contributed by top 1% of users)</p></li>
-<li><p>Segment key markets (e.g.&nbsp;build versions of the product suitable for particular needs – e.g.&nbsp;LinkedIn Light built to cater for Indian users on slower 3G networks).</p></li>
-</ul></li>
-</ul>
-<section id="good-segments" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="good-segments"><span class="header-section-number">8.1</span> Good segments</h2>
-<ul>
-<li>Market or country</li>
-<li>Device or platform</li>
-<li>Time of day or day of week</li>
-<li>User type (new vs existing, high-use vs low-use)</li>
-<li>Account characteristics (single vs joint account)</li>
-</ul>
-</section>
-<section id="issues-to-be-aware-of" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="issues-to-be-aware-of"><span class="header-section-number">8.2</span> Issues to be aware of</h2>
-<ul>
-<li><p>Users changing segment can lead to misleading results: if I make changes on feature F, and compare users of F with those who don’t use F. Suppose avg of sessions per wk is 20 for users, 10 for non-users. Now suppose that my change makes everyone with 15 sessions per wk who previously used F to stop using F. Avg for users of F will increase, that for non-users will also increase. But this has nothing to do with overall avg sessions per wk, which could go in any direction. – Solution: if possible, only look at segments that are fixed before the start of the experiment. If you cannot do that, then beware of this issue, and look at aggregate metrics.</p></li>
-<li><p>Simpson’s paradox</p></li>
-</ul>
-</section>
-<section id="simpsons-paradox" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="simpsons-paradox"><span class="header-section-number">8.3</span> Simpson’s paradox</h2>
-<ul>
-<li><p>Simpson’s paradox basically happens due to a kind of omitted variable bias.</p></li>
-<li><p>It can occus if pooling data overlooks a confounding driver of the data generation that affects the data in specific ways.</p></li>
-<li><p>In particular, the underlying data needs to be such that:</p>
-<ol type="1">
-<li>Outcomes differ by the level of the confounding variable</li>
-<li>The difference in outcome between these levels is larger than the differences in outcome within each level</li>
-</ol></li>
-<li><p>This is very abstract – I’m aiming to rewrite this over time.</p></li>
-<li><p>The paradox has two classic manifestations: frequency Tables and correlations.</p></li>
-<li><p>For frequency Tables, classic examples are listed on <a href="https://en.wikipedia.org/wiki/Simpson%27s_paradox#Examples">Wikipedia</a>. Notice that in all the examples, the difference in outcomes between levels of the confounder (departments, stone size, and year) is much larger than the differences between the groups of interest (men and women, treatments, batters) at any given level of the confounder.</p></li>
-<li><p>For correlations, the below gif makes things very clear.</p></li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../inputs/simpsons_paradox.gif" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Pace~svwiki, CC BY-SA 4.0 <a href="https://creativecommons.org/licenses/by-sa/4.0" class="uri">https://creativecommons.org/licenses/by-sa/4.0</a>, via Wikimedia Commons</figcaption>
-</figure>
-</div>
-</section>
-<section id="resources" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="resources"><span class="header-section-number">8.4</span> Resources</h2>
-<ul>
-<li><span class="citation" data-cites="bojinov2020avoid">Bojinov, Saint-Jacques, and Tingley (<a href="references.html#ref-bojinov2020avoid" role="doc-biblioref">2020</a>)</span></li>
-</ul>
+<p>Our estimate of the average treatment effect is</p>
+<p><span class="math display">\[
+\hat{\tau} = \bar{Y}^{obs}_t - \bar{Y}^{obs}_c,
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\bar{Y}_t^{obs} = \frac{1}{N_t}\sum_{i:W_i=1} Y_i^{obs} \qquad \bar{Y}_c^{obs} = \frac{1}{N_c}\sum_{i:W_i=0} Y_i^{obs}.
+\]</span></p>
+<p>This is an unbiased estimate of <span class="math inline">\(\tau = \bar{Y(1)} - \bar{Y(0)}\)</span> (see Proof of Theorem 6.1 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="references.html#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>).</p>
+<p>Because treatment and control units are independently and randomly assigned, an unbiased estimate of the sampling variance of <span class="math inline">\(\hat{\tau}\)</span> is given by[^vardetails]:</p>
+<p><span class="math display">\[
+Var(\hat{\tau}) = \frac{s^2_t}{N_t} + \frac{s^2_c}{N_c},
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+s_c^2 = \frac{1}{N_c - 1}\sum_{i:W_i=0}\left(Y_i(0) - \bar{Y}_c^{obs}\right)^2 \qquad s_t^2 = \frac{1}{N_t - 1}\sum_{i:W_i=1}\left(Y_i(1) - \bar{Y}_t^{obs}\right)^2.
+\]</span></p>
+<p>To test whether the observed treatment effect is significantly different from zero, we test:</p>
+<p><span class="math display">\[
+H_0: \bar{Y}^{obs}_t = \bar{Y}^{obs}_c
+H_A: \bar{Y}^{obs}_t \neq \bar{Y}^{obs}_c.
+\]</span></p>
+<p>We calculate the test-statistic</p>
+<p><span class="math display">\[
+T = \frac{\hat{\tau}}{\sqrt{Var(\hat{\tau})}} \sim t_{(N_t + N_c - 2)},
+\]</span></p>
+<p>where <span class="math inline">\(N_t + N_c - 2\)</span> is number of degrees of freedom[^tdetails].</p>
+<p>[^vardetails] We gloss over a few details here. Depending on the treatment assignment mechanism, units are not independently assigned. In online experiments, we often use hash functions for treatment assignment, in which case assignment is independent. But if we use the assignment mechanism of a completely randomised experiment, where we perfectly balance the number of units assigned to each treatment, each unit being assigned to one variant lowers the probability of all other units being assigned to that same variant. In that case, the above variance estimator is unbiased only if the treatment effect is constant. However, it is usually used in practice even in cases where constant treatment effects are unlikely because it is conservative (i.e.&nbsp;at least as large as the true variance) and because it is always unbiased if the ATE is an estimate of the infinite super-population ATE.</p>
+<p>[^tdetails] Note that the test statistic follows a t-distribution because we have to estimate the variance (that is, if we replace the true variance with its estimate when standardising a normal variable, the result follows a Student’s t-distribution). So, this has nothing to do with the CLT. However, for the test statistic to follow a student distribution, the numerator has to follow a normal distribution. Often, though, the underlying data is not normal, so that its approximately normal only for large enough samples, due to the CLT. At the same time, the t-distribution also converges to normal as the sample size increases. Hence, one we have a sample size large enough to justify using the t-distribution, we might as well use a z-test. As pointed out in Chapter 9 in <span class="citation" data-cites="rice2006mathematical">Rice (<a href="references.html#ref-rice2006mathematical" role="doc-biblioref">2006</a>)</span>, the test statistic above only follows a t-distribution if we use the pooled variance, but for large sample sizes, the distribution is still approximately t or normal.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
-<div id="ref-bojinov2020avoid" class="csl-entry" role="listitem">
-Bojinov, Iavor, Guillaume Saint-Jacques, and Martin Tingley. 2020. <span>“Avoid the Pitfalls of a/b Testing.”</span> <em>Harvard Business Review</em> 98 (2): 48–53.
+<div id="ref-imbens2015causal" class="csl-entry" role="listitem">
+Imbens, Guido W, and Donald B Rubin. 2015. <em>Causal Inference in Statistics, Social, and Biomedical Sciences</em>. Cambridge University Press.
+</div>
+<div id="ref-rice2006mathematical" class="csl-entry" role="listitem">
+Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. Cengage Learning.
 </div>
 </div>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -509,13 +484,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/switchbacks.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span>
+      <a href="../index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/references.html" class="pagination-link">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/metrics.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metrics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

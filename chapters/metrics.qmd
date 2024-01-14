@@ -48,6 +48,8 @@
 
 - Will change over time as the service matures and as it becomes more closely aligned/correlated with the North Star
 
+- @duan2021online discuss lots of useful considerations for cases where we run experiments based on surrogate metrics
+
 - Example for Amazon buyer focused team: number of high-quality sellers that join platform per month.
 
 
@@ -198,18 +200,18 @@ Further conserns:
   - In general, if you have two groups, focus on metric that unifies them (i.e. for marketplace, transactions captures value for sellers and buyers)
 
 
+## Good use of guardrail metrics
 
-Guardrail metrics
+- Based on Airbnb's Experiment Guardrail system as discussed in [this](https://medium.com/airbnb-engineering/designing-experimentation-guardrails-ed6a976ec669) post
 
-- Customer experience
+- Goal is to have an automated process that ensures that no change as a negative impact on another part of the product without there having been an explicit discussion about it
 
-  - Latency
+- Select guardrails for each experiement (based on types of guardrails above, and find balance between protecting all teams and moving fast -- remember, as pointed out in the post, if you have 50 guardrail metrics and alert any significant degradation, then you have at least one false alert in 92% percent of experiments -- given that $1 - (1-0.05)^50 = 0.92$)
 
-  - Very poor experinece (i.e. no search results, threads, harassment)
+- For each metric, have three types of guardrals: impact guardrail (catch experiments with high negative impact on metric), power guardrail (ensure impact guardrail has adequate significance and power levels) and stat. sig guardrail (catch even small impacts on key metrics if statsig)
 
-- ...
+- Experiments that raise a flag are being discussed among all stakeholders to make launch decision considering all trade-offs
 
-- Cannibalisation of similar products in our ecosystem (i.e. WhatsApp impact on Messenger)
 
 
 ### How to think about risks of a given set of metrics?
@@ -337,12 +339,27 @@ An extension of the pirate metrics.
   - Average revenue per user (ARPE)
   - Customer lifetime value (CLV)
 
+Guardrails
 
-Guardrail metrics
-- Bounce rate (proportion of site visitors who leave after seeing only the first page)
-- Cancellation rate
-- Number of messages flagged as spam/harmful
+- Protecting the business
 
+  - Revenue
+
+  - Cancellation rate
+
+  - Cannibalisation of similar products in our ecosystem (i.e. WhatsApp impact on Messenger)
+
+- Protecting internal validity of experiment
+
+- User experience metrics
+
+  - Bounce rate (proportion of site visitors who leave after seeing only the first page)
+
+  - Latency
+
+  - Number of messages flagged as spam/harmful
+
+- Strategic priority metrics
 
 
 
@@ -357,10 +374,6 @@ Guardrail metrics
   - Type 2: Simple Heuristic Based Metrics: Simple heuristic based metrics, such as Click-Through Rate and user activity counts, offer direct insights into user interaction with online services. While actionable, they can be misleading in terms of user experience and business goals. For instance, higher CTR due to misleading content can negatively impact user experience and, subsequently, the service's market share. These metrics are suitable for early-stage services but may not align with real user experience improvements in more mature stages.
 
   - Type 3: User-Behavior-Driven Metrics: User-behavior-driven metrics, derived from user satisfaction and frustration models, aim to directly measure user experience and its impact on long-term service success. They are complex, involving detailed analysis of user behavior, like considering both clicks and dwell time for assessing search satisfaction. These metrics are sensitive and actionable for agile experiments, offering a more nuanced understanding of user interaction than simpler metrics.
-
-
-
-
 
 
 ## Metric sensitivity decomposition
@@ -382,6 +395,14 @@ $$
 - See also @richardson2023pareto for a more rigorous exposition of the point.
 
 - Think about this more. I'm not convinced we don't just care about power.
+
+
+## Metrics vs goals
+
+- Every metric has its limitations.
+
+- Meta's goal is to have lots of users. But how do you measure this? As Alex Schultz explains [here](https://www.youtube.com/watch?v=mIvX3hBc9rI), the industry has moved from registered users to confirmed registered users to active confirmed registered users to monthly active users 
+
 
 
 

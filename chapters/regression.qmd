@@ -4,9 +4,6 @@ todo:
 - Use DAaidson and MacKinnon metrics book: nicely separates mechanics of ols with statistical interpretation. Do the same. 
 
 
-
-
-
 Linear regression is by far the most often used method to estimate relationships between outcomes and explanatory variables in applied econometrics and -- probably -- all of applied social science. In this article I want to to two things: define the related terminology that is often used but not defined (OLS, linear equation, etc.) and -- mainly -- explain a less frequently taught and understand way to think about linear regression, that in terms of its linear algebra.
 
 There are, of course, a lot of very good resources on linear regression and OLS, and I list my favourite ones at the bottom. But none of them quite tie everything together in the way I was looking for.
@@ -209,6 +206,33 @@ which gets us to the same result but in more steps.
 
 
 ## Misc. questions
+
+
+## Assumptions
+
+- In general, as @hayashi2011econometrics points out, "a model is a set of joint distributions satisfying a set of assumptions".
+
+Classical linear regresison model
+
+1. Linearity
+
+- The relationship between the dependent and independent variables is linear.
+
+2. Strict exogeneity
+
+- $E(\epsilon_i | X) = 0$
+
+
+
+
+## Testing the assumptions
+
+- Based on [this](https://github.com/erykml/medium_articles/blob/master/Statistics/linear_regression_assumptions.ipynb)
+
+
+
+
+
 
 ### Normality of error term
 
