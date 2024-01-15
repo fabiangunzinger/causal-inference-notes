@@ -1,0 +1,4 @@
+# Guiding principles
+
+- Remember Twyman's Law: if a result looks interesting it is probably a mistake -- don't invent a story, investigate!
+

@@ -1,6 +1,14 @@
 # Miscellaneous topics
 
-## Causal inference vs prediction
+## Description vs prediction vs causal inference
+
+- Descriptive analysis describes the data. We simply turn data into meaningfull summary measures presented in tables or -- better, usually! -- figures. The aim here is to simply describe the data as it is, highlighting aspects that are particularly interesting or relevant to the task at hand.
+
+- Predictive analysis predicts unobserved metric values based on observed ones. We build a model that captures the data generating process of the metric we aim to predict based on training data we observe, so that we can then predict metric values we don't observe.
+
+- Causal inference makes statements about what would happen to outcomes if we changed the world in a particular way.
+
+Causal inference vs prediction
 
 - Prediction is about finding the most likely outcome based on a set of (existing) covariates. Causal inference is about finding the effect of a change in a covariate on the outcome.
 

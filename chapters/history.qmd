@@ -1,0 +1,3 @@
+# History
+
+- Great-looking history of experimentation from Kohavi [here](https://experimentguide.com/history/)

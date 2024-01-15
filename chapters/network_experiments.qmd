@@ -1,39 +1,34 @@
 # Network experiments
 
-- Network experiments are experiments where there the treatment status of units might determine the outcome of other units, thus violating the [SUTVA assumption](neyman_rubin_causal_model.qmd## Stable unit treatment value assumption (SUTVA)
-)
+- Network experiments are experiments in a context in which the outcome of some units is affected by the treatment status of other units, so that the treatment may not only change the behaviour of treated untis but also that of control units.
 
-- @larsen2023statistical cite a large number of papers that provide more details on these approaches and provide solutions to some of the challenges.
+- This violates [SUTVA](neyman_rubin_causal_model.qmd## Stable unit treatment value assumption (SUTVA)) and leads to a bias in standard ATE estimators. 
 
-
-## The problem
-
-- Interference creates bias in standard ATE estimators.
-
-- Fundamentally, this happens because with interference, the ATE is not an estimate of what would happen if all units were treated (which is what standard ATE estimates are estimating).
-
+- Fundamentally, we're dealing with a threat to external validity. In general, external validity is about the extent to which results from a scientific study can be generalised to contexts outside of the study. In the context of online experiments, where we typically experiment on a sample of the overall user population, external validity is about the extent to which results from our experiments translate to the entire population of users. Standard ATE estimators estimate the difference between two counterfactual states of the world: that where all units are treated and that which no units are treated. With interference, control units behave differently than they would have if nobody had been exposed to the treatment (and treatment of the treted units hadn't spilled over to them), and so the difference in treatment and control outcomes is no longer an unbiased estimate of the difference in outcomes of these two counterfactual states of the world.
 
 ## Types of interferance
 
 @larsen2023statistical differentiate between:
 
-- Network interference: all units in the population are the same but they interact with each other. In particular, interference happens when the treatment status of users in a social network mutually determines their outcome (e.g. one user being assigned to a new messenger service might increase messaging for that individual's friends who are in control)
+- Network interference. Suppose we have a network where all nodes are of the same type and where the behaviour of each node can affect the behaviour of the nodes it is directly connected to. An example is a social network, where all nodes are people, and where more activity of one person may plausibly lead to more activity among their connections, which may lead to more activity among their connections, and so on. Here, experimentation is difficult because if we randomly split units into treatment and control group, units in the treatment group that change their behaviour as a result of the treatment might interact with connections of theirs that are allocated to the control group and thus change their behaviour as a result. But now the units in the control group don't behave any longer as they would under the absence of the treatment, and comparing the differences in behaviour between treatment and control is not an accurate representation of the different outcomes in two counterfactual states of the world, one where everyone is treated and one where nobody is.
 
-- Marketplace interference: there are at least two types of units that form an online marketplace (i.e. sellers and buyers), and interference often happens when units compete for finite resources (e.g. uber customers hailing a finite amount of drivers, JET restaurants relying on a finite number of drivers). Examples are ride hailing, job matching, ads marketplaces, education platforms, and food delivery, which is an example of a three-sided marketplace. 
-
-- A particular typs of interference is "cannibalisation", whereby the increase in the desired behaviour in the treatment group is solely or (under partial cannibalisation) partially due to a shift of the behaviour from control units to treatment units. This usually happens if units share a common pool of a fixed resource (e.g. a fixe number of uber drivers, a fixed number of items to buy at an auction) and the treatment makes it easier or more attractive for the treatment units to engage in the behaviour, which then leaves fewer resources to the control. In other words, it's in zero-sum contexts. See @liu2020trustworthy
+- Marketplace interference. Suppose we have a network composed of two of more types of nodes which interact with each other, and where, from the perspective of each type of node, the number of other nodes is finite, so that each type of node competes for interactions with a fixed number of nodes of the other type. Examples include ride hailing, where drivers compete for customers and customers for available rides; ads marketplaces, where marketers compete for slots and platforms with slots for marketers; or food delivery services, where riders compete for orders and customers who place orders for riders (food delivery services, such as Deliveroo, are three-sided marketplaces, managing the interaction of restaurants, riders, and customers). In such a marketplace experimentation is challenging because treatment and control groups compete for a fixed pool of resources, so that an increase in behaviour for the treatment group must lead to a decrease in the decreate of the behaviour for the control group. This "cannibalisation" effect exaggerates the actual treatment effect. (See @liu2020trustworthy for more.)
 
 
-## Dealing with interaction effects
+## Dealing with interference
 
 - There are a number of different approaches (see, e.g. discussion in @larsen2023statistical)
 
-- What they share in common is that they all address the fundamental problem: that units that interact with one another are not all in the same treatment group, as they would be if everyone were in the same treatment group (as standard ATE estimaors assume).
+- What they share in common is that they all address the fundamental problem, which is that under the presence of interaction effects, the difference in outcomes between the treatment and the control group is not an accurate representation of the two counterfactual states of the world where everyone is and isn't exposed to the treatment, which is what standard ATE estimators measure.
 
-- There are two broad approaches: those that adjust the design, and those that adjust the analysis.
-
+- There are two broad ways to tackle the problem: we can adjust the design to limit interference in the first place, or we can model interference and adjust the analysis.
 
 ### Design-based approaches
+
+#### Split resources
+
+- If shared resources cause the issue (e.g. budget for ads), then splitting the resources is an option (i.e. 50% of resources for a variance that gets 50% of the traffig)
+
 
 #### Cluster-based randomisation approaches
 
@@ -55,9 +50,17 @@
 
 - Another challenge is ensuring you have enough effective sample size: if the outcomes of users within a group are correlated, then randomising at a level higher than the unit reduces effective sample size. In the extreme case, where within group correlation is perfect, your effective sample size is the number of groups, not the number of units.
 
+- Effectively, we face a variance-bias tradeoff: the fewer clusters we have the larger and more isolated they are, which leads to low bias but large variance and vice versa. 
+
+- How to adjust standard errors? See @abadie2023should and @de2024level
+
+
 #### Ego-clusters
 
-- Instead of traditional clusters, create much smaller, unit-based clusters.
+- Instead of traditional clusters, create much smaller, unit-based clusters. See @saint2019using
+
+- Basically: you create clusters based on a central node (the ego) and its direct links (the alters), and randomise egos and alters seprately.
+
 
 #### Switchback experiments
 
@@ -70,7 +73,7 @@
 
 ### Analysis-based approaches
 
-- Analysis based approaches model the interference and then adjust the analysis accordingly. See last paragraph of section 6 in @larsen2023statistical for details.
+- Analysis based approaches model the interference and then adjust the analysis accordingly. See last paragraph of section 6 in @larsen2023statistical for details. Also, @bojinov2023design, in their introduction, differentiate between approaches that rely on game theoretic, Markov Chain, and network approachs to model interference.
 
 
 ## Measuring interaction effects

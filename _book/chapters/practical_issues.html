@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 11&nbsp; Practical issues</title>
+<title>Causal inference notes - 5&nbsp; Practical issues</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,8 +49,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/quasi_experiments.html" rel="next">
-<link href="../chapters/experiments.html" rel="prev">
+<link href="../chapters/network_experiments.html" rel="next">
+<link href="../chapters/threats_to_validity.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -57,7 +76,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -73,10 +93,10 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/experiments.html">Experiments</a></li><li class="breadcrumb-item"><a href="../chapters/practical_issues.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Practical issues</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/practical_issues.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Practical issues</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -101,135 +121,49 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preface</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">introduction.qmd</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/epistemology.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">epistemology.html</span></span></a>
+  <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Power</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">ethics.html</span></span></a>
+  <a href="../chapters/threats_to_validity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/fundamental_problem.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fundamental problem of causal inference</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../fundamentals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Fundamentals</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/potential_outcomes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/dags.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Directed Acyclic Graphs</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">statistics.html</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/fwl.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">FWL</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../chapters/experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Experiments</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/practical_issues.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../chapters/quasi_experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Quasi experiments</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/matching.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Matching</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/regression_discontinuity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Regression discontinuity design</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/useful_resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Useful resources</span></span></a>
+  <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/switchbacks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/heterogeneous_treatment_effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -244,14 +178,21 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-if-you-want-to-implement-a-feature-right-away" id="toc-what-if-you-want-to-implement-a-feature-right-away" class="nav-link active" data-scroll-target="#what-if-you-want-to-implement-a-feature-right-away"><span class="header-section-number">5.1</span> What if you want to implement a feature right away?</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">5.2</span> Resources</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Practical issues</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Practical issues</span></h1>
 </div>
 
 
@@ -266,21 +207,35 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>todo: - Look at <span class="citation" data-cites="kohavi2009controlled">Kohavi et al. (<a href="references.html#ref-kohavi2009controlled" role="doc-biblioref">2009</a>)</span> and <span class="citation" data-cites="kohavi2007practical">Kohavi, Henne, and Sommerfield (<a href="references.html#ref-kohavi2007practical" role="doc-biblioref">2007</a>)</span> (a shorter version of the former)</p>
+<section id="what-if-you-want-to-implement-a-feature-right-away" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="what-if-you-want-to-implement-a-feature-right-away"><span class="header-section-number">5.1</span> What if you want to implement a feature right away?</h2>
 <ul>
-<li><p>For useful set of rules of thumb, see Kohavi papers as well as <a href="https://www.evanmiller.org/you-cant-spell-cuped-without-frisch-waugh-lovell.html#:~:text=So%20you're%20running%20experiments,faster%2C%20somehow%2C%20using%20math.">this</a> CUPED post</p></li>
-<li><p>For great outline of experiment platform and used methods see <a href="https://www.uber.com/en-GB/blog/xp/">this</a> Uber post.</p></li>
+<li><p>There are situations where you feel very confident that a feature works well and you don’t want to wait a week or two to implement it.</p></li>
+<li><p>Pinterest uses what they call “holdout experiments” in such cases, whereby 99% of users are exposed to the new feature and the remaining 1% act as the control (see <span class="citation" data-cites="king2020power">King (<a href="references.html#ref-king2020power" role="doc-biblioref">2020</a>)</span> for more). In effect, this is a reversal of how experimentation typically happens.</p></li>
+<li><p>You will want to use this approach sparingly, because the whole point of using experiments is that we usually can’t know the effect of a feature, even when we think we do (rember the <a href="https://pubmed.ncbi.nlm.nih.gov/15936423/">CRASH trial</a>).</p></li>
+<li><p>But I really like the idea, because sometimes there really are cases in practice where you can be pretty certain that waiting for results is a waste of time (e.g.&nbsp;if you have an online shop and move from list of items without pictures to a grid-view with pictures). In such a situation, running a holdout experiment can help you be certain that the direction of the effect is what you expected, and also provide an estimate for the magnitude of the effect.</p></li>
 </ul>
-<p>Notes from larsen2023statistical</p>
+</section>
+<section id="resources" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="resources"><span class="header-section-number">5.2</span> Resources</h2>
 <ul>
-<li>Reasons for insufficient power
-<ul>
-<li>Treatment effect is homogenously distributed across entire user base but very small</li>
-<li>Feature affects only small number of users, so overall effect is highly attenuated</li>
-<li>Treatment effect on known subgroups is of interest</li>
-</ul></li>
+<li><a href="https://www.forbes.com/sites/quora/2015/06/19/when-should-ab-testing-not-be-trusted-to-make-decisions/">Forbes article on when not to trust your A/B tests</a></li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-king2020power" class="csl-entry" role="listitem">
+King, Jeremy. 2020. <span>“The Power of These Techniques Is Only Getting Stronger.”</span> <em>Harvard Business Review</em>. HARVARD BUSINESS SCHOOL PUBLISHING CORPORATION 300 NORTH BEACON STREET&nbsp;….
+</div>
+<div id="ref-kohavi2007practical" class="csl-entry" role="listitem">
+Kohavi, Ron, Randal M Henne, and Dan Sommerfield. 2007. <span>“Practical Guide to Controlled Experiments on the Web: Listen to Your Customers Not to the Hippo.”</span> In <em>Proceedings of the 13th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, 959–67.
+</div>
+<div id="ref-kohavi2009controlled" class="csl-entry" role="listitem">
+Kohavi, Ron, Roger Longbotham, Dan Sommerfield, and Randal M Henne. 2009. <span>“Controlled Experiments on the Web: Survey and Practical Guide.”</span> <em>Data Mining and Knowledge Discovery</em> 18: 140–81.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -518,13 +473,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/experiments.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Experiments</span>
+      <a href="../chapters/threats_to_validity.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Threats to validity</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/quasi_experiments.html" class="pagination-link">
-        <span class="nav-page-text">Quasi experiments</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/network_experiments.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Network experiments</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

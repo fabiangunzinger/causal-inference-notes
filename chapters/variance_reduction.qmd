@@ -77,7 +77,47 @@ If $x$ is uncorrelated with the treatment assignment then $\beta = \beta_1$, so 
 - Imbens & Rubin, Causal Inference for Statistics, Social, and Biomedical Sciences, Chapter 7 [link](https://www.cambridge.org/core/books/causal-inference-for-statistics-social-and-biomedical-sciences/71126BE90C58F1A431FE9B2DD07938AB)
 
 
+## CUPAC
 
+- CUPED was designed by folks at Doordash [@tang2000control] to reduce the duration of their switchback experiments, which -- according to their paper -- it did by about 25 percent.
+
+- CUPED can be extended to (make notation consistent with CUPED)
+
+$$
+y' = y - \theta \bar{f(X)} + \theta E(f(X))
+$$
+
+- In above, it can be shown that optimal $f(X) = E(Y|X)$ (show this).
+
+- CUPED, which is effectively regression adjustment, uses best linear predictor.
+
+- CUPAC extends this to non-linear predictors, generating $\hat{y} = g(X) = E(Y|X)$.
+
+### Advantages
+
+- Can be used for metrics that have no pre-experiment data (if you have variables that correlate with the metric and are unaffected by the treatment)
+
+### Thoughts
+
+- There are two approaches: predict the experiment-time outcome or predict the pre-experiment value.
+
+- If you do the former, then you need features that are unaffected by the treatment. This means that for reach metric and each experiment, you need to collect features that meet this requirement. This will be different for each metric and experiment because for many features, whether or not the feature is impacted by the treatment depends on the specific experiment (i.e. where in the funnel the feature is active). This could be solved by finding, for each metric of interest, a set of features that are always independent of the treatment (such as distance between restaurant and customer, or the type of browser used by a customer), but it's not at all clear that finding a set of features with good predictive properties is possible for all our metrics. Hence, building this into a pipeline in an automated way would be an enormous endeavour, if it's possible at all.
+
+- This approach is thus really only viable in a very specialised setting where you keep running the same type of experiment, and thus have to build and train the model manually and only once (this is how it's being used for courier experiments).
+
+- To ensure that features really are independent of treatment condition, they actively monitor correlations for each running experiment.
+
+- @tang2000control gives the example of reducing average daily delivery time, where a delivery-level covariate that is unaffected by treatment is distance between restaurant and customer. 
+
+
+### Useful resources
+
+- [Control Using Predictions as Covariates in Switchback Experiments]([file:///Users/fabian.gunzinger/Downloads/code_final_draft1.pdf](https://www.researchgate.net/publication/345698207_Control_Using_Predictions_as_Covariates_in_Switchback_Experiments))
+
+
+## Other methods
+
+- [Variance Reduction Using In-Experiment Data: Efficient and Targeted Online Measurement for Sparse and Delayed Outcomes](https://alexdeng.github.io/public/files/kdd2023-inexp.pdf)
 
 
 ## Useful resources

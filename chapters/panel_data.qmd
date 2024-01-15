@@ -1,0 +1,5 @@
+# Panel-data models
+
+- See @arkhangelsky2023causal
+- See sources in @bojinov2020importance
+

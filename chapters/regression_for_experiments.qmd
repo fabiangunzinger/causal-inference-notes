@@ -1,0 +1,5 @@
+# Regression for experiment evaluation
+
+
+- See @athey2017econometrics
+- See also Friedman critique, Lin response, and Imbens Rubin book response

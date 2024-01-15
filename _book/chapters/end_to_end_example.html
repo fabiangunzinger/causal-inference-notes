@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Causal inference notes - 2&nbsp; End-to-end example</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/metrics.html" rel="next">
+<link href="../index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/end_to_end_example.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">End-to-end example</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Causal inference notes</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/end_to_end_example.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">End-to-end example</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#clarify" id="toc-clarify" class="nav-link active" data-scroll-target="#clarify"><span class="header-section-number">2.1</span> Clarify</a></li>
+  <li><a href="#pre-design" id="toc-pre-design" class="nav-link" data-scroll-target="#pre-design"><span class="header-section-number">2.2</span> Pre-design</a></li>
+  <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design"><span class="header-section-number">2.3</span> Design</a></li>
+  <li><a href="#running-experiment" id="toc-running-experiment" class="nav-link" data-scroll-target="#running-experiment"><span class="header-section-number">2.4</span> Running experiment</a></li>
+  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis"><span class="header-section-number">2.5</span> Analysis</a></li>
+  <li><a href="#decision-making" id="toc-decision-making" class="nav-link" data-scroll-target="#decision-making"><span class="header-section-number">2.6</span> Decision making</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">End-to-end example</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="clarify" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="clarify"><span class="header-section-number">2.1</span> Clarify</h2>
+<p>Understand the ask</p>
+<ul>
+<li><p>What does each term mean?</p></li>
+<li><p>What is our objective here?</p></li>
+</ul>
+<p>Understand the product</p>
+<ul>
+<li><p>What does the product do?</p></li>
+<li><p>What is its purpose?</p></li>
+<li><p>How precisely does it work?</p></li>
+</ul>
+<p>Describe my approach</p>
+<ul>
+<li><p>In order to design an evaluation approach, we’ll first have to make a few decisions together about what we care about as part of the test.</p></li>
+<li><p>Based on these, I’ll then propose a design and evaluation approach.</p></li>
+</ul>
+</section>
+<section id="pre-design" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="pre-design"><span class="header-section-number">2.2</span> Pre-design</h2>
+<p>Understand the change</p>
+<ul>
+<li><p>What is it?</p></li>
+<li><p>What problem is it trying to solve?</p></li>
+<li><p>Are there any concerns (for ideas and possible concerns of certain ideas, you should check the literature and have a look at <a href="https://goodui.org">GoodUI</a>)</p></li>
+</ul>
+<p>Understand the intervention</p>
+<ul>
+<li><p>How do we implement the feature?</p></li>
+<li><p>Do we implement different versions / have multiple treatments?</p></li>
+</ul>
+<p>Define metrics</p>
+<ul>
+<li><p>OEC, secondary, guardrails, debug</p></li>
+<li><p>Factors to consider</p>
+<ul>
+<li><p>What metric best captures behaviour we want to measure?</p></li>
+<li><p>Power</p></li>
+<li></li>
+</ul></li>
+<li><p>See <a href="metrics.html"><span>Chapter&nbsp;3</span></a> for more details</p></li>
+</ul>
+<p>Target audience</p>
+<ul>
+<li><p>Who is target audience?</p></li>
+<li><p>Any units to exclude?</p></li>
+<li><p>In general, it’s useful to think about the user experience funnel, and then think about where in the funnel the change is visible. More often than not, this is the relevant step at which to trigger users into the experiment.</p></li>
+</ul>
+<p>Formulate hypothesis</p>
+<ul>
+<li><p>“Adding a coupon field to the checkout page will reduce revenue per user for users who start the checkout process”.</p></li>
+<li><p>General template: “[proposed change] will [hypothesised effect] on [OEC] for [selected sample]”.</p></li>
+</ul>
+<p>Decide on statistical significance level, desired level of power, and MDE</p>
+<ul>
+<li><p>They are the key parameters to our experiment</p></li>
+<li><p>We use conventioal values of 0.05 and 0.8 for stat sifnificance and power, and 1 percent change for MDE.</p></li>
+</ul>
+<p>Decide on the MDE</p>
+<ul>
+<li>We use a 1 percent change</li>
+</ul>
+<p>Agree on decision-making process:</p>
+<ul>
+<li><p>Find a criteria that completely determines the launch/no-launch decision, i.e.&nbsp;such that meeting the criteria is a clear launch.</p></li>
+<li><p>For experiment, the criteria is the relationship between the OEC and the MDE.</p></li>
+<li><p>Validate these criteria with PM/leadership.</p></li>
+<li><p>Use traffic light system to classify your results: green is launch, red is no-launch, amber is need more info/data (see below)</p></li>
+</ul>
+</section>
+<section id="design" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="design"><span class="header-section-number">2.3</span> Design</h2>
+<p>Randomisation</p>
+<ul>
+<li><p>Randomisation unit</p></li>
+<li><p>Assignment mechanism</p></li>
+<li><p>Variant split</p>
+<ul>
+<li><p>Generally, equal proportions have highest power</p></li>
+<li><p>But if we have many treatments, allocating more users to control is advisable (describe why)</p></li>
+</ul></li>
+</ul>
+<p>Experiment size</p>
+<ul>
+<li><p>Given required power, MDE, and significance level, use power calculation to determine minimum size.</p></li>
+<li><p>See <a href="power.html"><span>Chapter&nbsp;4</span></a> for factors to consider that can affect power.</p></li>
+<li><p>Factors that determine power</p>
+<ul>
+<li><p>High vs low variance metric (e.g.&nbsp;binary has higher power due to lower variance)</p></li>
+<li><p>MDES</p></li>
+<li><p>Significance level</p></li>
+</ul></li>
+<li><p>Other factors to consider</p>
+<ul>
+<li><p>How save is experiment? If risky, ramp-up more slowly</p></li>
+<li><p>Do we need to share traffic with other experiments?</p></li>
+</ul></li>
+</ul>
+<p>Experiment duration</p>
+<ul>
+<li><p>We’ll make sure to run the experiment for at least a week to guard against day-of-week effects, and we’ll check for novely and learning effects and run the experiment for longer if needed</p></li>
+<li><p>Factors to consider</p>
+<ul>
+<li><p>More units generally leads to higher power (unless with cumulative metrics such as counts where variance increases with duration), though in a concave way – this is related to size requirement above</p></li>
+<li><p>Day of week effect (run for at least a week)</p></li>
+<li><p>Seasonality</p>
+<ul>
+<li><p>Need to ensure results not driven by reasonality in any of the places experiment is run</p></li>
+<li><p>One aspect of external validity (in terms of time)</p></li>
+</ul></li>
+<li><p>Novelty and learning effects (run experiment for longer until we see stable effects)</p></li>
+</ul></li>
+</ul>
+<p>Analysis</p>
+<ul>
+<li><p>Analysis approach (Fisher, Neyman, regression?)</p></li>
+<li><p>Corrections (MHT)?</p></li>
+</ul>
+<p>Timeline</p>
+<ul>
+<li>Discuss and agree upon timaline</li>
+</ul>
+<p>Limitations</p>
+<ul>
+<li>Think of possible limitations</li>
+</ul>
+<p>Risks</p>
+<ul>
+<li><p>Implementation</p></li>
+<li><p>Statistical</p></li>
+<li><p>Ethical</p></li>
+<li><p>Project management</p></li>
+</ul>
+</section>
+<section id="running-experiment" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="running-experiment"><span class="header-section-number">2.4</span> Running experiment</h2>
+<ul>
+<li><p>We need</p>
+<ul>
+<li><p>Instrumentation (lots of how users behave on the site and what experiment variant they were assigned to)</p></li>
+<li><p>Infrastructure to implement experiment (feature flagging and variant assignment)</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="analysis" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="analysis"><span class="header-section-number">2.5</span> Analysis</h2>
+<p>Sanity checks</p>
+<ul>
+<li>Check guardrail and invariant metrics to ensure internal validity</li>
+</ul>
+<p>Evaluation</p>
+<ul>
+<li>Run evaluation</li>
+</ul>
+</section>
+<section id="decision-making" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="decision-making"><span class="header-section-number">2.6</span> Decision making</h2>
+<ul>
+<li><p>Adding coupon field reduces revenue per user by 7 percent</p></li>
+<li><p>Hence, marketing campaign of coupons would not only have to cover campaign costs, but also reduction due to additional coupon field</p></li>
+<li><p>Marketing study found that sending coupons increases revenue per user by about 3 percent</p></li>
+<li><p>Hence, we won’t run the campaign</p></li>
+</ul>
+<p>Different hypothetical cases:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../inputs/decision_scenarios.png" class="img-fluid figure-img" style="width:75.0%"></p>
+<figcaption class="figure-caption">Possible decision scenarios. Source: <span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="references.html#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span></figcaption>
+</figure>
+</div>
+<ul>
+<li><p>Scenario 1: Neither SS nor PS – iterate or abandon</p></li>
+<li><p>Scenario 2: SS and PS – launch</p></li>
+<li><p>Scenario 3: SS but not PS with narrow CI – no lunch</p></li>
+<li><p>Scenario 4-6: CI so wide that SS and possibly even PS point estimate coule be null, or where small point estimate could still be SS and PS – run for longer or rerun with higher power ideally, else make decision based on risk/reward.</p></li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-kohavi2020trustworthy" class="csl-entry" role="listitem">
+Kohavi, Ron, Diane Tang, and Ya Xu. 2020. <em>Trustworthy Online Controlled Experiments: A Practical Guide to a/b Testing</em>. Cambridge University Press.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/metrics.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metrics</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

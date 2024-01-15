@@ -135,23 +135,39 @@
   {
     "objectID": "chapters/practical_issues.html",
     "href": "chapters/practical_issues.html",
+<<<<<<< HEAD
+    "title": "9  Practical issues",
+=======
     "title": "11  Practical issues",
+>>>>>>> 4db5bd567e50617152677384ed39b8b967817f17
     "section": "",
     "text": "For useful set of rules of thumb, see Kohavi papers as well as this CUPED post\nFor great outline of experiment platform and used methods see this Uber post.\n\nNotes from larsen2023statistical\n\nReasons for insufficient power\n\nTreatment effect is homogenously distributed across entire user base but very small\nFeature affects only small number of users, so overall effect is highly attenuated\nTreatment effect on known subgroups is of interest"
   },
   {
     "objectID": "chapters/regression_discontinuity.html#use-cases",
     "href": "chapters/regression_discontinuity.html#use-cases",
+<<<<<<< HEAD
+    "title": "11  Regression discontinuity design",
+    "section": "11.1 Use cases",
+    "text": "11.1 Use cases\n\nIdentifiable forcing variable"
+=======
     "title": "13  Regression discontinuity design",
     "section": "13.1 Use cases",
     "text": "13.1 Use cases\n\nIdentifiable forcing variable"
+>>>>>>> 4db5bd567e50617152677384ed39b8b967817f17
   },
   {
     "objectID": "chapters/regression_discontinuity.html#considerations",
     "href": "chapters/regression_discontinuity.html#considerations",
+<<<<<<< HEAD
+    "title": "11  Regression discontinuity design",
+    "section": "11.2 Considerations",
+    "text": "11.2 Considerations\n\nFunctional form: use local linear methods\nChoice of bandwidth: use asymptotic expansion\nAssessing (internal) validity: use suplementary analysis\nAssessing external validity: assess credibility of extrapolation to other subpopulations\n\nNotes based on Athey and Imbens (2017)\n\n\n\n\nAthey, Susan, and Guido W Imbens. 2017. “The State of Applied Econometrics: Causality and Policy Evaluation.” Journal of Economic Perspectives 31 (2): 3–32."
+=======
     "title": "13  Regression discontinuity design",
     "section": "13.2 Considerations",
     "text": "13.2 Considerations\n\nFunctional form: use local linear methods\nChoice of bandwidth: use asymptotic expansion\nAssessing (internal) validity: use suplementary analysis\nAssessing external validity: assess credibility of extrapolation to other subpopulations\n\nNotes based on Athey and Imbens (2017)\n\n\n\n\nAthey, Susan, and Guido W Imbens. 2017. “The State of Applied Econometrics: Causality and Policy Evaluation.” Journal of Economic Perspectives 31 (2): 3–32."
+>>>>>>> 4db5bd567e50617152677384ed39b8b967817f17
   },
   {
     "objectID": "chapters/references.html",
@@ -163,7 +179,15 @@
   {
     "objectID": "chapters/useful_resources.html",
     "href": "chapters/useful_resources.html",
+<<<<<<< HEAD
+<<<<<<< HEAD
+    "title": "12  Useful resources",
+=======
+    "title": "3  Useful resources",
+>>>>>>> 4db5bd567e50617152677384ed39b8b967817f17
+=======
     "title": "11  Useful resources",
+>>>>>>> 5a8bcdddcc98a44239b27ded81a5e170b26f9bad
     "section": "",
     "text": "Getting to decisions faster in A/B tests – useful literature review of various moderl approaches to A/B testing"
   },

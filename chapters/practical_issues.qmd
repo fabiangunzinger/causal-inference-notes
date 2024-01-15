@@ -1,0 +1,20 @@
+# Practical issues
+
+todo:
+- Look at @kohavi2009controlled and @kohavi2007practical (a shorter version of the former)
+
+
+## What if you want to implement a feature right away?
+
+- There are situations where you feel very confident that a feature works well and you don't want to wait a week or two to implement it.
+
+- Pinterest uses what they call "holdout experiments" in such cases, whereby 99% of users are exposed to the new feature and the remaining 1% act as the control (see @king2020power for more). In effect, this is a reversal of how experimentation typically happens.
+
+- You will want to use this approach sparingly, because the whole point of using experiments is that we usually can't know the effect of a feature, even when we think we do (rember the [CRASH trial](https://pubmed.ncbi.nlm.nih.gov/15936423/)).
+
+- But I really like the idea, because sometimes there really are cases in practice where you can be pretty certain that waiting for results is a waste of time (e.g. if you have an online shop and move from list of items without pictures to a grid-view with pictures). In such a situation, running a holdout experiment can help you be certain that the direction of the effect is what you expected, and also provide an estimate for the magnitude of the effect.
+
+
+## Resources
+
+- [Forbes article on when not to trust your A/B tests](https://www.forbes.com/sites/quora/2015/06/19/when-should-ab-testing-not-be-trusted-to-make-decisions/)

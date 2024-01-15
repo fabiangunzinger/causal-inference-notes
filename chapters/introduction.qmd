@@ -1,1 +1,7 @@
 # Introduction
+
+
+## Why causal inference?
+
+- Because many thinks we think work don't (look at list of refuted claims from Kohavi [here](https://experimentguide.com/refuted_observational_studies/))
+s

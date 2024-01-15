@@ -1,6 +1,5 @@
 # Neyman-Rubin causal model
 
-
 ## Potential outcomes
 
 ## Causal estimands
