@@ -15,6 +15,21 @@
 
 ## Threats to internal validity
 
+
+### Misc effects (some of them relevant only for field experiments)
+
+- Hawthorne effect: the treatment group works harder than normal.
+
+- John Henry effect: the comparison group competes with the treatment group.
+
+- Resentment and demoralising effect: not getting the treatment changes behaviour negatively.
+
+- Demand effect: treatment units more likely to do what they think is wanted from them.
+
+- Anticipation effect: control group changes behaviour in anticipation of future treatment.
+
+- Survey effect: being surveyed changes behaviour.
+
 ### Interference
 
 - Basically, all violations to SUTVA

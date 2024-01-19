@@ -41,6 +41,12 @@ $$
 
 where $N_t + N_c - 2$ is number of degrees of freedom[^tdetails].
 
+todo:
+
+- See Rice 6.2 on why this follows t distribution
+- For complete treatment and derivation of sampling distributions (incl. discussion of all the approximations and sample corrections), see Rice sampling chapter and my ipad notes.
+
+
 
 [^vardetails] We gloss over a few details here. Depending on the treatment assignment mechanism, units are not independently assigned. In online experiments, we often use hash functions for treatment assignment, in which case assignment is independent. But if we use the assignment mechanism of a completely randomised experiment, where we perfectly balance the number of units assigned to each treatment, each unit being assigned to one variant lowers the probability of all other units being assigned to that same variant. In that case, the above variance estimator is unbiased only if the treatment effect is constant. However, it is usually used in practice even in cases where constant treatment effects are unlikely because it is conservative (i.e. at least as large as the true variance) and because it is always unbiased if the ATE is an estimate of the infinite super-population ATE.
 

@@ -6,6 +6,10 @@
 
 - Fundamentally, we're dealing with a threat to external validity. In general, external validity is about the extent to which results from a scientific study can be generalised to contexts outside of the study. In the context of online experiments, where we typically experiment on a sample of the overall user population, external validity is about the extent to which results from our experiments translate to the entire population of users. Standard ATE estimators estimate the difference between two counterfactual states of the world: that where all units are treated and that which no units are treated. With interference, control units behave differently than they would have if nobody had been exposed to the treatment (and treatment of the treted units hadn't spilled over to them), and so the difference in treatment and control outcomes is no longer an unbiased estimate of the difference in outcomes of these two counterfactual states of the world.
 
+- Older description: Spillovers are externalities of our treatment on non-treatment group units. They can be behavioural, informational, physical, and market-wide (general equilibrium effects). They are a problem because they reduce the quality of the counterfactual, and, if we don't take them into account, will lead us to overestimate (negative spillovers) or underestimate (positive spillovers) the effect. We can limit spillovers by identifying them properly (both positive and negative ones) and then randomising at the appropriate level and/or explicitly measure them by adjusting the design accordingly. To adjust our analysis, we need three groups: treatment, not treated but spillovers, not treated and no spillovers. We can then control for social network of geographical (distance) variables.
+
+
+
 ## Types of interferance
 
 @larsen2023statistical differentiate between:
@@ -52,7 +56,23 @@
 
 - Effectively, we face a variance-bias tradeoff: the fewer clusters we have the larger and more isolated they are, which leads to low bias but large variance and vice versa. 
 
+Implications for analysis
+
 - How to adjust standard errors? See @abadie2023should and @de2024level
+
+- If we have randomised at the group level: either analyse the data at the group level, or, if analysing the data at the individual level, use clustered standard errors.
+
+Effect on power
+
+  - Reduces power because observations within clusters are almost surely correlated. Intuition:
+  
+    1. It effectively reduces sample size (if all observations within a cluster are identical, then our number of observations equals the number of clusters).
+  
+    2. It makes the sample less diversified and hence less representative of the population so that different estimates based on different samples will vary more widely, which leads to a larger standard error.
+
+  - The effect depends on the number of clusters (the more the more power we have) and on the intra-cluster correlation (the less correlation the higher the power).
+
+
 
 
 #### Ego-clusters
@@ -78,11 +98,22 @@
 
 ## Measuring interaction effects
 
-- Overall approach: if there are no interaction effects, different estimands should be the same
+Overall approach: if there are no interaction effects, different estimands should be the same
 
-- Design side: run clauster and unit-level experiment side-by-side. Different results imply presence of interaction effects
+Design side
 
-- Analysis side: 1) exposure modelling / reweighting 2) use of focal units
+- run clauster and unit-level experiment side-by-side. Different results imply presence of interaction effects
+
+- We can design differences in treatment density by varying the allocation fraction for different groups.
+
+- We can use a multistage randomisation to allocate treatment first at the group level and then, within the group, at the individual level. This creates a treatment group (the treated in the treatment group), a spillover control group (the untreated in the treatment group), and a pure control group (those in the nontreatment group). 
+
+Analysis side
+
+- exposure modelling / reweighting
+- use of focal units
+- We can exploit natural variation in treatment density (number of children eligible for deworming program within a geographic area).
+
 
 
 ## Useful resources

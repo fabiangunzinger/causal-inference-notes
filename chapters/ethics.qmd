@@ -13,3 +13,13 @@ Some useful principles to consider, based on reading chapter 9 in @kohavi2020tru
 - Presumptive consent: ask a small subset of users whether they would be okay participating and if they do, assume that the sentiment would generalise.
 
 - Different from clinical trials, subjects in online trials usually have the opportunity to switch service (for sth like FB, this might be difficult).
+
+What are Salganik (2018)'s three principles of ethical design? Why should we care?
+
+- Replace: use quasi-experiments whenever possible.
+
+- Refine: make interventions as harmless as possible.
+
+- Reduce: use the minimum necessary number of participants (use power analysis to make sure you're not over-powered).
+
+- Why all this? Because we can never know whether an intervention is not harmful to at least some participants.
