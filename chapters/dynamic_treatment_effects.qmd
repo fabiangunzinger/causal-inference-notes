@@ -1,45 +1,92 @@
 # Dynamic treatment effects
 
-Based on [this](https://drive.google.com/file/d/1h9WZFmf5moHc4XV_MwvT94_RG3CAhOTv/view) talk by Jake Blundell
 
-### Setup
+- Definition of long-term effect: conceptually, the effect towards which the estimate asymptotes. In practice, specified as a duration (e.g. 3 months) or amount of exposure (e.g. 10 times).
 
 - Measuring an ATE during an experimental period masks possibly dynamics. Stylistically, it can come about in three ways:
 
-    1. Constant treatment effect
-    2. Average of increasing effect (effect takes time to fully materialise)
-    3. Average of decreading effect (novelty effect)
-    
-    
-- Coverage:
-    - Restaurants and customers and possibly riders are all long tailed: most engage frequently, some very frequently. This affects composition of experiment population. 
-    - As a result, the shorter the experiment, the more we oversample from frequent users in session-based experiments (the same is not true in order-based ones, there it's constant).
-    - Implication: for session-level exp: the longer the experiment, the more representative the sample, for order-level, equally representative for all durations.
-    - Recommendations: be aware that short experiments may not generalise, check for sample representativeness, estimate heterogeneous treatment effects by user type.
-    - Fundamentally: need think about what relevant population is.
+  1. Constant treatment effect
 
-### Solution
+  2. Average of increasing effect (effect takes time to fully materialise)
 
-- Reweight sample so as to keep relative proportion of types constant accross time and treatment cell
+  3. Average of decreading effect (novelty effect)
 
-### Why care?
+
+## Why care?
 
 - We want to make decisions for the long-run, not just for the experimentation window. Given the above, we might under or overestimate the actual effect of the treatment
+
 - Provides an understanding of how users interact with product
+
 - Might reveal bugs in experimental setup or implementation (i.e. if we see unusual spikes)
 
-### Problem
 
-- Estimating dynamic average treatment effects if everyone enters at the same time is straightforward: treat each week as mini experiment and plot ATE over time.
-- Estimating dynamic average treatment effects if people enter at different times more complex, as in each week we observe people at different time of treatment path.
-    - Changing time measure to weeks since entry to experiment
-    - Because we have a fixed endpoint, this means we observe fewer users at later points since entering experiment (since some, who join late, we only observe for a few weeks till the experiment ends).
-    - Also, because of coverage issue above, we proportionally observe more frequent users in laters points since experiment entry (since we their share is about constant as they engage weekly, while infrequent users engage more infrequently)
-    - Hence, if we just compare outcomes across Treatment and Control for each week since experiment entry, composition of samples over time is different (again, frequent users have more weight in later periods)
-    
-    - Affects metrics at any level: user, order, session
-    
-    - Problem exists whenever:
+## Drivers of dynamic effects
+
+- Learning and novelty effects
+
+- Network effects (users influenced by what their connections do, but change takes time to propagate through network)
+
+- Delayed experience or measurement (might take time till user is exposed to change. e.g. FB new feature for Bday congratulation)
+
+- Ecosystem changes
+
+    - New products introduced (e.g. better cameras make photo-sharing more valuable)
+
+    - Seasonality
+
+    - Competitor behaviour (e.g. introduction of Signal may affect WhatsApp)
+
+    - Government policy (e.g. GDPR introduction may reduce value of feature)
+
+
+## Challenges 
+
+Coverage:
+
+  - Restaurants and customers and possibly riders are all long tailed: most engage frequently, some very frequently. This affects composition of experiment population. 
+
+  - As a result, the shorter the experiment, the more we oversample from frequent users in session-based experiments (the same is not true in order-based ones, there it's constant).
+
+  - Implication: for session-level exp: the longer the experiment, the more representative the sample, for order-level, equally representative for all durations.
+
+  - Recommendations: be aware that short experiments may not generalise, check for sample representativeness, estimate heterogeneous treatment effects by user type.
+
+  - Fundamentally: need think about what relevant population is.
+
+
+## Approaches
+
+- Reweighing (Blundell, Deliveroo [approach]([this](https://drive.google.com/file/d/1h9WZFmf5moHc4XV_MwvT94_RG3CAhOTv/view)))
+
+  - Reweight sample so as to keep relative proportion of types constant accross time and treatment cell
+
+  - Estimating dynamic average treatment effects if everyone enters at the same time is straightforward: treat each week as mini experiment and plot ATE over time.
+
+  - Estimating dynamic average treatment effects if people enter at different times more complex, as in each week we observe people at different time of treatment path.
+
+      - Changing time measure to weeks since entry to experiment
+
+      - Because we have a fixed endpoint, this means we observe fewer users at later points since entering experiment (since some, who join late, we only observe for a few weeks till the experiment ends).
+
+      - Also, because of coverage issue above, we proportionally observe more frequent users in laters points since experiment entry (since their share is about constant as they engage weekly, while infrequent users engage more infrequently)
+
+      - Hence, if we just compare outcomes across Treatment and Control for each week since experiment entry, composition of samples over time is different (again, frequent users have more weight in later periods)
+      
+      - Affects metrics at any level: user, order, session
+      
+      - Problem exists whenever:
+
         1. Users enter at different times
+
         2. We cut off time since experiments for later joiners (i.e. observe users for different lengths of time)
+
         3. Treatment entry is correlated with treatment effect (e.g. effect on top users is different)
+
+
+
+
+
+
+
+

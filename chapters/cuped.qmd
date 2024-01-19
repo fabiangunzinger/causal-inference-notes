@@ -157,9 +157,7 @@ It turns out that in the simple cases discussed above, it doesn't -- the two app
 First, we know (from the Frisch-Waugh-Lowell [theorem](https://en.wikipedia.org/wiki/Frisch%E2%80%93Waugh%E2%80%93Lovell_theorem)) that if we were to estimate the alternative model 
 
 $$
-\begin{equation}
 \tilde{y}_i = \alpha + \beta_1^* \tilde{d}_i + \epsilon_i,
-\end{equation}
 $$
 
 where $\tilde{y}_i$ is the residual from regressing $y$ on $x$, and $\tilde{d}_i$ the residual from regressing $d$ on $x$, we would find that $\beta_1^* = \beta_1$. That is, the two models are identical.

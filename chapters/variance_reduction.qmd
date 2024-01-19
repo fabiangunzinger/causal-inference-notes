@@ -65,9 +65,7 @@ $$
 where $\epsilon_i$ is the error term, and where the estimate of $\beta$ is the estimate of our average treatment effect. If we have an additional variable, $x_i$, that is correlated with $y_i$ but uncorrelated with $d_i$, we can add that to the right hand side of our regression model and estimate:
 
 $$
-\begin{equation}
 y_i = \alpha + \beta_1 d_i + \beta_2 x_i + \mu_i.
-\end{equation}
 $$
 
 If $x$ is uncorrelated with the treatment assignment then $\beta = \beta_1$, so the average treatment effect estimate will remain unchanged, which is good. And if $x$ is correlated with $y$, then the standard error of the average treatment effect estimate will again be lower, which increases power.

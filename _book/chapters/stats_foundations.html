@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -49,7 +49,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/neyman_rubin_causal_model.html" rel="next">
+<link href="../chapters/regression.html" rel="next">
 <link href="../index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -76,8 +76,7 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -98,7 +97,7 @@ div.csl-indent {
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/stats_foundations.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics foundation</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -134,26 +133,98 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
+  <a href="../chapters/regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/end_to_end_example.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">End-to-end example</span></span></a>
+  <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/guiding_principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Guiding principles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiment_design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Experiment design</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiment_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+  <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/threats_to_validity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/practical_issues.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/variance_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/switchbacks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/heterogeneous_treatment_effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
   </div>
 </li>
     </ul>
@@ -179,7 +250,9 @@ div.csl-indent {
   <li><a href="#commonly-used-probability-distributions" id="toc-commonly-used-probability-distributions" class="nav-link" data-scroll-target="#commonly-used-probability-distributions"><span class="header-section-number">2.9.1</span> Commonly used probability distributions</a></li>
   </ul></li>
   <li><a href="#p-values-how-to-draw-statistical-conclusions" id="toc-p-values-how-to-draw-statistical-conclusions" class="nav-link" data-scroll-target="#p-values-how-to-draw-statistical-conclusions"><span class="header-section-number">2.10</span> p-values – how to draw statistical conclusions ?</a></li>
-  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources"><span class="header-section-number">2.11</span> Sources</a></li>
+  <li><a href="#false-positive-rate-vs-false-discovery-rate" id="toc-false-positive-rate-vs-false-discovery-rate" class="nav-link" data-scroll-target="#false-positive-rate-vs-false-discovery-rate"><span class="header-section-number">2.11</span> False positive rate vs false discovery rate</a></li>
+  <li><a href="#confidence-interval-interpretations" id="toc-confidence-interval-interpretations" class="nav-link" data-scroll-target="#confidence-interval-interpretations"><span class="header-section-number">2.12</span> Confidence interval interpretations</a></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources"><span class="header-section-number">2.13</span> Sources</a></li>
   </ul>
 </nav>
     </div>
@@ -445,16 +518,35 @@ print(f"{'Bootstrap se:':20} {np.mean(resample_means.std()):.3f}")
 </section>
 <section id="p-values-how-to-draw-statistical-conclusions" class="level2" data-number="2.10">
 <h2 data-number="2.10" class="anchored" data-anchor-id="p-values-how-to-draw-statistical-conclusions"><span class="header-section-number">2.10</span> p-values – how to draw statistical conclusions ?</h2>
-<p>Limitations of reliying on pvap - Arbitrary cutoff - No appreciation for variation of coefficient – focus on ci instead (see <span class="citation" data-cites="romer2020praise">Romer (<a href="references.html#ref-romer2020praise" role="doc-biblioref">2020</a>)</span>, <span class="citation" data-cites="imbens2021statistical">Imbens (<a href="references.html#ref-imbens2021statistical" role="doc-biblioref">2021</a>)</span>) - Multiple hypothesis testing (actual) – report and apply MHT-correction - Multiple hypothesis testing (potential <a href="https://statmodeling.stat.columbia.edu/2016/03/07/29212/">Gelman post</a>)</p>
+<p>Limitations of reliying on pvap</p>
+<ul>
+<li><p>Arbitrary cutoff</p></li>
+<li><p>No appreciation for variation of coefficient – focus on ci instead (see <span class="citation" data-cites="romer2020praise">Romer (<a href="#ref-romer2020praise" role="doc-biblioref">2020</a>)</span>, <span class="citation" data-cites="imbens2021statistical">Imbens (<a href="#ref-imbens2021statistical" role="doc-biblioref">2021</a>)</span>)</p></li>
+<li><p>Multiple hypothesis testing (actual) – report and apply MHT-correction</p></li>
+<li><p>Multiple hypothesis testing (potential <a href="https://statmodeling.stat.columbia.edu/2016/03/07/29212/">Gelman post</a>)</p></li>
+</ul>
 </section>
-<section id="sources" class="level2" data-number="2.11">
-<h2 data-number="2.11" class="anchored" data-anchor-id="sources"><span class="header-section-number">2.11</span> Sources</h2>
+<section id="false-positive-rate-vs-false-discovery-rate" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="false-positive-rate-vs-false-discovery-rate"><span class="header-section-number">2.11</span> False positive rate vs false discovery rate</h2>
+<ul>
+<li><p>The false positive rate is <span class="math inline">\(P(significant result|no true effect)\)</span></p></li>
+<li><p>The false discovery rate is <span class="math inline">\(P(no true effect|significant result)\)</span></p></li>
+</ul>
+</section>
+<section id="confidence-interval-interpretations" class="level2" data-number="2.12">
+<h2 data-number="2.12" class="anchored" data-anchor-id="confidence-interval-interpretations"><span class="header-section-number">2.12</span> Confidence interval interpretations</h2>
+<ul>
+<li>95% CI for control and treatment overlap. Does this imply treatment is not significant?</li>
+</ul>
+</section>
+<section id="sources" class="level2" data-number="2.13">
+<h2 data-number="2.13" class="anchored" data-anchor-id="sources"><span class="header-section-number">2.13</span> Sources</h2>
 <ul>
 <li><a href="https://learning.oreilly.com/library/view/practical-statistics-for/9781492072935/">Practical statistics for data science</a> –&gt;</li>
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-imbens2021statistical" class="csl-entry" role="listitem">
 Imbens, Guido W. 2021. <span>“Statistical Significance, p-Values, and the Reporting of Uncertainty.”</span> <em>Journal of Economic Perspectives</em> 35 (3): 157–74.
 </div>
@@ -705,8 +797,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/neyman_rubin_causal_model.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/regression.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

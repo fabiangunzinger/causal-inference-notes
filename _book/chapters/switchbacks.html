@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 7&nbsp; Switchback experiments</title>
+<title>Causal inference notes - 16&nbsp; Switchback experiments</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -76,8 +76,7 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -95,10 +94,10 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/switchbacks.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Switchback experiments</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/switchbacks.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Switchback experiments</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -128,50 +127,104 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/guiding_principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Guiding principles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiment_design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Experiment design</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiment_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/threats_to_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/practical_issues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/variance_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/switchbacks.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/heterogeneous_treatment_effects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+  <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
   </div>
 </li>
     </ul>
@@ -184,8 +237,8 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#notes-on-bojinov2023design" id="toc-notes-on-bojinov2023design" class="nav-link active" data-scroll-target="#notes-on-bojinov2023design"><span class="header-section-number">7.1</span> Notes on <span class="citation" data-cites="bojinov2023design">Bojinov, Simchi-Levi, and Zhao (2023)</span></a></li>
-  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">7.2</span> Useful resources</a></li>
+  <li><a href="#notes-on-bojinov2023design" id="toc-notes-on-bojinov2023design" class="nav-link active" data-scroll-target="#notes-on-bojinov2023design"><span class="header-section-number">16.1</span> Notes on <span class="citation" data-cites="bojinov2023design">Bojinov, Simchi-Levi, and Zhao (2023)</span></a></li>
+  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">16.2</span> Useful resources</a></li>
   </ul>
 </nav>
     </div>
@@ -194,7 +247,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Switchback experiments</span></h1>
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Switchback experiments</span></h1>
 </div>
 
 
@@ -212,8 +265,8 @@ div.csl-indent {
 <ul>
 <li>Also called time-series experiments.</li>
 </ul>
-<section id="notes-on-bojinov2023design" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="notes-on-bojinov2023design"><span class="header-section-number">7.1</span> Notes on <span class="citation" data-cites="bojinov2023design">Bojinov, Simchi-Levi, and Zhao (<a href="references.html#ref-bojinov2023design" role="doc-biblioref">2023</a>)</span></h2>
+<section id="notes-on-bojinov2023design" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="notes-on-bojinov2023design"><span class="header-section-number">16.1</span> Notes on <span class="citation" data-cites="bojinov2023design">Bojinov, Simchi-Levi, and Zhao (<a href="#ref-bojinov2023design" role="doc-biblioref">2023</a>)</span></h2>
 <ul>
 <li><p>AB tests have two main challenges in practice: dealing with interaction effects, and estimating heterogeneous treatment effects.</p></li>
 <li><p>Switchback experiments sequentially assign units to a random treatment, measure the response, and repeat the proceedure for a fixed period of time.</p></li>
@@ -230,7 +283,7 @@ div.csl-indent {
 <ol type="1">
 <li><p>It provides an optimal design approach that reduces variance</p></li>
 <li><p>It assumes carryover effects and shows that estimation and inference is valid both when they are correctly and incorrectly specified, though in the latter case estimation variance is higher. The authors also provide a method for practitioners to measure the duraton of carryover effects.</p></li>
-<li><p>It takes a purely design-based perspective on inference by assuming that outcomes are unknown but fixed, which means that findings are wholy non-parametric and robust to model misspecification (akin to the approach of <a href="fisher.qmd">Fisher’s exact P-value approach</a>)</p></li>
+<li><p>It takes a purely design-based perspective on inference by assuming that outcomes are unknown but fixed, which means that findings are wholy non-parametric and robust to model misspecification (akin to the approach of <a href="../chapters/fisher.html">Fisher’s exact P-value approach</a>)</p></li>
 </ol></li>
 <li><p>Assumptions:</p></li>
 </ul>
@@ -252,16 +305,16 @@ Y_t(w_{1:T})=Y_t(w'_{1:T})
 <li>Which is a rigorous way of waying that all that matters do determine potential outcomes at time <span class="math inline">\(t\)</span> is the assignment history of the previous <span class="math inline">\(m\)</span> periods.</li>
 </ul>
 </section>
-<section id="useful-resources" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">7.2</span> Useful resources</h2>
+<section id="useful-resources" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">16.2</span> Useful resources</h2>
 <ul>
-<li><p><span class="citation" data-cites="bojinov2023design">Bojinov, Simchi-Levi, and Zhao (<a href="references.html#ref-bojinov2023design" role="doc-biblioref">2023</a>)</span></p></li>
-<li><p><span class="citation" data-cites="bojinov2019time">Bojinov and Shephard (<a href="references.html#ref-bojinov2019time" role="doc-biblioref">2019</a>)</span></p></li>
+<li><p><span class="citation" data-cites="bojinov2023design">Bojinov, Simchi-Levi, and Zhao (<a href="#ref-bojinov2023design" role="doc-biblioref">2023</a>)</span></p></li>
+<li><p><span class="citation" data-cites="bojinov2019time">Bojinov and Shephard (<a href="#ref-bojinov2019time" role="doc-biblioref">2019</a>)</span></p></li>
 <li><p><a href="https://doordash.engineering/2019/02/20/experiment-rigor-for-switchback-experiment-analysis/">Experiment Rigor for Switchback Experiment Analysis</a></p></li>
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-bojinov2019time" class="csl-entry" role="listitem">
 Bojinov, Iavor, and Neil Shephard. 2019. <span>“Time Series Experiments and Causal Estimands: Exact Randomization Tests and Trading.”</span> <em>Journal of the American Statistical Association</em> 114 (528): 1665–82.
 </div>
@@ -508,12 +561,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/network_experiments.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Network experiments</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Network experiments</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/heterogeneous_treatment_effects.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

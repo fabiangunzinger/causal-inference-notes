@@ -2,6 +2,7 @@
 
 todo:
 - Use DAaidson and MacKinnon metrics book: nicely separates mechanics of ols with statistical interpretation. Do the same. 
+- Include intro on regression from [here](https://people.duke.edu/~rnau/regintro.htm)
 
 
 Linear regression is by far the most often used method to estimate relationships between outcomes and explanatory variables in applied econometrics and -- probably -- all of applied social science. In this article I want to to two things: define the related terminology that is often used but not defined (OLS, linear equation, etc.) and -- mainly -- explain a less frequently taught and understand way to think about linear regression, that in terms of its linear algebra.
@@ -90,9 +91,7 @@ is a $k \times 1$ column vector that contains all $k$ regression coefficients.
 
 To be even more succinct, we can stack all n equations to get the matrix notation:
 $$
-\begin{equation}
 y = X\beta + \epsilon,
-\end{equation}
 $$
 
 where $\beta$ is defined as above,
@@ -205,35 +204,121 @@ $$
 which gets us to the same result but in more steps.
 
 
-## Misc. questions
-
 
 ## Assumptions
 
-- In general, as @hayashi2011econometrics points out, "a model is a set of joint distributions satisfying a set of assumptions".
+- Directly copied from or heavily based on https://people.duke.edu/~rnau/testing.htm. Edit and expand over time.
 
-Classical linear regresison model
+- In short, the assumptions are that the model is linear and additive, and that errors are iid. The latter assumption is often stated as three separate assumptions, as shown below.
 
-1. Linearity
+- Note: The dependent and independent variables in a regression model do not need to be normally distributed by themselves--only the prediction errors need to be normally distributed.  (In fact, independent variables do not even need to be random, as in the case of trend or dummy or treatment or pricing variables.)  But if the distributions of some of the variables that are random are extremely asymmetric or long-tailed, it may be hard to fit them into a linear model whose errors will be normally distributed, and explaining the shape of their distributions may be an interesting topic all by itself.  Keep in mind that the normal error assumption is usually justified by appeal to the central limit theorem, which holds in the case where many random variations are added together.  If the underlying sources of randomness are not interacting additively, this argument fails to hold.
 
-- The relationship between the dependent and independent variables is linear.
+There are four principal assumptions which justify the use of linear regression models for purposes of inference or prediction:
 
-2. Strict exogeneity
+(i) linearity and additivity of the relationship between dependent and independent variables:
 
-- $E(\epsilon_i | X) = 0$
+    (a) The expected value of dependent variable is a straight-line function of each independent variable, holding the others fixed.
+
+    (b) The slope of that line does not depend on the values of the other variables.
+
+    (c)  The effects of different independent variables on the expected value of the dependent variable are additive.
+
+(ii) statistical independence of the errors (in particular, no correlation between consecutive errors in the case of time series data)
+
+(iii) homoscedasticity (constant variance) of the errors
+
+  (a) versus time (in the case of time series data)
+
+  (b) versus the predictions
+
+  (c) versus any independent variable
+
+(iv) normality of the error distribution.
 
 
+If any of these assumptions is violated, then the forecasts, confidence intervals, and scientific insights yielded by a regression model may be (at best) inefficient or (at worst) seriously biased or misleading.
+
+### Linearity and additivity
+
+Why assume linearity?
+
+- It's the simplest non-trivial relationship and the easiest to work with
+
+- True relationships are often at least approximately linear for ranges we care about
+
+- Even if above not true, we can often transform variables so that relationshiop is linear
+
+How to test linearity
+
+- Look at scatterplot before running regression
+
+- Look at predicted values vs residual plot after running regression (linear model leads to evenly distributed dots across a horizontal line) -- can look at predicted vs observed value plot, too, in which case you expect points to fall on the 45 degree line, but this diagonal introduces additional visual noise.
+
+What if linearity is violated?
+
+- Add non-linear transformation like log (if data is strictly positive)
+
+- Add regressor that is a non-liner function of a current regressor (e.g. x^2)
+
+- Add new regressor that explains non-linear nature of current relationshiop
 
 
-## Testing the assumptions
+### iid errors
 
-- Based on [this](https://github.com/erykml/medium_articles/blob/master/Statistics/linear_regression_assumptions.ipynb)
+Why assume iid errors?
+
+- In many cases, it's justified by the CLT. As long as we calculate averages (sums or random variables, really), which are independent and identically distributed, the distribution will be approximately normal.
+
+- It's convenient because it implies that the optimal coefficient estimates for linear models minimise the MSE, and because it justified using tests based on the normal family (t, F, Chi-square distribution).
+
+- Even if the "true" error process is not normal in terms of the original units of the data, it may be possible to transform the data so that your model's prediction errors are approximately normal.
+
+- Note that normality is required for inferenence, not for parameter estimation or prediction.
 
 
+Potential issues
+
+- Heteroskedasticity (variance larger depending on come conditions -- certain covariate values)
+
+- Interdependence (e.g. in time-series models, in the context of network effects)
+
+How to check assumption
+
+- Independence
+
+  - In time-series: look at residual autocorrelation
+  - In non-time series: plot independent variables vs residuals -- independence suggests symmetric distribution around zero and no dependence in subsequent residuals under any ordering that is not based on the independent variables (i.e. no correlation given covariates)
+
+- Homoskedasticity
+
+  - Time series: plot time vs residuals
+  - Non-time series: plot predicted values vs residuals and independent variables vs residuals 
+
+- Normality
+
+    - Normal probability plot and normal quantile plot
+
+    - Could also use formal tests (Kolmogorov-Smirnov test, Shapiro-Wilk test, Jarque-Bera test, and the Anderson-Darling test), but they are often too restrictive in practice.
 
 
+How to fix violations
 
+- Independence
 
-### Normality of error term
+  - Time-series: for mild violations (Durbin-Watson between 1.2 and 1) adding lags, for serious violations (DW > 2.6) use difference model 
 
-- Why should error term be normal? One way to think about it is that we can think of the error term as the sum of many independent error terms. By the CLT, the distribution of the error term is then well approximated by a normal distribution. (In the CLT language, an error term for a single unit in the sample is a single sum of independent variables, and the distribution of all these errors can be approximated by a normal distribution)
+  - Non-time series: either due to non-linearity of model or due to omitted variable.   
+
+- Homoskedasticity
+
+  - Log transformation
+  - Model seasonality with dummies (do linearly or multiplicatively (take log of dependent variable))
+  - Seasonally adjust data before fitting model
+  
+- Normality
+
+  - Violations of normality often arise either because (a) the distributions of the dependent and/or independent variables are themselves significantly non-normal, and/or (b) the linearity assumption is violated. In such cases, a nonlinear transformation of variables might cure both problems. 
+
+  - Another possibility is that there are two or more subsets of the data having different statistical properties, in which case separate models should be built, or else some data should merely be excluded, provided that there is some a priori criterion that can be applied to make this determination.
+
+  - In some cases, the problem with the error distribution is mainly due to one or two very large errors. Such values should be scrutinized closely: are they genuine (i.e., not the result of data entry errors), are they explainable, are similar events likely to occur again in the future, and how influential are they in your model-fitting results? If they are merely errors or if they can be explained as unique events not likely to be repeated, then you may have cause to remove them. In some cases, however, it may be that the extreme values in the data provide the most useful information about values of some of the coefficients and/or provide the most realistic guide to the magnitudes of forecast errors.

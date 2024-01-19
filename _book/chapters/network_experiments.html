@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 6&nbsp; Network experiments</title>
+<title>Causal inference notes - 15&nbsp; Network experiments</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -50,7 +50,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../chapters/switchbacks.html" rel="next">
-<link href="../chapters/practical_issues.html" rel="prev">
+<link href="../chapters/variance_reduction.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -76,8 +76,7 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -93,10 +92,10 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/network_experiments.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Network experiments</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/network_experiments.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Network experiments</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -126,50 +125,104 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/guiding_principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Guiding principles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiment_design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Experiment design</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiment_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/threats_to_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/practical_issues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/variance_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/switchbacks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/heterogeneous_treatment_effects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+  <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
   </div>
 </li>
     </ul>
@@ -182,14 +235,14 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#types-of-interferance" id="toc-types-of-interferance" class="nav-link active" data-scroll-target="#types-of-interferance"><span class="header-section-number">6.1</span> Types of interferance</a></li>
-  <li><a href="#dealing-with-interference" id="toc-dealing-with-interference" class="nav-link" data-scroll-target="#dealing-with-interference"><span class="header-section-number">6.2</span> Dealing with interference</a>
+  <li><a href="#types-of-interferance" id="toc-types-of-interferance" class="nav-link active" data-scroll-target="#types-of-interferance"><span class="header-section-number">15.1</span> Types of interferance</a></li>
+  <li><a href="#dealing-with-interference" id="toc-dealing-with-interference" class="nav-link" data-scroll-target="#dealing-with-interference"><span class="header-section-number">15.2</span> Dealing with interference</a>
   <ul class="collapse">
-  <li><a href="#design-based-approaches" id="toc-design-based-approaches" class="nav-link" data-scroll-target="#design-based-approaches"><span class="header-section-number">6.2.1</span> Design-based approaches</a></li>
-  <li><a href="#analysis-based-approaches" id="toc-analysis-based-approaches" class="nav-link" data-scroll-target="#analysis-based-approaches"><span class="header-section-number">6.2.2</span> Analysis-based approaches</a></li>
+  <li><a href="#design-based-approaches" id="toc-design-based-approaches" class="nav-link" data-scroll-target="#design-based-approaches"><span class="header-section-number">15.2.1</span> Design-based approaches</a></li>
+  <li><a href="#analysis-based-approaches" id="toc-analysis-based-approaches" class="nav-link" data-scroll-target="#analysis-based-approaches"><span class="header-section-number">15.2.2</span> Analysis-based approaches</a></li>
   </ul></li>
-  <li><a href="#measuring-interaction-effects" id="toc-measuring-interaction-effects" class="nav-link" data-scroll-target="#measuring-interaction-effects"><span class="header-section-number">6.3</span> Measuring interaction effects</a></li>
-  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">6.4</span> Useful resources</a></li>
+  <li><a href="#measuring-interaction-effects" id="toc-measuring-interaction-effects" class="nav-link" data-scroll-target="#measuring-interaction-effects"><span class="header-section-number">15.3</span> Measuring interaction effects</a></li>
+  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">15.4</span> Useful resources</a></li>
   </ul>
 </nav>
     </div>
@@ -198,7 +251,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Network experiments</span></h1>
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Network experiments</span></h1>
 </div>
 
 
@@ -215,28 +268,34 @@ div.csl-indent {
 
 <ul>
 <li><p>Network experiments are experiments in a context in which the outcome of some units is affected by the treatment status of other units, so that the treatment may not only change the behaviour of treated untis but also that of control units.</p></li>
-<li><p>This violates <a href="neyman_rubin_causal_model.qmd## Stable unit treatment value assumption (SUTVA)">SUTVA</a> and leads to a bias in standard ATE estimators.</p></li>
+<li><p>This violates <a href="../chapters/neyman_rubin_causal_model.html## Stable unit treatment value assumption (SUTVA)">SUTVA</a> and leads to a bias in standard ATE estimators.</p></li>
 <li><p>Fundamentally, we’re dealing with a threat to external validity. In general, external validity is about the extent to which results from a scientific study can be generalised to contexts outside of the study. In the context of online experiments, where we typically experiment on a sample of the overall user population, external validity is about the extent to which results from our experiments translate to the entire population of users. Standard ATE estimators estimate the difference between two counterfactual states of the world: that where all units are treated and that which no units are treated. With interference, control units behave differently than they would have if nobody had been exposed to the treatment (and treatment of the treted units hadn’t spilled over to them), and so the difference in treatment and control outcomes is no longer an unbiased estimate of the difference in outcomes of these two counterfactual states of the world.</p></li>
 </ul>
-<section id="types-of-interferance" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="types-of-interferance"><span class="header-section-number">6.1</span> Types of interferance</h2>
-<p><span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="references.html#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span> differentiate between:</p>
+<section id="types-of-interferance" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="types-of-interferance"><span class="header-section-number">15.1</span> Types of interferance</h2>
+<p><span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span> differentiate between:</p>
 <ul>
 <li><p>Network interference. Suppose we have a network where all nodes are of the same type and where the behaviour of each node can affect the behaviour of the nodes it is directly connected to. An example is a social network, where all nodes are people, and where more activity of one person may plausibly lead to more activity among their connections, which may lead to more activity among their connections, and so on. Here, experimentation is difficult because if we randomly split units into treatment and control group, units in the treatment group that change their behaviour as a result of the treatment might interact with connections of theirs that are allocated to the control group and thus change their behaviour as a result. But now the units in the control group don’t behave any longer as they would under the absence of the treatment, and comparing the differences in behaviour between treatment and control is not an accurate representation of the different outcomes in two counterfactual states of the world, one where everyone is treated and one where nobody is.</p></li>
-<li><p>Marketplace interference. Suppose we have a network composed of two of more types of nodes which interact with each other, and where, from the perspective of each type of node, the number of other nodes is finite, so that each type of node competes for interactions with a fixed number of nodes of the other type. Examples include ride hailing, where drivers compete for customers and customers for available rides; ads marketplaces, where marketers compete for slots and platforms with slots for marketers; or food delivery services, where riders compete for orders and customers who place orders for riders (food delivery services, such as Deliveroo, are three-sided marketplaces, managing the interaction of restaurants, riders, and customers). In such a marketplace experimentation is challenging because treatment and control groups compete for a fixed pool of resources, so that an increase in behaviour for the treatment group must lead to a decrease in the decreate of the behaviour for the control group. This “cannibalisation” effect exaggerates the actual treatment effect. (See <span class="citation" data-cites="liu2020trustworthy">Liu, Mao, and Kang (<a href="references.html#ref-liu2020trustworthy" role="doc-biblioref">2020</a>)</span> for more.)</p></li>
+<li><p>Marketplace interference. Suppose we have a network composed of two of more types of nodes which interact with each other, and where, from the perspective of each type of node, the number of other nodes is finite, so that each type of node competes for interactions with a fixed number of nodes of the other type. Examples include ride hailing, where drivers compete for customers and customers for available rides; ads marketplaces, where marketers compete for slots and platforms with slots for marketers; or food delivery services, where riders compete for orders and customers who place orders for riders (food delivery services, such as Deliveroo, are three-sided marketplaces, managing the interaction of restaurants, riders, and customers). In such a marketplace experimentation is challenging because treatment and control groups compete for a fixed pool of resources, so that an increase in behaviour for the treatment group must lead to a decrease in the decreate of the behaviour for the control group. This “cannibalisation” effect exaggerates the actual treatment effect. (See <span class="citation" data-cites="liu2020trustworthy">Liu, Mao, and Kang (<a href="#ref-liu2020trustworthy" role="doc-biblioref">2020</a>)</span> for more.)</p></li>
 </ul>
 </section>
-<section id="dealing-with-interference" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="dealing-with-interference"><span class="header-section-number">6.2</span> Dealing with interference</h2>
+<section id="dealing-with-interference" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="dealing-with-interference"><span class="header-section-number">15.2</span> Dealing with interference</h2>
 <ul>
-<li><p>There are a number of different approaches (see, e.g.&nbsp;discussion in <span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="references.html#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span>)</p></li>
+<li><p>There are a number of different approaches (see, e.g.&nbsp;discussion in <span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span>)</p></li>
 <li><p>What they share in common is that they all address the fundamental problem, which is that under the presence of interaction effects, the difference in outcomes between the treatment and the control group is not an accurate representation of the two counterfactual states of the world where everyone is and isn’t exposed to the treatment, which is what standard ATE estimators measure.</p></li>
 <li><p>There are two broad ways to tackle the problem: we can adjust the design to limit interference in the first place, or we can model interference and adjust the analysis.</p></li>
 </ul>
-<section id="design-based-approaches" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="design-based-approaches"><span class="header-section-number">6.2.1</span> Design-based approaches</h3>
-<section id="cluster-based-randomisation-approaches" class="level4" data-number="6.2.1.1">
-<h4 data-number="6.2.1.1" class="anchored" data-anchor-id="cluster-based-randomisation-approaches"><span class="header-section-number">6.2.1.1</span> Cluster-based randomisation approaches</h4>
+<section id="design-based-approaches" class="level3" data-number="15.2.1">
+<h3 data-number="15.2.1" class="anchored" data-anchor-id="design-based-approaches"><span class="header-section-number">15.2.1</span> Design-based approaches</h3>
+<section id="split-resources" class="level4" data-number="15.2.1.1">
+<h4 data-number="15.2.1.1" class="anchored" data-anchor-id="split-resources"><span class="header-section-number">15.2.1.1</span> Split resources</h4>
+<ul>
+<li>If shared resources cause the issue (e.g.&nbsp;budget for ads), then splitting the resources is an option (i.e.&nbsp;50% of resources for a variance that gets 50% of the traffig)</li>
+</ul>
+</section>
+<section id="cluster-based-randomisation-approaches" class="level4" data-number="15.2.1.2">
+<h4 data-number="15.2.1.2" class="anchored" data-anchor-id="cluster-based-randomisation-approaches"><span class="header-section-number">15.2.1.2</span> Cluster-based randomisation approaches</h4>
 <ul>
 <li><p>This approache first splits the units into clusters that are disjoint (or as disjoint as possible). Randomisation then happens at the cluster level, and all units within a cluster receive the same treatment.</p></li>
 <li><p>Because units will interact only (or mostly) with units that have the same treatment status as they themselves, this design provides a better counterfacturals for the all-treated and all-controlled alternatives.</p></li>
@@ -252,18 +311,20 @@ div.csl-indent {
 <li>To test a feature in a social-network app: create graphs of user interactions, and partition the graph such that there is maximal within-group interaction and minimal between group interaction</li>
 </ul></li>
 </ul></li>
-<li><p>Another challenge is ensuring you have enough effective sample size: if the outcomes of users within a group are correlated, then randomising at a level higher than the unit reduces effective sample size. In the extreme case, where within group correlation is perfect, your effective sample size is the number of groups, not the number of units. See</p></li>
-<li><p>How to adjust standard errors? See <span class="citation" data-cites="abadie2023should">Abadie et al. (<a href="references.html#ref-abadie2023should" role="doc-biblioref">2023</a>)</span> and <span class="citation" data-cites="de2024level">Chaisemartin and Ramirez-Cuellar (<a href="references.html#ref-de2024level" role="doc-biblioref">2024</a>)</span></p></li>
+<li><p>Another challenge is ensuring you have enough effective sample size: if the outcomes of users within a group are correlated, then randomising at a level higher than the unit reduces effective sample size. In the extreme case, where within group correlation is perfect, your effective sample size is the number of groups, not the number of units.</p></li>
+<li><p>Effectively, we face a variance-bias tradeoff: the fewer clusters we have the larger and more isolated they are, which leads to low bias but large variance and vice versa.</p></li>
+<li><p>How to adjust standard errors? See <span class="citation" data-cites="abadie2023should">(<a href="#ref-abadie2023should" role="doc-biblioref"><strong>abadie2023should?</strong></a>)</span> and <span class="citation" data-cites="de2024level">(<a href="#ref-de2024level" role="doc-biblioref"><strong>de2024level?</strong></a>)</span></p></li>
 </ul>
 </section>
-<section id="ego-clusters" class="level4" data-number="6.2.1.2">
-<h4 data-number="6.2.1.2" class="anchored" data-anchor-id="ego-clusters"><span class="header-section-number">6.2.1.2</span> Ego-clusters</h4>
+<section id="ego-clusters" class="level4" data-number="15.2.1.3">
+<h4 data-number="15.2.1.3" class="anchored" data-anchor-id="ego-clusters"><span class="header-section-number">15.2.1.3</span> Ego-clusters</h4>
 <ul>
-<li>Instead of traditional clusters, create much smaller, unit-based clusters. See <span class="citation" data-cites="saint2019using">Saint-Jacques et al. (<a href="references.html#ref-saint2019using" role="doc-biblioref">2019</a>)</span></li>
+<li><p>Instead of traditional clusters, create much smaller, unit-based clusters. See <span class="citation" data-cites="saint2019using">Saint-Jacques et al. (<a href="#ref-saint2019using" role="doc-biblioref">2019</a>)</span></p></li>
+<li><p>Basically: you create clusters based on a central node (the ego) and its direct links (the alters), and randomise egos and alters seprately.</p></li>
 </ul>
 </section>
-<section id="switchback-experiments" class="level4" data-number="6.2.1.3">
-<h4 data-number="6.2.1.3" class="anchored" data-anchor-id="switchback-experiments"><span class="header-section-number">6.2.1.3</span> Switchback experiments</h4>
+<section id="switchback-experiments" class="level4" data-number="15.2.1.4">
+<h4 data-number="15.2.1.4" class="anchored" data-anchor-id="switchback-experiments"><span class="header-section-number">15.2.1.4</span> Switchback experiments</h4>
 <ul>
 <li><p>An approach often used to deal with marketplace interferance, whereby all units are frequently switched from being in control to being in treatment.</p></li>
 <li><p>There could be carry-over issues with this, but this can be dealt with by using “burn-in” periods.</p></li>
@@ -271,38 +332,32 @@ div.csl-indent {
 </ul>
 </section>
 </section>
-<section id="analysis-based-approaches" class="level3" data-number="6.2.2">
-<h3 data-number="6.2.2" class="anchored" data-anchor-id="analysis-based-approaches"><span class="header-section-number">6.2.2</span> Analysis-based approaches</h3>
+<section id="analysis-based-approaches" class="level3" data-number="15.2.2">
+<h3 data-number="15.2.2" class="anchored" data-anchor-id="analysis-based-approaches"><span class="header-section-number">15.2.2</span> Analysis-based approaches</h3>
 <ul>
-<li>Analysis based approaches model the interference and then adjust the analysis accordingly. See last paragraph of section 6 in <span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="references.html#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span> for details. Also, <span class="citation" data-cites="bojinov2023design">Bojinov, Simchi-Levi, and Zhao (<a href="references.html#ref-bojinov2023design" role="doc-biblioref">2023</a>)</span>, in their introduction, differentiate between approaches that rely on game theoretic, Markov Chain, and network approachs to model interference.</li>
+<li>Analysis based approaches model the interference and then adjust the analysis accordingly. See last paragraph of section 6 in <span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span> for details. Also, <span class="citation" data-cites="bojinov2023design">Bojinov, Simchi-Levi, and Zhao (<a href="#ref-bojinov2023design" role="doc-biblioref">2023</a>)</span>, in their introduction, differentiate between approaches that rely on game theoretic, Markov Chain, and network approachs to model interference.</li>
 </ul>
 </section>
 </section>
-<section id="measuring-interaction-effects" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="measuring-interaction-effects"><span class="header-section-number">6.3</span> Measuring interaction effects</h2>
+<section id="measuring-interaction-effects" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="measuring-interaction-effects"><span class="header-section-number">15.3</span> Measuring interaction effects</h2>
 <ul>
 <li><p>Overall approach: if there are no interaction effects, different estimands should be the same</p></li>
 <li><p>Design side: run clauster and unit-level experiment side-by-side. Different results imply presence of interaction effects</p></li>
 <li><p>Analysis side: 1) exposure modelling / reweighting 2) use of focal units</p></li>
 </ul>
 </section>
-<section id="useful-resources" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">6.4</span> Useful resources</h2>
+<section id="useful-resources" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">15.4</span> Useful resources</h2>
 <ul>
-<li><p><span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="references.html#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span>, in section 6, provides a recent review of the literature.</p></li>
-<li><p><span class="citation" data-cites="karrer2021network">Karrer et al. (<a href="references.html#ref-karrer2021network" role="doc-biblioref">2021</a>)</span> describe network experimentation at Meta.</p></li>
+<li><p><span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span>, in section 6, provides a recent review of the literature.</p></li>
+<li><p><span class="citation" data-cites="karrer2021network">Karrer et al. (<a href="#ref-karrer2021network" role="doc-biblioref">2021</a>)</span> describe network experimentation at Meta.</p></li>
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
-<div id="ref-abadie2023should" class="csl-entry" role="listitem">
-Abadie, Alberto, Susan Athey, Guido W Imbens, and Jeffrey M Wooldridge. 2023. <span>“When Should You Adjust Standard Errors for Clustering?”</span> <em>The Quarterly Journal of Economics</em> 138 (1): 1–35.
-</div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-bojinov2023design" class="csl-entry" role="listitem">
 Bojinov, Iavor, David Simchi-Levi, and Jinglong Zhao. 2023. <span>“Design and Analysis of Switchback Experiments.”</span> <em>Management Science</em> 69 (7): 3759–77.
-</div>
-<div id="ref-de2024level" class="csl-entry" role="listitem">
-Chaisemartin, Clément de, and Jaime Ramirez-Cuellar. 2024. <span>“At What Level Should One Cluster Standard Errors in Paired and Small-Strata Experiments?”</span> <em>American Economic Journal: Applied Economics</em> 16 (1): 193–212. https://doi.org/<a href="https://doi.org/10.1257/app.20210252">https://doi.org/10.1257/app.20210252</a>.
 </div>
 <div id="ref-karrer2021network" class="csl-entry" role="listitem">
 Karrer, Brian, Liang Shi, Monica Bhole, Matt Goldman, Tyrone Palmer, Charlie Gelman, Mikael Konutgan, and Feng Sun. 2021. <span>“Network Experimentation at Scale.”</span> In <em>Proceedings of the 27th Acm Sigkdd Conference on Knowledge Discovery &amp; Data Mining</em>, 3106–16.
@@ -555,13 +610,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/practical_issues.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Practical issues</span></span>
+      <a href="../chapters/variance_reduction.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variance reduction</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/switchbacks.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
