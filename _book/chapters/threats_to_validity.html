@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 4&nbsp; Threats to validity</title>
+<title>Causal inference notes - 12&nbsp; Threats to validity</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -49,7 +49,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/references.html" rel="next">
+<link href="../chapters/practical_issues.html" rel="next">
 <link href="../chapters/power.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -76,8 +76,7 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -93,10 +92,10 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/threats_to_validity.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Threats to validity</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/threats_to_validity.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Threats to validity</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -126,26 +125,104 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/guiding_principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Guiding principles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiment_design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Experiment design</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiment_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/threats_to_validity.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+  <a href="../chapters/practical_issues.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/variance_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/switchbacks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/heterogeneous_treatment_effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
   </div>
 </li>
     </ul>
@@ -158,25 +235,25 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#threats-to-reliability" id="toc-threats-to-reliability" class="nav-link active" data-scroll-target="#threats-to-reliability"><span class="header-section-number">4.1</span> Threats to reliability</a></li>
-  <li><a href="#threats-to-internal-validity" id="toc-threats-to-internal-validity" class="nav-link" data-scroll-target="#threats-to-internal-validity"><span class="header-section-number">4.2</span> Threats to internal validity</a>
+  <li><a href="#threats-to-reliability" id="toc-threats-to-reliability" class="nav-link active" data-scroll-target="#threats-to-reliability"><span class="header-section-number">12.1</span> Threats to reliability</a></li>
+  <li><a href="#threats-to-internal-validity" id="toc-threats-to-internal-validity" class="nav-link" data-scroll-target="#threats-to-internal-validity"><span class="header-section-number">12.2</span> Threats to internal validity</a>
   <ul class="collapse">
-  <li><a href="#interference" id="toc-interference" class="nav-link" data-scroll-target="#interference"><span class="header-section-number">4.2.1</span> Interference</a></li>
-  <li><a href="#interaction-effects" id="toc-interaction-effects" class="nav-link" data-scroll-target="#interaction-effects"><span class="header-section-number">4.2.2</span> Interaction effects</a></li>
-  <li><a href="#non-representative-users" id="toc-non-representative-users" class="nav-link" data-scroll-target="#non-representative-users"><span class="header-section-number">4.2.3</span> Non-representative users</a></li>
-  <li><a href="#survivor-bias" id="toc-survivor-bias" class="nav-link" data-scroll-target="#survivor-bias"><span class="header-section-number">4.2.4</span> Survivor bias</a></li>
-  <li><a href="#novelty-and-learning-effects" id="toc-novelty-and-learning-effects" class="nav-link" data-scroll-target="#novelty-and-learning-effects"><span class="header-section-number">4.2.5</span> Novelty and learning effects</a></li>
-  <li><a href="#sample-ration-mismatch" id="toc-sample-ration-mismatch" class="nav-link" data-scroll-target="#sample-ration-mismatch"><span class="header-section-number">4.2.6</span> Sample ration mismatch</a></li>
+  <li><a href="#interference" id="toc-interference" class="nav-link" data-scroll-target="#interference"><span class="header-section-number">12.2.1</span> Interference</a></li>
+  <li><a href="#interaction-effects" id="toc-interaction-effects" class="nav-link" data-scroll-target="#interaction-effects"><span class="header-section-number">12.2.2</span> Interaction effects</a></li>
+  <li><a href="#non-representative-users" id="toc-non-representative-users" class="nav-link" data-scroll-target="#non-representative-users"><span class="header-section-number">12.2.3</span> Non-representative users</a></li>
+  <li><a href="#survivor-bias" id="toc-survivor-bias" class="nav-link" data-scroll-target="#survivor-bias"><span class="header-section-number">12.2.4</span> Survivor bias</a></li>
+  <li><a href="#novelty-and-learning-effects" id="toc-novelty-and-learning-effects" class="nav-link" data-scroll-target="#novelty-and-learning-effects"><span class="header-section-number">12.2.5</span> Novelty and learning effects</a></li>
+  <li><a href="#sample-ration-mismatch" id="toc-sample-ration-mismatch" class="nav-link" data-scroll-target="#sample-ration-mismatch"><span class="header-section-number">12.2.6</span> Sample ration mismatch</a></li>
   </ul></li>
-  <li><a href="#treats-to-external-validity" id="toc-treats-to-external-validity" class="nav-link" data-scroll-target="#treats-to-external-validity"><span class="header-section-number">4.3</span> Treats to external validity</a>
+  <li><a href="#treats-to-external-validity" id="toc-treats-to-external-validity" class="nav-link" data-scroll-target="#treats-to-external-validity"><span class="header-section-number">12.3</span> Treats to external validity</a>
   <ul class="collapse">
-  <li><a href="#budget-effects-in-ads" id="toc-budget-effects-in-ads" class="nav-link" data-scroll-target="#budget-effects-in-ads"><span class="header-section-number">4.3.1</span> Budget effects in Ads</a></li>
-  <li><a href="#feedback-loops-from-personalisation" id="toc-feedback-loops-from-personalisation" class="nav-link" data-scroll-target="#feedback-loops-from-personalisation"><span class="header-section-number">4.3.2</span> Feedback loops from personalisation</a></li>
-  <li><a href="#day-of-week-effects" id="toc-day-of-week-effects" class="nav-link" data-scroll-target="#day-of-week-effects"><span class="header-section-number">4.3.3</span> Day-of-week effects</a></li>
-  <li><a href="#seasonality" id="toc-seasonality" class="nav-link" data-scroll-target="#seasonality"><span class="header-section-number">4.3.4</span> Seasonality</a></li>
+  <li><a href="#budget-effects-in-ads" id="toc-budget-effects-in-ads" class="nav-link" data-scroll-target="#budget-effects-in-ads"><span class="header-section-number">12.3.1</span> Budget effects in Ads</a></li>
+  <li><a href="#feedback-loops-from-personalisation" id="toc-feedback-loops-from-personalisation" class="nav-link" data-scroll-target="#feedback-loops-from-personalisation"><span class="header-section-number">12.3.2</span> Feedback loops from personalisation</a></li>
+  <li><a href="#day-of-week-effects" id="toc-day-of-week-effects" class="nav-link" data-scroll-target="#day-of-week-effects"><span class="header-section-number">12.3.3</span> Day-of-week effects</a></li>
+  <li><a href="#seasonality" id="toc-seasonality" class="nav-link" data-scroll-target="#seasonality"><span class="header-section-number">12.3.4</span> Seasonality</a></li>
   </ul></li>
-  <li><a href="#differences-in-time-to-action-between-users" id="toc-differences-in-time-to-action-between-users" class="nav-link" data-scroll-target="#differences-in-time-to-action-between-users"><span class="header-section-number">4.4</span> Differences in time-to-action between users</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">4.5</span> Resources</a></li>
+  <li><a href="#differences-in-time-to-action-between-users" id="toc-differences-in-time-to-action-between-users" class="nav-link" data-scroll-target="#differences-in-time-to-action-between-users"><span class="header-section-number">12.4</span> Differences in time-to-action between users</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">12.5</span> Resources</a></li>
   </ul>
 </nav>
     </div>
@@ -185,7 +262,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Threats to validity</span></h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Threats to validity</span></h1>
 </div>
 
 
@@ -207,13 +284,13 @@ div.csl-indent {
 <li><p>External validity is about the extent to which our experiment results generalise both across different populations and across time. Results don’t usually generalise across populations (a feature may work well in one country but not in another), which isn’t a problem because we can (and usually should!) just run the experiment separately for different markets. Traditional experiments do, howerver, assume that experiments generalise over time, in that we think that the effect we estimate during the experiment period will be persistent – i.e.&nbsp;we think that the long-term effect of a change will be the same as the short-term effect.</p></li>
 <li><p>In my mind, some of the threats listed below, such as learning effects, could be listed as threats to either internal or external validity. I list them where I think they make most sense given the definitions, but one could argue about that and some authors make different choices – what matters is that you think about them when designing an experiment!</p></li>
 </ul>
-<section id="threats-to-reliability" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="threats-to-reliability"><span class="header-section-number">4.1</span> Threats to reliability</h2>
+<section id="threats-to-reliability" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="threats-to-reliability"><span class="header-section-number">12.1</span> Threats to reliability</h2>
 </section>
-<section id="threats-to-internal-validity" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="threats-to-internal-validity"><span class="header-section-number">4.2</span> Threats to internal validity</h2>
-<section id="interference" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="interference"><span class="header-section-number">4.2.1</span> Interference</h3>
+<section id="threats-to-internal-validity" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="threats-to-internal-validity"><span class="header-section-number">12.2</span> Threats to internal validity</h2>
+<section id="interference" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="interference"><span class="header-section-number">12.2.1</span> Interference</h3>
 <ul>
 <li><p>Basically, all violations to SUTVA</p></li>
 <li><p>Interference can happen due to</p>
@@ -224,16 +301,16 @@ div.csl-indent {
 </ul></li>
 </ul>
 </section>
-<section id="interaction-effects" class="level3" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="interaction-effects"><span class="header-section-number">4.2.2</span> Interaction effects</h3>
+<section id="interaction-effects" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="interaction-effects"><span class="header-section-number">12.2.2</span> Interaction effects</h3>
 <ul>
 <li><p>Users can be simultaneously part of multiple experiments, so that what we measure for reach of them is really the effect of the interaction of all of them. This means that, if only some features are implemented, the results after roll out could be different from those observed during the experiment period.</p></li>
 <li><p>However, with large sample sizes, this should not generally be a problem because effects of different experiments average out between treatment and control group.</p></li>
 <li><p>While the above may be true statistically, interaction effects can still lead to extremely poor user experiences (blue background interacted with blue font), which is why mature platforms aim to avoid them.</p></li>
 </ul>
 </section>
-<section id="non-representative-users" class="level3" data-number="4.2.3">
-<h3 data-number="4.2.3" class="anchored" data-anchor-id="non-representative-users"><span class="header-section-number">4.2.3</span> Non-representative users</h3>
+<section id="non-representative-users" class="level3" data-number="12.2.3">
+<h3 data-number="12.2.3" class="anchored" data-anchor-id="non-representative-users"><span class="header-section-number">12.2.3</span> Non-representative users</h3>
 <p>Possible scenarios:</p>
 <ul>
 <li><p>Our marketing department launches an add campaign and attracts a lot of unusual users to the site temporarily.</p></li>
@@ -242,23 +319,18 @@ div.csl-indent {
 <li><p>Solution: run experiments for longer (thought this comes with opportunity costs, and will increase cookie churn)</p></li>
 </ul>
 </section>
-<section id="survivor-bias" class="level3" data-number="4.2.4">
-<h3 data-number="4.2.4" class="anchored" data-anchor-id="survivor-bias"><span class="header-section-number">4.2.4</span> Survivor bias</h3>
+<section id="survivor-bias" class="level3" data-number="12.2.4">
+<h3 data-number="12.2.4" class="anchored" data-anchor-id="survivor-bias"><span class="header-section-number">12.2.4</span> Survivor bias</h3>
 <ul>
 <li>This is really just a version of the above: if you select only users that have used the product for some time, your sample is not representative of all users. The classic demonstration of survivor bias is <a href="https://en.wikipedia.org/wiki/Abraham_Wald">Abraham Wald’s</a> insight in WWII that you want to put extra armour where returning plans got hit the least, since it’s presumable the planes that got hit there that didn’t make it back.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../inputs/survivorship-bias.svg" class="img-fluid figure-img" style="width:50.0%"></p>
-<figcaption class="figure-caption">Where would you put extra armour? By Martin Grandjean (vector), McGeddon (picture), Cameron Moll (concept) - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=102017718</figcaption>
-</figure>
-</div>
+<!-- ![Where would you put extra armour? By Martin Grandjean (vector), McGeddon (picture), Cameron Moll (concept) - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=102017718](../inputs/survivorship-bias.svg){width=50%} -->
 </section>
-<section id="novelty-and-learning-effects" class="level3" data-number="4.2.5">
-<h3 data-number="4.2.5" class="anchored" data-anchor-id="novelty-and-learning-effects"><span class="header-section-number">4.2.5</span> Novelty and learning effects</h3>
+<section id="novelty-and-learning-effects" class="level3" data-number="12.2.5">
+<h3 data-number="12.2.5" class="anchored" data-anchor-id="novelty-and-learning-effects"><span class="header-section-number">12.2.5</span> Novelty and learning effects</h3>
 <ul>
 <li><p>Challenge: behaviour might change abruptly and temporarily in response to a new feature (novelty or “burn in” effect) or it might take a while for behaviour fully adapt to a new feature (learning effects). In both cases, the results from a relatively short experiment will not provide a representative picture of the long-run effects of a feature.</p></li>
-<li><p>Examples: Increasing number of adds shows on Google led to increase in add revenue initially but then decrease of clicks in the long term because it increased add blindness <span class="citation" data-cites="hohnhold2015focusing">Hohnhold, O’Brien, and Tang (<a href="references.html#ref-hohnhold2015focusing" role="doc-biblioref">2015</a>)</span></p></li>
+<li><p>Examples: Increasing number of adds shows on Google led to increase in add revenue initially but then decrease of clicks in the long term because it increased add blindness <span class="citation" data-cites="hohnhold2015focusing">Hohnhold, O’Brien, and Tang (<a href="#ref-hohnhold2015focusing" role="doc-biblioref">2015</a>)</span></p></li>
 <li><p>Solutions:</p>
 <ul>
 <li><p>Measure long-term effects (by running experiments for longer)</p></li>
@@ -267,32 +339,32 @@ div.csl-indent {
 </ul></li>
 </ul>
 </section>
-<section id="sample-ration-mismatch" class="level3" data-number="4.2.6">
-<h3 data-number="4.2.6" class="anchored" data-anchor-id="sample-ration-mismatch"><span class="header-section-number">4.2.6</span> Sample ration mismatch</h3>
+<section id="sample-ration-mismatch" class="level3" data-number="12.2.6">
+<h3 data-number="12.2.6" class="anchored" data-anchor-id="sample-ration-mismatch"><span class="header-section-number">12.2.6</span> Sample ration mismatch</h3>
 </section>
 </section>
-<section id="treats-to-external-validity" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="treats-to-external-validity"><span class="header-section-number">4.3</span> Treats to external validity</h2>
-<section id="budget-effects-in-ads" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="budget-effects-in-ads"><span class="header-section-number">4.3.1</span> Budget effects in Ads</h3>
+<section id="treats-to-external-validity" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="treats-to-external-validity"><span class="header-section-number">12.3</span> Treats to external validity</h2>
+<section id="budget-effects-in-ads" class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="budget-effects-in-ads"><span class="header-section-number">12.3.1</span> Budget effects in Ads</h3>
 <ul>
 <li>On an adds platform, a treatment might perform very well during an experiment in that it makes marketers launch more adds. But once scaled up may do less well because the increased traffic might exhaust marketer’s budgets, leading them to reduce adds launched.</li>
 </ul>
 </section>
-<section id="feedback-loops-from-personalisation" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="feedback-loops-from-personalisation"><span class="header-section-number">4.3.2</span> Feedback loops from personalisation</h3>
+<section id="feedback-loops-from-personalisation" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="feedback-loops-from-personalisation"><span class="header-section-number">12.3.2</span> Feedback loops from personalisation</h3>
 <ul>
 <li>Treatments might behave differently during experimentation and once they are scaled up if the performance of a feature is a function of the size of the audience it is exposed to (an example could be a recommendation algorithm, which performs better and better as it is being used more).</li>
 </ul>
 </section>
-<section id="day-of-week-effects" class="level3" data-number="4.3.3">
-<h3 data-number="4.3.3" class="anchored" data-anchor-id="day-of-week-effects"><span class="header-section-number">4.3.3</span> Day-of-week effects</h3>
+<section id="day-of-week-effects" class="level3" data-number="12.3.3">
+<h3 data-number="12.3.3" class="anchored" data-anchor-id="day-of-week-effects"><span class="header-section-number">12.3.3</span> Day-of-week effects</h3>
 <ul>
 <li>See below</li>
 </ul>
 </section>
-<section id="seasonality" class="level3" data-number="4.3.4">
-<h3 data-number="4.3.4" class="anchored" data-anchor-id="seasonality"><span class="header-section-number">4.3.4</span> Seasonality</h3>
+<section id="seasonality" class="level3" data-number="12.3.4">
+<h3 data-number="12.3.4" class="anchored" data-anchor-id="seasonality"><span class="header-section-number">12.3.4</span> Seasonality</h3>
 <ul>
 <li><p>Seasonality comes in many forms: day of week effects, week of year effects, season effects, holiday effects, etc.</p></li>
 <li><p>The challenge is that, potentially, user behaviour might differ on certain days or over certain time periods either because we get different users or because users change their behaviour.</p></li>
@@ -303,22 +375,22 @@ div.csl-indent {
 </ul>
 </section>
 </section>
-<section id="differences-in-time-to-action-between-users" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="differences-in-time-to-action-between-users"><span class="header-section-number">4.4</span> Differences in time-to-action between users</h2>
+<section id="differences-in-time-to-action-between-users" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="differences-in-time-to-action-between-users"><span class="header-section-number">12.4</span> Differences in time-to-action between users</h2>
 <ul>
 <li><p>Some users may engage with a new features immediately, others might take a while and then react differently to it.</p></li>
 <li><p>When running experiments for a very short time, we might thus get a biased picture of the overall effect of the feature.</p></li>
 </ul>
 </section>
-<section id="resources" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="resources"><span class="header-section-number">4.5</span> Resources</h2>
+<section id="resources" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="resources"><span class="header-section-number">12.5</span> Resources</h2>
 <ul>
 <li><p><a href="https://www.forbes.com/sites/quora/2015/06/19/when-should-ab-testing-not-be-trusted-to-make-decisions/">Forbes article on when not to trust your A/B tests</a></p></li>
 <li><p><a href="https://towardsdatascience.com/ab-testing-when-external-validity-messes-with-your-results-888197b6bc7b">Dennis Meisner discussing threats to external validity</a></p></li>
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-hohnhold2015focusing" class="csl-entry" role="listitem">
 Hohnhold, Henning, Deirdre O’Brien, and Diane Tang. 2015. <span>“Focusing on the Long-Term: It’s Good for Users and Business.”</span> In <em>Proceedings of the 21th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, 1849–58.
 </div>
@@ -562,12 +634,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/power.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Power</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/references.html" class="pagination-link">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/practical_issues.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Practical issues</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

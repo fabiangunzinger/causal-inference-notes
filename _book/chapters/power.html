@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 4&nbsp; Power</title>
+<title>Causal inference notes - 11&nbsp; Power</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -76,8 +76,7 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -95,10 +94,10 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/power.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Power</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/power.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -128,56 +127,104 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/guiding_principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Guiding principles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiment_design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Experiment design</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/experiment_stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/power.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/threats_to_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/practical_issues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/variance_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/switchbacks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/heterogeneous_treatment_effects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+  <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
   </div>
 </li>
     </ul>
@@ -190,21 +237,21 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#theory" id="toc-theory" class="nav-link active" data-scroll-target="#theory"><span class="header-section-number">4.1</span> Theory</a></li>
-  <li><a href="#what-determines-power" id="toc-what-determines-power" class="nav-link" data-scroll-target="#what-determines-power"><span class="header-section-number">4.2</span> What determines power</a></li>
-  <li><a href="#how-to-increase-power" id="toc-how-to-increase-power" class="nav-link" data-scroll-target="#how-to-increase-power"><span class="header-section-number">4.3</span> How to increase power</a></li>
-  <li><a href="#how-to-choose-key-parameters" id="toc-how-to-choose-key-parameters" class="nav-link" data-scroll-target="#how-to-choose-key-parameters"><span class="header-section-number">4.4</span> How to choose key parameters</a>
+  <li><a href="#theory" id="toc-theory" class="nav-link active" data-scroll-target="#theory"><span class="header-section-number">11.1</span> Theory</a></li>
+  <li><a href="#what-determines-power" id="toc-what-determines-power" class="nav-link" data-scroll-target="#what-determines-power"><span class="header-section-number">11.2</span> What determines power</a></li>
+  <li><a href="#how-to-increase-power" id="toc-how-to-increase-power" class="nav-link" data-scroll-target="#how-to-increase-power"><span class="header-section-number">11.3</span> How to increase power</a></li>
+  <li><a href="#how-to-choose-key-parameters" id="toc-how-to-choose-key-parameters" class="nav-link" data-scroll-target="#how-to-choose-key-parameters"><span class="header-section-number">11.4</span> How to choose key parameters</a>
   <ul class="collapse">
-  <li><a href="#mde" id="toc-mde" class="nav-link" data-scroll-target="#mde"><span class="header-section-number">4.4.1</span> MDE</a></li>
-  <li><a href="#significance-level" id="toc-significance-level" class="nav-link" data-scroll-target="#significance-level"><span class="header-section-number">4.4.2</span> Significance level</a></li>
-  <li><a href="#power" id="toc-power" class="nav-link" data-scroll-target="#power"><span class="header-section-number">4.4.3</span> Power</a></li>
+  <li><a href="#mde" id="toc-mde" class="nav-link" data-scroll-target="#mde"><span class="header-section-number">11.4.1</span> MDE</a></li>
+  <li><a href="#significance-level" id="toc-significance-level" class="nav-link" data-scroll-target="#significance-level"><span class="header-section-number">11.4.2</span> Significance level</a></li>
+  <li><a href="#power" id="toc-power" class="nav-link" data-scroll-target="#power"><span class="header-section-number">11.4.3</span> Power</a></li>
   </ul></li>
-  <li><a href="#problems-with-low-power" id="toc-problems-with-low-power" class="nav-link" data-scroll-target="#problems-with-low-power"><span class="header-section-number">4.5</span> Problems with low power</a></li>
-  <li><a href="#power-in-online-experiments" id="toc-power-in-online-experiments" class="nav-link" data-scroll-target="#power-in-online-experiments"><span class="header-section-number">4.6</span> Power in online experiments</a></li>
-  <li><a href="#rule-of-thumb-for-sample-size" id="toc-rule-of-thumb-for-sample-size" class="nav-link" data-scroll-target="#rule-of-thumb-for-sample-size"><span class="header-section-number">4.7</span> Rule of thumb for sample size</a></li>
-  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices"><span class="header-section-number">4.8</span> Best practices</a></li>
-  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">4.9</span> Useful resources</a></li>
-  <li><a href="#qa" id="toc-qa" class="nav-link" data-scroll-target="#qa"><span class="header-section-number">4.10</span> Q&amp;A</a></li>
+  <li><a href="#problems-with-low-power" id="toc-problems-with-low-power" class="nav-link" data-scroll-target="#problems-with-low-power"><span class="header-section-number">11.5</span> Problems with low power</a></li>
+  <li><a href="#power-in-online-experiments" id="toc-power-in-online-experiments" class="nav-link" data-scroll-target="#power-in-online-experiments"><span class="header-section-number">11.6</span> Power in online experiments</a></li>
+  <li><a href="#rule-of-thumb-for-sample-size" id="toc-rule-of-thumb-for-sample-size" class="nav-link" data-scroll-target="#rule-of-thumb-for-sample-size"><span class="header-section-number">11.7</span> Rule of thumb for sample size</a></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices"><span class="header-section-number">11.8</span> Best practices</a></li>
+  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">11.9</span> Useful resources</a></li>
+  <li><a href="#qa" id="toc-qa" class="nav-link" data-scroll-target="#qa"><span class="header-section-number">11.10</span> Q&amp;A</a></li>
   </ul>
 </nav>
     </div>
@@ -213,7 +260,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-power" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Power</span></span></h1>
+<h1 class="title"><span id="sec-power" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power</span></span></h1>
 </div>
 
 
@@ -228,10 +275,10 @@ div.csl-indent {
 
 </header>
 
-<section id="theory" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="theory"><span class="header-section-number">4.1</span> Theory</h2>
+<section id="theory" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="theory"><span class="header-section-number">11.1</span> Theory</h2>
 <ul>
-<li>Largely based on <span class="citation" data-cites="duflo2007randomization">(<a href="references.html#ref-duflo2007randomization" role="doc-biblioref"><strong>duflo2007randomization?</strong></a>)</span></li>
+<li>Largely based on <span class="citation" data-cites="duflo2007randomization">(<a href="#ref-duflo2007randomization" role="doc-biblioref"><strong>duflo2007randomization?</strong></a>)</span></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -269,8 +316,8 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 <li><p>SE(<span class="math inline">\(\beta\)</span>) also includes measurement error, so this is also a determinant of power.</p></li>
 </ul>
 </section>
-<section id="what-determines-power" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="what-determines-power"><span class="header-section-number">4.2</span> What determines power</h2>
+<section id="what-determines-power" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="what-determines-power"><span class="header-section-number">11.2</span> What determines power</h2>
 <ul>
 <li><p>Significance level</p></li>
 <li><p>Effect size</p></li>
@@ -282,8 +329,8 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ul></li>
 </ul>
 </section>
-<section id="how-to-increase-power" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="how-to-increase-power"><span class="header-section-number">4.3</span> How to increase power</h2>
+<section id="how-to-increase-power" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="how-to-increase-power"><span class="header-section-number">11.3</span> How to increase power</h2>
 <ul>
 <li><p>Power can be increased trivially by lowering the significance level, which we often don’t want to do, or by increasing sample size, which we’re often trying to avoid.</p></li>
 <li><p>Increase effect size</p>
@@ -303,10 +350,10 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ul></li>
 </ul>
 </section>
-<section id="how-to-choose-key-parameters" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="how-to-choose-key-parameters"><span class="header-section-number">4.4</span> How to choose key parameters</h2>
-<section id="mde" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="mde"><span class="header-section-number">4.4.1</span> MDE</h3>
+<section id="how-to-choose-key-parameters" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="how-to-choose-key-parameters"><span class="header-section-number">11.4</span> How to choose key parameters</h2>
+<section id="mde" class="level3" data-number="11.4.1">
+<h3 data-number="11.4.1" class="anchored" data-anchor-id="mde"><span class="header-section-number">11.4.1</span> MDE</h3>
 <ul>
 <li><p>What are you balancing here? The size of the effect you are able to identify and the time it takes to do it.</p></li>
 <li><p>All else equal, the smaller a change you want to be able to detect, the longer it will take for the experiment to run because you need more sample size.</p></li>
@@ -324,8 +371,8 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ul></li>
 </ul>
 </section>
-<section id="significance-level" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="significance-level"><span class="header-section-number">4.4.2</span> Significance level</h3>
+<section id="significance-level" class="level3" data-number="11.4.2">
+<h3 data-number="11.4.2" class="anchored" data-anchor-id="significance-level"><span class="header-section-number">11.4.2</span> Significance level</h3>
 <ul>
 <li><p>What are you balancing here? The probabilities of making a type I and type II error.</p></li>
 <li><p>The higher significance level, the less likely we are to implement useless features (to make a Type I error) but the more likely we are to no implement useful features (to make a Type II error).</p></li>
@@ -343,8 +390,8 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ul></li>
 </ul>
 </section>
-<section id="power" class="level3" data-number="4.4.3">
-<h3 data-number="4.4.3" class="anchored" data-anchor-id="power"><span class="header-section-number">4.4.3</span> Power</h3>
+<section id="power" class="level3" data-number="11.4.3">
+<h3 data-number="11.4.3" class="anchored" data-anchor-id="power"><span class="header-section-number">11.4.3</span> Power</h3>
 <ul>
 <li><p>What are you balancing here? The risk of making a Type II error and the time you have to wait for your results.</p></li>
 <li><p>All else equal, the higher a level or power you want, the longer you’ll have to run the experiment to accumulate the requried sample size.</p></li>
@@ -355,43 +402,43 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ul>
 </section>
 </section>
-<section id="problems-with-low-power" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="problems-with-low-power"><span class="header-section-number">4.5</span> Problems with low power</h2>
+<section id="problems-with-low-power" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="problems-with-low-power"><span class="header-section-number">11.5</span> Problems with low power</h2>
 <ul>
 <li>Truth inflation: underpowered studies only find a significant effect it the effect size is larger than the true effect size, leading to inflated claims of effect sizes.</li>
 </ul>
 </section>
-<section id="power-in-online-experiments" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="power-in-online-experiments"><span class="header-section-number">4.6</span> Power in online experiments</h2>
+<section id="power-in-online-experiments" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="power-in-online-experiments"><span class="header-section-number">11.6</span> Power in online experiments</h2>
 <ul>
-<li><span class="citation" data-cites="kohavi2014seven">Kohavi et al. (<a href="references.html#ref-kohavi2014seven" role="doc-biblioref">2014</a>)</span> point out (in rule 7) that while general advice suggets that the CLT provides a good approximation for n larger than 30, the large skew in online metrics often requires many moer users. They recomment 355 * (skewness coefficient)^2.</li>
+<li><span class="citation" data-cites="kohavi2014seven">(<a href="#ref-kohavi2014seven" role="doc-biblioref"><strong>kohavi2014seven?</strong></a>)</span> point out (in rule 7) that while general advice suggets that the CLT provides a good approximation for n larger than 30, the large skew in online metrics often requires many moer users. They recomment 355 * (skewness coefficient)^2.</li>
 </ul>
 </section>
-<section id="rule-of-thumb-for-sample-size" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="rule-of-thumb-for-sample-size"><span class="header-section-number">4.7</span> Rule of thumb for sample size</h2>
+<section id="rule-of-thumb-for-sample-size" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="rule-of-thumb-for-sample-size"><span class="header-section-number">11.7</span> Rule of thumb for sample size</h2>
 <p>For alpha = 0.05, power = 0.8, and a two-sided test with equal allocation to two variants, required sample size is approximately:</p>
 <p><span class="math display">\[
 n \approx \frac{16\sigma^2}{\tau^2},
 \]</span></p>
 <p>where <span class="math inline">\(\sigma^2\)</span> is the sample variance and <span class="math inline">\(\tau\)</span> is the tretment effect (this is not known, but we can use the MDES).</p>
 </section>
-<section id="best-practices" class="level2" data-number="4.8">
-<h2 data-number="4.8" class="anchored" data-anchor-id="best-practices"><span class="header-section-number">4.8</span> Best practices</h2>
+<section id="best-practices" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="best-practices"><span class="header-section-number">11.8</span> Best practices</h2>
 <ul>
 <li>When aiming to estimate a precise effect size rather than just being interested in statistical significance, use assurance instead of power: instead of choosing a sample size to attain a given level of power, choose sample size so that confidence interval will be suitably narrow 99 percent of the time (<a href="https://www3.nd.edu/~kkelley/publications/articles/Anderson_Kelley_Maxwell_Psychological_Science_2017.pdf">Sample-Size Planning for More Accurate Statistical Power: A Method Adjusting Sample Effect Sizes for Publication Bias and Uncertainty</a> and <a href="https://tandfbis.s3.amazonaws.com/rt-media/pp/common/sample-chapters/9780415879682.pdf">Understanding the new statistics</a>.)</li>
 </ul>
 </section>
-<section id="useful-resources" class="level2" data-number="4.9">
-<h2 data-number="4.9" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">4.9</span> Useful resources</h2>
+<section id="useful-resources" class="level2" data-number="11.9">
+<h2 data-number="11.9" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">11.9</span> Useful resources</h2>
 <ul>
-<li><span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="references.html#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span> for general overview</li>
-<li><span class="citation" data-cites="zhou2023all">Zhou, Lu, and Shallah (<a href="references.html#ref-zhou2023all" role="doc-biblioref">2023</a>)</span> for comprehensive overview of how to calculate power</li>
-<li><span class="citation" data-cites="bojinov2023design">Bojinov, Simchi-Levi, and Zhao (<a href="references.html#ref-bojinov2023design" role="doc-biblioref">2023</a>)</span>, section 5, for simulation results for switchbacks and generally good approach to simulation to emulate</li>
-<li><span class="citation" data-cites="reich2012empirical">Reich et al. (<a href="references.html#ref-reich2012empirical" role="doc-biblioref">2012</a>)</span> power calcs for cluster-randomised experiments</li>
+<li><span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span> for general overview</li>
+<li><span class="citation" data-cites="zhou2023all">Zhou, Lu, and Shallah (<a href="#ref-zhou2023all" role="doc-biblioref">2023</a>)</span> for comprehensive overview of how to calculate power</li>
+<li><span class="citation" data-cites="bojinov2023design">Bojinov, Simchi-Levi, and Zhao (<a href="#ref-bojinov2023design" role="doc-biblioref">2023</a>)</span>, section 5, for simulation results for switchbacks and generally good approach to simulation to emulate</li>
+<li><span class="citation" data-cites="reich2012empirical">Reich et al. (<a href="#ref-reich2012empirical" role="doc-biblioref">2012</a>)</span> power calcs for cluster-randomised experiments</li>
 </ul>
 </section>
-<section id="qa" class="level2" data-number="4.10">
-<h2 data-number="4.10" class="anchored" data-anchor-id="qa"><span class="header-section-number">4.10</span> Q&amp;A</h2>
+<section id="qa" class="level2" data-number="11.10">
+<h2 data-number="11.10" class="anchored" data-anchor-id="qa"><span class="header-section-number">11.10</span> Q&amp;A</h2>
 <p>Questions:</p>
 <ol type="1">
 <li><p>Longer experiment duration generally increases power. Can you think of a scenario where this is not the case?</p></li>
@@ -404,12 +451,9 @@ n \approx \frac{16\sigma^2}{\tau^2},
 </ol>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-bojinov2023design" class="csl-entry" role="listitem">
 Bojinov, Iavor, David Simchi-Levi, and Jinglong Zhao. 2023. <span>“Design and Analysis of Switchback Experiments.”</span> <em>Management Science</em> 69 (7): 3759–77.
-</div>
-<div id="ref-kohavi2014seven" class="csl-entry" role="listitem">
-Kohavi, Ron, Alex Deng, Roger Longbotham, and Ya Xu. 2014. <span>“Seven Rules of Thumb for Web Site Experimenters.”</span> In <em>Proceedings of the 20th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, 1857–66.
 </div>
 <div id="ref-larsen2023statistical" class="csl-entry" role="listitem">
 Larsen, Nicholas, Jonathan Stallrich, Srijan Sengupta, Alex Deng, Ron Kohavi, and Nathaniel T Stevens. 2023. <span>“Statistical Challenges in Online Controlled Experiments: A Review of a/b Testing Methodology.”</span> <em>The American Statistician</em>, 1–15.
@@ -660,12 +704,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/metrics.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Metrics</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Metrics</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/threats_to_validity.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Threats to validity</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Threats to validity</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

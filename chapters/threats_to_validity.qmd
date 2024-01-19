@@ -67,7 +67,7 @@ Possible scenarios:
 
 - This is really just a version of the above: if you select only users that have used the product for some time, your sample is not representative of all users. The classic demonstration of survivor bias is [Abraham Wald's](https://en.wikipedia.org/wiki/Abraham_Wald) insight in WWII that you want to put extra armour where returning plans got hit the least, since it's presumable the planes that got hit there that didn't make it back.
 
-![Where would you put extra armour? By Martin Grandjean (vector), McGeddon (picture), Cameron Moll (concept) - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=102017718](../inputs/survivorship-bias.svg){width=50%}
+<!-- ![Where would you put extra armour? By Martin Grandjean (vector), McGeddon (picture), Cameron Moll (concept) - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=102017718](../inputs/survivorship-bias.svg){width=50%} -->
 
 ### Novelty and learning effects
 
