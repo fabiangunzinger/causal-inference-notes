@@ -404,6 +404,23 @@ $$
 - Meta's goal is to have lots of users. But how do you measure this? As Alex Schultz explains [here](https://www.youtube.com/watch?v=mIvX3hBc9rI), the industry has moved from registered users to confirmed registered users to active confirmed registered users to monthly active users 
 
 
+## Levels at which to calculate metrics
+
+- "Conversion rate" can be calculated at a numa number of different ways:
+
+  - At the variant level:
+
+  $$
+  CR_{variant\_level} = \frac{\text{Successful sessions across variant}}{\text{Total sessions across variant}}
+  $$
+
+- User level:
+  $$
+  CR_{User\_level} = \sum_{i=1}^{N_v}frac{\text{Successful sessions across user}}{\text{Total sessions across user}}
+  $$
+
+
+- Advantage of user level is that they are more robust to outliers, since each user has weight 1, instead of weight being proportional to their number of sessions (both total and successful).
 
 
 [^goodhartslaw]: A metric that isn't gameable defies [Goodhart's law](https://en.wikipedia.org/wiki/Goodhart's_law), which is what we want.
