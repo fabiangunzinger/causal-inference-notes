@@ -2,10 +2,10 @@
 
 A projection is a transformation of a vector onto a subspace.[^subspace]
 
-There are different types of projections, but the one that's relevant for us here is *orthogonal projection*, which projects a vector onto the nearest point on a subspace, where "nearest" usually refers to the Euclidean distance.[^euclid_dist] Why this type of projection is called "orthogonal projection" will be come clear below.
+There are different types of projections, but the one that's relevant for us here is *orthogonal projection*, which projects a vector onto the nearest point on a subspace, where ``nearest'' usually refers to the Euclidean distance.[^euclid_dist] Why this type of projection is called ``orthogonal projection'' will be come clear below.
 
 
-## Projecting from 2-D onto 1-D
+## Projecting from 2-D onto 1-sD
 
 Projecting a vector in two-dimensional space onto a line that goes through the origin is a nice way to build an understanding for what a projection does.[^line]
 
@@ -151,7 +151,15 @@ The math above generalises directly to projections onto N-dimensional space. All
 
 
 
-[^subspace]: A subspace is a subset of a vector space that is itself a vector space in which any possible linear combination of two vectors in the space is also in the space. For instance, a 2-dimensional plane is a subspace of $\mathbb{R}^3$ if it contains all possible linear combinations of any 2-dimensional vectors. For this to be the case, the plane has to go through the origin -- the point (0, 0, 0) -- to contain linear combinations with the zero scalar. Similarly, a line that goes through the origin is also a valid subspace, since any linear combination of two vectors that lie on the line will also lie on the line.
+[^subspace]: A subspace is a specific type of subset within a vector space that itself qualifies as a vector space. This means that any linear combination of vectors within the subspace must also belong to the subspace, as well as to the original, larger, space (linear combinations are formed by adding together scalar multiples of vectors).
+
+For example, consider a 2-dimensional plane within the 3-dimensional space denoted as $\mathbb{R}^3$. This 2-dimensional plane can be a subspace of $\mathbb{R}^3$ if it includes all possible linear combinations of any vectors lying within this plane. However, a crucial condition for this plane to be a subspace is that it must pass through the origin of $\mathbb{R}^3$, which is the point (0, 0, 0). This requirement is necessary because a subspace must contain the zero vector (in this case, the zero vector of $\mathbb{R}^3$) to fulfill the property of containing scalar multiples (including the zero scalar) of its vectors.
+
+Similarly, a line in $\mathbb{R}^3$ can be a subspace if it passes through the origin. This ensures that any linear combination of two vectors that lie on this line will also resultY
+ in a vector that lies on the same line. The key aspect here is that the line, like the plane, must include the origin to accommodate the zero vector and maintain closure under scalar multiplication and vector addition (meaning that the results or these operations are also part of the subspace).
+
+In summary, a subspace is not just any subset of a vector space; it must itself satisfy all the criteria of a vector space, including the inclusion of the zero vector, and closure under both vector addition and scalar multiplication.
+
 
 [^euclid_dist]: The Euclidean distance between two points $x$ and $\bar{x}$ in $\mathbb{R}^N$ is defined as $\sqrt{\sum_{i=1}^N{(\bar{x_i} - x_i})^2}$.
 

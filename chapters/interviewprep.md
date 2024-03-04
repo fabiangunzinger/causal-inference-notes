@@ -1,154 +1,67 @@
-# Background
+# Meta analytical reasoning 
 
-## Product
+Question
+- Restaurants you might like
+- On FB newsfeed
+- Non-sponsored
+- Link to rest business page
+- Similar to people you might know (horizontal widget, with 5 recs)
 
-How does it work?
-- Panel on feed with gallery of short videos
 
-Main purpose?
-- Share fun moments with your community
+# Background
 
-How does it provide value for users?
-- Can share and watch videos with/from community and feel engaged
+Product
+- Stakeholders
+  - FB
+  - Users
+  - Restaurants
 
-What is success?
-- Users upload frequently and consume frequently and engage positively
 
+Metrics
 
-## Objective
+- Engagement
 
-- Decide whether or not to replace current with new recommendation algorithm.
+  - Number of clicks on links
+  - Reactions/engagement on the rest page
+  - Time spent per day
 
+- Restaurant 
 
-# Pre-design
+- Guardrails
 
-## Intervention
+  - Number of comments, liks, share 
 
-- New algo changes which videos are shown
-- We've got one new algo that we compare to control
+What is recommendation based on
 
-- Treatment: show videos based on new algo
-- Control: show videos based on current algo
+- Input data
+  - Similar users -- what do they like
+  - Friends data -- what do they like
+    - Number friends who like a restaurat / have commented on it
+    - Similar to what friends might like  
+  - Restaurant -- which are populare in area, which are new
+  - User's own behaviour -- what is similar to have you liked in past 
 
 
-## Metrics
+# Pre-design
 
-OEC
+Feature
+- Treatment
+- Control: 
 
-- AVg. time spend watching reels per week per user
+Metrics
 
-Drivers
-- Share: Avg. number of reel uploads per user per week per user
-- Consume: Number of reels clicked per week per user
-- Engagement: Avg. reactions to reels per week per user
+- OEC: number of visits to restaurant pages
 
-Guardrails
 
-- Protect business
-  - Same metrics as above, but for Insta stories, FB reels and stories (to avoid cannibalisation)
 
-- Protect user experience
-  - Latency
-  - Video loading
-  - ...
 
-- Protecting exp internal validity
-  - SRM 
 
+# Design
 
-## Target audience
 
-- Global (no reason to restrict)
 
 
-## Hypothesis
 
-H0: ... will have no effect on ...
-H1: New recommendation algorithm will increase avg. time spend watching reel videos per week per user across the entire universe of users.
 
 
-## Decision-making process
-
-- Suggestion: nail down when to implement (green), not implement (red), and run experiment for longer/rerun with more data (amber)
-
-
-# Design
-
-## Exposure/roll-out
-
-- Use 1% of global universe
-
-## Key parameters
-
-Sig level (alpha): 0.05
-Power: 0.8
-MDE: 1%
-
-
-## Randomisation
-
-Unit
-- User
-
-Ass mechanisms
-- Bernoulli (hash based)
-
-Variant allocation
-- 50/50 to max power
-
-
-## Sample size/exp duration
-
-- Do power calc to get min sample size
-- Adjust by shared traffic
-- Adjust by ramp-up strategy
-- Adjust by internal validity considerations (seasonality, dow effects, learning effects)
-= Experiment duration
-
-## Anaysis strategy
-
-- Simple t-test (regression or t-test based)
-
-
-## Limitations
-
-- Driver metrics will suffer from interaction effects
-- Ignores subgroups / segment analysis
-
-
-# Implementation
-
-## Risks
-
-Internal validity
-
-- REM 
-- Dow effects
-- Seasonality
-- Non-represeantative users
-- 
-
-
-External validity
-- Not problematic given that we use global universe
-
-Ethics
-
-Project mgt
-
-# (Analysis, delivery, wrap-up)
-
-- How to present results for max usefulness for stakeholder
-
-
-#########################################################################################
-#########################################################################################
-#########################################################################################
-
-
-## Lessons
-
-- Think about control: what do we compare new feature to? (What do we show presently instead)
-
-- Need metrics for which I can compare t and c (above point should fix that largely, but can only use features that are present in both, i.e. likes)
 

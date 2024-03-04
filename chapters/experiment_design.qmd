@@ -151,10 +151,7 @@ Partial complience
 
 - We can adjust our analysis by calculating LATE, either using the Wald estimator (ITT / difference in take-up between treatment and control groups) or 2SLS where we instrument the behaviour we want to encourage with the treatment dummy (and possibly other covariates).
 
-
-Non-compliers
-
-Do not drop non-compliers or re-assign them to the control group -- compliers and non-compliers are different so that dropping or reclassifying non-compliers would re-introduce self-selection into out two samples, which defeats the whole point of the randomisation.
+- Do not drop non-compliers or re-assign them to the control group -- compliers and non-compliers are different so that dropping or reclassifying non-compliers would re-introduce self-selection into out two samples, which defeats the whole point of the randomisation.
 
 
 Defiers
@@ -166,6 +163,16 @@ Defiers
 - They might make us significantly misinterpret the true effect (RRE page 303, or, better, MHE p 156).
 
 - We can deal with them only if they form an identifiable subgroup, in which case we can estimate the treatment effect on defiers and compliers separately and calculate an average treatment effect.
+
+
+
+In an experiment with one-sided non-compliance what does IV estimate 1. if there are no always-takers and 2. if there are not never-takers?
+
+- In general, IV estimates LATE, the effect on compliers, and the treated consist of compliers and always-takers, while the non-treated consist of compliers and never-takers.
+
+- If there are no always-takers, the population of compliers is the same as the population of the treated, so that LATE = ATET.
+
+- If there are no never-takers, the population of compliers is the same as that of the untreated, so LATE = average treatment effect of the untreated.
 
 
 ## Attrition
