@@ -57,6 +57,10 @@ Coverage:
 
 ## Approaches
 
+- A simple approach to estimate whether there are dynamic effects is to use panel data with a time dummy and test whether the time coefficients are decreasign or increasing
+
+
+
 - Reweighing (Blundell, Deliveroo [approach]([this](https://drive.google.com/file/d/1h9WZFmf5moHc4XV_MwvT94_RG3CAhOTv/view)))
 
   - Reweight sample so as to keep relative proportion of types constant accross time and treatment cell

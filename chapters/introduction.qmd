@@ -4,4 +4,27 @@
 ## Why causal inference?
 
 - Because many thinks we think work don't (look at list of refuted claims from Kohavi [here](https://experimentguide.com/refuted_observational_studies/))
-s
+
+The purpose:
+
+- Create a valid counterfactual outcome - the outcome of the treated if they had not been treated - in order to eliminate selection bias when estimating the treatment effect.
+
+
+## Why experiments
+
+1. The randomisation of treatment eliminates selection bias.
+
+2. The presence of a control group provides a counterfactual of what would have happened without treatment.
+
+
+## Limitations of experiments
+
+1) They cannot be used to study the past.
+
+2) They can only estimate the effect of treatments that can be manipulated ("no causation without manipulation" Rubin). 
+
+3) Guidance for policy limited by compliance issues, environmental dependence, and equilibrium effects.
+
+4) There are ethical concerns.
+
+- For deeper discussion, see @stevenson2024cause and sources therein.

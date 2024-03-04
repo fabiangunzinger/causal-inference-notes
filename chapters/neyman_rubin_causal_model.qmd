@@ -24,6 +24,8 @@ $$
 \tau_{fs} = \frac{1}{N}\sum_{i=1}^N \left(Y_i(1) - Y_i(0)\right).
 $$
 
+- Hence: the causal effect is the average difference in individual potential outcomes.
+
 - We can generalise this in a number of ways.
 
 - We can focus only on a subset of the population, which can also happen in different ways.
@@ -76,8 +78,6 @@ $$
 - Essentially, both parts of SUTVA ensure the same thing: that $Y_i(w)$ is well defined: that it does not depend on the treatment status of other units, and that, for each possible treatment level, $w$, the precise form of that treatment level is well specified.
 
 
-## The assignment mechanism
-
 ## Finite sample vs super-population perspective
 
 There are two ways to perform inference:
@@ -85,6 +85,15 @@ There are two ways to perform inference:
 - When using the finite sample perspective, the $N$ units in the experiment sample are treated as the entire population of interest. Hence, there is no notion of randomisation due to sampling from a larger population, and all the randomness in the outcomes is due to randomness generates by the assignment mechanism.
 
 - When treating the $N$ units in the sample as a random sample from a larger super-population, then in addition to randomness from the randomisation, we also have randomness from the sampling.
+
+
+
+## How does randomisation help us estimate ATEs?
+
+By ensuring that the treatment - the causal variable of interest - is independent of potential outcomes, so that control and treatment group are comparable.
+
+More technically, it ensures that expected outcomes are the same in both groups, which means that the selection bias - the difference of expected potential outcomes without treatment - disappears. When using regression, this is equivalent to the error term being uncorrelated with treatment status.
+
 
 
 ## Useful resources

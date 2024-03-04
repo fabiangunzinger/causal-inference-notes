@@ -1,5 +1,12 @@
 # CUPED
 
+todo:
+
+- Incorporate Rice content on prediction and MSE (chapter 4.4 and ipad notes), which exactly gets us the CUPED result, again showing that CUPED is a re-invention of linear regression and standard stats 
+
+
+
+
 CUPED stands for "Controlled experiments Using Pre-Experiment Data", and reduces variance by partialling out outcome metric variance based on pre-experiment data.
 
 Questions:
