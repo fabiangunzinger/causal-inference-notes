@@ -14,7 +14,9 @@ todo:
 
 - But I really like the idea, because sometimes there really are cases in practice where you can be pretty certain that waiting for results is a waste of time (e.g. if you have an online shop and move from list of items without pictures to a grid-view with pictures). In such a situation, running a holdout experiment can help you be certain that the direction of the effect is what you expected, and also provide an estimate for the magnitude of the effect.
 
+- From [Forbes article on when not to trust your A/B tests](https://www.forbes.com/sites/quora/2015/06/19/when-should-ab-testing-not-be-trusted-to-make-decisions/)
 
-## Resources
 
-- [Forbes article on when not to trust your A/B tests](https://www.forbes.com/sites/quora/2015/06/19/when-should-ab-testing-not-be-trusted-to-make-decisions/)
+## Overlapping vs isoldated experiments
+
+- Useful post here: https://blog.statsig.com/embracing-overlapping-a-b-tests-and-the-danger-of-isolating-experiments-cb0a69e09d3

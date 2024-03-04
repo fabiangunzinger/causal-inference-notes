@@ -45,6 +45,7 @@ book:
     - chapters/heterogeneous_treatment_effects.qmd
     - chapters/triggered_analysis.md
 
+
     # Quasi-experiments in practice
     # - chapters/quasi_experiments.qmd
     # - chapters/matching.qmd

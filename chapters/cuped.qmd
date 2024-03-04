@@ -2,15 +2,15 @@
 
 CUPED stands for "Controlled experiments Using Pre-Experiment Data", and reduces variance by partialling out outcome metric variance based on pre-experiment data.
 
+Questions:
+- [ ] Why does fillna(y) not increase variance
+- [ ] What happens if pre and post perfectly correlated
+
+
+
 ## How CUPED works
 
 CUPED supposes that in addition to an outcome metric $y$, we also have access to another variable, $x$, which is correlated with $y$ but uncorrelated with the treatment assignment of our experiment. Pre-experiment data of the outcome metric is a good candidate for $x$ when it is available -- it's what's commonly used, and where the method gets its name from. With that in hand, notice that we can write
-
-
-
-
-
-
 
  -- the most obvious candidate that has been found to work well is pre-experiment data of the metric of interest.
 
