@@ -221,8 +221,20 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/triggered_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Triggered analysis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
   </div>
 </li>
     </ul>
@@ -236,7 +248,7 @@ div.csl-indent {
    
   <ul>
   <li><a href="#what-if-you-want-to-implement-a-feature-right-away" id="toc-what-if-you-want-to-implement-a-feature-right-away" class="nav-link active" data-scroll-target="#what-if-you-want-to-implement-a-feature-right-away"><span class="header-section-number">13.1</span> What if you want to implement a feature right away?</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">13.2</span> Resources</a></li>
+  <li><a href="#overlapping-vs-isoldated-experiments" id="toc-overlapping-vs-isoldated-experiments" class="nav-link" data-scroll-target="#overlapping-vs-isoldated-experiments"><span class="header-section-number">13.2</span> Overlapping vs isoldated experiments</a></li>
   </ul>
 </nav>
     </div>
@@ -260,7 +272,7 @@ div.csl-indent {
 
 </header>
 
-<p>todo: - Look at <span class="citation" data-cites="kohavi2009controlled">(<a href="#ref-kohavi2009controlled" role="doc-biblioref"><strong>kohavi2009controlled?</strong></a>)</span> and <span class="citation" data-cites="kohavi2007practical">(<a href="#ref-kohavi2007practical" role="doc-biblioref"><strong>kohavi2007practical?</strong></a>)</span> (a shorter version of the former)</p>
+<p>todo: - Look at <span class="citation" data-cites="kohavi2009controlled">Kohavi et al. (<a href="#ref-kohavi2009controlled" role="doc-biblioref">2009</a>)</span> and <span class="citation" data-cites="kohavi2007practical">Kohavi, Henne, and Sommerfield (<a href="#ref-kohavi2007practical" role="doc-biblioref">2007</a>)</span> (a shorter version of the former)</p>
 <section id="what-if-you-want-to-implement-a-feature-right-away" class="level2" data-number="13.1">
 <h2 data-number="13.1" class="anchored" data-anchor-id="what-if-you-want-to-implement-a-feature-right-away"><span class="header-section-number">13.1</span> What if you want to implement a feature right away?</h2>
 <ul>
@@ -268,18 +280,25 @@ div.csl-indent {
 <li><p>Pinterest uses what they call “holdout experiments” in such cases, whereby 99% of users are exposed to the new feature and the remaining 1% act as the control (see <span class="citation" data-cites="king2020power">King (<a href="#ref-king2020power" role="doc-biblioref">2020</a>)</span> for more). In effect, this is a reversal of how experimentation typically happens.</p></li>
 <li><p>You will want to use this approach sparingly, because the whole point of using experiments is that we usually can’t know the effect of a feature, even when we think we do (rember the <a href="https://pubmed.ncbi.nlm.nih.gov/15936423/">CRASH trial</a>).</p></li>
 <li><p>But I really like the idea, because sometimes there really are cases in practice where you can be pretty certain that waiting for results is a waste of time (e.g.&nbsp;if you have an online shop and move from list of items without pictures to a grid-view with pictures). In such a situation, running a holdout experiment can help you be certain that the direction of the effect is what you expected, and also provide an estimate for the magnitude of the effect.</p></li>
+<li><p>From <a href="https://www.forbes.com/sites/quora/2015/06/19/when-should-ab-testing-not-be-trusted-to-make-decisions/">Forbes article on when not to trust your A/B tests</a></p></li>
 </ul>
 </section>
-<section id="resources" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="resources"><span class="header-section-number">13.2</span> Resources</h2>
+<section id="overlapping-vs-isoldated-experiments" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="overlapping-vs-isoldated-experiments"><span class="header-section-number">13.2</span> Overlapping vs isoldated experiments</h2>
 <ul>
-<li><a href="https://www.forbes.com/sites/quora/2015/06/19/when-should-ab-testing-not-be-trusted-to-make-decisions/">Forbes article on when not to trust your A/B tests</a></li>
+<li>Useful post here: https://blog.statsig.com/embracing-overlapping-a-b-tests-and-the-danger-of-isolating-experiments-cb0a69e09d3</li>
 </ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-king2020power" class="csl-entry" role="listitem">
 King, Jeremy. 2020. <span>“The Power of These Techniques Is Only Getting Stronger.”</span> <em>Harvard Business Review</em>. HARVARD BUSINESS SCHOOL PUBLISHING CORPORATION 300 NORTH BEACON STREET&nbsp;….
+</div>
+<div id="ref-kohavi2007practical" class="csl-entry" role="listitem">
+Kohavi, Ron, Randal M Henne, and Dan Sommerfield. 2007. <span>“Practical Guide to Controlled Experiments on the Web: Listen to Your Customers Not to the Hippo.”</span> In <em>Proceedings of the 13th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, 959–67.
+</div>
+<div id="ref-kohavi2009controlled" class="csl-entry" role="listitem">
+Kohavi, Ron, Roger Longbotham, Dan Sommerfield, and Randal M Henne. 2009. <span>“Controlled Experiments on the Web: Survey and Practical Guide.”</span> <em>Data Mining and Knowledge Discovery</em> 18: 140–81.
 </div>
 </div>
 </section>

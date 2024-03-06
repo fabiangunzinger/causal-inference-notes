@@ -221,8 +221,20 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/triggered_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Triggered analysis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
   </div>
 </li>
     </ul>
@@ -270,6 +282,7 @@ div.csl-indent {
 <li><p>Network experiments are experiments in a context in which the outcome of some units is affected by the treatment status of other units, so that the treatment may not only change the behaviour of treated untis but also that of control units.</p></li>
 <li><p>This violates <a href="../chapters/neyman_rubin_causal_model.html## Stable unit treatment value assumption (SUTVA)">SUTVA</a> and leads to a bias in standard ATE estimators.</p></li>
 <li><p>Fundamentally, we’re dealing with a threat to external validity. In general, external validity is about the extent to which results from a scientific study can be generalised to contexts outside of the study. In the context of online experiments, where we typically experiment on a sample of the overall user population, external validity is about the extent to which results from our experiments translate to the entire population of users. Standard ATE estimators estimate the difference between two counterfactual states of the world: that where all units are treated and that which no units are treated. With interference, control units behave differently than they would have if nobody had been exposed to the treatment (and treatment of the treted units hadn’t spilled over to them), and so the difference in treatment and control outcomes is no longer an unbiased estimate of the difference in outcomes of these two counterfactual states of the world.</p></li>
+<li><p>Older description: Spillovers are externalities of our treatment on non-treatment group units. They can be behavioural, informational, physical, and market-wide (general equilibrium effects). They are a problem because they reduce the quality of the counterfactual, and, if we don’t take them into account, will lead us to overestimate (negative spillovers) or underestimate (positive spillovers) the effect. We can limit spillovers by identifying them properly (both positive and negative ones) and then randomising at the appropriate level and/or explicitly measure them by adjusting the design accordingly. To adjust our analysis, we need three groups: treatment, not treated but spillovers, not treated and no spillovers. We can then control for social network of geographical (distance) variables.</p></li>
 </ul>
 <section id="types-of-interferance" class="level2" data-number="15.1">
 <h2 data-number="15.1" class="anchored" data-anchor-id="types-of-interferance"><span class="header-section-number">15.1</span> Types of interferance</h2>
@@ -313,7 +326,20 @@ div.csl-indent {
 </ul></li>
 <li><p>Another challenge is ensuring you have enough effective sample size: if the outcomes of users within a group are correlated, then randomising at a level higher than the unit reduces effective sample size. In the extreme case, where within group correlation is perfect, your effective sample size is the number of groups, not the number of units.</p></li>
 <li><p>Effectively, we face a variance-bias tradeoff: the fewer clusters we have the larger and more isolated they are, which leads to low bias but large variance and vice versa.</p></li>
-<li><p>How to adjust standard errors? See <span class="citation" data-cites="abadie2023should">(<a href="#ref-abadie2023should" role="doc-biblioref"><strong>abadie2023should?</strong></a>)</span> and <span class="citation" data-cites="de2024level">(<a href="#ref-de2024level" role="doc-biblioref"><strong>de2024level?</strong></a>)</span></p></li>
+</ul>
+<p>Implications for analysis</p>
+<ul>
+<li><p>How to adjust standard errors? See <span class="citation" data-cites="abadie2023should">Abadie et al. (<a href="#ref-abadie2023should" role="doc-biblioref">2023</a>)</span> and <span class="citation" data-cites="de2024level">Chaisemartin and Ramirez-Cuellar (<a href="#ref-de2024level" role="doc-biblioref">2024</a>)</span></p></li>
+<li><p>If we have randomised at the group level: either analyse the data at the group level, or, if analysing the data at the individual level, use clustered standard errors.</p></li>
+</ul>
+<p>Effect on power</p>
+<ul>
+<li><p>Reduces power because observations within clusters are almost surely correlated. Intuition:</p>
+<ol type="1">
+<li><p>It effectively reduces sample size (if all observations within a cluster are identical, then our number of observations equals the number of clusters).</p></li>
+<li><p>It makes the sample less diversified and hence less representative of the population so that different estimates based on different samples will vary more widely, which leads to a larger standard error.</p></li>
+</ol></li>
+<li><p>The effect depends on the number of clusters (the more the more power we have) and on the intra-cluster correlation (the less correlation the higher the power).</p></li>
 </ul>
 </section>
 <section id="ego-clusters" class="level4" data-number="15.2.1.3">
@@ -341,10 +367,18 @@ div.csl-indent {
 </section>
 <section id="measuring-interaction-effects" class="level2" data-number="15.3">
 <h2 data-number="15.3" class="anchored" data-anchor-id="measuring-interaction-effects"><span class="header-section-number">15.3</span> Measuring interaction effects</h2>
+<p>Overall approach: if there are no interaction effects, different estimands should be the same</p>
+<p>Design side</p>
 <ul>
-<li><p>Overall approach: if there are no interaction effects, different estimands should be the same</p></li>
-<li><p>Design side: run clauster and unit-level experiment side-by-side. Different results imply presence of interaction effects</p></li>
-<li><p>Analysis side: 1) exposure modelling / reweighting 2) use of focal units</p></li>
+<li><p>run clauster and unit-level experiment side-by-side. Different results imply presence of interaction effects</p></li>
+<li><p>We can design differences in treatment density by varying the allocation fraction for different groups.</p></li>
+<li><p>We can use a multistage randomisation to allocate treatment first at the group level and then, within the group, at the individual level. This creates a treatment group (the treated in the treatment group), a spillover control group (the untreated in the treatment group), and a pure control group (those in the nontreatment group).</p></li>
+</ul>
+<p>Analysis side</p>
+<ul>
+<li>exposure modelling / reweighting</li>
+<li>use of focal units</li>
+<li>We can exploit natural variation in treatment density (number of children eligible for deworming program within a geographic area).</li>
 </ul>
 </section>
 <section id="useful-resources" class="level2" data-number="15.4">
@@ -356,8 +390,14 @@ div.csl-indent {
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-abadie2023should" class="csl-entry" role="listitem">
+Abadie, Alberto, Susan Athey, Guido W Imbens, and Jeffrey M Wooldridge. 2023. <span>“When Should You Adjust Standard Errors for Clustering?”</span> <em>The Quarterly Journal of Economics</em> 138 (1): 1–35.
+</div>
 <div id="ref-bojinov2023design" class="csl-entry" role="listitem">
 Bojinov, Iavor, David Simchi-Levi, and Jinglong Zhao. 2023. <span>“Design and Analysis of Switchback Experiments.”</span> <em>Management Science</em> 69 (7): 3759–77.
+</div>
+<div id="ref-de2024level" class="csl-entry" role="listitem">
+Chaisemartin, Clément de, and Jaime Ramirez-Cuellar. 2024. <span>“At What Level Should One Cluster Standard Errors in Paired and Small-Strata Experiments?”</span> <em>American Economic Journal: Applied Economics</em> 16 (1): 193–212. https://doi.org/<a href="https://doi.org/10.1257/app.20210252">https://doi.org/10.1257/app.20210252</a>.
 </div>
 <div id="ref-karrer2021network" class="csl-entry" role="listitem">
 Karrer, Brian, Liang Shi, Monica Bhole, Matt Goldman, Tyrone Palmer, Charlie Gelman, Mikael Konutgan, and Feng Sun. 2021. <span>“Network Experimentation at Scale.”</span> In <em>Proceedings of the 27th Acm Sigkdd Conference on Knowledge Discovery &amp; Data Mining</em>, 3106–16.

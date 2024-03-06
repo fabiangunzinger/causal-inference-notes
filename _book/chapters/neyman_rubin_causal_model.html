@@ -204,8 +204,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/triggered_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Triggered analysis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
   </div>
 </li>
     </ul>
@@ -221,8 +233,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#potential-outcomes" id="toc-potential-outcomes" class="nav-link active" data-scroll-target="#potential-outcomes"><span class="header-section-number">4.1</span> Potential outcomes</a></li>
   <li><a href="#causal-estimands" id="toc-causal-estimands" class="nav-link" data-scroll-target="#causal-estimands"><span class="header-section-number">4.2</span> Causal estimands</a></li>
   <li><a href="#stable-unit-treatment-value-assumption-sutva" id="toc-stable-unit-treatment-value-assumption-sutva" class="nav-link" data-scroll-target="#stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">4.3</span> Stable unit treatment value assumption (SUTVA)</a></li>
-  <li><a href="#the-assignment-mechanism" id="toc-the-assignment-mechanism" class="nav-link" data-scroll-target="#the-assignment-mechanism"><span class="header-section-number">4.4</span> The assignment mechanism</a></li>
-  <li><a href="#finite-sample-vs-super-population-perspective" id="toc-finite-sample-vs-super-population-perspective" class="nav-link" data-scroll-target="#finite-sample-vs-super-population-perspective"><span class="header-section-number">4.5</span> Finite sample vs super-population perspective</a></li>
+  <li><a href="#finite-sample-vs-super-population-perspective" id="toc-finite-sample-vs-super-population-perspective" class="nav-link" data-scroll-target="#finite-sample-vs-super-population-perspective"><span class="header-section-number">4.4</span> Finite sample vs super-population perspective</a></li>
+  <li><a href="#how-does-randomisation-help-us-estimate-ates" id="toc-how-does-randomisation-help-us-estimate-ates" class="nav-link" data-scroll-target="#how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">4.5</span> How does randomisation help us estimate ATEs?</a></li>
   <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">4.6</span> Useful resources</a></li>
   </ul>
 </nav>
@@ -269,6 +281,7 @@ Y_i(1) - Y_i(0).
 \tau_{fs} = \frac{1}{N}\sum_{i=1}^N \left(Y_i(1) - Y_i(0)\right).
 \]</span></p>
 <ul>
+<li><p>Hence: the causal effect is the average difference in individual potential outcomes.</p></li>
 <li><p>We can generalise this in a number of ways.</p></li>
 <li><p>We can focus only on a subset of the population, which can also happen in different ways.</p></li>
 <li><p>We can condition on covariates, such as when we focus only on women: <span class="math display">\[
@@ -311,16 +324,18 @@ Y_i(1) - Y_i(0).
 <li><p>Essentially, both parts of SUTVA ensure the same thing: that <span class="math inline">\(Y_i(w)\)</span> is well defined: that it does not depend on the treatment status of other units, and that, for each possible treatment level, <span class="math inline">\(w\)</span>, the precise form of that treatment level is well specified.</p></li>
 </ul>
 </section>
-<section id="the-assignment-mechanism" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="the-assignment-mechanism"><span class="header-section-number">4.4</span> The assignment mechanism</h2>
-</section>
-<section id="finite-sample-vs-super-population-perspective" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="finite-sample-vs-super-population-perspective"><span class="header-section-number">4.5</span> Finite sample vs super-population perspective</h2>
+<section id="finite-sample-vs-super-population-perspective" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="finite-sample-vs-super-population-perspective"><span class="header-section-number">4.4</span> Finite sample vs super-population perspective</h2>
 <p>There are two ways to perform inference:</p>
 <ul>
 <li><p>When using the finite sample perspective, the <span class="math inline">\(N\)</span> units in the experiment sample are treated as the entire population of interest. Hence, there is no notion of randomisation due to sampling from a larger population, and all the randomness in the outcomes is due to randomness generates by the assignment mechanism.</p></li>
 <li><p>When treating the <span class="math inline">\(N\)</span> units in the sample as a random sample from a larger super-population, then in addition to randomness from the randomisation, we also have randomness from the sampling.</p></li>
 </ul>
+</section>
+<section id="how-does-randomisation-help-us-estimate-ates" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">4.5</span> How does randomisation help us estimate ATEs?</h2>
+<p>By ensuring that the treatment - the causal variable of interest - is independent of potential outcomes, so that control and treatment group are comparable.</p>
+<p>More technically, it ensures that expected outcomes are the same in both groups, which means that the selection bias - the difference of expected potential outcomes without treatment - disappears. When using regression, this is equivalent to the error term being uncorrelated with treatment status.</p>
 </section>
 <section id="useful-resources" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">4.6</span> Useful resources</h2>

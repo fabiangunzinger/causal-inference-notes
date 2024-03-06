@@ -89,7 +89,7 @@ This also makes clear why this type of projection is called "orthogonal projecti
 
 ## Why project?
 
-Projection is useful because it allows us to approximately solve systems of linear equations that have no exact solution. Imagine we have the following system of equations:
+One reason projection is useful is because it allows us to approximately solve systems of linear equations that have no exact solution. Imagine we have the following system of equations:
 
 $$
 \begin{align*}
@@ -103,8 +103,38 @@ $$
 which we can write more compactly in matrix form as:
 
 $$
-Ax = b.
+Ax = b,
 $$
+
+where
+
+$$ A = \begin{pmatrix}
+  a_{11} & a_{12} & \cdots & a_{1k} \\
+  a_{21} & a_{22} & \cdots & a_{2k} \\
+  \vdots  & \vdots  & \ddots & \vdots  \\
+  a_{n1} & a_{n2} & \cdots & a_{nk}
+ \end{pmatrix},
+$$
+
+$$ x = 
+ \begin{pmatrix}
+  x_{1} \\
+  x_{2} \\
+  \vdots \\
+  x_{k} 
+ \end{pmatrix},
+$$ 
+
+and
+
+$$ b = 
+ \begin{pmatrix}
+  b_{1} \\
+  b_{2} \\
+  \vdots \\
+  b_{n} 
+ \end{pmatrix}.
+$$ 
 
 If $n > k$, the system is overdetermined -- it has more constarints (equations) than degrees of freedom (variables) -- and might not have a solution. In this case, it can be useful to solve
 
@@ -112,33 +142,28 @@ $$
 Ax = \hat{b},
 $$
 
-where $\hat{b}$ is the orthogonal projection of $b$ onto the vector space spanned by $A$, called the span or column space of $A$. Using orthogonal projection in this case achieves two things: it guarantees a solution because $\hat{b}$ lies on the same space as $Ax$ -- they both lie on the subspace spanned by the columns of $A$ -- and is makes $\hat{p}$ the best approximation to $b$ in that it is closest to it in terms of the Euclidean distance.
+where $\hat{b}$ is the orthogonal projection of $b$ onto the vector space spanned by $A$. This vector space is also called the span or column space of $A$. Using orthogonal projection achieves two things: first, it guarantees a solution because $\hat{b}$ lies on the same space as $Ax$ -- they both lie on the subspace spanned by the columns of $A$ -- and, second, it makes $\hat{p}$ the closest approximation to $b$ in terms of the Euclidean distance.
 
 
 ## Projection from 3-D onto 2-D and projecting onto N-D
 
-Our starting point is similar to the 2-D onto 1-D example above, but our vector $b$ is now 3-dimensional and the subspace we project it onto is now not a 1-dimensional line but a  2-dimensional plane. Hence, $p$ is now a point in the 3-dimensional space that lies on the 2-dimensional subspace. Above, we defined $p$ as $p = ax$, where $a$ was the scalar that characterised the line and $x$ the scalar that helped us move along that line. Similarly, we now have $p = Ax$, where $A$ is a 2 x 2 matrix, the two columns of which are the base vectors of the 2-dimensional subspace.
+As in the 2-D onto 1-D example above, we're going to project the vector $b$ onto a subspace. But $b$ is now a 3-D vector, and instead of projecting onto a line characterised by vector $a$, we're projecting onto a 2-D plane characterised by the 2 x 2 matrix $A$. Hence, our projection $p$ is now a point in the 3-dimensional space that lies on the 2-dimensional subspace. Similarly to above, $p$ is defined by $p = Ax$, where $x$ is a 2-D vector of scalars.
 
 We can still go about finding $p$ in the same way as above:
 
 $$
 \begin{aligned}
-argmin_{x} (b - Ax)'(b - Ax) \\
-\frac{d}{dx} (b - Ax)'(b - Ax) &= -2A'(b - Ax) = 0
-\end{aligned}
-$$
-
-Solving for $x$ we get:
-$$
-\begin{aligned}
--2A'(b - Ax) &= 0 \\
--A'b + A'Ax &= 0 \\
+A'(b - p) &= 0 \\
+A'(b - Ax) &= 0 \\
+A'b - A'Ax &= 0 \\
 A'Ax &= A'b \\
-x &= (A'A)^{-1}A'b
+x &= (A'A)^{-1}A'b\\
+\\
+p = Ax = \underbrace{A(A'A)^{-1}A'}_\text{$P_a$}b,
 \end{aligned}
 $$
 
-The last step above works only if $A'A$ is actually invertible, which is the case if $A$ has full rank, which is the case if none of its columns can be constructed from a linear combination of any other columns. (A visual way to think about this is the following: the columns of a matrix are the basis vectors of its column space. The rank is the number of dimensions of that column space. Full rank means that the column space has as many dimensions as there are columns.)
+The last step above works only if $A'A$ is actually invertible, which is the case if $A$ has full rank, which is the case if none of its columns can be constructed from a linear combination of any other columns (the columns of a matrix are the basis vectors of its column space. The rank is the number of dimensions of that column space. Full rank means that the column space has as many dimensions as there are columns.)
 
 The math above generalises directly to projections onto N-dimensional space. All that changes is that $b$, $A$, $x$, and $p$ are higher-dimensional objects, and that visualising what's happening becomes rather mind-bending.
 
@@ -155,7 +180,7 @@ The math above generalises directly to projections onto N-dimensional space. All
  in a vector that lies on the same line. The key aspect here is that the line, like the plane, must include the origin to accommodate the zero vector and maintain closure under scalar multiplication and vector addition (meaning that the results or these operations are also part of the subspace). In summary, a subspace is not just any subset of a vector space; it must itself satisfy all the criteria of a vector space, including the inclusion of the zero vector, and closure under both vector addition and scalar multiplication.
 
 
-[^euclid_dist]: The Euclidean distance between two points $x$ and $\bar{x}$ in $\mathbb{R}^N$ is defined as $\sqrt{\sum_{i=1}^N{(\bar{x_i} - x_i})^2}$.
+[^euclid_dist]: The Euclidean distance between two points $x$ and $\bar{x}$ in $\mathbb{R}^N$ is defined as $\sqrt{\sum_{i=1}^N{(\bar{a_i} - a_i})^2}$.
 
 [^line]: A line through the origin is a subspace of a two-dimensional vector because it is 1-dimensional (and thus a subset of the 2-dimensional vector) and because all possible linear combinations of vectors on the line will also lie on the line (see the definition of a "sub space" above).
 

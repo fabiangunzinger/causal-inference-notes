@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 18&nbsp; Ethics</title>
+<title>Causal inference notes - 19&nbsp; Ethics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,7 +49,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/heterogeneous_treatment_effects.html" rel="prev">
+<link href="../chapters/projection.html" rel="next">
+<link href="../chapters/triggered_analysis.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -72,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/ethics.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ethics</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/ethics.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Ethics</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -201,8 +221,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/triggered_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Triggered analysis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
   </div>
 </li>
     </ul>
@@ -218,7 +250,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ethics</span></h1>
+<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Ethics</span></h1>
 </div>
 
 
@@ -233,7 +265,7 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Some useful principles to consider, based on reading chapter 9 in <span class="citation" data-cites="kohavi2020trustworthy">(<a href="#ref-kohavi2020trustworthy" role="doc-biblioref"><strong>kohavi2020trustworthy?</strong></a>)</span></p>
+<p>Some useful principles to consider, based on reading chapter 9 in <span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span></p>
 <ul>
 <li><p>Only test changes that Company policy would allow you to roll out to 100 percent of users i.e.&nbsp;for Meta, deliberately showing them negative content wouldn’t qualify. Personally I’m not sure I agree. I think in the Meta example, it would be useful to understand the effect of exposure to negative content. I’m not gonna think about this deeply now, but I think adapting the rule to not showing levels of content users couldn’t organically be exposed to on the platform might be more useful. In the Meta example, this would allow for studying the effect of negative content in a systematic way without making the experience worse for treatment users than it actually is for some users (and could well be for treatment users, too). The reason for my willingness to entertain to go further is that there is a potentially large benefit to understanding harm. Yes, there might be some cost in the very short term (and you’d obviously want ot bound that cost somehow, as I proposed above, in order to guard against slippery slopes), but if the insights gained allow you to prevent large harm indefinitely later, then that’s worth considering. Two other thoughts: motivation clearly matters here. And: the possibility of a slippery slope is not generally an argument to not do something – often, as here – there are quite natural and objective ways to draw a line on how far one would be willing to go.</p></li>
 <li><p>Aim for equipoise: this is a situation where, ex-ante, there is no grounds to favour one variant over another. This is the normal case. (The term is borrowed from clinical trial, where clinical equipoise is the assumption in an RCT that no drug is ex-ante better than another).</p></li>
@@ -242,8 +274,20 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Presumptive consent: ask a small subset of users whether they would be okay participating and if they do, assume that the sentiment would generalise.</p></li>
 <li><p>Different from clinical trials, subjects in online trials usually have the opportunity to switch service (for sth like FB, this might be difficult).</p></li>
 </ul>
+<p>What are Salganik (2018)’s three principles of ethical design? Why should we care?</p>
+<ul>
+<li><p>Replace: use quasi-experiments whenever possible.</p></li>
+<li><p>Refine: make interventions as harmless as possible.</p></li>
+<li><p>Reduce: use the minimum necessary number of participants (use power analysis to make sure you’re not over-powered).</p></li>
+<li><p>Why all this? Because we can never know whether an intervention is not harmful to at least some participants.</p></li>
+</ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-kohavi2020trustworthy" class="csl-entry" role="listitem">
+Kohavi, Ron, Diane Tang, and Ya Xu. 2020. <em>Trustworthy Online Controlled Experiments: A Practical Guide to a/b Testing</em>. Cambridge University Press.
+</div>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -481,11 +525,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/heterogeneous_treatment_effects.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span>
+      <a href="../chapters/triggered_analysis.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Triggered analysis</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../chapters/projection.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Projection</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
