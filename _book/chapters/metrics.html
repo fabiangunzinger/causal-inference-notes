@@ -259,8 +259,20 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/triggered_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Triggered analysis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
   </div>
 </li>
     </ul>
@@ -301,6 +313,7 @@ window.Quarto = {
   <li><a href="#other-metric-taxonomies" id="toc-other-metric-taxonomies" class="nav-link" data-scroll-target="#other-metric-taxonomies"><span class="header-section-number">10.10</span> Other metric taxonomies</a></li>
   <li><a href="#metric-sensitivity-decomposition" id="toc-metric-sensitivity-decomposition" class="nav-link" data-scroll-target="#metric-sensitivity-decomposition"><span class="header-section-number">10.11</span> Metric sensitivity decomposition</a></li>
   <li><a href="#metrics-vs-goals" id="toc-metrics-vs-goals" class="nav-link" data-scroll-target="#metrics-vs-goals"><span class="header-section-number">10.12</span> Metrics vs goals</a></li>
+  <li><a href="#levels-at-which-to-calculate-metrics" id="toc-levels-at-which-to-calculate-metrics" class="nav-link" data-scroll-target="#levels-at-which-to-calculate-metrics"><span class="header-section-number">10.13</span> Levels at which to calculate metrics</a></li>
   </ul>
 </nav>
     </div>
@@ -662,6 +675,22 @@ P(\text{detecting treatment effect on the metric}) = P(H_1) \times P(p \leq \alp
 <ul>
 <li><p>Every metric has its limitations.</p></li>
 <li><p>Meta’s goal is to have lots of users. But how do you measure this? As Alex Schultz explains <a href="https://www.youtube.com/watch?v=mIvX3hBc9rI">here</a>, the industry has moved from registered users to confirmed registered users to active confirmed registered users to monthly active users</p></li>
+</ul>
+</section>
+<section id="levels-at-which-to-calculate-metrics" class="level2" data-number="10.13">
+<h2 data-number="10.13" class="anchored" data-anchor-id="levels-at-which-to-calculate-metrics"><span class="header-section-number">10.13</span> Levels at which to calculate metrics</h2>
+<ul>
+<li><p>“Conversion rate” can be calculated at a numa number of different ways:</p>
+<ul>
+<li>At the variant level:</li>
+</ul>
+<p><span class="math display">\[
+CR_{variant\_level} = \frac{\text{Successful sessions across variant}}{\text{Total sessions across variant}}
+\]</span></p></li>
+<li><p>User level: <span class="math display">\[
+CR_{User\_level} = \sum_{i=1}^{N_v}frac{\text{Successful sessions across user}}{\text{Total sessions across user}}
+\]</span></p></li>
+<li><p>Advantage of user level is that they are more robust to outliers, since each user has weight 1, instead of weight being proportional to their number of sessions (both total and successful).</p></li>
 </ul>
 
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -46,7 +46,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -55,13 +61,42 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -71,13 +106,13 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/projection.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Projection</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/projection.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Projection</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -86,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Causal inference notes</a> 
@@ -222,7 +257,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -254,19 +289,40 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
 
-<p>A projection is a transformation of a vector onto a subspace.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>There are different types of projections, but the one that’s relevant for us here is <em>orthogonal projection</em>, which projects a vector onto the nearest point on a subspace, where ]“nearest” usually refers to the Euclidean distance.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Why this type of projection is called “orthogonal projection” will be come clear below.</p>
+
+<p>A projection is a transformation of a vector onto a subspace.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Subspaces
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A subspace is a specific type of subset within a vector space that itself qualifies as a vector space. This means that any linear combination of vectors within the subspace must also belong to the subspace, as well as to the original, larger, space (linear combinations are formed by adding together scalar multiples of vectors).</p>
+<p>For example, consider a 2-dimensional plane within the 3-dimensional space denoted as <span class="math inline">\(\mathbb{R}^3\)</span>. This 2-dimensional plane can be a subspace of <span class="math inline">\(\mathbb{R}^3\)</span> if it includes all possible linear combinations of any vectors lying within this plane. However, a crucial condition for this plane to be a subspace is that it must pass through the origin of <span class="math inline">\(\mathbb{R}^3\)</span>, which is the point (0, 0, 0). This requirement is necessary because a subspace must contain the zero vector (in this case, the zero vector of <span class="math inline">\(\mathbb{R}^3\)</span>) to fulfill the property of containing scalar multiples (including the zero scalar) of its vectors.</p>
+<p>Similarly, a line in <span class="math inline">\(\mathbb{R}^3\)</span> can be a subspace if it passes through the origin. This ensures that any linear combination of two vectors that lie on this line will also resultY in a vector that lies on the same line. The key aspect here is that the line, like the plane, must include the origin to accommodate the zero vector and maintain closure under scalar multiplication and vector addition (meaning that the results or these operations are also part of the subspace).</p>
+<p>In summary, a subspace is not just any subset of a vector space; it must itself satisfy all the criteria of a vector space, including the inclusion of the zero vector, and closure under both vector addition and scalar multiplication.</p>
+</div>
+</div>
+</div>
+<p>There are different types of projections, but the one that’s relevant for us here is <em>orthogonal projection</em>, which projects a vector onto the nearest point on a subspace, where ]“nearest” usually refers to the Euclidean distance.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Why this type of projection is called “orthogonal projection” will be come clear below.</p>
 <section id="projecting-from-2-d-onto-1-d" class="level2" data-number="20.1">
 <h2 data-number="20.1" class="anchored" data-anchor-id="projecting-from-2-d-onto-1-d"><span class="header-section-number">20.1</span> Projecting from 2-D onto 1-D</h2>
-<p>Projecting a vector in two-dimensional space onto a line that goes through the origin is a nice way to build an understanding for what a projection does.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
-<p>Say we want to orthogonally project the vector <span class="math inline">\(b\)</span> onto a line defined by another vector, <span class="math inline">\(a\)</span>, and we will call the resulting projection <span class="math inline">\(p\)</span>. Hence, <span class="math inline">\(p\)</span> is the point on the line defined by <span class="math inline">\(a\)</span> that is nearest to the (tip of) the vector <span class="math inline">\(b\)</span>.</p>
+<p>Projecting a vector in two-dimensional space onto a line that goes through the origin is a nice way to build an understanding for what a projection does.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Say we want to orthogonally project the vector <span class="math inline">\(b\)</span> onto a line defined by another vector, <span class="math inline">\(a\)</span>, and we will call the resulting projection <span class="math inline">\(p\)</span>. Hence, <span class="math inline">\(p\)</span> is the point on the line defined by <span class="math inline">\(a\)</span> that is nearest to the (tip of) the vector <span class="math inline">\(b\)</span>. (Note, though, that <span class="math inline">\(p\)</span> is a vector, not a point. Calling it a point just clarifies what we’re doing here.)</p>
 <p>We can think of the line as being generated by scaling vector <span class="math inline">\(a\)</span> with a scalar <span class="math inline">\(x\)</span>, so that choosing a suitable <span class="math inline">\(x\)</span> allows us to reach any point on the line. Finding <span class="math inline">\(p\)</span> then boils down to finding the value of <span class="math inline">\(x\)</span> that gets us to that point of the line that is closest to <span class="math inline">\(b\)</span>. We can thus write <span class="math inline">\(p = ax\)</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../inputs/projection_onto_1d.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<figcaption class="figure-caption">Projecting a 2d vector onto a line</figcaption>
+<figcaption>Projecting a 2d vector onto a line</figcaption>
 </figure>
 </div>
 <p>Let’s start by finding <span class="math inline">\(p\)</span>. We can find it in different ways.</p>
@@ -304,7 +360,40 @@ p = ax = \underbrace{a(a'a)^{-1}a'}_\text{$P_a$}b,
 <p>where <span class="math inline">\(P_a\)</span> is the projection matrix.</p>
 <p>Let’s reflect for a moment what this all means. In general, pre-multiplying a vector by a matrix transforms the vector in a particular way. When we perform orthogonal projection, we pre-multiply a vector by a matrix that transforms the vector into that point on a subspace that it closest to the original vector. In our case here, pre-multiplying our initial vector <span class="math inline">\(b\)</span> by the projection matrix <span class="math inline">\(P_a\)</span> transforms <span class="math inline">\(b\)</span> into that point on <span class="math inline">\(a\)</span> that is closest to <span class="math inline">\(b\)</span>, which we call <span class="math inline">\(p\)</span>. Given that we define “nearest” using the Euclidean distance, it makes sense that the projection matrix would emerge out of the solution to the minimisation problem of finding the point on the subspace that minimises the Euclidean distance to the original vector.</p>
 <p><strong>Using basic geometry:</strong></p>
-<p>We could also find <span class="math inline">\(p\)</span> using our understanding of basic geometry. Looking at the figure above, it is intuitively obvious that the shortest path between the tip of <span class="math inline">\(b\)</span> and the line <span class="math inline">\(a\)</span> is that which is perpendicular to <span class="math inline">\(a\)</span> – the point at which the perpendicular line meets <span class="math inline">\(a\)</span> is thus <span class="math inline">\(p\)</span>. The path between <span class="math inline">\(b\)</span> and <span class="math inline">\(p\)</span> is simply <span class="math inline">\(b - p\)</span>. In linear algebra terms, we thus want that path to be orthogonal to the line <span class="math inline">\(a\)</span>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>We could also find <span class="math inline">\(p\)</span> using our understanding of basic geometry. Looking at the figure above, it is intuitively obvious that the shortest path between the tip of <span class="math inline">\(b\)</span> and the line <span class="math inline">\(a\)</span> is that which is perpendicular to <span class="math inline">\(a\)</span> – the point at which the perpendicular line meets <span class="math inline">\(a\)</span> is thus <span class="math inline">\(p\)</span>. The path between <span class="math inline">\(b\)</span> and <span class="math inline">\(p\)</span> is simply <span class="math inline">\(b - p\)</span>. In linear algebra terms, we thus want that path to be orthogonal to the line <span class="math inline">\(a\)</span>.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Orthogonal vectors
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Orthogonality is a generalisation of perpendicularity; two vectors that are orthogonal are perpendicular to each other. The word comes from the Greek “orthos”, meaning “straight” or “right”, and “gonia”, meaning “angle”. To test whether two vectors <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are perpendicular, we check whether their dot product, <span class="math inline">\(x'y\)</span> equals zero.</p>
+<p>But why do we know that the dot-product of orthogonal vectors is zero? The answer follows from the Pythagorean theorem, which states that for a right triangle with sides <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> and hypotenuse <span class="math inline">\(c\)</span> we have <span class="math inline">\(a^2\)</span> + <span class="math inline">\(b^2\)</span> = <span class="math inline">\(c^2\)</span>. Now, if vectors <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are orthogonal, they form the sides of a right triangle, where the hypotenuse is given by <span class="math inline">\(x + y\)</span>. By the Pythagorean theorem, we thus have</p>
+<p><span class="math display">\[
+||x||^2 + ||y||^2 = ||x + y||^2,
+\]</span></p>
+<p>which equals</p>
+<p><span class="math display">\[
+\left(\sqrt{x'x}\right)^2 + \left(\sqrt{y'y}\right)^2 = \left(\sqrt{(x + y)'(x + y)}\right)^2,
+\]</span></p>
+<p>and simplifies to</p>
+<p><span class="math display">\[
+\begin{aligned}
+x'x + y'y &amp;= (x + y)'(x + y) \\
+x'x + y'y &amp;= x'x + y'y + x'y + y'x \\
+x'x + y'y &amp;= x'x + y'y + 2x'y,
+\end{aligned}
+\]</span></p>
+<p>from which it is clear that <span class="math inline">\(x'y = 0\)</span>.</p>
+</div>
+</div>
+</div>
 <p>Hence, we want:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -315,11 +404,11 @@ xa'a &amp;= a'b \\
 x &amp;= (a'a)^{-1}a'b
 \end{aligned}
 \]</span></p>
-<p>So that, again, we have:<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p>So that, again, we have:<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 <p><span class="math display">\[
 p = ax = \underbrace{a(a'a)^{-1}a'}_\text{$P_a$}b.
 \]</span></p>
-<p>This also makes clear why this type of projection is called “orthogonal projection”: we want to project a vector onto a subspace in such a way that the distance between the original vector and the subspace is minimal. The resulting projection will be a point on the suspace such that a vector from that point to the original vector is orthogonal to the subspace. Intuitively, this is the case because the shortest path between the vector and the subspace will be that which is perpendicular to the subspace, and orthogonality is the generalisation of the notion of perpendicularity.</p>
+<p>This also makes clear why this type of projection is called “orthogonal projection”: we want to project a vector onto a subspace in such a way that the distance between the original vector and the subspace is minimal. The resulting projection will be a point on the subspace such that a vector from that point to the original vector is orthogonal to the subspace. Intuitively, this is the case because the shortest path between the vector and the subspace will be that which is perpendicular to the subspace, and orthogonality is the generalisation of the notion of perpendicularity.</p>
 </section>
 <section id="why-project" class="level2" data-number="20.2">
 <h2 data-number="20.2" class="anchored" data-anchor-id="why-project"><span class="header-section-number">20.2</span> Why project?</h2>
@@ -337,23 +426,23 @@ a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nk}x_k &amp;= b_n
 Ax = b,
 \]</span></p>
 <p>where</p>
-<p><span class="math display">\[ A = \begin{pmatrix}
+<p><span class="math display">\[
+A = \begin{pmatrix}
   a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1k} \\
   a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2k} \\
   \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
   a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nk}
 \end{pmatrix},
-\]</span></p>
-<p><span class="math display">\[ x =
+\quad
+x =
 \begin{pmatrix}
   x_{1} \\
   x_{2} \\
   \vdots \\
   x_{k}
 \end{pmatrix},
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[ b =
+\quad
+b =
 \begin{pmatrix}
   b_{1} \\
   b_{2} \\
@@ -369,7 +458,7 @@ Ax = \hat{b},
 </section>
 <section id="projection-from-3-d-onto-2-d-and-projecting-onto-n-d" class="level2" data-number="20.3">
 <h2 data-number="20.3" class="anchored" data-anchor-id="projection-from-3-d-onto-2-d-and-projecting-onto-n-d"><span class="header-section-number">20.3</span> Projection from 3-D onto 2-D and projecting onto N-D</h2>
-<p>As in the 2-D onto 1-D example above, we’re going to project the vector <span class="math inline">\(b\)</span> onto a subspace. But <span class="math inline">\(b\)</span> is now a 3-D vector, and instead of projecting onto a line characterised by vector <span class="math inline">\(a\)</span>, we’re projecting onto a 2-D plane characterised by the 2 x 2 matrix <span class="math inline">\(A\)</span>. Hence, our projection <span class="math inline">\(p\)</span> is now a point in the 3-dimensional space that lies on the 2-dimensional subspace. Similarly to above, <span class="math inline">\(p\)</span> is defined by <span class="math inline">\(p = Ax\)</span>, where <span class="math inline">\(x\)</span> is a 2-D vector of scalars.</p>
+<p>As in the 2-D onto 1-D example above, we’re going to project the vector <span class="math inline">\(b\)</span> onto a subspace. But <span class="math inline">\(b\)</span> is now a 3-D vector, and instead of projecting onto a line characterised by vector <span class="math inline">\(a\)</span>, we’re projecting onto a 2-D plane characterised by the 2 x 2 matrix <span class="math inline">\(A\)</span>. Hence, our projection <span class="math inline">\(p\)</span> is now a vector in the 3-dimensional space that lies on the 2-dimensional subspace. Similarly to above, <span class="math inline">\(p\)</span> is defined by <span class="math inline">\(p = Ax\)</span>, where <span class="math inline">\(x\)</span> is a 2-D vector of scalars.</p>
 <p>We can still go about finding <span class="math inline">\(p\)</span> in the same way as above:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -379,10 +468,28 @@ A'b - A'Ax &amp;= 0 \\
 A'Ax &amp;= A'b \\
 x &amp;= (A'A)^{-1}A'b\\
 \\
-p = Ax = \underbrace{A(A'A)^{-1}A'}_\text{$P_a$}b,
+p = Ax = \underbrace{A(A'A)^{-1}A'}_\text{$P_a$}b.
 \end{aligned}
 \]</span></p>
-<p>The last step above works only if <span class="math inline">\(A'A\)</span> is actually invertible, which is the case if <span class="math inline">\(A\)</span> has full rank, which is the case if none of its columns can be constructed from a linear combination of any other columns (the columns of a matrix are the basis vectors of its column space. The rank is the number of dimensions of that column space. Full rank means that the column space has as many dimensions as there are columns.)</p>
+<p>The last step above works only if <span class="math inline">\(A'A\)</span> is actually invertible, which is the case if <span class="math inline">\(A\)</span> has full rank.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Full rank
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A matrix is said to have full rank if none of its columns can be constructed from a linear combination of any other columns.</p>
+<p>We can think of the columns of a matrix are the basis vectors of its column space, and the rank of the matrix is the number of dimensions of that column space.</p>
+<p>Full rank means thus means that the column space has as many dimensions as there are columns.</p>
+</div>
+</div>
+</div>
 <p>The math above generalises directly to projections onto N-dimensional space. All that changes is that <span class="math inline">\(b\)</span>, <span class="math inline">\(A\)</span>, <span class="math inline">\(x\)</span>, and <span class="math inline">\(p\)</span> are higher-dimensional objects, and that visualising what’s happening becomes rather mind-bending.</p>
 </section>
 <section id="useful-references" class="level2" data-number="20.4">
@@ -397,11 +504,9 @@ p = Ax = \underbrace{A(A'A)^{-1}A'}_\text{$P_a$}b,
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>A subspace is a specific type of subset within a vector space that itself qualifies as a vector space. This means that any linear combination of vectors within the subspace must also belong to the subspace, as well as to the original, larger, space (linear combinations are formed by adding together scalar multiples of vectors). For example, consider a 2-dimensional plane within the 3-dimensional space denoted as <span class="math inline">\(\mathbb{R}^3\)</span>. This 2-dimensional plane can be a subspace of <span class="math inline">\(\mathbb{R}^3\)</span> if it includes all possible linear combinations of any vectors lying within this plane. However, a crucial condition for this plane to be a subspace is that it must pass through the origin of <span class="math inline">\(\mathbb{R}^3\)</span>, which is the point (0, 0, 0). This requirement is necessary because a subspace must contain the zero vector (in this case, the zero vector of <span class="math inline">\(\mathbb{R}^3\)</span>) to fulfill the property of containing scalar multiples (including the zero scalar) of its vectors. Similarly, a line in <span class="math inline">\(\mathbb{R}^3\)</span> can be a subspace if it passes through the origin. This ensures that any linear combination of two vectors that lie on this line will also resultY in a vector that lies on the same line. The key aspect here is that the line, like the plane, must include the origin to accommodate the zero vector and maintain closure under scalar multiplication and vector addition (meaning that the results or these operations are also part of the subspace). In summary, a subspace is not just any subset of a vector space; it must itself satisfy all the criteria of a vector space, including the inclusion of the zero vector, and closure under both vector addition and scalar multiplication.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>The Euclidean distance between two points <span class="math inline">\(x\)</span> and <span class="math inline">\(\bar{x}\)</span> in <span class="math inline">\(\mathbb{R}^N\)</span> is defined as <span class="math inline">\(\sqrt{\sum_{i=1}^N{(\bar{a_i} - a_i})^2}\)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>A line through the origin is a subspace of a two-dimensional vector because it is 1-dimensional (and thus a subset of the 2-dimensional vector) and because all possible linear combinations of vectors on the line will also lie on the line (see the definition of a “sub space” above).<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>TODO explain concept of orthogonality and why it is equivalent to the dot-product being zero.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>TODO show what happens if we define <span class="math inline">\(p = xa\)</span> instead of <span class="math inline">\(p = ax\)</span><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>The Euclidean distance between two points <span class="math inline">\(x\)</span> and <span class="math inline">\(\bar{x}\)</span> in <span class="math inline">\(\mathbb{R}^N\)</span> is defined as <span class="math inline">\(\sqrt{\sum_{i=1}^N{(\bar{a_i} - a_i})^2}\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>A line through the origin is a subspace of a two-dimensional vector because it is 1-dimensional (and thus a subset of the 2-dimensional vector) and because all possible linear combinations of vectors on the line will also lie on the line (see box on subspaces for more details).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>One thing I used to wonder about was whether the order of the vectors in the scalar product <span class="math inline">\(ax\)</span> matters. That is, whether we could also write <span class="math inline">\(p = xa\)</span>. Once you think about the rules of linear algebra, the answer becomes quite clear. For a scalar product, the order doesn’t matter. However, <span class="math inline">\(p = ax\)</span> is preferred because it naturally generalises to the higher-dimensional case where instead of a scalar <span class="math inline">\(a\)</span>, we have a matrix <span class="math inline">\(A\)</span>. In this case, <span class="math inline">\(p = Ax\)</span>, which is different from <span class="math inline">\(p = xA\)</span>, which is generally not defined, and <span class="math inline">\(p = x'A\)</span>, which leads to a different result.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -485,10 +590,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -498,8 +602,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -512,6 +625,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -555,6 +787,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -580,6 +813,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -641,7 +900,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/ethics.html" class="pagination-link">
+      <a href="../chapters/ethics.html" class="pagination-link  aria-label=" &lt;span="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Ethics</span></span>
       </a>          
   </div>
@@ -649,6 +908,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

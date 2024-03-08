@@ -61,12 +61,12 @@ book:
 
     # Appendix (math details)
     # - chapters/stats_details_like_lln_and_clt.qmd
-    - chapters/projection.qmd
+    - chapters/projection.md
     # - chapters/fwl.qmd
 
 
 
-bibliography: /Users/fabian.gunzinger/.dotfiles/latex/fabib.bib
+bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
 
 format:
   html:
@@ -74,6 +74,7 @@ format:
   pdf:
     documentclass: scrreprt
 jupyter: python3
+callout-icon: false
 
 
 
