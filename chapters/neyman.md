@@ -35,7 +35,7 @@ This estimator is unbiased (see Proof of Theorem 6.1 in @imbens2015causal for th
 
 ## Estimator of the variance of the average treatment effect estimator
 
-Estimating the variance of the average treatment estimator $\hat{tau}^{dif}$ involves two steps:
+Estimating the variance of the average treatment estimator $\hat{\tau}^{dif}$ involves two steps:
 
 1. Derive the sampling variance of the estimator for the average treatment effect (i.e. for the estimator defined in @eq-neyman-estimator).
 
@@ -53,11 +53,8 @@ where:
 $$
 \begin{align}
 S_c^2 &= \frac{1}{N - 1}\sum_{i=1}^{N}\left(Y_i(0) - \bar{Y}(0)\right)^2 \\
-
 S_t^2 &= \frac{1}{N - 1}\sum_{i=1}^{N}\left(Y_i(1) - \bar{Y}(1)\right)^2 \\
-
 S_{ct}^2 &= \frac{1}{N - 1}\sum_{i=1}^{N}\left(Y_i(1) - Y_i(0) - (\bar{Y}(1) - \bar{Y}(0))\right)^2 \\
-
 &= \frac{1}{N - 1}\sum_{i=1}^{N}\left(Y_i(1) - Y_i(0) - \tau_{fs}\right)^2 \\
 \end{align}
 $$

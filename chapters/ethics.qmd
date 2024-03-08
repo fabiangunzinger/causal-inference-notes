@@ -14,7 +14,7 @@ Some useful principles to consider, based on reading chapter 9 in @kohavi2020tru
 
 - Different from clinical trials, subjects in online trials usually have the opportunity to switch service (for sth like FB, this might be difficult).
 
-What are Salganik (2018)'s three principles of ethical design? Why should we care?
+Salganik (2018)'s three principles of ethical design?
 
 - Replace: use quasi-experiments whenever possible.
 
