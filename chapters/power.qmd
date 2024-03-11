@@ -33,11 +33,13 @@ $$
 
 - This means that the minimum detectable effect ($\delta$) is given by:
 
-$$ \delta = (t_a + t_{1-\kappa}) * \sqrt{\frac{1}{P(1-P)}\frac{\sigma^2}{N}} $$
+$$ \delta = (t_{\alpha} + t_{1-\kappa}) * \sqrt{\frac{1}{P(1-P)}\frac{\sigma^2}{N}} $$
 
 - Rearranding for the minimum required sample size we get:
 
-$$ N =  \frac{(t_a + t_{1-\kappa})^2}{P(1-P)}\left(\frac{\sigma}{\delta}\right)^2 $$
+$$
+N =  \frac{(t_a + t_{1-\kappa})^2}{P(1-P)}\left(\frac{\sigma}{\delta}\right)^2
+$$
 
 - So that the required sample size is inversely proportional to the minimal effect size we wish to detect. This makes sense, it means that the smaller an effect we want to detect, the larger the samle size we need. In particular, given that $N \propto \delta^{-2}$, to detect an effect of half the size we need a sample four times the size.
 
@@ -80,6 +82,22 @@ $$ N =  \frac{(t_a + t_{1-\kappa})^2}{P(1-P)}\left(\frac{\sigma}{\delta}\right)^
   - Use variance reduction technique
   
   - Only include triggered users
+
+- Conduct one-sided tests
+
+Effect of one-sided testing on required sample size.
+
+In general:
+$$
+N =  \frac{(t_a + t_{1-\kappa})^2}{P(1-P)}\left(\frac{\sigma}{\delta}\right)^2
+$$
+
+For $\alpha = 0.05$, we have $t_{\alpha}^{ts} = 1.96$ and $t_{\alpha}^{os} = 1.65$, while for $\kappa = 0.8$ we have $t_{1 - \kappa} = 0.84$. Hence:
+$$
+\frac{N^{os}}{N^{ts}} = \frac{ (1.64 + 0.84)^2}{(1.96 + 0.84)^2} = \frac{6.2}{7.84} = 0.79
+$$
+
+Hence, for given levels of power and significance, a one-sided test requires about 21 percent fewer observations.
 
 
 ## How to choose key parameters
