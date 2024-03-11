@@ -4,7 +4,7 @@ project:
 book:
   title: "Causal inference notes"
   author: "Fabian Gunzinger"
-  date: "9/28/2023"
+  date: "8/3/2024"
   chapters:
     - index.qmd
 
@@ -15,35 +15,35 @@ book:
     # - chapters/approaches_to_causal_inference.qmd
 
     # Statistics foundations
-    - chapters/stats_foundations.qmd
-    - chapters/regression.qmd
+    # - chapters/stats_foundations.qmd
+    # - chapters/regression.qmd
 
     # # Causal inference foundations
     # # - chapters/epistemology.qmd
     # - chapters/fundamental_problem.qmd
     - chapters/neyman_rubin_causal_model.qmd
     - chapters/fisher.qmd
-    - chapters/neyman.qmd
+    - chapters/neyman.md
     # - chapters/regression_for_experiments.qmd
     # # - chapters/sampling_vs_randomisation_uncertainty.qmd
     # - chapters/experiment_analysis.qmd
     # # - chapters/dags.qmd
 
     # Experiments in practice
-    - chapters/guiding_principles.qmd
-    - chapters/experiment_design.qmd
-    - chapters/experiment_stats.qmd
-    - chapters/metrics.qmd
+    # - chapters/guiding_principles.qmd
+    # - chapters/experiment_design.qmd
+    # - chapters/experiment_stats.qmd
+    - chapters/metrics.md
     # # - chapters/decision_making.qmd
     - chapters/power.qmd
     - chapters/threats_to_validity.qmd
     - chapters/practical_issues.qmd
-    - chapters/variance_reduction.qmd
+    # - chapters/variance_reduction.qmd
     # # - chapters/cuped.qmd
     - chapters/network_experiments.qmd
-    - chapters/switchbacks.qmd
-    - chapters/heterogeneous_treatment_effects.qmd
-    - chapters/triggered_analysis.md
+    # - chapters/switchbacks.qmd
+    # - chapters/heterogeneous_treatment_effects.qmd
+    # - chapters/triggered_analysis.md
 
 
     # Quasi-experiments in practice
@@ -61,12 +61,12 @@ book:
 
     # Appendix (math details)
     # - chapters/stats_details_like_lln_and_clt.qmd
-    - chapters/projection.qmd
+    - chapters/projection.md
     # - chapters/fwl.qmd
 
 
 
-bibliography: /Users/fabian.gunzinger/.dotfiles/latex/fabib.bib
+bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
 
 format:
   html:
@@ -74,6 +74,7 @@ format:
   pdf:
     documentclass: scrreprt
 jupyter: python3
+callout-icon: false
 
 
 

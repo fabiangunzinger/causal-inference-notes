@@ -129,7 +129,7 @@ Further conserns:
 
 - @deng2016data recommend using two criteria to evaluate the quality of a metric: directionality and sensitivity. Directionality requires that a move of the metric in one direction consistently captures the direction of the user experience. In practice, the direction of a metric, such as queries per user can be ambiguous. Sensitivity requires that the metric picks up changes in the user experience such that we can identify it as part of an experiment. We can think of them as the direction and the size of a vector: the more directly it points towards the North Star, and the closer it gets, the better. These two criteria also allow us to qualitatively compare different metrics and decide which one(s) to use as our OEC.
 
-- @deng2016data propose two ways to evalute directionality and sensitivity. First, we can use a validation corpus: a collection of prior experiments for which we know the effect on user experience, and which we can then use to test sensitivity and directionality of our metrics. The second, if no validation corpus is available, is degeneration experiments, whereby we deliberately degenerate the user experence in a way that is acceptable and doesn't harm long-term user experience, and then measure directionality and sensitivity of the metrics.
+- @deng2016data propose two ways to evaluate directionality and sensitivity. First, we can use a validation corpus: a collection of prior experiments for which we know the effect on user experience, and which we can then use to test sensitivity and directionality of our metrics. The second, if no validation corpus is available, is degeneration experiments, whereby we deliberately degenerate the user experience in a way that is acceptable and doesn't harm long-term user experience, and then measure directionality and sensitivity of the metrics.
 
 - @deng2016data point out that ratio metrics (CTR or Success Query Rate) are often good candidates for OECs because they are bounded and have high sensitivity. However, they need to be interpreted carefully because a change can result from a change in the numerator, the denominator, of both, out of which only the first gives a clear signal. Hence, when relying on ratio metrics, they recommend two things: 1) rely on debug metrics to separately track numerator and denominator, 2) only rely on ratio metrics with a stable denominator. For example: Bing used Session Success Rate instead or Query Success Rate even though QSR was more sensitive because the denominator of SSR was more stable (QSR was used as a debug metric).
 
@@ -243,7 +243,7 @@ Developed by Dave McClure, the pirate metrics (summary [here](https://500hats.ty
 
 The below Table provides a useful example of possible conversion metrics and associated conversion rates. 
 
-![AARRR example conversion metrics. Source: 500hats.typepad.com/500blogs/2007/09/startup-metrics.html](inputs/aarrr-example-conv-metrics.png)
+![AARRR example conversion metrics. Source: 500hats.typepad.com/500blogs/2007/09/startup-metrics.html](../inputs/aarrr-example-conv-metrics.png)
 
 
 ### AAAERRR
