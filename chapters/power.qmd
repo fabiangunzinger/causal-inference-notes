@@ -1,15 +1,20 @@
 # Power {#sec-power}
 
 
-## Theory
+
+
+## Measuring power
+
+
 
 - Largely based on @duflo2007randomization
 
 ![title](../inputs/power.png)
 
+
 Power basics
 
-- In the simplest possible, we randomly draw a sample of size $N$ from an identical population, so that our observations can be assumed to be i.i.d, and we allocate a fraction $P$ of our sample to treatment. We can then estiamte the treatment effect using the OLS regression
+, we randomly draw a sample of size $N$ from an identical population, so that our observations can be assumed to be i.i.d, and we allocate a fraction $P$ of our sample to treatment. We can then estiamte the treatment effect using the OLS regression
 
 $$ y = \alpha + \beta T + \epsilon$$
 
@@ -44,6 +49,14 @@ $$
 - So that the required sample size is inversely proportional to the minimal effect size we wish to detect. This makes sense, it means that the smaller an effect we want to detect, the larger the samle size we need. In particular, given that $N \propto \delta^{-2}$, to detect an effect of half the size we need a sample four times the size.
 
 - SE($\beta$) also includes measurement error, so this is also a determinant of power.
+
+
+## Measuring power
+
+- Cohen (1977) proposes estimated effect size / standard deviation of outcome. This is useful to compare effects across studies and domains.
+
+- Bloom (1985) proposes MDE, useful for within study/domain comparisons. More directly interpretable.
+
 
 
 ## What determines power

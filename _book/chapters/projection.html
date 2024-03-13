@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 18&nbsp; Projection</title>
+<title>Causal inference notes - 11&nbsp; Projection</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -46,13 +46,7 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -61,42 +55,13 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -106,13 +71,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/projection.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Projection</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/projection.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Projection</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -121,7 +86,7 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Causal inference notes</a> 
@@ -160,102 +125,60 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/guiding_principles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Guiding principles</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/experiment_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Experiment design</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/experiment_stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Power</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/threats_to_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/practical_issues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/variance_reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/switchbacks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/heterogeneous_treatment_effects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/triggered_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Triggered analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#projecting-from-2-d-onto-1-d" id="toc-projecting-from-2-d-onto-1-d" class="nav-link active" data-scroll-target="#projecting-from-2-d-onto-1-d"><span class="header-section-number">18.1</span> Projecting from 2-D onto 1-D</a></li>
-  <li><a href="#why-project" id="toc-why-project" class="nav-link" data-scroll-target="#why-project"><span class="header-section-number">18.2</span> Why project?</a></li>
-  <li><a href="#projection-from-3-d-onto-2-d-and-projecting-onto-n-d" id="toc-projection-from-3-d-onto-2-d-and-projecting-onto-n-d" class="nav-link" data-scroll-target="#projection-from-3-d-onto-2-d-and-projecting-onto-n-d"><span class="header-section-number">18.3</span> Projection from 3-D onto 2-D and projecting onto N-D</a></li>
-  <li><a href="#useful-references" id="toc-useful-references" class="nav-link" data-scroll-target="#useful-references"><span class="header-section-number">18.4</span> Useful references</a></li>
+  <li><a href="#projecting-from-2-d-onto-1-d" id="toc-projecting-from-2-d-onto-1-d" class="nav-link active" data-scroll-target="#projecting-from-2-d-onto-1-d"><span class="header-section-number">11.1</span> Projecting from 2-D onto 1-D</a></li>
+  <li><a href="#why-project" id="toc-why-project" class="nav-link" data-scroll-target="#why-project"><span class="header-section-number">11.2</span> Why project?</a></li>
+  <li><a href="#projection-from-3-d-onto-2-d-and-projecting-onto-n-d" id="toc-projection-from-3-d-onto-2-d-and-projecting-onto-n-d" class="nav-link" data-scroll-target="#projection-from-3-d-onto-2-d-and-projecting-onto-n-d"><span class="header-section-number">11.3</span> Projection from 3-D onto 2-D and projecting onto N-D</a></li>
+  <li><a href="#useful-references" id="toc-useful-references" class="nav-link" data-scroll-target="#useful-references"><span class="header-section-number">11.4</span> Useful references</a></li>
   </ul>
 </nav>
     </div>
@@ -264,7 +187,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-projection" class="quarto-section-identifier"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Projection</span></span></h1>
+<h1 class="title"><span id="sec-projection" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Projection</span></span></h1>
 </div>
 
 
@@ -277,9 +200,7 @@ window.Quarto = {
   </div>
   
 
-
 </header>
-
 
 <p>A projection is a transformation of a vector onto a subspace.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
@@ -302,15 +223,15 @@ Subspaces
 </div>
 </div>
 <p>There are different types of projections, but the one that’s relevant for us here is <em>orthogonal projection</em>, which projects a vector onto the nearest point on a subspace, where ]“nearest” usually refers to the Euclidean distance.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Why this type of projection is called “orthogonal projection” will be come clear below.</p>
-<section id="projecting-from-2-d-onto-1-d" class="level2" data-number="18.1">
-<h2 data-number="18.1" class="anchored" data-anchor-id="projecting-from-2-d-onto-1-d"><span class="header-section-number">18.1</span> Projecting from 2-D onto 1-D</h2>
+<section id="projecting-from-2-d-onto-1-d" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="projecting-from-2-d-onto-1-d"><span class="header-section-number">11.1</span> Projecting from 2-D onto 1-D</h2>
 <p>Projecting a vector in two-dimensional space onto a line that goes through the origin is a nice way to build an understanding for what a projection does.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>Say we want to orthogonally project the vector <span class="math inline">\(b\)</span> onto a line defined by another vector, <span class="math inline">\(a\)</span>, and we will call the resulting projection <span class="math inline">\(p\)</span>. Hence, <span class="math inline">\(p\)</span> is the point on the line defined by <span class="math inline">\(a\)</span> that is nearest to the (tip of) the vector <span class="math inline">\(b\)</span>. (Note, though, that <span class="math inline">\(p\)</span> is a vector, not a point. Calling it a point just clarifies what we’re doing here.)</p>
 <p>We can think of the line as being generated by scaling vector <span class="math inline">\(a\)</span> with a scalar <span class="math inline">\(x\)</span>, so that choosing a suitable <span class="math inline">\(x\)</span> allows us to reach any point on the line. Finding <span class="math inline">\(p\)</span> then boils down to finding the value of <span class="math inline">\(x\)</span> that gets us to that point of the line that is closest to <span class="math inline">\(b\)</span>. We can thus write <span class="math inline">\(p = ax\)</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../inputs/projection_onto_1d.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<figcaption>Projecting a 2d vector onto a line</figcaption>
+<figcaption class="figure-caption">Projecting a 2d vector onto a line</figcaption>
 </figure>
 </div>
 <p>Let’s start by finding <span class="math inline">\(p\)</span>. We can find it in different ways.</p>
@@ -398,8 +319,8 @@ p = ax = \underbrace{a(a'a)^{-1}a'}_\text{$P_a$}b.
 \]</span></p>
 <p>This also makes clear why this type of projection is called “orthogonal projection”: we want to project a vector onto a subspace in such a way that the distance between the original vector and the subspace is minimal. The resulting projection will be a point on the subspace such that a vector from that point to the original vector is orthogonal to the subspace. Intuitively, this is the case because the shortest path between the vector and the subspace will be that which is perpendicular to the subspace, and orthogonality is the generalisation of the notion of perpendicularity.</p>
 </section>
-<section id="why-project" class="level2" data-number="18.2">
-<h2 data-number="18.2" class="anchored" data-anchor-id="why-project"><span class="header-section-number">18.2</span> Why project?</h2>
+<section id="why-project" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="why-project"><span class="header-section-number">11.2</span> Why project?</h2>
 <p>One reason projection is useful is because it allows us to approximately solve systems of linear equations that have no exact solution. Imagine we have the following system of equations:</p>
 <p><span class="math display">\[
 \begin{align*}
@@ -444,8 +365,8 @@ Ax = \hat{b},
 \]</span></p>
 <p>where <span class="math inline">\(\hat{b}\)</span> is the orthogonal projection of <span class="math inline">\(b\)</span> onto the vector space spanned by <span class="math inline">\(A\)</span>. This vector space is also called the span or column space of <span class="math inline">\(A\)</span>. Using orthogonal projection achieves two things: first, it guarantees a solution because <span class="math inline">\(\hat{b}\)</span> lies on the same space as <span class="math inline">\(Ax\)</span> – they both lie on the subspace spanned by the columns of <span class="math inline">\(A\)</span> – and, second, it makes <span class="math inline">\(\hat{p}\)</span> the closest approximation to <span class="math inline">\(b\)</span> in terms of the Euclidean distance.</p>
 </section>
-<section id="projection-from-3-d-onto-2-d-and-projecting-onto-n-d" class="level2" data-number="18.3">
-<h2 data-number="18.3" class="anchored" data-anchor-id="projection-from-3-d-onto-2-d-and-projecting-onto-n-d"><span class="header-section-number">18.3</span> Projection from 3-D onto 2-D and projecting onto N-D</h2>
+<section id="projection-from-3-d-onto-2-d-and-projecting-onto-n-d" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="projection-from-3-d-onto-2-d-and-projecting-onto-n-d"><span class="header-section-number">11.3</span> Projection from 3-D onto 2-D and projecting onto N-D</h2>
 <p>As in the 2-D onto 1-D example above, we’re going to project the vector <span class="math inline">\(b\)</span> onto a subspace. But <span class="math inline">\(b\)</span> is now a 3-D vector, and instead of projecting onto a line characterised by vector <span class="math inline">\(a\)</span>, we’re projecting onto a 2-D plane characterised by the 2 x 2 matrix <span class="math inline">\(A\)</span>. Hence, our projection <span class="math inline">\(p\)</span> is now a vector in the 3-dimensional space that lies on the 2-dimensional subspace. Similarly to above, <span class="math inline">\(p\)</span> is defined by <span class="math inline">\(p = Ax\)</span>, where <span class="math inline">\(x\)</span> is a 2-D vector of scalars.</p>
 <p>We can still go about finding <span class="math inline">\(p\)</span> in the same way as above:</p>
 <p><span class="math display">\[
@@ -480,8 +401,8 @@ Full rank
 </div>
 <p>The math above generalises directly to projections onto N-dimensional space. All that changes is that <span class="math inline">\(b\)</span>, <span class="math inline">\(A\)</span>, <span class="math inline">\(x\)</span>, and <span class="math inline">\(p\)</span> are higher-dimensional objects, and that visualising what’s happening becomes rather mind-bending.</p>
 </section>
-<section id="useful-references" class="level2" data-number="18.4">
-<h2 data-number="18.4" class="anchored" data-anchor-id="useful-references"><span class="header-section-number">18.4</span> Useful references</h2>
+<section id="useful-references" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="useful-references"><span class="header-section-number">11.4</span> Useful references</h2>
 <ul>
 <li><p><a href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/video_galleries/video-lectures/">Gilbert Strang’s linear algebra lectures at MIT</a></p></li>
 <li><p><a href="https://bookdown.org/ts_robinson1994/10EconometricTheorems/linear_projection.html#linear_projection">10 Fundamental Theorems for Econometrics</a></p></li>
@@ -578,9 +499,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -590,17 +512,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -613,125 +526,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -775,7 +569,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -801,32 +594,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -888,15 +655,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/ethics.html" class="pagination-link  aria-label=" &lt;span="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Ethics</span></span>
+      <a href="../chapters/ethics.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ethics</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 

@@ -13,6 +13,7 @@ book:
     # - chapters/history.qmd
     # - chapters/stats_for_business.qmd
     # - chapters/approaches_to_causal_inference.qmd
+    # - chapters/limitations_of_experiments.md
 
     # Statistics foundations
     # - chapters/stats_foundations.qmd
@@ -66,7 +67,7 @@ book:
 
 
 
-bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
+bibliography: /Users/fabian.gunzinger/.dotfiles/latex/fabib.bib
 
 format:
   html:
