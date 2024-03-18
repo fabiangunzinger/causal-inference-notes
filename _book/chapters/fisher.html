@@ -215,86 +215,44 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/guiding_principles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Guiding principles</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/experiment_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Experiment design</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/experiment_stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Power</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/threats_to_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/practical_issues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/variance_reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/switchbacks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Switchback experiments</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/heterogeneous_treatment_effects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/triggered_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Triggered analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
   </div>
 </li>
     </ul>
@@ -342,7 +300,7 @@ window.Quarto = {
 <li><p>The key point about the sharp null hypothesis is that it allows us to impute all unobserved potential outcomes, not that the treatment effect is zero. The postulated treatment effect could thus be any deterministic function of the available data (e.g.&nbsp;an additive or multiplicative homogenous effect or a function of observed covariates).</p></li>
 <li><p>The only source of randomness in this framework is the randomness introduced by randomisation, meaning there is no randomness from sampling because we are interested in conclusions about the specific sample at hand, not about a superpopulation.</p></li>
 <li><p>The approach is truly non-parametric in that it doesn’t rely on a model of outcomes at all. In particular, we don’t model the distribution of test statistic values but calculate it directly. We can do that because we know the assignment mechanism, which is known by definition in a completely randomised experiment, and because of the strict null hypothesis, which allows us to solve the fundamental problem of causal inference by imputing the unobserved potential values.</p></li>
-<li><p><span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span> point out that while Fisher’s approach is often a good starting point, we are often concerned not only with learning that a treatment has some effect for some individual (which is what rejecting the sharp null hypothesis implies) but with estimating an average treatment effect without worrying about variations of the effect. For this, we need to rely on <a href="../chapters/neyman.html">Neyman’s approach</a>.</p></li>
+<li><p><span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span> point out that while Fisher’s approach is often a good starting point, we are often concerned not only with learning that a treatment has some effect for some individual (which is what rejecting the sharp null hypothesis implies) but with estimating an average treatment effect without worrying about variations of the effect. For this, we need to rely on <a href="neyman.qmd">Neyman’s approach</a>.</p></li>
 </ul>
 <section id="a-simple-example" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="a-simple-example"><span class="header-section-number">3.1</span> A simple example</h2>

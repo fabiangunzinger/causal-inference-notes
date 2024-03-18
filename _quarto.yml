@@ -16,7 +16,10 @@ book:
 
     # Statistics foundations
     # - chapters/stats_foundations.qmd
-    # - chapters/regression.qmd
+    # - chapters/stats_details_like_lln_and_clt.qmd
+    - chapters/projection.md
+    # - chapters/fwl.qmd
+    - chapters/regression.qmd
 
     # # Causal inference foundations
     # # - chapters/epistemology.qmd
@@ -57,13 +60,6 @@ book:
     - chapters/ethics.qmd
     # - chapters/useful_resources.qmd
     # - chapters/references.qmd
-
-
-    # Appendix (math details)
-    # - chapters/stats_details_like_lln_and_clt.qmd
-    - chapters/projection.md
-    # - chapters/fwl.qmd
-
 
 
 bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
