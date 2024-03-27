@@ -45,7 +45,11 @@ $$
 
 - This means that the minimum detectable effect ($\delta$) is given by:
 
+<<<<<<< HEAD
 $$ \delta = (t_{\alpha} + t_{1-\kappa}) * \sqrt{\frac{1}{P(1-P)}\frac{\sigma^2}{N}} $$
+=======
+$$ \delta = (t_a + tq_{1-\kappa}) * \sqrt{\frac{1}{P(1-P)}\frac{\sigma^2}{N}} $$
+>>>>>>> dev
 
 - Rearranding for the minimum required sample size we get:
 

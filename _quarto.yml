@@ -16,8 +16,11 @@ book:
     # - chapters/limitations_of_experiments.md
 
     # Statistics foundations
-    # - chapters/stats_foundations.qmd
-    # - chapters/regression.qmd
+    - chapters/stats_foundations.qmd
+    # - chapters/stats_details_like_lln_and_clt.qmd
+    - chapters/projection.md
+    # - chapters/fwl.qmd
+    - chapters/regression.qmd
 
     # # Causal inference foundations
     # # - chapters/epistemology.qmd
@@ -27,7 +30,8 @@ book:
     - chapters/neyman.md
     # - chapters/regression_for_experiments.qmd
     # # - chapters/sampling_vs_randomisation_uncertainty.qmd
-    # - chapters/experiment_analysis.qmd
+    - chapters/experiment_stats.qmd
+    - chapters/experiment_analysis.qmd
     # # - chapters/dags.qmd
 
     # Experiments in practice
@@ -60,6 +64,7 @@ book:
     # - chapters/references.qmd
 
 
+<<<<<<< HEAD
     # Appendix (math details)
     # - chapters/stats_details_like_lln_and_clt.qmd
     - chapters/projection.md
@@ -68,6 +73,9 @@ book:
 
 
 bibliography: /Users/fabian.gunzinger/.dotfiles/latex/fabib.bib
+=======
+bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
+>>>>>>> dev
 
 format:
   html:

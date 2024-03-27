@@ -11,7 +11,7 @@ There are, of course, a lot of very good resources on linear regression and OLS,
 
 There are two ways to understand linear regression: one is to think of the variables involved as dimensions and of each row as a data point -- this is the way the problem is usually motivated in introductory econometrics classes. The other is the linear algebra approach -- to think of each row of data as a dimension, and to think of the variable as vectors in the space formed by those dimensions.
 
-The first approach straightforwardly links to the intuition of minimising squares, which is useful. It's the one I have learned and relied on most of my life. The second one, though, provides an alternative and very powerful way to understand what linear regression does. And, importantly, understanding the linear algebra notation simplifies much of the notation and manipulations, and opens the way to much of the literature of econometric theory, such as an understanding of the Frisch-Waugh-Lowell theorem, which was the impetus for me to dig into the linear algebra of OLS.
+The first approach straightforwardly links to the intuition of minimising squares, which is useful. It's the one I have learned and relied on most of my life. The second one, though, provides an alternative and very powerful way to understand what linear regression does. Importantly, understanding the linear algebra of OLS allows for the use of much simpler notation and manipulations, and provides direct access to the literature of econometric theory. Case in point: for me, the desire to understand the mechanics, rather than just the intuition, of the  Frisch-Waugh-Lowell theorem, was the impetus for me to dig into the linear algebra of OLS.
 
 In this post I want to cover the following:
 
@@ -22,6 +22,16 @@ In this post I want to cover the following:
 -   Understand how we can think of the least squares solution as a projection
 
 -   Understand why this is a very useful way of seeing things
+
+
+::: {.callout-note collapse=true}
+
+## Why "regression"?
+
+Explain where the name comes from. 
+
+:::
+
 
 
 ## Glossary
@@ -94,18 +104,7 @@ $$
 y = X\beta + \epsilon,
 $$
 
-where $\beta$ is defined as above,
-
-$$ y = 
- \begin{pmatrix}
-  y_{1}\\
-  y_{2}\\
-  \vdots \\
-  y_{k} 
- \end{pmatrix}
-$$
-
-is a $n \times 1$ vector containing the $n$ outcome variables, one for each unit in the data,
+where
 
 $$ X = 
  \begin{pmatrix}
@@ -125,7 +124,15 @@ $$
 
 is an $n \times k$ matrix that contains all $n$ row vectors $x_i'$ stacked on top of each other, and
 
-$$ \epsilon = 
+$$ y = 
+ \begin{pmatrix}
+  y_{1}\\
+  y_{2}\\
+  \vdots \\
+  y_{k} 
+ \end{pmatrix}
+\quad
+\epsilon = 
  \begin{pmatrix}
   \epsilon_{1}\\
   \epsilon_{2}\\
@@ -134,7 +141,7 @@ $$ \epsilon =
  \end{pmatrix}
 $$
 
-a column vector containing the $n$ error terms.
+are both $n \times 1$ vectors containing, respectively, the $n$ outcome variables and error terms.
 
 ## The problem
 
@@ -206,6 +213,16 @@ which gets us to the same result but in more steps.
 
 
 ## Assumptions
+
+From Davidson and MacKinnon
+- Identifying assumption: E(e) = 0 -- this ensures that regression equation can be true only for particular values of the betas, instead of for any given one (which it could be, if error could just be anything)
+
+- Modelling e as a random variable: we're using the mathematical concept of randomness to model our ignorance of the data generating process. Assuming E(e) = 0 is saying that, on average, the determinants of y we ignore cancel out. That doesn't mean they are small. They can be very big. But estimating b still useful to know relationship between x we can observe and y.
+
+- We model variables in econometric models as random variables -- sets of possibilities -- and we observe a single realisation of each random var for each unit in the data.
+
+
+
 
 - Directly copied from or heavily based on https://people.duke.edu/~rnau/testing.htm. Edit and expand over time.
 
