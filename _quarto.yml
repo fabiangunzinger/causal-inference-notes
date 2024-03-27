@@ -15,7 +15,7 @@ book:
     # - chapters/approaches_to_causal_inference.qmd
 
     # Statistics foundations
-    # - chapters/stats_foundations.qmd
+    - chapters/stats_foundations.qmd
     # - chapters/stats_details_like_lln_and_clt.qmd
     - chapters/projection.md
     # - chapters/fwl.qmd
@@ -29,7 +29,8 @@ book:
     - chapters/neyman.md
     # - chapters/regression_for_experiments.qmd
     # # - chapters/sampling_vs_randomisation_uncertainty.qmd
-    # - chapters/experiment_analysis.qmd
+    - chapters/experiment_stats.qmd
+    - chapters/experiment_analysis.qmd
     # # - chapters/dags.qmd
 
     # Experiments in practice

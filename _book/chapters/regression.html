@@ -256,7 +256,7 @@ window.Quarto = {
 <p>Linear regression is by far the most often used method to estimate relationships between outcomes and explanatory variables in applied econometrics and – probably – all of applied social science. In this article I want to to two things: define the related terminology that is often used but not defined (OLS, linear equation, etc.) and – mainly – explain a less frequently taught and understand way to think about linear regression, that in terms of its linear algebra.</p>
 <p>There are, of course, a lot of very good resources on linear regression and OLS, and I list my favourite ones at the bottom. But none of them quite tie everything together in the way I was looking for.</p>
 <p>There are two ways to understand linear regression: one is to think of the variables involved as dimensions and of each row as a data point – this is the way the problem is usually motivated in introductory econometrics classes. The other is the linear algebra approach – to think of each row of data as a dimension, and to think of the variable as vectors in the space formed by those dimensions.</p>
-<p>The first approach straightforwardly links to the intuition of minimising squares, which is useful. It’s the one I have learned and relied on most of my life. The second one, though, provides an alternative and very powerful way to understand what linear regression does. And, importantly, understanding the linear algebra notation simplifies much of the notation and manipulations, and opens the way to much of the literature of econometric theory, such as an understanding of the Frisch-Waugh-Lowell theorem, which was the impetus for me to dig into the linear algebra of OLS.</p>
+<p>The first approach straightforwardly links to the intuition of minimising squares, which is useful. It’s the one I have learned and relied on most of my life. The second one, though, provides an alternative and very powerful way to understand what linear regression does. Importantly, understanding the linear algebra of OLS allows for the use of much simpler notation and manipulations, and provides direct access to the literature of econometric theory. Case in point: for me, the desire to understand the mechanics, rather than just the intuition, of the Frisch-Waugh-Lowell theorem, was the impetus for me to dig into the linear algebra of OLS.</p>
 <p>In this post I want to cover the following:</p>
 <ul>
 <li><p>Understand all the terminology related to linear regression so we fully know what we’re talking about</p></li>
@@ -264,6 +264,22 @@ window.Quarto = {
 <li><p>Understand how we can think of the least squares solution as a projection</p></li>
 <li><p>Understand why this is a very useful way of seeing things</p></li>
 </ul>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why “regression”?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Explain where the name comes from.</p>
+</div>
+</div>
+</div>
 <section id="glossary" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="glossary"><span class="header-section-number">3.1</span> Glossary</h2>
 <p>TODO: - Linear regression vs OLS</p>
@@ -311,16 +327,7 @@ x_i' = (x_{i1}, x_{i2}, \ldots, x_{ik})
 <p>To be even more succinct, we can stack all n equations to get the matrix notation: <span class="math display">\[
 y = X\beta + \epsilon,
 \]</span></p>
-<p>where <span class="math inline">\(\beta\)</span> is defined as above,</p>
-<p><span class="math display">\[ y =
-\begin{pmatrix}
-  y_{1}\\
-  y_{2}\\
-  \vdots \\
-  y_{k}
-\end{pmatrix}
-\]</span></p>
-<p>is a <span class="math inline">\(n \times 1\)</span> vector containing the <span class="math inline">\(n\)</span> outcome variables, one for each unit in the data,</p>
+<p>where</p>
 <p><span class="math display">\[ X =
 \begin{pmatrix}
   x_{1}' \\
@@ -337,7 +344,15 @@ y = X\beta + \epsilon,
 \end{pmatrix}
 \]</span></p>
 <p>is an <span class="math inline">\(n \times k\)</span> matrix that contains all <span class="math inline">\(n\)</span> row vectors <span class="math inline">\(x_i'\)</span> stacked on top of each other, and</p>
-<p><span class="math display">\[ \epsilon =
+<p><span class="math display">\[ y =
+\begin{pmatrix}
+  y_{1}\\
+  y_{2}\\
+  \vdots \\
+  y_{k}
+\end{pmatrix}
+\quad
+\epsilon =
 \begin{pmatrix}
   \epsilon_{1}\\
   \epsilon_{2}\\
@@ -345,7 +360,7 @@ y = X\beta + \epsilon,
   \epsilon_{k}
 \end{pmatrix}
 \]</span></p>
-<p>a column vector containing the <span class="math inline">\(n\)</span> error terms.</p>
+<p>are both <span class="math inline">\(n \times 1\)</span> vectors containing, respectively, the <span class="math inline">\(n\)</span> outcome variables and error terms.</p>
 <p>##&nbsp;The problem</p>
 <p>So, what do we want to do here? We have data on an outcome variable <span class="math inline">\(y\)</span> and explanatory variables <span class="math inline">\(x\)</span> for each unit <span class="math inline">\(i\)</span>, and we think that it is reasonable to think that this data is generated by a process whereby <span class="math inline">\(y\)</span> is the result of a linear combination of the <span class="math inline">\(x\)</span>s plus some noise, which we capture in the error term. The challenge is to find the right linear combination.</p>
 </section>
@@ -388,7 +403,10 @@ X'X\beta &amp;= X'y \\
 </section>
 <section id="assumptions" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">3.6</span> Assumptions</h2>
+<p>From Davidson and MacKinnon - Identifying assumption: E(e) = 0 – this ensures that regression equation can be true only for particular values of the betas, instead of for any given one (which it could be, if error could just be anything)</p>
 <ul>
+<li><p>Modelling e as a random variable: we’re using the mathematical concept of randomness to model our ignorance of the data generating process. Assuming E(e) = 0 is saying that, on average, the determinants of y we ignore cancel out. That doesn’t mean they are small. They can be very big. But estimating b still useful to know relationship between x we can observe and y.</p></li>
+<li><p>We model variables in econometric models as random variables – sets of possibilities – and we observe a single realisation of each random var for each unit in the data.</p></li>
 <li><p>Directly copied from or heavily based on https://people.duke.edu/~rnau/testing.htm. Edit and expand over time.</p></li>
 <li><p>In short, the assumptions are that the model is linear and additive, and that errors are iid. The latter assumption is often stated as three separate assumptions, as shown below.</p></li>
 <li><p>Note: The dependent and independent variables in a regression model do not need to be normally distributed by themselves–only the prediction errors need to be normally distributed. (In fact, independent variables do not even need to be random, as in the case of trend or dummy or treatment or pricing variables.) But if the distributions of some of the variables that are random are extremely asymmetric or long-tailed, it may be hard to fit them into a linear model whose errors will be normally distributed, and explaining the shape of their distributions may be an interesting topic all by itself. Keep in mind that the normal error assumption is usually justified by appeal to the central limit theorem, which holds in the case where many random variations are added together. If the underlying sources of randomness are not interacting additively, this argument fails to hold.</p></li>
