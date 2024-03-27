@@ -211,6 +211,34 @@ In particular, I think that to really understand the connection between multiple
 
 
 
+### CUPED implementation detail
+
+- Because we show control, treatment, difference, and CIs in our dashboard, we need to display unadjusted values.
+- This means our tests and CI's have to be based on the unadjusted delta and the adjusted standard error
+
+*Test statistic for unadjusted metric*
+$$
+Z_u = \frac{\bar{Y}^{obs}_{t} - \bar{Y}^{obs}_{c}}{\sqrt{\frac{s^2_t}{N_t} + \frac{s^2_c}{N_c}}}
+$$
+
+*Test statistic for CUPED-adjusted metric*
+$$
+Z_a = \frac{\left(\bar{Y}^{obs}_{t} - \bar{Y}^{obs}_{c}\right) - \theta \left(\bar{X}^{obs}_{t} - \bar{X}^{obs}_{c}\right)}{\sqrt{\left(\frac{s^2_t}{N_t} + \frac{s^2_c}{N_c}\right) (1 - \rho^2)}}
+$$
+
+*Implemented test statistic*
+$$
+Z_i = \frac{\bar{Y}^{obs}_{t} - \bar{Y}^{obs}_{c}}{\sqrt{\left(\frac{s^2_t}{N_t} + \frac{s^2_c}{N_c}\right) (1 - \rho^2)}}
+$$
+
+Critical assumption: 
+
+$$
+\bar{X}^{obs}_{t} = \bar{X}^{obs}_{c}
+$$
+
+
+
 
 ### Useful resources
 
@@ -222,6 +250,8 @@ In particular, I think that to really understand the connection between multiple
 Experiments: Case Studies at Netflix](https://www.kdd.org/kdd2016/papers/files/adp0945-xieA.pdf)
 
 - [How Booking.com increases the power of online experiments with CUPED](https://booking.ai/how-booking-com-increases-the-power-of-online-experiments-with-cuped-995d186fff1d)
+
+- [CUPED explained -- statsig post](https://www.statsig.com/blog/cuped)
 
 - [You can't spell CUPED without Frisch-Waugh-Lovell](https://www.evanmiller.org/you-cant-spell-cuped-without-frisch-waugh-lovell.html) -- good post exploring link to FWL theorem
 

@@ -31,27 +31,6 @@
 - Simpson's paradox
 
 
-## Simpson's paradox
-
-- Simpson's paradox basically happens due to a kind of omitted variable bias.
-
-- It can occus if pooling data overlooks a confounding driver of the data generation that affects the data in specific ways.
-
-- In particular, the underlying data needs to be such that:
-
-  1. Outcomes differ by the level of the confounding variable
-  2. The difference in outcome between these levels is larger than the differences in outcome within each level
-
-- This is very abstract -- I'm aiming to rewrite this over time.
-
-- The paradox has two classic manifestations: frequency Tables and correlations.
-
-- For frequency Tables, classic examples are listed on [Wikipedia](https://en.wikipedia.org/wiki/Simpson%27s_paradox#Examples). Notice that in all the examples, the difference in outcomes between levels of the confounder (departments, stone size, and year) is much larger than the differences between the groups of interest (men and women, treatments, batters) at any given level of the confounder.
-
-- For correlations, the below gif makes things very clear.
-
-![Pace~svwiki, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons](../inputs/simpsons_paradox.gif)
-
 
 ## Resources
 

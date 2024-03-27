@@ -12,6 +12,13 @@
 ![title](../inputs/power.png)
 
 
+
+$$
+n = \frac{(f(\alpha) + f(\beta))}{\text{Sample allocation}}\frac{\sigma}{\delta}
+$$
+
+
+
 Power basics
 
 , we randomly draw a sample of size $N$ from an identical population, so that our observations can be assumed to be i.i.d, and we allocate a fraction $P$ of our sample to treatment. We can then estiamte the treatment effect using the OLS regression
