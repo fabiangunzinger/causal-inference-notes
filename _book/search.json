@@ -498,101 +498,101 @@
   {
     "objectID": "chapters/power.html#theory",
     "href": "chapters/power.html#theory",
-    "title": "8  Power",
+    "title": "11  Power",
     "section": "",
     "text": "Largely based on (duflo2007randomization?)\n\n\n\n\ntitle\n\n\n\n\nIn the simplest possible, we randomly draw a sample of size \\(N\\) from an identical population, so that our observations can be assumed to be i.i.d, and we allocate a fraction \\(P\\) of our sample to treatment. We can then estiamte the treatment effect using the OLS regression\n\n\n\nwhere the standard error of \\(\\beta\\) is given by \\(\\sqrt{\\frac{1}{P(1-P)}\\frac{\\sigma^2}{N}}\\).\nstd error derivation (from standard variance result of two independent samples, using population fractions):\n\n\n\nThe distribution on the left hand side below shows the distribution of our effect size estimator \\(\\hat{\\beta}\\) if the null hypothesis is true.\nWe reject the null hypothesis if the estimated effect size is larger than the critical value \\(t_{\\alpha}\\), determined by the significance level \\(\\alpha\\). Hence, for this to happen we need \\(\\hat{\\beta} &gt; t_{\\alpha} * SE(\\hat{\\beta})\\) (follows from rearranging the t-test formula).\nOn the right is the distribution of \\(\\hat{\\beta}\\) if the true effect size is \\(\\beta\\).\nThe power of the test for a true effect size of \\(\\beta\\) is the area under this curve that falls to the right of \\(t_{\\alpha}\\). This is the probability that we reject the null hypothesis given that it is false.\nHence, to attain a power of \\(\\kappa\\) it must be that \\(\\beta &gt; (t_a + t_{1-\\kappa}) * SE(\\hat{\\beta})\\), where \\(t_{1-\\kappa}\\) is the value from a t-distribution that has \\(1-\\kappa\\) of its probability mass to the left (for \\(\\kappa = 0.8\\), \\(t_{1-\\kappa} = 0.84\\)).\nThis means that the minimum detectable effect (\\(\\delta\\)) is given by:\n\n\n\nRearranding for the minimum required sample size we get:\n\n\n\nSo that the required sample size is inversely proportional to the minimal effect size we wish to detect. This makes sense, it means that the smaller an effect we want to detect, the larger the samle size we need. In particular, given that \\(N \\propto \\delta^{-2}\\), to detect an effect of half the size we need a sample four times the size.\nSE(\\(\\beta\\)) also includes measurement error, so this is also a determinant of power.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Power</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#what-determines-power",
     "href": "chapters/power.html#what-determines-power",
-    "title": "8  Power",
-    "section": "8.2 What determines power",
-    "text": "8.2 What determines power\n\nSignificance level\nEffect size\nStandard error\n\nSample size\nVariant allocation proportion\nMetric variance",
+    "title": "11  Power",
+    "section": "11.2 What determines power",
+    "text": "11.2 What determines power\n\nSignificance level\nEffect size\nStandard error\n\nSample size\nVariant allocation proportion\nMetric variance",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Power</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#how-to-increase-power",
     "href": "chapters/power.html#how-to-increase-power",
-    "title": "8  Power",
-    "section": "8.3 How to increase power",
-    "text": "8.3 How to increase power\n\nPower can be increased trivially by lowering the significance level, which we often don’t want to do, or by increasing sample size, which we’re often trying to avoid.\nIncrease effect size\n\nEnsure that only users who are exposed to the change are in the data to avoid dilution of the effect\n\nOptimally allocate variance proportions\n\nUsually equal for highest power\nShow why with many treatment variants, higher share in control is better\n\nReduce metric variance\n\nChoose metric with low variance (e.g. indicator)\nUse variance reduction technique\nOnly include triggered users",
+    "title": "11  Power",
+    "section": "11.3 How to increase power",
+    "text": "11.3 How to increase power\n\nPower can be increased trivially by lowering the significance level, which we often don’t want to do, or by increasing sample size, which we’re often trying to avoid.\nIncrease effect size\n\nEnsure that only users who are exposed to the change are in the data to avoid dilution of the effect\n\nOptimally allocate variance proportions\n\nUsually equal for highest power\nShow why with many treatment variants, higher share in control is better\n\nReduce metric variance\n\nChoose metric with low variance (e.g. indicator)\nUse variance reduction technique\nOnly include triggered users",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Power</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#how-to-choose-key-parameters",
     "href": "chapters/power.html#how-to-choose-key-parameters",
-    "title": "8  Power",
-    "section": "8.4 How to choose key parameters",
-    "text": "8.4 How to choose key parameters\n\n8.4.1 MDE\n\nWhat are you balancing here? The size of the effect you are able to identify and the time it takes to do it.\nAll else equal, the smaller a change you want to be able to detect, the longer it will take for the experiment to run because you need more sample size.\nThe relevant question to ask here is “what counts as a practically relevant change?”\nTo answer that, consider:\n\nMaturity of service (the more mature, the smaller a change can be expected)\nSize of service (the larger, the smaller a change still generates a lot of revenue)\nCost of change that need ot be covered\n\nCost of fully building out feature for launch (can be 0 when fully built out for experiment or high if we use painted door)\nCost of maintaining new code (new code has higher bugs, may increase code complexity and maintenance)\nOther costs: e.g. does CPU utilization increase?\n\n\n\n\n\n8.4.2 Significance level\n\nWhat are you balancing here? The probabilities of making a type I and type II error.\nThe higher significance level, the less likely we are to implement useless features (to make a Type I error) but the more likely we are to no implement useful features (to make a Type II error).\nHence, gotta balance cost of implementing useless feature and cost of not implementing useful feature.\nThings that play into this:\n\nHow long will feature be in effect (less long lowers risk of implementing)?\nHow widely will it be deployed (less widely lowers risk of implementing)?\nHow many users will see it / where in the funnel is it (later in funnel lowers risk of implementation)\n\nWhat to do in practice:\n\nStart from baseline values (\\(alpha = 0.05\\))\nAdjust depending on balance of risks\n\n\n\n\n8.4.3 Power\n\nWhat are you balancing here? The risk of making a Type II error and the time you have to wait for your results.\nAll else equal, the higher a level or power you want, the longer you’ll have to run the experiment to accumulate the requried sample size.\nFactors to consider:\n\nHow costly is it to not implement a useful feature.",
+    "title": "11  Power",
+    "section": "11.4 How to choose key parameters",
+    "text": "11.4 How to choose key parameters\n\n11.4.1 MDE\n\nWhat are you balancing here? The size of the effect you are able to identify and the time it takes to do it.\nAll else equal, the smaller a change you want to be able to detect, the longer it will take for the experiment to run because you need more sample size.\nThe relevant question to ask here is “what counts as a practically relevant change?”\nTo answer that, consider:\n\nMaturity of service (the more mature, the smaller a change can be expected)\nSize of service (the larger, the smaller a change still generates a lot of revenue)\nCost of change that need ot be covered\n\nCost of fully building out feature for launch (can be 0 when fully built out for experiment or high if we use painted door)\nCost of maintaining new code (new code has higher bugs, may increase code complexity and maintenance)\nOther costs: e.g. does CPU utilization increase?\n\n\n\n\n\n11.4.2 Significance level\n\nWhat are you balancing here? The probabilities of making a type I and type II error.\nThe higher significance level, the less likely we are to implement useless features (to make a Type I error) but the more likely we are to no implement useful features (to make a Type II error).\nHence, gotta balance cost of implementing useless feature and cost of not implementing useful feature.\nThings that play into this:\n\nHow long will feature be in effect (less long lowers risk of implementing)?\nHow widely will it be deployed (less widely lowers risk of implementing)?\nHow many users will see it / where in the funnel is it (later in funnel lowers risk of implementation)\n\nWhat to do in practice:\n\nStart from baseline values (\\(alpha = 0.05\\))\nAdjust depending on balance of risks\n\n\n\n\n11.4.3 Power\n\nWhat are you balancing here? The risk of making a Type II error and the time you have to wait for your results.\nAll else equal, the higher a level or power you want, the longer you’ll have to run the experiment to accumulate the requried sample size.\nFactors to consider:\n\nHow costly is it to not implement a useful feature.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Power</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#problems-with-low-power",
     "href": "chapters/power.html#problems-with-low-power",
-    "title": "8  Power",
-    "section": "8.5 Problems with low power",
-    "text": "8.5 Problems with low power\n\nTruth inflation: underpowered studies only find a significant effect it the effect size is larger than the true effect size, leading to inflated claims of effect sizes.",
+    "title": "11  Power",
+    "section": "11.5 Problems with low power",
+    "text": "11.5 Problems with low power\n\nTruth inflation: underpowered studies only find a significant effect it the effect size is larger than the true effect size, leading to inflated claims of effect sizes.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Power</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#power-in-online-experiments",
     "href": "chapters/power.html#power-in-online-experiments",
-    "title": "8  Power",
-    "section": "8.6 Power in online experiments",
-    "text": "8.6 Power in online experiments\n\nKohavi et al. (2014) point out (in rule 7) that while general advice suggets that the CLT provides a good approximation for n larger than 30, the large skew in online metrics often requires many moer users. They recomment 355 * (skewness coefficient)^2.",
+    "title": "11  Power",
+    "section": "11.6 Power in online experiments",
+    "text": "11.6 Power in online experiments\n\nKohavi et al. (2014) point out (in rule 7) that while general advice suggets that the CLT provides a good approximation for n larger than 30, the large skew in online metrics often requires many moer users. They recomment 355 * (skewness coefficient)^2.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Power</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#rule-of-thumb-for-sample-size",
     "href": "chapters/power.html#rule-of-thumb-for-sample-size",
-    "title": "8  Power",
-    "section": "8.7 Rule of thumb for sample size",
-    "text": "8.7 Rule of thumb for sample size\nFor alpha = 0.05, power = 0.8, and a two-sided test with equal allocation to two variants, required sample size is approximately:\n\\[\nn \\approx \\frac{16\\sigma^2}{\\tau^2},\n\\]\nwhere \\(\\sigma^2\\) is the sample variance and \\(\\tau\\) is the tretment effect (this is not known, but we can use the MDES).",
+    "title": "11  Power",
+    "section": "11.7 Rule of thumb for sample size",
+    "text": "11.7 Rule of thumb for sample size\nFor alpha = 0.05, power = 0.8, and a two-sided test with equal allocation to two variants, required sample size is approximately:\n\\[\nn \\approx \\frac{16\\sigma^2}{\\tau^2},\n\\]\nwhere \\(\\sigma^2\\) is the sample variance and \\(\\tau\\) is the tretment effect (this is not known, but we can use the MDES).",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Power</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#best-practices",
     "href": "chapters/power.html#best-practices",
-    "title": "8  Power",
-    "section": "8.8 Best practices",
-    "text": "8.8 Best practices\n\nWhen aiming to estimate a precise effect size rather than just being interested in statistical significance, use assurance instead of power: instead of choosing a sample size to attain a given level of power, choose sample size so that confidence interval will be suitably narrow 99 percent of the time (Sample-Size Planning for More Accurate Statistical Power: A Method Adjusting Sample Effect Sizes for Publication Bias and Uncertainty and Understanding the new statistics.)",
+    "title": "11  Power",
+    "section": "11.8 Best practices",
+    "text": "11.8 Best practices\n\nWhen aiming to estimate a precise effect size rather than just being interested in statistical significance, use assurance instead of power: instead of choosing a sample size to attain a given level of power, choose sample size so that confidence interval will be suitably narrow 99 percent of the time (Sample-Size Planning for More Accurate Statistical Power: A Method Adjusting Sample Effect Sizes for Publication Bias and Uncertainty and Understanding the new statistics.)",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Power</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#useful-resources",
     "href": "chapters/power.html#useful-resources",
-    "title": "8  Power",
-    "section": "8.9 Useful resources",
-    "text": "8.9 Useful resources\n\nLarsen et al. (2023) for general overview\nZhou, Lu, and Shallah (2023) for comprehensive overview of how to calculate power\nBojinov, Simchi-Levi, and Zhao (2023), section 5, for simulation results for switchbacks and generally good approach to simulation to emulate\nReich et al. (2012) power calcs for cluster-randomised experiments",
+    "title": "11  Power",
+    "section": "11.9 Useful resources",
+    "text": "11.9 Useful resources\n\nLarsen et al. (2023) for general overview\nZhou, Lu, and Shallah (2023) for comprehensive overview of how to calculate power\nBojinov, Simchi-Levi, and Zhao (2023), section 5, for simulation results for switchbacks and generally good approach to simulation to emulate\nReich et al. (2012) power calcs for cluster-randomised experiments",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Power</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#qa",
     "href": "chapters/power.html#qa",
-    "title": "8  Power",
-    "section": "8.10 Q&A",
-    "text": "8.10 Q&A\nQuestions:\n\nLonger experiment duration generally increases power. Can you think of a scenario where this is not the case?\nAn online shopping site ranks products according to their average rating. Why might this be suboptimal? What could the site do instead?\n\nAnswers:\n\nWhen using a cumulative metric such as number of likes, the variance of which will increase the longer the experiment runs, which will increase the standard error of our treatment effect estimate and lower our power. Remember that \\(SE(\\hat{\\tau}) = \\sqrt{\\frac{1}{P(1-P)}\\frac{\\sigma^2}{N}}\\). So, whether this happens depends on what happens to \\(\\frac{\\sigma^2}{N}\\), as experiment duration increases. A decrease in power is plausible – likely, even! – because \\(N\\) will increase in a concave fashion over the course of the experiment duration (some users keep coming back), while \\(\\sigma^2\\) is likely to grow faster than linearly, which causes the ratio to increase and power to decrease.\nThe approach is suboptimal because products with few ratings will have much more variance than products with many ratings, and their average rating is thus less reliable. The problem is akin to small US states having the highest and lowest rates of kidney cancer, or small schools having highest and lowest average pupil performance. Fundamentally, it’s a problem of low power – the sample size is too low to reliably detect a true effect. The solution is to use a shrinkage method: use a weighted average of the product average rating and some global product rating, with the weight of the product average rating being proportional to the number of ratings. This way, products with few ratings will be average, while products with many ratings will reflect their own rating.\n\n\n\n\n\nBojinov, Iavor, David Simchi-Levi, and Jinglong Zhao. 2023. “Design and Analysis of Switchback Experiments.” Management Science 69 (7): 3759–77.\n\n\nKohavi, Ron, Alex Deng, Roger Longbotham, and Ya Xu. 2014. “Seven Rules of Thumb for Web Site Experimenters.” In Proceedings of the 20th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 1857–66.\n\n\nLarsen, Nicholas, Jonathan Stallrich, Srijan Sengupta, Alex Deng, Ron Kohavi, and Nathaniel T Stevens. 2023. “Statistical Challenges in Online Controlled Experiments: A Review of a/b Testing Methodology.” The American Statistician, 1–15.\n\n\nReich, Nicholas G, Jessica A Myers, Daniel Obeng, Aaron M Milstone, and Trish M Perl. 2012. “Empirical Power and Sample Size Calculations for Cluster-Randomized and Cluster-Randomized Crossover Studies.” PloS One 7 (4): e35564.\n\n\nZhou, Jing, Jiannan Lu, and Anas Shallah. 2023. “All about Sample-Size Calculations for a/b Testing: Novel Extensions and Practical Guide.” arXiv Preprint arXiv:2305.16459.",
+    "title": "11  Power",
+    "section": "11.10 Q&A",
+    "text": "11.10 Q&A\nQuestions:\n\nLonger experiment duration generally increases power. Can you think of a scenario where this is not the case?\nAn online shopping site ranks products according to their average rating. Why might this be suboptimal? What could the site do instead?\n\nAnswers:\n\nWhen using a cumulative metric such as number of likes, the variance of which will increase the longer the experiment runs, which will increase the standard error of our treatment effect estimate and lower our power. Remember that \\(SE(\\hat{\\tau}) = \\sqrt{\\frac{1}{P(1-P)}\\frac{\\sigma^2}{N}}\\). So, whether this happens depends on what happens to \\(\\frac{\\sigma^2}{N}\\), as experiment duration increases. A decrease in power is plausible – likely, even! – because \\(N\\) will increase in a concave fashion over the course of the experiment duration (some users keep coming back), while \\(\\sigma^2\\) is likely to grow faster than linearly, which causes the ratio to increase and power to decrease.\nThe approach is suboptimal because products with few ratings will have much more variance than products with many ratings, and their average rating is thus less reliable. The problem is akin to small US states having the highest and lowest rates of kidney cancer, or small schools having highest and lowest average pupil performance. Fundamentally, it’s a problem of low power – the sample size is too low to reliably detect a true effect. The solution is to use a shrinkage method: use a weighted average of the product average rating and some global product rating, with the weight of the product average rating being proportional to the number of ratings. This way, products with few ratings will be average, while products with many ratings will reflect their own rating.\n\n\n\n\n\nBojinov, Iavor, David Simchi-Levi, and Jinglong Zhao. 2023. “Design and Analysis of Switchback Experiments.” Management Science 69 (7): 3759–77.\n\n\nKohavi, Ron, Alex Deng, Roger Longbotham, and Ya Xu. 2014. “Seven Rules of Thumb for Web Site Experimenters.” In Proceedings of the 20th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 1857–66.\n\n\nLarsen, Nicholas, Jonathan Stallrich, Srijan Sengupta, Alex Deng, Ron Kohavi, and Nathaniel T Stevens. 2023. “Statistical Challenges in Online Controlled Experiments: A Review of a/b Testing Methodology.” The American Statistician, 1–15.\n\n\nReich, Nicholas G, Jessica A Myers, Daniel Obeng, Aaron M Milstone, and Trish M Perl. 2012. “Empirical Power and Sample Size Calculations for Cluster-Randomized and Cluster-Randomized Crossover Studies.” PloS One 7 (4): e35564.\n\n\nZhou, Jing, Jiannan Lu, and Anas Shallah. 2023. “All about Sample-Size Calculations for a/b Testing: Novel Extensions and Practical Guide.” arXiv Preprint arXiv:2305.16459.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Power</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
@@ -827,11 +827,11 @@
   {
     "objectID": "chapters/power.html",
     "href": "chapters/power.html",
-    "title": "8  Power",
+    "title": "11  Power",
     "section": "",
-    "text": "8.1 Theory\nPower basics\n\\[ y = \\alpha + \\beta T + \\epsilon\\]\n\\[\nstd = \\sqrt{\\frac{\\sigma^2}{N_t} + \\frac{\\sigma^2}{N_c}} = \\sqrt{\\frac{\\sigma^2}{PN} + \\frac{\\sigma^2}{(1-P)N}} = ... = \\sqrt{\\frac{1}{P(1-P)}\\frac{\\sigma^2}{N}}\n\\]\n\\[ \\delta = (t_a + tq_{1-\\kappa}) * \\sqrt{\\frac{1}{P(1-P)}\\frac{\\sigma^2}{N}} \\]\n\\[ N =  \\frac{(t_a + t_{1-\\kappa})^2}{P(1-P)}\\left(\\frac{\\sigma}{\\delta}\\right)^2 \\]",
+    "text": "11.1 Theory\nPower basics\n\\[ y = \\alpha + \\beta T + \\epsilon\\]\n\\[\nstd = \\sqrt{\\frac{\\sigma^2}{N_t} + \\frac{\\sigma^2}{N_c}} = \\sqrt{\\frac{\\sigma^2}{PN} + \\frac{\\sigma^2}{(1-P)N}} = ... = \\sqrt{\\frac{1}{P(1-P)}\\frac{\\sigma^2}{N}}\n\\]\n\\[ \\delta = (t_a + tq_{1-\\kappa}) * \\sqrt{\\frac{1}{P(1-P)}\\frac{\\sigma^2}{N}} \\]\n\\[ N =  \\frac{(t_a + t_{1-\\kappa})^2}{P(1-P)}\\left(\\frac{\\sigma}{\\delta}\\right)^2 \\]",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Power</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
@@ -956,61 +956,61 @@
   {
     "objectID": "chapters/projection.html",
     "href": "chapters/projection.html",
-    "title": "2  Projection",
+    "title": "3  Projection",
     "section": "",
-    "text": "2.1 Projecting from 2-D onto 1-D\nProjecting a vector in two-dimensional space onto a line that goes through the origin is a nice way to build an understanding for what a projection does.2\nSay we want to orthogonally project the vector \\(b\\) onto a line defined by another vector, \\(a\\), and we will call the resulting projection \\(p\\). Hence, \\(p\\) is the point on the line defined by \\(a\\) that is nearest to the (tip of) the vector \\(b\\). (Note, though, that \\(p\\) is a vector, not a point. Calling it a point just clarifies what we’re doing here.)\nWe can think of the line as being generated by scaling vector \\(a\\) with a scalar \\(x\\), so that choosing a suitable \\(x\\) allows us to reach any point on the line. Finding \\(p\\) then boils down to finding the value of \\(x\\) that gets us to that point of the line that is closest to \\(b\\). We can thus write \\(p = ax\\).\nLet’s start by finding \\(p\\). We can find it in different ways.\nUsing calculus:\nGiven that we define closeness based on the Euclidean distance, minimising the distance between the (tip of) the vector, \\(b\\), and the projection, \\(p\\), is akin to solving the following problem:\n\\[\n\\begin{aligned}\nargmin_{x} \\sqrt{\\sum_{i=1}^2{(b_i - p_i)^2}} &= argmin_{x} \\sum_{i=1}^2{(b_i - p_i)^2} \\\\\n&= argmin_{x} \\sum_{i=1}^2{(b_i - xa_i)^2} \\\\\n&= argmin_{x} (b - xa)'(b - xa),\n\\end{aligned}\n\\]\nCalculating the derivative with respect to \\(x\\) we get:\n\\[\n\\begin{aligned}\n\\frac{d}{dx} (b - xa)'(b - xa) &= (-a)'(b - xa) + (b - xa)'(-a) & \\\\\n&= -a'b + xa'a - a'b + xa'a \\\\\n&= -2a'b + 2xa'a\n\\end{aligned}\n\\]\nFinlly, setting the result to 0 and solving for \\(x\\) we get:\n\\[\n\\begin{aligned}\n-2a'b + 2xa'a &= 0 \\\\\nxa'a &= a'b \\\\\nx &= (a'a)^{-1}a'b\n\\end{aligned}\n\\]\nHence, given that \\(p = ax\\), we have:\n\\[\n\\begin{aligned}\np = ax = \\underbrace{a(a'a)^{-1}a'}_\\text{$P_a$}b,\n\\end{aligned}\n\\]\nwhere \\(P_a\\) is the projection matrix.\nLet’s reflect for a moment what this all means. In general, pre-multiplying a vector by a matrix transforms the vector in a particular way. When we perform orthogonal projection, we pre-multiply a vector by a matrix that transforms the vector into that point on a subspace that it closest to the original vector. In our case here, pre-multiplying our initial vector \\(b\\) by the projection matrix \\(P_a\\) transforms \\(b\\) into that point on \\(a\\) that is closest to \\(b\\), which we call \\(p\\). Given that we define “nearest” using the Euclidean distance, it makes sense that the projection matrix would emerge out of the solution to the minimisation problem of finding the point on the subspace that minimises the Euclidean distance to the original vector.\nUsing basic geometry:\nWe could also find \\(p\\) using our understanding of basic geometry. Looking at the figure above, it is intuitively obvious that the shortest path between the tip of \\(b\\) and the line \\(a\\) is that which is perpendicular to \\(a\\) – the point at which the perpendicular line meets \\(a\\) is thus \\(p\\). The path between \\(b\\) and \\(p\\) is simply \\(b - p\\). In linear algebra terms, we thus want that path to be orthogonal to the line \\(a\\).\nHence, we want:\n\\[\n\\begin{aligned}\na'(b - p) &= 0 \\\\\na'(b - xa) &= 0 \\\\\na'b - xa'a &= 0 \\\\\nxa'a &= a'b \\\\\nx &= (a'a)^{-1}a'b\n\\end{aligned}\n\\]\nSo that, again, we have:3\n\\[\np = ax = \\underbrace{a(a'a)^{-1}a'}_\\text{$P_a$}b.\n\\]\nThis also makes clear why this type of projection is called “orthogonal projection”: we want to project a vector onto a subspace in such a way that the distance between the original vector and the subspace is minimal. The resulting projection will be a point on the subspace such that a vector from that point to the original vector is orthogonal to the subspace. Intuitively, this is the case because the shortest path between the vector and the subspace will be that which is perpendicular to the subspace, and orthogonality is the generalisation of the notion of perpendicularity.",
+    "text": "3.1 Projecting from 2-D onto 1-D\nProjecting a vector in two-dimensional space onto a line that goes through the origin is a nice way to build an understanding for what a projection does.2\nSay we want to orthogonally project the vector \\(b\\) onto a line defined by another vector, \\(a\\), and we will call the resulting projection \\(p\\). Hence, \\(p\\) is the point on the line defined by \\(a\\) that is nearest to the (tip of) the vector \\(b\\). (Note, though, that \\(p\\) is a vector, not a point. Calling it a point just clarifies what we’re doing here.)\nWe can think of the line as being generated by scaling vector \\(a\\) with a scalar \\(x\\), so that choosing a suitable \\(x\\) allows us to reach any point on the line. Finding \\(p\\) then boils down to finding the value of \\(x\\) that gets us to that point of the line that is closest to \\(b\\). We can thus write \\(p = ax\\).\nLet’s start by finding \\(p\\). We can find it in different ways.\nUsing calculus:\nGiven that we define closeness based on the Euclidean distance, minimising the distance between the (tip of) the vector, \\(b\\), and the projection, \\(p\\), is akin to solving the following problem:\n\\[\n\\begin{aligned}\nargmin_{x} \\sqrt{\\sum_{i=1}^2{(b_i - p_i)^2}} &= argmin_{x} \\sum_{i=1}^2{(b_i - p_i)^2} \\\\\n&= argmin_{x} \\sum_{i=1}^2{(b_i - xa_i)^2} \\\\\n&= argmin_{x} (b - xa)'(b - xa),\n\\end{aligned}\n\\]\nCalculating the derivative with respect to \\(x\\) we get:\n\\[\n\\begin{aligned}\n\\frac{d}{dx} (b - xa)'(b - xa) &= (-a)'(b - xa) + (b - xa)'(-a) & \\\\\n&= -a'b + xa'a - a'b + xa'a \\\\\n&= -2a'b + 2xa'a\n\\end{aligned}\n\\]\nFinlly, setting the result to 0 and solving for \\(x\\) we get:\n\\[\n\\begin{aligned}\n-2a'b + 2xa'a &= 0 \\\\\nxa'a &= a'b \\\\\nx &= (a'a)^{-1}a'b\n\\end{aligned}\n\\]\nHence, given that \\(p = ax\\), we have:\n\\[\n\\begin{aligned}\np = ax = \\underbrace{a(a'a)^{-1}a'}_\\text{$P_a$}b,\n\\end{aligned}\n\\]\nwhere \\(P_a\\) is the projection matrix.\nLet’s reflect for a moment what this all means. In general, pre-multiplying a vector by a matrix transforms the vector in a particular way. When we perform orthogonal projection, we pre-multiply a vector by a matrix that transforms the vector into that point on a subspace that it closest to the original vector. In our case here, pre-multiplying our initial vector \\(b\\) by the projection matrix \\(P_a\\) transforms \\(b\\) into that point on \\(a\\) that is closest to \\(b\\), which we call \\(p\\). Given that we define “nearest” using the Euclidean distance, it makes sense that the projection matrix would emerge out of the solution to the minimisation problem of finding the point on the subspace that minimises the Euclidean distance to the original vector.\nUsing basic geometry:\nWe could also find \\(p\\) using our understanding of basic geometry. Looking at the figure above, it is intuitively obvious that the shortest path between the tip of \\(b\\) and the line \\(a\\) is that which is perpendicular to \\(a\\) – the point at which the perpendicular line meets \\(a\\) is thus \\(p\\). The path between \\(b\\) and \\(p\\) is simply \\(b - p\\). In linear algebra terms, we thus want that path to be orthogonal to the line \\(a\\).\nHence, we want:\n\\[\n\\begin{aligned}\na'(b - p) &= 0 \\\\\na'(b - xa) &= 0 \\\\\na'b - xa'a &= 0 \\\\\nxa'a &= a'b \\\\\nx &= (a'a)^{-1}a'b\n\\end{aligned}\n\\]\nSo that, again, we have:3\n\\[\np = ax = \\underbrace{a(a'a)^{-1}a'}_\\text{$P_a$}b.\n\\]\nThis also makes clear why this type of projection is called “orthogonal projection”: we want to project a vector onto a subspace in such a way that the distance between the original vector and the subspace is minimal. The resulting projection will be a point on the subspace such that a vector from that point to the original vector is orthogonal to the subspace. Intuitively, this is the case because the shortest path between the vector and the subspace will be that which is perpendicular to the subspace, and orthogonality is the generalisation of the notion of perpendicularity.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Projection</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projection</span>"
     ]
   },
   {
     "objectID": "chapters/projection.html#projecting-from-2-d-onto-1-d",
     "href": "chapters/projection.html#projecting-from-2-d-onto-1-d",
-    "title": "2  Projection",
+    "title": "3  Projection",
     "section": "",
     "text": "Projecting a 2d vector onto a line\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOrthogonal vectors\n\n\n\n\n\nOrthogonality is a generalisation of perpendicularity; two vectors that are orthogonal are perpendicular to each other. The word comes from the Greek “orthos”, meaning “straight” or “right”, and “gonia”, meaning “angle”. To test whether two vectors \\(x\\) and \\(y\\) are perpendicular, we check whether their dot product, \\(x'y\\) equals zero.\nBut why do we know that the dot-product of orthogonal vectors is zero? The answer follows from the Pythagorean theorem, which states that for a right triangle with sides \\(a\\) and \\(b\\) and hypotenuse \\(c\\) we have \\(a^2\\) + \\(b^2\\) = \\(c^2\\). Now, if vectors \\(x\\) and \\(y\\) are orthogonal, they form the sides of a right triangle, where the hypotenuse is given by \\(x + y\\). By the Pythagorean theorem, we thus have\n\\[\n||x||^2 + ||y||^2 = ||x + y||^2,\n\\]\nwhich equals\n\\[\n\\left(\\sqrt{x'x}\\right)^2 + \\left(\\sqrt{y'y}\\right)^2 = \\left(\\sqrt{(x + y)'(x + y)}\\right)^2,\n\\]\nand simplifies to\n\\[\n\\begin{aligned}\nx'x + y'y &= (x + y)'(x + y) \\\\\nx'x + y'y &= x'x + y'y + x'y + y'x \\\\\nx'x + y'y &= x'x + y'y + 2x'y,\n\\end{aligned}\n\\]\nfrom which it is clear that \\(x'y = 0\\).",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Projection</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projection</span>"
     ]
   },
   {
     "objectID": "chapters/projection.html#why-project",
     "href": "chapters/projection.html#why-project",
-    "title": "2  Projection",
-    "section": "2.2 Why project?",
-    "text": "2.2 Why project?\nOne reason projection is useful is because it allows us to approximately solve systems of linear equations that have no exact solution. Imagine we have the following system of equations:\n\\[\n\\begin{align*}\na_{11}x_1 + a_{12}x_2 + \\cdots + a_{1k}x_k &= b_1 \\\\\na_{21}x_1 + a_{22}x_2 + \\cdots + a_{2k}x_k &= b_2 \\\\\n\\vdots \\\\\na_{n1}x_1 + a_{n2}x_2 + \\cdots + a_{nk}x_k &= b_n\n\\end{align*}\n\\]\nwhich we can write more compactly in matrix form as:\n\\[\nAx = b,\n\\]\nwhere\n\\[\nA = \\begin{pmatrix}\n  a_{11} & a_{12} & \\cdots & a_{1k} \\\\\n  a_{21} & a_{22} & \\cdots & a_{2k} \\\\\n  \\vdots  & \\vdots  & \\ddots & \\vdots  \\\\\n  a_{n1} & a_{n2} & \\cdots & a_{nk}\n\\end{pmatrix},\n\\quad\nx =\n\\begin{pmatrix}\n  x_{1} \\\\\n  x_{2} \\\\\n  \\vdots \\\\\n  x_{k}\n\\end{pmatrix},\n\\quad\nb =\n\\begin{pmatrix}\n  b_{1} \\\\\n  b_{2} \\\\\n  \\vdots \\\\\n  b_{n}\n\\end{pmatrix}.\n\\]\nIf \\(n &gt; k\\), the system is overdetermined – it has more constarints (equations) than degrees of freedom (variables) – and might not have a solution. In this case, it can be useful to solve\n\\[\nAx = \\hat{b},\n\\]\nwhere \\(\\hat{b}\\) is the orthogonal projection of \\(b\\) onto the vector space spanned by \\(A\\). This vector space is also called the span or column space of \\(A\\). Using orthogonal projection achieves two things: first, it guarantees a solution because \\(\\hat{b}\\) lies on the same space as \\(Ax\\) – they both lie on the subspace spanned by the columns of \\(A\\) – and, second, it makes \\(\\hat{p}\\) the closest approximation to \\(b\\) in terms of the Euclidean distance.",
+    "title": "3  Projection",
+    "section": "3.2 Why project?",
+    "text": "3.2 Why project?\nOne reason projection is useful is because it allows us to approximately solve systems of linear equations that have no exact solution. Imagine we have the following system of equations:\n\\[\n\\begin{align*}\na_{11}x_1 + a_{12}x_2 + \\cdots + a_{1k}x_k &= b_1 \\\\\na_{21}x_1 + a_{22}x_2 + \\cdots + a_{2k}x_k &= b_2 \\\\\n\\vdots \\\\\na_{n1}x_1 + a_{n2}x_2 + \\cdots + a_{nk}x_k &= b_n\n\\end{align*}\n\\]\nwhich we can write more compactly in matrix form as:\n\\[\nAx = b,\n\\]\nwhere\n\\[\nA = \\begin{pmatrix}\n  a_{11} & a_{12} & \\cdots & a_{1k} \\\\\n  a_{21} & a_{22} & \\cdots & a_{2k} \\\\\n  \\vdots  & \\vdots  & \\ddots & \\vdots  \\\\\n  a_{n1} & a_{n2} & \\cdots & a_{nk}\n\\end{pmatrix},\n\\quad\nx =\n\\begin{pmatrix}\n  x_{1} \\\\\n  x_{2} \\\\\n  \\vdots \\\\\n  x_{k}\n\\end{pmatrix},\n\\quad\nb =\n\\begin{pmatrix}\n  b_{1} \\\\\n  b_{2} \\\\\n  \\vdots \\\\\n  b_{n}\n\\end{pmatrix}.\n\\]\nIf \\(n &gt; k\\), the system is overdetermined – it has more constarints (equations) than degrees of freedom (variables) – and might not have a solution. In this case, it can be useful to solve\n\\[\nAx = \\hat{b},\n\\]\nwhere \\(\\hat{b}\\) is the orthogonal projection of \\(b\\) onto the vector space spanned by \\(A\\). This vector space is also called the span or column space of \\(A\\). Using orthogonal projection achieves two things: first, it guarantees a solution because \\(\\hat{b}\\) lies on the same space as \\(Ax\\) – they both lie on the subspace spanned by the columns of \\(A\\) – and, second, it makes \\(\\hat{p}\\) the closest approximation to \\(b\\) in terms of the Euclidean distance.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Projection</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projection</span>"
     ]
   },
   {
     "objectID": "chapters/projection.html#projection-from-3-d-onto-2-d-and-projecting-onto-n-d",
     "href": "chapters/projection.html#projection-from-3-d-onto-2-d-and-projecting-onto-n-d",
-    "title": "2  Projection",
-    "section": "2.3 Projection from 3-D onto 2-D and projecting onto N-D",
-    "text": "2.3 Projection from 3-D onto 2-D and projecting onto N-D\nAs in the 2-D onto 1-D example above, we’re going to project the vector \\(b\\) onto a subspace. But \\(b\\) is now a 3-D vector, and instead of projecting onto a line characterised by vector \\(a\\), we’re projecting onto a 2-D plane characterised by the 2 x 2 matrix \\(A\\). Hence, our projection \\(p\\) is now a vector in the 3-dimensional space that lies on the 2-dimensional subspace. Similarly to above, \\(p\\) is defined by \\(p = Ax\\), where \\(x\\) is a 2-D vector of scalars.\nWe can still go about finding \\(p\\) in the same way as above:\n\\[\n\\begin{aligned}\nA'(b - p) &= 0 \\\\\nA'(b - Ax) &= 0 \\\\\nA'b - A'Ax &= 0 \\\\\nA'Ax &= A'b \\\\\nx &= (A'A)^{-1}A'b\\\\\n\\\\\np = Ax = \\underbrace{A(A'A)^{-1}A'}_\\text{$P_a$}b.\n\\end{aligned}\n\\]\nThe last step above works only if \\(A'A\\) is actually invertible, which is the case if \\(A\\) has full rank.\n\n\n\n\n\n\nFull rank\n\n\n\n\n\nA matrix is said to have full rank if none of its columns can be constructed from a linear combination of any other columns.\nWe can think of the columns of a matrix are the basis vectors of its column space, and the rank of the matrix is the number of dimensions of that column space.\nFull rank means thus means that the column space has as many dimensions as there are columns.\n\n\n\nThe math above generalises directly to projections onto N-dimensional space. All that changes is that \\(b\\), \\(A\\), \\(x\\), and \\(p\\) are higher-dimensional objects, and that visualising what’s happening becomes rather mind-bending.",
+    "title": "3  Projection",
+    "section": "3.3 Projection from 3-D onto 2-D and projecting onto N-D",
+    "text": "3.3 Projection from 3-D onto 2-D and projecting onto N-D\nAs in the 2-D onto 1-D example above, we’re going to project the vector \\(b\\) onto a subspace. But \\(b\\) is now a 3-D vector, and instead of projecting onto a line characterised by vector \\(a\\), we’re projecting onto a 2-D plane characterised by the 2 x 2 matrix \\(A\\). Hence, our projection \\(p\\) is now a vector in the 3-dimensional space that lies on the 2-dimensional subspace. Similarly to above, \\(p\\) is defined by \\(p = Ax\\), where \\(x\\) is a 2-D vector of scalars.\nWe can still go about finding \\(p\\) in the same way as above:\n\\[\n\\begin{aligned}\nA'(b - p) &= 0 \\\\\nA'(b - Ax) &= 0 \\\\\nA'b - A'Ax &= 0 \\\\\nA'Ax &= A'b \\\\\nx &= (A'A)^{-1}A'b\\\\\n\\\\\np = Ax = \\underbrace{A(A'A)^{-1}A'}_\\text{$P_a$}b.\n\\end{aligned}\n\\]\nThe last step above works only if \\(A'A\\) is actually invertible, which is the case if \\(A\\) has full rank.\n\n\n\n\n\n\nFull rank\n\n\n\n\n\nA matrix is said to have full rank if none of its columns can be constructed from a linear combination of any other columns.\nWe can think of the columns of a matrix are the basis vectors of its column space, and the rank of the matrix is the number of dimensions of that column space.\nFull rank means thus means that the column space has as many dimensions as there are columns.\n\n\n\nThe math above generalises directly to projections onto N-dimensional space. All that changes is that \\(b\\), \\(A\\), \\(x\\), and \\(p\\) are higher-dimensional objects, and that visualising what’s happening becomes rather mind-bending.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Projection</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projection</span>"
     ]
   },
   {
     "objectID": "chapters/projection.html#useful-references",
     "href": "chapters/projection.html#useful-references",
-    "title": "2  Projection",
-    "section": "2.4 Useful references",
-    "text": "2.4 Useful references\n\nGilbert Strang’s linear algebra lectures at MIT\n10 Fundamental Theorems for Econometrics",
+    "title": "3  Projection",
+    "section": "3.4 Useful references",
+    "text": "3.4 Useful references\n\nGilbert Strang’s linear algebra lectures at MIT\n10 Fundamental Theorems for Econometrics",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Projection</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projection</span>"
     ]
   },
   {
     "objectID": "chapters/projection.html#footnotes",
     "href": "chapters/projection.html#footnotes",
-    "title": "2  Projection",
+    "title": "3  Projection",
     "section": "",
     "text": "The Euclidean distance between two points \\(x\\) and \\(\\bar{x}\\) in \\(\\mathbb{R}^N\\) is defined as \\(\\sqrt{\\sum_{i=1}^N{(\\bar{a_i} - a_i})^2}\\).↩︎\nA line through the origin is a subspace of a two-dimensional vector because it is 1-dimensional (and thus a subset of the 2-dimensional vector) and because all possible linear combinations of vectors on the line will also lie on the line (see box on subspaces for more details).↩︎\nOne thing I used to wonder about was whether the order of the vectors in the scalar product \\(ax\\) matters. That is, whether we could also write \\(p = xa\\). Once you think about the rules of linear algebra, the answer becomes quite clear. For a scalar product, the order doesn’t matter. However, \\(p = ax\\) is preferred because it naturally generalises to the higher-dimensional case where instead of a scalar \\(a\\), we have a matrix \\(A\\). In this case, \\(p = Ax\\), which is different from \\(p = xA\\), which is generally not defined, and \\(p = x'A\\), which leads to a different result.↩︎",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Projection</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Projection</span>"
     ]
   },
   {
@@ -1101,6 +1101,16 @@
     "text": "9.1 Types of interferance\nLarsen et al. (2023) differentiate between:",
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Network experiments</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/experiment_analysis.html",
+    "href": "chapters/experiment_analysis.html",
+    "title": "9  Experiment analysis",
+    "section": "",
+    "text": "Discuss analysis for each major case of a 3 x 3 table: method of analysis (Fisher, Neyman, Regression), and source of uncertainty (Sampling, Randomisation, Both)\n\nWhy would we want to include covariates in a randomised experiment analysis?\n\nIf assignment to treatment is random within groups but not across groups (e.g. students in rural schools were a bit more likely to be assigned to small classes in the STAR experiment), then we need to check whether including school id changes the result.\nIncluding controls that have explanatory power for our outcome of interest helps us estimate the causal effect with more precision (and thus increases power) because it lowers the residual variance of the outcome variable, which in turn reduces the standard error of the causal effect.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Experiment analysis</span>"
     ]
   }
 ]

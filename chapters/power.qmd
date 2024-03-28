@@ -1,5 +1,24 @@
 # Power {#sec-power}
 
+Power is the probability that we reject the null hypothesis if it is false. It is an important component of experiment design because it determines the required sample size, which helps us determine how long we need to run an experiment for.
+
+
+We test the null hypothesis by constructing the test statistic
+
+$$
+z = \frac{\delta}{\se}
+$$
+
+
+We reject the null hypothsis if
+
+$$
+|\delta| < 
+$$
+
+
+
+
 
 ## Theory
 

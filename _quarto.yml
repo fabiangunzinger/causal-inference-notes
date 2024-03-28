@@ -68,8 +68,10 @@ bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
 format:
   html:
     theme: cosmo
+    include-in-header: "math_commands.html"
   pdf:
     documentclass: scrreprt
+    include-in-header: "math_commands.tex"
 jupyter: python3
 callout-icon: false
 
