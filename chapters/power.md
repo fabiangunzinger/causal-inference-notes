@@ -1,21 +1,120 @@
 # Power {#sec-power}
 
-Power is the probability that we reject the null hypothesis if it is false. It is an important component of experiment design because it determines the required sample size, which helps us determine how long we need to run an experiment for.
+Power is the probability that we reject the null hypothesis if it is false. It is a key component of experiment design because it determines the required sample size, which helps us determine how long we need to run an experiment for.
+
+In this section, I want to do the following:
+
+- Derive the formula for power from first principles.
+
+- Discuss implications of the formula for a number of experiment design aspects.
+
+- ...
+
+
+## Power formula from first principles
+
+Power is the probability that we reject the null hypothesis if it is false:
+
+$$
+1 - \beta = P[\text{reject } H_0 | H_0 \text{ is false}].
+$$
+
+To derive the formula for power, we thus have to start with testing proceedure
+that determines whether or not we reject $H_0$.
+
+The null hypothesis asserts that there is no difference between treatment and
+control group, while the alternative hypothesis asserts that there is:
+
+$$
+\begin{align}
+H_0: \te &= \te = 0 \\
+H_A: \te &= \te \neq 0.
+\end{align}
+$$
 
 
 We test the null hypothesis by constructing the test statistic
 
 $$
-z = \frac{\delta}{\se}
+Z = \frac{\tee}{\see}
 $$
 
-
-We reject the null hypothsis if
+and reject the null hypothesis if
 
 $$
-|\delta| < 
+|Z| > z_{\alpha/2},
 $$
 
+where $z_{\alpha/2}$ is the critical value of the standard normal distribution at the $\alpha/2$ percentile. We thus reject $H_0$ if
+
+$$
+|\tee| > \see z_{\alpha/2}
+$$
+
+The power of the test if $H_A$ is true is the probability that the test
+statistic falls into the rejection region, which is:
+
+$$
+1 - \beta = P\left[|\tee| > \see z_{\alpha/2}\right].
+$$
+
+The test statistic falling into the lower or upper rejection region are mutually
+exclusive events, so the above is equal to
+
+$$
+1 - \beta = P\left[\tee > \see z_{\alpha/2}\right]
++ P\left[\tee < -\see z_{\alpha/2}\right].
+$$
+
+Standardising, using the assumption that $H_A$ is true, we get
+
+$$
+1 - \beta = P\left[\frac{\tee - \te}{\see} > \frac{\see z_{\alpha/2} - \te}{\see}\right]
++ P\left[\frac{\tee - \te}{\see} < \frac{- \see z_{\alpha/2} - \te}{\see}\right], 
+$$
+
+which, using the standard normal CDF, $\Phi(z)$, we can rewrite as
+
+$$
+1 - \beta = \left[1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\see}\right)\right]
++ \left[\Phi\left(-z_{\alpha/2} - \frac{\te}{\see}\right)\right].
+$$
+
+<!--
+TODO
+Explain why we standardise using the assumption of H_A true (it's because
+we want to calculate p value falling to right of critical value if HA is true,
+visualise this using the Bloom picture)
+-->
+
+For a true positive effect, the propability that we reject $H_0$ because our
+test statistic falls below the lower critical value is very small, and similarly
+for a true negative effect. Hence, as the true effect size deviates from zero, one of the two terms in the expression above becomes vanishingly small and can be ignored. For the rest of this chapter, I assume we have a true positive effect and omit the second of the two terms. We thus have:
+
+$$
+1 - \beta = 1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\see}\right).
+$$
+
+For a simple experiment with two variants with equal population variance, the
+estimated standard error of the treatment effect is given by (see @sec-experiment-stats) 
+
+$$
+\see = \seefe = \seefep
+$$
+
+where: $\sev$ is the pooled estimator of the population variance, $\Nt$ and $\Nc$ are the number of units in the treatment and control groups, respectively, $\N = \Nt + \Nc$ is total sample size, and $P$ is the proportion of units in the treatment group.
+
+For such an experiment, the power is thus given by
+
+$$
+\begin{align}
+1 - \beta &= 1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\seefep}\right) \\
+&= 1 - \Phi\left(z_{\alpha/2} -
+\frac{\te}{\sev}\frac{1}{\sqrt{\frac{1}{P(1-P)N}}}\right) \\
+&= 1 - \Phi\left(z_{\alpha/2} -
+\frac{\te}{\sev}\sqrt{P(1-P)N}\right) \\
+\end{align}
+$$
 
 
 
@@ -190,6 +289,11 @@ where $\sigma^2$ is the sample variance and $\tau$ is the tretment effect (this 
 - @zhou2023all for comprehensive overview of how to calculate power
 - @bojinov2023design, section 5, for simulation results for switchbacks and generally good approach to simulation to emulate
 - @reich2012empirical power calcs for cluster-randomised experiments
+
+
+[^mutuallyexcl] We can simply dd up the probability of the test statistic falling into the
+upper and lower tail because the two events are independent.
+
 
 ## Q&A
 

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Define the project path and the paths of your files
+project_path="/Users/fgu/dev/personal/causal-inference-notes"
+tex_file_path="$project_path/math_commands.tex"
+html_file_path="$project_path/math_commands.html"
+
+# Flag to track if we are within \( and \)
+inside_math=false
+
+# Start the LaTeX file
+echo "" > "$tex_file_path"
+
+# Read and process math_commands.html
+while IFS= read -r line
+do
+    # Check if the line contains \(
+    if [[ $line =~ '\\\(' ]]; then
+        inside_math=true
+        continue
+    fi
+
+    # Check if the line contains \) and we are inside math environment
+    if [[ $line =~ '\\\)' ]] && [ "$inside_math" = true ]; then
+        inside_math=false
+        continue
+    fi
+
+    # If we are inside the math environment, strip leading spaces and write the line to the tex file
+    if [ "$inside_math" = true ]; then
+        echo "$line" >> "$tex_file_path"
+    fi
+done < "$html_file_path"
+

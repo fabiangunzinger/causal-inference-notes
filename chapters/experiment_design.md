@@ -56,7 +56,24 @@ Level:
 
 
 
-## The assignment mechanism
+## The assignment mechanisms
+
+Notes from @imbens2015causal:
+
+A *randomised experiment* is an assignment mechanism that
+
+1. is probabilistic (each unit has positive probability of being assigned to treatment and control), and
+2. has a known functional form that is controlled by the researcher (e.g. p(treatment) = 1/2).
+
+A *classical randomised experiment* is a randomised experiment with an assignment mechanism that is    
+
+1. Individualistic (assignment probabilities for each unit is independent of information on 
+
+2. Unconfounded (assignment probabilities are independent of potential outcomes)
+
+
+
+
 
 ### Bernoulli trials
 

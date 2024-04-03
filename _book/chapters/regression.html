@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 3&nbsp; Regression</title>
+<title>Causal inference notes - 4&nbsp; Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,6 +68,14 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+</head><body class="nav-sidebar floating"><span class="math inline">
+    \(
+    \newcommand{\vets}{s^2_t}
+    \newcommand{\se}{\sqrt{\frac{\vets}{N_t} + \frac{s^2_c}{N_c}}}
+    \newcommand{\yt}{Y_t}
+    \newcommand{\yc}{Y_c}
+    \)
+</span>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -99,9 +107,9 @@ window.Quarto = {
 };
 </script>
 
-</head>
 
-<body class="nav-sidebar floating">
+
+
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -110,7 +118,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/regression.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/regression.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -143,68 +151,86 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/regression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiment_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiment_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Experiment analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/threats_to_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/practical_issues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
   </div>
 </li>
     </ul>
@@ -217,15 +243,15 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#glossary" id="toc-glossary" class="nav-link active" data-scroll-target="#glossary"><span class="header-section-number">3.1</span> Glossary</a></li>
-  <li><a href="#the-setup" id="toc-the-setup" class="nav-link" data-scroll-target="#the-setup"><span class="header-section-number">3.2</span> The setup</a></li>
-  <li><a href="#classic-motivation-of-the-solution" id="toc-classic-motivation-of-the-solution" class="nav-link" data-scroll-target="#classic-motivation-of-the-solution"><span class="header-section-number">3.3</span> Classic motivation of the solution</a></li>
-  <li><a href="#linear-algebra-motivation-of-the-solution" id="toc-linear-algebra-motivation-of-the-solution" class="nav-link" data-scroll-target="#linear-algebra-motivation-of-the-solution"><span class="header-section-number">3.4</span> Linear algebra motivation of the solution</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">3.5</span> Resources</a></li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">3.6</span> Assumptions</a>
+  <li><a href="#glossary" id="toc-glossary" class="nav-link active" data-scroll-target="#glossary"><span class="header-section-number">4.1</span> Glossary</a></li>
+  <li><a href="#the-setup" id="toc-the-setup" class="nav-link" data-scroll-target="#the-setup"><span class="header-section-number">4.2</span> The setup</a></li>
+  <li><a href="#classic-motivation-of-the-solution" id="toc-classic-motivation-of-the-solution" class="nav-link" data-scroll-target="#classic-motivation-of-the-solution"><span class="header-section-number">4.3</span> Classic motivation of the solution</a></li>
+  <li><a href="#linear-algebra-motivation-of-the-solution" id="toc-linear-algebra-motivation-of-the-solution" class="nav-link" data-scroll-target="#linear-algebra-motivation-of-the-solution"><span class="header-section-number">4.4</span> Linear algebra motivation of the solution</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">4.5</span> Resources</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">4.6</span> Assumptions</a>
   <ul class="collapse">
-  <li><a href="#linearity-and-additivity" id="toc-linearity-and-additivity" class="nav-link" data-scroll-target="#linearity-and-additivity"><span class="header-section-number">3.6.1</span> Linearity and additivity</a></li>
-  <li><a href="#iid-errors" id="toc-iid-errors" class="nav-link" data-scroll-target="#iid-errors"><span class="header-section-number">3.6.2</span> iid errors</a></li>
+  <li><a href="#linearity-and-additivity" id="toc-linearity-and-additivity" class="nav-link" data-scroll-target="#linearity-and-additivity"><span class="header-section-number">4.6.1</span> Linearity and additivity</a></li>
+  <li><a href="#iid-errors" id="toc-iid-errors" class="nav-link" data-scroll-target="#iid-errors"><span class="header-section-number">4.6.2</span> iid errors</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -235,7 +261,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression</span></h1>
 </div>
 
 
@@ -280,12 +306,12 @@ Why “regression”?
 </div>
 </div>
 </div>
-<section id="glossary" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="glossary"><span class="header-section-number">3.1</span> Glossary</h2>
+<section id="glossary" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="glossary"><span class="header-section-number">4.1</span> Glossary</h2>
 <p>TODO: - Linear regression vs OLS</p>
 </section>
-<section id="the-setup" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="the-setup"><span class="header-section-number">3.2</span> The setup</h2>
+<section id="the-setup" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="the-setup"><span class="header-section-number">4.2</span> The setup</h2>
 <p>We usually start with data of the form <span class="math inline">\(\{y_i, x_{i1}, \cdots, x_{ik}\}_{i=1}^N\)</span>, where we observe an outcome variable <span class="math inline">\(y_i\)</span> and a set of <span class="math inline">\(k\)</span> explanatory variables <span class="math inline">\(x_i = (x_{i1}, \cdots, x_{ik})\)</span> for each unit <span class="math inline">\(i\)</span> in the dataset. We think that it might be reasonable to think of the outcome being linearly related to the regressors, so that, for each unit in our dataset, we can write the following linear equation:</p>
 <p><span class="math display">\[
 y_{i} = \beta_{1}x_{i1} + \beta_{2}x_{i2} + ... + \beta_{k}x_{ik} + \epsilon_{i}
@@ -364,13 +390,13 @@ y = X\beta + \epsilon,
 <p>##&nbsp;The problem</p>
 <p>So, what do we want to do here? We have data on an outcome variable <span class="math inline">\(y\)</span> and explanatory variables <span class="math inline">\(x\)</span> for each unit <span class="math inline">\(i\)</span>, and we think that it is reasonable to think that this data is generated by a process whereby <span class="math inline">\(y\)</span> is the result of a linear combination of the <span class="math inline">\(x\)</span>s plus some noise, which we capture in the error term. The challenge is to find the right linear combination.</p>
 </section>
-<section id="classic-motivation-of-the-solution" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="classic-motivation-of-the-solution"><span class="header-section-number">3.3</span> Classic motivation of the solution</h2>
+<section id="classic-motivation-of-the-solution" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="classic-motivation-of-the-solution"><span class="header-section-number">4.3</span> Classic motivation of the solution</h2>
 <p>TODO</p>
 </section>
-<section id="linear-algebra-motivation-of-the-solution" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="linear-algebra-motivation-of-the-solution"><span class="header-section-number">3.4</span> Linear algebra motivation of the solution</h2>
-<p>Notice how our problem here is exactly akin to the motivation for orthogonal projection discussed in <a href="projection.html" class="quarto-xref"><span>Chapter 2</span></a>. There we had a system of linear equations of the form</p>
+<section id="linear-algebra-motivation-of-the-solution" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="linear-algebra-motivation-of-the-solution"><span class="header-section-number">4.4</span> Linear algebra motivation of the solution</h2>
+<p>Notice how our problem here is exactly akin to the motivation for orthogonal projection discussed in <a href="projection.html" class="quarto-xref"><span>Chapter 3</span></a>. There we had a system of linear equations of the form</p>
 <p><span class="math display">\[
 Ax = b
 \]</span></p>
@@ -383,7 +409,7 @@ X\beta = y.
 X\beta + \epsilon = y.
 \]</span></p>
 <p>What we do, now, is to say that we want to find that linear combination of the explanatory variables that is closest to <span class="math inline">\(y\)</span>, so that <span class="math inline">\(\epsilon\)</span> is as small as possible, which is the same as finding the orthogonal projection of <span class="math inline">\(y\)</span> onto <span class="math inline">\(X\)</span>, which, traditionally, we call <span class="math inline">\(\hat{y}\)</span>.</p>
-<p>The solution is then the same as in <a href="projection.html" class="quarto-xref"><span>Chapter 2</span></a>:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>The solution is then the same as in <a href="projection.html" class="quarto-xref"><span>Chapter 3</span></a>:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p><span class="math display">\[
 \begin{aligned}
 X'\epsilon &amp;= 0 \\
@@ -395,14 +421,14 @@ X'X\beta &amp;= X'y \\
 \end{aligned}
 \]</span></p>
 </section>
-<section id="resources" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="resources"><span class="header-section-number">3.5</span> Resources</h2>
+<section id="resources" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="resources"><span class="header-section-number">4.5</span> Resources</h2>
 <ul>
 <li>Hayashi, Wooldridge, Verbeek, online resources</li>
 </ul>
 </section>
-<section id="assumptions" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">3.6</span> Assumptions</h2>
+<section id="assumptions" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">4.6</span> Assumptions</h2>
 <p>From Davidson and MacKinnon - Identifying assumption: E(e) = 0 – this ensures that regression equation can be true only for particular values of the betas, instead of for any given one (which it could be, if error could just be anything)</p>
 <ul>
 <li><p>Modelling e as a random variable: we’re using the mathematical concept of randomness to model our ignorance of the data generating process. Assuming E(e) = 0 is saying that, on average, the determinants of y we ignore cancel out. That doesn’t mean they are small. They can be very big. But estimating b still useful to know relationship between x we can observe and y.</p></li>
@@ -431,8 +457,8 @@ X'X\beta &amp;= X'y \\
 <li>normality of the error distribution.</li>
 </ol>
 <p>If any of these assumptions is violated, then the forecasts, confidence intervals, and scientific insights yielded by a regression model may be (at best) inefficient or (at worst) seriously biased or misleading.</p>
-<section id="linearity-and-additivity" class="level3" data-number="3.6.1">
-<h3 data-number="3.6.1" class="anchored" data-anchor-id="linearity-and-additivity"><span class="header-section-number">3.6.1</span> Linearity and additivity</h3>
+<section id="linearity-and-additivity" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="linearity-and-additivity"><span class="header-section-number">4.6.1</span> Linearity and additivity</h3>
 <p>Why assume linearity?</p>
 <ul>
 <li><p>It’s the simplest non-trivial relationship and the easiest to work with</p></li>
@@ -451,8 +477,8 @@ X'X\beta &amp;= X'y \\
 <li><p>Add new regressor that explains non-linear nature of current relationshiop</p></li>
 </ul>
 </section>
-<section id="iid-errors" class="level3" data-number="3.6.2">
-<h3 data-number="3.6.2" class="anchored" data-anchor-id="iid-errors"><span class="header-section-number">3.6.2</span> iid errors</h3>
+<section id="iid-errors" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="iid-errors"><span class="header-section-number">4.6.2</span> iid errors</h3>
 <p>Why assume iid errors?</p>
 <ul>
 <li><p>In many cases, it’s justified by the CLT. As long as we calculate averages (sums or random variables, really), which are independent and identically distributed, the distribution will be approximately normal.</p></li>
@@ -917,12 +943,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/projection.html" class="pagination-link  aria-label=" &lt;span="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Projection</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Projection</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/neyman_rubin_causal_model.html" class="pagination-link" aria-label="<span class='chapter-number'>4</span>&nbsp; <span class='chapter-title'>Neyman-Rubin causal model</span>">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/neyman_rubin_causal_model.html" class="pagination-link" aria-label="<span class='chapter-number'>5</span>&nbsp; <span class='chapter-title'>Neyman-Rubin causal model</span>">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
