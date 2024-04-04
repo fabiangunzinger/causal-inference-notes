@@ -24,22 +24,21 @@ book:
     # # Causal inference foundations
     # # - chapters/epistemology.qmd
     # - chapters/fundamental_problem.qmd
-    - chapters/neyman_rubin_causal_model.qmd
     - chapters/fisher.qmd
     - chapters/neyman.md
     # - chapters/regression_for_experiments.qmd
     # # - chapters/sampling_vs_randomisation_uncertainty.qmd
-    - chapters/experiment_stats.qmd
+    - chapters/experiment_stats.md
     - chapters/experiment_analysis.qmd
     # # - chapters/dags.qmd
 
     # Experiments in practice
     # - chapters/guiding_principles.qmd
-    # - chapters/experiment_design.qmd
+    - chapters/experiment_design.md
     # - chapters/experiment_stats.qmd
     - chapters/metrics.md
     # # - chapters/decision_making.qmd
-    - chapters/power.qmd
+    - chapters/power.md
     - chapters/threats_to_validity.qmd
     - chapters/practical_issues.qmd
     # - chapters/variance_reduction.qmd
@@ -56,6 +55,7 @@ book:
     # - chapters/regression_discontinuity.qmd
 
     # Misc.
+    # - chapters/causal_estimands.md
     # - chapters/multiple_hypothesis_correction.qmd
     # - chapters/misc_topics.qmd
     - chapters/ethics.qmd
@@ -68,8 +68,10 @@ bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
 format:
   html:
     theme: cosmo
+    include-in-header: "math_commands.html"
   pdf:
     documentclass: scrreprt
+    include-in-header: "math_commands.tex"
 jupyter: python3
 callout-icon: false
 

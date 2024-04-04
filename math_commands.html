@@ -1,0 +1,81 @@
+<span class="math inline">
+    \(
+    \newcommand{\nc}{\newcommand}
+
+    % sample sizes
+    \nc{\Nt}{N_t}
+    \nc{\Nc}{N_c}
+    \nc{\N}{N}
+    
+    % outcomes
+    \nc{yio}{Y_i^{obs}}
+    \nc{ytp}{Y_i(1)}
+    \nc{ycp}{Y_i(0)}
+    \nc{\yto}{Y_t^{obs}}
+    \nc{\yco}{Y_c^{obs}}
+    \nc{ytpb}{\bar{Y}(1)}
+    \nc{ycpb}{\bar{Y}(0)}
+    \nc{\ytob}{\bar{Y}_t^{obs}}
+    \nc{\ycob}{\bar{Y}_c^{obs}}
+
+    % sums of outcomes
+
+    % treatment effects
+    \nc{\te}{\tau}
+    \nc{\tee}{\hat{\te}}   
+    \nc{\tef}{\ytpb - \ycpb}
+    \nc{\teef}{\ytob - \ycob}
+    \nc{\tefs}{\frac{1}{\N}\sum_{i=1}^N\left(\ytp-\ycp\right)}
+
+    
+    % sample variances
+
+    \nc{\spv}{\sigma}   %symbol pop var
+    \nc{\sev}{\hat{\sigma}}   %symbol estimated var
+
+    \nc{\vt}{\spv^2_t}
+    \nc{\vc}{\spv^2_c}
+    \nc{\vp}{\spv^2}
+    \nc{\vte}{\sev^2_t}
+    \nc{\vce}{\sev^2_c}
+    \nc{\vpe}{\sev^2}
+    \nc{\vtf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ytp - \ytpb)^2}
+    \nc{\vcf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ycp - \ycpb)^2}
+    \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}(\yto - \ytob)^2}
+    \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}(\yco - \ycob)^2}
+
+    %%%%%%%%%%%%%%%%%%%%%%
+    % sampling variances %
+    %%%%%%%%%%%%%%%%%%%%%%
+
+    % sv[Estimate][Formula][Equal/Unequal][with treat Proportion]
+
+    \nc{\sv}{V(\te)}
+    \nc{\sve}{\hat{V}(\tee)}
+
+    \nc{\svfe}{\vp\left(\frac{1}{\Nt} + \frac{1}{\Nc}\right)}
+    \nc{\svfu}{\frac{\vt}{\Nt} + \frac{\vc}{\Nc}}
+    \nc{\svefe}{\vpe\left(\frac{1}{\Nt} + \frac{1}{\Nc}\right)}
+    \nc{\svefu}{\frac{\vte}{\Nt} + \frac{\vce}{\Nc}}
+
+    \nc{\svefep}{\vpe\left(\frac{1}{P(1-P)\N\right)}}
+
+
+    %%%%%%%%%%%%%%%%%%%
+    % standard errors %
+    %%%%%%%%%%%%%%%%%%%
+
+    % naming convention as for variance but with se prefix
+
+    \nc{\se}{\text{se}(\te}
+    \nc{\see}{\hat{\text{se}}(\tee)}
+
+    \nc{\sefe}{\sigma \sqrt{\frac{1}{\Nt} + \frac{1}{\Nc}}}
+    \nc{\sefu}{\sqrt{\frac{\vt}{\Nt} + \frac{\vc}{\Nc}}}
+    \nc{\seefe}{\sev\sqrt{\left(\frac{1}{\Nt} + \frac{1}{\Nc}\right)}}
+    \nc{\seefu}{\sqrt{\frac{\vt}{\Nt} + \frac{\vc}{\Nc}}}
+
+    <!-- \nc{\seefep}{\sev\sqrt{\left(\frac{1}{P(1-P)\N\right)}}} -->
+    \nc{\seefep}{\sev\sqrt{\frac{1}{P(1-P)N}}}
+    \)
+</span>
