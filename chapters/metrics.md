@@ -1,5 +1,8 @@
 # Metrics {#sec-metrics}
 
+todo
+- Look at: https://www.statsig.com/blog/picking-metrics-101
+
 
 ## Why good metrics matter
 
