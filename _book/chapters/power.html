@@ -158,7 +158,7 @@ div.csl-indent {
     % naming convention as for variance but with se prefix
 
     \nc{\se}{\text{se}(\te}
-    \nc{\see}{\hat{\text{se}}(\tee)}
+    \nc{\see}{\text{se}(\tee)}
 
     \nc{\sefe}{\sigma \sqrt{\frac{1}{\Nt} + \frac{1}{\Nc}}}
     \nc{\sefu}{\sqrt{\frac{\vt}{\Nt} + \frac{\vc}{\Nc}}}
@@ -337,7 +337,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#power-formula-from-first-principles" id="toc-power-formula-from-first-principles" class="nav-link active" data-scroll-target="#power-formula-from-first-principles"><span class="header-section-number">11.1</span> Power formula from first principles</a></li>
-  <li><a href="#theory" id="toc-theory" class="nav-link" data-scroll-target="#theory"><span class="header-section-number">11.2</span> Theory</a></li>
+  <li><a href="#old-notes" id="toc-old-notes" class="nav-link" data-scroll-target="#old-notes"><span class="header-section-number">11.2</span> Old notes</a></li>
   <li><a href="#what-determines-power" id="toc-what-determines-power" class="nav-link" data-scroll-target="#what-determines-power"><span class="header-section-number">11.3</span> What determines power</a></li>
   <li><a href="#how-to-increase-power" id="toc-how-to-increase-power" class="nav-link" data-scroll-target="#how-to-increase-power"><span class="header-section-number">11.4</span> How to increase power</a></li>
   <li><a href="#how-to-choose-key-parameters" id="toc-how-to-choose-key-parameters" class="nav-link" data-scroll-target="#how-to-choose-key-parameters"><span class="header-section-number">11.5</span> How to choose key parameters</a>
@@ -394,8 +394,8 @@ window.Quarto = {
 <p>The null hypothesis asserts that there is no difference between treatment and control group, while the alternative hypothesis asserts that there is:</p>
 <p><span class="math display">\[
 \begin{align}
-H_0: \te &amp;= \te = 0 \\
-H_A: \te &amp;= \te \neq 0.
+H_0: \te &amp;= \tef = 0 \\
+H_A: \te &amp;= \tef \neq 0.
 \end{align}
 \]</span></p>
 <p>We test the null hypothesis by constructing the test statistic</p>
@@ -410,56 +410,65 @@ Z = \frac{\tee}{\see}
 <p><span class="math display">\[
 |\tee| &gt; \see z_{\alpha/2}
 \]</span></p>
-<p>The power of the test if <span class="math inline">\(H_A\)</span> is true is the probability that the test statistic falls into the rejection region, which is:</p>
+<p>The power of the test is the probability that the test statistic falls into the rejection region if <span class="math inline">\(H_A\)</span> is true, which is:</p>
 <p><span class="math display">\[
-1 - \beta = P\left[|\tee| &gt; \see z_{\alpha/2}\right].
+1 - \beta = P\left[|\tee| &gt; \see z_{\alpha/2} | H_A \right].
 \]</span></p>
 <p>The test statistic falling into the lower or upper rejection region are mutually exclusive events, so the above is equal to</p>
 <p><span class="math display">\[
-1 - \beta = P\left[\tee &gt; \see z_{\alpha/2}\right]
-+ P\left[\tee &lt; -\see z_{\alpha/2}\right].
+1 - \beta = P\left[\tee &gt; \see z_{\alpha/2} | H_A \right]
++ P\left[\tee &lt; -\see z_{\alpha/2} | H_A \right].
 \]</span></p>
 <p>Standardising, using the assumption that <span class="math inline">\(H_A\)</span> is true, we get</p>
 <p><span class="math display">\[
-1 - \beta = P\left[\frac{\tee - \te}{\see} &gt; \frac{\see z_{\alpha/2} - \te}{\see}\right]
-+ P\left[\frac{\tee - \te}{\see} &lt; \frac{- \see z_{\alpha/2} - \te}{\see}\right],
+\begin{align}
+1 - \beta &amp;= P\left[\frac{\tee - \te}{\see} &gt; \frac{\see z_{\alpha/2} - \te}{\see}\right]
++ P\left[\frac{\tee - \te}{\see} &lt; \frac{- \see z_{\alpha/2} - \te}{\see}\right] \\
+&amp;= P\left[Z &gt; \frac{\see z_{\alpha/2} - \te}{\see}\right]
++ P\left[Z &lt; \frac{- \see z_{\alpha/2} - \te}{\see}\right],
+\end{align}
 \]</span></p>
 <p>which, using the standard normal CDF, <span class="math inline">\(\Phi(z)\)</span>, we can rewrite as</p>
 <p><span class="math display">\[
 1 - \beta = \left[1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\see}\right)\right]
 + \left[\Phi\left(-z_{\alpha/2} - \frac{\te}{\see}\right)\right].
 \]</span></p>
-<!--
-TODO
-Explain why we standardise using the assumption of H_A true (it's because
-we want to calculate p value falling to right of critical value if HA is true,
-visualise this using the Bloom picture)
--->
-<p>For a true positive effect, the propability that we reject <span class="math inline">\(H_0\)</span> because our test statistic falls below the lower critical value is very small, and similarly for a true negative effect. Hence, as the true effect size deviates from zero, one of the two terms in the expression above becomes vanishingly small and can be ignored. For the rest of this chapter, I assume we have a true positive effect and omit the second of the two terms. We thus have:</p>
+<p>The probability that we reject the null hypothesis for the wrong reason – because the test statistic falls below the lower critical value for a true positive effect or above the upper critical value for a true negative effect – is very small.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Hence, as the true effect size deviates from zero, one of the two terms in the expression above becomes vanishingly small and can be ignored. For the rest of this chapter, I assume we have a true positive effect and omit the second of the two terms. We thus have:</p>
 <p><span class="math display">\[
-1 - \beta = 1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\see}\right).
+1 - \beta = \Phi\left(z_{\alpha/2} - \frac{\te}{\see}\right).
+\]</span></p>
+<p>Furthermore, using the symmetry of the standard normal distribution, which implies that <span class="math inline">\(1 - \Phi(k) = \Phi(-k)\)</span>, we can simplify this to</p>
+<p><span class="math display">\[
+1 - \beta = \Phi\left(\frac{\te}{\see} - z_{\alpha/2}\right).
 \]</span></p>
 <p>For a simple experiment with two variants with equal population variance, the estimated standard error of the treatment effect is given by (see <a href="experiment_stats.html" class="quarto-xref"><span>Chapter 7</span></a>)</p>
 <p><span class="math display">\[
 \see = \seefe = \seefep
 \]</span></p>
-<p>where: <span class="math inline">\(\sev\)</span> is the pooled estimator of the population variance, <span class="math inline">\(\Nt\)</span> and <span class="math inline">\(\Nc\)</span> are the number of units in the treatment and control groups, respectively, <span class="math inline">\(\N = \Nt + \Nc\)</span> is total sample size, and <span class="math inline">\(P\)</span> is the proportion of units in the treatment group.</p>
+<p>where <span class="math inline">\(\sev\)</span> is the pooled estimator of the population variance, <span class="math inline">\(\Nt\)</span> and <span class="math inline">\(\Nc\)</span> are the number of units in the treatment and control groups, respectively, <span class="math inline">\(\N = \Nt + \Nc\)</span> is total sample size, and <span class="math inline">\(P\)</span> is the proportion of units in the treatment group.</p>
 <p>For such an experiment, the power is thus given by</p>
 <p><span class="math display">\[
+1 - \beta = \Phi\left(\frac{\te}{\seefep} - z_{\alpha/2}\right),
+\]</span></p>
+<p>which, with a bit of algebra (using <span class="math inline">\(1/\sqrt{1/x} = \sqrt{x}\)</span>), we can rewrite as</p>
+<p><span id="eq-power"><span class="math display">\[
+1 - \beta = \Phi\left(\frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2}\right).
+\tag{11.1}\]</span></span></p>
+<p>To calculate the required sample size for an experiment, we can rearrange <a href="#eq-power" class="quarto-xref">Equation&nbsp;<span>11.1</span></a> and solve for <span class="math inline">\(N\)</span>. To do this, we use the inverse of the CDS function <span class="math inline">\(\Phi(z)\)</span>. <span class="math inline">\(\Phi(z)\)</span> takes z-values and returns probabilities, so its inverse, <span class="math inline">\(\Phi(p)^{-1}\)</span>, takes probabilities and returns z-values. Using this, we get:</p>
+<p><span class="math display">\[
 \begin{align}
-1 - \beta &amp;= 1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\seefep}\right) \\
-&amp;= 1 - \Phi\left(z_{\alpha/2} -
-\frac{\te}{\sev}\frac{1}{\sqrt{\frac{1}{P(1-P)N}}}\right) \\
-&amp;= 1 - \Phi\left(z_{\alpha/2} -
-\frac{\te}{\sev}\sqrt{P(1-P)N}\right) \\
+\Phi(1 - \beta)^{-1} &amp;= \Phi\left(\Phi\left(\frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2}\right)\right)^{-1} \\
+z_{1 - \beta} &amp;= \frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2} \\
+\sqrt{P(1-P)N} &amp;= (z_{1 - \beta} + z_{\alpha/2})\left(\frac{\sev}{\te}\right) \\
+N &amp;= \frac{(z_{1 - \beta} + z_{\alpha/2})^2}{P(1-P)}\left(\frac{\sev}{\te}\right)^2.
 \end{align}
 \]</span></p>
+<p>This formula not only tells us the sample size required for an experiment, but also helps us reason about what impacts required sample size and how…</p>
 </section>
-<section id="theory" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="theory"><span class="header-section-number">11.2</span> Theory</h2>
-<ul>
-<li>Largely based on <span class="citation" data-cites="duflo2007randomization">(<a href="#ref-duflo2007randomization" role="doc-biblioref"><strong>duflo2007randomization?</strong></a>)</span></li>
-</ul>
+<section id="old-notes" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="old-notes"><span class="header-section-number">11.2</span> Old notes</h2>
+<!-- ## Theory -->
+<!-- - Largely based on @duflo2007randomization -->
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../inputs/power.png" class="img-fluid figure-img"></p>
@@ -616,7 +625,6 @@ n \approx \frac{16\sigma^2}{\tau^2},
 <li><span class="citation" data-cites="bojinov2023design">Bojinov, Simchi-Levi, and Zhao (<a href="#ref-bojinov2023design" role="doc-biblioref">2023</a>)</span>, section 5, for simulation results for switchbacks and generally good approach to simulation to emulate</li>
 <li><span class="citation" data-cites="reich2012empirical">Reich et al. (<a href="#ref-reich2012empirical" role="doc-biblioref">2012</a>)</span> power calcs for cluster-randomised experiments</li>
 </ul>
-<p>[^mutuallyexcl] We can simply dd up the probability of the test statistic falling into the upper and lower tail because the two events are independent.</p>
 </section>
 <section id="qa" class="level2" data-number="11.11">
 <h2 data-number="11.11" class="anchored" data-anchor-id="qa"><span class="header-section-number">11.11</span> Q&amp;A</h2>
@@ -649,6 +657,12 @@ Reich, Nicholas G, Jessica A Myers, Daniel Obeng, Aaron M Milstone, and Trish M 
 Zhou, Jing, Jiannan Lu, and Anas Shallah. 2023. <span>“All about Sample-Size Calculations for a/b Testing: Novel Extensions and Practical Guide.”</span> <em>arXiv Preprint arXiv:2305.16459</em>.
 </div>
 </div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>This kind of error is somtimes called a <a href="https://en.wikipedia.org/wiki/Type_III_error">Type III error</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

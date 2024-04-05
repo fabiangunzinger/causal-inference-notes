@@ -27,8 +27,8 @@ control group, while the alternative hypothesis asserts that there is:
 
 $$
 \begin{align}
-H_0: \te &= \te = 0 \\
-H_A: \te &= \te \neq 0.
+H_0: \te &= \tef = 0 \\
+H_A: \te &= \tef \neq 0.
 \end{align}
 $$
 
@@ -51,26 +51,30 @@ $$
 |\tee| > \see z_{\alpha/2}
 $$
 
-The power of the test if $H_A$ is true is the probability that the test
-statistic falls into the rejection region, which is:
+The power of the test is the probability that the test
+statistic falls into the rejection region if $H_A$ is true, which is:
 
 $$
-1 - \beta = P\left[|\tee| > \see z_{\alpha/2}\right].
+1 - \beta = P\left[|\tee| > \see z_{\alpha/2} | H_A \right].
 $$
 
 The test statistic falling into the lower or upper rejection region are mutually
 exclusive events, so the above is equal to
 
 $$
-1 - \beta = P\left[\tee > \see z_{\alpha/2}\right]
-+ P\left[\tee < -\see z_{\alpha/2}\right].
+1 - \beta = P\left[\tee > \see z_{\alpha/2} | H_A \right]
++ P\left[\tee < -\see z_{\alpha/2} | H_A \right].
 $$
 
 Standardising, using the assumption that $H_A$ is true, we get
 
 $$
-1 - \beta = P\left[\frac{\tee - \te}{\see} > \frac{\see z_{\alpha/2} - \te}{\see}\right]
-+ P\left[\frac{\tee - \te}{\see} < \frac{- \see z_{\alpha/2} - \te}{\see}\right], 
+\begin{align}
+1 - \beta &= P\left[\frac{\tee - \te}{\see} > \frac{\see z_{\alpha/2} - \te}{\see}\right]
++ P\left[\frac{\tee - \te}{\see} < \frac{- \see z_{\alpha/2} - \te}{\see}\right] \\
+&= P\left[Z > \frac{\see z_{\alpha/2} - \te}{\see}\right]
++ P\left[Z < \frac{- \see z_{\alpha/2} - \te}{\see}\right], 
+\end{align}
 $$
 
 which, using the standard normal CDF, $\Phi(z)$, we can rewrite as
@@ -80,19 +84,21 @@ $$
 + \left[\Phi\left(-z_{\alpha/2} - \frac{\te}{\see}\right)\right].
 $$
 
-<!--
-TODO
-Explain why we standardise using the assumption of H_A true (it's because
-we want to calculate p value falling to right of critical value if HA is true,
-visualise this using the Bloom picture)
--->
-
-For a true positive effect, the propability that we reject $H_0$ because our
-test statistic falls below the lower critical value is very small, and similarly
-for a true negative effect. Hence, as the true effect size deviates from zero, one of the two terms in the expression above becomes vanishingly small and can be ignored. For the rest of this chapter, I assume we have a true positive effect and omit the second of the two terms. We thus have:
+The probability that we reject the null hypothesis for the wrong reason --
+because the test statistic falls below the lower critical value for a true
+positive effect or above the upper critical value for a true negative effect --
+is very small.[^type3error] Hence, as the true effect size deviates from zero, one of the two terms in the expression above becomes vanishingly small and can be ignored. For the rest of this chapter, I assume we have a true positive effect and omit the second of the two terms. We thus have:
 
 $$
-1 - \beta = 1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\see}\right).
+1 - \beta = \Phi\left(z_{\alpha/2} - \frac{\te}{\see}\right).
+$$
+
+Furthermore, using the symmetry of the standard normal
+distribution, which implies that $1 - \Phi(k) = \Phi(-k)$, we can simplify this
+to
+
+$$
+1 - \beta = \Phi\left(\frac{\te}{\see} - z_{\alpha/2}\right).
 $$
 
 For a simple experiment with two variants with equal population variance, the
@@ -102,26 +108,47 @@ $$
 \see = \seefe = \seefep
 $$
 
-where: $\sev$ is the pooled estimator of the population variance, $\Nt$ and $\Nc$ are the number of units in the treatment and control groups, respectively, $\N = \Nt + \Nc$ is total sample size, and $P$ is the proportion of units in the treatment group.
+where $\sev$ is the pooled estimator of the population variance, $\Nt$ and $\Nc$ are the number of units in the treatment and control groups, respectively, $\N = \Nt + \Nc$ is total sample size, and $P$ is the proportion of units in the treatment group.
 
 For such an experiment, the power is thus given by
 
 $$
+1 - \beta = \Phi\left(\frac{\te}{\seefep} - z_{\alpha/2}\right), 
+$$
+
+which, with a bit of algebra (using $1/\sqrt{1/x} = \sqrt{x}$),
+we can rewrite as
+
+$$
+1 - \beta = \Phi\left(\frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2}\right).
+$$ {#eq-power}
+
+To calculate the required sample size for an experiment, we can rearrange
+@eq-power and solve for $N$. To do this, we use the inverse of the CDS function $\Phi(z)$. $\Phi(z)$ takes z-values and returns probabilities, so its inverse, $\Phi(p)^{-1}$, takes probabilities and returns z-values. Using this, we get:
+
+$$
 \begin{align}
-1 - \beta &= 1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\seefep}\right) \\
-&= 1 - \Phi\left(z_{\alpha/2} -
-\frac{\te}{\sev}\frac{1}{\sqrt{\frac{1}{P(1-P)N}}}\right) \\
-&= 1 - \Phi\left(z_{\alpha/2} -
-\frac{\te}{\sev}\sqrt{P(1-P)N}\right) \\
+\Phi(1 - \beta)^{-1} &= \Phi\left(\Phi\left(\frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2}\right)\right)^{-1} \\
+z_{1 - \beta} &= \frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2} \\
+\sqrt{P(1-P)N} &= (z_{1 - \beta} + z_{\alpha/2})\left(\frac{\sev}{\te}\right) \\
+N &= \frac{(z_{1 - \beta} + z_{\alpha/2})^2}{P(1-P)}\left(\frac{\sev}{\te}\right)^2.
 \end{align}
 $$
 
+This formula not only tells us the sample size required for an experiment, but
+also helps us reason about what impacts required sample size and how...
 
 
 
-## Theory
 
-- Largely based on @duflo2007randomization
+
+
+
+## Old notes
+
+<!-- ## Theory -->
+
+<!-- - Largely based on @duflo2007randomization -->
 
 ![title](../inputs/power.png)
 
@@ -291,10 +318,6 @@ where $\sigma^2$ is the sample variance and $\tau$ is the tretment effect (this 
 - @reich2012empirical power calcs for cluster-randomised experiments
 
 
-[^mutuallyexcl] We can simply dd up the probability of the test statistic falling into the
-upper and lower tail because the two events are independent.
-
-
 ## Q&A
 
 Questions:
@@ -308,3 +331,11 @@ Answers:
 1. When using a cumulative metric such as number of likes, the variance of which will increase the longer the experiment runs, which will increase the standard error of our treatment effect estimate and lower our power. Remember that $SE(\hat{\tau}) = \sqrt{\frac{1}{P(1-P)}\frac{\sigma^2}{N}}$. So, whether this happens depends on what happens to $\frac{\sigma^2}{N}$, as experiment duration increases. A decrease in power is plausible -- likely, even! -- because $N$ will increase in a concave fashion over the course of the experiment duration (some users keep coming back), while $\sigma^2$ is likely to grow faster than linearly, which causes the ratio to increase and power to decrease. 
 
 2. The approach is suboptimal because products with few ratings will have much more variance than products with many ratings, and their average rating is thus less reliable. The problem is akin to small US states having the highest *and* lowest rates of kidney cancer, or small schools having highest *and* lowest average pupil performance. Fundamentally, it's a problem of low power -- the sample size is too low to reliably detect a true effect. The solution is to use a shrinkage method: use a weighted average of the product average rating and some global product rating, with the weight of the product average rating being proportional to the number of ratings. This way, products with few ratings will be average, while products with many ratings will reflect their own rating.
+
+[^type3error]: This kind of error is somtimes called a [Type III
+    error](https://en.wikipedia.org/wiki/Type_III_error)
+
+[^mutuallyexcl]: We can simply dd up the probability of the test statistic falling into the
+upper and lower tail because the two events are independent.
+
+
