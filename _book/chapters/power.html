@@ -92,7 +92,10 @@ div.csl-indent {
     \(
     \newcommand{\nc}{\newcommand}
 
-    % sample sizes
+    %%%%%%%%%%%%%%%%
+    % sample sizes %
+    %%%%%%%%%%%%%%%%
+
     \nc{\Nt}{N_t}
     \nc{\Nc}{N_c}
     \nc{\N}{N}
@@ -167,6 +170,22 @@ div.csl-indent {
 
     <!-- \nc{\seefep}{\sev\sqrt{\left(\frac{1}{P(1-P)\N\right)}}} -->
     \nc{\seefep}{\sev\sqrt{\frac{1}{P(1-P)N}}}
+
+
+    %%%%%%%%%%%%%%%%%%%%%%
+    % hypothesis testing %
+    %%%%%%%%%%%%%%%%%%%%%%
+
+    \nc{hn}{H_0}
+    \nc{ha}{H_A}
+    \nc{za}{z_\alpha}
+    \nc{zk}{z{1 - \kappa}}
+
+
+    %%%%%%%%%%%%%%%%%%
+    % other commands %
+    %%%%%%%%%%%%%%%%%%
+
     \)
 </span>
 
@@ -336,22 +355,32 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#power-formula-from-first-principles" id="toc-power-formula-from-first-principles" class="nav-link active" data-scroll-target="#power-formula-from-first-principles"><span class="header-section-number">11.1</span> Power formula from first principles</a></li>
-  <li><a href="#old-notes" id="toc-old-notes" class="nav-link" data-scroll-target="#old-notes"><span class="header-section-number">11.2</span> Old notes</a></li>
-  <li><a href="#what-determines-power" id="toc-what-determines-power" class="nav-link" data-scroll-target="#what-determines-power"><span class="header-section-number">11.3</span> What determines power</a></li>
-  <li><a href="#how-to-increase-power" id="toc-how-to-increase-power" class="nav-link" data-scroll-target="#how-to-increase-power"><span class="header-section-number">11.4</span> How to increase power</a></li>
-  <li><a href="#how-to-choose-key-parameters" id="toc-how-to-choose-key-parameters" class="nav-link" data-scroll-target="#how-to-choose-key-parameters"><span class="header-section-number">11.5</span> How to choose key parameters</a>
+  <li><a href="#understanding-the-formula-that-determines-sample-size" id="toc-understanding-the-formula-that-determines-sample-size" class="nav-link active" data-scroll-target="#understanding-the-formula-that-determines-sample-size"><span class="header-section-number">11.1</span> Understanding the formula that determines sample size</a></li>
+  <li><a href="#implications-of-the-formula" id="toc-implications-of-the-formula" class="nav-link" data-scroll-target="#implications-of-the-formula"><span class="header-section-number">11.2</span> Implications of the formula</a></li>
+  <li><a href="#rules-of-thumb-the-big-16-vs-32-confusion" id="toc-rules-of-thumb-the-big-16-vs-32-confusion" class="nav-link" data-scroll-target="#rules-of-thumb-the-big-16-vs-32-confusion"><span class="header-section-number">11.3</span> Rules of thumb – the big 16 vs 32 confusion</a></li>
+  <li><a href="#different-types-of-metrics" id="toc-different-types-of-metrics" class="nav-link" data-scroll-target="#different-types-of-metrics"><span class="header-section-number">11.4</span> Different types of metrics</a></li>
+  <li><a href="#power-for-quasi-experimental-studies" id="toc-power-for-quasi-experimental-studies" class="nav-link" data-scroll-target="#power-for-quasi-experimental-studies"><span class="header-section-number">11.5</span> Power for quasi-experimental studies</a></li>
+  <li><a href="#deriving-the-sample-size-formula" id="toc-deriving-the-sample-size-formula" class="nav-link" data-scroll-target="#deriving-the-sample-size-formula"><span class="header-section-number">11.6</span> Deriving the sample size formula</a>
   <ul class="collapse">
-  <li><a href="#mde" id="toc-mde" class="nav-link" data-scroll-target="#mde"><span class="header-section-number">11.5.1</span> MDE</a></li>
-  <li><a href="#significance-level" id="toc-significance-level" class="nav-link" data-scroll-target="#significance-level"><span class="header-section-number">11.5.2</span> Significance level</a></li>
-  <li><a href="#power" id="toc-power" class="nav-link" data-scroll-target="#power"><span class="header-section-number">11.5.3</span> Power</a></li>
+  <li><a href="#derivation-from-first-principles" id="toc-derivation-from-first-principles" class="nav-link" data-scroll-target="#derivation-from-first-principles"><span class="header-section-number">11.6.1</span> Derivation from first principles</a></li>
+  <li><a href="#starting-from-type-i-and-type-ii-error-conditions" id="toc-starting-from-type-i-and-type-ii-error-conditions" class="nav-link" data-scroll-target="#starting-from-type-i-and-type-ii-error-conditions"><span class="header-section-number">11.6.2</span> Starting from Type I and Type II error conditions</a></li>
+  <li><a href="#starting-from-graphical-illustration" id="toc-starting-from-graphical-illustration" class="nav-link" data-scroll-target="#starting-from-graphical-illustration"><span class="header-section-number">11.6.3</span> Starting from graphical illustration</a></li>
   </ul></li>
-  <li><a href="#problems-with-low-power" id="toc-problems-with-low-power" class="nav-link" data-scroll-target="#problems-with-low-power"><span class="header-section-number">11.6</span> Problems with low power</a></li>
-  <li><a href="#power-in-online-experiments" id="toc-power-in-online-experiments" class="nav-link" data-scroll-target="#power-in-online-experiments"><span class="header-section-number">11.7</span> Power in online experiments</a></li>
-  <li><a href="#rule-of-thumb-for-sample-size" id="toc-rule-of-thumb-for-sample-size" class="nav-link" data-scroll-target="#rule-of-thumb-for-sample-size"><span class="header-section-number">11.8</span> Rule of thumb for sample size</a></li>
-  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices"><span class="header-section-number">11.9</span> Best practices</a></li>
-  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">11.10</span> Useful resources</a></li>
-  <li><a href="#qa" id="toc-qa" class="nav-link" data-scroll-target="#qa"><span class="header-section-number">11.11</span> Q&amp;A</a></li>
+  <li><a href="#old-notes" id="toc-old-notes" class="nav-link" data-scroll-target="#old-notes"><span class="header-section-number">11.7</span> Old notes</a></li>
+  <li><a href="#what-determines-power" id="toc-what-determines-power" class="nav-link" data-scroll-target="#what-determines-power"><span class="header-section-number">11.8</span> What determines power</a></li>
+  <li><a href="#how-to-increase-power" id="toc-how-to-increase-power" class="nav-link" data-scroll-target="#how-to-increase-power"><span class="header-section-number">11.9</span> How to increase power</a></li>
+  <li><a href="#how-to-choose-key-parameters" id="toc-how-to-choose-key-parameters" class="nav-link" data-scroll-target="#how-to-choose-key-parameters"><span class="header-section-number">11.10</span> How to choose key parameters</a>
+  <ul class="collapse">
+  <li><a href="#mde" id="toc-mde" class="nav-link" data-scroll-target="#mde"><span class="header-section-number">11.10.1</span> MDE</a></li>
+  <li><a href="#significance-level" id="toc-significance-level" class="nav-link" data-scroll-target="#significance-level"><span class="header-section-number">11.10.2</span> Significance level</a></li>
+  <li><a href="#power" id="toc-power" class="nav-link" data-scroll-target="#power"><span class="header-section-number">11.10.3</span> Power</a></li>
+  </ul></li>
+  <li><a href="#problems-with-low-power" id="toc-problems-with-low-power" class="nav-link" data-scroll-target="#problems-with-low-power"><span class="header-section-number">11.11</span> Problems with low power</a></li>
+  <li><a href="#power-in-online-experiments" id="toc-power-in-online-experiments" class="nav-link" data-scroll-target="#power-in-online-experiments"><span class="header-section-number">11.12</span> Power in online experiments</a></li>
+  <li><a href="#rule-of-thumb-for-sample-size" id="toc-rule-of-thumb-for-sample-size" class="nav-link" data-scroll-target="#rule-of-thumb-for-sample-size"><span class="header-section-number">11.13</span> Rule of thumb for sample size</a></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices"><span class="header-section-number">11.14</span> Best practices</a></li>
+  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">11.15</span> Useful resources</a></li>
+  <li><a href="#qa" id="toc-qa" class="nav-link" data-scroll-target="#qa"><span class="header-section-number">11.16</span> Q&amp;A</a></li>
   </ul>
 </nav>
     </div>
@@ -384,8 +413,34 @@ window.Quarto = {
 <li><p>Discuss implications of the formula for a number of experiment design aspects.</p></li>
 <li><p>…</p></li>
 </ul>
-<section id="power-formula-from-first-principles" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="power-formula-from-first-principles"><span class="header-section-number">11.1</span> Power formula from first principles</h2>
+<section id="understanding-the-formula-that-determines-sample-size" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="understanding-the-formula-that-determines-sample-size"><span class="header-section-number">11.1</span> Understanding the formula that determines sample size</h2>
+<p>first explain all the elements …</p>
+<p>lh curve …this is sampling dist of tee, know shape from sampling theory reject h0 if value larger than za rhs is sampling distr under ha what is zk? now derive bloom formula…</p>
+</section>
+<section id="implications-of-the-formula" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="implications-of-the-formula"><span class="header-section-number">11.2</span> Implications of the formula</h2>
+</section>
+<section id="rules-of-thumb-the-big-16-vs-32-confusion" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="rules-of-thumb-the-big-16-vs-32-confusion"><span class="header-section-number">11.3</span> Rules of thumb – the big 16 vs 32 confusion</h2>
+<ul>
+<li><p>There is another way to express the variance, which has led to massive confusion.</p></li>
+<li><p>I’m pretty sure its the 1/N vs 1/(N/2) error that accounts for the wrong result, and nobody seems to derive this from first principles to check.</p></li>
+<li><p>Is original wrong? Check in book – access through WBS.</p></li>
+</ul>
+</section>
+<section id="different-types-of-metrics" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="different-types-of-metrics"><span class="header-section-number">11.4</span> Different types of metrics</h2>
+</section>
+<section id="power-for-quasi-experimental-studies" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="power-for-quasi-experimental-studies"><span class="header-section-number">11.5</span> Power for quasi-experimental studies</h2>
+</section>
+<section id="deriving-the-sample-size-formula" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="deriving-the-sample-size-formula"><span class="header-section-number">11.6</span> Deriving the sample size formula</h2>
+<p>The power formula can be intimidating and abstract (all the more so, because there are many different versions floating around).</p>
+<p>The goal of this section is to demystify the formula. The best way to do that is to derive it from first principles, which will helps us understand where the formula comes from. In addition to the derivation from first principles, I’ll also show a couple other ways that are useful to understand it, and are a bit faster to use in practice.</p>
+<section id="derivation-from-first-principles" class="level3" data-number="11.6.1">
+<h3 data-number="11.6.1" class="anchored" data-anchor-id="derivation-from-first-principles"><span class="header-section-number">11.6.1</span> Derivation from first principles</h3>
 <p>Power is the probability that we reject the null hypothesis if it is false:</p>
 <p><span class="math display">\[
 1 - \beta = P[\text{reject } H_0 | H_0 \text{ is false}].
@@ -463,18 +518,32 @@ z_{1 - \beta} &amp;= \frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2} \\
 N &amp;= \frac{(z_{1 - \beta} + z_{\alpha/2})^2}{P(1-P)}\left(\frac{\sev}{\te}\right)^2.
 \end{align}
 \]</span></p>
-<p>This formula not only tells us the sample size required for an experiment, but also helps us reason about what impacts required sample size and how…</p>
 </section>
-<section id="old-notes" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="old-notes"><span class="header-section-number">11.2</span> Old notes</h2>
-<!-- ## Theory -->
-<!-- - Largely based on @duflo2007randomization -->
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../inputs/power.png" class="img-fluid figure-img"></p>
-<figcaption>title</figcaption>
+<section id="starting-from-type-i-and-type-ii-error-conditions" class="level3" data-number="11.6.2">
+<h3 data-number="11.6.2" class="anchored" data-anchor-id="starting-from-type-i-and-type-ii-error-conditions"><span class="header-section-number">11.6.2</span> Starting from Type I and Type II error conditions</h3>
+</section>
+<section id="starting-from-graphical-illustration" class="level3" data-number="11.6.3">
+<h3 data-number="11.6.3" class="anchored" data-anchor-id="starting-from-graphical-illustration"><span class="header-section-number">11.6.3</span> Starting from graphical illustration</h3>
+<p><span class="citation" data-cites="bloom1995minimum">Bloom (<a href="#ref-bloom1995minimum" role="doc-biblioref">1995</a>)</span> introduces the notion of the MDE as a useful way to quantify power. In the process, he also uses an intuitive way to derive the power formula based on an illustration of a typical hypothesis-testing scenario.</p>
+<div id="fig-power" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-power-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../inputs/power.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-power-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.1: Source: <span class="citation" data-cites="duflo2007using">Duflo, Glennerster, and Kremer (<a href="#ref-duflo2007using" role="doc-biblioref">2007</a>)</span>, based on <span class="citation" data-cites="bloom1995minimum">Bloom (<a href="#ref-bloom1995minimum" role="doc-biblioref">1995</a>)</span>.
+</figcaption>
 </figure>
 </div>
+<p>Let’s start by understanding <a href="#fig-power" class="quarto-xref">Figure&nbsp;<span>11.1</span></a>, which visualises the setup of a one-sided hypothesis test where the true effect equals 0 under the null hypothesis and some positive constant <span class="math inline">\(\te\)</span> under the alternative hypothesis. Note that the curves are <em>not</em> the standard normal distribution, but the sampling distribution of our estimator <span class="math inline">\(\tee\)</span>. This means that the standard deviation of the curves is given by the standard error of <span class="math inline">\(\tee\)</span>, which is <span class="math inline">\(\see\)</span>. Under the assumption of a homogenous treatment effect, the standard error is identical under <span class="math inline">\(\hn\)</span> and <span class="math inline">\(\ha\)</span>, which is why the two curves have the same shape (see <a href="experiment_stats.html" class="quarto-xref"><span>Chapter 7</span></a> for details).</p>
+<p>the distribution will be the same under both the null and the alternative hypothesis, with the center of each distribution given by our hypothesised value of <span class="math inline">\(\te\)</span> – zero under <span class="math inline">\(\hn\)</span> and a positive constant under <span class="math inline">\(\ha\)</span>.</p>
+<p>We reject <span class="math inline">\(\hn\)</span> if <span class="math inline">\(\tee\)</span> is to the right of the critical value <span class="math inline">\(\za\)</span>. Also, for a given level of power <span class="math inline">\(\beta\)</span>,</p>
+</section>
+</section>
+<section id="old-notes" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="old-notes"><span class="header-section-number">11.7</span> Old notes</h2>
+<!-- ## Theory -->
+<!-- - Largely based on @duflo2007randomization -->
 <p>Power basics</p>
 <ul>
 <li>In the simplest possible, we randomly draw a sample of size <span class="math inline">\(N\)</span> from an identical population, so that our observations can be assumed to be i.i.d, and we allocate a fraction <span class="math inline">\(P\)</span> of our sample to treatment. We can then estiamte the treatment effect using the OLS regression</li>
@@ -505,8 +574,8 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 <li><p>SE(<span class="math inline">\(\beta\)</span>) also includes measurement error, so this is also a determinant of power.</p></li>
 </ul>
 </section>
-<section id="what-determines-power" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="what-determines-power"><span class="header-section-number">11.3</span> What determines power</h2>
+<section id="what-determines-power" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="what-determines-power"><span class="header-section-number">11.8</span> What determines power</h2>
 <ul>
 <li><p>Significance level</p></li>
 <li><p>Effect size</p></li>
@@ -518,8 +587,8 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ul></li>
 </ul>
 </section>
-<section id="how-to-increase-power" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="how-to-increase-power"><span class="header-section-number">11.4</span> How to increase power</h2>
+<section id="how-to-increase-power" class="level2" data-number="11.9">
+<h2 data-number="11.9" class="anchored" data-anchor-id="how-to-increase-power"><span class="header-section-number">11.9</span> How to increase power</h2>
 <ul>
 <li><p>Power can be increased trivially by lowering the significance level, which we often don’t want to do, or by increasing sample size, which we’re often trying to avoid.</p></li>
 <li><p>Increase effect size</p>
@@ -539,10 +608,10 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ul></li>
 </ul>
 </section>
-<section id="how-to-choose-key-parameters" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="how-to-choose-key-parameters"><span class="header-section-number">11.5</span> How to choose key parameters</h2>
-<section id="mde" class="level3" data-number="11.5.1">
-<h3 data-number="11.5.1" class="anchored" data-anchor-id="mde"><span class="header-section-number">11.5.1</span> MDE</h3>
+<section id="how-to-choose-key-parameters" class="level2" data-number="11.10">
+<h2 data-number="11.10" class="anchored" data-anchor-id="how-to-choose-key-parameters"><span class="header-section-number">11.10</span> How to choose key parameters</h2>
+<section id="mde" class="level3" data-number="11.10.1">
+<h3 data-number="11.10.1" class="anchored" data-anchor-id="mde"><span class="header-section-number">11.10.1</span> MDE</h3>
 <ul>
 <li><p>What are you balancing here? The size of the effect you are able to identify and the time it takes to do it.</p></li>
 <li><p>All else equal, the smaller a change you want to be able to detect, the longer it will take for the experiment to run because you need more sample size.</p></li>
@@ -560,8 +629,8 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ul></li>
 </ul>
 </section>
-<section id="significance-level" class="level3" data-number="11.5.2">
-<h3 data-number="11.5.2" class="anchored" data-anchor-id="significance-level"><span class="header-section-number">11.5.2</span> Significance level</h3>
+<section id="significance-level" class="level3" data-number="11.10.2">
+<h3 data-number="11.10.2" class="anchored" data-anchor-id="significance-level"><span class="header-section-number">11.10.2</span> Significance level</h3>
 <ul>
 <li><p>What are you balancing here? The probabilities of making a type I and type II error.</p></li>
 <li><p>The higher significance level, the less likely we are to implement useless features (to make a Type I error) but the more likely we are to no implement useful features (to make a Type II error).</p></li>
@@ -579,8 +648,8 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ul></li>
 </ul>
 </section>
-<section id="power" class="level3" data-number="11.5.3">
-<h3 data-number="11.5.3" class="anchored" data-anchor-id="power"><span class="header-section-number">11.5.3</span> Power</h3>
+<section id="power" class="level3" data-number="11.10.3">
+<h3 data-number="11.10.3" class="anchored" data-anchor-id="power"><span class="header-section-number">11.10.3</span> Power</h3>
 <ul>
 <li><p>What are you balancing here? The risk of making a Type II error and the time you have to wait for your results.</p></li>
 <li><p>All else equal, the higher a level or power you want, the longer you’ll have to run the experiment to accumulate the requried sample size.</p></li>
@@ -591,34 +660,35 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ul>
 </section>
 </section>
-<section id="problems-with-low-power" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="problems-with-low-power"><span class="header-section-number">11.6</span> Problems with low power</h2>
+<section id="problems-with-low-power" class="level2" data-number="11.11">
+<h2 data-number="11.11" class="anchored" data-anchor-id="problems-with-low-power"><span class="header-section-number">11.11</span> Problems with low power</h2>
 <ul>
 <li>Truth inflation: underpowered studies only find a significant effect it the effect size is larger than the true effect size, leading to inflated claims of effect sizes.</li>
 </ul>
 </section>
-<section id="power-in-online-experiments" class="level2" data-number="11.7">
-<h2 data-number="11.7" class="anchored" data-anchor-id="power-in-online-experiments"><span class="header-section-number">11.7</span> Power in online experiments</h2>
+<section id="power-in-online-experiments" class="level2" data-number="11.12">
+<h2 data-number="11.12" class="anchored" data-anchor-id="power-in-online-experiments"><span class="header-section-number">11.12</span> Power in online experiments</h2>
 <ul>
 <li><span class="citation" data-cites="kohavi2014seven">Kohavi et al. (<a href="#ref-kohavi2014seven" role="doc-biblioref">2014</a>)</span> point out (in rule 7) that while general advice suggets that the CLT provides a good approximation for n larger than 30, the large skew in online metrics often requires many moer users. They recomment 355 * (skewness coefficient)^2.</li>
 </ul>
 </section>
-<section id="rule-of-thumb-for-sample-size" class="level2" data-number="11.8">
-<h2 data-number="11.8" class="anchored" data-anchor-id="rule-of-thumb-for-sample-size"><span class="header-section-number">11.8</span> Rule of thumb for sample size</h2>
-<p>For alpha = 0.05, power = 0.8, and a two-sided test with equal allocation to two variants, required sample size is approximately:</p>
+<section id="rule-of-thumb-for-sample-size" class="level2" data-number="11.13">
+<h2 data-number="11.13" class="anchored" data-anchor-id="rule-of-thumb-for-sample-size"><span class="header-section-number">11.13</span> Rule of thumb for sample size</h2>
+<p>For alpha = 0.05, power = 0.8, and a two-sided test with equal allocation to two variants, required sample size per variant is approximately:</p>
 <p><span class="math display">\[
 n \approx \frac{16\sigma^2}{\tau^2},
 \]</span></p>
 <p>where <span class="math inline">\(\sigma^2\)</span> is the sample variance and <span class="math inline">\(\tau\)</span> is the tretment effect (this is not known, but we can use the MDES).</p>
+<p>The formula straighforwardly comes from <a href="#eq-power" class="quarto-xref">Equation&nbsp;<span>11.1</span></a>, using 1.96 for <span class="math inline">\(t_\alpha\)</span>, 0.84 for <span class="math inline">\(t_{1 - \beta}\)</span>, and 0.5 for <span class="math inline">\(P\)</span>.</p>
 </section>
-<section id="best-practices" class="level2" data-number="11.9">
-<h2 data-number="11.9" class="anchored" data-anchor-id="best-practices"><span class="header-section-number">11.9</span> Best practices</h2>
+<section id="best-practices" class="level2" data-number="11.14">
+<h2 data-number="11.14" class="anchored" data-anchor-id="best-practices"><span class="header-section-number">11.14</span> Best practices</h2>
 <ul>
 <li>When aiming to estimate a precise effect size rather than just being interested in statistical significance, use assurance instead of power: instead of choosing a sample size to attain a given level of power, choose sample size so that confidence interval will be suitably narrow 99 percent of the time (<a href="https://www3.nd.edu/~kkelley/publications/articles/Anderson_Kelley_Maxwell_Psychological_Science_2017.pdf">Sample-Size Planning for More Accurate Statistical Power: A Method Adjusting Sample Effect Sizes for Publication Bias and Uncertainty</a> and <a href="https://tandfbis.s3.amazonaws.com/rt-media/pp/common/sample-chapters/9780415879682.pdf">Understanding the new statistics</a>.)</li>
 </ul>
 </section>
-<section id="useful-resources" class="level2" data-number="11.10">
-<h2 data-number="11.10" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">11.10</span> Useful resources</h2>
+<section id="useful-resources" class="level2" data-number="11.15">
+<h2 data-number="11.15" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">11.15</span> Useful resources</h2>
 <ul>
 <li><span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span> for general overview</li>
 <li><span class="citation" data-cites="zhou2023all">Zhou, Lu, and Shallah (<a href="#ref-zhou2023all" role="doc-biblioref">2023</a>)</span> for comprehensive overview of how to calculate power</li>
@@ -626,8 +696,8 @@ n \approx \frac{16\sigma^2}{\tau^2},
 <li><span class="citation" data-cites="reich2012empirical">Reich et al. (<a href="#ref-reich2012empirical" role="doc-biblioref">2012</a>)</span> power calcs for cluster-randomised experiments</li>
 </ul>
 </section>
-<section id="qa" class="level2" data-number="11.11">
-<h2 data-number="11.11" class="anchored" data-anchor-id="qa"><span class="header-section-number">11.11</span> Q&amp;A</h2>
+<section id="qa" class="level2" data-number="11.16">
+<h2 data-number="11.16" class="anchored" data-anchor-id="qa"><span class="header-section-number">11.16</span> Q&amp;A</h2>
 <p>Questions:</p>
 <ol type="1">
 <li><p>Longer experiment duration generally increases power. Can you think of a scenario where this is not the case?</p></li>
@@ -641,8 +711,14 @@ n \approx \frac{16\sigma^2}{\tau^2},
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-bloom1995minimum" class="csl-entry" role="listitem">
+Bloom, Howard S. 1995. <span>“Minimum Detectable Effects: A Simple Way to Report the Statistical Power of Experimental Designs.”</span> <em>Evaluation Review</em> 19 (5): 547–56.
+</div>
 <div id="ref-bojinov2023design" class="csl-entry" role="listitem">
 Bojinov, Iavor, David Simchi-Levi, and Jinglong Zhao. 2023. <span>“Design and Analysis of Switchback Experiments.”</span> <em>Management Science</em> 69 (7): 3759–77.
+</div>
+<div id="ref-duflo2007using" class="csl-entry" role="listitem">
+Duflo, Esther, Rachel Glennerster, and Michael Kremer. 2007. <span>“Using Randomization in Development Economics Research: A Toolkit.”</span> <em>Handbook of Development Economics</em> 4: 3895–3962.
 </div>
 <div id="ref-kohavi2014seven" class="csl-entry" role="listitem">
 Kohavi, Ron, Alex Deng, Roger Longbotham, and Ya Xu. 2014. <span>“Seven Rules of Thumb for Web Site Experimenters.”</span> In <em>Proceedings of the 20th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, 1857–66.

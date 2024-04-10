@@ -63,22 +63,40 @@ probability of treatment equal to $p$.
 
 ## Variance of treatment effect estimates
 
-Cases to discuss: 
+Before starting the below, understand implication of sampling and randomisation
+variation on formula -- check imbens rubin.
 
+Actually, do the following:
 
-- Simplest case with variance known, equal, and independent assignments (derive
-  from first principles)
+- Online experiments rely on hashing, so sampling is independent.
 
-- Relax known assumption
+- Hence, we are looking for the difference of two independent random variables.
 
-- Relax equal variance assumption
+- Focus on $\ytob$, which is a scaled sum of $\Nt$ iid random variables. (They
+are random vars because given that we randomly sample from the population, the
+realised value of the $i$th unit in the sample is random). Hence, $\ytob$ is
+also a random variable.
 
-- Relax independent assignment assumption
+- We have $V(\ytob)$ ... V(Y_t) / N_t.
 
-- Discuss population vs sample perspective
+- Same for $\ycob$.
 
-- Show derivation for using treatment proportion
+- Hence, V($\teef$) = ...
 
+- In practice, we don't know variances. So need to estimate. We do this using
+... (box with derivation). Which gives us...
+
+- There are usually different representations of this
+
+- Common assumption: same variance. Holds only if treatment effect is homogenous
+  (box with proof) gives ...
+
+- Often made assumption: same sample size gives ...
+
+- We can also integrate treatment allocation proportion, which is very useful.
+Gives us ...
+
+...
 
 For most of the text, I'll rely on the assumption of equal variance because it
 simplifies notation and is justified in the context of online experiments
@@ -97,9 +115,7 @@ $$
 $$
 
 
-
 Notes to integrate:
-
 
 Because our Bernoulli assignment mechanism allocates treatment and control units independently and randomly, an unbiased estimate of the sampling variance of $\hat{\tau}$ is given by:
 

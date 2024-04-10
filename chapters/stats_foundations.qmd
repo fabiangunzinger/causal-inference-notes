@@ -1,4 +1,5 @@
-# Statistics foundation
+# Statistics foundation {#sec-stats-foundations}
+
 <!-- 
 ```{python}
 import matplotlib.pyplot as plt

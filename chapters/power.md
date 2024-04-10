@@ -11,7 +11,47 @@ In this section, I want to do the following:
 - ...
 
 
-## Power formula from first principles
+## Understanding the formula that determines sample size
+
+first explain all the elements ...
+
+lh curve ...this is sampling dist of tee, know shape from sampling theory
+reject h0 if value larger than za
+rhs is sampling distr under ha
+what is zk? 
+now derive bloom formula...
+
+
+
+
+## Implications of the formula
+
+## Rules of thumb -- the big 16 vs 32 confusion
+
+- There is another way to express the variance, which has led to massive
+confusion.
+
+- I'm pretty sure its the 1/N vs 1/(N/2) error that accounts for the wrong
+result, and nobody seems to derive this from first principles to check.
+
+- Is original wrong? Check in book -- access through WBS.
+
+## Different types of metrics
+
+## Power for quasi-experimental studies
+
+## Deriving the sample size formula
+
+The power formula can be intimidating and abstract (all the more so, because
+there are many different versions floating around).
+
+The goal of this section is to demystify the formula. The best way to do that is
+to derive it from first principles, which will helps us understand where the
+formula comes from. In addition to the derivation from first principles, I'll
+also show a couple other ways that are useful to understand it, and are a bit
+faster to use in practice.
+
+### Derivation from first principles
 
 Power is the probability that we reject the null hypothesis if it is false:
 
@@ -135,13 +175,33 @@ N &= \frac{(z_{1 - \beta} + z_{\alpha/2})^2}{P(1-P)}\left(\frac{\sev}{\te}\right
 \end{align}
 $$
 
-This formula not only tells us the sample size required for an experiment, but
-also helps us reason about what impacts required sample size and how...
 
+### Starting from Type I and Type II error conditions
 
+### Starting from graphical illustration
 
+@bloom1995minimum introduces the notion of the MDE as a useful way to quantify
+power. In the process, he also uses an intuitive way to derive the power formula
+based on an illustration of a typical hypothesis-testing scenario.
 
+![Source: @duflo2007using, based on
+@bloom1995minimum.](../inputs/power.png){#fig-power}
 
+Let's start by understanding @fig-power, which visualises the setup of a
+one-sided hypothesis test where the true effect equals 0 under the null
+hypothesis and some positive constant $\te$ under the alternative hypothesis. Note that the curves are *not* the standard normal distribution,
+but the sampling distribution of our estimator $\tee$. This means that the standard
+deviation of the curves is given by the standard error of $\tee$, which is
+$\see$. Under the assumption of a homogenous treatment effect, the standard
+error is identical under $\hn$ and $\ha$, which is why the two curves have the
+same shape (see @sec-experiment-stats for details).
+
+the distribution will be the same under both the null and the alternative
+hypothesis, with the center of each distribution given by our hypothesised value
+of $\te$ -- zero under $\hn$ and a positive constant under $\ha$.
+
+We reject $\hn$ if $\tee$ is to the right of the critical value $\za$. Also,
+for a given level of power $\beta$, 
 
 
 ## Old notes
@@ -150,7 +210,6 @@ also helps us reason about what impacts required sample size and how...
 
 <!-- - Largely based on @duflo2007randomization -->
 
-![title](../inputs/power.png)
 
 Power basics
 
@@ -296,13 +355,16 @@ $$ N =  \frac{(t_a + t_{1-\kappa})^2}{P(1-P)}\left(\frac{\sigma}{\delta}\right)^
 
 ## Rule of thumb for sample size
 
-For alpha = 0.05, power = 0.8, and a two-sided test with equal allocation to two variants, required sample size is approximately:
+For alpha = 0.05, power = 0.8, and a two-sided test with equal allocation to two variants, required sample size per variant is approximately:
 
 $$
 n \approx \frac{16\sigma^2}{\tau^2},
 $$
 
 where $\sigma^2$ is the sample variance and $\tau$ is the tretment effect (this is not known, but we can use the MDES).
+
+The formula straighforwardly comes from @eq-power, using 1.96 for $t_\alpha$,
+0.84 for $t_{1 - \beta}$, and 0.5 for $P$.
 
 
 ## Best practices

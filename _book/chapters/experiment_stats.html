@@ -92,7 +92,10 @@ div.csl-indent {
     \(
     \newcommand{\nc}{\newcommand}
 
-    % sample sizes
+    %%%%%%%%%%%%%%%%
+    % sample sizes %
+    %%%%%%%%%%%%%%%%
+
     \nc{\Nt}{N_t}
     \nc{\Nc}{N_c}
     \nc{\N}{N}
@@ -158,7 +161,7 @@ div.csl-indent {
     % naming convention as for variance but with se prefix
 
     \nc{\se}{\text{se}(\te}
-    \nc{\see}{\hat{\text{se}}(\tee)}
+    \nc{\see}{\text{se}(\tee)}
 
     \nc{\sefe}{\sigma \sqrt{\frac{1}{\Nt} + \frac{1}{\Nc}}}
     \nc{\sefu}{\sqrt{\frac{\vt}{\Nt} + \frac{\vc}{\Nc}}}
@@ -167,6 +170,22 @@ div.csl-indent {
 
     <!-- \nc{\seefep}{\sev\sqrt{\left(\frac{1}{P(1-P)\N\right)}}} -->
     \nc{\seefep}{\sev\sqrt{\frac{1}{P(1-P)N}}}
+
+
+    %%%%%%%%%%%%%%%%%%%%%%
+    % hypothesis testing %
+    %%%%%%%%%%%%%%%%%%%%%%
+
+    \nc{hn}{H_0}
+    \nc{ha}{H_A}
+    \nc{za}{z_\alpha}
+    \nc{zk}{z{1 - \kappa}}
+
+
+    %%%%%%%%%%%%%%%%%%
+    % other commands %
+    %%%%%%%%%%%%%%%%%%
+
     \)
 </span>
 
@@ -407,15 +426,22 @@ window.Quarto = {
 </section>
 <section id="variance-of-treatment-effect-estimates" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="variance-of-treatment-effect-estimates"><span class="header-section-number">7.4</span> Variance of treatment effect estimates</h2>
-<p>Cases to discuss:</p>
+<p>Before starting the below, understand implication of sampling and randomisation variation on formula – check imbens rubin.</p>
+<p>Actually, do the following:</p>
 <ul>
-<li><p>Simplest case with variance known, equal, and independent assignments (derive from first principles)</p></li>
-<li><p>Relax known assumption</p></li>
-<li><p>Relax equal variance assumption</p></li>
-<li><p>Relax independent assignment assumption</p></li>
-<li><p>Discuss population vs sample perspective</p></li>
-<li><p>Show derivation for using treatment proportion</p></li>
+<li><p>Online experiments rely on hashing, so sampling is independent.</p></li>
+<li><p>Hence, we are looking for the difference of two independent random variables.</p></li>
+<li><p>Focus on <span class="math inline">\(\ytob\)</span>, which is a scaled sum of <span class="math inline">\(\Nt\)</span> iid random variables. (They are random vars because given that we randomly sample from the population, the realised value of the <span class="math inline">\(i\)</span>th unit in the sample is random). Hence, <span class="math inline">\(\ytob\)</span> is also a random variable.</p></li>
+<li><p>We have <span class="math inline">\(V(\ytob)\)</span> … V(Y_t) / N_t.</p></li>
+<li><p>Same for <span class="math inline">\(\ycob\)</span>.</p></li>
+<li><p>Hence, V(<span class="math inline">\(\teef\)</span>) = …</p></li>
+<li><p>In practice, we don’t know variances. So need to estimate. We do this using … (box with derivation). Which gives us…</p></li>
+<li><p>There are usually different representations of this</p></li>
+<li><p>Common assumption: same variance. Holds only if treatment effect is homogenous (box with proof) gives …</p></li>
+<li><p>Often made assumption: same sample size gives …</p></li>
+<li><p>We can also integrate treatment allocation proportion, which is very useful. Gives us …</p></li>
 </ul>
+<p>…</p>
 <p>For most of the text, I’ll rely on the assumption of equal variance because it simplifies notation and is justified in the context of online experiments because of randomisation, large sample sizes, and (generally) small treatment effects.</p>
 <p>Hence, my standard sampling variance is:</p>
 <p><span class="math display">\[
