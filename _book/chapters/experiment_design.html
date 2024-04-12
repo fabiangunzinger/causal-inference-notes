@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 10&nbsp; Experiment design</title>
+<title>Causal inference notes - 9&nbsp; Experiment design</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,7 +24,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -67,13 +66,7 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -82,23 +75,89 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 </head><body class="nav-sidebar floating"><span class="math inline">
     \(
-    \newcommand{\tee}{\hat{\tau}}   <!-- treatment effect estimate -->
-    \newcommand{\vet}{s^2_t}
-    \newcommand{\vec}{s^2_c}
-    \newcommand{\nt}{N_t}
-    \newcommand{\nc}{N_c}
-    \newcommand{\ses}{\text{se}(\tee)}   <!-- standard error symbol -->
-    \newcommand{\se}{\sqrt{\frac{\vet}{\nt} + \frac{\vec}{\nc}}}
-    \newcommand{\yt}{Y_t}
-    \newcommand{\yc}{Y_c}
+    \newcommand{\nc}{\newcommand}
+
+    % sample sizes
+    \nc{\Nt}{N_t}
+    \nc{\Nc}{N_c}
+    \nc{\N}{N}
+    
+    % outcomes
+    \nc{yio}{Y_i^{obs}}
+    \nc{ytp}{Y_i(1)}
+    \nc{ycp}{Y_i(0)}
+    \nc{\yto}{Y_t^{obs}}
+    \nc{\yco}{Y_c^{obs}}
+    \nc{ytpb}{\bar{Y}(1)}
+    \nc{ycpb}{\bar{Y}(0)}
+    \nc{\ytob}{\bar{Y}_t^{obs}}
+    \nc{\ycob}{\bar{Y}_c^{obs}}
+
+    % sums of outcomes
+
+    % treatment effects
+    \nc{\te}{\tau}
+    \nc{\tee}{\hat{\te}}   
+    \nc{\tef}{\ytpb - \ycpb}
+    \nc{\teef}{\ytob - \ycob}
+    \nc{\tefs}{\frac{1}{\N}\sum_{i=1}^N\left(\ytp-\ycp\right)}
+
+    
+    % sample variances
+
+    \nc{\spv}{\sigma}   %symbol pop var
+    \nc{\sev}{\hat{\sigma}}   %symbol estimated var
+
+    \nc{\vt}{\spv^2_t}
+    \nc{\vc}{\spv^2_c}
+    \nc{\vp}{\spv^2}
+    \nc{\vte}{\sev^2_t}
+    \nc{\vce}{\sev^2_c}
+    \nc{\vpe}{\sev^2}
+    \nc{\vtf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ytp - \ytpb)^2}
+    \nc{\vcf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ycp - \ycpb)^2}
+    \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}(\yto - \ytob)^2}
+    \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}(\yco - \ycob)^2}
+
+    %%%%%%%%%%%%%%%%%%%%%%
+    % sampling variances %
+    %%%%%%%%%%%%%%%%%%%%%%
+
+    % sv[Estimate][Formula][Equal/Unequal][with treat Proportion]
+
+    \nc{\sv}{V(\te)}
+    \nc{\sve}{\hat{V}(\tee)}
+
+    \nc{\svfe}{\vp\left(\frac{1}{\Nt} + \frac{1}{\Nc}\right)}
+    \nc{\svfu}{\frac{\vt}{\Nt} + \frac{\vc}{\Nc}}
+    \nc{\svefe}{\vpe\left(\frac{1}{\Nt} + \frac{1}{\Nc}\right)}
+    \nc{\svefu}{\frac{\vte}{\Nt} + \frac{\vce}{\Nc}}
+
+    \nc{\svefep}{\vpe\left(\frac{1}{P(1-P)\N\right)}}
+
+
+    %%%%%%%%%%%%%%%%%%%
+    % standard errors %
+    %%%%%%%%%%%%%%%%%%%
+
+    % naming convention as for variance but with se prefix
+
+    \nc{\se}{\text{se}(\te}
+    \nc{\see}{\hat{\text{se}}(\tee)}
+
+    \nc{\sefe}{\sigma \sqrt{\frac{1}{\Nt} + \frac{1}{\Nc}}}
+    \nc{\sefu}{\sqrt{\frac{\vt}{\Nt} + \frac{\vc}{\Nc}}}
+    \nc{\seefe}{\sev\sqrt{\left(\frac{1}{\Nt} + \frac{1}{\Nc}\right)}}
+    \nc{\seefu}{\sqrt{\frac{\vt}{\Nt} + \frac{\vc}{\Nc}}}
+
+    <!-- \nc{\seefep}{\sev\sqrt{\left(\frac{1}{P(1-P)\N\right)}}} -->
+    \nc{\seefep}{\sev\sqrt{\frac{1}{P(1-P)N}}}
     \)
 </span>
 
@@ -111,13 +170,13 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/experiment_design.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Experiment design</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/experiment_design.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Experiment design</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -126,7 +185,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Causal inference notes</a> 
@@ -165,104 +224,98 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/neyman_rubin_causal_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Neyman-Rubin causal model</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/experiment_stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/experiment_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Experiment analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Experiment analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/experiment_design.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Experiment design</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Experiment design</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/threats_to_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/practical_issues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#designs" id="toc-designs" class="nav-link active" data-scroll-target="#designs"><span class="header-section-number">10.1</span> Designs</a></li>
-  <li><a href="#choosing-unit-of-randomisation" id="toc-choosing-unit-of-randomisation" class="nav-link" data-scroll-target="#choosing-unit-of-randomisation"><span class="header-section-number">10.2</span> Choosing unit of randomisation</a></li>
-  <li><a href="#dimensions-along-which-we-can-vary-randomisation" id="toc-dimensions-along-which-we-can-vary-randomisation" class="nav-link" data-scroll-target="#dimensions-along-which-we-can-vary-randomisation"><span class="header-section-number">10.3</span> Dimensions along which we can vary randomisation</a></li>
-  <li><a href="#the-assignment-mechanisms" id="toc-the-assignment-mechanisms" class="nav-link" data-scroll-target="#the-assignment-mechanisms"><span class="header-section-number">10.4</span> The assignment mechanisms</a>
+  <li><a href="#designs" id="toc-designs" class="nav-link active" data-scroll-target="#designs"><span class="header-section-number">9.1</span> Designs</a></li>
+  <li><a href="#choosing-unit-of-randomisation" id="toc-choosing-unit-of-randomisation" class="nav-link" data-scroll-target="#choosing-unit-of-randomisation"><span class="header-section-number">9.2</span> Choosing unit of randomisation</a></li>
+  <li><a href="#dimensions-along-which-we-can-vary-randomisation" id="toc-dimensions-along-which-we-can-vary-randomisation" class="nav-link" data-scroll-target="#dimensions-along-which-we-can-vary-randomisation"><span class="header-section-number">9.3</span> Dimensions along which we can vary randomisation</a></li>
+  <li><a href="#the-assignment-mechanisms" id="toc-the-assignment-mechanisms" class="nav-link" data-scroll-target="#the-assignment-mechanisms"><span class="header-section-number">9.4</span> The assignment mechanisms</a>
   <ul class="collapse">
-  <li><a href="#bernoulli-trials" id="toc-bernoulli-trials" class="nav-link" data-scroll-target="#bernoulli-trials"><span class="header-section-number">10.4.1</span> Bernoulli trials</a></li>
-  <li><a href="#completely-randomised-experiments" id="toc-completely-randomised-experiments" class="nav-link" data-scroll-target="#completely-randomised-experiments"><span class="header-section-number">10.4.2</span> Completely randomised experiments</a></li>
-  <li><a href="#stratified-randomised-experiments" id="toc-stratified-randomised-experiments" class="nav-link" data-scroll-target="#stratified-randomised-experiments"><span class="header-section-number">10.4.3</span> Stratified randomised experiments</a></li>
-  <li><a href="#paired-randomised-experiments" id="toc-paired-randomised-experiments" class="nav-link" data-scroll-target="#paired-randomised-experiments"><span class="header-section-number">10.4.4</span> Paired randomised experiments</a></li>
-  <li><a href="#matching" id="toc-matching" class="nav-link" data-scroll-target="#matching"><span class="header-section-number">10.4.5</span> Matching</a></li>
+  <li><a href="#bernoulli-trials" id="toc-bernoulli-trials" class="nav-link" data-scroll-target="#bernoulli-trials"><span class="header-section-number">9.4.1</span> Bernoulli trials</a></li>
+  <li><a href="#completely-randomised-experiments" id="toc-completely-randomised-experiments" class="nav-link" data-scroll-target="#completely-randomised-experiments"><span class="header-section-number">9.4.2</span> Completely randomised experiments</a></li>
+  <li><a href="#stratified-randomised-experiments" id="toc-stratified-randomised-experiments" class="nav-link" data-scroll-target="#stratified-randomised-experiments"><span class="header-section-number">9.4.3</span> Stratified randomised experiments</a></li>
+  <li><a href="#paired-randomised-experiments" id="toc-paired-randomised-experiments" class="nav-link" data-scroll-target="#paired-randomised-experiments"><span class="header-section-number">9.4.4</span> Paired randomised experiments</a></li>
+  <li><a href="#matching" id="toc-matching" class="nav-link" data-scroll-target="#matching"><span class="header-section-number">9.4.5</span> Matching</a></li>
   </ul></li>
-  <li><a href="#choosing-number-of-units-per-arm" id="toc-choosing-number-of-units-per-arm" class="nav-link" data-scroll-target="#choosing-number-of-units-per-arm"><span class="header-section-number">10.5</span> Choosing number of units per arm</a></li>
-  <li><a href="#hypothesis-formulation" id="toc-hypothesis-formulation" class="nav-link" data-scroll-target="#hypothesis-formulation"><span class="header-section-number">10.6</span> Hypothesis formulation</a></li>
-  <li><a href="#treatment-effects" id="toc-treatment-effects" class="nav-link" data-scroll-target="#treatment-effects"><span class="header-section-number">10.7</span> Treatment effects</a></li>
-  <li><a href="#imperfect-compliance" id="toc-imperfect-compliance" class="nav-link" data-scroll-target="#imperfect-compliance"><span class="header-section-number">10.8</span> Imperfect compliance</a></li>
-  <li><a href="#attrition" id="toc-attrition" class="nav-link" data-scroll-target="#attrition"><span class="header-section-number">10.9</span> Attrition</a></li>
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">10.10</span> Interpretation</a></li>
-  <li><a href="#qa" id="toc-qa" class="nav-link" data-scroll-target="#qa"><span class="header-section-number">10.11</span> Q&amp;A</a></li>
+  <li><a href="#choosing-number-of-units-per-arm" id="toc-choosing-number-of-units-per-arm" class="nav-link" data-scroll-target="#choosing-number-of-units-per-arm"><span class="header-section-number">9.5</span> Choosing number of units per arm</a></li>
+  <li><a href="#hypothesis-formulation" id="toc-hypothesis-formulation" class="nav-link" data-scroll-target="#hypothesis-formulation"><span class="header-section-number">9.6</span> Hypothesis formulation</a></li>
+  <li><a href="#treatment-effects" id="toc-treatment-effects" class="nav-link" data-scroll-target="#treatment-effects"><span class="header-section-number">9.7</span> Treatment effects</a></li>
+  <li><a href="#imperfect-compliance" id="toc-imperfect-compliance" class="nav-link" data-scroll-target="#imperfect-compliance"><span class="header-section-number">9.8</span> Imperfect compliance</a></li>
+  <li><a href="#attrition" id="toc-attrition" class="nav-link" data-scroll-target="#attrition"><span class="header-section-number">9.9</span> Attrition</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">9.10</span> Interpretation</a></li>
+  <li><a href="#qa" id="toc-qa" class="nav-link" data-scroll-target="#qa"><span class="header-section-number">9.11</span> Q&amp;A</a></li>
   </ul>
 </nav>
     </div>
@@ -271,7 +324,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Experiment design</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Experiment design</span></h1>
 </div>
 
 
@@ -284,12 +337,10 @@ div.csl-indent {
   </div>
   
 
-
 </header>
 
-
-<section id="designs" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="designs"><span class="header-section-number">10.1</span> Designs</h2>
+<section id="designs" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="designs"><span class="header-section-number">9.1</span> Designs</h2>
 <ul>
 <li>See BIT blue book section 5</li>
 </ul>
@@ -313,17 +364,17 @@ div.csl-indent {
 <li>A mixed design is where we have a control group and baseline data. If we use that baseline, the estimator is then a difference-in-difference estimator, which is statistically more efficient.</li>
 </ul>
 </section>
-<section id="choosing-unit-of-randomisation" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="choosing-unit-of-randomisation"><span class="header-section-number">10.2</span> Choosing unit of randomisation</h2>
+<section id="choosing-unit-of-randomisation" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="choosing-unit-of-randomisation"><span class="header-section-number">9.2</span> Choosing unit of randomisation</h2>
 <p>Factors to consider: - Spillovers - The level of treatment administration - The level of measurement (randomisation level needs to be the same or higher) - Power - Attrition and compliance (within-group randomisation may lead to resentment among participants and staff) - Feasibility (what is easiest, cheapest, politically possible, …)</p>
 </section>
-<section id="dimensions-along-which-we-can-vary-randomisation" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="dimensions-along-which-we-can-vary-randomisation"><span class="header-section-number">10.3</span> Dimensions along which we can vary randomisation</h2>
+<section id="dimensions-along-which-we-can-vary-randomisation" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="dimensions-along-which-we-can-vary-randomisation"><span class="header-section-number">9.3</span> Dimensions along which we can vary randomisation</h2>
 <p>Aspect: - access - access around cutoff - timing - encouragement</p>
 <p>Level: - individual - group</p>
 </section>
-<section id="the-assignment-mechanisms" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="the-assignment-mechanisms"><span class="header-section-number">10.4</span> The assignment mechanisms</h2>
+<section id="the-assignment-mechanisms" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="the-assignment-mechanisms"><span class="header-section-number">9.4</span> The assignment mechanisms</h2>
 <p>Notes from <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>:</p>
 <p>A <em>randomised experiment</em> is an assignment mechanism that</p>
 <ol type="1">
@@ -335,14 +386,14 @@ div.csl-indent {
 <li><p>Individualistic (assignment probabilities for each unit is independent of information on</p></li>
 <li><p>Unconfounded (assignment probabilities are independent of potential outcomes)</p></li>
 </ol>
-<section id="bernoulli-trials" class="level3" data-number="10.4.1">
-<h3 data-number="10.4.1" class="anchored" data-anchor-id="bernoulli-trials"><span class="header-section-number">10.4.1</span> Bernoulli trials</h3>
+<section id="bernoulli-trials" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="bernoulli-trials"><span class="header-section-number">9.4.1</span> Bernoulli trials</h3>
 </section>
-<section id="completely-randomised-experiments" class="level3" data-number="10.4.2">
-<h3 data-number="10.4.2" class="anchored" data-anchor-id="completely-randomised-experiments"><span class="header-section-number">10.4.2</span> Completely randomised experiments</h3>
+<section id="completely-randomised-experiments" class="level3" data-number="9.4.2">
+<h3 data-number="9.4.2" class="anchored" data-anchor-id="completely-randomised-experiments"><span class="header-section-number">9.4.2</span> Completely randomised experiments</h3>
 </section>
-<section id="stratified-randomised-experiments" class="level3" data-number="10.4.3">
-<h3 data-number="10.4.3" class="anchored" data-anchor-id="stratified-randomised-experiments"><span class="header-section-number">10.4.3</span> Stratified randomised experiments</h3>
+<section id="stratified-randomised-experiments" class="level3" data-number="9.4.3">
+<h3 data-number="9.4.3" class="anchored" data-anchor-id="stratified-randomised-experiments"><span class="header-section-number">9.4.3</span> Stratified randomised experiments</h3>
 <p>Stratification is a treatment allocation method in which the pool of eligible units is first divided into strata (or groups or blocks) so as to ensure balance along certain variables. Random assignment is then performed within each group.</p>
 <p>Effect: Random allocation of treatment ensures that control and treatment group will be similar in expectation, stratification ensures that along certain dimensions they will be in practice. If we stratify by gender and language, for instance, we make sure that both control and treatment group have the same proportion of women who speak a given language.</p>
 <p>Advantages: 1.) It can increase precision of the estimator by lowering residual variance (intuitively, it has the opposite effect of clustering: it makes samples more representative of the overall population, which means that repeated samples will be more similar, which means that the standard error of the estimator is smaller). 2.) It allows analysis by subgroups.</p>
@@ -351,31 +402,31 @@ div.csl-indent {
 <p>…and what variables to use? Use variables that - are highly correlated with the outcome variable - are discrete (can discretise by creating buckets) - are the subgroups of interest</p>
 <p>How to adjust analysis? Include dummy for each variable used for stratification in the regression. (explain why…)</p>
 </section>
-<section id="paired-randomised-experiments" class="level3" data-number="10.4.4">
-<h3 data-number="10.4.4" class="anchored" data-anchor-id="paired-randomised-experiments"><span class="header-section-number">10.4.4</span> Paired randomised experiments</h3>
+<section id="paired-randomised-experiments" class="level3" data-number="9.4.4">
+<h3 data-number="9.4.4" class="anchored" data-anchor-id="paired-randomised-experiments"><span class="header-section-number">9.4.4</span> Paired randomised experiments</h3>
 <p>Paired randomisation is an extreme form of stratification where the size of each stratum equals the number of treatment cells.</p>
 <p>If we have three cells (two treatments and one control) and we pair based on test scores, we pick groups of three students, starting with the three highest scoring ones, and randomly assign one of them to each cell.</p>
 <p>The aim is to increase power and achieve balance, and it’s particularly useful if we have small samples.</p>
 <p>The danger is that if we have attrition and one of the three students drops out, we lose all three observations (OLS will drop all observations with the relevant dummy because there is a missing value). One remedy is to have strata of size double or triple the cell number.</p>
 </section>
-<section id="matching" class="level3" data-number="10.4.5">
-<h3 data-number="10.4.5" class="anchored" data-anchor-id="matching"><span class="header-section-number">10.4.5</span> Matching</h3>
+<section id="matching" class="level3" data-number="9.4.5">
+<h3 data-number="9.4.5" class="anchored" data-anchor-id="matching"><span class="header-section-number">9.4.5</span> Matching</h3>
 <p>How to adjust analysis? Matching is an extreme form of stratifying, and so the approach is the same: we include a dummy for each (but one) matched pair. (If we have matched on test scores, we include a dummy for all but one possible test scores).</p>
 </section>
 </section>
-<section id="choosing-number-of-units-per-arm" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="choosing-number-of-units-per-arm"><span class="header-section-number">10.5</span> Choosing number of units per arm</h2>
+<section id="choosing-number-of-units-per-arm" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="choosing-number-of-units-per-arm"><span class="header-section-number">9.5</span> Choosing number of units per arm</h2>
 <ul>
 <li><p>Show that equal split maximises power (use power formula and show that power is max for p = 1-p )</p></li>
 <li><p>If we have many treatment groups, then more units should be allocated to control to estimate its effect more precisely (add formula)</p></li>
 <li><p>if sample variances differ, the ratio of the sample sizes should equal the ratio of the standard deviations.</p></li>
 </ul>
 </section>
-<section id="hypothesis-formulation" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="hypothesis-formulation"><span class="header-section-number">10.6</span> Hypothesis formulation</h2>
+<section id="hypothesis-formulation" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="hypothesis-formulation"><span class="header-section-number">9.6</span> Hypothesis formulation</h2>
 </section>
-<section id="treatment-effects" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="treatment-effects"><span class="header-section-number">10.7</span> Treatment effects</h2>
+<section id="treatment-effects" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="treatment-effects"><span class="header-section-number">9.7</span> Treatment effects</h2>
 <p>ATE is the average difference in potential outcomes of all subjects. E[y1 - y0]</p>
 <p>ATE is a weighted average of ATET and average treatment effect of untreated.</p>
 <p>ATE is also a weighted average of the compliers, always-takers, and never-takers.</p>
@@ -386,8 +437,8 @@ div.csl-indent {
 <p>ITT is the average difference in potential outcomes of those assigned to treatment (a weighted average between those who accepted treatment and those who didn’t).</p>
 <p>LATE is the average difference in potential outcomes of compliers.</p>
 </section>
-<section id="imperfect-compliance" class="level2" data-number="10.8">
-<h2 data-number="10.8" class="anchored" data-anchor-id="imperfect-compliance"><span class="header-section-number">10.8</span> Imperfect compliance</h2>
+<section id="imperfect-compliance" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="imperfect-compliance"><span class="header-section-number">9.8</span> Imperfect compliance</h2>
 <p>Partial complience</p>
 <ul>
 <li><p>Partial compliance occurs if, for some reason, some people in the treatment group are not treated or some people in the control group are.</p></li>
@@ -410,8 +461,8 @@ div.csl-indent {
 <li><p>If there are no never-takers, the population of compliers is the same as that of the untreated, so LATE = average treatment effect of the untreated.</p></li>
 </ul>
 </section>
-<section id="attrition" class="level2" data-number="10.9">
-<h2 data-number="10.9" class="anchored" data-anchor-id="attrition"><span class="header-section-number">10.9</span> Attrition</h2>
+<section id="attrition" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="attrition"><span class="header-section-number">9.9</span> Attrition</h2>
 <p>Attrition is when, for some reason, we cannot collect endline data on some units.</p>
 <p>It’s a problem because when it’s systematic rather than random, treatment and control group are no longer comparable, which is a threat to internal validity. (Even if the same number of people drop out, if they are different type, the problem is the same.) Also, it reduces sample size and thus power.</p>
 <p>We can limit it if we promise access to the program to everyone (phase-in design), change the level of randomisation, and improve data collection.</p>
@@ -421,15 +472,15 @@ div.csl-indent {
 <p>Manski-Horowitz bounds: Lower bound: replace all missing values in treatment with the least favourable outcome value from the observed sample and replace all missing values in control with most favourable value in the observed sample. Upper bound created in a reverse way. Unless attrition is low and the outcome variable is tightly bounded, this tends to lead to very large bounds.</p>
 <p>Lee bounds: We treat the estimate from the available data as an upper bound, and construct the lower bound by trimming from the sample with less attrition the observations that most contribute to the treatment effect.</p>
 </section>
-<section id="interpretation" class="level2" data-number="10.10">
-<h2 data-number="10.10" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">10.10</span> Interpretation</h2>
+<section id="interpretation" class="level2" data-number="9.10">
+<h2 data-number="9.10" class="anchored" data-anchor-id="interpretation"><span class="header-section-number">9.10</span> Interpretation</h2>
 <ul>
 <li><p>We often think of experiment as answering: “Does the intervention work?”, but what it really answers is “What is the average effect of the intervention with this specific implementation for this particular population at this time?”</p></li>
 <li><p>When we have multiple treatments or analyse subgroups separately, we need to test whether different estimates are significantly different from each other (can’t just look at whether some are significantly different from zero while some aren’t)</p></li>
 </ul>
 </section>
-<section id="qa" class="level2" data-number="10.11">
-<h2 data-number="10.11" class="anchored" data-anchor-id="qa"><span class="header-section-number">10.11</span> Q&amp;A</h2>
+<section id="qa" class="level2" data-number="9.11">
+<h2 data-number="9.11" class="anchored" data-anchor-id="qa"><span class="header-section-number">9.11</span> Q&amp;A</h2>
 <p>Questions:</p>
 <ol type="1">
 <li>Why don’t we include MDE in our hypothesis statement (i.e.&nbsp;“a will increase b by at least MDE for target population”)? Wouldn’t that be a good idea in a business context where we strongly care about an MDE? Don’t we just not do that because academics, who developed the methods, don’t usually care about an effect being of a certain size but only about learning what the effect is?</li>
@@ -440,7 +491,7 @@ div.csl-indent {
 </ol>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-imbens2015causal" class="csl-entry" role="listitem">
 Imbens, Guido W, and Donald B Rubin. 2015. <em>Causal Inference in Statistics, Social, and Biomedical Sciences</em>. Cambridge University Press.
 </div>
@@ -527,9 +578,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -539,17 +591,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -562,125 +605,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -724,7 +648,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -750,32 +673,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -837,18 +734,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/experiment_analysis.html" class="pagination-link  aria-label=" &lt;span="" analysis&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Experiment analysis</span></span>
+      <a href="../chapters/experiment_analysis.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Experiment analysis</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/metrics.html" class="pagination-link" aria-label="<span class='chapter-number'>11</span>&nbsp; <span class='chapter-title'>Metrics</span>">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Metrics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/metrics.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Metrics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 
