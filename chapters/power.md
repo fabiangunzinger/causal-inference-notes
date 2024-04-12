@@ -130,7 +130,7 @@ positive effect or above the upper critical value for a true negative effect --
 is very small.[^type3error] Hence, as the true effect size deviates from zero, one of the two terms in the expression above becomes vanishingly small and can be ignored. For the rest of this chapter, I assume we have a true positive effect and omit the second of the two terms. We thus have:
 
 $$
-1 - \beta = \Phi\left(z_{\alpha/2} - \frac{\te}{\see}\right).
+1 - \beta = 1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\see}\right).
 $$
 
 Furthermore, using the symmetry of the standard normal

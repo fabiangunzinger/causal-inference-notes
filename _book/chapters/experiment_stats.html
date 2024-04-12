@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 7&nbsp; Statistics of online experiments</title>
+<title>Causal inference notes - 8&nbsp; Statistics of online experiments</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -230,7 +230,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/experiment_stats.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/experiment_stats.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -269,56 +269,56 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/experiment_stats.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/experiment_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Experiment analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Experiment analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/experiment_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Experiment design</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Experiment design</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -355,17 +355,17 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#potential-outcomes-and-outcome-of-interest" id="toc-potential-outcomes-and-outcome-of-interest" class="nav-link active" data-scroll-target="#potential-outcomes-and-outcome-of-interest"><span class="header-section-number">7.1</span> Potential outcomes and outcome of interest</a></li>
-  <li><a href="#treatment-effect-estimates" id="toc-treatment-effect-estimates" class="nav-link" data-scroll-target="#treatment-effect-estimates"><span class="header-section-number">7.2</span> Treatment effect estimates</a></li>
-  <li><a href="#assignment-mechanism" id="toc-assignment-mechanism" class="nav-link" data-scroll-target="#assignment-mechanism"><span class="header-section-number">7.3</span> Assignment mechanism</a></li>
-  <li><a href="#variance-of-treatment-effect-estimates" id="toc-variance-of-treatment-effect-estimates" class="nav-link" data-scroll-target="#variance-of-treatment-effect-estimates"><span class="header-section-number">7.4</span> Variance of treatment effect estimates</a></li>
-  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">7.5</span> Hypothesis testing</a></li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">7.6</span> Assumptions</a>
+  <li><a href="#potential-outcomes-and-outcome-of-interest" id="toc-potential-outcomes-and-outcome-of-interest" class="nav-link active" data-scroll-target="#potential-outcomes-and-outcome-of-interest"><span class="header-section-number">8.1</span> Potential outcomes and outcome of interest</a></li>
+  <li><a href="#treatment-effect-estimates" id="toc-treatment-effect-estimates" class="nav-link" data-scroll-target="#treatment-effect-estimates"><span class="header-section-number">8.2</span> Treatment effect estimates</a></li>
+  <li><a href="#assignment-mechanism" id="toc-assignment-mechanism" class="nav-link" data-scroll-target="#assignment-mechanism"><span class="header-section-number">8.3</span> Assignment mechanism</a></li>
+  <li><a href="#variance-of-treatment-effect-estimates" id="toc-variance-of-treatment-effect-estimates" class="nav-link" data-scroll-target="#variance-of-treatment-effect-estimates"><span class="header-section-number">8.4</span> Variance of treatment effect estimates</a></li>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">8.5</span> Hypothesis testing</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">8.6</span> Assumptions</a>
   <ul class="collapse">
-  <li><a href="#stable-unit-treatment-value-assumption-sutva" id="toc-stable-unit-treatment-value-assumption-sutva" class="nav-link" data-scroll-target="#stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">7.6.1</span> Stable unit treatment value assumption (SUTVA)</a></li>
+  <li><a href="#stable-unit-treatment-value-assumption-sutva" id="toc-stable-unit-treatment-value-assumption-sutva" class="nav-link" data-scroll-target="#stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">8.6.1</span> Stable unit treatment value assumption (SUTVA)</a></li>
   </ul></li>
-  <li><a href="#how-does-randomisation-help-us-estimate-ates" id="toc-how-does-randomisation-help-us-estimate-ates" class="nav-link" data-scroll-target="#how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">7.7</span> How does randomisation help us estimate ATEs?</a></li>
-  <li><a href="#finite-sample-vs-super-population-perspective" id="toc-finite-sample-vs-super-population-perspective" class="nav-link" data-scroll-target="#finite-sample-vs-super-population-perspective"><span class="header-section-number">7.8</span> Finite sample vs super-population perspective</a></li>
+  <li><a href="#how-does-randomisation-help-us-estimate-ates" id="toc-how-does-randomisation-help-us-estimate-ates" class="nav-link" data-scroll-target="#how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">8.7</span> How does randomisation help us estimate ATEs?</a></li>
+  <li><a href="#finite-sample-vs-super-population-perspective" id="toc-finite-sample-vs-super-population-perspective" class="nav-link" data-scroll-target="#finite-sample-vs-super-population-perspective"><span class="header-section-number">8.8</span> Finite sample vs super-population perspective</a></li>
   </ul>
 </nav>
     </div>
@@ -374,7 +374,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-experiment-stats" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></h1>
+<h1 class="title"><span id="sec-experiment-stats" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></h1>
 </div>
 
 
@@ -392,8 +392,8 @@ window.Quarto = {
 
 
 <p>The goal of this chapter is to succinctly summarise the statistical theory of randomised experiments.</p>
-<section id="potential-outcomes-and-outcome-of-interest" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="potential-outcomes-and-outcome-of-interest"><span class="header-section-number">7.1</span> Potential outcomes and outcome of interest</h2>
+<section id="potential-outcomes-and-outcome-of-interest" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="potential-outcomes-and-outcome-of-interest"><span class="header-section-number">8.1</span> Potential outcomes and outcome of interest</h2>
 <p>We have a population of units <span class="math inline">\(i = 1, \dots, \N\)</span>. Each unit in the population can be exposed to one of two treatments, which are identical across units, so that <span class="math inline">\(\mathbb{T}_i = \mathbb{T} = \{0, 1\}\)</span>, where <span class="math inline">\(\mathbb{T}_i = 1\)</span> indicates that unit <span class="math inline">\(i\)</span> receives the active treatment and <span class="math inline">\(\mathbb{T}_i = 0\)</span> indicates that they receive the control treatment.</p>
 <p>Each unit <span class="math inline">\(i\)</span> has potential outcomes <span class="math inline">\(\ycp\)</span> and <span class="math inline">\(\ytp\)</span> corresponding to each of the two possible treatments. <span class="math inline">\(\ycp\)</span> is the outcome unit <span class="math inline">\(i\)</span> would experience if they were assigned to the control group; <span class="math inline">\(\ytp\)</span>, if they were assigned to the active treatment. Given that each unit is either assigned to treatment or control we’ll only ever observe one of these outcomes in practice. In fact, what we do observe for each unit is <span class="math inline">\(\yio\)</span>, which equals <span class="math inline">\(\ytp\)</span> if the unit was assigned the active treatment and <span class="math inline">\(\ycp\)</span> if they were assigned the control treatment.</p>
 <p>But the insight that both of potential outcomes exist at a conceptual level is the foundation of the potential outcomes approach. The reason these outcomes are important is that they allow us to coherently think about causal effects – the difference in the state of the world under the active and the control treatment. The individual-level treatment effect is given by</p>
@@ -403,12 +403,12 @@ window.Quarto = {
 <p>and the average treatment effect (ATE) over the entire population is defined as the average difference in individual outcomes<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p><span id="eq-ate"><span class="math display">\[
 \te = \tefs = \tef.
-\tag{7.1}\]</span></span></p>
+\tag{8.1}\]</span></span></p>
 <p>This is the outcome we usually care about in an online experiment.</p>
 </section>
-<section id="treatment-effect-estimates" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="treatment-effect-estimates"><span class="header-section-number">7.2</span> Treatment effect estimates</h2>
-<p>We don’t observe potential outcomes, so we can’t estimate Equation <a href="#eq-ate" class="quarto-xref">Equation&nbsp;<span>7.1</span></a> directly.</p>
+<section id="treatment-effect-estimates" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="treatment-effect-estimates"><span class="header-section-number">8.2</span> Treatment effect estimates</h2>
+<p>We don’t observe potential outcomes, so we can’t estimate Equation <a href="#eq-ate" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> directly.</p>
 <p>Our estimate of the average treatment effect is</p>
 <p><span class="math display">\[
 \hat{\tau} = \bar{Y}^{obs}_t - \bar{Y}^{obs}_c,
@@ -419,18 +419,17 @@ window.Quarto = {
 \]</span></p>
 <p>This is an unbiased estimate of <span class="math inline">\(\tau = \bar{Y(1)} - \bar{Y(0)}\)</span> (see Proof of Theorem 6.1 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>).</p>
 </section>
-<section id="assignment-mechanism" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="assignment-mechanism"><span class="header-section-number">7.3</span> Assignment mechanism</h2>
+<section id="assignment-mechanism" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="assignment-mechanism"><span class="header-section-number">8.3</span> Assignment mechanism</h2>
 <p>In online experiments, units usually get allocated to treatment variants based on a hash function <!-- (see @sec-treatment-assignment) -->. The basic proceedure is simple: we concatenace information such as the unit and experiment ID, hash it, and check where the resulting hash value lies on the range of possible hash values. We might then allocate the unit into control if the hash value falls below the midpoint and into treatment otherwise.</p>
 <p>The assignment mechanism for each unit is thus akin to a Bernoulli trial, with probability of treatment equal to <span class="math inline">\(p\)</span>.</p>
 </section>
-<section id="variance-of-treatment-effect-estimates" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="variance-of-treatment-effect-estimates"><span class="header-section-number">7.4</span> Variance of treatment effect estimates</h2>
-<p>Before starting the below, understand implication of sampling and randomisation variation on formula – check imbens rubin.</p>
-<p>Actually, do the following:</p>
+<section id="variance-of-treatment-effect-estimates" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="variance-of-treatment-effect-estimates"><span class="header-section-number">8.4</span> Variance of treatment effect estimates</h2>
+<p>Online experiments typically use a hash function to determine whether a user is part of an experiment and allocate them to a treatment condition if they are. In both cases this works roughly as follows: the hash function takes as its input a string unique to the user (such as the concatenated experiment and user id) and returns a number that is unique to the input string; the sampling and treatment allocation decisions are then made based on where on the function’s range the value falls.</p>
+<p>This is important for thinking about the standard error because it implies that sampling decisions and treatment assignmend decisions for each user are made independent of all other users, meaning that any one user’s inclusion into the experiment or a certain treatment group has no effect on any other user’s inclusion probabilities. This is different from field experiments, where researchers often collect a pre-determined number of experiment units and then ensure that each treatment group is of a pre-determined size. In both these cases, any user’s inclusion in an experiment and treatment group makes it less likely for any other user to be included. As a result of this dependence, the derivation of the standard error is more complicated though it turns out that formula we will derive below still holds approximately, since the interdependence is small if the population from which experiment units are sampled is much larger than the experiment sample.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>So let’s think about the standard error for a typical online experiment from first principles.</p>
 <ul>
-<li><p>Online experiments rely on hashing, so sampling is independent.</p></li>
-<li><p>Hence, we are looking for the difference of two independent random variables.</p></li>
 <li><p>Focus on <span class="math inline">\(\ytob\)</span>, which is a scaled sum of <span class="math inline">\(\Nt\)</span> iid random variables. (They are random vars because given that we randomly sample from the population, the realised value of the <span class="math inline">\(i\)</span>th unit in the sample is random). Hence, <span class="math inline">\(\ytob\)</span> is also a random variable.</p></li>
 <li><p>We have <span class="math inline">\(V(\ytob)\)</span> … V(Y_t) / N_t.</p></li>
 <li><p>Same for <span class="math inline">\(\ycob\)</span>.</p></li>
@@ -465,8 +464,8 @@ s_c^2 = \frac{1}{N_c - 1}\sum_{i:W_i=0}\left(Y_i(0) - \bar{Y}_c^{obs}\right)^2 \
 <p>If, instead of using a Bernoulli trial assignment mechanism we use a <em>completely randomised experiment</em>, where we perfectly balance the number of units assigned to each treatment, then the variance estimator above is not necessarily unbiased. In such an experiment, assignments are not independent because each unit being assigned to one unit lowers the probability of all other units of being assigned to that same variant.</p>
 <p>, each unit being assigned to one variant lowers the probability of all other units being assigned to that same variant. In that case, the above variance estimator is unbiased only if the treatment effect is constant. However, it is usually used in practice even in cases where constant treatment effects are unlikely because it is conservative (i.e.&nbsp;at least as large as the true variance) and because it is always unbiased if the ATE is an estimate of the infinite super-population ATE.</p>
 </section>
-<section id="hypothesis-testing" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">7.5</span> Hypothesis testing</h2>
+<section id="hypothesis-testing" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">8.5</span> Hypothesis testing</h2>
 <p>To test whether the observed treatment effect is significantly different from zero, we test:</p>
 <p><span class="math display">\[
 H_0: \bar{Y}^{obs}_t = \bar{Y}^{obs}_c
@@ -476,17 +475,17 @@ H_A: \bar{Y}^{obs}_t \neq \bar{Y}^{obs}_c.
 <p><span class="math display">\[
 T = \frac{\hat{\tau}}{\sqrt{Var(\hat{\tau})}} \sim t_{(N_t + N_c - 2)},
 \]</span></p>
-<p>where <span class="math inline">\(N_t + N_c - 2\)</span> is number of degrees of freedom<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>where <span class="math inline">\(N_t + N_c - 2\)</span> is number of degrees of freedom<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 <p>todo:</p>
 <ul>
 <li>See Rice 6.2 on why this follows t distribution</li>
 <li>For complete treatment and derivation of sampling distributions (incl.&nbsp;discussion of all the approximations and sample corrections), see Rice sampling chapter and my ipad notes.</li>
 </ul>
 </section>
-<section id="assumptions" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">7.6</span> Assumptions</h2>
-<section id="stable-unit-treatment-value-assumption-sutva" class="level3" data-number="7.6.1">
-<h3 data-number="7.6.1" class="anchored" data-anchor-id="stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">7.6.1</span> Stable unit treatment value assumption (SUTVA)</h3>
+<section id="assumptions" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">8.6</span> Assumptions</h2>
+<section id="stable-unit-treatment-value-assumption-sutva" class="level3" data-number="8.6.1">
+<h3 data-number="8.6.1" class="anchored" data-anchor-id="stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">8.6.1</span> Stable unit treatment value assumption (SUTVA)</h3>
 <ul>
 <li>SUTVA has two components: no interference, and no hidden variations of treatments.</li>
 </ul>
@@ -504,13 +503,13 @@ T = \frac{\hat{\tau}}{\sqrt{Var(\hat{\tau})}} \sim t_{(N_t + N_c - 2)},
 </ul>
 </section>
 </section>
-<section id="how-does-randomisation-help-us-estimate-ates" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">7.7</span> How does randomisation help us estimate ATEs?</h2>
+<section id="how-does-randomisation-help-us-estimate-ates" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">8.7</span> How does randomisation help us estimate ATEs?</h2>
 <p>By ensuring that the treatment - the causal variable of interest - is independent of potential outcomes, so that control and treatment group are comparable.</p>
 <p>More technically, it ensures that expected outcomes are the same in both groups, which means that the selection bias - the difference of expected potential outcomes without treatment - disappears. When using regression, this is equivalent to the error term being uncorrelated with treatment status.</p>
 </section>
-<section id="finite-sample-vs-super-population-perspective" class="level2" data-number="7.8">
-<h2 data-number="7.8" class="anchored" data-anchor-id="finite-sample-vs-super-population-perspective"><span class="header-section-number">7.8</span> Finite sample vs super-population perspective</h2>
+<section id="finite-sample-vs-super-population-perspective" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="finite-sample-vs-super-population-perspective"><span class="header-section-number">8.8</span> Finite sample vs super-population perspective</h2>
 <p>There are two ways to perform inference:</p>
 <ul>
 <li><p>When using the finite sample perspective, the <span class="math inline">\(N\)</span> units in the experiment sample are treated as the entire population of interest. Hence, there is no notion of randomisation due to sampling from a larger population, and all the randomness in the outcomes is due to randomness generates by the assignment mechanism.</p></li>
@@ -531,7 +530,8 @@ Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. Cengage 
 <hr>
 <ol>
 <li id="fn1"><p>Other choices are possible. We could define the individual level treatment effect as the ratio of active and control treatment, and we can create different summary statistics of the individual-level treatment effects other than the average treatment effect over the entire population (see, for instance, Chapter 1 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Note that the test statistic follows a t-distribution because we have to estimate the variance (that is, if we replace the true variance with its estimate when standardising a normal variable, the result follows a Student’s t-distribution). So, this has nothing to do with the CLT. However, for the test statistic to follow a student distribution, the numerator has to follow a normal distribution. Often, though, the underlying data is not normal, so that its approximately normal only for large enough samples, due to the CLT. At the same time, the t-distribution also converges to normal as the sample size increases. Hence, one we have a sample size large enough to justify using the t-distribution, we might as well use a z-test. As pointed out in Chapter 9 in <span class="citation" data-cites="rice2006mathematical">Rice (<a href="#ref-rice2006mathematical" role="doc-biblioref">2006</a>)</span>, the test statistic above only follows a t-distribution if we use the pooled variance, but for large sample sizes, the distribution is still approximately t or normal.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>See <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span> Section 6.7 and Appendix B of Chapter 6 for details.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Note that the test statistic follows a t-distribution because we have to estimate the variance (that is, if we replace the true variance with its estimate when standardising a normal variable, the result follows a Student’s t-distribution). So, this has nothing to do with the CLT. However, for the test statistic to follow a student distribution, the numerator has to follow a normal distribution. Often, though, the underlying data is not normal, so that its approximately normal only for large enough samples, due to the CLT. At the same time, the t-distribution also converges to normal as the sample size increases. Hence, one we have a sample size large enough to justify using the t-distribution, we might as well use a z-test. As pointed out in Chapter 9 in <span class="citation" data-cites="rice2006mathematical">Rice (<a href="#ref-rice2006mathematical" role="doc-biblioref">2006</a>)</span>, the test statistic above only follows a t-distribution if we use the pooled variance, but for large sample sizes, the distribution is still approximately t or normal.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -926,12 +926,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/neyman.html" class="pagination-link  aria-label=" &lt;span="" repeated="" sampling="" approach&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/experiment_analysis.html" class="pagination-link" aria-label="<span class='chapter-number'>8</span>&nbsp; <span class='chapter-title'>Experiment analysis</span>">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Experiment analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/experiment_analysis.html" class="pagination-link" aria-label="<span class='chapter-number'>9</span>&nbsp; <span class='chapter-title'>Experiment analysis</span>">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Experiment analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

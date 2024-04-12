@@ -16,6 +16,7 @@ book:
 
     # Statistics foundations
     - chapters/stats_foundations.qmd
+    - chapters/power.md
     # - chapters/stats_details_like_lln_and_clt.qmd
     - chapters/projection.md
     # - chapters/fwl.qmd
@@ -38,7 +39,6 @@ book:
     # - chapters/experiment_stats.qmd
     - chapters/metrics.md
     # # - chapters/decision_making.qmd
-    - chapters/power.md
     - chapters/threats_to_validity.qmd
     - chapters/practical_issues.qmd
     # - chapters/variance_reduction.qmd

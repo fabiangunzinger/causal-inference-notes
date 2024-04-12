@@ -63,14 +63,31 @@ probability of treatment equal to $p$.
 
 ## Variance of treatment effect estimates
 
-Before starting the below, understand implication of sampling and randomisation
-variation on formula -- check imbens rubin.
+Online experiments typically use a hash function to determine whether a user is
+part of an experiment and allocate them to a treatment condition if they are. In
+both cases this works roughly as follows: the hash function takes as its input a
+string unique to the user (such as the concatenated experiment and user id)
+and returns a number that is unique to the input string; the sampling and
+treatment allocation decisions are then made based on where on the function's
+range the value falls.
 
-Actually, do the following:
+This is important for thinking about the standard error because it implies that
+sampling decisions and treatment assignmend decisions for each user are made
+independent of all other users, meaning that any one user's inclusion into the
+experiment or a certain treatment group has no effect on any other user's
+inclusion probabilities. This is different from field experiments, where
+researchers often collect a pre-determined number of experiment units and then
+ensure that each treatment group is of a pre-determined size. In both these
+cases, any user's inclusion in an experiment and treatment group makes it
+less likely for any other user to be included. As a result of this dependence,
+the derivation of the standard error is more complicated though it turns out that
+formula we will derive below still holds approximately, since the
+interdependence is small if the population from which experiment units are
+sampled is much larger than the experiment sample.[^imbens-ref]
 
-- Online experiments rely on hashing, so sampling is independent.
+So let's think about the standard error for a typical online experiment from
+first principles.
 
-- Hence, we are looking for the difference of two independent random variables.
 
 - Focus on $\ytob$, which is a scaled sum of $\Nt$ iid random variables. (They
 are random vars because given that we randomly sample from the population, the
@@ -200,6 +217,7 @@ There are two ways to perform inference:
 
 - When treating the $N$ units in the sample as a random sample from a larger super-population, then in addition to randomness from the randomisation, we also have randomness from the sampling.
 
+[^imbens-ref]: See @imbens2015causal Section 6.7 and Appendix B of Chapter 6 for details.
 
 [^alternative_choices]: Other choices are possible. We could define the
 individual level treatment effect as the ratio of active and control treatment,
