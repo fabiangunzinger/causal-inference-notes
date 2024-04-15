@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Causal inference notes - 11&nbsp; Metrics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/threats_to_validity.html" rel="next">
+<link href="../chapters/experiment_design.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+</head><body class="nav-sidebar floating"><span class="math inline">
+    \(
+    \newcommand{\nc}{\newcommand}
+
+    %%%%%%%%%%%%%%%%
+    % sample sizes %
+    %%%%%%%%%%%%%%%%
+
+    \nc{\Nt}{N_t}
+    \nc{\Nc}{N_c}
+    \nc{\N}{N}
+    
+    % outcomes
+    \nc{yio}{Y_i^{obs}}
+    \nc{ytp}{Y_i(1)}
+    \nc{ycp}{Y_i(0)}
+    \nc{\yto}{Y_t^{obs}}
+    \nc{\yco}{Y_c^{obs}}
+    \nc{ytpb}{\bar{Y}(1)}
+    \nc{ycpb}{\bar{Y}(0)}
+    \nc{\ytob}{\bar{Y}_t^{obs}}
+    \nc{\ycob}{\bar{Y}_c^{obs}}
+
+    % sums of outcomes
+
+    % treatment effects
+    \nc{\te}{\tau}
+    \nc{\tee}{\hat{\te}}   
+    \nc{\tef}{\ytpb - \ycpb}
+    \nc{\teef}{\ytob - \ycob}
+    \nc{\tefs}{\frac{1}{\N}\sum_{i=1}^N\left(\ytp-\ycp\right)}
+
+    
+    % sample variances
+
+    \nc{\spv}{\sigma}   %symbol pop var
+    \nc{\sev}{\hat{\sigma}}   %symbol estimated var
+
+    \nc{\vt}{\spv^2_t}
+    \nc{\vc}{\spv^2_c}
+    \nc{\vp}{\spv^2}
+    \nc{\vte}{\sev^2_t}
+    \nc{\vce}{\sev^2_c}
+    \nc{\vpe}{\sev^2}
+    \nc{\vtf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ytp - \ytpb)^2}
+    \nc{\vcf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ycp - \ycpb)^2}
+    \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}(\yto - \ytob)^2}
+    \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}(\yco - \ycob)^2}
+
+    %%%%%%%%%%%%%%%%%%%%%%
+    % sampling variances %
+    %%%%%%%%%%%%%%%%%%%%%%
+
+    % sv[Estimate][Formula][Equal/Unequal][with treat Proportion]
+
+    \nc{\sv}{V(\te)}
+    \nc{\sve}{\hat{V}(\tee)}
+
+    \nc{\svfe}{\vp\left(\frac{1}{\Nt} + \frac{1}{\Nc}\right)}
+    \nc{\svfu}{\frac{\vt}{\Nt} + \frac{\vc}{\Nc}}
+    \nc{\svefe}{\vpe\left(\frac{1}{\Nt} + \frac{1}{\Nc}\right)}
+    \nc{\svefu}{\frac{\vte}{\Nt} + \frac{\vce}{\Nc}}
+
+    \nc{\svefep}{\vpe\left(\frac{1}{P(1-P)\N\right)}}
+
+
+    %%%%%%%%%%%%%%%%%%%
+    % standard errors %
+    %%%%%%%%%%%%%%%%%%%
+
+    % naming convention as for variance but with se prefix
+
+    \nc{\se}{\text{se}(\te}
+    \nc{\see}{\text{se}(\tee)}
+
+    \nc{\sefe}{\sigma \sqrt{\frac{1}{\Nt} + \frac{1}{\Nc}}}
+    \nc{\sefu}{\sqrt{\frac{\vt}{\Nt} + \frac{\vc}{\Nc}}}
+    \nc{\seefe}{\sev\sqrt{\left(\frac{1}{\Nt} + \frac{1}{\Nc}\right)}}
+    \nc{\seefu}{\sqrt{\frac{\vt}{\Nt} + \frac{\vc}{\Nc}}}
+
+    <!-- \nc{\seefep}{\sev\sqrt{\left(\frac{1}{P(1-P)\N\right)}}} -->
+    \nc{\seefep}{\sev\sqrt{\frac{1}{P(1-P)N}}}
+
+
+    %%%%%%%%%%%%%%%%%%%%%%
+    % hypothesis testing %
+    %%%%%%%%%%%%%%%%%%%%%%
+
+    \nc{hn}{H_0}
+    \nc{ha}{H_A}
+    \nc{za}{z_\alpha}
+    \nc{zk}{z{1 - \kappa}}
+
+
+    %%%%%%%%%%%%%%%%%%
+    % other commands %
+    %%%%%%%%%%%%%%%%%%
+
+    \)
+</span>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/metrics.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Metrics</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Causal inference notes</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiment_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiment_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Experiment analysis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiment_design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Experiment design</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/threats_to_validity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/practical_issues.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#why-good-metrics-matter" id="toc-why-good-metrics-matter" class="nav-link active" data-scroll-target="#why-good-metrics-matter"><span class="header-section-number">11.1</span> Why good metrics matter</a></li>
+  <li><a href="#metric-taxonomy" id="toc-metric-taxonomy" class="nav-link" data-scroll-target="#metric-taxonomy"><span class="header-section-number">11.2</span> Metric taxonomy</a>
+  <ul class="collapse">
+  <li><a href="#goal-metrics" id="toc-goal-metrics" class="nav-link" data-scroll-target="#goal-metrics"><span class="header-section-number">11.2.1</span> Goal metrics</a></li>
+  <li><a href="#driver-metrics" id="toc-driver-metrics" class="nav-link" data-scroll-target="#driver-metrics"><span class="header-section-number">11.2.2</span> Driver metrics</a></li>
+  <li><a href="#guardrail-metrics" id="toc-guardrail-metrics" class="nav-link" data-scroll-target="#guardrail-metrics"><span class="header-section-number">11.2.3</span> Guardrail metrics</a></li>
+  <li><a href="#supporting-metrics" id="toc-supporting-metrics" class="nav-link" data-scroll-target="#supporting-metrics"><span class="header-section-number">11.2.4</span> Supporting metrics</a></li>
+  <li><a href="#debug-metrics" id="toc-debug-metrics" class="nav-link" data-scroll-target="#debug-metrics"><span class="header-section-number">11.2.5</span> Debug metrics</a></li>
+  </ul></li>
+  <li><a href="#what-makes-a-good-metric" id="toc-what-makes-a-good-metric" class="nav-link" data-scroll-target="#what-makes-a-good-metric"><span class="header-section-number">11.3</span> What makes a good Metric</a></li>
+  <li><a href="#developing-and-evaluating-good-metrics" id="toc-developing-and-evaluating-good-metrics" class="nav-link" data-scroll-target="#developing-and-evaluating-good-metrics"><span class="header-section-number">11.4</span> Developing and evaluating good metrics</a></li>
+  <li><a href="#combining-metrics-into-a-signal-creating-an-oec" id="toc-combining-metrics-into-a-signal-creating-an-oec" class="nav-link" data-scroll-target="#combining-metrics-into-a-signal-creating-an-oec"><span class="header-section-number">11.5</span> Combining metrics into a signal / creating an OEC</a></li>
+  <li><a href="#how-to-select-metrics" id="toc-how-to-select-metrics" class="nav-link" data-scroll-target="#how-to-select-metrics"><span class="header-section-number">11.6</span> How to select metrics</a></li>
+  <li><a href="#good-use-of-guardrail-metrics" id="toc-good-use-of-guardrail-metrics" class="nav-link" data-scroll-target="#good-use-of-guardrail-metrics"><span class="header-section-number">11.7</span> Good use of guardrail metrics</a>
+  <ul class="collapse">
+  <li><a href="#how-to-think-about-risks-of-a-given-set-of-metrics" id="toc-how-to-think-about-risks-of-a-given-set-of-metrics" class="nav-link" data-scroll-target="#how-to-think-about-risks-of-a-given-set-of-metrics"><span class="header-section-number">11.7.1</span> How to think about risks of a given set of metrics?</a></li>
+  </ul></li>
+  <li><a href="#frameworks-for-creating-driver-metrics" id="toc-frameworks-for-creating-driver-metrics" class="nav-link" data-scroll-target="#frameworks-for-creating-driver-metrics"><span class="header-section-number">11.8</span> Frameworks for creating driver metrics</a>
+  <ul class="collapse">
+  <li><a href="#pirate-metrics-aarrr" id="toc-pirate-metrics-aarrr" class="nav-link" data-scroll-target="#pirate-metrics-aarrr"><span class="header-section-number">11.8.1</span> Pirate metrics (AARRR)</a></li>
+  <li><a href="#aaaerrr" id="toc-aaaerrr" class="nav-link" data-scroll-target="#aaaerrr"><span class="header-section-number">11.8.2</span> AAAERRR</a></li>
+  <li><a href="#pulse" id="toc-pulse" class="nav-link" data-scroll-target="#pulse"><span class="header-section-number">11.8.3</span> PULSE</a></li>
+  <li><a href="#heart" id="toc-heart" class="nav-link" data-scroll-target="#heart"><span class="header-section-number">11.8.4</span> HEART</a></li>
+  </ul></li>
+  <li><a href="#common-metrics" id="toc-common-metrics" class="nav-link" data-scroll-target="#common-metrics"><span class="header-section-number">11.9</span> Common metrics</a></li>
+  <li><a href="#other-metric-taxonomies" id="toc-other-metric-taxonomies" class="nav-link" data-scroll-target="#other-metric-taxonomies"><span class="header-section-number">11.10</span> Other metric taxonomies</a></li>
+  <li><a href="#metric-sensitivity-decomposition" id="toc-metric-sensitivity-decomposition" class="nav-link" data-scroll-target="#metric-sensitivity-decomposition"><span class="header-section-number">11.11</span> Metric sensitivity decomposition</a></li>
+  <li><a href="#metrics-vs-goals" id="toc-metrics-vs-goals" class="nav-link" data-scroll-target="#metrics-vs-goals"><span class="header-section-number">11.12</span> Metrics vs goals</a></li>
+  <li><a href="#levels-at-which-to-calculate-metrics" id="toc-levels-at-which-to-calculate-metrics" class="nav-link" data-scroll-target="#levels-at-which-to-calculate-metrics"><span class="header-section-number">11.13</span> Levels at which to calculate metrics</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-metrics" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Metrics</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>todo - Look at: https://www.statsig.com/blog/picking-metrics-101</p>
+<section id="why-good-metrics-matter" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="why-good-metrics-matter"><span class="header-section-number">11.1</span> Why good metrics matter</h2>
+<ul>
+<li><p>Good metrics ensure that everyone works towards the same goal in a way that is reliable, transparent, and provides accountability – they ensure coherence across the company.</p></li>
+<li><p>Good metrics increase the probability that our evaluations detect a change if there is one – they have high sensitivity.</p></li>
+</ul>
+</section>
+<section id="metric-taxonomy" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="metric-taxonomy"><span class="header-section-number">11.2</span> Metric taxonomy</h2>
+<ul>
+<li><p>Different contributions in the literature and different companies use different ways to classify metrics. So so the same type of metrics will have different names and the same name will be used for different types of metrics across contexts. What matters is less the labels, but an understanding of the different functions metric can serve and how different types of metric relate to one another.</p></li>
+<li><p><span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span> classify metrics into goal metrics, driver metrics, and guardrail metrics. I find this useful and use it as the basis of how I think about metrics, but also add supporting and debug metrics.</p></li>
+<li><p>While I talk about these metrics below mainly as defined at the company level, they can be defined at each level within an organisation.</p></li>
+<li><p>The challenge is to make sure that definitions across metric types and organisation levels cohere. Figure 6.1 in <span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span> is a useful way to visualise this: it shows a large arrow containing many small arrows inside. This can represent goal metrics (large arrow) and driver metrics (small arrows) or organisational metrics (large arrows) and team metrics (small arrows). In each case, we want to make sure that the direction of the small arrows is as aligned as possible with the large arrow.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../inputs/metric_alignment.png" class="img-fluid figure-img" style="width:75.0%"></p>
+<figcaption>Useful visual metaphor for aligning organisation level metrics with lower-level metrics</figcaption>
+</figure>
+</div>
+<section id="goal-metrics" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="goal-metrics"><span class="header-section-number">11.2.1</span> Goal metrics</h3>
+<ul>
+<li><p>Also “success metrics” or “North Star” metrics</p></li>
+<li><p>Directly aligned with the organisation’s mission and represents how it creates value for its customers</p></li>
+<li><p>They are a quantitative definition of what success looks like</p></li>
+<li><p>Tend to be long-term oriented and slow-moving</p></li>
+<li><p>An organisation usually has only very few or even just one</p></li>
+<li><p>Examples: “average monthly purchases” for Amazon, MAP for Meta</p></li>
+</ul>
+</section>
+<section id="driver-metrics" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="driver-metrics"><span class="header-section-number">11.2.2</span> Driver metrics</h3>
+<ul>
+<li><p>Also “surrogate metrics”, “predictive metrics”, “proxy metrics”</p></li>
+<li><p>Capture the movement of factors contributing to the organisation’s goal</p></li>
+<li><p>They are a quantitative representation of what drives success</p></li>
+<li><p>They tend to be short-term oriented and fast-moving</p></li>
+<li><p>Will change over time as the service matures and as it becomes more closely aligned/correlated with the North Star</p></li>
+<li><p><span class="citation" data-cites="duan2021online">Duan, Ba, and Zhang (<a href="#ref-duan2021online" role="doc-biblioref">2021</a>)</span> discuss lots of useful considerations for cases where we run experiments based on surrogate metrics</p></li>
+<li><p>Example for Amazon buyer focused team: number of high-quality sellers that join platform per month.</p></li>
+</ul>
+</section>
+<section id="guardrail-metrics" class="level3" data-number="11.2.3">
+<h3 data-number="11.2.3" class="anchored" data-anchor-id="guardrail-metrics"><span class="header-section-number">11.2.3</span> Guardrail metrics</h3>
+<ul>
+<li><p><span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span> divide guardrails into two types: those protecting the business and those ensuring internal validity of experiment results</p></li>
+<li><p>The main guardrail to ensure internal validity is smaple ratio mismatch (SRM). Others are discussed in chapter 21 in <span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span></p></li>
+<li><p>Guardrails that protect the business ensure that improving one part of the platform don’t come at the cost of quality/experience/something else – they basically try to guard against unintended consequences (an example would be site latency)</p></li>
+<li><p><span class="citation" data-cites="deng2016data">Deng and Shi (<a href="#ref-deng2016data" role="doc-biblioref">2016</a>)</span> argue that the main feature of a good guardrail metric should be directionality, so that we can be sure that if we get a signal, it points in the right direction in terms of user experience (in contrast to debug metrics, which should have good sensitivity)</p></li>
+<li><p>Amazon example: average number of purchases per day (to check that influx of sellers doesn’t lead to paralysis for buysers)</p></li>
+</ul>
+</section>
+<section id="supporting-metrics" class="level3" data-number="11.2.4">
+<h3 data-number="11.2.4" class="anchored" data-anchor-id="supporting-metrics"><span class="header-section-number">11.2.4</span> Supporting metrics</h3>
+<ul>
+<li><p>Indicators that the primary or NS metric are moving in the right direction (particularly useful as leading indicators)</p></li>
+<li><p>Amazon example: emails sent to high-quality sellers, emails opened, etc.</p></li>
+</ul>
+</section>
+<section id="debug-metrics" class="level3" data-number="11.2.5">
+<h3 data-number="11.2.5" class="anchored" data-anchor-id="debug-metrics"><span class="header-section-number">11.2.5</span> Debug metrics</h3>
+<ul>
+<li><p><span class="citation" data-cites="deng2016data">Deng and Shi (<a href="#ref-deng2016data" role="doc-biblioref">2016</a>)</span> mention debug metrics as a way to get additional informaiton about the movement of our primary metrics.</p></li>
+<li><p>They can be useful when showing the individual components of combo metrics, or the numerator and denominator of ratio metrics.</p></li>
+</ul>
+</section>
+</section>
+<section id="what-makes-a-good-metric" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="what-makes-a-good-metric"><span class="header-section-number">11.3</span> What makes a good Metric</h2>
+<ul>
+<li><p>What makes a good metric in general varies of the type of matric we’re talking about.</p></li>
+<li><p><span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span> argues that a good goal or North Star metric is simple and stable. A good driver metrics, especially one which we would use for experimentation (is there ever an argument to be made for a driver metric that you wouldn’t want to use for experimentation?), we have a few more criteria.</p></li>
+<li><p>A good starting point to think about characteristics of a good metric for experimentation is the <a href="https://www.microsoft.com/en-us/research/group/experimentation-platform-exp/articles/stedii-properties-of-a-good-metric/">STEDII framework</a> from Microsoft’s experimentation platform. But I find it quite incomplete, and augment it with other measures mentioned in <span class="citation" data-cites="kohavi2020trustworthy">Kohavi, Tang, and Xu (<a href="#ref-kohavi2020trustworthy" role="doc-biblioref">2020</a>)</span>.</p></li>
+</ul>
+<p>Key:</p>
+<ul>
+<li><p>Meaningful: does it reflect the goal of the company/product (check is direction of change aligned with change in quality)</p></li>
+<li><p>Measurable: not everything is measurable (e.g.&nbsp;post-purchase satisfaction)</p></li>
+<li><p>Attributable: we must be able to attribute changes in the metrics to experiment variants (not possible with data from third party data proviers)</p></li>
+<li><p>Sensitive and timely: ensures we can detect a change in a timely manner (check that metric variance is low, and that we have historically observed change in the metric)</p></li>
+<li><p>Trustworthy: is the metric reliable for what we want to measure (is data collection reliable? is it not gameable<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>?)</p></li>
+<li><p>Interpretable and actionable: do we know what a change in the metric means? can we easily interpret it?</p></li>
+<li><p>Directionality: does the measure consitently go in the same direction for a change that means the same?</p></li>
+</ul>
+<p>Further conserns:</p>
+<ul>
+<li><p>Efficient: can we use the metric at scale? (check cost of metric use)</p></li>
+<li><p>Debuggable: can we investigate anomalies (can we decompose metric?)</p></li>
+<li><p>Inclusive and fair: do we know blindspots and limitations? do we have segments to check impact of most vulnerable segments?</p></li>
+</ul>
+</section>
+<section id="developing-and-evaluating-good-metrics" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="developing-and-evaluating-good-metrics"><span class="header-section-number">11.4</span> Developing and evaluating good metrics</h2>
+<ul>
+<li><p>See <span class="citation" data-cites="richardson2023pareto">Richardson et al. (<a href="#ref-richardson2023pareto" role="doc-biblioref">2023</a>)</span> for a great paper on how to develop ideal proxy metrics (i.e.&nbsp;metrics that aren’t directly the North Star). <span class="citation" data-cites="duan2021online">Duan, Ba, and Zhang (<a href="#ref-duan2021online" role="doc-biblioref">2021</a>)</span> also seems promising.</p></li>
+<li><p><span class="citation" data-cites="deng2016data">Deng and Shi (<a href="#ref-deng2016data" role="doc-biblioref">2016</a>)</span> suggest a three-step process to develop user-behaviour-driven metrics:</p>
+<ol type="1">
+<li><p>Formulate a hypothesis based on a simple model of user behaviour (e.g.&nbsp;social network users who like, comment, and share more have a better user-experience)</p></li>
+<li><p>Conduct user studies to create labelled data against which the original model can be tested (e.g.&nbsp;conduct user surveys and test whether users who like, comment, and share more report a better experience)</p></li>
+<li><p>Design online metrics based on insights from step 2 and assess their directionality and sensitivity as discussed below (e.g.&nbsp;create a metric called “meaningful engagement” and test whether it has high directionality and sensitivity in past experiments)</p></li>
+</ol>
+<p>In doing this, remember to 1) focus on behaviour patterns that are observed for most users, 2) collect labelled data from various sources to mitigate bias (surveys, lab studies, annotated logged data), and 3) use transparent models so that we can define and track debug metrics (e.g.&nbsp;create an online metric using a decision tree, rather than a complex ML model).</p></li>
+<li><p><span class="citation" data-cites="deng2016data">Deng and Shi (<a href="#ref-deng2016data" role="doc-biblioref">2016</a>)</span> recommend using two criteria to evaluate the quality of a metric: directionality and sensitivity. Directionality requires that a move of the metric in one direction consistently captures the direction of the user experience. In practice, the direction of a metric, such as queries per user can be ambiguous. Sensitivity requires that the metric picks up changes in the user experience such that we can identify it as part of an experiment. We can think of them as the direction and the size of a vector: the more directly it points towards the North Star, and the closer it gets, the better. These two criteria also allow us to qualitatively compare different metrics and decide which one(s) to use as our OEC.</p></li>
+<li><p><span class="citation" data-cites="deng2016data">Deng and Shi (<a href="#ref-deng2016data" role="doc-biblioref">2016</a>)</span> propose two ways to evaluate directionality and sensitivity. First, we can use a validation corpus: a collection of prior experiments for which we know the effect on user experience, and which we can then use to test sensitivity and directionality of our metrics. The second, if no validation corpus is available, is degeneration experiments, whereby we deliberately degenerate the user experience in a way that is acceptable and doesn’t harm long-term user experience, and then measure directionality and sensitivity of the metrics.</p></li>
+<li><p><span class="citation" data-cites="deng2016data">Deng and Shi (<a href="#ref-deng2016data" role="doc-biblioref">2016</a>)</span> point out that ratio metrics (CTR or Success Query Rate) are often good candidates for OECs because they are bounded and have high sensitivity. However, they need to be interpreted carefully because a change can result from a change in the numerator, the denominator, of both, out of which only the first gives a clear signal. Hence, when relying on ratio metrics, they recommend two things: 1) rely on debug metrics to separately track numerator and denominator, 2) only rely on ratio metrics with a stable denominator. For example: Bing used Session Success Rate instead or Query Success Rate even though QSR was more sensitive because the denominator of SSR was more stable (QSR was used as a debug metric).</p></li>
+<li><p>For cases where no single metric fits all scenarios, <span class="citation" data-cites="deng2016data">Deng and Shi (<a href="#ref-deng2016data" role="doc-biblioref">2016</a>)</span> recommend using a combo metric. To create such a metric, it is important to 1) understand the direction and interpretation of each metric and be aware of the scenarios when it fails to provide an accurate signal, 2) have metrics that cover all scenarios.</p></li>
+<li><p>Overall process</p>
+<ul>
+<li>Define Goals for feature (e.g.&nbsp;improve efficiency)</li>
+<li>Define Signals (fewer undos or erases)</li>
+<li>Define Metrics (average number of undos per session)</li>
+</ul></li>
+</ul>
+</section>
+<section id="combining-metrics-into-a-signal-creating-an-oec" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="combining-metrics-into-a-signal-creating-an-oec"><span class="header-section-number">11.5</span> Combining metrics into a signal / creating an OEC</h2>
+<ul>
+<li><p>We often consider multiple key metrics, and have a mental model of the trade-offs we are willing to accept (i.e.&nbsp;how much churn are we willing to accept as long as other users compensate for loss)?</p></li>
+<li><p>An OEC is a way to formally state these trade-offs by creating a single metric as a weighted average of all key metrics.</p></li>
+<li><p>Possible approaches</p>
+<ul>
+<li>Normalise each metrics to between 0 and 1 and assign a weight to each</li>
+</ul></li>
+</ul>
+</section>
+<section id="how-to-select-metrics" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="how-to-select-metrics"><span class="header-section-number">11.6</span> How to select metrics</h2>
+<ul>
+<li><p>NSM – what is essence of company? How can we capture it?</p></li>
+<li><p>Driver metrics</p>
+<ul>
+<li><p>In general, want product/service metrics that capture essence/goal/value proposition of product and drive company mission/NSM</p></li>
+<li><p>E.g. for mature product, might wanna focus on engagement rather than activation/growth</p></li>
+<li><p>Is there one single NSM for product/service (i.e.&nbsp;#of txns for Marketplace)</p></li>
+<li><p>Questions to think about</p>
+<ul>
+<li><p>How does the product work, exactly? (Do we know if transaction happens?)</p></li>
+<li><p>What is essence of product? (Give everyone opportunity to sell things and help locals find what they need)</p></li>
+<li><p>What are its goals? (Product pretty mature, so maybe engagement rather than growth)</p></li>
+<li><p>What would success look like? (We facilitate a lot of transactions)</p></li>
+<li><p>How do users get value from it? (Sellers sell things quickly, buyers find things quickly)</p></li>
+</ul></li>
+</ul></li>
+<li><p>Support and guardrails trickier. Use AAAERRR Framework</p></li>
+<li><p>To ensure coherence across all workstreams in a company, metrics used at all levels have to contribute to the same overall goal, which is captured by the company’s North Star.</p></li>
+<li><p>Primary metric something that directly captures what you wanna improve? Guardrails general health metrics you don’t want to go down (e.g.&nbsp;revenue, conversion)? Based on Kohavi anecdote below</p></li>
+<li><p><span class="citation" data-cites="bojinov2020importance">Bojinov, Chen, and Liu (<a href="#ref-bojinov2020importance" role="doc-biblioref">2020</a>)</span> mention that LinkedIn has four company wide success metrics and many product specific ones. So, presumably we’d use company-wide ones as guardrails. Question is, what are good product-specific metrics? Good in the sense that they have a positive impact on business-wide metrics? Can use causal inference (e.g.&nbsp;IV) to test effect (see section 2.1 in <span class="citation" data-cites="bojinov2020importance">Bojinov, Chen, and Liu (<a href="#ref-bojinov2020importance" role="doc-biblioref">2020</a>)</span>)</p></li>
+<li><p>Have an OEC that directly captuers what you want to measure. Selecting the wrong metric can lead to misleading results. <span class="citation" data-cites="kohavi2012trusworthy">(<a href="#ref-kohavi2012trusworthy" role="doc-biblioref"><strong>kohavi2012trusworthy?</strong></a>)</span> provide a memorable example from an experiment at Bing: the experiment increased revenue by user because search results were poorer, leading users to make more searches and lead them to click on more adds. This is good in the short-term. But in the long term, users will surely get frustrated by the poorer search results. A better metric would have been one that directly captures the quality of the search results, such as sessions per user. Lesson: have an OEC that directly captures the thing you want to improve, and use higher level-metrics such as revenue as guardrails.</p></li>
+<li><p>Normalise metrics by sample size. E.g. user revenue per user rather than variant-level revenue (since the latter is dependent on number of users, which can vary between variants).</p></li>
+<li><p>Adam D’Angelo on metrics <a href="https://www.youtube.com/watch?v=zsBjAuexPq4">here</a></p>
+<ul>
+<li>What to measure? Focus on users who are getting value today
+<ul>
+<li>Active users (active if getting value)</li>
+<li>Revenue (implies they get value)</li>
+<li>Transactions (for marketplace)</li>
+</ul></li>
+<li>In general, if you have two groups, focus on metric that unifies them (i.e.&nbsp;for marketplace, transactions captures value for sellers and buyers)</li>
+</ul></li>
+</ul>
+</section>
+<section id="good-use-of-guardrail-metrics" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="good-use-of-guardrail-metrics"><span class="header-section-number">11.7</span> Good use of guardrail metrics</h2>
+<ul>
+<li><p>Based on Airbnb’s Experiment Guardrail system as discussed in <a href="https://medium.com/airbnb-engineering/designing-experimentation-guardrails-ed6a976ec669">this</a> post</p></li>
+<li><p>Goal is to have an automated process that ensures that no change as a negative impact on another part of the product without there having been an explicit discussion about it</p></li>
+<li><p>Select guardrails for each experiement (based on types of guardrails above, and find balance between protecting all teams and moving fast – remember, as pointed out in the post, if you have 50 guardrail metrics and alert any significant degradation, then you have at least one false alert in 92% percent of experiments – given that <span class="math inline">\(1 - (1-0.05)^50 = 0.92\)</span>)</p></li>
+<li><p>For each metric, have three types of guardrals: impact guardrail (catch experiments with high negative impact on metric), power guardrail (ensure impact guardrail has adequate significance and power levels) and stat. sig guardrail (catch even small impacts on key metrics if statsig)</p></li>
+<li><p>Experiments that raise a flag are being discussed among all stakeholders to make launch decision considering all trade-offs</p></li>
+</ul>
+<section id="how-to-think-about-risks-of-a-given-set-of-metrics" class="level3" data-number="11.7.1">
+<h3 data-number="11.7.1" class="anchored" data-anchor-id="how-to-think-about-risks-of-a-given-set-of-metrics"><span class="header-section-number">11.7.1</span> How to think about risks of a given set of metrics?</h3>
+<ul>
+<li><p>Think about what I’ve focuse on (i.e.&nbsp;engagement for a mature product)</p></li>
+<li><p>The risk is then that we neglect stages earlier in the funnel (e.g.&nbsp;acquisition in areas where the product doesn’t do as well) and later in the funnel (i.e.&nbsp;we might wanna think about monetisation)</p></li>
+</ul>
+</section>
+</section>
+<section id="frameworks-for-creating-driver-metrics" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="frameworks-for-creating-driver-metrics"><span class="header-section-number">11.8</span> Frameworks for creating driver metrics</h2>
+<p>Driver metrics represent quantitative measures of the factors that drive an organisation’s success. The following frameworks help us think about those drivers of success.</p>
+<section id="pirate-metrics-aarrr" class="level3" data-number="11.8.1">
+<h3 data-number="11.8.1" class="anchored" data-anchor-id="pirate-metrics-aarrr"><span class="header-section-number">11.8.1</span> Pirate metrics (AARRR)</h3>
+<p>Developed by Dave McClure, the pirate metrics (summary <a href="https://500hats.typepad.com/500blogs/2007/09/startup-metrics.html">here</a>, slides <a href="https://www.slideshare.net/dmc500hats/startup-metrics-for-pirates-long-version">here</a>) classify driver metrics into:</p>
+<ul>
+<li><p>Acquisition (the user comes to our site from various channels)</p></li>
+<li><p>Activation (has a good experience on the first visit)</p></li>
+<li><p>Retention (comes back to the site)</p></li>
+<li><p>Referral (likes the site enough to recommend it to others)</p></li>
+<li><p>Revenue (engages in a revenue generating behaviour)</p></li>
+</ul>
+<p>The below Table provides a useful example of possible conversion metrics and associated conversion rates.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../inputs/aarrr-example-conv-metrics.png" class="img-fluid figure-img"></p>
+<figcaption>AARRR example conversion metrics. Source: 500hats.typepad.com/500blogs/2007/09/startup-metrics.html</figcaption>
+</figure>
+</div>
+</section>
+<section id="aaaerrr" class="level3" data-number="11.8.2">
+<h3 data-number="11.8.2" class="anchored" data-anchor-id="aaaerrr"><span class="header-section-number">11.8.2</span> AAAERRR</h3>
+<p>An extension of the pirate metrics.</p>
+<ul>
+<li><p>Awareness (how many aware of product)</p></li>
+<li><p>Acquisition (how many use product)</p></li>
+<li><p>Activation (how many are realizing value of product – e.g.&nbsp;10 friends in 7 days on FB / stored at least 1 file on a device on Dropbox)</p></li>
+<li><p>Engagement (breath and frequencey of engagement)</p></li>
+<li><p>Revenue (how many are paying for product)</p></li>
+<li><p>Retention/renewal (how many are coming back)</p></li>
+<li><p>Referral (how many are becoming advocates)</p></li>
+</ul>
+</section>
+<section id="pulse" class="level3" data-number="11.8.3">
+<h3 data-number="11.8.3" class="anchored" data-anchor-id="pulse"><span class="header-section-number">11.8.3</span> PULSE</h3>
+<ul>
+<li><p>Page views</p></li>
+<li><p>Uptime</p></li>
+<li><p>Latency</p></li>
+<li><p>Seven-day active users</p></li>
+<li><p>Earnings</p></li>
+</ul>
+</section>
+<section id="heart" class="level3" data-number="11.8.4">
+<h3 data-number="11.8.4" class="anchored" data-anchor-id="heart"><span class="header-section-number">11.8.4</span> HEART</h3>
+<ul>
+<li><p>Developed by <span class="citation" data-cites="rodden2010measuring">Rodden, Hutchinson, and Fu (<a href="#ref-rodden2010measuring" role="doc-biblioref">2010</a>)</span>, the authors address shortcomings of the PULSE framework.</p></li>
+<li><p>Key challenge in CHI is creation of user-experience metrics based on large-scale data.</p></li>
+<li><p>Traditional PULSE metrics (Page views, Uptime, Latency, Seven-day active users, Earnings) are useful and related to user-experience, but limited because they are indirect and can be ambiguous (are more page views a sign of an increase in engagement or in confusion?) and provide limited insight (seven-day active users shows user-base volume but nothing about product commitment).</p></li>
+<li><p>Authors propose HEART metrics (Happiness, Engagement, Adoption, Retention, Task success) to complement traditional metrics and remedy their shortcomings.</p></li>
+<li><p>Happiness</p>
+<ul>
+<li>Measured using bipolar scale in-product survey</li>
+<li>Shows that users liked redesign of personalised homepage after initial dip (also shows value of dynamic treatment effects)</li>
+</ul></li>
+<li><p>Engagement</p>
+<ul>
+<li>E.g. number of visits per user per week</li>
+<li>Helped Gmail team see proportion of users who visited more than 5 times per week.</li>
+</ul></li>
+<li><p>Adoption and retention</p>
+<ul>
+<li>E.g. how many new accounts created (adoption), how many users from seven-day active users 3 weeks ago are still in that set (retention).</li>
+<li>Helped Google Finance team distinguish between new and recurring users during 2008 meltdown.</li>
+</ul></li>
+<li><p>Task success</p>
+<ul>
+<li>E.g. progress in optimal path (signup)</li>
+<li>Helped Google maps team see that users could adopt search to single-box so they could drop double-box version.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="common-metrics" class="level2" data-number="11.9">
+<h2 data-number="11.9" class="anchored" data-anchor-id="common-metrics"><span class="header-section-number">11.9</span> Common metrics</h2>
+<ul>
+<li><p>Conversion rate</p></li>
+<li><p>Number of bookings</p></li>
+<li><p>Engagement</p>
+<ul>
+<li>Likes, shares, comments, reactions</li>
+<li>Page views</li>
+<li>Click-through rates (CTR)</li>
+<li>Time spent per user per day</li>
+</ul></li>
+<li><p>Retention</p>
+<ul>
+<li><p>Daily active users (DAU, useful to measure intensity of usage)</p></li>
+<li><p>Weekly active users (WAU)</p></li>
+<li><p>Monthly active users (MAU, user engages frequently)</p></li>
+<li><p>Stickiness (DAU / MAU)</p></li>
+<li><p>Churn rate (percentage of users who stop using the service within a given period)</p></li>
+<li><p>Retention rate (1 - churn rate)</p></li>
+<li><p>28-day retention rate (% who still use it 28-days after</p></li>
+<li><p>Time spent on product</p></li>
+<li><p>Session frequency</p></li>
+</ul></li>
+<li><p>Revenue</p>
+<ul>
+<li>Average revenue per user (ARPE)</li>
+<li>Customer lifetime value (CLV)</li>
+</ul></li>
+</ul>
+<p>Guardrails</p>
+<ul>
+<li><p>Protecting the business</p>
+<ul>
+<li><p>Revenue</p></li>
+<li><p>Cancellation rate</p></li>
+<li><p>Cannibalisation of similar products in our ecosystem (i.e.&nbsp;WhatsApp impact on Messenger)</p></li>
+</ul></li>
+<li><p>Protecting internal validity of experiment</p></li>
+<li><p>User experience metrics</p>
+<ul>
+<li><p>Bounce rate (proportion of site visitors who leave after seeing only the first page)</p></li>
+<li><p>Latency</p></li>
+<li><p>Number of messages flagged as spam/harmful</p></li>
+</ul></li>
+<li><p>Strategic priority metrics</p></li>
+</ul>
+</section>
+<section id="other-metric-taxonomies" class="level2" data-number="11.10">
+<h2 data-number="11.10" class="anchored" data-anchor-id="other-metric-taxonomies"><span class="header-section-number">11.10</span> Other metric taxonomies</h2>
+<p><strong>Business report vs heuristic vs user-behaviour</strong></p>
+<ul>
+<li><p><span class="citation" data-cites="deng2016data">Deng and Shi (<a href="#ref-deng2016data" role="doc-biblioref">2016</a>)</span> use a different classification altogether:</p>
+<ul>
+<li><p>Type 1: Business Report Driven Metrics: Business report driven metrics, like Revenue per User and Monthly Active Users, focus on long-term goals of online services. These metrics are vital for business assessments but are less actionable for short-term product improvements. For example, improving search results in a service like Bing might decrease short-term revenue per user, highlighting the need for longer-term experimentation to truly assess impacts.</p></li>
+<li><p>Type 2: Simple Heuristic Based Metrics: Simple heuristic based metrics, such as Click-Through Rate and user activity counts, offer direct insights into user interaction with online services. While actionable, they can be misleading in terms of user experience and business goals. For instance, higher CTR due to misleading content can negatively impact user experience and, subsequently, the service’s market share. These metrics are suitable for early-stage services but may not align with real user experience improvements in more mature stages.</p></li>
+<li><p>Type 3: User-Behavior-Driven Metrics: User-behavior-driven metrics, derived from user satisfaction and frustration models, aim to directly measure user experience and its impact on long-term service success. They are complex, involving detailed analysis of user behavior, like considering both clicks and dwell time for assessing search satisfaction. These metrics are sensitive and actionable for agile experiments, offering a more nuanced understanding of user interaction than simpler metrics.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="metric-sensitivity-decomposition" class="level2" data-number="11.11">
+<h2 data-number="11.11" class="anchored" data-anchor-id="metric-sensitivity-decomposition"><span class="header-section-number">11.11</span> Metric sensitivity decomposition</h2>
+<ul>
+<li><span class="citation" data-cites="deng2016data">Deng and Shi (<a href="#ref-deng2016data" role="doc-biblioref">2016</a>)</span> point out that detecting a treatment effect has two components:</li>
+</ul>
+<p><span class="math display">\[
+P(\text{detecting treatment effect on the metric}) = P(H_1) \times P(p \leq \alpha | H_1)
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(P(H_1)\)</span> is moveability of the metric</p></li>
+<li><p><span class="math inline">\(P(p \leq \alpha | H_1)\)</span> is power</p></li>
+<li><p>The authors point out that understanding which component produces a lack of sensitivity is crucial. Because if it’s movement probability, we might need a different metric, whereas with a lack of power, variance reduction might help.</p></li>
+<li><p>Examples for metrics with low movement probability might be “number of sessions per user” for a search engine, since daily search needs are limited, and changing user engagement is difficult in the short-term. An example for a metric with low power is “Revenue per user”, due to very high variance.</p></li>
+<li><p>See also <span class="citation" data-cites="richardson2023pareto">Richardson et al. (<a href="#ref-richardson2023pareto" role="doc-biblioref">2023</a>)</span> for a more rigorous exposition of the point.</p></li>
+<li><p>Think about this more. I’m not convinced we don’t just care about power.</p></li>
+</ul>
+</section>
+<section id="metrics-vs-goals" class="level2" data-number="11.12">
+<h2 data-number="11.12" class="anchored" data-anchor-id="metrics-vs-goals"><span class="header-section-number">11.12</span> Metrics vs goals</h2>
+<ul>
+<li><p>Every metric has its limitations.</p></li>
+<li><p>Meta’s goal is to have lots of users. But how do you measure this? As Alex Schultz explains <a href="https://www.youtube.com/watch?v=mIvX3hBc9rI">here</a>, the industry has moved from registered users to confirmed registered users to active confirmed registered users to monthly active users</p></li>
+</ul>
+</section>
+<section id="levels-at-which-to-calculate-metrics" class="level2" data-number="11.13">
+<h2 data-number="11.13" class="anchored" data-anchor-id="levels-at-which-to-calculate-metrics"><span class="header-section-number">11.13</span> Levels at which to calculate metrics</h2>
+<ul>
+<li><p>“Conversion rate” can be calculated at a numa number of different ways:</p>
+<ul>
+<li>At the variant level:</li>
+</ul>
+<p><span class="math display">\[
+CR_{variant\_level} = \frac{\text{Successful sessions across variant}}{\text{Total sessions across variant}}
+\]</span></p></li>
+<li><p>User level: <span class="math display">\[
+CR_{User\_level} = \sum_{i=1}^{N_v}frac{\text{Successful sessions across user}}{\text{Total sessions across user}}
+\]</span></p></li>
+<li><p>Advantage of user level is that they are more robust to outliers, since each user has weight 1, instead of weight being proportional to their number of sessions (both total and successful).</p></li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-bojinov2020importance" class="csl-entry" role="listitem">
+Bojinov, Iavor, Albert Chen, and Min Liu. 2020. <span>“The Importance of Being Causal.”</span> <em>Harvard Data Science Review</em> 2 (3): 6.
+</div>
+<div id="ref-deng2016data" class="csl-entry" role="listitem">
+Deng, Alex, and Xiaolin Shi. 2016. <span>“Data-Driven Metric Development for Online Controlled Experiments: Seven Lessons Learned.”</span> In <em>Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, 77–86.
+</div>
+<div id="ref-duan2021online" class="csl-entry" role="listitem">
+Duan, Weitao, Shan Ba, and Chunzhe Zhang. 2021. <span>“Online Experimentation with Surrogate Metrics: Guidelines and a Case Study.”</span> In <em>Proceedings of the 14th ACM International Conference on Web Search and Data Mining</em>, 193–201.
+</div>
+<div id="ref-kohavi2020trustworthy" class="csl-entry" role="listitem">
+Kohavi, Ron, Diane Tang, and Ya Xu. 2020. <em>Trustworthy Online Controlled Experiments: A Practical Guide to a/b Testing</em>. Cambridge University Press.
+</div>
+<div id="ref-richardson2023pareto" class="csl-entry" role="listitem">
+Richardson, Lee, Alessandro Zito, Dylan Greaves, and Jacopo Soriano. 2023. <span>“Pareto Optimal Proxy Metrics.”</span> <em>arXiv Preprint arXiv:2307.01000</em>.
+</div>
+<div id="ref-rodden2010measuring" class="csl-entry" role="listitem">
+Rodden, Kerry, Hilary Hutchinson, and Xin Fu. 2010. <span>“Measuring the User Experience on a Large Scale: User-Centered Metrics for Web Applications.”</span> In <em>Proceedings of the SIGCHI Conference on Human Factors in Computing Systems</em>, 2395–98.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>A metric that isn’t gameable defies <a href="https://en.wikipedia.org/wiki/Goodhart's_law">Goodhart’s law</a>, which is what we want.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/experiment_design.html" class="pagination-link  aria-label=" &lt;span="" design&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Experiment design</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/threats_to_validity.html" class="pagination-link" aria-label="<span class='chapter-number'>12</span>&nbsp; <span class='chapter-title'>Threats to validity</span>">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Threats to validity</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
