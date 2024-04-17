@@ -5,31 +5,42 @@ The goal of this chapter is to succinctly summarise the statistical theory of ra
 
 ## Potential outcomes and outcome of interest
 
-We have a population of units $i = 1, \dots, \N$. Each unit in the population can be exposed to one of two treatments, which are identical across units, so that $\mathbb{T}_i = \mathbb{T} = \{0, 1\}$, where $\mathbb{T}_i = 1$ indicates that unit $i$ receives the active treatment and $\mathbb{T}_i = 0$ indicates that they receive the control treatment.
+We have a population of units $i = 1, \dots, \N$. Each unit in the population can be exposed to one of two treatments, which are identical across units. Each unit $i$ has potential outcomes $\ycp$ and $\ytp$ corresponding to each of the two possible treatments. $\ycp$ is the outcome unit $i$ would experience if they received the control treatment; $\ytp$, the outcome they would experience if they received the active treatment. Given that each unit is either assigned to treatment or control we'll only ever observe one of these outcomes in practice. In fact, what we do observe for each unit is $\yio$, which equals $\ytp$ if the unit was assigned the active treatment and $\ycp$ if they were assigned the control treatment.
 
-Each unit $i$ has potential outcomes $\ycp$ and $\ytp$ corresponding to each of the two possible treatments. $\ycp$ is the outcome unit $i$ would experience if they were assigned to the control group; $\ytp$, if they were assigned to the active treatment. Given that each unit is either assigned to treatment or control we'll only ever observe one of these outcomes in practice. In fact, what we do observe for each unit is $\yio$, which equals $\ytp$ if the unit was assigned the active treatment and $\ycp$ if they were assigned the control treatment.
-
-But the insight that both of potential outcomes exist at a conceptual level is
-the foundation of the potential outcomes approach. The reason these outcomes are
-important is that they allow us to coherently think about causal effects -- the
-difference in the state of the world under the active and the control treatment.
-The individual-level treatment effect is given by
+What's the use of potential outcomes we can't observe? They provide us with a
+simple and coherent way to think about the causal effect of the active
+treatment. For unit $i$, that causal effect is given by
 
 $$
 \ytp - \ycp,
 $$
 
-and the average treatment effect (ATE) over the entire population is defined as
-the average difference in individual outcomes[^alternative_choices]
+which tells us how the outcome for that unit is different when given the
+active treatment compared to the counterfactual state of the world where they
+were given the control treatment.
+
+We are usually interested in the average causal effect of the treatment across
+all units, which is given by the Average Treatment Effect (ATE)
 
 $$
 \te = \tefs = \tef.
 $$ {#eq-ate}
 
-This is the outcome we usually care about in an online experiment.
+This is the quantity we're trying to estimate in a typical experiment, though
+other choices are possible.[^alternative_choices]
 
 
-## Treatment effect estimates
+## Estimating the outcome of interest
+
+Given that we only observe one potential outcome per unit, how can we estimate
+@eq-ate?
+
+- Simple random assignment due to hash functions
+
+- Hence, E(Y(1) | W=1) = E(Y(1)) ...
+
+
+
 
 We don't observe potential outcomes, so we can't estimate Equation @eq-ate
 directly. 
