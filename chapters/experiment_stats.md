@@ -5,7 +5,11 @@ The goal of this chapter is to succinctly summarise the statistical theory of ra
 
 ## Potential outcomes and outcome of interest
 
-We have a population of units $i = 1, \dots, \N$. Each unit in the population can be exposed to one of two treatments, which are identical across units. Each unit $i$ has potential outcomes $\ycp$ and $\ytp$ corresponding to each of the two possible treatments. $\ycp$ is the outcome unit $i$ would experience if they received the control treatment; $\ytp$, the outcome they would experience if they received the active treatment. Given that each unit is either assigned to treatment or control we'll only ever observe one of these outcomes in practice. In fact, what we do observe for each unit is $\yio$, which equals $\ytp$ if the unit was assigned the active treatment and $\ycp$ if they were assigned the control treatment.
+We have a population of units $i = 1, \dots, \N$. Each unit in the population can be exposed to one of two treatments, which are identical across units. Each unit $i$ has potential outcomes $\ycp$ and $\ytp$ corresponding to each of the two possible treatments. $\ycp$ is the outcome unit $i$ would experience if they received the control treatment; $\ytp$, the outcome they would experience if they received the active treatment. Given that each unit is either assigned to treatment or control we'll only ever observe one of these outcomes in practice. In fact, what we do observe for each unit is $\yio$, which equals $\ytp$ if the unit was assigned the active treatment and $\ycp$ if they were assigned the control treatment. That is, for $\ti_i = 1$ if unit $i$ is allocated to treatment and $\ti_i = 0$ if they are allocated to control, we can write
+
+$$
+\yio = \ti_i \ytp + (1 - \ti_i) \ycp.
+$$
 
 What's the use of potential outcomes we can't observe? They provide us with a
 simple and coherent way to think about the causal effect of the active
@@ -23,7 +27,7 @@ We are usually interested in the average causal effect of the treatment across
 all units, which is given by the Average Treatment Effect (ATE)
 
 $$
-\te = \tefs = \tef.
+\te = \tefs = \tef = E[\ytp] - E[\ycp].
 $$ {#eq-ate}
 
 This is the quantity we're trying to estimate in a typical experiment, though
@@ -35,17 +39,42 @@ other choices are possible.[^alternative_choices]
 Given that we only observe one potential outcome per unit, how can we estimate
 @eq-ate?
 
-- Simple random assignment due to hash functions
+In online experiments, we typically use simple random assignment to allocate
+units to the expeirment sample and treatment variants (see
+@sec-treatment-assignment for details). Random assignment to treatment implies
+that
 
-- Hence, E(Y(1) | W=1) = E(Y(1)) ...
+$$
+\begin{align}
+E[\ytp | \ti_i = 1] &= E[\ytp]\\
+E[\ytp | \ti_i = 0] &= E[\ytp]
+\end{align}
+$$
 
+That is: given that assignment is random, the expected outcome under treatment
+is the same for units in the treatment and control group, and simply equals the
+expected outcome under treatment across the entire population.
 
+The same is true for expected outcomes under control, so that we have
 
+$$
+\begin{align}
+E[\ycp | \ti_i = 1] &= E[\ycp]\\
+E[\ycp | \ti_i = 0] &= E[\ycp]
+\end{align}
+$$
 
-We don't observe potential outcomes, so we can't estimate Equation @eq-ate
-directly. 
+Combining these equations with @eq-ate, we can write:
 
-Our estimate of the average treatment effect is
+$$
+\te = E[\ytp] - E[\ycp] = E[\ytp | \ti_i = 1] - E[\ycp | \ti_i = 0],
+$$
+
+which says that we can express the true effect as the difference between the
+expected outcomes of treated and untreated untis -- we have identified a way for
+expressing the treatment effect in quantities we can actually estimate based on
+the data we have available. In particular, the above suggests the following
+estimation approach:
 
 $$
 \hat{\tau} = \bar{Y}^{obs}_t - \bar{Y}^{obs}_c,
@@ -56,6 +85,11 @@ where
 $$
 \bar{Y}_t^{obs} = \frac{1}{N_t}\sum_{i:W_i=1} Y_i^{obs} \qquad \bar{Y}_c^{obs} = \frac{1}{N_c}\sum_{i:W_i=0} Y_i^{obs}.
 $$
+
+- We can show that this is unbiased ...
+
+- For alternative proof of unbiasedness, see below
+
 
 This is an unbiased estimate of $\tau = \bar{Y(1)} - \bar{Y(0)}$ (see Proof of Theorem 6.1 in @imbens2015causal).
 

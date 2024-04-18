@@ -35,6 +35,7 @@ book:
 
     # Experiments in practice
     # - chapters/guiding_principles.qmd
+    - chapters/treatment_assignment.md
     - chapters/experiment_design.md
     # - chapters/experiment_stats.qmd
     - chapters/metrics.md

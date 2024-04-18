@@ -10,7 +10,17 @@
     \nc{\Nc}{N_c}
     \nc{\N}{N}
     
-    % outcomes
+    %%%%%%%%%%%%%%%%%%%%%%%%%
+    % treatment assignments %
+    %%%%%%%%%%%%%%%%%%%%%%%%%
+
+    \nc{ti}{W}
+    
+
+    %%%%%%%%%%%%
+    % outcomes %
+    %%%%%%%%%%%%
+
     \nc{yio}{Y_i^{obs}}
     \nc{ytp}{Y_i(1)}
     \nc{ycp}{Y_i(0)}
@@ -21,9 +31,14 @@
     \nc{\ytob}{\bar{Y}_t^{obs}}
     \nc{\ycob}{\bar{Y}_c^{obs}}
 
-    % sums of outcomes
+    %%%%%%%%%%%%%%%%%%%%
+    % sums of outcomes %
+    %%%%%%%%%%%%%%%%%%%%
 
-    % treatment effects
+    %%%%%%%%%%%%%%%%%%%%%
+    % treatment effects %
+    %%%%%%%%%%%%%%%%%%%%%
+
     \nc{\te}{\tau}
     \nc{\tee}{\hat{\te}}   
     \nc{\tef}{\ytpb - \ycpb}
@@ -31,7 +46,9 @@
     \nc{\tefs}{\frac{1}{\N}\sum_{i=1}^N\left(\ytp-\ycp\right)}
 
     
-    % sample variances
+    %%%%%%%%%%%%%%%%%%%%
+    % sample variances %
+    %%%%%%%%%%%%%%%%%%%%
 
     \nc{\spv}{\sigma}   %symbol pop var
     \nc{\sev}{\hat{\sigma}}   %symbol estimated var
