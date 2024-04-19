@@ -111,24 +111,10 @@ $$
 
 ## Variance of treatment effect estimates
 
-Online experiments typically use a hash function to determine whether a user is
-part of an experiment and allocate them to a treatment condition if they are. In
-both cases this works roughly as follows: the hash function takes as its input a
-string unique to the user (such as the concatenated experiment and user id)
-and returns a number that is unique to the input string; the sampling and
-treatment allocation decisions are then made based on where on the function's
-range the value falls.
+Discussion in {#sec-treatment-assignment} important also for standard error. 
 
-This is important for thinking about the standard error because it implies that
-sampling decisions and treatment assignmend decisions for each user are made
-independent of all other users, meaning that any one user's inclusion into the
-experiment or a certain treatment group has no effect on any other user's
-inclusion probabilities. This is different from field experiments, where
-researchers often collect a pre-determined number of experiment units and then
-ensure that each treatment group is of a pre-determined size. In both these
-cases, any user's inclusion in an experiment and treatment group makes it
-less likely for any other user to be included. As a result of this dependence,
-the derivation of the standard error is more complicated though it turns out that
+In
+field experiments, we have dependence. As a result of this dependence, the derivation of the standard error is more complicated though it turns out that
 formula we will derive below still holds approximately, since the
 interdependence is small if the population from which experiment units are
 sampled is much larger than the experiment sample.[^imbens-ref]
@@ -136,17 +122,21 @@ sampled is much larger than the experiment sample.[^imbens-ref]
 So let's think about the standard error for a typical online experiment from
 first principles.
 
+$$
+\begin{align}
+V\left[\tee\right] &= V\left[\ytob - \ycob\right] \\
+&=V\left[\ytob\right] + V\left[\ycob\right] \\
+&=V\left[\ytobf\right] + V\left[\ycobf\right] \\
+&=\frac{1}{\Nt^2}\sum_{i:\ti_i=1} V\left[\yto\right]
++ \frac{1}{\Nc^2}\sum_{i:\ti_i=0} V\left[\yco\right] \\
+&=\frac{\Nt}{\Nt^2}V\left[\yto\right] + \frac{\Nc}{\Nc^2}V\left[\yco\right] \\
+&=\frac{1}{\Nt}V\left[\yio | \ti_i = 1\right] + \frac{1}{\Nc}V\left[\yio | \ti_i = 0\right] \\
+&=\frac{1}{\Nt}V\left[\ytp\right] + \frac{1}{\Nc}V\left[\ycp\right] \\
+&=\frac{1}{\Nt}V\left[\ytp\right] + \frac{1}{\Nc}V\left[\ycp\right] \\
+&=\frac{\vt}{\Nt} + \frac{\vc}{\Nc} \\
+\end{align}
+$$
 
-- Focus on $\ytob$, which is a scaled sum of $\Nt$ iid random variables. (They
-are random vars because given that we randomly sample from the population, the
-realised value of the $i$th unit in the sample is random). Hence, $\ytob$ is
-also a random variable.
-
-- We have $V(\ytob)$ ... V(Y_t) / N_t.
-
-- Same for $\ycob$.
-
-- Hence, V($\teef$) = ...
 
 - In practice, we don't know variances. So need to estimate. We do this using
 ... (box with derivation). Which gives us...
