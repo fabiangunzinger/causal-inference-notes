@@ -5,15 +5,15 @@ The goal of this chapter is to succinctly summarise the statistical theory of ra
 
 ## Potential outcomes and outcome of interest
 
-We have a population of units $i = 1, \dots, \N$. Each unit in the population can be exposed to one of two treatments, which are identical across units. Each unit $i$ has potential outcomes $\ycp$ and $\ytp$ corresponding to each of the two possible treatments. $\ycp$ is the outcome unit $i$ would experience if they received the control treatment; $\ytp$, the outcome they would experience if they received the active treatment. Given that each unit is either assigned to treatment or control we'll only ever observe one of these outcomes in practice. In fact, what we do observe for each unit is $\yio$, which equals $\ytp$ if the unit was assigned the active treatment and $\ycp$ if they were assigned the control treatment. That is, for $\ti_i = 1$ if unit $i$ is allocated to treatment and $\ti_i = 0$ if they are allocated to control, we can write
+We have a population of units $i = 1, \dots, \N$. Each unit in the population can be exposed to one of two treatments, which are identical across units. Each unit $i$ has potential outcomes $\ycp$ and $\ytp$ corresponding to each of the two possible treatments. $\ycp$ is the outcome unit $i$ would experience if they received the control treatment; $\ytp$, the outcome they would experience if they received the active treatment. Given that each unit is either assigned to treatment or control we'll only ever observe one of these outcomes in practice. In fact, what we do observe for each unit is $\yio$, which equals $\ytp$ if the unit was assigned the active treatment and $\ycp$ if they were assigned the control treatment. That is, if we write $\ti_i = 1$ if unit $i$ is allocated to treatment and $\ti_i = 0$ if they are allocated to control, then we can express $\yio$ as
 
 $$
 \yio = \ti_i \ytp + (1 - \ti_i) \ycp.
 $$
 
-What's the use of potential outcomes we can't observe? They provide us with a
-simple and coherent way to think about the causal effect of the active
-treatment. For unit $i$, that causal effect is given by
+What's the use of potential outcomes we can only partially observe? They provide
+us with a simple and coherent way to think about the causal effect of the
+treatment; for unit $i$, that causal effect is given by
 
 $$
 \ytp - \ycp,
@@ -21,13 +21,14 @@ $$
 
 which tells us how the outcome for that unit is different when given the
 active treatment compared to the counterfactual state of the world where they
-were given the control treatment.
+were given the control treatment. This is what we mean by the causal effect of
+the treatment.
 
 We are usually interested in the average causal effect of the treatment across
 all units, which is given by the Average Treatment Effect (ATE)
 
 $$
-\te = \tefs = \tef = E[\ytp] - E[\ycp].
+\te = \tefs = \tef.
 $$ {#eq-ate}
 
 This is the quantity we're trying to estimate in a typical experiment, though
@@ -53,9 +54,8 @@ $$
 
 That is: given that assignment is random, the expected outcome under treatment
 is the same for units in the treatment and control group, and simply equals the
-expected outcome under treatment across the entire population.
-
-The same is true for expected outcomes under control, so that we have
+expected outcome under treatment across the entire population. The same is true
+for expected outcomes under control, so that we have
 
 $$
 \begin{align}
@@ -64,10 +64,14 @@ E[\ycp | \ti_i = 0] &= E[\ycp]
 \end{align}
 $$
 
-Combining these equations with @eq-ate, we can write:
+Now, expanding @eq-ate and using the above expressions we have:
 
 $$
-\te = E[\ytp] - E[\ycp] = E[\ytp | \ti_i = 1] - E[\ycp | \ti_i = 0],
+\begin{align}
+\te &= \tef \\ 
+&= E[\ytp] - E[\ycp] \\
+&= E[\ytp | \ti_i = 1] - E[\ycp | \ti_i = 0],
+\end{align}
 $$
 
 which says that we can express the true effect as the difference between the
@@ -77,33 +81,32 @@ the data we have available. In particular, the above suggests the following
 estimation approach:
 
 $$
-\hat{\tau} = \bar{Y}^{obs}_t - \bar{Y}^{obs}_c,
-$$
+\tee = \ytob - \ycob,
+$$ {#eq-ate-est}
 
 where
 
 $$
-\bar{Y}_t^{obs} = \frac{1}{N_t}\sum_{i:W_i=1} Y_i^{obs} \qquad \bar{Y}_c^{obs} = \frac{1}{N_c}\sum_{i:W_i=0} Y_i^{obs}.
+\ytob = \ytobf \qquad \ycob = \ycobf.
 $$
 
-- We can show that this is unbiased ...
+We can show that this is unbiased estimator of $\te$:[^alternative_proof]
 
-- For alternative proof of unbiasedness, see below
-
-
-This is an unbiased estimate of $\tau = \bar{Y(1)} - \bar{Y(0)}$ (see Proof of Theorem 6.1 in @imbens2015causal).
-
-## Assignment mechanism
-
-In online experiments, units usually get allocated to treatment variants based
-on a hash function <!-- (see @sec-treatment-assignment) -->. The basic proceedure is
-simple: we concatenace information such as the unit and experiment ID, hash it,
-and check where the resulting hash value lies on the range of possible hash
-values. We might then allocate the unit into control if the hash value falls
-below the midpoint and into treatment otherwise.
-
-The assignment mechanism for each unit is thus akin to a Bernoulli trial, with
-probability of treatment equal to $p$. 
+$$
+\begin{align}
+E\left[\tee\right] &= E\left[\ytob - \ycob\right] \\
+&=E\left[\ytob\right]- E\left[\ycob\right] \\
+&=E\left[\ytobf\right] - E\left[\ycobf\right] \\
+&=\frac{1}{\Nt}\sum_{i:\ti_i=1} E\left[\yto\right]
+-\frac{1}{\Nc}\sum_{i:\ti_i=0} E\left[\yco\right] \\
+&=\frac{\Nt}{\Nt}E\left[\yto\right] -\frac{\Nc}{\Nc}E\left[\yco\right] \\
+&=E\left[\yto\right] - E\left[\yco\right] \\
+&=E\left[\yio | \ti_i = 1\right] - E\left[\yio | \ti_i = 0\right] \\
+&=E\left[\ytp\right] - E\left[\ycp\right] \\
+&=\ytpb - \ycpb \\
+&=\te
+\end{align}
+$$
 
 
 ## Variance of treatment effect estimates
@@ -269,6 +272,8 @@ individual level treatment effect as the ratio of active and control treatment,
 and we can create different summary statistics of the individual-level treatment
 effects other than the average treatment effect over the entire population (see,
 for instance, Chapter 1 in @imbens2015causal).
+
+[^alternative_proof]: For an alternative proof, see the proof of Theorem 6.1 in @imbens2015causal.
 
 
 [^tdetails]: Note that the test statistic follows a t-distribution because we have to estimate the variance (that is, if we replace the true variance with its estimate when standardising a normal variable, the result follows a Student's t-distribution). So, this has nothing to do with the CLT. However, for the test statistic to follow a student distribution, the numerator has to follow a normal distribution. Often, though, the underlying data is not normal, so that its approximately normal only for large enough samples, due to the CLT. At the same time, the t-distribution also converges to normal as the sample size increases. Hence, one we have a sample size large enough to justify using the t-distribution, we might as well use a z-test. As pointed out in Chapter 9 in @rice2006mathematical, the test statistic above only follows a t-distribution if we use the pooled variance, but for large sample sizes, the distribution is still approximately t or normal.

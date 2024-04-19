@@ -120,6 +120,8 @@ div.csl-indent {
     \nc{ycpb}{\bar{Y}(0)}
     \nc{\ytob}{\bar{Y}_t^{obs}}
     \nc{\ycob}{\bar{Y}_c^{obs}}
+    \nc{\ytobf}{\frac{1}{\Nt}\sum_{i:\ti_i=1} \yto}
+    \nc{\ycobf}{\frac{1}{\Nc}\sum_{i:\ti_i=0} \yco}
 
     %%%%%%%%%%%%%%%%%%%%
     % sums of outcomes %
@@ -202,6 +204,12 @@ div.csl-indent {
     %%%%%%%%%%%%%%%%%%
     % other commands %
     %%%%%%%%%%%%%%%%%%
+
+    <!-- These aren't working for some reason -->
+    <!-- \nc{lp}{\left(} -->
+    <!-- \nc{rp}{\right)} -->
+    <!-- \nc{lb}{\left[} -->
+    <!-- \nc{rb}{\right]} -->
 
     \)
 </span>
@@ -380,15 +388,14 @@ window.Quarto = {
   <ul>
   <li><a href="#potential-outcomes-and-outcome-of-interest" id="toc-potential-outcomes-and-outcome-of-interest" class="nav-link active" data-scroll-target="#potential-outcomes-and-outcome-of-interest"><span class="header-section-number">8.1</span> Potential outcomes and outcome of interest</a></li>
   <li><a href="#estimating-the-outcome-of-interest" id="toc-estimating-the-outcome-of-interest" class="nav-link" data-scroll-target="#estimating-the-outcome-of-interest"><span class="header-section-number">8.2</span> Estimating the outcome of interest</a></li>
-  <li><a href="#assignment-mechanism" id="toc-assignment-mechanism" class="nav-link" data-scroll-target="#assignment-mechanism"><span class="header-section-number">8.3</span> Assignment mechanism</a></li>
-  <li><a href="#variance-of-treatment-effect-estimates" id="toc-variance-of-treatment-effect-estimates" class="nav-link" data-scroll-target="#variance-of-treatment-effect-estimates"><span class="header-section-number">8.4</span> Variance of treatment effect estimates</a></li>
-  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">8.5</span> Hypothesis testing</a></li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">8.6</span> Assumptions</a>
+  <li><a href="#variance-of-treatment-effect-estimates" id="toc-variance-of-treatment-effect-estimates" class="nav-link" data-scroll-target="#variance-of-treatment-effect-estimates"><span class="header-section-number">8.3</span> Variance of treatment effect estimates</a></li>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">8.4</span> Hypothesis testing</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">8.5</span> Assumptions</a>
   <ul class="collapse">
-  <li><a href="#stable-unit-treatment-value-assumption-sutva" id="toc-stable-unit-treatment-value-assumption-sutva" class="nav-link" data-scroll-target="#stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">8.6.1</span> Stable unit treatment value assumption (SUTVA)</a></li>
+  <li><a href="#stable-unit-treatment-value-assumption-sutva" id="toc-stable-unit-treatment-value-assumption-sutva" class="nav-link" data-scroll-target="#stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">8.5.1</span> Stable unit treatment value assumption (SUTVA)</a></li>
   </ul></li>
-  <li><a href="#how-does-randomisation-help-us-estimate-ates" id="toc-how-does-randomisation-help-us-estimate-ates" class="nav-link" data-scroll-target="#how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">8.7</span> How does randomisation help us estimate ATEs?</a></li>
-  <li><a href="#finite-sample-vs-super-population-perspective" id="toc-finite-sample-vs-super-population-perspective" class="nav-link" data-scroll-target="#finite-sample-vs-super-population-perspective"><span class="header-section-number">8.8</span> Finite sample vs super-population perspective</a></li>
+  <li><a href="#how-does-randomisation-help-us-estimate-ates" id="toc-how-does-randomisation-help-us-estimate-ates" class="nav-link" data-scroll-target="#how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">8.6</span> How does randomisation help us estimate ATEs?</a></li>
+  <li><a href="#finite-sample-vs-super-population-perspective" id="toc-finite-sample-vs-super-population-perspective" class="nav-link" data-scroll-target="#finite-sample-vs-super-population-perspective"><span class="header-section-number">8.7</span> Finite sample vs super-population perspective</a></li>
   </ul>
 </nav>
     </div>
@@ -417,18 +424,18 @@ window.Quarto = {
 <p>The goal of this chapter is to succinctly summarise the statistical theory of randomised experiments.</p>
 <section id="potential-outcomes-and-outcome-of-interest" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="potential-outcomes-and-outcome-of-interest"><span class="header-section-number">8.1</span> Potential outcomes and outcome of interest</h2>
-<p>We have a population of units <span class="math inline">\(i = 1, \dots, \N\)</span>. Each unit in the population can be exposed to one of two treatments, which are identical across units. Each unit <span class="math inline">\(i\)</span> has potential outcomes <span class="math inline">\(\ycp\)</span> and <span class="math inline">\(\ytp\)</span> corresponding to each of the two possible treatments. <span class="math inline">\(\ycp\)</span> is the outcome unit <span class="math inline">\(i\)</span> would experience if they received the control treatment; <span class="math inline">\(\ytp\)</span>, the outcome they would experience if they received the active treatment. Given that each unit is either assigned to treatment or control we’ll only ever observe one of these outcomes in practice. In fact, what we do observe for each unit is <span class="math inline">\(\yio\)</span>, which equals <span class="math inline">\(\ytp\)</span> if the unit was assigned the active treatment and <span class="math inline">\(\ycp\)</span> if they were assigned the control treatment. That is, for <span class="math inline">\(\ti_i = 1\)</span> if unit <span class="math inline">\(i\)</span> is allocated to treatment and <span class="math inline">\(\ti_i = 0\)</span> if they are allocated to control, we can write</p>
+<p>We have a population of units <span class="math inline">\(i = 1, \dots, \N\)</span>. Each unit in the population can be exposed to one of two treatments, which are identical across units. Each unit <span class="math inline">\(i\)</span> has potential outcomes <span class="math inline">\(\ycp\)</span> and <span class="math inline">\(\ytp\)</span> corresponding to each of the two possible treatments. <span class="math inline">\(\ycp\)</span> is the outcome unit <span class="math inline">\(i\)</span> would experience if they received the control treatment; <span class="math inline">\(\ytp\)</span>, the outcome they would experience if they received the active treatment. Given that each unit is either assigned to treatment or control we’ll only ever observe one of these outcomes in practice. In fact, what we do observe for each unit is <span class="math inline">\(\yio\)</span>, which equals <span class="math inline">\(\ytp\)</span> if the unit was assigned the active treatment and <span class="math inline">\(\ycp\)</span> if they were assigned the control treatment. That is, if we write <span class="math inline">\(\ti_i = 1\)</span> if unit <span class="math inline">\(i\)</span> is allocated to treatment and <span class="math inline">\(\ti_i = 0\)</span> if they are allocated to control, then we can express <span class="math inline">\(\yio\)</span> as</p>
 <p><span class="math display">\[
 \yio = \ti_i \ytp + (1 - \ti_i) \ycp.
 \]</span></p>
-<p>What’s the use of potential outcomes we can’t observe? They provide us with a simple and coherent way to think about the causal effect of the active treatment. For unit <span class="math inline">\(i\)</span>, that causal effect is given by</p>
+<p>What’s the use of potential outcomes we can only partially observe? They provide us with a simple and coherent way to think about the causal effect of the treatment; for unit <span class="math inline">\(i\)</span>, that causal effect is given by</p>
 <p><span class="math display">\[
 \ytp - \ycp,
 \]</span></p>
-<p>which tells us how the outcome for that unit is different when given the active treatment compared to the counterfactual state of the world where they were given the control treatment.</p>
+<p>which tells us how the outcome for that unit is different when given the active treatment compared to the counterfactual state of the world where they were given the control treatment. This is what we mean by the causal effect of the treatment.</p>
 <p>We are usually interested in the average causal effect of the treatment across all units, which is given by the Average Treatment Effect (ATE)</p>
 <p><span id="eq-ate"><span class="math display">\[
-\te = \tefs = \tef = E[\ytp] - E[\ycp].
+\te = \tefs = \tef.
 \tag{8.1}\]</span></span></p>
 <p>This is the quantity we’re trying to estimate in a typical experiment, though other choices are possible.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 </section>
@@ -442,41 +449,50 @@ E[\ytp | \ti_i = 1] &amp;= E[\ytp]\\
 E[\ytp | \ti_i = 0] &amp;= E[\ytp]
 \end{align}
 \]</span></p>
-<p>That is: given that assignment is random, the expected outcome under treatment is the same for units in the treatment and control group, and simply equals the expected outcome under treatment across the entire population.</p>
-<p>The same is true for expected outcomes under control, so that we have</p>
+<p>That is: given that assignment is random, the expected outcome under treatment is the same for units in the treatment and control group, and simply equals the expected outcome under treatment across the entire population. The same is true for expected outcomes under control, so that we have</p>
 <p><span class="math display">\[
 \begin{align}
 E[\ycp | \ti_i = 1] &amp;= E[\ycp]\\
 E[\ycp | \ti_i = 0] &amp;= E[\ycp]
 \end{align}
 \]</span></p>
-<p>Combining these equations with <a href="#eq-ate" class="quarto-xref">Equation&nbsp;<span>8.1</span></a>, we can write:</p>
+<p>Now, expanding <a href="#eq-ate" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> and using the above expressions we have:</p>
 <p><span class="math display">\[
-\te = E[\ytp] - E[\ycp] = E[\ytp | \ti_i = 1] - E[\ycp | \ti_i = 0],
+\begin{align}
+\te &amp;= \tef \\
+&amp;= E[\ytp] - E[\ycp] \\
+&amp;= E[\ytp | \ti_i = 1] - E[\ycp | \ti_i = 0],
+\end{align}
 \]</span></p>
 <p>which says that we can express the true effect as the difference between the expected outcomes of treated and untreated untis – we have identified a way for expressing the treatment effect in quantities we can actually estimate based on the data we have available. In particular, the above suggests the following estimation approach:</p>
-<p><span class="math display">\[
-\hat{\tau} = \bar{Y}^{obs}_t - \bar{Y}^{obs}_c,
-\]</span></p>
+<p><span id="eq-ate-est"><span class="math display">\[
+\tee = \ytob - \ycob,
+\tag{8.2}\]</span></span></p>
 <p>where</p>
 <p><span class="math display">\[
-\bar{Y}_t^{obs} = \frac{1}{N_t}\sum_{i:W_i=1} Y_i^{obs} \qquad \bar{Y}_c^{obs} = \frac{1}{N_c}\sum_{i:W_i=0} Y_i^{obs}.
+\ytob = \ytobf \qquad \ycob = \ycobf.
 \]</span></p>
-<ul>
-<li><p>We can show that this is unbiased …</p></li>
-<li><p>For alternative proof of unbiasedness, see below</p></li>
-</ul>
-<p>This is an unbiased estimate of <span class="math inline">\(\tau = \bar{Y(1)} - \bar{Y(0)}\)</span> (see Proof of Theorem 6.1 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>).</p>
+<p>We can show that this is unbiased estimator of <span class="math inline">\(\te\)</span>:<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p><span class="math display">\[
+\begin{align}
+E\left[\tee\right] &amp;= E\left[\ytob - \ycob\right] \\
+&amp;=E\left[\ytob\right]- E\left[\ycob\right] \\
+&amp;=E\left[\ytobf\right] - E\left[\ycobf\right] \\
+&amp;=\frac{1}{\Nt}\sum_{i:\ti_i=1} E\left[\yto\right]
+-\frac{1}{\Nc}\sum_{i:\ti_i=0} E\left[\yco\right] \\
+&amp;=\frac{\Nt}{\Nt}E\left[\yto\right] -\frac{\Nc}{\Nc}E\left[\yco\right] \\
+&amp;=E\left[\yto\right] - E\left[\yco\right] \\
+&amp;=E\left[\yio | \ti_i = 1\right] - E\left[\yio | \ti_i = 0\right] \\
+&amp;=E\left[\ytp\right] - E\left[\ycp\right] \\
+&amp;=\ytpb - \ycpb \\
+&amp;=\te
+\end{align}
+\]</span></p>
 </section>
-<section id="assignment-mechanism" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="assignment-mechanism"><span class="header-section-number">8.3</span> Assignment mechanism</h2>
-<p>In online experiments, units usually get allocated to treatment variants based on a hash function <!-- (see @sec-treatment-assignment) -->. The basic proceedure is simple: we concatenace information such as the unit and experiment ID, hash it, and check where the resulting hash value lies on the range of possible hash values. We might then allocate the unit into control if the hash value falls below the midpoint and into treatment otherwise.</p>
-<p>The assignment mechanism for each unit is thus akin to a Bernoulli trial, with probability of treatment equal to <span class="math inline">\(p\)</span>.</p>
-</section>
-<section id="variance-of-treatment-effect-estimates" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="variance-of-treatment-effect-estimates"><span class="header-section-number">8.4</span> Variance of treatment effect estimates</h2>
+<section id="variance-of-treatment-effect-estimates" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="variance-of-treatment-effect-estimates"><span class="header-section-number">8.3</span> Variance of treatment effect estimates</h2>
 <p>Online experiments typically use a hash function to determine whether a user is part of an experiment and allocate them to a treatment condition if they are. In both cases this works roughly as follows: the hash function takes as its input a string unique to the user (such as the concatenated experiment and user id) and returns a number that is unique to the input string; the sampling and treatment allocation decisions are then made based on where on the function’s range the value falls.</p>
-<p>This is important for thinking about the standard error because it implies that sampling decisions and treatment assignmend decisions for each user are made independent of all other users, meaning that any one user’s inclusion into the experiment or a certain treatment group has no effect on any other user’s inclusion probabilities. This is different from field experiments, where researchers often collect a pre-determined number of experiment units and then ensure that each treatment group is of a pre-determined size. In both these cases, any user’s inclusion in an experiment and treatment group makes it less likely for any other user to be included. As a result of this dependence, the derivation of the standard error is more complicated though it turns out that formula we will derive below still holds approximately, since the interdependence is small if the population from which experiment units are sampled is much larger than the experiment sample.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>This is important for thinking about the standard error because it implies that sampling decisions and treatment assignmend decisions for each user are made independent of all other users, meaning that any one user’s inclusion into the experiment or a certain treatment group has no effect on any other user’s inclusion probabilities. This is different from field experiments, where researchers often collect a pre-determined number of experiment units and then ensure that each treatment group is of a pre-determined size. In both these cases, any user’s inclusion in an experiment and treatment group makes it less likely for any other user to be included. As a result of this dependence, the derivation of the standard error is more complicated though it turns out that formula we will derive below still holds approximately, since the interdependence is small if the population from which experiment units are sampled is much larger than the experiment sample.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 <p>So let’s think about the standard error for a typical online experiment from first principles.</p>
 <ul>
 <li><p>Focus on <span class="math inline">\(\ytob\)</span>, which is a scaled sum of <span class="math inline">\(\Nt\)</span> iid random variables. (They are random vars because given that we randomly sample from the population, the realised value of the <span class="math inline">\(i\)</span>th unit in the sample is random). Hence, <span class="math inline">\(\ytob\)</span> is also a random variable.</p></li>
@@ -513,8 +529,8 @@ s_c^2 = \frac{1}{N_c - 1}\sum_{i:W_i=0}\left(Y_i(0) - \bar{Y}_c^{obs}\right)^2 \
 <p>If, instead of using a Bernoulli trial assignment mechanism we use a <em>completely randomised experiment</em>, where we perfectly balance the number of units assigned to each treatment, then the variance estimator above is not necessarily unbiased. In such an experiment, assignments are not independent because each unit being assigned to one unit lowers the probability of all other units of being assigned to that same variant.</p>
 <p>, each unit being assigned to one variant lowers the probability of all other units being assigned to that same variant. In that case, the above variance estimator is unbiased only if the treatment effect is constant. However, it is usually used in practice even in cases where constant treatment effects are unlikely because it is conservative (i.e.&nbsp;at least as large as the true variance) and because it is always unbiased if the ATE is an estimate of the infinite super-population ATE.</p>
 </section>
-<section id="hypothesis-testing" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">8.5</span> Hypothesis testing</h2>
+<section id="hypothesis-testing" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">8.4</span> Hypothesis testing</h2>
 <p>To test whether the observed treatment effect is significantly different from zero, we test:</p>
 <p><span class="math display">\[
 H_0: \bar{Y}^{obs}_t = \bar{Y}^{obs}_c
@@ -524,17 +540,17 @@ H_A: \bar{Y}^{obs}_t \neq \bar{Y}^{obs}_c.
 <p><span class="math display">\[
 T = \frac{\hat{\tau}}{\sqrt{Var(\hat{\tau})}} \sim t_{(N_t + N_c - 2)},
 \]</span></p>
-<p>where <span class="math inline">\(N_t + N_c - 2\)</span> is number of degrees of freedom<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<p>where <span class="math inline">\(N_t + N_c - 2\)</span> is number of degrees of freedom<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
 <p>todo:</p>
 <ul>
 <li>See Rice 6.2 on why this follows t distribution</li>
 <li>For complete treatment and derivation of sampling distributions (incl.&nbsp;discussion of all the approximations and sample corrections), see Rice sampling chapter and my ipad notes.</li>
 </ul>
 </section>
-<section id="assumptions" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">8.6</span> Assumptions</h2>
-<section id="stable-unit-treatment-value-assumption-sutva" class="level3" data-number="8.6.1">
-<h3 data-number="8.6.1" class="anchored" data-anchor-id="stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">8.6.1</span> Stable unit treatment value assumption (SUTVA)</h3>
+<section id="assumptions" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">8.5</span> Assumptions</h2>
+<section id="stable-unit-treatment-value-assumption-sutva" class="level3" data-number="8.5.1">
+<h3 data-number="8.5.1" class="anchored" data-anchor-id="stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">8.5.1</span> Stable unit treatment value assumption (SUTVA)</h3>
 <ul>
 <li>SUTVA has two components: no interference, and no hidden variations of treatments.</li>
 </ul>
@@ -552,13 +568,13 @@ T = \frac{\hat{\tau}}{\sqrt{Var(\hat{\tau})}} \sim t_{(N_t + N_c - 2)},
 </ul>
 </section>
 </section>
-<section id="how-does-randomisation-help-us-estimate-ates" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">8.7</span> How does randomisation help us estimate ATEs?</h2>
+<section id="how-does-randomisation-help-us-estimate-ates" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">8.6</span> How does randomisation help us estimate ATEs?</h2>
 <p>By ensuring that the treatment - the causal variable of interest - is independent of potential outcomes, so that control and treatment group are comparable.</p>
 <p>More technically, it ensures that expected outcomes are the same in both groups, which means that the selection bias - the difference of expected potential outcomes without treatment - disappears. When using regression, this is equivalent to the error term being uncorrelated with treatment status.</p>
 </section>
-<section id="finite-sample-vs-super-population-perspective" class="level2" data-number="8.8">
-<h2 data-number="8.8" class="anchored" data-anchor-id="finite-sample-vs-super-population-perspective"><span class="header-section-number">8.8</span> Finite sample vs super-population perspective</h2>
+<section id="finite-sample-vs-super-population-perspective" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="finite-sample-vs-super-population-perspective"><span class="header-section-number">8.7</span> Finite sample vs super-population perspective</h2>
 <p>There are two ways to perform inference:</p>
 <ul>
 <li><p>When using the finite sample perspective, the <span class="math inline">\(N\)</span> units in the experiment sample are treated as the entire population of interest. Hence, there is no notion of randomisation due to sampling from a larger population, and all the randomness in the outcomes is due to randomness generates by the assignment mechanism.</p></li>
@@ -579,8 +595,9 @@ Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. Cengage 
 <hr>
 <ol>
 <li id="fn1"><p>Other choices are possible. We could define the individual level treatment effect as the ratio of active and control treatment, and we can create different summary statistics of the individual-level treatment effects other than the average treatment effect over the entire population (see, for instance, Chapter 1 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>See <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span> Section 6.7 and Appendix B of Chapter 6 for details.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Note that the test statistic follows a t-distribution because we have to estimate the variance (that is, if we replace the true variance with its estimate when standardising a normal variable, the result follows a Student’s t-distribution). So, this has nothing to do with the CLT. However, for the test statistic to follow a student distribution, the numerator has to follow a normal distribution. Often, though, the underlying data is not normal, so that its approximately normal only for large enough samples, due to the CLT. At the same time, the t-distribution also converges to normal as the sample size increases. Hence, one we have a sample size large enough to justify using the t-distribution, we might as well use a z-test. As pointed out in Chapter 9 in <span class="citation" data-cites="rice2006mathematical">Rice (<a href="#ref-rice2006mathematical" role="doc-biblioref">2006</a>)</span>, the test statistic above only follows a t-distribution if we use the pooled variance, but for large sample sizes, the distribution is still approximately t or normal.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>For an alternative proof, see the proof of Theorem 6.1 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>See <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span> Section 6.7 and Appendix B of Chapter 6 for details.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Note that the test statistic follows a t-distribution because we have to estimate the variance (that is, if we replace the true variance with its estimate when standardising a normal variable, the result follows a Student’s t-distribution). So, this has nothing to do with the CLT. However, for the test statistic to follow a student distribution, the numerator has to follow a normal distribution. Often, though, the underlying data is not normal, so that its approximately normal only for large enough samples, due to the CLT. At the same time, the t-distribution also converges to normal as the sample size increases. Hence, one we have a sample size large enough to justify using the t-distribution, we might as well use a z-test. As pointed out in Chapter 9 in <span class="citation" data-cites="rice2006mathematical">Rice (<a href="#ref-rice2006mathematical" role="doc-biblioref">2006</a>)</span>, the test statistic above only follows a t-distribution if we use the pooled variance, but for large sample sizes, the distribution is still approximately t or normal.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
