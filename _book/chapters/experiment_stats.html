@@ -153,8 +153,8 @@ div.csl-indent {
     \nc{\vpe}{\sev^2}
     \nc{\vtf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ytp - \ytpb)^2}
     \nc{\vcf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ycp - \ycpb)^2}
-    \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}(\yto - \ytob)^2}
-    \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}(\yco - \ycob)^2}
+    \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}\left(\yio - \ytob\right)^2}
+    \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}\left(\yio - \ycob\right)^2}
 
     %%%%%%%%%%%%%%%%%%%%%%
     % sampling variances %
@@ -204,6 +204,8 @@ div.csl-indent {
     %%%%%%%%%%%%%%%%%%
     % other commands %
     %%%%%%%%%%%%%%%%%%
+
+    \nc{mc}[1]{\text{\scriptsize(#1)}} %math inline comment
 
     <!-- These aren't working for some reason -->
     <!-- \nc{lp}{\left(} -->
@@ -422,12 +424,20 @@ window.Quarto = {
 
 
 <p>The goal of this chapter is to succinctly summarise the statistical theory of randomised experiments.</p>
+<p>Most online experiments appear very simple; we split traffic into two groups with different experiences and compare outcomes between groups. So how much statistical theory could we possibly need?</p>
+<p>Well, to experiment effectively, you do want to make sure you have</p>
+<ol type="1">
+<li><p>a coherent definition of the causal effect effect you want to measure and a good way of estimating it,</p></li>
+<li><p>a way to differentiate signals from noise,</p></li>
+<li><p>a way to ensure your experiment has a good chance of picking up signals.</p></li>
+</ol>
+<p>First two are covered here. The third, which relates to the power of your experiment, is covered in <a href="power.html" class="quarto-xref"><span>Chapter 3</span></a>.</p>
 <section id="potential-outcomes-and-outcome-of-interest" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="potential-outcomes-and-outcome-of-interest"><span class="header-section-number">8.1</span> Potential outcomes and outcome of interest</h2>
 <p>We have a population of units <span class="math inline">\(i = 1, \dots, \N\)</span>. Each unit in the population can be exposed to one of two treatments, which are identical across units. Each unit <span class="math inline">\(i\)</span> has potential outcomes <span class="math inline">\(\ycp\)</span> and <span class="math inline">\(\ytp\)</span> corresponding to each of the two possible treatments. <span class="math inline">\(\ycp\)</span> is the outcome unit <span class="math inline">\(i\)</span> would experience if they received the control treatment; <span class="math inline">\(\ytp\)</span>, the outcome they would experience if they received the active treatment. Given that each unit is either assigned to treatment or control we’ll only ever observe one of these outcomes in practice. In fact, what we do observe for each unit is <span class="math inline">\(\yio\)</span>, which equals <span class="math inline">\(\ytp\)</span> if the unit was assigned the active treatment and <span class="math inline">\(\ycp\)</span> if they were assigned the control treatment. That is, if we write <span class="math inline">\(\ti_i = 1\)</span> if unit <span class="math inline">\(i\)</span> is allocated to treatment and <span class="math inline">\(\ti_i = 0\)</span> if they are allocated to control, then we can express <span class="math inline">\(\yio\)</span> as</p>
-<p><span class="math display">\[
+<p><span id="eq-yio"><span class="math display">\[
 \yio = \ti_i \ytp + (1 - \ti_i) \ycp.
-\]</span></p>
+\tag{8.1}\]</span></span></p>
 <p>What’s the use of potential outcomes we can only partially observe? They provide us with a simple and coherent way to think about the causal effect of the treatment; for unit <span class="math inline">\(i\)</span>, that causal effect is given by</p>
 <p><span class="math display">\[
 \ytp - \ycp,
@@ -436,12 +446,12 @@ window.Quarto = {
 <p>We are usually interested in the average causal effect of the treatment across all units, which is given by the Average Treatment Effect (ATE)</p>
 <p><span id="eq-ate"><span class="math display">\[
 \te = \tefs = \tef.
-\tag{8.1}\]</span></span></p>
+\tag{8.2}\]</span></span></p>
 <p>This is the quantity we’re trying to estimate in a typical experiment, though other choices are possible.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 </section>
 <section id="estimating-the-outcome-of-interest" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="estimating-the-outcome-of-interest"><span class="header-section-number">8.2</span> Estimating the outcome of interest</h2>
-<p>Given that we only observe one potential outcome per unit, how can we estimate <a href="#eq-ate" class="quarto-xref">Equation&nbsp;<span>8.1</span></a>?</p>
+<p>Given that we only observe one potential outcome per unit, how can we estimate <a href="#eq-ate" class="quarto-xref">Equation&nbsp;<span>8.2</span></a>?</p>
 <p>In online experiments, we typically use simple random assignment to allocate units to the expeirment sample and treatment variants (see <a href="treatment_assignment.html" class="quarto-xref"><span>Chapter 10</span></a> for details). Random assignment to treatment implies that</p>
 <p><span class="math display">\[
 \begin{align}
@@ -456,7 +466,7 @@ E[\ycp | \ti_i = 1] &amp;= E[\ycp]\\
 E[\ycp | \ti_i = 0] &amp;= E[\ycp]
 \end{align}
 \]</span></p>
-<p>Now, expanding <a href="#eq-ate" class="quarto-xref">Equation&nbsp;<span>8.1</span></a> and using the above expressions we have:</p>
+<p>Now, expanding <a href="#eq-ate" class="quarto-xref">Equation&nbsp;<span>8.2</span></a> and using the above expressions we have:</p>
 <p><span class="math display">\[
 \begin{align}
 \te &amp;= \tef \\
@@ -464,15 +474,15 @@ E[\ycp | \ti_i = 0] &amp;= E[\ycp]
 &amp;= E[\ytp | \ti_i = 1] - E[\ycp | \ti_i = 0],
 \end{align}
 \]</span></p>
-<p>which says that we can express the true effect as the difference between the expected outcomes of treated and untreated untis – we have identified a way for expressing the treatment effect in quantities we can actually estimate based on the data we have available. In particular, the above suggests the following estimation approach:</p>
+<p>which says that we can express the true effect as the difference between the expected outcomes of treated and untreated untis – we have identified a way for expressing the treatment effect in quantities we can actually estimate based on available data. In particular, the above suggests the following estimation approach:</p>
 <p><span id="eq-ate-est"><span class="math display">\[
 \tee = \ytob - \ycob,
-\tag{8.2}\]</span></span></p>
+\tag{8.3}\]</span></span></p>
 <p>where</p>
 <p><span class="math display">\[
 \ytob = \ytobf \qquad \ycob = \ycobf.
 \]</span></p>
-<p>We can show that this is unbiased estimator of <span class="math inline">\(\te\)</span>:<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>We can show that this is an unbiased estimator of <span class="math inline">\(\te\)</span>:<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p><span class="math display">\[
 \begin{align}
 E\left[\tee\right] &amp;= E\left[\ytob - \ycob\right] \\
@@ -491,8 +501,8 @@ E\left[\tee\right] &amp;= E\left[\ytob - \ycob\right] \\
 </section>
 <section id="variance-of-treatment-effect-estimates" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="variance-of-treatment-effect-estimates"><span class="header-section-number">8.3</span> Variance of treatment effect estimates</h2>
-<p>Discussion in {#sec-treatment-assignment} important also for standard error.</p>
-<p>In field experiments, we have dependence. As a result of this dependence, the derivation of the standard error is more complicated though it turns out that formula we will derive below still holds approximately, since the interdependence is small if the population from which experiment units are sampled is much larger than the experiment sample.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>In this section, we’ll derive the standard error of our treatment effect stimator <span class="math inline">\(\tee\)</span>.</p>
+<p>For the estimation of the treatment effect above, the main implication of the simple random sample proceedure commonly used for online experiments (see chapter <a href="treatment_assignment.html" class="quarto-xref"><span>Chapter 10</span></a>) was that the expectation of potential ourcomes for treatment and control groups were identical. For the estimation of the standard error, the main implication is that sampling and treatment assignment between units are independent in the sense that one unit being samples or assigned to a treatment condition doesn’t affect the sampling or assignment probabilities for any other units.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 <p>So let’s think about the standard error for a typical online experiment from first principles.</p>
 <p><span class="math display">\[
 \begin{align}
@@ -505,8 +515,16 @@ V\left[\tee\right] &amp;= V\left[\ytob - \ycob\right] \\
 &amp;=\frac{1}{\Nt}V\left[\yio | \ti_i = 1\right] + \frac{1}{\Nc}V\left[\yio | \ti_i = 0\right] \\
 &amp;=\frac{1}{\Nt}V\left[\ytp\right] + \frac{1}{\Nc}V\left[\ycp\right] \\
 &amp;=\frac{1}{\Nt}V\left[\ytp\right] + \frac{1}{\Nc}V\left[\ycp\right] \\
-&amp;=\frac{\vt}{\Nt} + \frac{\vc}{\Nc} \\
+&amp;=\frac{\vt}{\Nt} + \frac{\vc}{\Nc},
 \end{align}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\vt ≡ V\left[\ytp\right] \quad \vc ≡ V\left[\ycp\right],
+\]</span></p>
+<p>is the (true) population variance in the treatment and control group, respectively. In practice, we don’t know these variances, so we estimate them using</p>
+<p><span class="math display">\[
+\vte = \vtef \quad \vce = \vcef.
 \]</span></p>
 <ul>
 <li><p>In practice, we don’t know variances. So need to estimate. We do this using … (box with derivation). Which gives us…</p></li>
@@ -527,13 +545,6 @@ V\left[\tee\right] &amp;= V\left[\ytob - \ycob\right] \\
 \]</span></p>
 <p>Notes to integrate:</p>
 <p>Because our Bernoulli assignment mechanism allocates treatment and control units independently and randomly, an unbiased estimate of the sampling variance of <span class="math inline">\(\hat{\tau}\)</span> is given by:</p>
-<p><span class="math display">\[
-\vtees = \vtee
-\]</span></p>
-<p>where</p>
-<p><span class="math display">\[
-s_c^2 = \frac{1}{N_c - 1}\sum_{i:W_i=0}\left(Y_i(0) - \bar{Y}_c^{obs}\right)^2 \qquad s_t^2 = \frac{1}{N_t - 1}\sum_{i:W_i=1}\left(Y_i(1) - \bar{Y}_t^{obs}\right)^2.
-\]</span></p>
 <p>[^vardetails]</p>
 <p>We gloss over a few details here. Depending on the treatment assignment mechanism, units are not independently assigned. In online experiments, we often use hash functions for treatment assignment, in which case assignment is independent. But f</p>
 <p>If, instead of using a Bernoulli trial assignment mechanism we use a <em>completely randomised experiment</em>, where we perfectly balance the number of units assigned to each treatment, then the variance estimator above is not necessarily unbiased. In such an experiment, assignments are not independent because each unit being assigned to one unit lowers the probability of all other units of being assigned to that same variant.</p>
@@ -606,7 +617,7 @@ Rice, John A. 2006. <em>Mathematical Statistics and Data Analysis</em>. Cengage 
 <ol>
 <li id="fn1"><p>Other choices are possible. We could define the individual level treatment effect as the ratio of active and control treatment, and we can create different summary statistics of the individual-level treatment effects other than the average treatment effect over the entire population (see, for instance, Chapter 1 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>For an alternative proof, see the proof of Theorem 6.1 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>See <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span> Section 6.7 and Appendix B of Chapter 6 for details.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>When we sample units without replacement and use a completely randomised experiment as the assignment mechanism, this is not true. As a result, the derivation of the standard error is more complicated though it turns out that formula we derive here still holds approximately, since the interdependence is small if the population from which experiment units are sampled is much larger than the experiment sample. For more details, See <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span> Section 6.7 and Appendix B of Chapter 6.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Note that the test statistic follows a t-distribution because we have to estimate the variance (that is, if we replace the true variance with its estimate when standardising a normal variable, the result follows a Student’s t-distribution). So, this has nothing to do with the CLT. However, for the test statistic to follow a student distribution, the numerator has to follow a normal distribution. Often, though, the underlying data is not normal, so that its approximately normal only for large enough samples, due to the CLT. At the same time, the t-distribution also converges to normal as the sample size increases. Hence, one we have a sample size large enough to justify using the t-distribution, we might as well use a z-test. As pointed out in Chapter 9 in <span class="citation" data-cites="rice2006mathematical">Rice (<a href="#ref-rice2006mathematical" role="doc-biblioref">2006</a>)</span>, the test statistic above only follows a t-distribution if we use the pooled variance, but for large sample sizes, the distribution is still approximately t or normal.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>

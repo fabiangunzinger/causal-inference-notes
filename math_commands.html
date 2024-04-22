@@ -63,8 +63,8 @@
     \nc{\vpe}{\sev^2}
     \nc{\vtf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ytp - \ytpb)^2}
     \nc{\vcf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ycp - \ycpb)^2}
-    \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}(\yto - \ytob)^2}
-    \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}(\yco - \ycob)^2}
+    \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}\left(\yio - \ytob\right)^2}
+    \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}\left(\yio - \ycob\right)^2}
 
     %%%%%%%%%%%%%%%%%%%%%%
     % sampling variances %
@@ -114,6 +114,8 @@
     %%%%%%%%%%%%%%%%%%
     % other commands %
     %%%%%%%%%%%%%%%%%%
+
+    \nc{mc}[1]{\text{\scriptsize(#1)}} %math inline comment
 
     <!-- These aren't working for some reason -->
     <!-- \nc{lp}{\left(} -->

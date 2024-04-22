@@ -2,6 +2,22 @@
 
 The goal of this chapter is to succinctly summarise the statistical theory of randomised experiments.
 
+Most online experiments appear very simple; we split traffic into two groups with
+different experiences and compare outcomes between groups. So how much
+statistical theory could we possibly need?
+
+Well, to experiment effectively, you do want to make sure you have
+
+1. a coherent definition of the causal effect effect you want to measure and a
+   good way of estimating it,
+
+2. a way to differentiate signals from noise,
+
+3. a way to ensure your experiment has a good chance of picking up signals.
+
+First two are covered here. The third, which relates to the power of your
+experiment, is covered in @sec-power.
+
 
 ## Potential outcomes and outcome of interest
 
@@ -9,7 +25,7 @@ We have a population of units $i = 1, \dots, \N$. Each unit in the population ca
 
 $$
 \yio = \ti_i \ytp + (1 - \ti_i) \ycp.
-$$
+$$ {#eq-yio}
 
 What's the use of potential outcomes we can only partially observe? They provide
 us with a simple and coherent way to think about the causal effect of the
@@ -77,7 +93,7 @@ $$
 which says that we can express the true effect as the difference between the
 expected outcomes of treated and untreated untis -- we have identified a way for
 expressing the treatment effect in quantities we can actually estimate based on
-the data we have available. In particular, the above suggests the following
+available data. In particular, the above suggests the following
 estimation approach:
 
 $$
@@ -90,7 +106,7 @@ $$
 \ytob = \ytobf \qquad \ycob = \ycobf.
 $$
 
-We can show that this is unbiased estimator of $\te$:[^alternative_proof]
+We can show that this is an unbiased estimator of $\te$:[^alternative_proof]
 
 $$
 \begin{align}
@@ -111,13 +127,17 @@ $$
 
 ## Variance of treatment effect estimates
 
-Discussion in {#sec-treatment-assignment} important also for standard error. 
+In this section, we'll derive the standard error of our treatment effect
+stimator $\tee$.
 
-In
-field experiments, we have dependence. As a result of this dependence, the derivation of the standard error is more complicated though it turns out that
-formula we will derive below still holds approximately, since the
-interdependence is small if the population from which experiment units are
-sampled is much larger than the experiment sample.[^imbens-ref]
+For the estimation of the treatment effect above, the main implication of the
+simple random sample proceedure commonly used for online experiments (see
+chapter @sec-treatment-assignment) was that the expectation of potential
+ourcomes for treatment and control groups were identical. For the estimation of
+the standard error, the main implication is that sampling and treatment
+assignment between units are independent in the sense that one unit being
+samples or assigned to a treatment condition doesn't affect the sampling or
+assignment probabilities for any other units.[^dependence_case]
 
 So let's think about the standard error for a typical online experiment from
 first principles.
@@ -133,9 +153,25 @@ V\left[\tee\right] &= V\left[\ytob - \ycob\right] \\
 &=\frac{1}{\Nt}V\left[\yio | \ti_i = 1\right] + \frac{1}{\Nc}V\left[\yio | \ti_i = 0\right] \\
 &=\frac{1}{\Nt}V\left[\ytp\right] + \frac{1}{\Nc}V\left[\ycp\right] \\
 &=\frac{1}{\Nt}V\left[\ytp\right] + \frac{1}{\Nc}V\left[\ycp\right] \\
-&=\frac{\vt}{\Nt} + \frac{\vc}{\Nc} \\
+&=\frac{\vt}{\Nt} + \frac{\vc}{\Nc},
 \end{align}
 $$
+
+where
+
+$$
+\vt ≡ V\left[\ytp\right] \quad \vc ≡ V\left[\ycp\right],
+$$
+
+is the (true) population variance in the treatment and control group,
+respectively. In practice, we don't know these variances, so we estimate them
+using 
+
+$$
+\vte = \vtef \quad \vce = \vcef.
+$$
+
+
 
 
 - In practice, we don't know variances. So need to estimate. We do this using
@@ -173,16 +209,6 @@ $$
 Notes to integrate:
 
 Because our Bernoulli assignment mechanism allocates treatment and control units independently and randomly, an unbiased estimate of the sampling variance of $\hat{\tau}$ is given by:
-
-$$
-\vtees = \vtee
-$$
-
-where
-
-$$
-s_c^2 = \frac{1}{N_c - 1}\sum_{i:W_i=0}\left(Y_i(0) - \bar{Y}_c^{obs}\right)^2 \qquad s_t^2 = \frac{1}{N_t - 1}\sum_{i:W_i=1}\left(Y_i(1) - \bar{Y}_t^{obs}\right)^2.
-$$
 
 
 [^vardetails] 
@@ -255,8 +281,6 @@ There are two ways to perform inference:
 
 - When treating the $N$ units in the sample as a random sample from a larger super-population, then in addition to randomness from the randomisation, we also have randomness from the sampling.
 
-[^imbens-ref]: See @imbens2015causal Section 6.7 and Appendix B of Chapter 6 for details.
-
 [^alternative_choices]: Other choices are possible. We could define the
 individual level treatment effect as the ratio of active and control treatment,
 and we can create different summary statistics of the individual-level treatment
@@ -264,6 +288,11 @@ effects other than the average treatment effect over the entire population (see,
 for instance, Chapter 1 in @imbens2015causal).
 
 [^alternative_proof]: For an alternative proof, see the proof of Theorem 6.1 in @imbens2015causal.
+
+[^dependence_case]: When we sample units without replacement and use a completely randomised experiment as the assignment mechanism, this is not true. As a result, the derivation of the standard error is more complicated though it turns out that
+formula we derive here still holds approximately, since the
+interdependence is small if the population from which experiment units are
+sampled is much larger than the experiment sample. For more details, See @imbens2015causal Section 6.7 and Appendix B of Chapter 6.
 
 
 [^tdetails]: Note that the test statistic follows a t-distribution because we have to estimate the variance (that is, if we replace the true variance with its estimate when standardising a normal variable, the result follows a Student's t-distribution). So, this has nothing to do with the CLT. However, for the test statistic to follow a student distribution, the numerator has to follow a normal distribution. Often, though, the underlying data is not normal, so that its approximately normal only for large enough samples, due to the CLT. At the same time, the t-distribution also converges to normal as the sample size increases. Hence, one we have a sample size large enough to justify using the t-distribution, we might as well use a z-test. As pointed out in Chapter 9 in @rice2006mathematical, the test statistic above only follows a t-distribution if we use the pooled variance, but for large sample sizes, the distribution is still approximately t or normal.
