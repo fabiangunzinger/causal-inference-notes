@@ -44,7 +44,7 @@ We are usually interested in the average causal effect of the treatment across
 all units, which is given by the Average Treatment Effect (ATE)
 
 $$
-\te = \tefs = \tef.
+\boxed{\te = \tefs = \tef}
 $$ {#eq-ate}
 
 This is the quantity we're trying to estimate in a typical experiment, though
@@ -97,7 +97,7 @@ available data. In particular, the above suggests the following
 estimation approach:
 
 $$
-\tee = \ytob - \ycob,
+\boxed{\tee = \ytob - \ycob}
 $$ {#eq-ate-est}
 
 where
@@ -125,34 +125,54 @@ E\left[\tee\right] &= E\left[\ytob - \ycob\right] \\
 $$
 
 
-## Variance of treatment effect estimates
+## Standard error of treatment effect estimate
 
 In this section, we'll derive the standard error of our treatment effect
 stimator $\tee$.
 
-For the estimation of the treatment effect above, the main implication of the
-simple random sample proceedure commonly used for online experiments (see
-chapter @sec-treatment-assignment) was that the expectation of potential
-ourcomes for treatment and control groups were identical. For the derivation of
-the standard error, the main implication is that sampling and treatment
-assignment between units are independent in the sense that one unit being
-sampled or assigned to a treatment condition doesn't affect other units' sampling or
-assignment probabilities.[^dependence_case]
+Our treatment effect estimate, $\tee$, is a random variable because sampling and
+treatment assignment are random. This means that if we were to repeat the sampe
+experiment many times we'd get a slightly different value for $\tee$ each time.
+The distribution of all these values is called the sampling distribution of
+$\tee$. We know a few things about that distribution. From the central limit
+theorem we know that its shape is Normal (see @sec-stats-foundations). Above we
+have shown above that the distribution has mean $\te$, which means our estimator
+is unbiased. Naturally, the distribution also has a standard deviation. Because it
+is a sampling distribution, that standard deviation is called the standard
+error. But it is still a standard deviation, and is thus defined as the square
+root of the variance. We'll thus find the standard error as follows: we first
+derive the variance of the treatment estimate, then find a way to estimate that
+variance, and then take the square root of that estimate to get the standard
+error.
 
-So let's think about the standard error for a typical online experiment from
+
+### Treatment effect estimate variance
+
+The way we sample units into our experiment and assign them to treatment groups
+has important implications for the variance. For the estimation of the treatment
+effect above, the main implication of the simple random sample proceedure
+commonly used for online experiments (see chapter @sec-treatment-assignment) was
+that the expectation of potential ourcomes for treatment and control groups were
+identical. For the derivation of the variance and the standard error, the main
+implication is that sampling and treatment assignment between units are
+independent in the sense that one unit being sampled or assigned to a treatment
+condition doesn't affect other units' sampling or assignment
+probabilities.[^dependence_case]
+
+Given this independence property, let's think about the standard error for a typical online experiment from
 first principles.
 
 $$
 \begin{align}
-V\left[\tee\right] &= V\left[\ytob - \ycob\right] \\
-&=V\left[\ytob\right] + V\left[\ycob\right] \\
-&=V\left[\ytobf\right] + V\left[\ycobf\right] \\
-&=\frac{1}{\Nt^2}\sum_{i:\ti_i=1} V\left[\yto\right]
-+ \frac{1}{\Nc^2}\sum_{i:\ti_i=0} V\left[\yco\right] \\
-&=\frac{\Nt}{\Nt^2}V\left[\yto\right] + \frac{\Nc}{\Nc^2}V\left[\yco\right] \\
-&=\frac{1}{\Nt}V\left[\yio | \ti_i = 1\right] + \frac{1}{\Nc}V\left[\yio | \ti_i = 0\right] \\
-&=\frac{1}{\Nt}V\left[\ytp\right] + \frac{1}{\Nc}V\left[\ycp\right] \\
-&=\frac{1}{\Nt}V\left[\ytp\right] + \frac{1}{\Nc}V\left[\ycp\right] \\
+V\left(\tee\right) &= V\left(\ytob - \ycob\right) \\
+&=V\left(\ytob\right) + V\left(\ycob\right) \\
+&=V\left(\ytobf\right) + V\left(\ycobf\right) \\
+&=\frac{1}{\Nt^2}\sum_{i:\ti_i=1} V\left(\yto\right)
++ \frac{1}{\Nc^2}\sum_{i:\ti_i=0} V\left(\yco\right) \\
+&=\frac{\Nt}{\Nt^2}V\left(\yto\right) + \frac{\Nc}{\Nc^2}V\left(\yco\right) \\
+&=\frac{1}{\Nt}V\left(\yio | \ti_i = 1\right) + \frac{1}{\Nc}V\left(\yio | \ti_i = 0\right) \\
+&=\frac{1}{\Nt}V\left(\ytp\right) + \frac{1}{\Nc}V\left(\ycp\right) \\
+&=\frac{1}{\Nt}V\left(\ytp\right) + \frac{1}{\Nc}V\left(\ycp\right) \\
 &=\frac{\vt}{\Nt} + \frac{\vc}{\Nc},
 \end{align}
 $$
@@ -160,11 +180,15 @@ $$
 where
 
 $$
-\vt ≡ V\left[\ytp\right] \quad \vc ≡ V\left[\ycp\right],
+\vt ≡ V\left(\ytp\right) \quad \vc ≡ V\left(\ycp\right),
 $$
 
 is the (true) population variance in the treatment and control group,
-respectively. In practice, we don't know these variances, so we estimate them
+respectively.
+
+### Estimating the treatment effect estimate variance
+
+In practice, we don't know these variances, so we estimate them
 using 
 
 $$
@@ -174,52 +198,51 @@ $$
 from which we get
 
 $$
-\vte = \frac{\vte}{\Nt} + \frac{\vce}{\Nc}.
+\sve = \svefu.
 $$
 
 This is the variance of our treatment effect estimate. For statistical testing,
 the construction of confidence intervals, and for power analysis we work with
-the standard error, which is defined as the square root of the variance:
+the standard errors. We'll derive these next.
+
+### Standard error of treatment effect estimate
+
+As discussed above, the standard error is simply the standard deviation of the
+sampling distribution of $\tee$, defined as the square root of the sampling variance, and is thus defined as:
 
 $$
-\se = \sqrt{\frac{\vte}{\Nt} + \frac{\vce}{\Nc}}.
+\boxed{\se = \seefu}
 $${#eq-se}
 
-We could work with this. But it is useful to make a few assumptions that
-simplify the expression and are usually innocent given the nature of online
-experiments. First, sample sizes are usually in the thousands or tens of thousands, so that the group sizes are close to identical. Assuming they are the same, we can write
+We could work with this, and sometimes do. But in the context of online
+experiments, because sample sizes are so large and treatment effects are usually
+small, people often assume equal sample sizes and variances, so that we have
+$\Nt = \Nc = N/2$ and $\vte = \vce = \vpe$. The common variance $\vpe$ is
+estimated by "pooling" $\vte$ and $\vce$ to create a degrees-of-freedom-weighted
+estimator of the form:
 
 $$
-\se = \sqrt{\frac{\vte + \vce}{\N\2}}.
+\vpe = \vpef.
 $$
 
-Also, treatment effects are usually small, so that group variances are also very similar.[^additive-effects] Assuming they are the same, we can write
+Substituting all of the above in @eq-se results in 
 
 $$
-\se = \sqrt{\frac{\vpe + \vpe}{\N\2}} = \sqrt{\frac{2\vpe}{\N\2}} = \sqrt{\frac{4\vpe}{\N}} = 2\frac{\vpe}{\sqrt{\N}}
-$${#eq-ses}
+\se = \sqrt{\frac{\vpe + \vpe}{\N/2}} = \sqrt{\frac{4\vpe}{\N}} = \seefe
+$$
 
 For most of the text, I'll use this expression for the standard error. In some
-cases, though, it is useful to express the standard error in terms of the proportion of
-units allocated to the treatment group. Hence, instead of assuming equal sample
-sizes, we use $P$ to denote that proportion and $\N$ to denote total sample
-size. After a little algebraic manupulation, we then get:
+cases, though, it is useful to express the standard error in terms of the
+proportion of units allocated to the treatment group. Hence, instead of assuming
+equal sample sizes, we use $P$ to denote that proportion and $\N$ to denote
+total sample size, while maintaining the assumption of equal variance. After a little algebraic manipulation we then get:
 
 $$
-\se = \sqrt{\frac{\vpe}{P\N} + \frac{\vpe}{(1-P)\N} = \sqrt{\frac{2\vpe}{P(1-P)N}}.
-$${#eq-sep}
+\se = \sqrt{\frac{\vpe}{P\N} + \frac{\vpe}{(1-P)\N}} = \seefp.
+$$
 
-
-
-[^vardetails] 
-
-We gloss over a few details here. Depending on the treatment assignment mechanism, units are not independently assigned. In online experiments, we often use hash functions for treatment assignment, in which case assignment is independent. But f
-
-If, instead of using a Bernoulli trial assignment mechanism we use a *completely randomised experiment*, where we perfectly balance the number of units assigned to each treatment, then the variance estimator above is not necessarily unbiased. In such an experiment, assignments are not independent because each unit being assigned to one unit lowers the probability of all other units of being assigned to that same variant. 
-
-, each unit being assigned to one variant lowers the probability of all other units being assigned to that same variant. In that case, the above variance estimator is unbiased only if the treatment effect is constant. However, it is usually used in practice even in cases where constant treatment effects are unlikely because it is conservative (i.e. at least as large as the true variance) and because it is always unbiased if the ATE is an estimate of the infinite super-population ATE.
-
-
+Notice that for equal sample sizes, when $P=0.5$, this formulation is equivalent
+to the one above as expected.
 
 
 ## Hypothesis testing

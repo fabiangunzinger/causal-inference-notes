@@ -178,6 +178,8 @@ $$
 
 ### Starting from Type I and Type II error conditions
 
+Use @list2011so
+
 ### Starting from graphical illustration
 
 @bloom1995minimum introduces the notion of the MDE as a useful way to quantify

@@ -64,7 +64,8 @@ book:
     # - chapters/references.qmd
 
 
-bibliography: /Users/fabian.gunzinger/.dotfiles/latex/fabib.bib
+bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
+# bibliography: /Users/fabian.gunzinger/.dotfiles/latex/fabib.bib
 
 format:
   html:
