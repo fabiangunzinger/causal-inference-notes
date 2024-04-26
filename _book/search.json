@@ -4,376 +4,416 @@
     "href": "index.html",
     "title": "Causal inference notes",
     "section": "",
-    "text": "In this space I want to collect my notes on causal inference.\nIf you find the notes helpful, find any errors, or have any suggestions, please get in touch by writing to fa.gunzinger@gmail.com."
+    "text": "In this space I want to collect my notes on causal inference.\nIf you find the notes helpful, find any errors, or have any suggestions, please get in touch by writing to fa.gunzinger@gmail.com.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>index.html</span>"
+    ]
   },
   {
     "objectID": "chapters/stats_foundations.html",
     "href": "chapters/stats_foundations.html",
-    "title": "2  Statistics foundation",
+    "title": "3  Statistics foundation",
     "section": "",
-    "text": "2.1 Important moments of random variables\nIn general, the kth uncentered moment of a discrete random variable X is defined by\n\\[\nE(X^k) = \\sum_{i=1}^n p(x_i)x_i^k\n\\],\nand the kth centered moment as\n\\[\nE\\left(X-E(X)\\right)^k = \\sum_{i=1}^n p(x_i)(x_i - \\mu)^k\n\\],\nHence, the mean of a random variable is the first uncentered momement, and the variance is the second centered moment.",
+    "text": "3.1 Important moments of random variables\nIn general, the kth uncentered moment of a discrete random variable X is defined by\n\\[\nE(X^k) = \\sum_{i=1}^n p(x_i)x_i^k\n\\],\nand the kth centered moment as\n\\[\nE\\left(X-E(X)\\right)^k = \\sum_{i=1}^n p(x_i)(x_i - \\mu)^k\n\\],\nHence, the mean of a random variable is the first uncentered momement, and the variance is the second centered moment.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Statistics foundation</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics foundation</span>"
     ]
   },
   {
     "objectID": "chapters/stats_foundations.html#sampling",
     "href": "chapters/stats_foundations.html#sampling",
-    "title": "2  Statistics foundation",
-    "section": "2.2 Sampling",
-    "text": "2.2 Sampling\n\nWe rely on a sample to learn about a larger population.\nWe thus need to make sure that the sampling procedure is free of bias, so that units in the sample are representative of those in the population.\nWhile representativeness cannot be achieved perfectly, it’s important to ensure that non-representativeness is due to random error and not due to systematic bias.\nRandom errors produce deviations that vary over repeated samples, while systematic bias persists. Such selection bias can lead to misleading and ephemeral conclusions.\nTwo basic sampling procedures are simple random sampling (randomly select \\(n\\) units from a population of \\(N\\)) and stratified random sampling (randomly select \\(n_s\\) from each stratum \\(S\\) of a population of \\(N\\)).\nThe mean outcome of the sample is denoted \\(\\bar{x}\\); that of the population, \\(\\mu\\).\n(On stratification: why does it reduce variance? Imagine an extreme case, where the number of strata were equal to the number of different units in the sample. In this case, the variance would be zero. Number of diff units here needns be individuals, but groups of units that share all relevant characteristics)",
+    "title": "3  Statistics foundation",
+    "section": "3.2 Sampling",
+    "text": "3.2 Sampling\n\nWe rely on a sample to learn about a larger population.\nWe thus need to make sure that the sampling procedure is free of bias, so that units in the sample are representative of those in the population.\nWhile representativeness cannot be achieved perfectly, it’s important to ensure that non-representativeness is due to random error and not due to systematic bias.\nRandom errors produce deviations that vary over repeated samples, while systematic bias persists. Such selection bias can lead to misleading and ephemeral conclusions.\nTwo basic sampling procedures are simple random sampling (randomly select \\(n\\) units from a population of \\(N\\)) and stratified random sampling (randomly select \\(n_s\\) from each stratum \\(S\\) of a population of \\(N\\)).\nThe mean outcome of the sample is denoted \\(\\bar{x}\\); that of the population, \\(\\mu\\).\n(On stratification: why does it reduce variance? Imagine an extreme case, where the number of strata were equal to the number of different units in the sample. In this case, the variance would be zero. Number of diff units here needns be individuals, but groups of units that share all relevant characteristics)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Statistics foundation</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics foundation</span>"
     ]
   },
   {
     "objectID": "chapters/stats_foundations.html#sampling-distributions",
     "href": "chapters/stats_foundations.html#sampling-distributions",
-    "title": "2  Statistics foundation",
-    "section": "2.3 Sampling distributions",
-    "text": "2.3 Sampling distributions\n\nA sampling distribution is the distribution of a statistic (e.g. the mean) over many repeated samples. Classical statistics is much concerned with making inferences from samples about the population based on such statistics.\nWhen we measure an attribute of the population based on a sample using a statistic, the result will vary over repeated samples. To capture by how much it varies, we are concerned with the sampling variability.\nKey distinctions:\n\nThe data distribution is the distribution of the data in the sample, and its spread is measured by the standard deviation.\nThe sampling distribution is the distribution of the sample statistic, and its spread is measured by the standard error.\n\n\n\nFigure show that:\n\nData distribution has larger spread than sampling distributions (each data point is a special case of a sample with n = 1)\nThe spread of sampling distributions decreases with increasing sample size",
+    "title": "3  Statistics foundation",
+    "section": "3.3 Sampling distributions",
+    "text": "3.3 Sampling distributions\n\nA sampling distribution is the distribution of a statistic (e.g. the mean) over many repeated samples. Classical statistics is much concerned with making inferences from samples about the population based on such statistics.\nWhen we measure an attribute of the population based on a sample using a statistic, the result will vary over repeated samples. To capture by how much it varies, we are concerned with the sampling variability.\nKey distinctions:\n\nThe data distribution is the distribution of the data in the sample, and its spread is measured by the standard deviation.\nThe sampling distribution is the distribution of the sample statistic, and its spread is measured by the standard error.\n\n\n\nFigure show that:\n\nData distribution has larger spread than sampling distributions (each data point is a special case of a sample with n = 1)\nThe spread of sampling distributions decreases with increasing sample size",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Statistics foundation</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics foundation</span>"
     ]
   },
   {
     "objectID": "chapters/stats_foundations.html#law-of-large-numbers-and-central-limit-theorem",
     "href": "chapters/stats_foundations.html#law-of-large-numbers-and-central-limit-theorem",
-    "title": "2  Statistics foundation",
-    "section": "2.4 Law of large numbers and central limit theorem",
-    "text": "2.4 Law of large numbers and central limit theorem\n\nSuppose that we have a sequence of independent and identically distributed (iid) random variables \\(\\{x_1, ..., x_n\\}\\) drawn from a distribution with expected value \\(\\mu\\) and finite variance \\(\\sigma^2\\), and we are interested in the mean value \\(\\bar{x} = \\frac{x_1 + ... + x_n}{n}\\).\nThe law or large numbers states that \\(\\bar{x}\\) converges to \\(\\mu\\) as we increase the sample size. Formally:\n\n\\[\n\\bar{x} \\rightarrow \\mu \\text{ as } n \\rightarrow \\infty.\n\\]\n\nThe (classical, Lindeberg-Lévy) central limit theorem describes the spread of the sampling distribution of \\(\\bar{x}\\) around \\(\\mu\\) during this convergence. In particular, it implies that for large enough \\(n\\), the distribution of \\(\\bar{x}\\) will be close to a normal distribution with mean \\(\\mu\\) and variance \\(\\sigma^2/n\\). The above figures are a visual representation of this. Formally:\n\n\\[\n\\lim _{n\\to\\infty} \\sqrt{n}(\\bar{x} - \\mu) \\rightarrow \\mathcal{N}\\left(0,\\sigma ^{2}\\right).\n\\]\n\nThis is useful because it means that irrespective of the underlying distribution (i.e. the distribution of the values in our sequence above), we can use the normal distribution and approximations to it (such as the t-distribution) to calculate sampling distributions when we do inference. Because of this, the CLT is at the heart of the theory of hypothesis testing and confidence intervals, and thus of much of classical statistics.\nFor experiments, this means that our estiamted treatment effect is normally distributed, which is what allows us to draw inferences from our experimental setting ot the population as a whole. The CLT is thus at the heart of the experimental approach.\nThe CLT also explains the prevalence of the normal distribution in the natural world. Many characteristics of living things we observe and measure are the sum of the additive effects of many genetic and environmental factors, so their distribution tends to be normal. –&gt;",
+    "title": "3  Statistics foundation",
+    "section": "3.4 Law of large numbers and central limit theorem",
+    "text": "3.4 Law of large numbers and central limit theorem\n\nSuppose that we have a sequence of independent and identically distributed (iid) random variables \\(\\{x_1, ..., x_n\\}\\) drawn from a distribution with expected value \\(\\mu\\) and finite variance \\(\\sigma^2\\), and we are interested in the mean value \\(\\bar{x} = \\frac{x_1 + ... + x_n}{n}\\).\nThe law or large numbers states that \\(\\bar{x}\\) converges to \\(\\mu\\) as we increase the sample size. Formally:\n\n\\[\n\\bar{x} \\rightarrow \\mu \\text{ as } n \\rightarrow \\infty.\n\\]\n\nThe (classical, Lindeberg-Lévy) central limit theorem describes the spread of the sampling distribution of \\(\\bar{x}\\) around \\(\\mu\\) during this convergence. In particular, it implies that for large enough \\(n\\), the distribution of \\(\\bar{x}\\) will be close to a normal distribution with mean \\(\\mu\\) and variance \\(\\sigma^2/n\\). The above figures are a visual representation of this. Formally:\n\n\\[\n\\lim _{n\\to\\infty} \\sqrt{n}(\\bar{x} - \\mu) \\rightarrow \\mathcal{N}\\left(0,\\sigma ^{2}\\right).\n\\]\n\nThis is useful because it means that irrespective of the underlying distribution (i.e. the distribution of the values in our sequence above), we can use the normal distribution and approximations to it (such as the t-distribution) to calculate sampling distributions when we do inference. Because of this, the CLT is at the heart of the theory of hypothesis testing and confidence intervals, and thus of much of classical statistics.\nFor experiments, this means that our estiamted treatment effect is normally distributed, which is what allows us to draw inferences from our experimental setting ot the population as a whole. The CLT is thus at the heart of the experimental approach.\nThe CLT also explains the prevalence of the normal distribution in the natural world. Many characteristics of living things we observe and measure are the sum of the additive effects of many genetic and environmental factors, so their distribution tends to be normal. –&gt;",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Statistics foundation</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics foundation</span>"
     ]
   },
   {
     "objectID": "chapters/stats_foundations.html#standard-error",
     "href": "chapters/stats_foundations.html#standard-error",
-    "title": "2  Statistics foundation",
-    "section": "2.5 Standard error",
-    "text": "2.5 Standard error\n\nThe standard error is a measure for the variability of the sampling distribution.\nIt is related to the standard deviation of the observations, \\(\\sigma\\) and the sample size \\(n\\) in the following way:\n\n\\[\nse = \\frac{\\sigma}{\\sqrt{n}}\n\\]\n\nThe relationship between sample size and se is sometimes called the “Square-root of n rule”, since reducing the \\(se\\) by a factor of 2 requires an increase in the sample size by a factor of 4.\n\nDerivation:\nThe sum of a sequence of independent random variables is:\n\\[\nT = (x_1 + x_2 + ... + x_n)\n\\]\nWhich has variance\n\\[\nVar(T) = Var(x_1) + Var(x_2) + ... + Var(x_n) = n\\sigma^2\\]\nand mean\n\\[\n\\bar{x} = T/n.\n\\]\nThe variance of \\(\\bar{x}\\) is then given by:\n\\[\nVar(\\bar{x}) = Var\\left(\\frac{T}{n}\\right) = \\frac{1}{n^2}Var(T) = \\frac{1}{n^2}n\\sigma^2 = \\frac{\\sigma^2}{n}.\n\\]\nThe standard error is defined as the standard deviation of \\(\\bar{x}\\), and is thus\n\\[\nse(\\bar{x}) = \\sqrt{Var(\\bar{x})} = \\frac{\\sigma}{\\sqrt{n}}.\n\\]",
+    "title": "3  Statistics foundation",
+    "section": "3.5 Standard error",
+    "text": "3.5 Standard error\n\nThe standard error is a measure for the variability of the sampling distribution.\nIt is related to the standard deviation of the observations, \\(\\sigma\\) and the sample size \\(n\\) in the following way:\n\n\\[\nse = \\frac{\\sigma}{\\sqrt{n}}\n\\]\n\nThe relationship between sample size and se is sometimes called the “Square-root of n rule”, since reducing the \\(se\\) by a factor of 2 requires an increase in the sample size by a factor of 4.\n\nDerivation:\nThe sum of a sequence of independent random variables is:\n\\[\nT = (x_1 + x_2 + ... + x_n)\n\\]\nWhich has variance\n\\[\nVar(T) = Var(x_1) + Var(x_2) + ... + Var(x_n) = n\\sigma^2\\]\nand mean\n\\[\n\\bar{x} = T/n.\n\\]\nThe variance of \\(\\bar{x}\\) is then given by:\n\\[\nVar(\\bar{x}) = Var\\left(\\frac{T}{n}\\right) = \\frac{1}{n^2}Var(T) = \\frac{1}{n^2}n\\sigma^2 = \\frac{\\sigma^2}{n}.\n\\]\nThe standard error is defined as the standard deviation of \\(\\bar{x}\\), and is thus\n\\[\nse(\\bar{x}) = \\sqrt{Var(\\bar{x})} = \\frac{\\sigma}{\\sqrt{n}}.\n\\]",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Statistics foundation</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics foundation</span>"
     ]
   },
   {
     "objectID": "chapters/stats_foundations.html#bootstrap",
     "href": "chapters/stats_foundations.html#bootstrap",
-    "title": "2  Statistics foundation",
-    "section": "2.6 Bootstrap",
-    "text": "2.6 Bootstrap\n\nIn practice, we often use the bootstrap to calculate standard errors of model parameters or statistics.\nConceptually, the bootstrap works as follows:\n\nwe draw an original sample and calculate our statistic\nwe then create a blown-up version of that sample by duplicating it many times\nwe then draw repeated samples from the large sample, recalculate our statistic, and calculate the standard deviation of these statistics to get the standard error.\n\nTo achieve this easily, we can skip step 2) by simply sampling with replacement from the original distribution in step 3).\nThe full procedure makes clear what the bootstrap results tell us, however: they tell us how lots of additional samples would behave if they were drawn from a population like our original sample.\nHence, if the original sample is not representative of the population of interest, then bootstrap results are not informative about that population either.\nThe bootstrap can also be used to improve the performance of classification or regression trees by fitting multiple trees on bootstrapped sample and then averaging their predictions. This is called “bagging”, short for “bootstrap aggregating”.\nWe can use to boostrap also to calculate CIs following this algorithm:\n\nDraw a large number of bootstrap samples and calculate the statistic of interest\nTrim [(100-x)/2] percent of the bootstrap results on either end of the distribution\nThe trim points are the end point of the CI.",
+    "title": "3  Statistics foundation",
+    "section": "3.6 Bootstrap",
+    "text": "3.6 Bootstrap\n\nIn practice, we often use the bootstrap to calculate standard errors of model parameters or statistics.\nConceptually, the bootstrap works as follows:\n\nwe draw an original sample and calculate our statistic\nwe then create a blown-up version of that sample by duplicating it many times\nwe then draw repeated samples from the large sample, recalculate our statistic, and calculate the standard deviation of these statistics to get the standard error.\n\nTo achieve this easily, we can skip step 2) by simply sampling with replacement from the original distribution in step 3).\nThe full procedure makes clear what the bootstrap results tell us, however: they tell us how lots of additional samples would behave if they were drawn from a population like our original sample.\nHence, if the original sample is not representative of the population of interest, then bootstrap results are not informative about that population either.\nThe bootstrap can also be used to improve the performance of classification or regression trees by fitting multiple trees on bootstrapped sample and then averaging their predictions. This is called “bagging”, short for “bootstrap aggregating”.\nWe can use to boostrap also to calculate CIs following this algorithm:\n\nDraw a large number of bootstrap samples and calculate the statistic of interest\nTrim [(100-x)/2] percent of the bootstrap results on either end of the distribution\nThe trim points are the end point of the CI.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Statistics foundation</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics foundation</span>"
     ]
   },
   {
     "objectID": "chapters/stats_foundations.html#selection-bias",
     "href": "chapters/stats_foundations.html#selection-bias",
-    "title": "2  Statistics foundation",
-    "section": "2.7 Selection bias",
-    "text": "2.7 Selection bias\nCommon types of selection bias in data science: - The vast search effect (using the data to answer many questions will eventually reveal something interesting by mere chance – if 20,000 people flip a coin 10 times, some will have 10 straight heads) - Nonrandom sampling - Cherry-picking data - Selecting specific time-intervals - Stopping experiments prematurely - Regression to the mean (occurs in settings where we measure outcomes repeatedly over time and where luck and skill combine to determine outcomes, since winners of one period will be less lucky next period and perform closer to the mean performer)\nWays to guard against selection bias: - have one or many holdout datasets to confirm your results.",
+    "title": "3  Statistics foundation",
+    "section": "3.7 Selection bias",
+    "text": "3.7 Selection bias\nCommon types of selection bias in data science: - The vast search effect (using the data to answer many questions will eventually reveal something interesting by mere chance – if 20,000 people flip a coin 10 times, some will have 10 straight heads) - Nonrandom sampling - Cherry-picking data - Selecting specific time-intervals - Stopping experiments prematurely - Regression to the mean (occurs in settings where we measure outcomes repeatedly over time and where luck and skill combine to determine outcomes, since winners of one period will be less lucky next period and perform closer to the mean performer)\nWays to guard against selection bias: - have one or many holdout datasets to confirm your results.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Statistics foundation</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics foundation</span>"
     ]
   },
   {
     "objectID": "chapters/stats_foundations.html#standard-deviation-vs-standard-error",
     "href": "chapters/stats_foundations.html#standard-deviation-vs-standard-error",
-    "title": "2  Statistics foundation",
-    "section": "2.8 Standard deviation vs standard error",
-    "text": "2.8 Standard deviation vs standard error\n\nStandard deviation is the spread of the distribution of the values in the population of interest\nStandard error is the spread of the distribution of a sample statistic (such as the mean) based on a random sample of population values.",
+    "title": "3  Statistics foundation",
+    "section": "3.8 Standard deviation vs standard error",
+    "text": "3.8 Standard deviation vs standard error\n\nStandard deviation is the spread of the distribution of the values in the population of interest\nStandard error is the spread of the distribution of a sample statistic (such as the mean) based on a random sample of population values.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Statistics foundation</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics foundation</span>"
     ]
   },
   {
     "objectID": "chapters/stats_foundations.html#degrees-of-freedom",
     "href": "chapters/stats_foundations.html#degrees-of-freedom",
-    "title": "2  Statistics foundation",
-    "section": "2.9 Degrees of freedom",
-    "text": "2.9 Degrees of freedom\nIn statistics, degrees of freedom generally refers to the number of values in a calculation that can vary freely.\nExamples:\n\nVariance calculation: given that we have a mean, once we know all but one value, we also know final value, since sum of mean deviations has to be zero.\nCovariance calculation: given the two means, once we know the values for all but one x and y pair, we also know the values of the final pair. Hence, we loose one df (not clear to me why not two, given that both x and y are determined – because we treat their product as a single value? but that seems arbitrary)\nAlso, why no correction when we have popultion means? See wikipedia article on variance for section on bias correction\nThere is lots of confusion out there when it comes to df. For instance, you sometimes hear people say that df is the number of parameters you had to calculate on route. But this is wrong. It happens to come to the same when calculating variance, but not if you calcualte covariance (where you calculate two means beforehand, but only loose one df).",
+    "title": "3  Statistics foundation",
+    "section": "3.9 Degrees of freedom",
+    "text": "3.9 Degrees of freedom\nIn statistics, degrees of freedom generally refers to the number of values in a calculation that can vary freely.\nExamples:\n\nVariance calculation: given that we have a mean, once we know all but one value, we also know final value, since sum of mean deviations has to be zero.\nCovariance calculation: given the two means, once we know the values for all but one x and y pair, we also know the values of the final pair. Hence, we loose one df (not clear to me why not two, given that both x and y are determined – because we treat their product as a single value? but that seems arbitrary)\nAlso, why no correction when we have popultion means? See wikipedia article on variance for section on bias correction\nThere is lots of confusion out there when it comes to df. For instance, you sometimes hear people say that df is the number of parameters you had to calculate on route. But this is wrong. It happens to come to the same when calculating variance, but not if you calcualte covariance (where you calculate two means beforehand, but only loose one df).",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Statistics foundation</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics foundation</span>"
     ]
   },
   {
     "objectID": "chapters/stats_foundations.html#commonly-used-distributions",
     "href": "chapters/stats_foundations.html#commonly-used-distributions",
-    "title": "2  Statistics foundation",
-    "section": "2.10 Commonly used distributions",
-    "text": "2.10 Commonly used distributions\nfrom here\n\n2.10.1 Commonly used probability distributions\nThe following table lists the variance for some commonly used probability distributions.\n\n\n\n\n\n\n\n\n\nName of the probability distribution\nProbability distribution function\nMean\nVariance\n\n\n\n\nBinomial distribution\n\\(\\Pr\\,(X=k) = \\binom{n}{k}p^k(1 - p)^{n-k}\\)\n\\(np\\)\n\\(np(1 - p)\\)\n\n\nGeometric distribution\n\\(\\Pr\\,(X=k) = (1 - p)^{k-1}p\\)\n\\(\\frac{1}{p}\\)\n\\(\\frac{1 - p}{p^2}\\)\n\n\nNormal distribution\n\\(f(x \\mid \\mu, \\sigma^2) = \\frac{1}{\\sqrt{2\\pi\\sigma^2}} e^{-\\frac{(x - \\mu)^2}{2\\sigma^2}}\\)\n\\(\\mu\\)\n\\(\\sigma^2\\)\n\n\nUniform distribution (continuous)\n\\(f(x \\mid a, b) = \\begin{cases} \\frac{1}{b - a} & \\text{for } a \\le x \\le b, \\\\[3pt] 0 & \\text{for } x &lt; a \\text{ or } x &gt; b \\end{cases}\\)\n\\(\\frac{a + b}{2}\\)\n\\(\\frac{(b - a)^2}{12}\\)\n\n\nExponential distribution\n\\(f(x \\mid \\lambda) = \\lambda e^{-\\lambda x}\\)\n\\(\\frac{1}{\\lambda}\\)\n\\(\\frac{1}{\\lambda^2}\\)\n\n\nPoisson distribution\n\\(f(k \\mid \\lambda) = \\frac{e^{-\\lambda}\\lambda^{k}}{k!}\\)\n\\(\\lambda\\)\n\\(\\lambda\\)",
+    "title": "3  Statistics foundation",
+    "section": "3.10 Commonly used distributions",
+    "text": "3.10 Commonly used distributions\nfrom here\n\n3.10.1 Commonly used probability distributions\nThe following table lists the variance for some commonly used probability distributions.\n\n\n\n\n\n\n\n\n\nName of the probability distribution\nProbability distribution function\nMean\nVariance\n\n\n\n\nBinomial distribution\n\\(\\Pr\\,(X=k) = \\binom{n}{k}p^k(1 - p)^{n-k}\\)\n\\(np\\)\n\\(np(1 - p)\\)\n\n\nGeometric distribution\n\\(\\Pr\\,(X=k) = (1 - p)^{k-1}p\\)\n\\(\\frac{1}{p}\\)\n\\(\\frac{1 - p}{p^2}\\)\n\n\nNormal distribution\n\\(f(x \\mid \\mu, \\sigma^2) = \\frac{1}{\\sqrt{2\\pi\\sigma^2}} e^{-\\frac{(x - \\mu)^2}{2\\sigma^2}}\\)\n\\(\\mu\\)\n\\(\\sigma^2\\)\n\n\nUniform distribution (continuous)\n\\(f(x \\mid a, b) = \\begin{cases} \\frac{1}{b - a} & \\text{for } a \\le x \\le b, \\\\[3pt] 0 & \\text{for } x &lt; a \\text{ or } x &gt; b \\end{cases}\\)\n\\(\\frac{a + b}{2}\\)\n\\(\\frac{(b - a)^2}{12}\\)\n\n\nExponential distribution\n\\(f(x \\mid \\lambda) = \\lambda e^{-\\lambda x}\\)\n\\(\\frac{1}{\\lambda}\\)\n\\(\\frac{1}{\\lambda^2}\\)\n\n\nPoisson distribution\n\\(f(k \\mid \\lambda) = \\frac{e^{-\\lambda}\\lambda^{k}}{k!}\\)\n\\(\\lambda\\)\n\\(\\lambda\\)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Statistics foundation</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics foundation</span>"
     ]
   },
   {
     "objectID": "chapters/stats_foundations.html#p-values-how-to-draw-statistical-conclusions",
     "href": "chapters/stats_foundations.html#p-values-how-to-draw-statistical-conclusions",
-    "title": "2  Statistics foundation",
-    "section": "2.11 p-values – how to draw statistical conclusions ?",
-    "text": "2.11 p-values – how to draw statistical conclusions ?\nLimitations of reliying on pvap\n\nArbitrary cutoff\nNo appreciation for variation of coefficient – focus on ci instead (see Romer (2020), Imbens (2021))\nMultiple hypothesis testing (actual) – report and apply MHT-correction\nMultiple hypothesis testing (potential Gelman post)",
+    "title": "3  Statistics foundation",
+    "section": "3.11 p-values – how to draw statistical conclusions ?",
+    "text": "3.11 p-values – how to draw statistical conclusions ?\nLimitations of reliying on pvap\n\nArbitrary cutoff\nNo appreciation for variation of coefficient – focus on ci instead (see Romer (2020), Imbens (2021))\nMultiple hypothesis testing (actual) – report and apply MHT-correction\nMultiple hypothesis testing (potential Gelman post)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Statistics foundation</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics foundation</span>"
     ]
   },
   {
     "objectID": "chapters/stats_foundations.html#false-positive-rate-vs-false-discovery-rate",
     "href": "chapters/stats_foundations.html#false-positive-rate-vs-false-discovery-rate",
-    "title": "2  Statistics foundation",
-    "section": "2.12 False positive rate vs false discovery rate",
-    "text": "2.12 False positive rate vs false discovery rate\n\nThe false positive rate is \\(P(significant result|no true effect)\\)\nThe false discovery rate is \\(P(no true effect|significant result)\\)",
+    "title": "3  Statistics foundation",
+    "section": "3.12 False positive rate vs false discovery rate",
+    "text": "3.12 False positive rate vs false discovery rate\n\nThe false positive rate is \\(P(significant result|no true effect)\\)\nThe false discovery rate is \\(P(no true effect|significant result)\\)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Statistics foundation</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics foundation</span>"
     ]
   },
   {
     "objectID": "chapters/stats_foundations.html#confidence-interval-interpretations",
     "href": "chapters/stats_foundations.html#confidence-interval-interpretations",
-    "title": "2  Statistics foundation",
-    "section": "2.13 Confidence interval interpretations",
-    "text": "2.13 Confidence interval interpretations\n\n95% CI for control and treatment overlap. Does this imply treatment is not significant?",
+    "title": "3  Statistics foundation",
+    "section": "3.13 Confidence interval interpretations",
+    "text": "3.13 Confidence interval interpretations\n\n95% CI for control and treatment overlap. Does this imply treatment is not significant?",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Statistics foundation</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics foundation</span>"
     ]
   },
   {
     "objectID": "chapters/stats_foundations.html#sources",
     "href": "chapters/stats_foundations.html#sources",
-    "title": "2  Statistics foundation",
-    "section": "2.14 Sources",
-    "text": "2.14 Sources\n\nPractical statistics for data science –&gt;\n\n\n\n\n\nImbens, Guido W. 2021. “Statistical Significance, p-Values, and the Reporting of Uncertainty.” Journal of Economic Perspectives 35 (3): 157–74.\n\n\nRomer, David. 2020. “In Praise of Confidence Intervals.” In AEA Papers and Proceedings, 110:55–60.",
+    "title": "3  Statistics foundation",
+    "section": "3.14 Sources",
+    "text": "3.14 Sources\n\nPractical statistics for data science –&gt;\n\n\n\n\n\nImbens, Guido W. 2021. “Statistical Significance, p-Values, and the Reporting of Uncertainty.” Journal of Economic Perspectives 35 (3): 157–74.\n\n\nRomer, David. 2020. “In Praise of Confidence Intervals.” In AEA Papers and Proceedings, 110:55–60.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Statistics foundation</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics foundation</span>"
     ]
   },
   {
     "objectID": "chapters/power.html",
     "href": "chapters/power.html",
-    "title": "3  Power",
+    "title": "5  Power",
     "section": "",
-    "text": "3.1 Understanding the formula that determines sample size\nfirst explain all the elements …\nlh curve …this is sampling dist of tee, know shape from sampling theory reject h0 if value larger than za rhs is sampling distr under ha what is zk? now derive bloom formula…",
+    "text": "5.1 Understanding the formula that determines sample size\nfirst explain all the elements …\nlh curve …this is sampling dist of tee, know shape from sampling theory reject h0 if value larger than za rhs is sampling distr under ha what is zk? now derive bloom formula…",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#implications-of-the-formula",
     "href": "chapters/power.html#implications-of-the-formula",
-    "title": "3  Power",
-    "section": "3.2 Implications of the formula",
-    "text": "3.2 Implications of the formula",
+    "title": "5  Power",
+    "section": "5.2 Implications of the formula",
+    "text": "5.2 Implications of the formula",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#rules-of-thumb-the-big-16-vs-32-confusion",
     "href": "chapters/power.html#rules-of-thumb-the-big-16-vs-32-confusion",
-    "title": "3  Power",
-    "section": "3.3 Rules of thumb – the big 16 vs 32 confusion",
-    "text": "3.3 Rules of thumb – the big 16 vs 32 confusion\n\nThere is another way to express the variance, which has led to massive confusion.\nI’m pretty sure its the 1/N vs 1/(N/2) error that accounts for the wrong result, and nobody seems to derive this from first principles to check.\nIs original wrong? Check in book – access through WBS.",
+    "title": "5  Power",
+    "section": "5.3 Rules of thumb – the big 16 vs 32 confusion",
+    "text": "5.3 Rules of thumb – the big 16 vs 32 confusion\n\nThere is another way to express the variance, which has led to massive confusion.\nI’m pretty sure its the 1/N vs 1/(N/2) error that accounts for the wrong result, and nobody seems to derive this from first principles to check.\nIs original wrong? Check in book – access through WBS.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#different-types-of-metrics",
     "href": "chapters/power.html#different-types-of-metrics",
-    "title": "3  Power",
-    "section": "3.4 Different types of metrics",
-    "text": "3.4 Different types of metrics",
+    "title": "5  Power",
+    "section": "5.4 Different types of metrics",
+    "text": "5.4 Different types of metrics",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#power-for-quasi-experimental-studies",
     "href": "chapters/power.html#power-for-quasi-experimental-studies",
-    "title": "3  Power",
-    "section": "3.5 Power for quasi-experimental studies",
-    "text": "3.5 Power for quasi-experimental studies",
+    "title": "5  Power",
+    "section": "5.5 Power for quasi-experimental studies",
+    "text": "5.5 Power for quasi-experimental studies",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#deriving-the-sample-size-formula",
     "href": "chapters/power.html#deriving-the-sample-size-formula",
-    "title": "3  Power",
-    "section": "3.6 Deriving the sample size formula",
-    "text": "3.6 Deriving the sample size formula\nThe power formula can be intimidating and abstract (all the more so, because there are many different versions floating around).\nThe goal of this section is to demystify the formula. The best way to do that is to derive it from first principles, which will helps us understand where the formula comes from. In addition to the derivation from first principles, I’ll also show a couple other ways that are useful to understand it, and are a bit faster to use in practice.\n\n3.6.1 Derivation from first principles\nPower is the probability that we reject the null hypothesis if it is false:\n\\[\n1 - \\beta = P[\\text{reject } H_0 | H_0 \\text{ is false}].\n\\]\nTo derive the formula for power, we thus have to start with testing proceedure that determines whether or not we reject \\(H_0\\).\nThe null hypothesis asserts that there is no difference between treatment and control group, while the alternative hypothesis asserts that there is:\n\\[\n\\begin{align}\nH_0: \\te &= \\tef = 0 \\\\\nH_A: \\te &= \\tef \\neq 0.\n\\end{align}\n\\]\nWe test the null hypothesis by constructing the test statistic\n\\[\nZ = \\frac{\\tee}{\\see}\n\\]\nand reject the null hypothesis if\n\\[\n|Z| &gt; z_{\\alpha/2},\n\\]\nwhere \\(z_{\\alpha/2}\\) is the critical value of the standard normal distribution at the \\(\\alpha/2\\) percentile. We thus reject \\(H_0\\) if\n\\[\n|\\tee| &gt; \\see z_{\\alpha/2}\n\\]\nThe power of the test is the probability that the test statistic falls into the rejection region if \\(H_A\\) is true, which is:\n\\[\n1 - \\beta = P\\left[|\\tee| &gt; \\see z_{\\alpha/2} | H_A \\right].\n\\]\nThe test statistic falling into the lower or upper rejection region are mutually exclusive events, so the above is equal to\n\\[\n1 - \\beta = P\\left[\\tee &gt; \\see z_{\\alpha/2} | H_A \\right]\n+ P\\left[\\tee &lt; -\\see z_{\\alpha/2} | H_A \\right].\n\\]\nStandardising, using the assumption that \\(H_A\\) is true, we get\n\\[\n\\begin{align}\n1 - \\beta &= P\\left[\\frac{\\tee - \\te}{\\see} &gt; \\frac{\\see z_{\\alpha/2} - \\te}{\\see}\\right]\n+ P\\left[\\frac{\\tee - \\te}{\\see} &lt; \\frac{- \\see z_{\\alpha/2} - \\te}{\\see}\\right] \\\\\n&= P\\left[Z &gt; \\frac{\\see z_{\\alpha/2} - \\te}{\\see}\\right]\n+ P\\left[Z &lt; \\frac{- \\see z_{\\alpha/2} - \\te}{\\see}\\right],\n\\end{align}\n\\]\nwhich, using the standard normal CDF, \\(\\Phi(z)\\), we can rewrite as\n\\[\n1 - \\beta = \\left[1 - \\Phi\\left(z_{\\alpha/2} - \\frac{\\te}{\\see}\\right)\\right]\n+ \\left[\\Phi\\left(-z_{\\alpha/2} - \\frac{\\te}{\\see}\\right)\\right].\n\\]\nThe probability that we reject the null hypothesis for the wrong reason – because the test statistic falls below the lower critical value for a true positive effect or above the upper critical value for a true negative effect – is very small.1 Hence, as the true effect size deviates from zero, one of the two terms in the expression above becomes vanishingly small and can be ignored. For the rest of this chapter, I assume we have a true positive effect and omit the second of the two terms. We thus have:\n\\[\n1 - \\beta = 1 - \\Phi\\left(z_{\\alpha/2} - \\frac{\\te}{\\see}\\right).\n\\]\nFurthermore, using the symmetry of the standard normal distribution, which implies that \\(1 - \\Phi(k) = \\Phi(-k)\\), we can simplify this to\n\\[\n1 - \\beta = \\Phi\\left(\\frac{\\te}{\\see} - z_{\\alpha/2}\\right).\n\\]\nFor a simple experiment with two variants with equal population variance, the estimated standard error of the treatment effect is given by (see Chapter 8)\n\\[\n\\see = \\seefe = \\seefep\n\\]\nwhere \\(\\sev\\) is the pooled estimator of the population variance, \\(\\Nt\\) and \\(\\Nc\\) are the number of units in the treatment and control groups, respectively, \\(\\N = \\Nt + \\Nc\\) is total sample size, and \\(P\\) is the proportion of units in the treatment group.\nFor such an experiment, the power is thus given by\n\\[\n1 - \\beta = \\Phi\\left(\\frac{\\te}{\\seefep} - z_{\\alpha/2}\\right),\n\\]\nwhich, with a bit of algebra (using \\(1/\\sqrt{1/x} = \\sqrt{x}\\)), we can rewrite as\n\\[\n1 - \\beta = \\Phi\\left(\\frac{\\te}{\\sev}\\sqrt{P(1-P)N} - z_{\\alpha/2}\\right).\n\\tag{3.1}\\]\nTo calculate the required sample size for an experiment, we can rearrange Equation 3.1 and solve for \\(N\\). To do this, we use the inverse of the CDS function \\(\\Phi(z)\\). \\(\\Phi(z)\\) takes z-values and returns probabilities, so its inverse, \\(\\Phi(p)^{-1}\\), takes probabilities and returns z-values. Using this, we get:\n\\[\n\\begin{align}\n\\Phi(1 - \\beta)^{-1} &= \\Phi\\left(\\Phi\\left(\\frac{\\te}{\\sev}\\sqrt{P(1-P)N} - z_{\\alpha/2}\\right)\\right)^{-1} \\\\\nz_{1 - \\beta} &= \\frac{\\te}{\\sev}\\sqrt{P(1-P)N} - z_{\\alpha/2} \\\\\n\\sqrt{P(1-P)N} &= (z_{1 - \\beta} + z_{\\alpha/2})\\left(\\frac{\\sev}{\\te}\\right) \\\\\nN &= \\frac{(z_{1 - \\beta} + z_{\\alpha/2})^2}{P(1-P)}\\left(\\frac{\\sev}{\\te}\\right)^2.\n\\end{align}\n\\]\n\n\n3.6.2 Starting from Type I and Type II error conditions\nUse List, Sadoff, and Wagner (2011)\n\n\n3.6.3 Starting from graphical illustration\nBloom (1995) introduces the notion of the MDE as a useful way to quantify power. In the process, he also uses an intuitive way to derive the power formula based on an illustration of a typical hypothesis-testing scenario.\n\n\n\n\n\n\nFigure 3.1: Source: Duflo, Glennerster, and Kremer (2007), based on Bloom (1995).\n\n\n\nLet’s start by understanding Figure 3.1, which visualises the setup of a one-sided hypothesis test where the true effect equals 0 under the null hypothesis and some positive constant \\(\\te\\) under the alternative hypothesis. Note that the curves are not the standard normal distribution, but the sampling distribution of our estimator \\(\\tee\\). This means that the standard deviation of the curves is given by the standard error of \\(\\tee\\), which is \\(\\see\\). Under the assumption of a homogenous treatment effect, the standard error is identical under \\(\\hn\\) and \\(\\ha\\), which is why the two curves have the same shape (see Chapter 8 for details).\nthe distribution will be the same under both the null and the alternative hypothesis, with the center of each distribution given by our hypothesised value of \\(\\te\\) – zero under \\(\\hn\\) and a positive constant under \\(\\ha\\).\nWe reject \\(\\hn\\) if \\(\\tee\\) is to the right of the critical value \\(\\za\\). Also, for a given level of power \\(\\beta\\),",
+    "title": "5  Power",
+    "section": "5.6 Deriving the sample size formula",
+    "text": "5.6 Deriving the sample size formula\nThe power formula can be intimidating and abstract (all the more so, because there are many different versions floating around).\nThe goal of this section is to demystify the formula. The best way to do that is to derive it from first principles, which will helps us understand where the formula comes from. In addition to the derivation from first principles, I’ll also show a couple other ways that are useful to understand it, and are a bit faster to use in practice.\n\n5.6.1 Derivation from first principles\nPower is the probability that we reject the null hypothesis if it is false:\n\\[\n1 - \\beta = P[\\text{reject } H_0 | H_0 \\text{ is false}].\n\\]\nTo derive the formula for power, we thus have to start with testing proceedure that determines whether or not we reject \\(H_0\\).\nThe null hypothesis asserts that there is no difference between treatment and control group, while the alternative hypothesis asserts that there is:\n\\[\n\\begin{align}\nH_0: \\te &= \\tef = 0 \\\\\nH_A: \\te &= \\tef \\neq 0.\n\\end{align}\n\\]\nWe test the null hypothesis by constructing the test statistic\n\\[\nZ = \\frac{\\tee}{\\see}\n\\]\nand reject the null hypothesis if\n\\[\n|Z| &gt; z_{\\alpha/2},\n\\]\nwhere \\(z_{\\alpha/2}\\) is the critical value of the standard normal distribution at the \\(\\alpha/2\\) percentile. We thus reject \\(H_0\\) if\n\\[\n|\\tee| &gt; \\see z_{\\alpha/2}\n\\]\nThe power of the test is the probability that the test statistic falls into the rejection region if \\(H_A\\) is true, which is:\n\\[\n1 - \\beta = P\\left[|\\tee| &gt; \\see z_{\\alpha/2} | H_A \\right].\n\\]\nThe test statistic falling into the lower or upper rejection region are mutually exclusive events, so the above is equal to\n\\[\n1 - \\beta = P\\left[\\tee &gt; \\see z_{\\alpha/2} | H_A \\right]\n+ P\\left[\\tee &lt; -\\see z_{\\alpha/2} | H_A \\right].\n\\]\nStandardising, using the assumption that \\(H_A\\) is true, we get\n\\[\n\\begin{align}\n1 - \\beta &= P\\left[\\frac{\\tee - \\te}{\\see} &gt; \\frac{\\see z_{\\alpha/2} - \\te}{\\see}\\right]\n+ P\\left[\\frac{\\tee - \\te}{\\see} &lt; \\frac{- \\see z_{\\alpha/2} - \\te}{\\see}\\right] \\\\\n&= P\\left[Z &gt; \\frac{\\see z_{\\alpha/2} - \\te}{\\see}\\right]\n+ P\\left[Z &lt; \\frac{- \\see z_{\\alpha/2} - \\te}{\\see}\\right],\n\\end{align}\n\\]\nwhich, using the standard normal CDF, \\(\\Phi(z)\\), we can rewrite as\n\\[\n1 - \\beta = \\left[1 - \\Phi\\left(z_{\\alpha/2} - \\frac{\\te}{\\see}\\right)\\right]\n+ \\left[\\Phi\\left(-z_{\\alpha/2} - \\frac{\\te}{\\see}\\right)\\right].\n\\]\nThe probability that we reject the null hypothesis for the wrong reason – because the test statistic falls below the lower critical value for a true positive effect or above the upper critical value for a true negative effect – is very small.1 Hence, as the true effect size deviates from zero, one of the two terms in the expression above becomes vanishingly small and can be ignored. For the rest of this chapter, I assume we have a true positive effect and omit the second of the two terms. We thus have:\n\\[\n1 - \\beta = 1 - \\Phi\\left(z_{\\alpha/2} - \\frac{\\te}{\\see}\\right).\n\\]\nFurthermore, using the symmetry of the standard normal distribution, which implies that \\(1 - \\Phi(k) = \\Phi(-k)\\), we can simplify this to\n\\[\n1 - \\beta = \\Phi\\left(\\frac{\\te}{\\see} - z_{\\alpha/2}\\right).\n\\]\nFor a simple experiment with two variants with equal population variance, the estimated standard error of the treatment effect is given by (see ?sec-experiment-stats)\n\\[\n\\see = \\seefe = \\seefep\n\\]\nwhere \\(\\sev\\) is the pooled estimator of the population variance, \\(\\Nt\\) and \\(\\Nc\\) are the number of units in the treatment and control groups, respectively, \\(\\N = \\Nt + \\Nc\\) is total sample size, and \\(P\\) is the proportion of units in the treatment group.\nFor such an experiment, the power is thus given by\n\\[\n1 - \\beta = \\Phi\\left(\\frac{\\te}{\\seefep} - z_{\\alpha/2}\\right),\n\\]\nwhich, with a bit of algebra (using \\(1/\\sqrt{1/x} = \\sqrt{x}\\)), we can rewrite as\n\\[\n1 - \\beta = \\Phi\\left(\\frac{\\te}{\\sev}\\sqrt{P(1-P)N} - z_{\\alpha/2}\\right).\n\\tag{5.1}\\]\nTo calculate the required sample size for an experiment, we can rearrange Equation 5.1 and solve for \\(N\\). To do this, we use the inverse of the CDS function \\(\\Phi(z)\\). \\(\\Phi(z)\\) takes z-values and returns probabilities, so its inverse, \\(\\Phi(p)^{-1}\\), takes probabilities and returns z-values. Using this, we get:\n\\[\n\\begin{align}\n\\Phi(1 - \\beta)^{-1} &= \\Phi\\left(\\Phi\\left(\\frac{\\te}{\\sev}\\sqrt{P(1-P)N} - z_{\\alpha/2}\\right)\\right)^{-1} \\\\\nz_{1 - \\beta} &= \\frac{\\te}{\\sev}\\sqrt{P(1-P)N} - z_{\\alpha/2} \\\\\n\\sqrt{P(1-P)N} &= (z_{1 - \\beta} + z_{\\alpha/2})\\left(\\frac{\\sev}{\\te}\\right) \\\\\nN &= \\frac{(z_{1 - \\beta} + z_{\\alpha/2})^2}{P(1-P)}\\left(\\frac{\\sev}{\\te}\\right)^2.\n\\end{align}\n\\]\n\n\n5.6.2 Starting from Type I and Type II error conditions\nUse List, Sadoff, and Wagner (2011)\n\n\n5.6.3 Starting from graphical illustration\nBloom (1995) introduces the notion of the MDE as a useful way to quantify power. In the process, he also uses an intuitive way to derive the power formula based on an illustration of a typical hypothesis-testing scenario.\n\n\n\n\n\n\nFigure 5.1: Source: Duflo, Glennerster, and Kremer (2007), based on Bloom (1995).\n\n\n\nLet’s start by understanding Figure 5.1, which visualises the setup of a one-sided hypothesis test where the true effect equals 0 under the null hypothesis and some positive constant \\(\\te\\) under the alternative hypothesis. Note that the curves are not the standard normal distribution, but the sampling distribution of our estimator \\(\\tee\\). This means that the standard deviation of the curves is given by the standard error of \\(\\tee\\), which is \\(\\see\\). Under the assumption of a homogenous treatment effect, the standard error is identical under \\(\\hn\\) and \\(\\ha\\), which is why the two curves have the same shape (see ?sec-experiment-stats for details).\nthe distribution will be the same under both the null and the alternative hypothesis, with the center of each distribution given by our hypothesised value of \\(\\te\\) – zero under \\(\\hn\\) and a positive constant under \\(\\ha\\).\nWe reject \\(\\hn\\) if \\(\\tee\\) is to the right of the critical value \\(\\za\\). Also, for a given level of power \\(\\beta\\),",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#old-notes",
     "href": "chapters/power.html#old-notes",
-    "title": "3  Power",
-    "section": "3.7 Old notes",
-    "text": "3.7 Old notes\n\n\nPower basics\n\nIn the simplest possible, we randomly draw a sample of size \\(N\\) from an identical population, so that our observations can be assumed to be i.i.d, and we allocate a fraction \\(P\\) of our sample to treatment. We can then estiamte the treatment effect using the OLS regression\n\n\\[ y = \\alpha + \\beta T + \\epsilon\\]\n\nwhere the standard error of \\(\\beta\\) is given by \\(\\sqrt{\\frac{1}{P(1-P)}\\frac{\\sigma^2}{N}}\\).\nstd error derivation (from standard variance result of two independent samples, using population fractions):\n\n\\[\nstd = \\sqrt{\\frac{\\sigma^2}{N_t} + \\frac{\\sigma^2}{N_c}} = \\sqrt{\\frac{\\sigma^2}{PN} + \\frac{\\sigma^2}{(1-P)N}} = ... = \\sqrt{\\frac{1}{P(1-P)}\\frac{\\sigma^2}{N}}\n\\]\n\nThe distribution on the left hand side below shows the distribution of our effect size estimator \\(\\hat{\\beta}\\) if the null hypothesis is true.\nWe reject the null hypothesis if the estimated effect size is larger than the critical value \\(t_{\\alpha}\\), determined by the significance level \\(\\alpha\\). Hence, for this to happen we need \\(\\hat{\\beta} &gt; t_{\\alpha} * SE(\\hat{\\beta})\\) (follows from rearranging the t-test formula).\nOn the right is the distribution of \\(\\hat{\\beta}\\) if the true effect size is \\(\\beta\\).\nThe power of the test for a true effect size of \\(\\beta\\) is the area under this curve that falls to the right of \\(t_{\\alpha}\\). This is the probability that we reject the null hypothesis given that it is false.\nHence, to attain a power of \\(\\kappa\\) it must be that \\(\\beta &gt; (t_a + t_{1-\\kappa}) * SE(\\hat{\\beta})\\), where \\(t_{1-\\kappa}\\) is the value from a t-distribution that has \\(1-\\kappa\\) of its probability mass to the left (for \\(\\kappa = 0.8\\), \\(t_{1-\\kappa} = 0.84\\)).\nThis means that the minimum detectable effect (\\(\\delta\\)) is given by:\n\n\\[ \\delta = (t_a + tq_{1-\\kappa}) * \\sqrt{\\frac{1}{P(1-P)}\\frac{\\sigma^2}{N}} \\]\n\nRearranding for the minimum required sample size we get:\n\n\\[ N =  \\frac{(t_a + t_{1-\\kappa})^2}{P(1-P)}\\left(\\frac{\\sigma}{\\delta}\\right)^2 \\]\n\nSo that the required sample size is inversely proportional to the minimal effect size we wish to detect. This makes sense, it means that the smaller an effect we want to detect, the larger the samle size we need. In particular, given that \\(N \\propto \\delta^{-2}\\), to detect an effect of half the size we need a sample four times the size.\nSE(\\(\\beta\\)) also includes measurement error, so this is also a determinant of power.",
+    "title": "5  Power",
+    "section": "5.7 Old notes",
+    "text": "5.7 Old notes\n\n\nPower basics\n\nIn the simplest possible, we randomly draw a sample of size \\(N\\) from an identical population, so that our observations can be assumed to be i.i.d, and we allocate a fraction \\(P\\) of our sample to treatment. We can then estiamte the treatment effect using the OLS regression\n\n\\[ y = \\alpha + \\beta T + \\epsilon\\]\n\nwhere the standard error of \\(\\beta\\) is given by \\(\\sqrt{\\frac{1}{P(1-P)}\\frac{\\sigma^2}{N}}\\).\nstd error derivation (from standard variance result of two independent samples, using population fractions):\n\n\\[\nstd = \\sqrt{\\frac{\\sigma^2}{N_t} + \\frac{\\sigma^2}{N_c}} = \\sqrt{\\frac{\\sigma^2}{PN} + \\frac{\\sigma^2}{(1-P)N}} = ... = \\sqrt{\\frac{1}{P(1-P)}\\frac{\\sigma^2}{N}}\n\\]\n\nThe distribution on the left hand side below shows the distribution of our effect size estimator \\(\\hat{\\beta}\\) if the null hypothesis is true.\nWe reject the null hypothesis if the estimated effect size is larger than the critical value \\(t_{\\alpha}\\), determined by the significance level \\(\\alpha\\). Hence, for this to happen we need \\(\\hat{\\beta} &gt; t_{\\alpha} * SE(\\hat{\\beta})\\) (follows from rearranging the t-test formula).\nOn the right is the distribution of \\(\\hat{\\beta}\\) if the true effect size is \\(\\beta\\).\nThe power of the test for a true effect size of \\(\\beta\\) is the area under this curve that falls to the right of \\(t_{\\alpha}\\). This is the probability that we reject the null hypothesis given that it is false.\nHence, to attain a power of \\(\\kappa\\) it must be that \\(\\beta &gt; (t_a + t_{1-\\kappa}) * SE(\\hat{\\beta})\\), where \\(t_{1-\\kappa}\\) is the value from a t-distribution that has \\(1-\\kappa\\) of its probability mass to the left (for \\(\\kappa = 0.8\\), \\(t_{1-\\kappa} = 0.84\\)).\nThis means that the minimum detectable effect (\\(\\delta\\)) is given by:\n\n\\[ \\delta = (t_a + tq_{1-\\kappa}) * \\sqrt{\\frac{1}{P(1-P)}\\frac{\\sigma^2}{N}} \\]\n\nRearranding for the minimum required sample size we get:\n\n\\[ N =  \\frac{(t_a + t_{1-\\kappa})^2}{P(1-P)}\\left(\\frac{\\sigma}{\\delta}\\right)^2 \\]\n\nSo that the required sample size is inversely proportional to the minimal effect size we wish to detect. This makes sense, it means that the smaller an effect we want to detect, the larger the samle size we need. In particular, given that \\(N \\propto \\delta^{-2}\\), to detect an effect of half the size we need a sample four times the size.\nSE(\\(\\beta\\)) also includes measurement error, so this is also a determinant of power.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#what-determines-power",
     "href": "chapters/power.html#what-determines-power",
-    "title": "3  Power",
-    "section": "3.8 What determines power",
-    "text": "3.8 What determines power\n\nSignificance level\nEffect size\nStandard error\n\nSample size\nVariant allocation proportion\nMetric variance",
+    "title": "5  Power",
+    "section": "5.8 What determines power",
+    "text": "5.8 What determines power\n\nSignificance level\nEffect size\nStandard error\n\nSample size\nVariant allocation proportion\nMetric variance",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#how-to-increase-power",
     "href": "chapters/power.html#how-to-increase-power",
-    "title": "3  Power",
-    "section": "3.9 How to increase power",
-    "text": "3.9 How to increase power\n\nPower can be increased trivially by lowering the significance level, which we often don’t want to do, or by increasing sample size, which we’re often trying to avoid.\nIncrease effect size\n\nEnsure that only users who are exposed to the change are in the data to avoid dilution of the effect\n\nOptimally allocate variance proportions\n\nUsually equal for highest power\nShow why with many treatment variants, higher share in control is better\n\nReduce metric variance\n\nChoose metric with low variance (e.g. indicator)\nUse variance reduction technique\nOnly include triggered users",
+    "title": "5  Power",
+    "section": "5.9 How to increase power",
+    "text": "5.9 How to increase power\n\nPower can be increased trivially by lowering the significance level, which we often don’t want to do, or by increasing sample size, which we’re often trying to avoid.\nIncrease effect size\n\nEnsure that only users who are exposed to the change are in the data to avoid dilution of the effect\n\nOptimally allocate variance proportions\n\nUsually equal for highest power\nShow why with many treatment variants, higher share in control is better\n\nReduce metric variance\n\nChoose metric with low variance (e.g. indicator)\nUse variance reduction technique\nOnly include triggered users",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#how-to-choose-key-parameters",
     "href": "chapters/power.html#how-to-choose-key-parameters",
-    "title": "3  Power",
-    "section": "3.10 How to choose key parameters",
-    "text": "3.10 How to choose key parameters\n\n3.10.1 MDE\n\nWhat are you balancing here? The size of the effect you are able to identify and the time it takes to do it.\nAll else equal, the smaller a change you want to be able to detect, the longer it will take for the experiment to run because you need more sample size.\nThe relevant question to ask here is “what counts as a practically relevant change?”\nTo answer that, consider:\n\nMaturity of service (the more mature, the smaller a change can be expected)\nSize of service (the larger, the smaller a change still generates a lot of revenue)\nCost of change that need ot be covered\n\nCost of fully building out feature for launch (can be 0 when fully built out for experiment or high if we use painted door)\nCost of maintaining new code (new code has higher bugs, may increase code complexity and maintenance)\nOther costs: e.g. does CPU utilization increase?\n\n\n\n\n\n3.10.2 Significance level\n\nWhat are you balancing here? The probabilities of making a type I and type II error.\nThe higher significance level, the less likely we are to implement useless features (to make a Type I error) but the more likely we are to no implement useful features (to make a Type II error).\nHence, gotta balance cost of implementing useless feature and cost of not implementing useful feature.\nThings that play into this:\n\nHow long will feature be in effect (less long lowers risk of implementing)?\nHow widely will it be deployed (less widely lowers risk of implementing)?\nHow many users will see it / where in the funnel is it (later in funnel lowers risk of implementation)\n\nWhat to do in practice:\n\nStart from baseline values (\\(alpha = 0.05\\))\nAdjust depending on balance of risks\n\n\n\n\n3.10.3 Power\n\nWhat are you balancing here? The risk of making a Type II error and the time you have to wait for your results.\nAll else equal, the higher a level or power you want, the longer you’ll have to run the experiment to accumulate the requried sample size.\nFactors to consider:\n\nHow costly is it to not implement a useful feature.",
+    "title": "5  Power",
+    "section": "5.10 How to choose key parameters",
+    "text": "5.10 How to choose key parameters\n\n5.10.1 MDE\n\nWhat are you balancing here? The size of the effect you are able to identify and the time it takes to do it.\nAll else equal, the smaller a change you want to be able to detect, the longer it will take for the experiment to run because you need more sample size.\nThe relevant question to ask here is “what counts as a practically relevant change?”\nTo answer that, consider:\n\nMaturity of service (the more mature, the smaller a change can be expected)\nSize of service (the larger, the smaller a change still generates a lot of revenue)\nCost of change that need ot be covered\n\nCost of fully building out feature for launch (can be 0 when fully built out for experiment or high if we use painted door)\nCost of maintaining new code (new code has higher bugs, may increase code complexity and maintenance)\nOther costs: e.g. does CPU utilization increase?\n\n\n\n\n\n5.10.2 Significance level\n\nWhat are you balancing here? The probabilities of making a type I and type II error.\nThe higher significance level, the less likely we are to implement useless features (to make a Type I error) but the more likely we are to no implement useful features (to make a Type II error).\nHence, gotta balance cost of implementing useless feature and cost of not implementing useful feature.\nThings that play into this:\n\nHow long will feature be in effect (less long lowers risk of implementing)?\nHow widely will it be deployed (less widely lowers risk of implementing)?\nHow many users will see it / where in the funnel is it (later in funnel lowers risk of implementation)\n\nWhat to do in practice:\n\nStart from baseline values (\\(alpha = 0.05\\))\nAdjust depending on balance of risks\n\n\n\n\n5.10.3 Power\n\nWhat are you balancing here? The risk of making a Type II error and the time you have to wait for your results.\nAll else equal, the higher a level or power you want, the longer you’ll have to run the experiment to accumulate the requried sample size.\nFactors to consider:\n\nHow costly is it to not implement a useful feature.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#problems-with-low-power",
     "href": "chapters/power.html#problems-with-low-power",
-    "title": "3  Power",
-    "section": "3.11 Problems with low power",
-    "text": "3.11 Problems with low power\n\nTruth inflation: underpowered studies only find a significant effect it the effect size is larger than the true effect size, leading to inflated claims of effect sizes.",
+    "title": "5  Power",
+    "section": "5.11 Problems with low power",
+    "text": "5.11 Problems with low power\n\nTruth inflation: underpowered studies only find a significant effect it the effect size is larger than the true effect size, leading to inflated claims of effect sizes.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#power-in-online-experiments",
     "href": "chapters/power.html#power-in-online-experiments",
-    "title": "3  Power",
-    "section": "3.12 Power in online experiments",
-    "text": "3.12 Power in online experiments\n\nKohavi et al. (2014) point out (in rule 7) that while general advice suggets that the CLT provides a good approximation for n larger than 30, the large skew in online metrics often requires many moer users. They recomment 355 * (skewness coefficient)^2.",
+    "title": "5  Power",
+    "section": "5.12 Power in online experiments",
+    "text": "5.12 Power in online experiments\n\nKohavi et al. (2014) point out (in rule 7) that while general advice suggets that the CLT provides a good approximation for n larger than 30, the large skew in online metrics often requires many moer users. They recomment 355 * (skewness coefficient)^2.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#rule-of-thumb-for-sample-size",
     "href": "chapters/power.html#rule-of-thumb-for-sample-size",
-    "title": "3  Power",
-    "section": "3.13 Rule of thumb for sample size",
-    "text": "3.13 Rule of thumb for sample size\nFor alpha = 0.05, power = 0.8, and a two-sided test with equal allocation to two variants, required sample size per variant is approximately:\n\\[\nn \\approx \\frac{16\\sigma^2}{\\tau^2},\n\\]\nwhere \\(\\sigma^2\\) is the sample variance and \\(\\tau\\) is the tretment effect (this is not known, but we can use the MDES).\nThe formula straighforwardly comes from Equation 3.1, using 1.96 for \\(t_\\alpha\\), 0.84 for \\(t_{1 - \\beta}\\), and 0.5 for \\(P\\).",
+    "title": "5  Power",
+    "section": "5.13 Rule of thumb for sample size",
+    "text": "5.13 Rule of thumb for sample size\nFor alpha = 0.05, power = 0.8, and a two-sided test with equal allocation to two variants, required sample size per variant is approximately:\n\\[\nn \\approx \\frac{16\\sigma^2}{\\tau^2},\n\\]\nwhere \\(\\sigma^2\\) is the sample variance and \\(\\tau\\) is the tretment effect (this is not known, but we can use the MDES).\nThe formula straighforwardly comes from Equation 5.1, using 1.96 for \\(t_\\alpha\\), 0.84 for \\(t_{1 - \\beta}\\), and 0.5 for \\(P\\).",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#best-practices",
     "href": "chapters/power.html#best-practices",
-    "title": "3  Power",
-    "section": "3.14 Best practices",
-    "text": "3.14 Best practices\n\nWhen aiming to estimate a precise effect size rather than just being interested in statistical significance, use assurance instead of power: instead of choosing a sample size to attain a given level of power, choose sample size so that confidence interval will be suitably narrow 99 percent of the time (Sample-Size Planning for More Accurate Statistical Power: A Method Adjusting Sample Effect Sizes for Publication Bias and Uncertainty and Understanding the new statistics.)",
+    "title": "5  Power",
+    "section": "5.14 Best practices",
+    "text": "5.14 Best practices\n\nWhen aiming to estimate a precise effect size rather than just being interested in statistical significance, use assurance instead of power: instead of choosing a sample size to attain a given level of power, choose sample size so that confidence interval will be suitably narrow 99 percent of the time (Sample-Size Planning for More Accurate Statistical Power: A Method Adjusting Sample Effect Sizes for Publication Bias and Uncertainty and Understanding the new statistics.)",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#useful-resources",
     "href": "chapters/power.html#useful-resources",
-    "title": "3  Power",
-    "section": "3.15 Useful resources",
-    "text": "3.15 Useful resources\n\nLarsen et al. (2023) for general overview\nZhou, Lu, and Shallah (2023) for comprehensive overview of how to calculate power\nBojinov, Simchi-Levi, and Zhao (2023), section 5, for simulation results for switchbacks and generally good approach to simulation to emulate\nReich et al. (2012) power calcs for cluster-randomised experiments",
+    "title": "5  Power",
+    "section": "5.15 Useful resources",
+    "text": "5.15 Useful resources\n\nLarsen et al. (2023) for general overview\nZhou, Lu, and Shallah (2023) for comprehensive overview of how to calculate power\nBojinov, Simchi-Levi, and Zhao (2023), section 5, for simulation results for switchbacks and generally good approach to simulation to emulate\nReich et al. (2012) power calcs for cluster-randomised experiments",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#qa",
     "href": "chapters/power.html#qa",
-    "title": "3  Power",
-    "section": "3.16 Q&A",
-    "text": "3.16 Q&A\nQuestions:\n\nLonger experiment duration generally increases power. Can you think of a scenario where this is not the case?\nAn online shopping site ranks products according to their average rating. Why might this be suboptimal? What could the site do instead?\n\nAnswers:\n\nWhen using a cumulative metric such as number of likes, the variance of which will increase the longer the experiment runs, which will increase the standard error of our treatment effect estimate and lower our power. Remember that \\(SE(\\hat{\\tau}) = \\sqrt{\\frac{1}{P(1-P)}\\frac{\\sigma^2}{N}}\\). So, whether this happens depends on what happens to \\(\\frac{\\sigma^2}{N}\\), as experiment duration increases. A decrease in power is plausible – likely, even! – because \\(N\\) will increase in a concave fashion over the course of the experiment duration (some users keep coming back), while \\(\\sigma^2\\) is likely to grow faster than linearly, which causes the ratio to increase and power to decrease.\nThe approach is suboptimal because products with few ratings will have much more variance than products with many ratings, and their average rating is thus less reliable. The problem is akin to small US states having the highest and lowest rates of kidney cancer, or small schools having highest and lowest average pupil performance. Fundamentally, it’s a problem of low power – the sample size is too low to reliably detect a true effect. The solution is to use a shrinkage method: use a weighted average of the product average rating and some global product rating, with the weight of the product average rating being proportional to the number of ratings. This way, products with few ratings will be average, while products with many ratings will reflect their own rating.\n\n\n\n\n\nBloom, Howard S. 1995. “Minimum Detectable Effects: A Simple Way to Report the Statistical Power of Experimental Designs.” Evaluation Review 19 (5): 547–56.\n\n\nBojinov, Iavor, David Simchi-Levi, and Jinglong Zhao. 2023. “Design and Analysis of Switchback Experiments.” Management Science 69 (7): 3759–77.\n\n\nDuflo, Esther, Rachel Glennerster, and Michael Kremer. 2007. “Using Randomization in Development Economics Research: A Toolkit.” Handbook of Development Economics 4: 3895–3962.\n\n\nKohavi, Ron, Alex Deng, Roger Longbotham, and Ya Xu. 2014. “Seven Rules of Thumb for Web Site Experimenters.” In Proceedings of the 20th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 1857–66.\n\n\nLarsen, Nicholas, Jonathan Stallrich, Srijan Sengupta, Alex Deng, Ron Kohavi, and Nathaniel T Stevens. 2023. “Statistical Challenges in Online Controlled Experiments: A Review of a/b Testing Methodology.” The American Statistician, 1–15.\n\n\nList, John A, Sally Sadoff, and Mathis Wagner. 2011. “So You Want to Run an Experiment, Now What? Some Simple Rules of Thumb for Optimal Experimental Design.” Experimental Economics 14: 439–57.\n\n\nReich, Nicholas G, Jessica A Myers, Daniel Obeng, Aaron M Milstone, and Trish M Perl. 2012. “Empirical Power and Sample Size Calculations for Cluster-Randomized and Cluster-Randomized Crossover Studies.” PloS One 7 (4): e35564.\n\n\nZhou, Jing, Jiannan Lu, and Anas Shallah. 2023. “All about Sample-Size Calculations for a/b Testing: Novel Extensions and Practical Guide.” arXiv Preprint arXiv:2305.16459.",
+    "title": "5  Power",
+    "section": "5.16 Q&A",
+    "text": "5.16 Q&A\nQuestions:\n\nLonger experiment duration generally increases power. Can you think of a scenario where this is not the case?\nAn online shopping site ranks products according to their average rating. Why might this be suboptimal? What could the site do instead?\n\nAnswers:\n\nWhen using a cumulative metric such as number of likes, the variance of which will increase the longer the experiment runs, which will increase the standard error of our treatment effect estimate and lower our power. Remember that \\(SE(\\hat{\\tau}) = \\sqrt{\\frac{1}{P(1-P)}\\frac{\\sigma^2}{N}}\\). So, whether this happens depends on what happens to \\(\\frac{\\sigma^2}{N}\\), as experiment duration increases. A decrease in power is plausible – likely, even! – because \\(N\\) will increase in a concave fashion over the course of the experiment duration (some users keep coming back), while \\(\\sigma^2\\) is likely to grow faster than linearly, which causes the ratio to increase and power to decrease.\nThe approach is suboptimal because products with few ratings will have much more variance than products with many ratings, and their average rating is thus less reliable. The problem is akin to small US states having the highest and lowest rates of kidney cancer, or small schools having highest and lowest average pupil performance. Fundamentally, it’s a problem of low power – the sample size is too low to reliably detect a true effect. The solution is to use a shrinkage method: use a weighted average of the product average rating and some global product rating, with the weight of the product average rating being proportional to the number of ratings. This way, products with few ratings will be average, while products with many ratings will reflect their own rating.\n\n\n\n\n\nBloom, Howard S. 1995. “Minimum Detectable Effects: A Simple Way to Report the Statistical Power of Experimental Designs.” Evaluation Review 19 (5): 547–56.\n\n\nBojinov, Iavor, David Simchi-Levi, and Jinglong Zhao. 2023. “Design and Analysis of Switchback Experiments.” Management Science 69 (7): 3759–77.\n\n\nDuflo, Esther, Rachel Glennerster, and Michael Kremer. 2007. “Using Randomization in Development Economics Research: A Toolkit.” Handbook of Development Economics 4: 3895–3962.\n\n\nKohavi, Ron, Alex Deng, Roger Longbotham, and Ya Xu. 2014. “Seven Rules of Thumb for Web Site Experimenters.” In Proceedings of the 20th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 1857–66.\n\n\nLarsen, Nicholas, Jonathan Stallrich, Srijan Sengupta, Alex Deng, Ron Kohavi, and Nathaniel T Stevens. 2023. “Statistical Challenges in Online Controlled Experiments: A Review of a/b Testing Methodology.” The American Statistician, 1–15.\n\n\nList, John A, Sally Sadoff, and Mathis Wagner. 2011. “So You Want to Run an Experiment, Now What? Some Simple Rules of Thumb for Optimal Experimental Design.” Experimental Economics 14: 439–57.\n\n\nReich, Nicholas G, Jessica A Myers, Daniel Obeng, Aaron M Milstone, and Trish M Perl. 2012. “Empirical Power and Sample Size Calculations for Cluster-Randomized and Cluster-Randomized Crossover Studies.” PloS One 7 (4): e35564.\n\n\nZhou, Jing, Jiannan Lu, and Anas Shallah. 2023. “All about Sample-Size Calculations for a/b Testing: Novel Extensions and Practical Guide.” arXiv Preprint arXiv:2305.16459.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/power.html#footnotes",
     "href": "chapters/power.html#footnotes",
-    "title": "3  Power",
+    "title": "5  Power",
     "section": "",
     "text": "This kind of error is somtimes called a Type III error↩︎",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Power</span>"
+      "Statistics",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Power</span>"
     ]
   },
   {
     "objectID": "chapters/projection.html",
     "href": "chapters/projection.html",
-    "title": "4  Projection",
+    "title": "14  Projection",
     "section": "",
-    "text": "4.1 Projecting from 2-D onto 1-D\nProjecting a vector in two-dimensional space onto a line that goes through the origin is a nice way to build an understanding for what a projection does.2\nSay we want to orthogonally project the vector \\(b\\) onto a line defined by another vector, \\(a\\), and we will call the resulting projection \\(p\\). Hence, \\(p\\) is the point on the line defined by \\(a\\) that is nearest to the (tip of) the vector \\(b\\). (Note, though, that \\(p\\) is a vector, not a point. Calling it a point just clarifies what we’re doing here.)\nWe can think of the line as being generated by scaling vector \\(a\\) with a scalar \\(x\\), so that choosing a suitable \\(x\\) allows us to reach any point on the line. Finding \\(p\\) then boils down to finding the value of \\(x\\) that gets us to that point of the line that is closest to \\(b\\). We can thus write \\(p = ax\\).\nLet’s start by finding \\(p\\). We can find it in different ways.\nUsing calculus:\nGiven that we define closeness based on the Euclidean distance, minimising the distance between the (tip of) the vector, \\(b\\), and the projection, \\(p\\), is akin to solving the following problem:\n\\[\n\\begin{aligned}\nargmin_{x} \\sqrt{\\sum_{i=1}^2{(b_i - p_i)^2}} &= argmin_{x} \\sum_{i=1}^2{(b_i - p_i)^2} \\\\\n&= argmin_{x} \\sum_{i=1}^2{(b_i - xa_i)^2} \\\\\n&= argmin_{x} (b - xa)'(b - xa),\n\\end{aligned}\n\\]\nCalculating the derivative with respect to \\(x\\) we get:\n\\[\n\\begin{aligned}\n\\frac{d}{dx} (b - xa)'(b - xa) &= (-a)'(b - xa) + (b - xa)'(-a) & \\\\\n&= -a'b + xa'a - a'b + xa'a \\\\\n&= -2a'b + 2xa'a\n\\end{aligned}\n\\]\nFinlly, setting the result to 0 and solving for \\(x\\) we get:\n\\[\n\\begin{aligned}\n-2a'b + 2xa'a &= 0 \\\\\nxa'a &= a'b \\\\\nx &= (a'a)^{-1}a'b\n\\end{aligned}\n\\]\nHence, given that \\(p = ax\\), we have:\n\\[\n\\begin{aligned}\np = ax = \\underbrace{a(a'a)^{-1}a'}_\\text{$P_a$}b,\n\\end{aligned}\n\\]\nwhere \\(P_a\\) is the projection matrix.\nLet’s reflect for a moment what this all means. In general, pre-multiplying a vector by a matrix transforms the vector in a particular way. When we perform orthogonal projection, we pre-multiply a vector by a matrix that transforms the vector into that point on a subspace that it closest to the original vector. In our case here, pre-multiplying our initial vector \\(b\\) by the projection matrix \\(P_a\\) transforms \\(b\\) into that point on \\(a\\) that is closest to \\(b\\), which we call \\(p\\). Given that we define “nearest” using the Euclidean distance, it makes sense that the projection matrix would emerge out of the solution to the minimisation problem of finding the point on the subspace that minimises the Euclidean distance to the original vector.\nUsing basic geometry:\nWe could also find \\(p\\) using our understanding of basic geometry. Looking at the figure above, it is intuitively obvious that the shortest path between the tip of \\(b\\) and the line \\(a\\) is that which is perpendicular to \\(a\\) – the point at which the perpendicular line meets \\(a\\) is thus \\(p\\). The path between \\(b\\) and \\(p\\) is simply \\(b - p\\). In linear algebra terms, we thus want that path to be orthogonal to the line \\(a\\).\nHence, we want:\n\\[\n\\begin{aligned}\na'(b - p) &= 0 \\\\\na'(b - xa) &= 0 \\\\\na'b - xa'a &= 0 \\\\\nxa'a &= a'b \\\\\nx &= (a'a)^{-1}a'b\n\\end{aligned}\n\\]\nSo that, again, we have:3\n\\[\np = ax = \\underbrace{a(a'a)^{-1}a'}_\\text{$P_a$}b.\n\\]\nThis also makes clear why this type of projection is called “orthogonal projection”: we want to project a vector onto a subspace in such a way that the distance between the original vector and the subspace is minimal. The resulting projection will be a point on the subspace such that a vector from that point to the original vector is orthogonal to the subspace. Intuitively, this is the case because the shortest path between the vector and the subspace will be that which is perpendicular to the subspace, and orthogonality is the generalisation of the notion of perpendicularity.",
+    "text": "14.1 Projecting from 2-D onto 1-D\nProjecting a vector in two-dimensional space onto a line that goes through the origin is a nice way to build an understanding for what a projection does.2\nSay we want to orthogonally project the vector \\(b\\) onto a line defined by another vector, \\(a\\), and we will call the resulting projection \\(p\\). Hence, \\(p\\) is the point on the line defined by \\(a\\) that is nearest to the (tip of) the vector \\(b\\). (Note, though, that \\(p\\) is a vector, not a point. Calling it a point just clarifies what we’re doing here.)\nWe can think of the line as being generated by scaling vector \\(a\\) with a scalar \\(x\\), so that choosing a suitable \\(x\\) allows us to reach any point on the line. Finding \\(p\\) then boils down to finding the value of \\(x\\) that gets us to that point of the line that is closest to \\(b\\). We can thus write \\(p = ax\\).\nLet’s start by finding \\(p\\). We can find it in different ways.\nUsing calculus:\nGiven that we define closeness based on the Euclidean distance, minimising the distance between the (tip of) the vector, \\(b\\), and the projection, \\(p\\), is akin to solving the following problem:\n\\[\n\\begin{aligned}\nargmin_{x} \\sqrt{\\sum_{i=1}^2{(b_i - p_i)^2}} &= argmin_{x} \\sum_{i=1}^2{(b_i - p_i)^2} \\\\\n&= argmin_{x} \\sum_{i=1}^2{(b_i - xa_i)^2} \\\\\n&= argmin_{x} (b - xa)'(b - xa),\n\\end{aligned}\n\\]\nCalculating the derivative with respect to \\(x\\) we get:\n\\[\n\\begin{aligned}\n\\frac{d}{dx} (b - xa)'(b - xa) &= (-a)'(b - xa) + (b - xa)'(-a) & \\\\\n&= -a'b + xa'a - a'b + xa'a \\\\\n&= -2a'b + 2xa'a\n\\end{aligned}\n\\]\nFinlly, setting the result to 0 and solving for \\(x\\) we get:\n\\[\n\\begin{aligned}\n-2a'b + 2xa'a &= 0 \\\\\nxa'a &= a'b \\\\\nx &= (a'a)^{-1}a'b\n\\end{aligned}\n\\]\nHence, given that \\(p = ax\\), we have:\n\\[\n\\begin{aligned}\np = ax = \\underbrace{a(a'a)^{-1}a'}_\\text{$P_a$}b,\n\\end{aligned}\n\\]\nwhere \\(P_a\\) is the projection matrix.\nLet’s reflect for a moment what this all means. In general, pre-multiplying a vector by a matrix transforms the vector in a particular way. When we perform orthogonal projection, we pre-multiply a vector by a matrix that transforms the vector into that point on a subspace that it closest to the original vector. In our case here, pre-multiplying our initial vector \\(b\\) by the projection matrix \\(P_a\\) transforms \\(b\\) into that point on \\(a\\) that is closest to \\(b\\), which we call \\(p\\). Given that we define “nearest” using the Euclidean distance, it makes sense that the projection matrix would emerge out of the solution to the minimisation problem of finding the point on the subspace that minimises the Euclidean distance to the original vector.\nUsing basic geometry:\nWe could also find \\(p\\) using our understanding of basic geometry. Looking at the figure above, it is intuitively obvious that the shortest path between the tip of \\(b\\) and the line \\(a\\) is that which is perpendicular to \\(a\\) – the point at which the perpendicular line meets \\(a\\) is thus \\(p\\). The path between \\(b\\) and \\(p\\) is simply \\(b - p\\). In linear algebra terms, we thus want that path to be orthogonal to the line \\(a\\).\nHence, we want:\n\\[\n\\begin{aligned}\na'(b - p) &= 0 \\\\\na'(b - xa) &= 0 \\\\\na'b - xa'a &= 0 \\\\\nxa'a &= a'b \\\\\nx &= (a'a)^{-1}a'b\n\\end{aligned}\n\\]\nSo that, again, we have:3\n\\[\np = ax = \\underbrace{a(a'a)^{-1}a'}_\\text{$P_a$}b.\n\\]\nThis also makes clear why this type of projection is called “orthogonal projection”: we want to project a vector onto a subspace in such a way that the distance between the original vector and the subspace is minimal. The resulting projection will be a point on the subspace such that a vector from that point to the original vector is orthogonal to the subspace. Intuitively, this is the case because the shortest path between the vector and the subspace will be that which is perpendicular to the subspace, and orthogonality is the generalisation of the notion of perpendicularity.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Projection</span>"
+      "Appendix",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Projection</span>"
     ]
   },
   {
     "objectID": "chapters/projection.html#projecting-from-2-d-onto-1-d",
     "href": "chapters/projection.html#projecting-from-2-d-onto-1-d",
-    "title": "4  Projection",
+    "title": "14  Projection",
     "section": "",
     "text": "Projecting a 2d vector onto a line\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOrthogonal vectors\n\n\n\n\n\nOrthogonality is a generalisation of perpendicularity; two vectors that are orthogonal are perpendicular to each other. The word comes from the Greek “orthos”, meaning “straight” or “right”, and “gonia”, meaning “angle”. To test whether two vectors \\(x\\) and \\(y\\) are perpendicular, we check whether their dot product, \\(x'y\\) equals zero.\nBut why do we know that the dot-product of orthogonal vectors is zero? The answer follows from the Pythagorean theorem, which states that for a right triangle with sides \\(a\\) and \\(b\\) and hypotenuse \\(c\\) we have \\(a^2\\) + \\(b^2\\) = \\(c^2\\). Now, if vectors \\(x\\) and \\(y\\) are orthogonal, they form the sides of a right triangle, where the hypotenuse is given by \\(x + y\\). By the Pythagorean theorem, we thus have\n\\[\n||x||^2 + ||y||^2 = ||x + y||^2,\n\\]\nwhich equals\n\\[\n\\left(\\sqrt{x'x}\\right)^2 + \\left(\\sqrt{y'y}\\right)^2 = \\left(\\sqrt{(x + y)'(x + y)}\\right)^2,\n\\]\nand simplifies to\n\\[\n\\begin{aligned}\nx'x + y'y &= (x + y)'(x + y) \\\\\nx'x + y'y &= x'x + y'y + x'y + y'x \\\\\nx'x + y'y &= x'x + y'y + 2x'y,\n\\end{aligned}\n\\]\nfrom which it is clear that \\(x'y = 0\\).",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Projection</span>"
+      "Appendix",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Projection</span>"
     ]
   },
   {
     "objectID": "chapters/projection.html#why-project",
     "href": "chapters/projection.html#why-project",
-    "title": "4  Projection",
-    "section": "4.2 Why project?",
-    "text": "4.2 Why project?\nOne reason projection is useful is because it allows us to approximately solve systems of linear equations that have no exact solution. Imagine we have the following system of equations:\n\\[\n\\begin{align*}\na_{11}x_1 + a_{12}x_2 + \\cdots + a_{1k}x_k &= b_1 \\\\\na_{21}x_1 + a_{22}x_2 + \\cdots + a_{2k}x_k &= b_2 \\\\\n\\vdots \\\\\na_{n1}x_1 + a_{n2}x_2 + \\cdots + a_{nk}x_k &= b_n\n\\end{align*}\n\\]\nwhich we can write more compactly in matrix form as:\n\\[\nAx = b,\n\\]\nwhere\n\\[\nA = \\begin{pmatrix}\n  a_{11} & a_{12} & \\cdots & a_{1k} \\\\\n  a_{21} & a_{22} & \\cdots & a_{2k} \\\\\n  \\vdots  & \\vdots  & \\ddots & \\vdots  \\\\\n  a_{n1} & a_{n2} & \\cdots & a_{nk}\n\\end{pmatrix},\n\\quad\nx =\n\\begin{pmatrix}\n  x_{1} \\\\\n  x_{2} \\\\\n  \\vdots \\\\\n  x_{k}\n\\end{pmatrix},\n\\quad\nb =\n\\begin{pmatrix}\n  b_{1} \\\\\n  b_{2} \\\\\n  \\vdots \\\\\n  b_{n}\n\\end{pmatrix}.\n\\]\nIf \\(n &gt; k\\), the system is overdetermined – it has more constarints (equations) than degrees of freedom (variables) – and might not have a solution. In this case, it can be useful to solve\n\\[\nAx = \\hat{b},\n\\]\nwhere \\(\\hat{b}\\) is the orthogonal projection of \\(b\\) onto the vector space spanned by \\(A\\). This vector space is also called the span or column space of \\(A\\). Using orthogonal projection achieves two things: first, it guarantees a solution because \\(\\hat{b}\\) lies on the same space as \\(Ax\\) – they both lie on the subspace spanned by the columns of \\(A\\) – and, second, it makes \\(\\hat{p}\\) the closest approximation to \\(b\\) in terms of the Euclidean distance.",
+    "title": "14  Projection",
+    "section": "14.2 Why project?",
+    "text": "14.2 Why project?\nOne reason projection is useful is because it allows us to approximately solve systems of linear equations that have no exact solution. Imagine we have the following system of equations:\n\\[\n\\begin{align*}\na_{11}x_1 + a_{12}x_2 + \\cdots + a_{1k}x_k &= b_1 \\\\\na_{21}x_1 + a_{22}x_2 + \\cdots + a_{2k}x_k &= b_2 \\\\\n\\vdots \\\\\na_{n1}x_1 + a_{n2}x_2 + \\cdots + a_{nk}x_k &= b_n\n\\end{align*}\n\\]\nwhich we can write more compactly in matrix form as:\n\\[\nAx = b,\n\\]\nwhere\n\\[\nA = \\begin{pmatrix}\n  a_{11} & a_{12} & \\cdots & a_{1k} \\\\\n  a_{21} & a_{22} & \\cdots & a_{2k} \\\\\n  \\vdots  & \\vdots  & \\ddots & \\vdots  \\\\\n  a_{n1} & a_{n2} & \\cdots & a_{nk}\n\\end{pmatrix},\n\\quad\nx =\n\\begin{pmatrix}\n  x_{1} \\\\\n  x_{2} \\\\\n  \\vdots \\\\\n  x_{k}\n\\end{pmatrix},\n\\quad\nb =\n\\begin{pmatrix}\n  b_{1} \\\\\n  b_{2} \\\\\n  \\vdots \\\\\n  b_{n}\n\\end{pmatrix}.\n\\]\nIf \\(n &gt; k\\), the system is overdetermined – it has more constarints (equations) than degrees of freedom (variables) – and might not have a solution. In this case, it can be useful to solve\n\\[\nAx = \\hat{b},\n\\]\nwhere \\(\\hat{b}\\) is the orthogonal projection of \\(b\\) onto the vector space spanned by \\(A\\). This vector space is also called the span or column space of \\(A\\). Using orthogonal projection achieves two things: first, it guarantees a solution because \\(\\hat{b}\\) lies on the same space as \\(Ax\\) – they both lie on the subspace spanned by the columns of \\(A\\) – and, second, it makes \\(\\hat{p}\\) the closest approximation to \\(b\\) in terms of the Euclidean distance.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Projection</span>"
+      "Appendix",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Projection</span>"
     ]
   },
   {
     "objectID": "chapters/projection.html#projection-from-3-d-onto-2-d-and-projecting-onto-n-d",
     "href": "chapters/projection.html#projection-from-3-d-onto-2-d-and-projecting-onto-n-d",
-    "title": "4  Projection",
-    "section": "4.3 Projection from 3-D onto 2-D and projecting onto N-D",
-    "text": "4.3 Projection from 3-D onto 2-D and projecting onto N-D\nAs in the 2-D onto 1-D example above, we’re going to project the vector \\(b\\) onto a subspace. But \\(b\\) is now a 3-D vector, and instead of projecting onto a line characterised by vector \\(a\\), we’re projecting onto a 2-D plane characterised by the 2 x 2 matrix \\(A\\). Hence, our projection \\(p\\) is now a vector in the 3-dimensional space that lies on the 2-dimensional subspace. Similarly to above, \\(p\\) is defined by \\(p = Ax\\), where \\(x\\) is a 2-D vector of scalars.\nWe can still go about finding \\(p\\) in the same way as above:\n\\[\n\\begin{aligned}\nA'(b - p) &= 0 \\\\\nA'(b - Ax) &= 0 \\\\\nA'b - A'Ax &= 0 \\\\\nA'Ax &= A'b \\\\\nx &= (A'A)^{-1}A'b\\\\\n\\\\\np = Ax = \\underbrace{A(A'A)^{-1}A'}_\\text{$P_a$}b.\n\\end{aligned}\n\\]\nThe last step above works only if \\(A'A\\) is actually invertible, which is the case if \\(A\\) has full rank.\n\n\n\n\n\n\nFull rank\n\n\n\n\n\nA matrix is said to have full rank if none of its columns can be constructed from a linear combination of any other columns.\nWe can think of the columns of a matrix are the basis vectors of its column space, and the rank of the matrix is the number of dimensions of that column space.\nFull rank means thus means that the column space has as many dimensions as there are columns.\n\n\n\nThe math above generalises directly to projections onto N-dimensional space. All that changes is that \\(b\\), \\(A\\), \\(x\\), and \\(p\\) are higher-dimensional objects, and that visualising what’s happening becomes rather mind-bending.",
+    "title": "14  Projection",
+    "section": "14.3 Projection from 3-D onto 2-D and projecting onto N-D",
+    "text": "14.3 Projection from 3-D onto 2-D and projecting onto N-D\nAs in the 2-D onto 1-D example above, we’re going to project the vector \\(b\\) onto a subspace. But \\(b\\) is now a 3-D vector, and instead of projecting onto a line characterised by vector \\(a\\), we’re projecting onto a 2-D plane characterised by the 2 x 2 matrix \\(A\\). Hence, our projection \\(p\\) is now a vector in the 3-dimensional space that lies on the 2-dimensional subspace. Similarly to above, \\(p\\) is defined by \\(p = Ax\\), where \\(x\\) is a 2-D vector of scalars.\nWe can still go about finding \\(p\\) in the same way as above:\n\\[\n\\begin{aligned}\nA'(b - p) &= 0 \\\\\nA'(b - Ax) &= 0 \\\\\nA'b - A'Ax &= 0 \\\\\nA'Ax &= A'b \\\\\nx &= (A'A)^{-1}A'b\\\\\n\\\\\np = Ax = \\underbrace{A(A'A)^{-1}A'}_\\text{$P_a$}b.\n\\end{aligned}\n\\]\nThe last step above works only if \\(A'A\\) is actually invertible, which is the case if \\(A\\) has full rank.\n\n\n\n\n\n\nFull rank\n\n\n\n\n\nA matrix is said to have full rank if none of its columns can be constructed from a linear combination of any other columns.\nWe can think of the columns of a matrix are the basis vectors of its column space, and the rank of the matrix is the number of dimensions of that column space.\nFull rank means thus means that the column space has as many dimensions as there are columns.\n\n\n\nThe math above generalises directly to projections onto N-dimensional space. All that changes is that \\(b\\), \\(A\\), \\(x\\), and \\(p\\) are higher-dimensional objects, and that visualising what’s happening becomes rather mind-bending.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Projection</span>"
+      "Appendix",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Projection</span>"
     ]
   },
   {
     "objectID": "chapters/projection.html#useful-references",
     "href": "chapters/projection.html#useful-references",
-    "title": "4  Projection",
-    "section": "4.4 Useful references",
-    "text": "4.4 Useful references\n\nGilbert Strang’s linear algebra lectures at MIT\n10 Fundamental Theorems for Econometrics",
+    "title": "14  Projection",
+    "section": "14.4 Useful references",
+    "text": "14.4 Useful references\n\nGilbert Strang’s linear algebra lectures at MIT\n10 Fundamental Theorems for Econometrics",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Projection</span>"
+      "Appendix",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Projection</span>"
     ]
   },
   {
     "objectID": "chapters/projection.html#footnotes",
     "href": "chapters/projection.html#footnotes",
-    "title": "4  Projection",
+    "title": "14  Projection",
     "section": "",
     "text": "The Euclidean distance between two points \\(x\\) and \\(\\bar{x}\\) in \\(\\mathbb{R}^N\\) is defined as \\(\\sqrt{\\sum_{i=1}^N{(\\bar{a_i} - a_i})^2}\\).↩︎\nA line through the origin is a subspace of a two-dimensional vector because it is 1-dimensional (and thus a subset of the 2-dimensional vector) and because all possible linear combinations of vectors on the line will also lie on the line (see box on subspaces for more details).↩︎\nOne thing I used to wonder about was whether the order of the vectors in the scalar product \\(ax\\) matters. That is, whether we could also write \\(p = xa\\). Once you think about the rules of linear algebra, the answer becomes quite clear. For a scalar product, the order doesn’t matter. However, \\(p = ax\\) is preferred because it naturally generalises to the higher-dimensional case where instead of a scalar \\(a\\), we have a matrix \\(A\\). In this case, \\(p = Ax\\), which is different from \\(p = xA\\), which is generally not defined, and \\(p = x'A\\), which leads to a different result.↩︎",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Projection</span>"
+      "Appendix",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Projection</span>"
     ]
   },
   {
@@ -519,11 +559,12 @@
   {
     "objectID": "chapters/experiment_stats.html",
     "href": "chapters/experiment_stats.html",
-    "title": "8  Statistics of online experiments",
+    "title": "3  Potential outcomes and outcome of interest",
     "section": "",
-    "text": "8.1 Potential outcomes and outcome of interest\nWe have a population of units \\(i = 1, \\dots, \\N\\). Each unit in the population can be exposed to one of two treatments, which are identical across units. Each unit \\(i\\) has potential outcomes \\(\\ycp\\) and \\(\\ytp\\) corresponding to each of the two possible treatments. \\(\\ycp\\) is the outcome unit \\(i\\) would experience if they received the control treatment; \\(\\ytp\\), the outcome they would experience if they received the active treatment. Given that each unit is either assigned to treatment or control we’ll only ever observe one of these outcomes in practice. In fact, what we do observe for each unit is \\(\\yio\\), which equals \\(\\ytp\\) if the unit was assigned the active treatment and \\(\\ycp\\) if they were assigned the control treatment. That is, if we write \\(\\ti_i = 1\\) if unit \\(i\\) is allocated to treatment and \\(\\ti_i = 0\\) if they are allocated to control, then we can express \\(\\yio\\) as\n\\[\n\\yio = \\ti_i \\ytp + (1 - \\ti_i) \\ycp.\n\\tag{8.1}\\]\nWhat’s the use of potential outcomes we can only partially observe? They provide us with a simple and coherent way to think about the causal effect of the treatment; for unit \\(i\\), that causal effect is given by\n\\[\n\\ytp - \\ycp,\n\\]\nwhich tells us how the outcome for that unit is different when given the active treatment compared to the counterfactual state of the world where they were given the control treatment. This is what we mean by the causal effect of the treatment.\nWe are usually interested in the average causal effect of the treatment across all units, which is given by the Average Treatment Effect (ATE)\n\\[\n\\boxed{\\te = \\tefs = \\tef}\n\\tag{8.2}\\]\nThis is the quantity we’re trying to estimate in a typical experiment, though other choices are possible.1",
+    "text": "3.1 Estimating the outcome of interest\nGiven that we only observe one potential outcome per unit, how can we estimate Equation 3.2?\nIn online experiments, we typically use simple random assignment to allocate units to the expeirment sample and treatment variants (see Chapter 8 for details). Random assignment to treatment implies that\n\\[\n\\begin{align}\nE[\\ytp | \\ti_i = 1] &= E[\\ytp]\\\\\nE[\\ytp | \\ti_i = 0] &= E[\\ytp]\n\\end{align}\n\\]\nThat is: given that assignment is random, the expected outcome under treatment is the same for units in the treatment and control group, and simply equals the expected outcome under treatment across the entire population. The same is true for expected outcomes under control, so that we have\n\\[\n\\begin{align}\nE[\\ycp | \\ti_i = 1] &= E[\\ycp]\\\\\nE[\\ycp | \\ti_i = 0] &= E[\\ycp]\n\\end{align}\n\\]\nNow, expanding Equation 3.2 and using the above expressions we have:\n\\[\n\\begin{align}\n\\te &= \\tef \\\\\n&= E[\\ytp] - E[\\ycp] \\\\\n&= E[\\ytp | \\ti_i = 1] - E[\\ycp | \\ti_i = 0],\n\\end{align}\n\\]\nwhich says that we can express the true effect as the difference between the expected outcomes of treated and untreated untis – we have identified a way for expressing the treatment effect in quantities we can actually estimate based on available data. In particular, the above suggests the following estimation approach:\n\\[\n\\boxed{\\tee = \\ytob - \\ycob}\n\\tag{3.3}\\]\nwhere\n\\[\n\\ytob = \\ytobf \\qquad \\ycob = \\ycobf.\n\\]\nWe can show that this is an unbiased estimator of \\(\\te\\):2\n\\[\n\\begin{align}\nE\\left[\\tee\\right] &= E\\left[\\ytob - \\ycob\\right] \\\\\n&=E\\left[\\ytob\\right]- E\\left[\\ycob\\right] \\\\\n&=E\\left[\\ytobf\\right] - E\\left[\\ycobf\\right] \\\\\n&=\\frac{1}{\\Nt}\\sum_{i:\\ti_i=1} E\\left[\\yto\\right]\n-\\frac{1}{\\Nc}\\sum_{i:\\ti_i=0} E\\left[\\yco\\right] \\\\\n&=\\frac{\\Nt}{\\Nt}E\\left[\\yto\\right] -\\frac{\\Nc}{\\Nc}E\\left[\\yco\\right] \\\\\n&=E\\left[\\yto\\right] - E\\left[\\yco\\right] \\\\\n&=E\\left[\\yio | \\ti_i = 1\\right] - E\\left[\\yio | \\ti_i = 0\\right] \\\\\n&=E\\left[\\ytp\\right] - E\\left[\\ycp\\right] \\\\\n&=\\ytpb - \\ycpb \\\\\n&=\\te\n\\end{align}\n\\]",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Statistics of online experiments</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Potential outcomes and outcome of interest</span>"
     ]
   },
   {
@@ -559,51 +600,56 @@
   {
     "objectID": "chapters/experiment_stats.html#hypothesis-testing",
     "href": "chapters/experiment_stats.html#hypothesis-testing",
-    "title": "8  Statistics of online experiments",
-    "section": "8.4 Hypothesis testing",
-    "text": "8.4 Hypothesis testing\nTo test whether the observed treatment effect is significantly different from zero, we test:\n\\[\nH_0: \\bar{Y}^{obs}_t = \\bar{Y}^{obs}_c\nH_A: \\bar{Y}^{obs}_t \\neq \\bar{Y}^{obs}_c.\n\\]\nWe calculate the test-statistic\n\\[\nT = \\frac{\\hat{\\tau}}{\\sqrt{Var(\\hat{\\tau})}} \\sim t_{(N_t + N_c - 2)},\n\\]\nwhere \\(N_t + N_c - 2\\) is number of degrees of freedom4.\ntodo:\n\nSee Rice 6.2 on why this follows t distribution\nFor complete treatment and derivation of sampling distributions (incl. discussion of all the approximations and sample corrections), see Rice sampling chapter and my ipad notes.",
+    "title": "3  Potential outcomes and outcome of interest",
+    "section": "3.3 Hypothesis testing",
+    "text": "3.3 Hypothesis testing\nTo test whether the observed treatment effect is significantly different from zero, we test:\n\\[\nH_0: \\bar{Y}^{obs}_t = \\bar{Y}^{obs}_c\nH_A: \\bar{Y}^{obs}_t \\neq \\bar{Y}^{obs}_c.\n\\]\nWe calculate the test-statistic\n\\[\nT = \\frac{\\hat{\\tau}}{\\sqrt{Var(\\hat{\\tau})}} \\sim t_{(N_t + N_c - 2)},\n\\]\nwhere \\(N_t + N_c - 2\\) is number of degrees of freedom4.\ntodo:\n\nSee Rice 6.2 on why this follows t distribution\nFor complete treatment and derivation of sampling distributions (incl. discussion of all the approximations and sample corrections), see Rice sampling chapter and my ipad notes.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Statistics of online experiments</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Potential outcomes and outcome of interest</span>"
     ]
   },
   {
     "objectID": "chapters/experiment_stats.html#assumptions",
     "href": "chapters/experiment_stats.html#assumptions",
-    "title": "8  Statistics of online experiments",
-    "section": "8.5 Assumptions",
-    "text": "8.5 Assumptions\n\n8.5.1 Stable unit treatment value assumption (SUTVA)\n\nSUTVA has two components: no interference, and no hidden variations of treatments.\n\nNo interference\n\nThe no interference assumption states that a unit’s potential outcumes are independent of the treatment assignment of all other units.\nThis will be violated if there are network effects: if the behaviour of units is mutually dependent. For instance: if my wife and I both use an online photo-sharing service and my wife sees a new feature that we both like while I’m in the control group, we might stil share the same number of family photos but start sharing them all on her account instead of mine. This creates an artificial treatment effect because if I had also had access to the new feature, we might not have changed our behaviour at all, while, during the experiment, her sharing volume went up while mine went down, suggesting the existent of a positive effect.\nAnother case where the no interference assumption can be violated is in the form of general equilibrium effects. A classic example is the effect of further education: the effect of my doing a PhD in statistics on my earnings while nobody else changes their behaviour (the partial-equilibrium effect) is surely different from the outcome of my earnings if suddenly everyone decided to do a PhD in statistics (the general-equilibrium effect).\nThe two violations capture the two different ways interference can lead to incorrect results: interference can happen and bias our results either during the experiment or once the feature is fully rolled out. In either case, the treatment of some unit has an externality on other units.\n\nNo hidden treatment variations\n\nThe second component, no hidden treatment variation, states that a unit receiving a specific treatment level cannot receive different forms of that treatment level. This does not mean that the form of the treatment level has to be the same for each unit, but only that a given treatment level is well specified for a given unit. To use Imbens and Rubin’s aspirin example: suppose we test the effect of aspirin on reducing headaches but have old and new aspirins which vary in strength, so that we effectively have three possible treatment statuses: no aspirin (control), weak aspirin, and strong aspirin. SUTVA does not require that all treatment units either get the weak or the strong aspirin, but requires that each unit can only receive one or the other in case they are treated, so that there is no ambiguity what form of the treatment a given unit will receive in case it is treated. (It would be permissible to have the treatment be randomly weak or strong, but this is not relevant in my world.)\nEssentially, both parts of SUTVA ensure the same thing: that \\(Y_i(w)\\) is well defined: that it does not depend on the treatment status of other units, and that, for each possible treatment level, \\(w\\), the precise form of that treatment level is well specified.",
+    "title": "3  Potential outcomes and outcome of interest",
+    "section": "3.4 Assumptions",
+    "text": "3.4 Assumptions\n\n3.4.1 Stable unit treatment value assumption (SUTVA)\n\nSUTVA has two components: no interference, and no hidden variations of treatments.\n\nNo interference\n\nThe no interference assumption states that a unit’s potential outcumes are independent of the treatment assignment of all other units.\nThis will be violated if there are network effects: if the behaviour of units is mutually dependent. For instance: if my wife and I both use an online photo-sharing service and my wife sees a new feature that we both like while I’m in the control group, we might stil share the same number of family photos but start sharing them all on her account instead of mine. This creates an artificial treatment effect because if I had also had access to the new feature, we might not have changed our behaviour at all, while, during the experiment, her sharing volume went up while mine went down, suggesting the existent of a positive effect.\nAnother case where the no interference assumption can be violated is in the form of general equilibrium effects. A classic example is the effect of further education: the effect of my doing a PhD in statistics on my earnings while nobody else changes their behaviour (the partial-equilibrium effect) is surely different from the outcome of my earnings if suddenly everyone decided to do a PhD in statistics (the general-equilibrium effect).\nThe two violations capture the two different ways interference can lead to incorrect results: interference can happen and bias our results either during the experiment or once the feature is fully rolled out. In either case, the treatment of some unit has an externality on other units.\n\nNo hidden treatment variations\n\nThe second component, no hidden treatment variation, states that a unit receiving a specific treatment level cannot receive different forms of that treatment level. This does not mean that the form of the treatment level has to be the same for each unit, but only that a given treatment level is well specified for a given unit. To use Imbens and Rubin’s aspirin example: suppose we test the effect of aspirin on reducing headaches but have old and new aspirins which vary in strength, so that we effectively have three possible treatment statuses: no aspirin (control), weak aspirin, and strong aspirin. SUTVA does not require that all treatment units either get the weak or the strong aspirin, but requires that each unit can only receive one or the other in case they are treated, so that there is no ambiguity what form of the treatment a given unit will receive in case it is treated. (It would be permissible to have the treatment be randomly weak or strong, but this is not relevant in my world.)\nEssentially, both parts of SUTVA ensure the same thing: that \\(Y_i(w)\\) is well defined: that it does not depend on the treatment status of other units, and that, for each possible treatment level, \\(w\\), the precise form of that treatment level is well specified.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Statistics of online experiments</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Potential outcomes and outcome of interest</span>"
     ]
   },
   {
     "objectID": "chapters/experiment_stats.html#how-does-randomisation-help-us-estimate-ates",
     "href": "chapters/experiment_stats.html#how-does-randomisation-help-us-estimate-ates",
-    "title": "8  Statistics of online experiments",
-    "section": "8.6 How does randomisation help us estimate ATEs?",
-    "text": "8.6 How does randomisation help us estimate ATEs?\nBy ensuring that the treatment - the causal variable of interest - is independent of potential outcomes, so that control and treatment group are comparable.\nMore technically, it ensures that expected outcomes are the same in both groups, which means that the selection bias - the difference of expected potential outcomes without treatment - disappears. When using regression, this is equivalent to the error term being uncorrelated with treatment status.",
+    "title": "3  Potential outcomes and outcome of interest",
+    "section": "3.5 How does randomisation help us estimate ATEs?",
+    "text": "3.5 How does randomisation help us estimate ATEs?\nBy ensuring that the treatment - the causal variable of interest - is independent of potential outcomes, so that control and treatment group are comparable.\nMore technically, it ensures that expected outcomes are the same in both groups, which means that the selection bias - the difference of expected potential outcomes without treatment - disappears. When using regression, this is equivalent to the error term being uncorrelated with treatment status.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Statistics of online experiments</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Potential outcomes and outcome of interest</span>"
     ]
   },
   {
     "objectID": "chapters/experiment_stats.html#finite-sample-vs-super-population-perspective",
     "href": "chapters/experiment_stats.html#finite-sample-vs-super-population-perspective",
-    "title": "8  Statistics of online experiments",
-    "section": "8.7 Finite sample vs super-population perspective",
-    "text": "8.7 Finite sample vs super-population perspective\nThere are two ways to perform inference:\n\nWhen using the finite sample perspective, the \\(N\\) units in the experiment sample are treated as the entire population of interest. Hence, there is no notion of randomisation due to sampling from a larger population, and all the randomness in the outcomes is due to randomness generates by the assignment mechanism.\nWhen treating the \\(N\\) units in the sample as a random sample from a larger super-population, then in addition to randomness from the randomisation, we also have randomness from the sampling.\n\n\n\n\n\nImbens, Guido W, and Donald B Rubin. 2015. Causal Inference in Statistics, Social, and Biomedical Sciences. Cambridge University Press.\n\n\nRice, John A. 2006. Mathematical Statistics and Data Analysis. Cengage Learning.",
+    "title": "3  Potential outcomes and outcome of interest",
+    "section": "3.6 Finite sample vs super-population perspective",
+    "text": "3.6 Finite sample vs super-population perspective\nThere are two ways to perform inference:\n\nWhen using the finite sample perspective, the \\(N\\) units in the experiment sample are treated as the entire population of interest. Hence, there is no notion of randomisation due to sampling from a larger population, and all the randomness in the outcomes is due to randomness generates by the assignment mechanism.\nWhen treating the \\(N\\) units in the sample as a random sample from a larger super-population, then in addition to randomness from the randomisation, we also have randomness from the sampling.\n\n\n\n\n\nImbens, Guido W, and Donald B Rubin. 2015. Causal Inference in Statistics, Social, and Biomedical Sciences. Cambridge University Press.\n\n\nRice, John A. 2006. Mathematical Statistics and Data Analysis. Cengage Learning.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Statistics of online experiments</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Potential outcomes and outcome of interest</span>"
     ]
   },
   {
     "objectID": "chapters/experiment_stats.html#footnotes",
     "href": "chapters/experiment_stats.html#footnotes",
-    "title": "8  Statistics of online experiments",
+    "title": "3  Potential outcomes and outcome of interest",
     "section": "",
     "text": "Other choices are possible. We could define the individual level treatment effect as the ratio of active and control treatment, and we can create different summary statistics of the individual-level treatment effects other than the average treatment effect over the entire population (see, for instance, Chapter 1 in Imbens and Rubin (2015)).↩︎\nFor an alternative proof, see the proof of Theorem 6.1 in Imbens and Rubin (2015).↩︎\nWhen we sample units without replacement and use a completely randomised experiment as the assignment mechanism, this is not true. As a result, the derivation of the standard error is more complicated though it turns out that formula we derive here is still commonly used. The reason is twofold: if treatment errors are constant, then the estimator is unbiased even in the more complex case. If not, then the estimator is conservative compared to one that takes the interaction from the complete randomisation into account. Furthermore, the expression is valid approximately ….\nstill holds approximately, since the interdependence is small if the population from which experiment units are sampled is much larger than the experiment sample. For more details, See Imbens and Rubin (2015) Section 6.7 and Appendix B of Chapter 6.↩︎\nNote that the test statistic follows a t-distribution because we have to estimate the variance (that is, if we replace the true variance with its estimate when standardising a normal variable, the result follows a Student’s t-distribution). So, this has nothing to do with the CLT. However, for the test statistic to follow a student distribution, the numerator has to follow a normal distribution. Often, though, the underlying data is not normal, so that its approximately normal only for large enough samples, due to the CLT. At the same time, the t-distribution also converges to normal as the sample size increases. Hence, one we have a sample size large enough to justify using the t-distribution, we might as well use a z-test. As pointed out in Chapter 9 in Rice (2006), the test statistic above only follows a t-distribution if we use the pooled variance, but for large sample sizes, the distribution is still approximately t or normal.↩︎",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Statistics of online experiments</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Potential outcomes and outcome of interest</span>"
     ]
   },
   {
@@ -1029,19 +1075,24 @@
   {
     "objectID": "chapters/experiment_stats.html#estimating-the-outcome-of-interest",
     "href": "chapters/experiment_stats.html#estimating-the-outcome-of-interest",
-    "title": "8  Statistics of online experiments",
-    "section": "8.2 Estimating the outcome of interest",
-    "text": "8.2 Estimating the outcome of interest\nGiven that we only observe one potential outcome per unit, how can we estimate Equation 8.2?\nIn online experiments, we typically use simple random assignment to allocate units to the expeirment sample and treatment variants (see Chapter 10 for details). Random assignment to treatment implies that\n\\[\n\\begin{align}\nE[\\ytp | \\ti_i = 1] &= E[\\ytp]\\\\\nE[\\ytp | \\ti_i = 0] &= E[\\ytp]\n\\end{align}\n\\]\nThat is: given that assignment is random, the expected outcome under treatment is the same for units in the treatment and control group, and simply equals the expected outcome under treatment across the entire population. The same is true for expected outcomes under control, so that we have\n\\[\n\\begin{align}\nE[\\ycp | \\ti_i = 1] &= E[\\ycp]\\\\\nE[\\ycp | \\ti_i = 0] &= E[\\ycp]\n\\end{align}\n\\]\nNow, expanding Equation 8.2 and using the above expressions we have:\n\\[\n\\begin{align}\n\\te &= \\tef \\\\\n&= E[\\ytp] - E[\\ycp] \\\\\n&= E[\\ytp | \\ti_i = 1] - E[\\ycp | \\ti_i = 0],\n\\end{align}\n\\]\nwhich says that we can express the true effect as the difference between the expected outcomes of treated and untreated untis – we have identified a way for expressing the treatment effect in quantities we can actually estimate based on available data. In particular, the above suggests the following estimation approach:\n\\[\n\\boxed{\\tee = \\ytob - \\ycob}\n\\tag{8.3}\\]\nwhere\n\\[\n\\ytob = \\ytobf \\qquad \\ycob = \\ycobf.\n\\]\nWe can show that this is an unbiased estimator of \\(\\te\\):2\n\\[\n\\begin{align}\nE\\left[\\tee\\right] &= E\\left[\\ytob - \\ycob\\right] \\\\\n&=E\\left[\\ytob\\right]- E\\left[\\ycob\\right] \\\\\n&=E\\left[\\ytobf\\right] - E\\left[\\ycobf\\right] \\\\\n&=\\frac{1}{\\Nt}\\sum_{i:\\ti_i=1} E\\left[\\yto\\right]\n-\\frac{1}{\\Nc}\\sum_{i:\\ti_i=0} E\\left[\\yco\\right] \\\\\n&=\\frac{\\Nt}{\\Nt}E\\left[\\yto\\right] -\\frac{\\Nc}{\\Nc}E\\left[\\yco\\right] \\\\\n&=E\\left[\\yto\\right] - E\\left[\\yco\\right] \\\\\n&=E\\left[\\yio | \\ti_i = 1\\right] - E\\left[\\yio | \\ti_i = 0\\right] \\\\\n&=E\\left[\\ytp\\right] - E\\left[\\ycp\\right] \\\\\n&=\\ytpb - \\ycpb \\\\\n&=\\te\n\\end{align}\n\\]",
+    "title": "3  Statistics of online experiments",
+    "section": "3.2 Estimating the outcome of interest",
+    "text": "3.2 Estimating the outcome of interest\nGiven that we only observe one potential outcome per unit, how can we estimate Equation 3.2?\nIn online experiments, we typically use simple random assignment to allocate units to the expeirment sample and treatment variants (see Chapter 8 for details). Random assignment to treatment implies that\n\\[\n\\begin{align}\nE[\\ytp | \\ti_i = 1] &= E[\\ytp]\\\\\nE[\\ytp | \\ti_i = 0] &= E[\\ytp]\n\\end{align}\n\\]\nThat is: given that assignment is random, the expected outcome under treatment is the same for units in the treatment and control group, and simply equals the expected outcome under treatment across the entire population. The same is true for expected outcomes under control, so that we have\n\\[\n\\begin{align}\nE[\\ycp | \\ti_i = 1] &= E[\\ycp]\\\\\nE[\\ycp | \\ti_i = 0] &= E[\\ycp]\n\\end{align}\n\\]\nNow, expanding Equation 3.2 and using the above expressions we have:\n\\[\n\\begin{align}\n\\te &= \\tef \\\\\n&= E[\\ytp] - E[\\ycp] \\\\\n&= E[\\ytp | \\ti_i = 1] - E[\\ycp | \\ti_i = 0],\n\\end{align}\n\\]\nwhich says that we can express the true effect as the difference between the expected outcomes of treated and untreated untis – we have identified a way for expressing the treatment effect in quantities we can actually estimate based on available data. In particular, the above suggests the following estimation approach:\n\\[\n\\boxed{\\tee = \\ytob - \\ycob}\n\\tag{3.3}\\]\nwhere\n\\[\n\\ytob = \\ytobf \\qquad \\ycob = \\ycobf.\n\\]\nWe can show that this is an unbiased estimator of \\(\\te\\):2\n\\[\n\\begin{align}\nE\\left[\\tee\\right] &= E\\left[\\ytob - \\ycob\\right] \\\\\n&=E\\left[\\ytob\\right]- E\\left[\\ycob\\right] \\\\\n&=E\\left[\\ytobf\\right] - E\\left[\\ycobf\\right] \\\\\n&=\\frac{1}{\\Nt}\\sum_{i:\\ti_i=1} E\\left[\\yto\\right]\n-\\frac{1}{\\Nc}\\sum_{i:\\ti_i=0} E\\left[\\yco\\right] \\\\\n&=\\frac{\\Nt}{\\Nt}E\\left[\\yto\\right] -\\frac{\\Nc}{\\Nc}E\\left[\\yco\\right] \\\\\n&=E\\left[\\yto\\right] - E\\left[\\yco\\right] \\\\\n&=E\\left[\\yio | \\ti_i = 1\\right] - E\\left[\\yio | \\ti_i = 0\\right] \\\\\n&=E\\left[\\ytp\\right] - E\\left[\\ycp\\right] \\\\\n&=\\ytpb - \\ycpb \\\\\n&=\\te\n\\end{align}\n\\]",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Statistics of online experiments</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Statistics of online experiments</span>"
     ]
   },
   {
     "objectID": "chapters/treatment_assignment.html",
     "href": "chapters/treatment_assignment.html",
-    "title": "10  Treatment assignment",
+    "title": "8  Treatment assignment",
     "section": "",
-    "text": "In an online experiment, we typically allocate units to the experiment sample and a treatment condition using simple random assignment. We do this using a hash function as follows:\n\nTo determine whether a unit is part of the experiment sample, we create a hash string by concatenating the unique unit id with additional experiment information such as the experiment id, the market the experiment is being run in, and a random seed.\nWe then feed that hash string into a hash algorithm (often MD5 is chosen) to receive a hash value and check where in the range of possible hash values our particular hash value falls. If it’s below a certain threshold, the unit is part of the sample. If, for instance, we want to allocate 10% of traffic to the experiment, we’d include all users whose hash value lies within the lowest (or highest) 10% of possible hash values.\nFor units that are part of the sample, we then determine treatment allocation in the same way. We create a new hash string and hash value (by, for instance, changing the random seed added to the string), and assign the unit to a treatment condition based on where in the range of possible hash values their hash value lies. If, for instance, we split the sample equally between one treatment and one control group, units whose hash value falls into the lower (or upper) half of possible hash values would be allocated to treatment.\n\nThe important implication of this process for experiment analysis is that both sampling and treatment assignment for each unit are completely independent of that of other units.\nThis is easiest to see in contrast to experiments where neither of these decisions are independent, as is often the case in lab and field experiments in social science, but also medical experiments. There, we typically recruit a pre-determined number of units into our experiment, so that the inclusion of any given unit lowers the probability of inclusion for all others. Similarly, for treatment assignment, we would often use what is called “complete randomisation”, whereby we ensure that exactly \\(\\Nt\\) or of all \\(N\\) units end up in the treatment group. This, again means that assigning any given unit to treatment lowers the probability of receiving the treatment for all other units. In both of those cases, we sample without replacement.\nIn contrast, relying on hashes mimics the independence from sampling with replacement. The entire point of hash values is that they are deterministic given a hash string. Our decision to include a user into the sample or a particular variant based on whether their unique hash value falls above or below a pre-determined threshold is thus independent of how many other users have already met that condition. This is because the decision we made for these users alters neither our user’s hash value nor the thresholds we compare it against."
+    "text": "In an online experiment, we typically allocate units to the experiment sample and a treatment condition using simple random assignment. We do this using a hash function as follows:\n\nTo determine whether a unit is part of the experiment sample, we create a hash string by concatenating the unique unit id with additional experiment information such as the experiment id, the market the experiment is being run in, and a random seed.\nWe then feed that hash string into a hash algorithm (often MD5 is chosen) to receive a hash value and check where in the range of possible hash values our particular hash value falls. If it’s below a certain threshold, the unit is part of the sample. If, for instance, we want to allocate 10% of traffic to the experiment, we’d include all users whose hash value lies within the lowest (or highest) 10% of possible hash values.\nFor units that are part of the sample, we then determine treatment allocation in the same way. We create a new hash string and hash value (by, for instance, changing the random seed added to the string), and assign the unit to a treatment condition based on where in the range of possible hash values their hash value lies. If, for instance, we split the sample equally between one treatment and one control group, units whose hash value falls into the lower (or upper) half of possible hash values would be allocated to treatment.\n\nThe important implication of this process for experiment analysis is that both sampling and treatment assignment for each unit are completely independent of that of other units.\nThis is easiest to see in contrast to experiments where neither of these decisions are independent, as is often the case in lab and field experiments in social science, but also medical experiments. There, we typically recruit a pre-determined number of units into our experiment, so that the inclusion of any given unit lowers the probability of inclusion for all others. Similarly, for treatment assignment, we would often use what is called “complete randomisation”, whereby we ensure that exactly \\(\\Nt\\) or of all \\(N\\) units end up in the treatment group. This, again means that assigning any given unit to treatment lowers the probability of receiving the treatment for all other units. In both of those cases, we sample without replacement.\nIn contrast, relying on hashes mimics the independence from sampling with replacement. The entire point of hash values is that they are deterministic given a hash string. Our decision to include a user into the sample or a particular variant based on whether their unique hash value falls above or below a pre-determined threshold is thus independent of how many other users have already met that condition. This is because the decision we made for these users alters neither our user’s hash value nor the thresholds we compare it against.",
+    "crumbs": [
+      "Practical issues",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Treatment assignment</span>"
+    ]
   },
   {
     "objectID": "chapters/power.html#understanding-the-formula-that-determines-sample-size",
@@ -1070,11 +1121,187 @@
   {
     "objectID": "chapters/experiment_stats.html#standard-error-of-treatment-effect-estimate",
     "href": "chapters/experiment_stats.html#standard-error-of-treatment-effect-estimate",
-    "title": "8  Statistics of online experiments",
-    "section": "8.3 Standard error of treatment effect estimate",
-    "text": "8.3 Standard error of treatment effect estimate\nIn this section, we’ll derive the standard error of our treatment effect stimator \\(\\tee\\).\nOur treatment effect estimate, \\(\\tee\\), is a random variable because sampling and treatment assignment are random. This means that if we were to repeat the sampe experiment many times we’d get a slightly different value for \\(\\tee\\) each time. The distribution of all these values is called the sampling distribution of \\(\\tee\\). We know a few things about that distribution. From the central limit theorem we know that its shape is Normal (see ?sec-stats-foundations). Above we have shown above that the distribution has mean \\(\\te\\), which means our estimator is unbiased. Naturally, the distribution also has a standard deviation. Because it is a sampling distribution, that standard deviation is called the standard error. But it is still a standard deviation, and is thus defined as the square root of the variance. We’ll thus find the standard error as follows: we first derive the variance of the treatment estimate, then find a way to estimate that variance, and then take the square root of that estimate to get the standard error.\n\n8.3.1 Treatment effect estimate variance\nThe way we sample units into our experiment and assign them to treatment groups has important implications for the variance. For the estimation of the treatment effect above, the main implication of the simple random sample proceedure commonly used for online experiments (see chapter Chapter 10) was that the expectation of potential ourcomes for treatment and control groups were identical. For the derivation of the variance and the standard error, the main implication is that sampling and treatment assignment between units are independent in the sense that one unit being sampled or assigned to a treatment condition doesn’t affect other units’ sampling or assignment probabilities.3\nGiven this independence property, let’s think about the standard error for a typical online experiment from first principles.\n\\[\n\\begin{align}\nV\\left(\\tee\\right) &= V\\left(\\ytob - \\ycob\\right) \\\\\n&=V\\left(\\ytob\\right) + V\\left(\\ycob\\right) \\\\\n&=V\\left(\\ytobf\\right) + V\\left(\\ycobf\\right) \\\\\n&=\\frac{1}{\\Nt^2}\\sum_{i:\\ti_i=1} V\\left(\\yto\\right)\n+ \\frac{1}{\\Nc^2}\\sum_{i:\\ti_i=0} V\\left(\\yco\\right) \\\\\n&=\\frac{\\Nt}{\\Nt^2}V\\left(\\yto\\right) + \\frac{\\Nc}{\\Nc^2}V\\left(\\yco\\right) \\\\\n&=\\frac{1}{\\Nt}V\\left(\\yio | \\ti_i = 1\\right) + \\frac{1}{\\Nc}V\\left(\\yio | \\ti_i = 0\\right) \\\\\n&=\\frac{1}{\\Nt}V\\left(\\ytp\\right) + \\frac{1}{\\Nc}V\\left(\\ycp\\right) \\\\\n&=\\frac{1}{\\Nt}V\\left(\\ytp\\right) + \\frac{1}{\\Nc}V\\left(\\ycp\\right) \\\\\n&=\\frac{\\vt}{\\Nt} + \\frac{\\vc}{\\Nc},\n\\end{align}\n\\]\nwhere\n\\[\n\\vt ≡ V\\left(\\ytp\\right) \\quad \\vc ≡ V\\left(\\ycp\\right),\n\\]\nis the (true) population variance in the treatment and control group, respectively.\n\n\n8.3.2 Estimating the treatment effect estimate variance\nIn practice, we don’t know these variances, so we estimate them using\n\\[\n\\vte = \\vtef \\quad \\vce = \\vcef,\n\\]\nfrom which we get\n\\[\n\\sve = \\svefu.\n\\]\nThis is the variance of our treatment effect estimate. For statistical testing, the construction of confidence intervals, and for power analysis we work with the standard errors. We’ll derive these next.\n\n\n8.3.3 Standard error of treatment effect estimate\nAs discussed above, the standard error is simply the standard deviation of the sampling distribution of \\(\\tee\\), defined as the square root of the sampling variance, and is thus defined as:\n\\[\n\\boxed{\\se = \\seefu}\n\\tag{8.4}\\]\nWe could work with this, and sometimes do. But in the context of online experiments, because sample sizes are so large and treatment effects are usually small, people often assume equal sample sizes and variances, so that we have \\(\\Nt = \\Nc = N/2\\) and \\(\\vte = \\vce = \\vpe\\). The common variance \\(\\vpe\\) is estimated by “pooling” \\(\\vte\\) and \\(\\vce\\) to create a degrees-of-freedom-weighted estimator of the form:\n\\[\n\\vpe = \\vpef.\n\\]\nSubstituting all of the above in Equation 8.4 results in\n\\[\n\\se = \\sqrt{\\frac{\\vpe + \\vpe}{\\N/2}} = \\sqrt{\\frac{4\\vpe}{\\N}} = \\seefe\n\\]\nFor most of the text, I’ll use this expression for the standard error. In some cases, though, it is useful to express the standard error in terms of the proportion of units allocated to the treatment group. Hence, instead of assuming equal sample sizes, we use \\(P\\) to denote that proportion and \\(\\N\\) to denote total sample size, while maintaining the assumption of equal variance. After a little algebraic manipulation we then get:\n\\[\n\\se = \\sqrt{\\frac{\\vpe}{P\\N} + \\frac{\\vpe}{(1-P)\\N}} = \\seefp.\n\\]\nNotice that for equal sample sizes, when \\(P=0.5\\), this formulation is equivalent to the one above as expected.",
+    "title": "3  Potential outcomes and outcome of interest",
+    "section": "3.2 Standard error of treatment effect estimate",
+    "text": "3.2 Standard error of treatment effect estimate\nIn this section, we’ll derive the standard error of our treatment effect stimator \\(\\tee\\).\nOur treatment effect estimate, \\(\\tee\\), is a random variable because sampling and treatment assignment are random. This means that if we were to repeat the sampe experiment many times we’d get a slightly different value for \\(\\tee\\) each time. The distribution of all these values is called the sampling distribution of \\(\\tee\\). We know a few things about that distribution. From the central limit theorem we know that its shape is Normal (see ?sec-stats-foundations). Above we have shown above that the distribution has mean \\(\\te\\), which means our estimator is unbiased. Naturally, the distribution also has a standard deviation. Because it is a sampling distribution, that standard deviation is called the standard error. But it is still a standard deviation, and is thus defined as the square root of the variance. We’ll thus find the standard error as follows: we first derive the variance of the treatment estimate, then find a way to estimate that variance, and then take the square root of that estimate to get the standard error.\n\n3.2.1 Treatment effect estimate variance\nThe way we sample units into our experiment and assign them to treatment groups has important implications for the variance. For the estimation of the treatment effect above, the main implication of the simple random sample proceedure commonly used for online experiments (see chapter Chapter 8) was that the expectation of potential ourcomes for treatment and control groups were identical. For the derivation of the variance and the standard error, the main implication is that sampling and treatment assignment between units are independent in the sense that one unit being sampled or assigned to a treatment condition doesn’t affect other units’ sampling or assignment probabilities.3\nGiven this independence property, let’s think about the standard error for a typical online experiment from first principles.\n\\[\n\\begin{align}\nV\\left(\\tee\\right) &= V\\left(\\ytob - \\ycob\\right) \\\\\n&=V\\left(\\ytob\\right) + V\\left(\\ycob\\right) \\\\\n&=V\\left(\\ytobf\\right) + V\\left(\\ycobf\\right) \\\\\n&=\\frac{1}{\\Nt^2}\\sum_{i:\\ti_i=1} V\\left(\\yto\\right)\n+ \\frac{1}{\\Nc^2}\\sum_{i:\\ti_i=0} V\\left(\\yco\\right) \\\\\n&=\\frac{\\Nt}{\\Nt^2}V\\left(\\yto\\right) + \\frac{\\Nc}{\\Nc^2}V\\left(\\yco\\right) \\\\\n&=\\frac{1}{\\Nt}V\\left(\\yio | \\ti_i = 1\\right) + \\frac{1}{\\Nc}V\\left(\\yio | \\ti_i = 0\\right) \\\\\n&=\\frac{1}{\\Nt}V\\left(\\ytp\\right) + \\frac{1}{\\Nc}V\\left(\\ycp\\right) \\\\\n&=\\frac{1}{\\Nt}V\\left(\\ytp\\right) + \\frac{1}{\\Nc}V\\left(\\ycp\\right) \\\\\n&=\\frac{\\vt}{\\Nt} + \\frac{\\vc}{\\Nc},\n\\end{align}\n\\]\nwhere\n\\[\n\\vt ≡ V\\left(\\ytp\\right) \\quad \\vc ≡ V\\left(\\ycp\\right),\n\\]\nis the (true) population variance in the treatment and control group, respectively.\n\n\n3.2.2 Estimating the treatment effect estimate variance\nIn practice, we don’t know these variances, so we estimate them using\n\\[\n\\vte = \\vtef \\quad \\vce = \\vcef,\n\\]\nfrom which we get\n\\[\n\\sve = \\svefu.\n\\]\nThis is the variance of our treatment effect estimate. For statistical testing, the construction of confidence intervals, and for power analysis we work with the standard errors. We’ll derive these next.\n\n\n3.2.3 Standard error of treatment effect estimate\nAs discussed above, the standard error is simply the standard deviation of the sampling distribution of \\(\\tee\\), defined as the square root of the sampling variance, and is thus defined as:\n\\[\n\\boxed{\\se = \\seefu}\n\\tag{3.4}\\]\nWe could work with this, and sometimes do. But in the context of online experiments, because sample sizes are so large and treatment effects are usually small, people often assume equal sample sizes and variances, so that we have \\(\\Nt = \\Nc = N/2\\) and \\(\\vte = \\vce = \\vpe\\). The common variance \\(\\vpe\\) is estimated by “pooling” \\(\\vte\\) and \\(\\vce\\) to create a degrees-of-freedom-weighted estimator of the form:\n\\[\n\\vpe = \\vpef.\n\\]\nSubstituting all of the above in Equation 3.4 results in\n\\[\n\\se = \\sqrt{\\frac{\\vpe + \\vpe}{\\N/2}} = \\sqrt{\\frac{4\\vpe}{\\N}} = \\seefe\n\\]\nFor most of the text, I’ll use this expression for the standard error. In some cases, though, it is useful to express the standard error in terms of the proportion of units allocated to the treatment group. Hence, instead of assuming equal sample sizes, we use \\(P\\) to denote that proportion and \\(\\N\\) to denote total sample size, while maintaining the assumption of equal variance. After a little algebraic manipulation we then get:\n\\[\n\\se = \\sqrt{\\frac{\\vpe}{P\\N} + \\frac{\\vpe}{(1-P)\\N}} = \\seefp.\n\\]\nNotice that for equal sample sizes, when \\(P=0.5\\), this formulation is equivalent to the one above as expected.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Statistics of online experiments</span>"
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Potential outcomes and outcome of interest</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/introduction.html",
+    "href": "chapters/introduction.html",
+    "title": "2  Introduction",
+    "section": "",
+    "text": "2.1 Why causal inference?\nThe purpose:",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/introduction.html#why-causal-inference",
+    "href": "chapters/introduction.html#why-causal-inference",
+    "title": "2  Introduction",
+    "section": "",
+    "text": "Because many thinks we think work don’t (look at list of refuted claims from Kohavi here)\n\n\n\nCreate a valid counterfactual outcome - the outcome of the treated if they had not been treated - in order to eliminate selection bias when estimating the treatment effect.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/introduction.html#why-experiments",
+    "href": "chapters/introduction.html#why-experiments",
+    "title": "2  Introduction",
+    "section": "2.2 Why experiments",
+    "text": "2.2 Why experiments\n\nThe randomisation of treatment eliminates selection bias.\nThe presence of a control group provides a counterfactual of what would have happened without treatment.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/introduction.html#limitations-of-experiments",
+    "href": "chapters/introduction.html#limitations-of-experiments",
+    "title": "2  Introduction",
+    "section": "2.3 Limitations of experiments",
+    "text": "2.3 Limitations of experiments\nLook at Deaton and Cartwright papers.\n\nThey cannot be used to study the past.\nThey can only estimate the effect of treatments that can be manipulated (“no causation without manipulation” Rubin).\nGuidance for policy limited by compliance issues, environmental dependence, and equilibrium effects.\nThere are ethical concerns.\n\n\nFor deeper discussion, see Stevenson (2024) and sources therein.\n\n\n\n\n\nStevenson, Megan T. 2024. “Cause, Effect, and the Structure of the Social World.” CrimRxiv.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/fwl.html",
+    "href": "chapters/fwl.html",
+    "title": "15  FWL",
+    "section": "",
+    "text": "Use stuff from blog another post on cuped post",
+    "crumbs": [
+      "Appendix",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>FWL</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/statistics.html",
+    "href": "chapters/statistics.html",
+    "title": "Statistics",
+    "section": "",
+    "text": "The goal of this part of the book is to collect all the statistical theory that underlies online experiments.\nMost online experiments are very simple; we split traffic into groups with different experiences and compare outcomes between groups—how much statistical theory could we possibly need?\nWell, to experiment effectively, you want, at a minimum, the following:\n\nA coherent definition of the causal effect you want to measure, a reliable way of estimating it, and a way to quantify the uncertainty around your estimate.\nA way to differentiate between estimates that signal the existence of a true effect and those that are the results of random noise in the data.\nA way to ensure your experiment has a good chance of picking up signals if there are any.\n\nFirst two are covered here. The third, which relates to the power of your experiment, is covered in 5  Power.",
+    "crumbs": [
+      "Statistics"
+    ]
+  },
+  {
+    "objectID": "chapters/outcomes.html",
+    "href": "chapters/outcomes.html",
+    "title": "3  Outcomes",
+    "section": "",
+    "text": "3.1 Potential outcomes and outcome of interest\nWe have a population of units \\(i = 1, \\dots, \\N\\). Each unit in the population can be exposed to one of two treatments, which are identical across units. Each unit \\(i\\) has potential outcomes \\(\\ycp\\) and \\(\\ytp\\) corresponding to each of the two possible treatments. \\(\\ycp\\) is the outcome unit \\(i\\) would experience if they received the control treatment; \\(\\ytp\\), the outcome they would experience if they received the active treatment. Given that each unit is either assigned to treatment or control we’ll only ever observe one of these outcomes in practice. In fact, what we do observe for each unit is \\(\\yio\\), which equals \\(\\ytp\\) if the unit was assigned the active treatment and \\(\\ycp\\) if they were assigned the control treatment. That is, if we write \\(\\ti_i = 1\\) if unit \\(i\\) is allocated to treatment and \\(\\ti_i = 0\\) if they are allocated to control, then we can express \\(\\yio\\) as\n\\[\n\\yio = \\ti_i \\ytp + (1 - \\ti_i) \\ycp.\n\\tag{3.1}\\]\nWhat’s the use of potential outcomes we can only partially observe? They provide us with a simple and coherent way to think about the causal effect of the treatment; for unit \\(i\\), that causal effect is given by\n\\[\n\\ytp - \\ycp,\n\\]\nwhich tells us how the outcome for that unit is different when given the active treatment compared to the counterfactual state of the world where they were given the control treatment. This is what we mean by the causal effect of the treatment.\nWe are usually interested in the average causal effect of the treatment across all units, which is given by the Average Treatment Effect (ATE)\n\\[\n\\boxed{\\te = \\tefs = \\tef}\n\\tag{3.2}\\]\nThis is the quantity we’re trying to estimate in a typical experiment, though other choices are possible.1",
+    "crumbs": [
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Outcomes</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/outcomes.html#standard-error-of-treatment-effect-estimate",
+    "href": "chapters/outcomes.html#standard-error-of-treatment-effect-estimate",
+    "title": "3  Outcomes",
+    "section": "3.3 Standard error of treatment effect estimate",
+    "text": "3.3 Standard error of treatment effect estimate\nIn this section, we’ll derive the standard error of our treatment effect stimator \\(\\tee\\).\nOur treatment effect estimate, \\(\\tee\\), is a random variable because sampling and treatment assignment are random. This means that if we were to repeat the sampe experiment many times we’d get a slightly different value for \\(\\tee\\) each time. The distribution of all these values is called the sampling distribution of \\(\\tee\\). We know a few things about that distribution. From the central limit theorem we know that its shape is Normal (see ?sec-stats-foundations). Above we have shown above that the distribution has mean \\(\\te\\), which means our estimator is unbiased. Naturally, the distribution also has a standard deviation. Because it is a sampling distribution, that standard deviation is called the standard error. But it is still a standard deviation, and is thus defined as the square root of the variance. We’ll thus find the standard error as follows: we first derive the variance of the treatment estimate, then find a way to estimate that variance, and then take the square root of that estimate to get the standard error.\n\n3.3.1 Treatment effect estimate variance\nThe way we sample units into our experiment and assign them to treatment groups has important implications for the variance. For the estimation of the treatment effect above, the main implication of the simple random sample proceedure commonly used for online experiments (see chapter Chapter 8) was that the expectation of potential ourcomes for treatment and control groups were identical. For the derivation of the variance and the standard error, the main implication is that sampling and treatment assignment between units are independent in the sense that one unit being sampled or assigned to a treatment condition doesn’t affect other units’ sampling or assignment probabilities.3\nGiven this independence property, let’s think about the standard error for a typical online experiment from first principles.\n\\[\n\\begin{align}\nV\\left(\\tee\\right) &= V\\left(\\ytob - \\ycob\\right) \\\\\n&=V\\left(\\ytob\\right) + V\\left(\\ycob\\right) \\\\\n&=V\\left(\\ytobf\\right) + V\\left(\\ycobf\\right) \\\\\n&=\\frac{1}{\\Nt^2}\\sum_{i:\\ti_i=1} V\\left(\\yto\\right)\n+ \\frac{1}{\\Nc^2}\\sum_{i:\\ti_i=0} V\\left(\\yco\\right) \\\\\n&=\\frac{\\Nt}{\\Nt^2}V\\left(\\yto\\right) + \\frac{\\Nc}{\\Nc^2}V\\left(\\yco\\right) \\\\\n&=\\frac{1}{\\Nt}V\\left(\\yio | \\ti_i = 1\\right) + \\frac{1}{\\Nc}V\\left(\\yio | \\ti_i = 0\\right) \\\\\n&=\\frac{1}{\\Nt}V\\left(\\ytp\\right) + \\frac{1}{\\Nc}V\\left(\\ycp\\right) \\\\\n&=\\frac{1}{\\Nt}V\\left(\\ytp\\right) + \\frac{1}{\\Nc}V\\left(\\ycp\\right) \\\\\n&=\\frac{\\vt}{\\Nt} + \\frac{\\vc}{\\Nc},\n\\end{align}\n\\]\nwhere\n\\[\n\\vt ≡ V\\left(\\ytp\\right) \\quad \\vc ≡ V\\left(\\ycp\\right),\n\\]\nis the (true) population variance in the treatment and control group, respectively.\n\n\n3.3.2 Estimating the treatment effect estimate variance\nIn practice, we don’t know these variances, so we estimate them using\n\\[\n\\vte = \\vtef \\quad \\vce = \\vcef,\n\\]\nfrom which we get\n\\[\n\\sve = \\svefu.\n\\]\nThis is the variance of our treatment effect estimate. For statistical testing, the construction of confidence intervals, and for power analysis we work with the standard errors. We’ll derive these next.\n\n\n3.3.3 Standard error of treatment effect estimate\nAs discussed above, the standard error is simply the standard deviation of the sampling distribution of \\(\\tee\\), defined as the square root of the sampling variance, and is thus defined as:\n\\[\n\\boxed{\\se = \\seefu}\n\\tag{3.4}\\]\nWe could work with this, and sometimes do. But in the context of online experiments, because sample sizes are so large and treatment effects are usually small, people often assume equal sample sizes and variances, so that we have \\(\\Nt = \\Nc = N/2\\) and \\(\\vte = \\vce = \\vpe\\). The common variance \\(\\vpe\\) is estimated by “pooling” \\(\\vte\\) and \\(\\vce\\) to create a degrees-of-freedom-weighted estimator of the form:\n\\[\n\\vpe = \\vpef.\n\\]\nSubstituting all of the above in Equation 3.4 results in\n\\[\n\\se = \\sqrt{\\frac{\\vpe + \\vpe}{\\N/2}} = \\sqrt{\\frac{4\\vpe}{\\N}} = \\seefe\n\\]\nFor most of the text, I’ll use this expression for the standard error. In some cases, though, it is useful to express the standard error in terms of the proportion of units allocated to the treatment group. Hence, instead of assuming equal sample sizes, we use \\(P\\) to denote that proportion and \\(\\N\\) to denote total sample size, while maintaining the assumption of equal variance. After a little algebraic manipulation we then get:\n\\[\n\\se = \\sqrt{\\frac{\\vpe}{P\\N} + \\frac{\\vpe}{(1-P)\\N}} = \\seefp.\n\\]\nNotice that for equal sample sizes, when \\(P=0.5\\), this formulation is equivalent to the one above as expected.",
+    "crumbs": [
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Outcomes</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/outcomes.html#assumptions",
+    "href": "chapters/outcomes.html#assumptions",
+    "title": "3  Outcomes",
+    "section": "3.4 Assumptions",
+    "text": "3.4 Assumptions\n\n3.4.1 Stable unit treatment value assumption (SUTVA)\n\nSUTVA has two components: no interference, and no hidden variations of treatments.\n\nNo interference\n\nThe no interference assumption states that a unit’s potential outcumes are independent of the treatment assignment of all other units.\nThis will be violated if there are network effects: if the behaviour of units is mutually dependent. For instance: if my wife and I both use an online photo-sharing service and my wife sees a new feature that we both like while I’m in the control group, we might stil share the same number of family photos but start sharing them all on her account instead of mine. This creates an artificial treatment effect because if I had also had access to the new feature, we might not have changed our behaviour at all, while, during the experiment, her sharing volume went up while mine went down, suggesting the existent of a positive effect.\nAnother case where the no interference assumption can be violated is in the form of general equilibrium effects. A classic example is the effect of further education: the effect of my doing a PhD in statistics on my earnings while nobody else changes their behaviour (the partial-equilibrium effect) is surely different from the outcome of my earnings if suddenly everyone decided to do a PhD in statistics (the general-equilibrium effect).\nThe two violations capture the two different ways interference can lead to incorrect results: interference can happen and bias our results either during the experiment or once the feature is fully rolled out. In either case, the treatment of some unit has an externality on other units.\n\nNo hidden treatment variations\n\nThe second component, no hidden treatment variation, states that a unit receiving a specific treatment level cannot receive different forms of that treatment level. This does not mean that the form of the treatment level has to be the same for each unit, but only that a given treatment level is well specified for a given unit. To use Imbens and Rubin’s aspirin example: suppose we test the effect of aspirin on reducing headaches but have old and new aspirins which vary in strength, so that we effectively have three possible treatment statuses: no aspirin (control), weak aspirin, and strong aspirin. SUTVA does not require that all treatment units either get the weak or the strong aspirin, but requires that each unit can only receive one or the other in case they are treated, so that there is no ambiguity what form of the treatment a given unit will receive in case it is treated. (It would be permissible to have the treatment be randomly weak or strong, but this is not relevant in my world.)\nEssentially, both parts of SUTVA ensure the same thing: that \\(Y_i(w)\\) is well defined: that it does not depend on the treatment status of other units, and that, for each possible treatment level, \\(w\\), the precise form of that treatment level is well specified.",
+    "crumbs": [
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Outcomes</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/outcomes.html#how-does-randomisation-help-us-estimate-ates",
+    "href": "chapters/outcomes.html#how-does-randomisation-help-us-estimate-ates",
+    "title": "3  Outcomes",
+    "section": "3.5 How does randomisation help us estimate ATEs?",
+    "text": "3.5 How does randomisation help us estimate ATEs?\nBy ensuring that the treatment - the causal variable of interest - is independent of potential outcomes, so that control and treatment group are comparable.\nMore technically, it ensures that expected outcomes are the same in both groups, which means that the selection bias - the difference of expected potential outcomes without treatment - disappears. When using regression, this is equivalent to the error term being uncorrelated with treatment status.",
+    "crumbs": [
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Outcomes</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/outcomes.html#finite-sample-vs-super-population-perspective",
+    "href": "chapters/outcomes.html#finite-sample-vs-super-population-perspective",
+    "title": "3  Outcomes",
+    "section": "3.6 Finite sample vs super-population perspective",
+    "text": "3.6 Finite sample vs super-population perspective\nThere are two ways to perform inference:\n\nWhen using the finite sample perspective, the \\(N\\) units in the experiment sample are treated as the entire population of interest. Hence, there is no notion of randomisation due to sampling from a larger population, and all the randomness in the outcomes is due to randomness generates by the assignment mechanism.\nWhen treating the \\(N\\) units in the sample as a random sample from a larger super-population, then in addition to randomness from the randomisation, we also have randomness from the sampling.\n\n\n\n\n\nImbens, Guido W, and Donald B Rubin. 2015. Causal Inference in Statistics, Social, and Biomedical Sciences. Cambridge University Press.",
+    "crumbs": [
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Outcomes</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/outcomes.html#footnotes",
+    "href": "chapters/outcomes.html#footnotes",
+    "title": "3  Outcomes",
+    "section": "",
+    "text": "Other choices are possible. We could define the individual level treatment effect as the ratio of active and control treatment, and we can create different summary statistics of the individual-level treatment effects other than the average treatment effect over the entire population (see, for instance, Chapter 1 in Imbens and Rubin (2015)).↩︎\nFor an alternative proof, see the proof of Theorem 6.1 in Imbens and Rubin (2015).↩︎\nWhen we sample units without replacement and use a completely randomised experiment as the assignment mechanism, this is not true. As a result, the derivation of the standard error is more complicated though it turns out that formula we derive here is still commonly used. The reason is twofold: if treatment errors are constant, then the estimator is unbiased even in the more complex case. If not, then the estimator is conservative compared to one that takes the interaction from the complete randomisation into account. Furthermore, the expression is valid approximately ….\nstill holds approximately, since the interdependence is small if the population from which experiment units are sampled is much larger than the experiment sample. For more details, See Imbens and Rubin (2015) Section 6.7 and Appendix B of Chapter 6.↩︎",
+    "crumbs": [
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Outcomes</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/cis.html",
+    "href": "chapters/cis.html",
+    "title": "4  Confidence intervals",
+    "section": "",
+    "text": "4.1 Hypothesis testing\nTo test whether the observed treatment effect is significantly different from zero, we test:\n\\[\nH_0: \\bar{Y}^{obs}_t = \\bar{Y}^{obs}_c\nH_A: \\bar{Y}^{obs}_t \\neq \\bar{Y}^{obs}_c.\n\\]\nWe calculate the test-statistic\n\\[\nT = \\frac{\\hat{\\tau}}{\\sqrt{Var(\\hat{\\tau})}} \\sim t_{(N_t + N_c - 2)},\n\\]\nwhere \\(N_t + N_c - 2\\) is number of degrees of freedom[^tdetails].\ntodo:",
+    "crumbs": [
+      "Statistics",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Confidence intervals</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/cis.html#hypothesis-testing",
+    "href": "chapters/cis.html#hypothesis-testing",
+    "title": "4  Confidence intervals",
+    "section": "",
+    "text": "See Rice 6.2 on why this follows t distribution\nFor complete treatment and derivation of sampling distributions (incl. discussion of all the approximations and sample corrections), see Rice sampling chapter and my ipad notes.",
+    "crumbs": [
+      "Statistics",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Confidence intervals</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/analysis.html",
+    "href": "chapters/analysis.html",
+    "title": "6  Analysis",
+    "section": "",
+    "text": "Discuss analysis for each major case of a 3 x 3 table: method of analysis (Fisher, Neyman, Regression), and source of uncertainty (Sampling, Randomisation, Both)\n\nWhy would we want to include covariates in a randomised experiment analysis?\n\nIf assignment to treatment is random within groups but not across groups (e.g. students in rural schools were a bit more likely to be assigned to small classes in the STAR experiment), then we need to check whether including school id changes the result.\nIncluding controls that have explanatory power for our outcome of interest helps us estimate the causal effect with more precision (and thus increases power) because it lowers the residual variance of the outcome variable, which in turn reduces the standard error of the causal effect.",
+    "crumbs": [
+      "Statistics",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/outcomes.html#estimating-the-outcome-of-interest",
+    "href": "chapters/outcomes.html#estimating-the-outcome-of-interest",
+    "title": "3  Outcomes",
+    "section": "3.2 Estimating the outcome of interest",
+    "text": "3.2 Estimating the outcome of interest\nGiven that we only observe one potential outcome per unit, how can we estimate Equation 3.2?\nIn online experiments, we typically use simple random assignment to allocate units to the expeirment sample and treatment variants (see Chapter 8 for details). Random assignment to treatment implies that\n\\[\n\\begin{align}\nE[\\ytp | \\ti_i = 1] &= E[\\ytp]\\\\\nE[\\ytp | \\ti_i = 0] &= E[\\ytp]\n\\end{align}\n\\]\nThat is: given that assignment is random, the expected outcome under treatment is the same for units in the treatment and control group, and simply equals the expected outcome under treatment across the entire population. The same is true for expected outcomes under control, so that we have\n\\[\n\\begin{align}\nE[\\ycp | \\ti_i = 1] &= E[\\ycp]\\\\\nE[\\ycp | \\ti_i = 0] &= E[\\ycp]\n\\end{align}\n\\]\nNow, expanding Equation 3.2 and using the above expressions we have:\n\\[\n\\begin{align}\n\\te &= \\tef \\\\\n&= E[\\ytp] - E[\\ycp] \\\\\n&= E[\\ytp | \\ti_i = 1] - E[\\ycp | \\ti_i = 0],\n\\end{align}\n\\]\nwhich says that we can express the true effect as the difference between the expected outcomes of treated and untreated untis – we have identified a way for expressing the treatment effect in quantities we can actually estimate based on available data. In particular, the above suggests the following estimation approach:\n\\[\n\\boxed{\\tee = \\ytob - \\ycob}\n\\tag{3.3}\\]\nwhere\n\\[\n\\ytob = \\ytobf \\qquad \\ycob = \\ycobf.\n\\]\nWe can show that this is an unbiased estimator of \\(\\te\\):2\n\\[\n\\begin{align}\nE\\left[\\tee\\right] &= E\\left[\\ytob - \\ycob\\right] \\\\\n&=E\\left[\\ytob\\right]- E\\left[\\ycob\\right] \\\\\n&=E\\left[\\ytobf\\right] - E\\left[\\ycobf\\right] \\\\\n&=\\frac{1}{\\Nt}\\sum_{i:\\ti_i=1} E\\left[\\yto\\right]\n-\\frac{1}{\\Nc}\\sum_{i:\\ti_i=0} E\\left[\\yco\\right] \\\\\n&=\\frac{\\Nt}{\\Nt}E\\left[\\yto\\right] -\\frac{\\Nc}{\\Nc}E\\left[\\yco\\right] \\\\\n&=E\\left[\\yto\\right] - E\\left[\\yco\\right] \\\\\n&=E\\left[\\yio | \\ti_i = 1\\right] - E\\left[\\yio | \\ti_i = 0\\right] \\\\\n&=E\\left[\\ytp\\right] - E\\left[\\ycp\\right] \\\\\n&=\\ytpb - \\ycpb \\\\\n&=\\te\n\\end{align}\n\\]",
+    "crumbs": [
+      "Statistics",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Outcomes</span>"
     ]
   }
 ]

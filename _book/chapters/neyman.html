@@ -155,6 +155,7 @@ div.csl-indent {
     \nc{\vcf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ycp - \ycpb)^2}
     \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}\left(\yio - \ytob\right)^2}
     \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}\left(\yio - \ycob\right)^2}
+    \nc{vpef}{\frac{(\Nt - 1)\vte + (\Nc - 1)\vce}{\Nt + \Nc - 2}}
 
     %%%%%%%%%%%%%%%%%%%%%%
     % sampling variances %
@@ -162,7 +163,7 @@ div.csl-indent {
 
     % sv[Estimate][Formula][Equal/Unequal][with treat Proportion]
 
-    \nc{\sv}{V(\te)}
+    \nc{\sv}{V\left(\tee\right)}
     \nc{\sve}{\hat{V}(\tee)}
 
     \nc{\svfe}{\vp\left(\frac{1}{\Nt} + \frac{1}{\Nc}\right)}
@@ -180,14 +181,9 @@ div.csl-indent {
     % naming convention as for variance but with se prefix
 
     \nc{\se}{\text{se}(\tee)}
-
-    \nc{\sefe}{\sigma \sqrt{\frac{1}{\Nt} + \frac{1}{\Nc}}}
-    \nc{\sefu}{\sqrt{\frac{\vt}{\Nt} + \frac{\vc}{\Nc}}}
-    \nc{\seefe}{\sev\sqrt{\left(\frac{1}{\Nt} + \frac{1}{\Nc}\right)}}
-    \nc{\seefu}{\sqrt{\frac{\vt}{\Nt} + \frac{\vc}{\Nc}}}
-
-    <!-- \nc{\seefep}{\sev\sqrt{\left(\frac{1}{P(1-P)\N\right)}}} -->
-    \nc{\seefep}{\sev\sqrt{\frac{1}{P(1-P)N}}}
+    \nc{\seefu}{\sqrt{\svefu}}
+    \nc{\seefe}{\sqrt{\frac{4\vpe}{\N}}}
+    \nc{\seefp}{\sqrt{\frac{\vpe}{P(1-P)N}}}
 
 
     %%%%%%%%%%%%%%%%%%%%%%

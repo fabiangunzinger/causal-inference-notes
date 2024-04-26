@@ -1,4 +1,4 @@
-# Experiment analysis
+# Analysis {#sec-analysis}
 
 - Discuss analysis for each major case of a 3 x 3 table: method of analysis (Fisher, Neyman, Regression), and source of uncertainty (Sampling, Randomisation, Both)
 

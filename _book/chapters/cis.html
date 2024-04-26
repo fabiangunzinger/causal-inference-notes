@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 14&nbsp; Projection</title>
+<title>Causal inference notes - 4&nbsp; Confidence intervals</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/fwl.html" rel="next">
-<link href="../chapters/network_experiments.html" rel="prev">
+<link href="../chapters/power.html" rel="next">
+<link href="../chapters/outcomes.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -232,7 +232,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/projection.html">Appendix</a></li><li class="breadcrumb-item"><a href="../chapters/projection.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Projection</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistics.html">Statistics</a></li><li class="breadcrumb-item"><a href="../chapters/cis.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Confidence intervals</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -282,7 +282,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a href="../chapters/statistics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -291,14 +291,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
+  <a href="../chapters/outcomes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Outcomes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/experiment_stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
+  <a href="../chapters/cis.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Confidence intervals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -309,8 +309,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/experiment_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Experiment analysis</span></span></a>
+  <a href="../chapters/analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -371,7 +371,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">Appendix</span></a>
+ <span class="menu-text">Appendices</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -379,14 +379,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
+  <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/fwl.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">FWL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">FWL</span></span></a>
   </div>
 </li>
       </ul>
@@ -401,19 +407,16 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#projecting-from-2-d-onto-1-d" id="toc-projecting-from-2-d-onto-1-d" class="nav-link active" data-scroll-target="#projecting-from-2-d-onto-1-d"><span class="header-section-number">14.1</span> Projecting from 2-D onto 1-D</a></li>
-  <li><a href="#why-project" id="toc-why-project" class="nav-link" data-scroll-target="#why-project"><span class="header-section-number">14.2</span> Why project?</a></li>
-  <li><a href="#projection-from-3-d-onto-2-d-and-projecting-onto-n-d" id="toc-projection-from-3-d-onto-2-d-and-projecting-onto-n-d" class="nav-link" data-scroll-target="#projection-from-3-d-onto-2-d-and-projecting-onto-n-d"><span class="header-section-number">14.3</span> Projection from 3-D onto 2-D and projecting onto N-D</a></li>
-  <li><a href="#useful-references" id="toc-useful-references" class="nav-link" data-scroll-target="#useful-references"><span class="header-section-number">14.4</span> Useful references</a></li>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link active" data-scroll-target="#hypothesis-testing"><span class="header-section-number">4.1</span> Hypothesis testing</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/projection.html">Appendix</a></li><li class="breadcrumb-item"><a href="../chapters/projection.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Projection</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistics.html">Statistics</a></li><li class="breadcrumb-item"><a href="../chapters/cis.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Confidence intervals</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-projection" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Projection</span></span></h1>
+<h1 class="title"><span id="sec-cis" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Confidence intervals</span></span></h1>
 </div>
 
 
@@ -430,221 +433,25 @@ window.Quarto = {
 </header>
 
 
-<p>A projection is a transformation of a vector onto a subspace.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Subspaces
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A subspace is a specific type of subset within a vector space that itself qualifies as a vector space. This means that any linear combination of vectors within the subspace must also belong to the subspace, as well as to the original, larger, space (linear combinations are formed by adding together scalar multiples of vectors).</p>
-<p>For example, consider a 2-dimensional plane within the 3-dimensional space denoted as <span class="math inline">\(\mathbb{R}^3\)</span>. This 2-dimensional plane can be a subspace of <span class="math inline">\(\mathbb{R}^3\)</span> if it includes all possible linear combinations of any vectors lying within this plane. However, a crucial condition for this plane to be a subspace is that it must pass through the origin of <span class="math inline">\(\mathbb{R}^3\)</span>, which is the point (0, 0, 0). This requirement is necessary because a subspace must contain the zero vector (in this case, the zero vector of <span class="math inline">\(\mathbb{R}^3\)</span>) to fulfill the property of containing scalar multiples (including the zero scalar) of its vectors.</p>
-<p>Similarly, a line in <span class="math inline">\(\mathbb{R}^3\)</span> can be a subspace if it passes through the origin. This ensures that any linear combination of two vectors that lie on this line will also resultY in a vector that lies on the same line. The key aspect here is that the line, like the plane, must include the origin to accommodate the zero vector and maintain closure under scalar multiplication and vector addition (meaning that the results or these operations are also part of the subspace).</p>
-<p>In summary, a subspace is not just any subset of a vector space; it must itself satisfy all the criteria of a vector space, including the inclusion of the zero vector, and closure under both vector addition and scalar multiplication.</p>
-</div>
-</div>
-</div>
-<p>There are different types of projections, but the one that’s relevant for us here is <em>orthogonal projection</em>, which projects a vector onto the nearest point on a subspace, where ]“nearest” usually refers to the Euclidean distance.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Why this type of projection is called “orthogonal projection” will be come clear below.</p>
-<section id="projecting-from-2-d-onto-1-d" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="projecting-from-2-d-onto-1-d"><span class="header-section-number">14.1</span> Projecting from 2-D onto 1-D</h2>
-<p>Projecting a vector in two-dimensional space onto a line that goes through the origin is a nice way to build an understanding for what a projection does.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>Say we want to orthogonally project the vector <span class="math inline">\(b\)</span> onto a line defined by another vector, <span class="math inline">\(a\)</span>, and we will call the resulting projection <span class="math inline">\(p\)</span>. Hence, <span class="math inline">\(p\)</span> is the point on the line defined by <span class="math inline">\(a\)</span> that is nearest to the (tip of) the vector <span class="math inline">\(b\)</span>. (Note, though, that <span class="math inline">\(p\)</span> is a vector, not a point. Calling it a point just clarifies what we’re doing here.)</p>
-<p>We can think of the line as being generated by scaling vector <span class="math inline">\(a\)</span> with a scalar <span class="math inline">\(x\)</span>, so that choosing a suitable <span class="math inline">\(x\)</span> allows us to reach any point on the line. Finding <span class="math inline">\(p\)</span> then boils down to finding the value of <span class="math inline">\(x\)</span> that gets us to that point of the line that is closest to <span class="math inline">\(b\)</span>. We can thus write <span class="math inline">\(p = ax\)</span>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../inputs/projection_onto_1d.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<figcaption>Projecting a 2d vector onto a line</figcaption>
-</figure>
-</div>
-<p>Let’s start by finding <span class="math inline">\(p\)</span>. We can find it in different ways.</p>
-<p><strong>Using calculus</strong>:</p>
-<p>Given that we define closeness based on the Euclidean distance, minimising the distance between the (tip of) the vector, <span class="math inline">\(b\)</span>, and the projection, <span class="math inline">\(p\)</span>, is akin to solving the following problem:</p>
+<section id="hypothesis-testing" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">4.1</span> Hypothesis testing</h2>
+<p>To test whether the observed treatment effect is significantly different from zero, we test:</p>
 <p><span class="math display">\[
-\begin{aligned}
-argmin_{x} \sqrt{\sum_{i=1}^2{(b_i - p_i)^2}} &amp;= argmin_{x} \sum_{i=1}^2{(b_i - p_i)^2} \\
-&amp;= argmin_{x} \sum_{i=1}^2{(b_i - xa_i)^2} \\
-&amp;= argmin_{x} (b - xa)'(b - xa),
-\end{aligned}
+H_0: \bar{Y}^{obs}_t = \bar{Y}^{obs}_c
+H_A: \bar{Y}^{obs}_t \neq \bar{Y}^{obs}_c.
 \]</span></p>
-<p>Calculating the derivative with respect to <span class="math inline">\(x\)</span> we get:</p>
+<p>We calculate the test-statistic</p>
 <p><span class="math display">\[
-\begin{aligned}
-\frac{d}{dx} (b - xa)'(b - xa) &amp;= (-a)'(b - xa) + (b - xa)'(-a) &amp; \\
-&amp;= -a'b + xa'a - a'b + xa'a \\
-&amp;= -2a'b + 2xa'a
-\end{aligned}
+T = \frac{\hat{\tau}}{\sqrt{Var(\hat{\tau})}} \sim t_{(N_t + N_c - 2)},
 \]</span></p>
-<p>Finlly, setting the result to 0 and solving for <span class="math inline">\(x\)</span> we get:</p>
-<p><span class="math display">\[
-\begin{aligned}
--2a'b + 2xa'a &amp;= 0 \\
-xa'a &amp;= a'b \\
-x &amp;= (a'a)^{-1}a'b
-\end{aligned}
-\]</span></p>
-<p>Hence, given that <span class="math inline">\(p = ax\)</span>, we have:</p>
-<p><span class="math display">\[
-\begin{aligned}
-p = ax = \underbrace{a(a'a)^{-1}a'}_\text{$P_a$}b,
-\end{aligned}
-\]</span></p>
-<p>where <span class="math inline">\(P_a\)</span> is the projection matrix.</p>
-<p>Let’s reflect for a moment what this all means. In general, pre-multiplying a vector by a matrix transforms the vector in a particular way. When we perform orthogonal projection, we pre-multiply a vector by a matrix that transforms the vector into that point on a subspace that it closest to the original vector. In our case here, pre-multiplying our initial vector <span class="math inline">\(b\)</span> by the projection matrix <span class="math inline">\(P_a\)</span> transforms <span class="math inline">\(b\)</span> into that point on <span class="math inline">\(a\)</span> that is closest to <span class="math inline">\(b\)</span>, which we call <span class="math inline">\(p\)</span>. Given that we define “nearest” using the Euclidean distance, it makes sense that the projection matrix would emerge out of the solution to the minimisation problem of finding the point on the subspace that minimises the Euclidean distance to the original vector.</p>
-<p><strong>Using basic geometry:</strong></p>
-<p>We could also find <span class="math inline">\(p\)</span> using our understanding of basic geometry. Looking at the figure above, it is intuitively obvious that the shortest path between the tip of <span class="math inline">\(b\)</span> and the line <span class="math inline">\(a\)</span> is that which is perpendicular to <span class="math inline">\(a\)</span> – the point at which the perpendicular line meets <span class="math inline">\(a\)</span> is thus <span class="math inline">\(p\)</span>. The path between <span class="math inline">\(b\)</span> and <span class="math inline">\(p\)</span> is simply <span class="math inline">\(b - p\)</span>. In linear algebra terms, we thus want that path to be orthogonal to the line <span class="math inline">\(a\)</span>.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Orthogonal vectors
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Orthogonality is a generalisation of perpendicularity; two vectors that are orthogonal are perpendicular to each other. The word comes from the Greek “orthos”, meaning “straight” or “right”, and “gonia”, meaning “angle”. To test whether two vectors <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are perpendicular, we check whether their dot product, <span class="math inline">\(x'y\)</span> equals zero.</p>
-<p>But why do we know that the dot-product of orthogonal vectors is zero? The answer follows from the Pythagorean theorem, which states that for a right triangle with sides <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> and hypotenuse <span class="math inline">\(c\)</span> we have <span class="math inline">\(a^2\)</span> + <span class="math inline">\(b^2\)</span> = <span class="math inline">\(c^2\)</span>. Now, if vectors <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are orthogonal, they form the sides of a right triangle, where the hypotenuse is given by <span class="math inline">\(x + y\)</span>. By the Pythagorean theorem, we thus have</p>
-<p><span class="math display">\[
-||x||^2 + ||y||^2 = ||x + y||^2,
-\]</span></p>
-<p>which equals</p>
-<p><span class="math display">\[
-\left(\sqrt{x'x}\right)^2 + \left(\sqrt{y'y}\right)^2 = \left(\sqrt{(x + y)'(x + y)}\right)^2,
-\]</span></p>
-<p>and simplifies to</p>
-<p><span class="math display">\[
-\begin{aligned}
-x'x + y'y &amp;= (x + y)'(x + y) \\
-x'x + y'y &amp;= x'x + y'y + x'y + y'x \\
-x'x + y'y &amp;= x'x + y'y + 2x'y,
-\end{aligned}
-\]</span></p>
-<p>from which it is clear that <span class="math inline">\(x'y = 0\)</span>.</p>
-</div>
-</div>
-</div>
-<p>Hence, we want:</p>
-<p><span class="math display">\[
-\begin{aligned}
-a'(b - p) &amp;= 0 \\
-a'(b - xa) &amp;= 0 \\
-a'b - xa'a &amp;= 0 \\
-xa'a &amp;= a'b \\
-x &amp;= (a'a)^{-1}a'b
-\end{aligned}
-\]</span></p>
-<p>So that, again, we have:<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
-<p><span class="math display">\[
-p = ax = \underbrace{a(a'a)^{-1}a'}_\text{$P_a$}b.
-\]</span></p>
-<p>This also makes clear why this type of projection is called “orthogonal projection”: we want to project a vector onto a subspace in such a way that the distance between the original vector and the subspace is minimal. The resulting projection will be a point on the subspace such that a vector from that point to the original vector is orthogonal to the subspace. Intuitively, this is the case because the shortest path between the vector and the subspace will be that which is perpendicular to the subspace, and orthogonality is the generalisation of the notion of perpendicularity.</p>
-</section>
-<section id="why-project" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="why-project"><span class="header-section-number">14.2</span> Why project?</h2>
-<p>One reason projection is useful is because it allows us to approximately solve systems of linear equations that have no exact solution. Imagine we have the following system of equations:</p>
-<p><span class="math display">\[
-\begin{align*}
-a_{11}x_1 + a_{12}x_2 + \cdots + a_{1k}x_k &amp;= b_1 \\
-a_{21}x_1 + a_{22}x_2 + \cdots + a_{2k}x_k &amp;= b_2 \\
-\vdots \\
-a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nk}x_k &amp;= b_n
-\end{align*}
-\]</span></p>
-<p>which we can write more compactly in matrix form as:</p>
-<p><span class="math display">\[
-Ax = b,
-\]</span></p>
-<p>where</p>
-<p><span class="math display">\[
-A = \begin{pmatrix}
-  a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1k} \\
-  a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2k} \\
-  \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
-  a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nk}
-\end{pmatrix},
-\quad
-x =
-\begin{pmatrix}
-  x_{1} \\
-  x_{2} \\
-  \vdots \\
-  x_{k}
-\end{pmatrix},
-\quad
-b =
-\begin{pmatrix}
-  b_{1} \\
-  b_{2} \\
-  \vdots \\
-  b_{n}
-\end{pmatrix}.
-\]</span></p>
-<p>If <span class="math inline">\(n &gt; k\)</span>, the system is overdetermined – it has more constarints (equations) than degrees of freedom (variables) – and might not have a solution. In this case, it can be useful to solve</p>
-<p><span class="math display">\[
-Ax = \hat{b},
-\]</span></p>
-<p>where <span class="math inline">\(\hat{b}\)</span> is the orthogonal projection of <span class="math inline">\(b\)</span> onto the vector space spanned by <span class="math inline">\(A\)</span>. This vector space is also called the span or column space of <span class="math inline">\(A\)</span>. Using orthogonal projection achieves two things: first, it guarantees a solution because <span class="math inline">\(\hat{b}\)</span> lies on the same space as <span class="math inline">\(Ax\)</span> – they both lie on the subspace spanned by the columns of <span class="math inline">\(A\)</span> – and, second, it makes <span class="math inline">\(\hat{p}\)</span> the closest approximation to <span class="math inline">\(b\)</span> in terms of the Euclidean distance.</p>
-</section>
-<section id="projection-from-3-d-onto-2-d-and-projecting-onto-n-d" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="projection-from-3-d-onto-2-d-and-projecting-onto-n-d"><span class="header-section-number">14.3</span> Projection from 3-D onto 2-D and projecting onto N-D</h2>
-<p>As in the 2-D onto 1-D example above, we’re going to project the vector <span class="math inline">\(b\)</span> onto a subspace. But <span class="math inline">\(b\)</span> is now a 3-D vector, and instead of projecting onto a line characterised by vector <span class="math inline">\(a\)</span>, we’re projecting onto a 2-D plane characterised by the 2 x 2 matrix <span class="math inline">\(A\)</span>. Hence, our projection <span class="math inline">\(p\)</span> is now a vector in the 3-dimensional space that lies on the 2-dimensional subspace. Similarly to above, <span class="math inline">\(p\)</span> is defined by <span class="math inline">\(p = Ax\)</span>, where <span class="math inline">\(x\)</span> is a 2-D vector of scalars.</p>
-<p>We can still go about finding <span class="math inline">\(p\)</span> in the same way as above:</p>
-<p><span class="math display">\[
-\begin{aligned}
-A'(b - p) &amp;= 0 \\
-A'(b - Ax) &amp;= 0 \\
-A'b - A'Ax &amp;= 0 \\
-A'Ax &amp;= A'b \\
-x &amp;= (A'A)^{-1}A'b\\
-\\
-p = Ax = \underbrace{A(A'A)^{-1}A'}_\text{$P_a$}b.
-\end{aligned}
-\]</span></p>
-<p>The last step above works only if <span class="math inline">\(A'A\)</span> is actually invertible, which is the case if <span class="math inline">\(A\)</span> has full rank.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Full rank
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A matrix is said to have full rank if none of its columns can be constructed from a linear combination of any other columns.</p>
-<p>We can think of the columns of a matrix are the basis vectors of its column space, and the rank of the matrix is the number of dimensions of that column space.</p>
-<p>Full rank means thus means that the column space has as many dimensions as there are columns.</p>
-</div>
-</div>
-</div>
-<p>The math above generalises directly to projections onto N-dimensional space. All that changes is that <span class="math inline">\(b\)</span>, <span class="math inline">\(A\)</span>, <span class="math inline">\(x\)</span>, and <span class="math inline">\(p\)</span> are higher-dimensional objects, and that visualising what’s happening becomes rather mind-bending.</p>
-</section>
-<section id="useful-references" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="useful-references"><span class="header-section-number">14.4</span> Useful references</h2>
+<p>where <span class="math inline">\(N_t + N_c - 2\)</span> is number of degrees of freedom[^tdetails].</p>
+<p>todo:</p>
 <ul>
-<li><p><a href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/video_galleries/video-lectures/">Gilbert Strang’s linear algebra lectures at MIT</a></p></li>
-<li><p><a href="https://bookdown.org/ts_robinson1994/10EconometricTheorems/linear_projection.html#linear_projection">10 Fundamental Theorems for Econometrics</a></p></li>
+<li>See Rice 6.2 on why this follows t distribution</li>
+<li>For complete treatment and derivation of sampling distributions (incl.&nbsp;discussion of all the approximations and sample corrections), see Rice sampling chapter and my ipad notes.</li>
 </ul>
 
 
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>The Euclidean distance between two points <span class="math inline">\(x\)</span> and <span class="math inline">\(\bar{x}\)</span> in <span class="math inline">\(\mathbb{R}^N\)</span> is defined as <span class="math inline">\(\sqrt{\sum_{i=1}^N{(\bar{a_i} - a_i})^2}\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>A line through the origin is a subspace of a two-dimensional vector because it is 1-dimensional (and thus a subset of the 2-dimensional vector) and because all possible linear combinations of vectors on the line will also lie on the line (see box on subspaces for more details).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>One thing I used to wonder about was whether the order of the vectors in the scalar product <span class="math inline">\(ax\)</span> matters. That is, whether we could also write <span class="math inline">\(p = xa\)</span>. Once you think about the rules of linear algebra, the answer becomes quite clear. For a scalar product, the order doesn’t matter. However, <span class="math inline">\(p = ax\)</span> is preferred because it naturally generalises to the higher-dimensional case where instead of a scalar <span class="math inline">\(a\)</span>, we have a matrix <span class="math inline">\(A\)</span>. In this case, <span class="math inline">\(p = Ax\)</span>, which is different from <span class="math inline">\(p = xA\)</span>, which is generally not defined, and <span class="math inline">\(p = x'A\)</span>, which leads to a different result.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->
@@ -1037,13 +844,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/network_experiments.html" class="pagination-link  aria-label=" &lt;span="" experiments&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Network experiments</span></span>
+      <a href="../chapters/outcomes.html" class="pagination-link  aria-label=" &lt;span="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Outcomes</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/fwl.html" class="pagination-link" aria-label="<span class='chapter-number'>15</span>&nbsp; <span class='chapter-title'>FWL</span>">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">FWL</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/power.html" class="pagination-link" aria-label="<span class='chapter-number'>5</span>&nbsp; <span class='chapter-title'>Power</span>">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Power</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

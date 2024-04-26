@@ -1,23 +1,4 @@
-# Statistics of online experiments {#sec-experiment-stats}
-
-The goal of this chapter is to succinctly summarise the statistical theory of randomised experiments.
-
-Most online experiments appear very simple; we split traffic into two groups with
-different experiences and compare outcomes between groups. So how much
-statistical theory could we possibly need?
-
-Well, to experiment effectively, you do want to make sure you have
-
-1. a coherent definition of the causal effect effect you want to measure and a
-   good way of estimating it,
-
-2. a way to differentiate signals from noise,
-
-3. a way to ensure your experiment has a good chance of picking up signals.
-
-First two are covered here. The third, which relates to the power of your
-experiment, is covered in @sec-power.
-
+# Outcomes {#sec-outcomes}
 
 ## Potential outcomes and outcome of interest
 
@@ -244,28 +225,6 @@ $$
 Notice that for equal sample sizes, when $P=0.5$, this formulation is equivalent
 to the one above as expected.
 
-
-## Hypothesis testing
-
-To test whether the observed treatment effect is significantly different from zero, we test:
-
-$$
-H_0: \bar{Y}^{obs}_t = \bar{Y}^{obs}_c
-H_A: \bar{Y}^{obs}_t \neq \bar{Y}^{obs}_c.
-$$
-
-We calculate the test-statistic
-
-$$
-T = \frac{\hat{\tau}}{\sqrt{Var(\hat{\tau})}} \sim t_{(N_t + N_c - 2)},
-$$
-
-where $N_t + N_c - 2$ is number of degrees of freedom[^tdetails].
-
-todo:
-
-- See Rice 6.2 on why this follows t distribution
-- For complete treatment and derivation of sampling distributions (incl. discussion of all the approximations and sample corrections), see Rice sampling chapter and my ipad notes.
 
 ## Assumptions 
 

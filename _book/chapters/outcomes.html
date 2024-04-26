@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 14&nbsp; Projection</title>
+<title>Causal inference notes - 3&nbsp; Outcomes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,8 +50,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/fwl.html" rel="next">
-<link href="../chapters/network_experiments.html" rel="prev">
+<link href="../chapters/cis.html" rel="next">
+<link href="../chapters/statistics.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -232,7 +252,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/projection.html">Appendix</a></li><li class="breadcrumb-item"><a href="../chapters/projection.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Projection</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistics.html">Statistics</a></li><li class="breadcrumb-item"><a href="../chapters/outcomes.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Outcomes</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -282,7 +302,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a href="../chapters/statistics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistics</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -291,14 +311,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
+  <a href="../chapters/outcomes.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Outcomes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/experiment_stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
+  <a href="../chapters/cis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Confidence intervals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -309,7 +329,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/experiment_analysis.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/analysis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Experiment analysis</span></span></a>
   </div>
 </li>
@@ -371,7 +391,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">Appendix</span></a>
+ <span class="menu-text">Appendices</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -379,14 +399,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
+  <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/fwl.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">FWL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">FWL</span></span></a>
   </div>
 </li>
       </ul>
@@ -401,19 +427,29 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#projecting-from-2-d-onto-1-d" id="toc-projecting-from-2-d-onto-1-d" class="nav-link active" data-scroll-target="#projecting-from-2-d-onto-1-d"><span class="header-section-number">14.1</span> Projecting from 2-D onto 1-D</a></li>
-  <li><a href="#why-project" id="toc-why-project" class="nav-link" data-scroll-target="#why-project"><span class="header-section-number">14.2</span> Why project?</a></li>
-  <li><a href="#projection-from-3-d-onto-2-d-and-projecting-onto-n-d" id="toc-projection-from-3-d-onto-2-d-and-projecting-onto-n-d" class="nav-link" data-scroll-target="#projection-from-3-d-onto-2-d-and-projecting-onto-n-d"><span class="header-section-number">14.3</span> Projection from 3-D onto 2-D and projecting onto N-D</a></li>
-  <li><a href="#useful-references" id="toc-useful-references" class="nav-link" data-scroll-target="#useful-references"><span class="header-section-number">14.4</span> Useful references</a></li>
+  <li><a href="#potential-outcomes-and-outcome-of-interest" id="toc-potential-outcomes-and-outcome-of-interest" class="nav-link active" data-scroll-target="#potential-outcomes-and-outcome-of-interest"><span class="header-section-number">3.1</span> Potential outcomes and outcome of interest</a></li>
+  <li><a href="#estimating-the-outcome-of-interest" id="toc-estimating-the-outcome-of-interest" class="nav-link" data-scroll-target="#estimating-the-outcome-of-interest"><span class="header-section-number">3.2</span> Estimating the outcome of interest</a></li>
+  <li><a href="#standard-error-of-treatment-effect-estimate" id="toc-standard-error-of-treatment-effect-estimate" class="nav-link" data-scroll-target="#standard-error-of-treatment-effect-estimate"><span class="header-section-number">3.3</span> Standard error of treatment effect estimate</a>
+  <ul class="collapse">
+  <li><a href="#treatment-effect-estimate-variance" id="toc-treatment-effect-estimate-variance" class="nav-link" data-scroll-target="#treatment-effect-estimate-variance"><span class="header-section-number">3.3.1</span> Treatment effect estimate variance</a></li>
+  <li><a href="#estimating-the-treatment-effect-estimate-variance" id="toc-estimating-the-treatment-effect-estimate-variance" class="nav-link" data-scroll-target="#estimating-the-treatment-effect-estimate-variance"><span class="header-section-number">3.3.2</span> Estimating the treatment effect estimate variance</a></li>
+  <li><a href="#standard-error-of-treatment-effect-estimate-1" id="toc-standard-error-of-treatment-effect-estimate-1" class="nav-link" data-scroll-target="#standard-error-of-treatment-effect-estimate-1"><span class="header-section-number">3.3.3</span> Standard error of treatment effect estimate</a></li>
+  </ul></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">3.4</span> Assumptions</a>
+  <ul class="collapse">
+  <li><a href="#stable-unit-treatment-value-assumption-sutva" id="toc-stable-unit-treatment-value-assumption-sutva" class="nav-link" data-scroll-target="#stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">3.4.1</span> Stable unit treatment value assumption (SUTVA)</a></li>
+  </ul></li>
+  <li><a href="#how-does-randomisation-help-us-estimate-ates" id="toc-how-does-randomisation-help-us-estimate-ates" class="nav-link" data-scroll-target="#how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">3.5</span> How does randomisation help us estimate ATEs?</a></li>
+  <li><a href="#finite-sample-vs-super-population-perspective" id="toc-finite-sample-vs-super-population-perspective" class="nav-link" data-scroll-target="#finite-sample-vs-super-population-perspective"><span class="header-section-number">3.6</span> Finite sample vs super-population perspective</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/projection.html">Appendix</a></li><li class="breadcrumb-item"><a href="../chapters/projection.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Projection</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistics.html">Statistics</a></li><li class="breadcrumb-item"><a href="../chapters/outcomes.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Outcomes</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-projection" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Projection</span></span></h1>
+<h1 class="title"><span id="sec-outcomes" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Outcomes</span></span></h1>
 </div>
 
 
@@ -430,220 +466,182 @@ window.Quarto = {
 </header>
 
 
-<p>A projection is a transformation of a vector onto a subspace.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Subspaces
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A subspace is a specific type of subset within a vector space that itself qualifies as a vector space. This means that any linear combination of vectors within the subspace must also belong to the subspace, as well as to the original, larger, space (linear combinations are formed by adding together scalar multiples of vectors).</p>
-<p>For example, consider a 2-dimensional plane within the 3-dimensional space denoted as <span class="math inline">\(\mathbb{R}^3\)</span>. This 2-dimensional plane can be a subspace of <span class="math inline">\(\mathbb{R}^3\)</span> if it includes all possible linear combinations of any vectors lying within this plane. However, a crucial condition for this plane to be a subspace is that it must pass through the origin of <span class="math inline">\(\mathbb{R}^3\)</span>, which is the point (0, 0, 0). This requirement is necessary because a subspace must contain the zero vector (in this case, the zero vector of <span class="math inline">\(\mathbb{R}^3\)</span>) to fulfill the property of containing scalar multiples (including the zero scalar) of its vectors.</p>
-<p>Similarly, a line in <span class="math inline">\(\mathbb{R}^3\)</span> can be a subspace if it passes through the origin. This ensures that any linear combination of two vectors that lie on this line will also resultY in a vector that lies on the same line. The key aspect here is that the line, like the plane, must include the origin to accommodate the zero vector and maintain closure under scalar multiplication and vector addition (meaning that the results or these operations are also part of the subspace).</p>
-<p>In summary, a subspace is not just any subset of a vector space; it must itself satisfy all the criteria of a vector space, including the inclusion of the zero vector, and closure under both vector addition and scalar multiplication.</p>
-</div>
-</div>
-</div>
-<p>There are different types of projections, but the one that’s relevant for us here is <em>orthogonal projection</em>, which projects a vector onto the nearest point on a subspace, where ]“nearest” usually refers to the Euclidean distance.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Why this type of projection is called “orthogonal projection” will be come clear below.</p>
-<section id="projecting-from-2-d-onto-1-d" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="projecting-from-2-d-onto-1-d"><span class="header-section-number">14.1</span> Projecting from 2-D onto 1-D</h2>
-<p>Projecting a vector in two-dimensional space onto a line that goes through the origin is a nice way to build an understanding for what a projection does.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-<p>Say we want to orthogonally project the vector <span class="math inline">\(b\)</span> onto a line defined by another vector, <span class="math inline">\(a\)</span>, and we will call the resulting projection <span class="math inline">\(p\)</span>. Hence, <span class="math inline">\(p\)</span> is the point on the line defined by <span class="math inline">\(a\)</span> that is nearest to the (tip of) the vector <span class="math inline">\(b\)</span>. (Note, though, that <span class="math inline">\(p\)</span> is a vector, not a point. Calling it a point just clarifies what we’re doing here.)</p>
-<p>We can think of the line as being generated by scaling vector <span class="math inline">\(a\)</span> with a scalar <span class="math inline">\(x\)</span>, so that choosing a suitable <span class="math inline">\(x\)</span> allows us to reach any point on the line. Finding <span class="math inline">\(p\)</span> then boils down to finding the value of <span class="math inline">\(x\)</span> that gets us to that point of the line that is closest to <span class="math inline">\(b\)</span>. We can thus write <span class="math inline">\(p = ax\)</span>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../inputs/projection_onto_1d.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<figcaption>Projecting a 2d vector onto a line</figcaption>
-</figure>
-</div>
-<p>Let’s start by finding <span class="math inline">\(p\)</span>. We can find it in different ways.</p>
-<p><strong>Using calculus</strong>:</p>
-<p>Given that we define closeness based on the Euclidean distance, minimising the distance between the (tip of) the vector, <span class="math inline">\(b\)</span>, and the projection, <span class="math inline">\(p\)</span>, is akin to solving the following problem:</p>
+<section id="potential-outcomes-and-outcome-of-interest" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="potential-outcomes-and-outcome-of-interest"><span class="header-section-number">3.1</span> Potential outcomes and outcome of interest</h2>
+<p>We have a population of units <span class="math inline">\(i = 1, \dots, \N\)</span>. Each unit in the population can be exposed to one of two treatments, which are identical across units. Each unit <span class="math inline">\(i\)</span> has potential outcomes <span class="math inline">\(\ycp\)</span> and <span class="math inline">\(\ytp\)</span> corresponding to each of the two possible treatments. <span class="math inline">\(\ycp\)</span> is the outcome unit <span class="math inline">\(i\)</span> would experience if they received the control treatment; <span class="math inline">\(\ytp\)</span>, the outcome they would experience if they received the active treatment. Given that each unit is either assigned to treatment or control we’ll only ever observe one of these outcomes in practice. In fact, what we do observe for each unit is <span class="math inline">\(\yio\)</span>, which equals <span class="math inline">\(\ytp\)</span> if the unit was assigned the active treatment and <span class="math inline">\(\ycp\)</span> if they were assigned the control treatment. That is, if we write <span class="math inline">\(\ti_i = 1\)</span> if unit <span class="math inline">\(i\)</span> is allocated to treatment and <span class="math inline">\(\ti_i = 0\)</span> if they are allocated to control, then we can express <span class="math inline">\(\yio\)</span> as</p>
+<p><span id="eq-yio"><span class="math display">\[
+\yio = \ti_i \ytp + (1 - \ti_i) \ycp.
+\tag{3.1}\]</span></span></p>
+<p>What’s the use of potential outcomes we can only partially observe? They provide us with a simple and coherent way to think about the causal effect of the treatment; for unit <span class="math inline">\(i\)</span>, that causal effect is given by</p>
 <p><span class="math display">\[
-\begin{aligned}
-argmin_{x} \sqrt{\sum_{i=1}^2{(b_i - p_i)^2}} &amp;= argmin_{x} \sum_{i=1}^2{(b_i - p_i)^2} \\
-&amp;= argmin_{x} \sum_{i=1}^2{(b_i - xa_i)^2} \\
-&amp;= argmin_{x} (b - xa)'(b - xa),
-\end{aligned}
+\ytp - \ycp,
 \]</span></p>
-<p>Calculating the derivative with respect to <span class="math inline">\(x\)</span> we get:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\frac{d}{dx} (b - xa)'(b - xa) &amp;= (-a)'(b - xa) + (b - xa)'(-a) &amp; \\
-&amp;= -a'b + xa'a - a'b + xa'a \\
-&amp;= -2a'b + 2xa'a
-\end{aligned}
-\]</span></p>
-<p>Finlly, setting the result to 0 and solving for <span class="math inline">\(x\)</span> we get:</p>
-<p><span class="math display">\[
-\begin{aligned}
--2a'b + 2xa'a &amp;= 0 \\
-xa'a &amp;= a'b \\
-x &amp;= (a'a)^{-1}a'b
-\end{aligned}
-\]</span></p>
-<p>Hence, given that <span class="math inline">\(p = ax\)</span>, we have:</p>
-<p><span class="math display">\[
-\begin{aligned}
-p = ax = \underbrace{a(a'a)^{-1}a'}_\text{$P_a$}b,
-\end{aligned}
-\]</span></p>
-<p>where <span class="math inline">\(P_a\)</span> is the projection matrix.</p>
-<p>Let’s reflect for a moment what this all means. In general, pre-multiplying a vector by a matrix transforms the vector in a particular way. When we perform orthogonal projection, we pre-multiply a vector by a matrix that transforms the vector into that point on a subspace that it closest to the original vector. In our case here, pre-multiplying our initial vector <span class="math inline">\(b\)</span> by the projection matrix <span class="math inline">\(P_a\)</span> transforms <span class="math inline">\(b\)</span> into that point on <span class="math inline">\(a\)</span> that is closest to <span class="math inline">\(b\)</span>, which we call <span class="math inline">\(p\)</span>. Given that we define “nearest” using the Euclidean distance, it makes sense that the projection matrix would emerge out of the solution to the minimisation problem of finding the point on the subspace that minimises the Euclidean distance to the original vector.</p>
-<p><strong>Using basic geometry:</strong></p>
-<p>We could also find <span class="math inline">\(p\)</span> using our understanding of basic geometry. Looking at the figure above, it is intuitively obvious that the shortest path between the tip of <span class="math inline">\(b\)</span> and the line <span class="math inline">\(a\)</span> is that which is perpendicular to <span class="math inline">\(a\)</span> – the point at which the perpendicular line meets <span class="math inline">\(a\)</span> is thus <span class="math inline">\(p\)</span>. The path between <span class="math inline">\(b\)</span> and <span class="math inline">\(p\)</span> is simply <span class="math inline">\(b - p\)</span>. In linear algebra terms, we thus want that path to be orthogonal to the line <span class="math inline">\(a\)</span>.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Orthogonal vectors
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Orthogonality is a generalisation of perpendicularity; two vectors that are orthogonal are perpendicular to each other. The word comes from the Greek “orthos”, meaning “straight” or “right”, and “gonia”, meaning “angle”. To test whether two vectors <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are perpendicular, we check whether their dot product, <span class="math inline">\(x'y\)</span> equals zero.</p>
-<p>But why do we know that the dot-product of orthogonal vectors is zero? The answer follows from the Pythagorean theorem, which states that for a right triangle with sides <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> and hypotenuse <span class="math inline">\(c\)</span> we have <span class="math inline">\(a^2\)</span> + <span class="math inline">\(b^2\)</span> = <span class="math inline">\(c^2\)</span>. Now, if vectors <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are orthogonal, they form the sides of a right triangle, where the hypotenuse is given by <span class="math inline">\(x + y\)</span>. By the Pythagorean theorem, we thus have</p>
-<p><span class="math display">\[
-||x||^2 + ||y||^2 = ||x + y||^2,
-\]</span></p>
-<p>which equals</p>
-<p><span class="math display">\[
-\left(\sqrt{x'x}\right)^2 + \left(\sqrt{y'y}\right)^2 = \left(\sqrt{(x + y)'(x + y)}\right)^2,
-\]</span></p>
-<p>and simplifies to</p>
-<p><span class="math display">\[
-\begin{aligned}
-x'x + y'y &amp;= (x + y)'(x + y) \\
-x'x + y'y &amp;= x'x + y'y + x'y + y'x \\
-x'x + y'y &amp;= x'x + y'y + 2x'y,
-\end{aligned}
-\]</span></p>
-<p>from which it is clear that <span class="math inline">\(x'y = 0\)</span>.</p>
-</div>
-</div>
-</div>
-<p>Hence, we want:</p>
-<p><span class="math display">\[
-\begin{aligned}
-a'(b - p) &amp;= 0 \\
-a'(b - xa) &amp;= 0 \\
-a'b - xa'a &amp;= 0 \\
-xa'a &amp;= a'b \\
-x &amp;= (a'a)^{-1}a'b
-\end{aligned}
-\]</span></p>
-<p>So that, again, we have:<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
-<p><span class="math display">\[
-p = ax = \underbrace{a(a'a)^{-1}a'}_\text{$P_a$}b.
-\]</span></p>
-<p>This also makes clear why this type of projection is called “orthogonal projection”: we want to project a vector onto a subspace in such a way that the distance between the original vector and the subspace is minimal. The resulting projection will be a point on the subspace such that a vector from that point to the original vector is orthogonal to the subspace. Intuitively, this is the case because the shortest path between the vector and the subspace will be that which is perpendicular to the subspace, and orthogonality is the generalisation of the notion of perpendicularity.</p>
+<p>which tells us how the outcome for that unit is different when given the active treatment compared to the counterfactual state of the world where they were given the control treatment. This is what we mean by the causal effect of the treatment.</p>
+<p>We are usually interested in the average causal effect of the treatment across all units, which is given by the Average Treatment Effect (ATE)</p>
+<p><span id="eq-ate"><span class="math display">\[
+\boxed{\te = \tefs = \tef}
+\tag{3.2}\]</span></span></p>
+<p>This is the quantity we’re trying to estimate in a typical experiment, though other choices are possible.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 </section>
-<section id="why-project" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="why-project"><span class="header-section-number">14.2</span> Why project?</h2>
-<p>One reason projection is useful is because it allows us to approximately solve systems of linear equations that have no exact solution. Imagine we have the following system of equations:</p>
+<section id="estimating-the-outcome-of-interest" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="estimating-the-outcome-of-interest"><span class="header-section-number">3.2</span> Estimating the outcome of interest</h2>
+<p>Given that we only observe one potential outcome per unit, how can we estimate <a href="#eq-ate" class="quarto-xref">Equation&nbsp;<span>3.2</span></a>?</p>
+<p>In online experiments, we typically use simple random assignment to allocate units to the expeirment sample and treatment variants (see <a href="treatment_assignment.html" class="quarto-xref"><span>Chapter 8</span></a> for details). Random assignment to treatment implies that</p>
 <p><span class="math display">\[
-\begin{align*}
-a_{11}x_1 + a_{12}x_2 + \cdots + a_{1k}x_k &amp;= b_1 \\
-a_{21}x_1 + a_{22}x_2 + \cdots + a_{2k}x_k &amp;= b_2 \\
-\vdots \\
-a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nk}x_k &amp;= b_n
-\end{align*}
+\begin{align}
+E[\ytp | \ti_i = 1] &amp;= E[\ytp]\\
+E[\ytp | \ti_i = 0] &amp;= E[\ytp]
+\end{align}
 \]</span></p>
-<p>which we can write more compactly in matrix form as:</p>
+<p>That is: given that assignment is random, the expected outcome under treatment is the same for units in the treatment and control group, and simply equals the expected outcome under treatment across the entire population. The same is true for expected outcomes under control, so that we have</p>
 <p><span class="math display">\[
-Ax = b,
+\begin{align}
+E[\ycp | \ti_i = 1] &amp;= E[\ycp]\\
+E[\ycp | \ti_i = 0] &amp;= E[\ycp]
+\end{align}
+\]</span></p>
+<p>Now, expanding <a href="#eq-ate" class="quarto-xref">Equation&nbsp;<span>3.2</span></a> and using the above expressions we have:</p>
+<p><span class="math display">\[
+\begin{align}
+\te &amp;= \tef \\
+&amp;= E[\ytp] - E[\ycp] \\
+&amp;= E[\ytp | \ti_i = 1] - E[\ycp | \ti_i = 0],
+\end{align}
+\]</span></p>
+<p>which says that we can express the true effect as the difference between the expected outcomes of treated and untreated untis – we have identified a way for expressing the treatment effect in quantities we can actually estimate based on available data. In particular, the above suggests the following estimation approach:</p>
+<p><span id="eq-ate-est"><span class="math display">\[
+\boxed{\tee = \ytob - \ycob}
+\tag{3.3}\]</span></span></p>
+<p>where</p>
+<p><span class="math display">\[
+\ytob = \ytobf \qquad \ycob = \ycobf.
+\]</span></p>
+<p>We can show that this is an unbiased estimator of <span class="math inline">\(\te\)</span>:<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p><span class="math display">\[
+\begin{align}
+E\left[\tee\right] &amp;= E\left[\ytob - \ycob\right] \\
+&amp;=E\left[\ytob\right]- E\left[\ycob\right] \\
+&amp;=E\left[\ytobf\right] - E\left[\ycobf\right] \\
+&amp;=\frac{1}{\Nt}\sum_{i:\ti_i=1} E\left[\yto\right]
+-\frac{1}{\Nc}\sum_{i:\ti_i=0} E\left[\yco\right] \\
+&amp;=\frac{\Nt}{\Nt}E\left[\yto\right] -\frac{\Nc}{\Nc}E\left[\yco\right] \\
+&amp;=E\left[\yto\right] - E\left[\yco\right] \\
+&amp;=E\left[\yio | \ti_i = 1\right] - E\left[\yio | \ti_i = 0\right] \\
+&amp;=E\left[\ytp\right] - E\left[\ycp\right] \\
+&amp;=\ytpb - \ycpb \\
+&amp;=\te
+\end{align}
+\]</span></p>
+</section>
+<section id="standard-error-of-treatment-effect-estimate" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="standard-error-of-treatment-effect-estimate"><span class="header-section-number">3.3</span> Standard error of treatment effect estimate</h2>
+<p>In this section, we’ll derive the standard error of our treatment effect stimator <span class="math inline">\(\tee\)</span>.</p>
+<p>Our treatment effect estimate, <span class="math inline">\(\tee\)</span>, is a random variable because sampling and treatment assignment are random. This means that if we were to repeat the sampe experiment many times we’d get a slightly different value for <span class="math inline">\(\tee\)</span> each time. The distribution of all these values is called the sampling distribution of <span class="math inline">\(\tee\)</span>. We know a few things about that distribution. From the central limit theorem we know that its shape is Normal (see <span class="quarto-unresolved-ref">?sec-stats-foundations</span>). Above we have shown above that the distribution has mean <span class="math inline">\(\te\)</span>, which means our estimator is unbiased. Naturally, the distribution also has a standard deviation. Because it is a sampling distribution, that standard deviation is called the standard error. But it is still a standard deviation, and is thus defined as the square root of the variance. We’ll thus find the standard error as follows: we first derive the variance of the treatment estimate, then find a way to estimate that variance, and then take the square root of that estimate to get the standard error.</p>
+<section id="treatment-effect-estimate-variance" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="treatment-effect-estimate-variance"><span class="header-section-number">3.3.1</span> Treatment effect estimate variance</h3>
+<p>The way we sample units into our experiment and assign them to treatment groups has important implications for the variance. For the estimation of the treatment effect above, the main implication of the simple random sample proceedure commonly used for online experiments (see chapter <a href="treatment_assignment.html" class="quarto-xref"><span>Chapter 8</span></a>) was that the expectation of potential ourcomes for treatment and control groups were identical. For the derivation of the variance and the standard error, the main implication is that sampling and treatment assignment between units are independent in the sense that one unit being sampled or assigned to a treatment condition doesn’t affect other units’ sampling or assignment probabilities.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>Given this independence property, let’s think about the standard error for a typical online experiment from first principles.</p>
+<p><span class="math display">\[
+\begin{align}
+V\left(\tee\right) &amp;= V\left(\ytob - \ycob\right) \\
+&amp;=V\left(\ytob\right) + V\left(\ycob\right) \\
+&amp;=V\left(\ytobf\right) + V\left(\ycobf\right) \\
+&amp;=\frac{1}{\Nt^2}\sum_{i:\ti_i=1} V\left(\yto\right)
++ \frac{1}{\Nc^2}\sum_{i:\ti_i=0} V\left(\yco\right) \\
+&amp;=\frac{\Nt}{\Nt^2}V\left(\yto\right) + \frac{\Nc}{\Nc^2}V\left(\yco\right) \\
+&amp;=\frac{1}{\Nt}V\left(\yio | \ti_i = 1\right) + \frac{1}{\Nc}V\left(\yio | \ti_i = 0\right) \\
+&amp;=\frac{1}{\Nt}V\left(\ytp\right) + \frac{1}{\Nc}V\left(\ycp\right) \\
+&amp;=\frac{1}{\Nt}V\left(\ytp\right) + \frac{1}{\Nc}V\left(\ycp\right) \\
+&amp;=\frac{\vt}{\Nt} + \frac{\vc}{\Nc},
+\end{align}
 \]</span></p>
 <p>where</p>
 <p><span class="math display">\[
-A = \begin{pmatrix}
-  a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1k} \\
-  a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2k} \\
-  \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
-  a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nk}
-\end{pmatrix},
-\quad
-x =
-\begin{pmatrix}
-  x_{1} \\
-  x_{2} \\
-  \vdots \\
-  x_{k}
-\end{pmatrix},
-\quad
-b =
-\begin{pmatrix}
-  b_{1} \\
-  b_{2} \\
-  \vdots \\
-  b_{n}
-\end{pmatrix}.
+\vt ≡ V\left(\ytp\right) \quad \vc ≡ V\left(\ycp\right),
 \]</span></p>
-<p>If <span class="math inline">\(n &gt; k\)</span>, the system is overdetermined – it has more constarints (equations) than degrees of freedom (variables) – and might not have a solution. In this case, it can be useful to solve</p>
-<p><span class="math display">\[
-Ax = \hat{b},
-\]</span></p>
-<p>where <span class="math inline">\(\hat{b}\)</span> is the orthogonal projection of <span class="math inline">\(b\)</span> onto the vector space spanned by <span class="math inline">\(A\)</span>. This vector space is also called the span or column space of <span class="math inline">\(A\)</span>. Using orthogonal projection achieves two things: first, it guarantees a solution because <span class="math inline">\(\hat{b}\)</span> lies on the same space as <span class="math inline">\(Ax\)</span> – they both lie on the subspace spanned by the columns of <span class="math inline">\(A\)</span> – and, second, it makes <span class="math inline">\(\hat{p}\)</span> the closest approximation to <span class="math inline">\(b\)</span> in terms of the Euclidean distance.</p>
+<p>is the (true) population variance in the treatment and control group, respectively.</p>
 </section>
-<section id="projection-from-3-d-onto-2-d-and-projecting-onto-n-d" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="projection-from-3-d-onto-2-d-and-projecting-onto-n-d"><span class="header-section-number">14.3</span> Projection from 3-D onto 2-D and projecting onto N-D</h2>
-<p>As in the 2-D onto 1-D example above, we’re going to project the vector <span class="math inline">\(b\)</span> onto a subspace. But <span class="math inline">\(b\)</span> is now a 3-D vector, and instead of projecting onto a line characterised by vector <span class="math inline">\(a\)</span>, we’re projecting onto a 2-D plane characterised by the 2 x 2 matrix <span class="math inline">\(A\)</span>. Hence, our projection <span class="math inline">\(p\)</span> is now a vector in the 3-dimensional space that lies on the 2-dimensional subspace. Similarly to above, <span class="math inline">\(p\)</span> is defined by <span class="math inline">\(p = Ax\)</span>, where <span class="math inline">\(x\)</span> is a 2-D vector of scalars.</p>
-<p>We can still go about finding <span class="math inline">\(p\)</span> in the same way as above:</p>
+<section id="estimating-the-treatment-effect-estimate-variance" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="estimating-the-treatment-effect-estimate-variance"><span class="header-section-number">3.3.2</span> Estimating the treatment effect estimate variance</h3>
+<p>In practice, we don’t know these variances, so we estimate them using</p>
 <p><span class="math display">\[
-\begin{aligned}
-A'(b - p) &amp;= 0 \\
-A'(b - Ax) &amp;= 0 \\
-A'b - A'Ax &amp;= 0 \\
-A'Ax &amp;= A'b \\
-x &amp;= (A'A)^{-1}A'b\\
-\\
-p = Ax = \underbrace{A(A'A)^{-1}A'}_\text{$P_a$}b.
-\end{aligned}
+\vte = \vtef \quad \vce = \vcef,
 \]</span></p>
-<p>The last step above works only if <span class="math inline">\(A'A\)</span> is actually invertible, which is the case if <span class="math inline">\(A\)</span> has full rank.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Full rank
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A matrix is said to have full rank if none of its columns can be constructed from a linear combination of any other columns.</p>
-<p>We can think of the columns of a matrix are the basis vectors of its column space, and the rank of the matrix is the number of dimensions of that column space.</p>
-<p>Full rank means thus means that the column space has as many dimensions as there are columns.</p>
-</div>
-</div>
-</div>
-<p>The math above generalises directly to projections onto N-dimensional space. All that changes is that <span class="math inline">\(b\)</span>, <span class="math inline">\(A\)</span>, <span class="math inline">\(x\)</span>, and <span class="math inline">\(p\)</span> are higher-dimensional objects, and that visualising what’s happening becomes rather mind-bending.</p>
+<p>from which we get</p>
+<p><span class="math display">\[
+\sve = \svefu.
+\]</span></p>
+<p>This is the variance of our treatment effect estimate. For statistical testing, the construction of confidence intervals, and for power analysis we work with the standard errors. We’ll derive these next.</p>
 </section>
-<section id="useful-references" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="useful-references"><span class="header-section-number">14.4</span> Useful references</h2>
+<section id="standard-error-of-treatment-effect-estimate-1" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="standard-error-of-treatment-effect-estimate-1"><span class="header-section-number">3.3.3</span> Standard error of treatment effect estimate</h3>
+<p>As discussed above, the standard error is simply the standard deviation of the sampling distribution of <span class="math inline">\(\tee\)</span>, defined as the square root of the sampling variance, and is thus defined as:</p>
+<p><span id="eq-se"><span class="math display">\[
+\boxed{\se = \seefu}
+\tag{3.4}\]</span></span></p>
+<p>We could work with this, and sometimes do. But in the context of online experiments, because sample sizes are so large and treatment effects are usually small, people often assume equal sample sizes and variances, so that we have <span class="math inline">\(\Nt = \Nc = N/2\)</span> and <span class="math inline">\(\vte = \vce = \vpe\)</span>. The common variance <span class="math inline">\(\vpe\)</span> is estimated by “pooling” <span class="math inline">\(\vte\)</span> and <span class="math inline">\(\vce\)</span> to create a degrees-of-freedom-weighted estimator of the form:</p>
+<p><span class="math display">\[
+\vpe = \vpef.
+\]</span></p>
+<p>Substituting all of the above in <a href="#eq-se" class="quarto-xref">Equation&nbsp;<span>3.4</span></a> results in</p>
+<p><span class="math display">\[
+\se = \sqrt{\frac{\vpe + \vpe}{\N/2}} = \sqrt{\frac{4\vpe}{\N}} = \seefe
+\]</span></p>
+<p>For most of the text, I’ll use this expression for the standard error. In some cases, though, it is useful to express the standard error in terms of the proportion of units allocated to the treatment group. Hence, instead of assuming equal sample sizes, we use <span class="math inline">\(P\)</span> to denote that proportion and <span class="math inline">\(\N\)</span> to denote total sample size, while maintaining the assumption of equal variance. After a little algebraic manipulation we then get:</p>
+<p><span class="math display">\[
+\se = \sqrt{\frac{\vpe}{P\N} + \frac{\vpe}{(1-P)\N}} = \seefp.
+\]</span></p>
+<p>Notice that for equal sample sizes, when <span class="math inline">\(P=0.5\)</span>, this formulation is equivalent to the one above as expected.</p>
+</section>
+</section>
+<section id="assumptions" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">3.4</span> Assumptions</h2>
+<section id="stable-unit-treatment-value-assumption-sutva" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">3.4.1</span> Stable unit treatment value assumption (SUTVA)</h3>
 <ul>
-<li><p><a href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/video_galleries/video-lectures/">Gilbert Strang’s linear algebra lectures at MIT</a></p></li>
-<li><p><a href="https://bookdown.org/ts_robinson1994/10EconometricTheorems/linear_projection.html#linear_projection">10 Fundamental Theorems for Econometrics</a></p></li>
+<li>SUTVA has two components: no interference, and no hidden variations of treatments.</li>
+</ul>
+<p><strong>No interference</strong></p>
+<ul>
+<li><p>The no interference assumption states that a unit’s potential outcumes are independent of the treatment assignment of all other units.</p></li>
+<li><p>This will be violated if there are network effects: if the behaviour of units is mutually dependent. For instance: if my wife and I both use an online photo-sharing service and my wife sees a new feature that we both like while I’m in the control group, we might stil share the same number of family photos but start sharing them all on her account instead of mine. This creates an artificial treatment effect because if I had also had access to the new feature, we might not have changed our behaviour at all, while, during the experiment, her sharing volume went up while mine went down, suggesting the existent of a positive effect.</p></li>
+<li><p>Another case where the no interference assumption can be violated is in the form of general equilibrium effects. A classic example is the effect of further education: the effect of my doing a PhD in statistics on my earnings while nobody else changes their behaviour (the partial-equilibrium effect) is surely different from the outcome of my earnings if suddenly everyone decided to do a PhD in statistics (the general-equilibrium effect).</p></li>
+<li><p>The two violations capture the two different ways interference can lead to incorrect results: interference can happen and bias our results either during the experiment or once the feature is fully rolled out. In either case, the treatment of some unit has an externality on other units.</p></li>
+</ul>
+<p><strong>No hidden treatment variations</strong></p>
+<ul>
+<li><p>The second component, no hidden treatment variation, states that a unit receiving a specific treatment level cannot receive different forms of that treatment level. This does <em>not</em> mean that the form of the treatment level has to be the same for each unit, but only that a given treatment level is well specified for a given unit. To use Imbens and Rubin’s aspirin example: suppose we test the effect of aspirin on reducing headaches but have old and new aspirins which vary in strength, so that we effectively have three possible treatment statuses: no aspirin (control), weak aspirin, and strong aspirin. SUTVA does <em>not</em> require that all treatment units either get the weak or the strong aspirin, but requires that each unit can only receive one or the other in case they are treated, so that there is no ambiguity what form of the treatment a given unit will receive in case it is treated. (It would be permissible to have the treatment be randomly weak or strong, but this is not relevant in my world.)</p></li>
+<li><p>Essentially, both parts of SUTVA ensure the same thing: that <span class="math inline">\(Y_i(w)\)</span> is well defined: that it does not depend on the treatment status of other units, and that, for each possible treatment level, <span class="math inline">\(w\)</span>, the precise form of that treatment level is well specified.</p></li>
+</ul>
+</section>
+</section>
+<section id="how-does-randomisation-help-us-estimate-ates" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">3.5</span> How does randomisation help us estimate ATEs?</h2>
+<p>By ensuring that the treatment - the causal variable of interest - is independent of potential outcomes, so that control and treatment group are comparable.</p>
+<p>More technically, it ensures that expected outcomes are the same in both groups, which means that the selection bias - the difference of expected potential outcomes without treatment - disappears. When using regression, this is equivalent to the error term being uncorrelated with treatment status.</p>
+</section>
+<section id="finite-sample-vs-super-population-perspective" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="finite-sample-vs-super-population-perspective"><span class="header-section-number">3.6</span> Finite sample vs super-population perspective</h2>
+<p>There are two ways to perform inference:</p>
+<ul>
+<li><p>When using the finite sample perspective, the <span class="math inline">\(N\)</span> units in the experiment sample are treated as the entire population of interest. Hence, there is no notion of randomisation due to sampling from a larger population, and all the randomness in the outcomes is due to randomness generates by the assignment mechanism.</p></li>
+<li><p>When treating the <span class="math inline">\(N\)</span> units in the sample as a random sample from a larger super-population, then in addition to randomness from the randomisation, we also have randomness from the sampling.</p></li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-imbens2015causal" class="csl-entry" role="listitem">
+Imbens, Guido W, and Donald B Rubin. 2015. <em>Causal Inference in Statistics, Social, and Biomedical Sciences</em>. Cambridge University Press.
+</div>
+</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>The Euclidean distance between two points <span class="math inline">\(x\)</span> and <span class="math inline">\(\bar{x}\)</span> in <span class="math inline">\(\mathbb{R}^N\)</span> is defined as <span class="math inline">\(\sqrt{\sum_{i=1}^N{(\bar{a_i} - a_i})^2}\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>A line through the origin is a subspace of a two-dimensional vector because it is 1-dimensional (and thus a subset of the 2-dimensional vector) and because all possible linear combinations of vectors on the line will also lie on the line (see box on subspaces for more details).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>One thing I used to wonder about was whether the order of the vectors in the scalar product <span class="math inline">\(ax\)</span> matters. That is, whether we could also write <span class="math inline">\(p = xa\)</span>. Once you think about the rules of linear algebra, the answer becomes quite clear. For a scalar product, the order doesn’t matter. However, <span class="math inline">\(p = ax\)</span> is preferred because it naturally generalises to the higher-dimensional case where instead of a scalar <span class="math inline">\(a\)</span>, we have a matrix <span class="math inline">\(A\)</span>. In this case, <span class="math inline">\(p = Ax\)</span>, which is different from <span class="math inline">\(p = xA\)</span>, which is generally not defined, and <span class="math inline">\(p = x'A\)</span>, which leads to a different result.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Other choices are possible. We could define the individual level treatment effect as the ratio of active and control treatment, and we can create different summary statistics of the individual-level treatment effects other than the average treatment effect over the entire population (see, for instance, Chapter 1 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>For an alternative proof, see the proof of Theorem 6.1 in <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>When we sample units without replacement and use a completely randomised experiment as the assignment mechanism, this is not true. As a result, the derivation of the standard error is more complicated though it turns out that formula we derive here is still commonly used. The reason is twofold: if treatment errors are constant, then the estimator is unbiased even in the more complex case. If not, then the estimator is conservative compared to one that takes the interaction from the complete randomisation into account. Furthermore, the expression is valid approximately ….</p>
+<p>still holds approximately, since the interdependence is small if the population from which experiment units are sampled is much larger than the experiment sample. For more details, See <span class="citation" data-cites="imbens2015causal">Imbens and Rubin (<a href="#ref-imbens2015causal" role="doc-biblioref">2015</a>)</span> Section 6.7 and Appendix B of Chapter 6.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -1037,13 +1035,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/network_experiments.html" class="pagination-link  aria-label=" &lt;span="" experiments&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Network experiments</span></span>
+      <a href="../chapters/statistics.html" class="pagination-link  aria-label=" statistics"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Statistics</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/fwl.html" class="pagination-link" aria-label="<span class='chapter-number'>15</span>&nbsp; <span class='chapter-title'>FWL</span>">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">FWL</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/cis.html" class="pagination-link" aria-label="<span class='chapter-number'>4</span>&nbsp; <span class='chapter-title'>Confidence intervals</span>">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Confidence intervals</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

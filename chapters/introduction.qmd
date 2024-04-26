@@ -19,6 +19,8 @@ The purpose:
 
 ## Limitations of experiments
 
+Look at Deaton and Cartwright papers.
+
 1) They cannot be used to study the past.
 
 2) They can only estimate the effect of treatments that can be manipulated ("no causation without manipulation" Rubin). 

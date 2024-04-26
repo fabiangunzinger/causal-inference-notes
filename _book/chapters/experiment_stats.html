@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 8&nbsp; Statistics of online experiments</title>
+<title>Causal inference notes - 3&nbsp; Potential outcomes and outcome of interest</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -50,8 +50,8 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/experiment_analysis.html" rel="next">
-<link href="../chapters/neyman.html" rel="prev">
+<link href="../chapters/power.html" rel="next">
+<link href="../chapters/statistics.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -252,7 +252,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/experiment_stats.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistics.html">Statistics</a></li><li class="breadcrumb-item"><a href="../chapters/experiment_stats.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Potential outcomes and outcome of interest</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -283,96 +283,134 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
+  <a href="../chapters/introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Power</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/fisher.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Fisher’s exact P-value approach</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/neyman.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../chapters/statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/experiment_stats.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Potential outcomes and outcome of interest</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/experiment_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Experiment analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Experiment analysis</span></span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/treatment_assignment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Treatment assignment</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/experiment_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Experiment design</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/threats_to_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/practical_issues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Practical issues</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/treatment_assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Treatment assignment</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiment_design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Experiment design</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Metrics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/threats_to_validity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/practical_issues.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/fwl.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">FWL</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -383,30 +421,29 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#potential-outcomes-and-outcome-of-interest" id="toc-potential-outcomes-and-outcome-of-interest" class="nav-link active" data-scroll-target="#potential-outcomes-and-outcome-of-interest"><span class="header-section-number">8.1</span> Potential outcomes and outcome of interest</a></li>
-  <li><a href="#estimating-the-outcome-of-interest" id="toc-estimating-the-outcome-of-interest" class="nav-link" data-scroll-target="#estimating-the-outcome-of-interest"><span class="header-section-number">8.2</span> Estimating the outcome of interest</a></li>
-  <li><a href="#standard-error-of-treatment-effect-estimate" id="toc-standard-error-of-treatment-effect-estimate" class="nav-link" data-scroll-target="#standard-error-of-treatment-effect-estimate"><span class="header-section-number">8.3</span> Standard error of treatment effect estimate</a>
+  <li><a href="#estimating-the-outcome-of-interest" id="toc-estimating-the-outcome-of-interest" class="nav-link active" data-scroll-target="#estimating-the-outcome-of-interest"><span class="header-section-number">3.1</span> Estimating the outcome of interest</a></li>
+  <li><a href="#standard-error-of-treatment-effect-estimate" id="toc-standard-error-of-treatment-effect-estimate" class="nav-link" data-scroll-target="#standard-error-of-treatment-effect-estimate"><span class="header-section-number">3.2</span> Standard error of treatment effect estimate</a>
   <ul class="collapse">
-  <li><a href="#treatment-effect-estimate-variance" id="toc-treatment-effect-estimate-variance" class="nav-link" data-scroll-target="#treatment-effect-estimate-variance"><span class="header-section-number">8.3.1</span> Treatment effect estimate variance</a></li>
-  <li><a href="#estimating-the-treatment-effect-estimate-variance" id="toc-estimating-the-treatment-effect-estimate-variance" class="nav-link" data-scroll-target="#estimating-the-treatment-effect-estimate-variance"><span class="header-section-number">8.3.2</span> Estimating the treatment effect estimate variance</a></li>
-  <li><a href="#standard-error-of-treatment-effect-estimate-1" id="toc-standard-error-of-treatment-effect-estimate-1" class="nav-link" data-scroll-target="#standard-error-of-treatment-effect-estimate-1"><span class="header-section-number">8.3.3</span> Standard error of treatment effect estimate</a></li>
+  <li><a href="#treatment-effect-estimate-variance" id="toc-treatment-effect-estimate-variance" class="nav-link" data-scroll-target="#treatment-effect-estimate-variance"><span class="header-section-number">3.2.1</span> Treatment effect estimate variance</a></li>
+  <li><a href="#estimating-the-treatment-effect-estimate-variance" id="toc-estimating-the-treatment-effect-estimate-variance" class="nav-link" data-scroll-target="#estimating-the-treatment-effect-estimate-variance"><span class="header-section-number">3.2.2</span> Estimating the treatment effect estimate variance</a></li>
+  <li><a href="#standard-error-of-treatment-effect-estimate-1" id="toc-standard-error-of-treatment-effect-estimate-1" class="nav-link" data-scroll-target="#standard-error-of-treatment-effect-estimate-1"><span class="header-section-number">3.2.3</span> Standard error of treatment effect estimate</a></li>
   </ul></li>
-  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">8.4</span> Hypothesis testing</a></li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">8.5</span> Assumptions</a>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">3.3</span> Hypothesis testing</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">3.4</span> Assumptions</a>
   <ul class="collapse">
-  <li><a href="#stable-unit-treatment-value-assumption-sutva" id="toc-stable-unit-treatment-value-assumption-sutva" class="nav-link" data-scroll-target="#stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">8.5.1</span> Stable unit treatment value assumption (SUTVA)</a></li>
+  <li><a href="#stable-unit-treatment-value-assumption-sutva" id="toc-stable-unit-treatment-value-assumption-sutva" class="nav-link" data-scroll-target="#stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">3.4.1</span> Stable unit treatment value assumption (SUTVA)</a></li>
   </ul></li>
-  <li><a href="#how-does-randomisation-help-us-estimate-ates" id="toc-how-does-randomisation-help-us-estimate-ates" class="nav-link" data-scroll-target="#how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">8.6</span> How does randomisation help us estimate ATEs?</a></li>
-  <li><a href="#finite-sample-vs-super-population-perspective" id="toc-finite-sample-vs-super-population-perspective" class="nav-link" data-scroll-target="#finite-sample-vs-super-population-perspective"><span class="header-section-number">8.7</span> Finite sample vs super-population perspective</a></li>
+  <li><a href="#how-does-randomisation-help-us-estimate-ates" id="toc-how-does-randomisation-help-us-estimate-ates" class="nav-link" data-scroll-target="#how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">3.5</span> How does randomisation help us estimate ATEs?</a></li>
+  <li><a href="#finite-sample-vs-super-population-perspective" id="toc-finite-sample-vs-super-population-perspective" class="nav-link" data-scroll-target="#finite-sample-vs-super-population-perspective"><span class="header-section-number">3.6</span> Finite sample vs super-population perspective</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistics.html">Statistics</a></li><li class="breadcrumb-item"><a href="../chapters/experiment_stats.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Potential outcomes and outcome of interest</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-experiment-stats" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistics of online experiments</span></span></h1>
+<h1 class="title"><span id="sec-outcomes" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Potential outcomes and outcome of interest</span></span></h1>
 </div>
 
 
@@ -423,21 +460,10 @@ window.Quarto = {
 </header>
 
 
-<p>The goal of this chapter is to succinctly summarise the statistical theory of randomised experiments.</p>
-<p>Most online experiments appear very simple; we split traffic into two groups with different experiences and compare outcomes between groups. So how much statistical theory could we possibly need?</p>
-<p>Well, to experiment effectively, you do want to make sure you have</p>
-<ol type="1">
-<li><p>a coherent definition of the causal effect effect you want to measure and a good way of estimating it,</p></li>
-<li><p>a way to differentiate signals from noise,</p></li>
-<li><p>a way to ensure your experiment has a good chance of picking up signals.</p></li>
-</ol>
-<p>First two are covered here. The third, which relates to the power of your experiment, is covered in <a href="power.html" class="quarto-xref"><span>Chapter 3</span></a>.</p>
-<section id="potential-outcomes-and-outcome-of-interest" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="potential-outcomes-and-outcome-of-interest"><span class="header-section-number">8.1</span> Potential outcomes and outcome of interest</h2>
 <p>We have a population of units <span class="math inline">\(i = 1, \dots, \N\)</span>. Each unit in the population can be exposed to one of two treatments, which are identical across units. Each unit <span class="math inline">\(i\)</span> has potential outcomes <span class="math inline">\(\ycp\)</span> and <span class="math inline">\(\ytp\)</span> corresponding to each of the two possible treatments. <span class="math inline">\(\ycp\)</span> is the outcome unit <span class="math inline">\(i\)</span> would experience if they received the control treatment; <span class="math inline">\(\ytp\)</span>, the outcome they would experience if they received the active treatment. Given that each unit is either assigned to treatment or control we’ll only ever observe one of these outcomes in practice. In fact, what we do observe for each unit is <span class="math inline">\(\yio\)</span>, which equals <span class="math inline">\(\ytp\)</span> if the unit was assigned the active treatment and <span class="math inline">\(\ycp\)</span> if they were assigned the control treatment. That is, if we write <span class="math inline">\(\ti_i = 1\)</span> if unit <span class="math inline">\(i\)</span> is allocated to treatment and <span class="math inline">\(\ti_i = 0\)</span> if they are allocated to control, then we can express <span class="math inline">\(\yio\)</span> as</p>
 <p><span id="eq-yio"><span class="math display">\[
 \yio = \ti_i \ytp + (1 - \ti_i) \ycp.
-\tag{8.1}\]</span></span></p>
+\tag{3.1}\]</span></span></p>
 <p>What’s the use of potential outcomes we can only partially observe? They provide us with a simple and coherent way to think about the causal effect of the treatment; for unit <span class="math inline">\(i\)</span>, that causal effect is given by</p>
 <p><span class="math display">\[
 \ytp - \ycp,
@@ -446,13 +472,12 @@ window.Quarto = {
 <p>We are usually interested in the average causal effect of the treatment across all units, which is given by the Average Treatment Effect (ATE)</p>
 <p><span id="eq-ate"><span class="math display">\[
 \boxed{\te = \tefs = \tef}
-\tag{8.2}\]</span></span></p>
+\tag{3.2}\]</span></span></p>
 <p>This is the quantity we’re trying to estimate in a typical experiment, though other choices are possible.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-</section>
-<section id="estimating-the-outcome-of-interest" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="estimating-the-outcome-of-interest"><span class="header-section-number">8.2</span> Estimating the outcome of interest</h2>
-<p>Given that we only observe one potential outcome per unit, how can we estimate <a href="#eq-ate" class="quarto-xref">Equation&nbsp;<span>8.2</span></a>?</p>
-<p>In online experiments, we typically use simple random assignment to allocate units to the expeirment sample and treatment variants (see <a href="treatment_assignment.html" class="quarto-xref"><span>Chapter 10</span></a> for details). Random assignment to treatment implies that</p>
+<section id="estimating-the-outcome-of-interest" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="estimating-the-outcome-of-interest"><span class="header-section-number">3.1</span> Estimating the outcome of interest</h2>
+<p>Given that we only observe one potential outcome per unit, how can we estimate <a href="#eq-ate" class="quarto-xref">Equation&nbsp;<span>3.2</span></a>?</p>
+<p>In online experiments, we typically use simple random assignment to allocate units to the expeirment sample and treatment variants (see <a href="treatment_assignment.html" class="quarto-xref"><span>Chapter 8</span></a> for details). Random assignment to treatment implies that</p>
 <p><span class="math display">\[
 \begin{align}
 E[\ytp | \ti_i = 1] &amp;= E[\ytp]\\
@@ -466,7 +491,7 @@ E[\ycp | \ti_i = 1] &amp;= E[\ycp]\\
 E[\ycp | \ti_i = 0] &amp;= E[\ycp]
 \end{align}
 \]</span></p>
-<p>Now, expanding <a href="#eq-ate" class="quarto-xref">Equation&nbsp;<span>8.2</span></a> and using the above expressions we have:</p>
+<p>Now, expanding <a href="#eq-ate" class="quarto-xref">Equation&nbsp;<span>3.2</span></a> and using the above expressions we have:</p>
 <p><span class="math display">\[
 \begin{align}
 \te &amp;= \tef \\
@@ -477,7 +502,7 @@ E[\ycp | \ti_i = 0] &amp;= E[\ycp]
 <p>which says that we can express the true effect as the difference between the expected outcomes of treated and untreated untis – we have identified a way for expressing the treatment effect in quantities we can actually estimate based on available data. In particular, the above suggests the following estimation approach:</p>
 <p><span id="eq-ate-est"><span class="math display">\[
 \boxed{\tee = \ytob - \ycob}
-\tag{8.3}\]</span></span></p>
+\tag{3.3}\]</span></span></p>
 <p>where</p>
 <p><span class="math display">\[
 \ytob = \ytobf \qquad \ycob = \ycobf.
@@ -499,13 +524,13 @@ E\left[\tee\right] &amp;= E\left[\ytob - \ycob\right] \\
 \end{align}
 \]</span></p>
 </section>
-<section id="standard-error-of-treatment-effect-estimate" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="standard-error-of-treatment-effect-estimate"><span class="header-section-number">8.3</span> Standard error of treatment effect estimate</h2>
+<section id="standard-error-of-treatment-effect-estimate" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="standard-error-of-treatment-effect-estimate"><span class="header-section-number">3.2</span> Standard error of treatment effect estimate</h2>
 <p>In this section, we’ll derive the standard error of our treatment effect stimator <span class="math inline">\(\tee\)</span>.</p>
 <p>Our treatment effect estimate, <span class="math inline">\(\tee\)</span>, is a random variable because sampling and treatment assignment are random. This means that if we were to repeat the sampe experiment many times we’d get a slightly different value for <span class="math inline">\(\tee\)</span> each time. The distribution of all these values is called the sampling distribution of <span class="math inline">\(\tee\)</span>. We know a few things about that distribution. From the central limit theorem we know that its shape is Normal (see <span class="quarto-unresolved-ref">?sec-stats-foundations</span>). Above we have shown above that the distribution has mean <span class="math inline">\(\te\)</span>, which means our estimator is unbiased. Naturally, the distribution also has a standard deviation. Because it is a sampling distribution, that standard deviation is called the standard error. But it is still a standard deviation, and is thus defined as the square root of the variance. We’ll thus find the standard error as follows: we first derive the variance of the treatment estimate, then find a way to estimate that variance, and then take the square root of that estimate to get the standard error.</p>
-<section id="treatment-effect-estimate-variance" class="level3" data-number="8.3.1">
-<h3 data-number="8.3.1" class="anchored" data-anchor-id="treatment-effect-estimate-variance"><span class="header-section-number">8.3.1</span> Treatment effect estimate variance</h3>
-<p>The way we sample units into our experiment and assign them to treatment groups has important implications for the variance. For the estimation of the treatment effect above, the main implication of the simple random sample proceedure commonly used for online experiments (see chapter <a href="treatment_assignment.html" class="quarto-xref"><span>Chapter 10</span></a>) was that the expectation of potential ourcomes for treatment and control groups were identical. For the derivation of the variance and the standard error, the main implication is that sampling and treatment assignment between units are independent in the sense that one unit being sampled or assigned to a treatment condition doesn’t affect other units’ sampling or assignment probabilities.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<section id="treatment-effect-estimate-variance" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="treatment-effect-estimate-variance"><span class="header-section-number">3.2.1</span> Treatment effect estimate variance</h3>
+<p>The way we sample units into our experiment and assign them to treatment groups has important implications for the variance. For the estimation of the treatment effect above, the main implication of the simple random sample proceedure commonly used for online experiments (see chapter <a href="treatment_assignment.html" class="quarto-xref"><span>Chapter 8</span></a>) was that the expectation of potential ourcomes for treatment and control groups were identical. For the derivation of the variance and the standard error, the main implication is that sampling and treatment assignment between units are independent in the sense that one unit being sampled or assigned to a treatment condition doesn’t affect other units’ sampling or assignment probabilities.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 <p>Given this independence property, let’s think about the standard error for a typical online experiment from first principles.</p>
 <p><span class="math display">\[
 \begin{align}
@@ -527,8 +552,8 @@ V\left(\tee\right) &amp;= V\left(\ytob - \ycob\right) \\
 \]</span></p>
 <p>is the (true) population variance in the treatment and control group, respectively.</p>
 </section>
-<section id="estimating-the-treatment-effect-estimate-variance" class="level3" data-number="8.3.2">
-<h3 data-number="8.3.2" class="anchored" data-anchor-id="estimating-the-treatment-effect-estimate-variance"><span class="header-section-number">8.3.2</span> Estimating the treatment effect estimate variance</h3>
+<section id="estimating-the-treatment-effect-estimate-variance" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="estimating-the-treatment-effect-estimate-variance"><span class="header-section-number">3.2.2</span> Estimating the treatment effect estimate variance</h3>
 <p>In practice, we don’t know these variances, so we estimate them using</p>
 <p><span class="math display">\[
 \vte = \vtef \quad \vce = \vcef,
@@ -539,17 +564,17 @@ V\left(\tee\right) &amp;= V\left(\ytob - \ycob\right) \\
 \]</span></p>
 <p>This is the variance of our treatment effect estimate. For statistical testing, the construction of confidence intervals, and for power analysis we work with the standard errors. We’ll derive these next.</p>
 </section>
-<section id="standard-error-of-treatment-effect-estimate-1" class="level3" data-number="8.3.3">
-<h3 data-number="8.3.3" class="anchored" data-anchor-id="standard-error-of-treatment-effect-estimate-1"><span class="header-section-number">8.3.3</span> Standard error of treatment effect estimate</h3>
+<section id="standard-error-of-treatment-effect-estimate-1" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="standard-error-of-treatment-effect-estimate-1"><span class="header-section-number">3.2.3</span> Standard error of treatment effect estimate</h3>
 <p>As discussed above, the standard error is simply the standard deviation of the sampling distribution of <span class="math inline">\(\tee\)</span>, defined as the square root of the sampling variance, and is thus defined as:</p>
 <p><span id="eq-se"><span class="math display">\[
 \boxed{\se = \seefu}
-\tag{8.4}\]</span></span></p>
+\tag{3.4}\]</span></span></p>
 <p>We could work with this, and sometimes do. But in the context of online experiments, because sample sizes are so large and treatment effects are usually small, people often assume equal sample sizes and variances, so that we have <span class="math inline">\(\Nt = \Nc = N/2\)</span> and <span class="math inline">\(\vte = \vce = \vpe\)</span>. The common variance <span class="math inline">\(\vpe\)</span> is estimated by “pooling” <span class="math inline">\(\vte\)</span> and <span class="math inline">\(\vce\)</span> to create a degrees-of-freedom-weighted estimator of the form:</p>
 <p><span class="math display">\[
 \vpe = \vpef.
 \]</span></p>
-<p>Substituting all of the above in <a href="#eq-se" class="quarto-xref">Equation&nbsp;<span>8.4</span></a> results in</p>
+<p>Substituting all of the above in <a href="#eq-se" class="quarto-xref">Equation&nbsp;<span>3.4</span></a> results in</p>
 <p><span class="math display">\[
 \se = \sqrt{\frac{\vpe + \vpe}{\N/2}} = \sqrt{\frac{4\vpe}{\N}} = \seefe
 \]</span></p>
@@ -560,8 +585,8 @@ V\left(\tee\right) &amp;= V\left(\ytob - \ycob\right) \\
 <p>Notice that for equal sample sizes, when <span class="math inline">\(P=0.5\)</span>, this formulation is equivalent to the one above as expected.</p>
 </section>
 </section>
-<section id="hypothesis-testing" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">8.4</span> Hypothesis testing</h2>
+<section id="hypothesis-testing" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">3.3</span> Hypothesis testing</h2>
 <p>To test whether the observed treatment effect is significantly different from zero, we test:</p>
 <p><span class="math display">\[
 H_0: \bar{Y}^{obs}_t = \bar{Y}^{obs}_c
@@ -578,10 +603,10 @@ T = \frac{\hat{\tau}}{\sqrt{Var(\hat{\tau})}} \sim t_{(N_t + N_c - 2)},
 <li>For complete treatment and derivation of sampling distributions (incl.&nbsp;discussion of all the approximations and sample corrections), see Rice sampling chapter and my ipad notes.</li>
 </ul>
 </section>
-<section id="assumptions" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">8.5</span> Assumptions</h2>
-<section id="stable-unit-treatment-value-assumption-sutva" class="level3" data-number="8.5.1">
-<h3 data-number="8.5.1" class="anchored" data-anchor-id="stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">8.5.1</span> Stable unit treatment value assumption (SUTVA)</h3>
+<section id="assumptions" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">3.4</span> Assumptions</h2>
+<section id="stable-unit-treatment-value-assumption-sutva" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">3.4.1</span> Stable unit treatment value assumption (SUTVA)</h3>
 <ul>
 <li>SUTVA has two components: no interference, and no hidden variations of treatments.</li>
 </ul>
@@ -599,13 +624,13 @@ T = \frac{\hat{\tau}}{\sqrt{Var(\hat{\tau})}} \sim t_{(N_t + N_c - 2)},
 </ul>
 </section>
 </section>
-<section id="how-does-randomisation-help-us-estimate-ates" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">8.6</span> How does randomisation help us estimate ATEs?</h2>
+<section id="how-does-randomisation-help-us-estimate-ates" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">3.5</span> How does randomisation help us estimate ATEs?</h2>
 <p>By ensuring that the treatment - the causal variable of interest - is independent of potential outcomes, so that control and treatment group are comparable.</p>
 <p>More technically, it ensures that expected outcomes are the same in both groups, which means that the selection bias - the difference of expected potential outcomes without treatment - disappears. When using regression, this is equivalent to the error term being uncorrelated with treatment status.</p>
 </section>
-<section id="finite-sample-vs-super-population-perspective" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="finite-sample-vs-super-population-perspective"><span class="header-section-number">8.7</span> Finite sample vs super-population perspective</h2>
+<section id="finite-sample-vs-super-population-perspective" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="finite-sample-vs-super-population-perspective"><span class="header-section-number">3.6</span> Finite sample vs super-population perspective</h2>
 <p>There are two ways to perform inference:</p>
 <ul>
 <li><p>When using the finite sample perspective, the <span class="math inline">\(N\)</span> units in the experiment sample are treated as the entire population of interest. Hence, there is no notion of randomisation due to sampling from a larger population, and all the randomness in the outcomes is due to randomness generates by the assignment mechanism.</p></li>
@@ -1023,13 +1048,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/neyman.html" class="pagination-link  aria-label=" &lt;span="" repeated="" sampling="" approach&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neyman’s repeated sampling approach</span></span>
+      <a href="../chapters/statistics.html" class="pagination-link  aria-label=" statistics"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Statistics</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/experiment_analysis.html" class="pagination-link" aria-label="<span class='chapter-number'>9</span>&nbsp; <span class='chapter-title'>Experiment analysis</span>">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Experiment analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/power.html" class="pagination-link" aria-label="<span class='chapter-number'>4</span>&nbsp; <span class='chapter-title'>Power</span>">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Power</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
