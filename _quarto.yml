@@ -22,8 +22,10 @@ book:
       # - chapters/fisher.qmd
       # - chapters/neyman.md
       # - chapters/sampling_vs_randomisation_uncertainty.qmd
+      - chapters/treatment_assignment.md
       - chapters/outcomes.md
-      - chapters/cis.md
+      - chapters/standard_error.md
+      - chapters/testing_and_cis.md
       - chapters/power.md
       - chapters/analysis.md
       # - chapters/regression.qmd
@@ -33,7 +35,6 @@ book:
       chapters:
         # - chapters/guiding_principles.qmd
         - chapters/ethics.qmd
-        - chapters/treatment_assignment.md
         - chapters/experiment_design.md
         # - chapters/experiment_stats.qmd
         - chapters/metrics.md

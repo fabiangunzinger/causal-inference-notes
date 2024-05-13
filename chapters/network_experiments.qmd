@@ -58,7 +58,8 @@
 
 Implications for analysis
 
-- How to adjust standard errors? See @abadie2023should and @de2024level
+- How to adjust standard errors? See @abadie2023should and @de2024level, also check
+middleton2015unbiased
 
 - If we have randomised at the group level: either analyse the data at the group level, or, if analysing the data at the individual level, use clustered standard errors.
 
@@ -72,6 +73,7 @@ Effect on power
 
   - The effect depends on the number of clusters (the more the more power we have) and on the intra-cluster correlation (the less correlation the higher the power).
 
+A
 
 
 
