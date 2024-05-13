@@ -2,14 +2,14 @@
 
 ## Potential outcomes
 
-We have a population of units $i = 1, \dots, \N$. Each unit in the population can be exposed to one of two treatments, which are identical across units. Each unit $i$ has potential outcomes $\ycp$ and $\ytp$ corresponding to each of the two possible treatments. $\ycp$ is the outcome unit $i$ would experience if they received the control treatment; $\ytp$, the outcome they would experience if they received the active treatment.
+We have a population of units $i = 1, \dots, \N$. Each unit in the population can be exposed to one of two treatments, which are identical across units. Each unit $i$ has potential outcomes $\ypc$ and $\ypt$ corresponding to each of the two possible treatments. $\ypc$ is the outcome unit $i$ would experience if they received the control treatment; $\ypt$, the outcome they would experience if they received the active treatment.
 
 
-Each unit is either assigned to treatment or control, so we'll only ever observe one of their potential outcomes. We denote the observed outcome for unit $i$ as $\yio$. This observed outcome equals $\ytp$ if the unit was assigned to treatment and $\ycp$ if they were assigned control. That is, if we write $\ti_i = 1$ if unit $i$ is allocated to treatment and $\ti_i = 0$ if they are allocated to control, then we can express the **observed outcome** for unit $i$ as
+Each unit is either assigned to treatment or control, so we'll only ever observe one of their potential outcomes. We denote the observed outcome for unit $i$ as $\yo$. This observed outcome equals $\ypt$ if the unit was assigned to treatment and $\ypc$ if they were assigned control. That is, if we write $\ti_i = 1$ if unit $i$ is allocated to treatment and $\ti_i = 0$ if they are allocated to control, then we can express the **observed outcome** for unit $i$ as
 
 $$
-\yio = \ti_i \ytp + (1 - \ti_i) \ycp.
-$$ {#eq-yio}
+\yo = \ti_i \ypt + (1 - \ti_i) \ypc.
+$$ {#eq-yo}
 
 
 ## Effect of interest
@@ -19,7 +19,7 @@ us with a simple and coherent way to think about the causal effect of the
 treatment; for unit $i$, the **individual causal effect** is given by
 
 $$
-\ytp - \ycp,
+\ypt - \ypc,
 $$
 
 which tells us how the outcome for that unit is different when given the
@@ -50,8 +50,8 @@ that
 
 $$
 \begin{align}
-E[\ytp | \ti_i = 1] &= E[\ytp]\\
-E[\ytp | \ti_i = 0] &= E[\ytp]
+E[\ypt | \ti_i = 1] &= E[\ypt]\\
+E[\ypt | \ti_i = 0] &= E[\ypt]
 \end{align}
 $$
 
@@ -62,8 +62,8 @@ for expected outcomes under control, so that we have
 
 $$
 \begin{align}
-E[\ycp | \ti_i = 1] &= E[\ycp]\\
-E[\ycp | \ti_i = 0] &= E[\ycp]
+E[\ypc | \ti_i = 1] &= E[\ypc]\\
+E[\ypc | \ti_i = 0] &= E[\ypc]
 \end{align}
 $$
 
@@ -72,8 +72,8 @@ Now, expanding @eq-ate and using the above expressions we have:
 $$
 \begin{align}
 \te &= \tef \\ 
-&= E[\ytp] - E[\ycp] \\
-&= E[\ytp | \ti_i = 1] - E[\ycp | \ti_i = 0],
+&= E[\ypt] - E[\ypc] \\
+&= E[\ypt | \ti_i = 1] - E[\ypc | \ti_i = 0],
 \end{align}
 $$
 
@@ -84,29 +84,29 @@ available data. In particular, the above suggests the following
 estimation approach:
 
 $$
-\boxed{\tee = \ytob - \ycob}
+\boxed{\tee = \teef}
 $$ {#eq-ate-est}
 
 where
 
 $$
-\ytob = \ytobf \qquad \ycob = \ycobf.
+\yotb= \yotbf \qquad \yocb = \yocbf.
 $$
 
 We can show that this is an unbiased estimator of $\te$:[^alternative_proof]
 
 $$
 \begin{align}
-E\left[\tee\right] &= E\left[\ytob - \ycob\right] \\
-&=E\left[\ytob\right]- E\left[\ycob\right] \\
-&=E\left[\ytobf\right] - E\left[\ycobf\right] \\
-&=\frac{1}{\Nt}\sum_{i:\ti_i=1} E\left[\yto\right]
--\frac{1}{\Nc}\sum_{i:\ti_i=0} E\left[\yco\right] \\
-&=\frac{\Nt}{\Nt}E\left[\yto\right] -\frac{\Nc}{\Nc}E\left[\yco\right] \\
-&=E\left[\yto\right] - E\left[\yco\right] \\
-&=E\left[\yio | \ti_i = 1\right] - E\left[\yio | \ti_i = 0\right] \\
-&=E\left[\ytp\right] - E\left[\ycp\right] \\
-&=\ytpb - \ycpb \\
+E\left[\tee\right] &= E\left[\yotb - \yocb\right] \\
+&=E\left[\yotb\right]- E\left[\yocb\right] \\
+&=E\left[\yotbf\right] - E\left[\yocbf\right] \\
+&=\frac{1}{\Nt}\sum_{i:\ti_i=1} E\left[\yoi\right]
+-\frac{1}{\Nc}\sum_{i:\ti_i=0} E\left[\yoi\right] \\
+&=\frac{\Nt}{\Nt}E\left[\yoi|\tii=1\right]
+-\frac{\Nc}{\Nc}E\left[\yoi|\tii=0\right] \\
+&=E\left[\yoi|\tii=1\right] - E\left[\yoi|\tii=0\right] \\
+&=E\left[\ypt\right] - E\left[\ypc\right] \\
+&=\yptb - \ypcb \\
 &=\te
 \end{align}
 $$

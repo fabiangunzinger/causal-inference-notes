@@ -2,45 +2,39 @@
     \(
     \newcommand{\nc}{\newcommand}
 
-    %%%%%%%%%%%
-    % symbols %
-    %%%%%%%%%%%
-
-    \nc{stoe}{\alpha}
-    \nc{stte}{\beta}
-
-
     %%%%%%%%%%%%%%%%
     % sample sizes %
     %%%%%%%%%%%%%%%%
 
-    \nc{\Nt}{N_t}
-    \nc{\Nc}{N_c}
     \nc{\N}{N}
+    \nc{\Nt}{\N_t}
+    \nc{\Nc}{\N_c}
     
-    %%%%%%%%%%%%%%%%%%%%%%%%%
-    % treatment assignments %
-    %%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % sampling and treatment assignment %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    \nc{ti}{W}
-    
+    \nc{\ti}{W}                       % treatment indicator
+    \nc{\tii}{\ti_i}                  % treatment indicator for unit i
 
     %%%%%%%%%%%%
     % outcomes %
     %%%%%%%%%%%%
 
-    \nc{\yo}{Y_i}
-    \nc{\ypt}{Y_i(1)}
-    \nc{\ypc}{Y_i(0)}
+    \nc{\y}{Y}
 
-    \nc{yptb}{\bar{Y}(1)}
-    \nc{ypcb}{\bar{Y}(0)}
+    \nc{\ypt}{\y_i(1)}
+    \nc{\ypc}{\y_i(0)}
+    \nc{\yptb}{\bar{\y}(1)}
+    \nc{\ypcb}{\bar{\y}(0)}
     
-    \nc{\ytob}{\bar{\yio}_t}
-    \nc{\ycob}{\bar{\yio}_c}
+    \nc{\yo}{\y^{obs}}
+    \nc{\yoi}{\y_i^{obs}}
+    \nc{\yotb}{\bar{\y}_t^{obs}}
+    \nc{\yocb}{\bar{\y}_c^{obs}}
     
-    \nc{\ytobf}{\frac{1}{\Nt}\sum_{i:\ti_i=1} \yto}
-    \nc{\ycobf}{\frac{1}{\Nc}\sum_{i:\ti_i=0} \yco}
+    \nc{\yotbf}{\frac{1}{\Nt}\sum_{i:\tii=1} \yoi}
+    \nc{\yocbf}{\frac{1}{\Nc}\sum_{i:\tii=0} \yoi}
 
     %%%%%%%%%%%%%%%%%%%%
     % sums of outcomes %
@@ -52,9 +46,9 @@
 
     \nc{\te}{\tau}
     \nc{\tee}{\hat{\te}}   
-    \nc{\tef}{\ytpb - \ycpb}
-    \nc{\teef}{\ytob - \ycob}
-    \nc{\tefs}{\frac{1}{\N}\sum_{i=1}^N\left(\ytp-\ycp\right)}
+    \nc{\tef}{\yptb - \ypcb}
+    \nc{\teef}{\yotb - \yocb}
+    \nc{\tefs}{\frac{1}{\N}\sum_{i=1}^N\left(\ypt-\ypc\right)}
 
     
     %%%%%%%%%%%%%%%%%%%%
@@ -70,11 +64,11 @@
     \nc{\vte}{\sev^2_t}
     \nc{\vce}{\sev^2_c}
     \nc{\vpe}{\sev^2}
-    \nc{\vtf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ytp - \ytpb)^2}
-    \nc{\vcf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ycp - \ycpb)^2}
-    \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}\left(\yio - \ytob\right)^2}
-    \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}\left(\yio - \ycob\right)^2}
-    \nc{vpef}{\frac{(\Nt - 1)\vte + (\Nc - 1)\vce}{\Nt + \Nc - 2}}
+    \nc{\vtf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ytp - \yptb)^2}
+    \nc{\vcf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ycp - \ypcb)^2}
+    \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}\left(\yoi - \yotb\right)^2}
+    \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}\left(\yoi - \yocb\right)^2}
+    \nc{\vpef}{\frac{(\Nt - 1)\vte + (\Nc - 1)\vce}{\Nt + \Nc - 2}}
 
     %%%%%%%%%%%%%%%%%%%%%%
     % sampling variances %
@@ -109,23 +103,31 @@
     % hypothesis testing %
     %%%%%%%%%%%%%%%%%%%%%%
 
-    \nc{hn}{H_0}
-    \nc{ha}{H_A}
-    \nc{za}{z_\stoe}
-    \nc{zb}{z_{1 - \stte}}
+    \nc{\hn}{H_0}
+    \nc{\ha}{H_A}
+    \nc{\za}{z_\stoe}
+    \nc{\zb}{z_{1 - \stte}}
+
+
+    %%%%%%%%%%%%%%
+    % misc. math %
+    %%%%%%%%%%%%%%
+
+    \nc{\stoe}{\alpha}                % type one error
+    \nc{\stte}{\beta}                 % type two error
 
 
     %%%%%%%%%%%%%%%%%%
     % other commands %
     %%%%%%%%%%%%%%%%%%
 
-    \nc{mc}[1]{\text{\scriptsize(#1)}} %math inline comment
+    \nc{\mc}[1]{\text{\scriptsize(#1)}} %math inline comment
 
     <!-- These aren't working for some reason -->
-    <!-- \nc{lp}{\left(} -->
-    <!-- \nc{rp}{\right)} -->
-    <!-- \nc{lb}{\left[} -->
-    <!-- \nc{rb}{\right]} -->
+    <!-- \nc{\lp}{\left(} -->
+    <!-- \nc{\rp}{\right)} -->
+    <!-- \nc{\lb}{\left[} -->
+    <!-- \nc{\rb}{\right]} -->
 
     \)
 </span>

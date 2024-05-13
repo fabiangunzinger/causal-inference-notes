@@ -37,15 +37,14 @@ first principles.
 
 $$
 \begin{align}
-V\left(\tee\right) &= V\left(\ytob - \ycob\right) \\
-&=V\left(\ytob\right) + V\left(\ycob\right) \\
-&=V\left(\ytobf\right) + V\left(\ycobf\right) \\
-&=\frac{1}{\Nt^2}\sum_{i:\ti_i=1} V\left(\yto\right)
-+ \frac{1}{\Nc^2}\sum_{i:\ti_i=0} V\left(\yco\right) \\
-&=\frac{\Nt}{\Nt^2}V\left(\yto\right) + \frac{\Nc}{\Nc^2}V\left(\yco\right) \\
-&=\frac{1}{\Nt}V\left(\yio | \ti_i = 1\right) + \frac{1}{\Nc}V\left(\yio | \ti_i = 0\right) \\
-&=\frac{1}{\Nt}V\left(\ytp\right) + \frac{1}{\Nc}V\left(\ycp\right) \\
-&=\frac{1}{\Nt}V\left(\ytp\right) + \frac{1}{\Nc}V\left(\ycp\right) \\
+V\left(\tee\right) &= V\left(\teef\right) \\
+&=V\left(\yotb\right) + V\left(\yocb\right) \\
+&=V\left(\yotbf\right) + V\left(\yocbf\right) \\
+&=\frac{1}{\Nt^2}\sum_{i:\tii=1} V\left(\yoi\right)
++ \frac{1}{\Nc^2}\sum_{i:\tii=0} V\left(\yoi\right) \\
+&=\frac{\Nt}{\Nt^2}V\left(\yoi | \tii = 1\right) + \frac{\Nc}{\Nc^2}V\left(\yoi | \tii = 0\right) \\
+&=\frac{1}{\Nt}V\left(\yoi | \tii = 1\right) + \frac{1}{\Nc}V\left(\yoi | \tii = 0\right) \\
+&=\frac{1}{\Nt}V\left(\ypt\right) + \frac{1}{\Nc}V\left(\ypc\right) \\
 &=\frac{\vt}{\Nt} + \frac{\vc}{\Nc},
 \end{align}
 $$
@@ -53,7 +52,7 @@ $$
 where
 
 $$
-\vt ≡ V\left(\ytp\right) \quad \vc ≡ V\left(\ycp\right),
+\vt ≡ V\left(\ypt\right) \quad \vc ≡ V\left(\ypc\right),
 $$
 
 is the (true) population variance in the treatment and control group,
