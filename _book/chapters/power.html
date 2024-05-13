@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 6&nbsp; Power</title>
+<title>Causal inference notes - 7&nbsp; Power</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,7 +24,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -67,13 +66,7 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -82,10 +75,8 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 </head><body class="nav-sidebar floating"><span class="math inline">
@@ -181,9 +172,9 @@ div.csl-indent {
     % naming convention as for variance but with se prefix
 
     \nc{\se}{\text{se}(\tee)}
-    \nc{\seefu}{\sqrt{\svefu}}
-    \nc{\seefe}{\sqrt{\frac{4\vpe}{\N}}}
-    \nc{\seefp}{\sqrt{\frac{\vpe}{P(1-P)N}}}
+    \nc{\sefu}{\sqrt{\svfu}}
+    \nc{\sefe}{\sqrt{\svfe}}
+    \nc{\sefep}{\sqrt{\frac{\vpe}{P(1-P)N}}}
 
 
     %%%%%%%%%%%%%%%%%%%%%%
@@ -214,33 +205,6 @@ div.csl-indent {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
 
 
 
@@ -249,13 +213,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistics.html">Statistics</a></li><li class="breadcrumb-item"><a href="../chapters/power.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Power</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistics.html">Statistics</a></li><li class="breadcrumb-item"><a href="../chapters/power.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Power</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -264,7 +228,7 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Causal inference notes</a> 
@@ -311,32 +275,38 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/treatment_assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sampling and assignment</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/outcomes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Outcomes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Outcomes</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/standard_error.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Standard error</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Standard error</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/testing_and_cis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Testing and confidence intervals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Testing and confidence intervals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/power.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Power</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Power</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -353,13 +323,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/ethics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/treatment_assignment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Treatment assignment</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Ethics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -388,8 +352,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/variance_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
   </div>
 </li>
       </ul>
@@ -406,19 +376,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/fwl.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">FWL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">FWL</span></span></a>
   </div>
 </li>
       </ul>
@@ -426,48 +396,48 @@ window.Quarto = {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#understanding-the-formula-that-determines-sample-size" id="toc-understanding-the-formula-that-determines-sample-size" class="nav-link active" data-scroll-target="#understanding-the-formula-that-determines-sample-size"><span class="header-section-number">6.1</span> Understanding the formula that determines sample size</a></li>
-  <li><a href="#implications-of-the-formula" id="toc-implications-of-the-formula" class="nav-link" data-scroll-target="#implications-of-the-formula"><span class="header-section-number">6.2</span> Implications of the formula</a></li>
-  <li><a href="#rules-of-thumb-the-big-16-vs-32-confusion" id="toc-rules-of-thumb-the-big-16-vs-32-confusion" class="nav-link" data-scroll-target="#rules-of-thumb-the-big-16-vs-32-confusion"><span class="header-section-number">6.3</span> Rules of thumb – the big 16 vs 32 confusion</a></li>
-  <li><a href="#different-types-of-metrics" id="toc-different-types-of-metrics" class="nav-link" data-scroll-target="#different-types-of-metrics"><span class="header-section-number">6.4</span> Different types of metrics</a></li>
-  <li><a href="#power-for-quasi-experimental-studies" id="toc-power-for-quasi-experimental-studies" class="nav-link" data-scroll-target="#power-for-quasi-experimental-studies"><span class="header-section-number">6.5</span> Power for quasi-experimental studies</a></li>
-  <li><a href="#deriving-the-sample-size-formula" id="toc-deriving-the-sample-size-formula" class="nav-link" data-scroll-target="#deriving-the-sample-size-formula"><span class="header-section-number">6.6</span> Deriving the sample size formula</a>
+  <li><a href="#understanding-the-formula-that-determines-sample-size" id="toc-understanding-the-formula-that-determines-sample-size" class="nav-link active" data-scroll-target="#understanding-the-formula-that-determines-sample-size"><span class="header-section-number">7.1</span> Understanding the formula that determines sample size</a></li>
+  <li><a href="#implications-of-the-formula" id="toc-implications-of-the-formula" class="nav-link" data-scroll-target="#implications-of-the-formula"><span class="header-section-number">7.2</span> Implications of the formula</a></li>
+  <li><a href="#rules-of-thumb-the-big-16-vs-32-confusion" id="toc-rules-of-thumb-the-big-16-vs-32-confusion" class="nav-link" data-scroll-target="#rules-of-thumb-the-big-16-vs-32-confusion"><span class="header-section-number">7.3</span> Rules of thumb – the big 16 vs 32 confusion</a></li>
+  <li><a href="#different-types-of-metrics" id="toc-different-types-of-metrics" class="nav-link" data-scroll-target="#different-types-of-metrics"><span class="header-section-number">7.4</span> Different types of metrics</a></li>
+  <li><a href="#power-for-quasi-experimental-studies" id="toc-power-for-quasi-experimental-studies" class="nav-link" data-scroll-target="#power-for-quasi-experimental-studies"><span class="header-section-number">7.5</span> Power for quasi-experimental studies</a></li>
+  <li><a href="#deriving-the-sample-size-formula" id="toc-deriving-the-sample-size-formula" class="nav-link" data-scroll-target="#deriving-the-sample-size-formula"><span class="header-section-number">7.6</span> Deriving the sample size formula</a>
   <ul class="collapse">
-  <li><a href="#derivation-from-first-principles" id="toc-derivation-from-first-principles" class="nav-link" data-scroll-target="#derivation-from-first-principles"><span class="header-section-number">6.6.1</span> Derivation from first principles</a></li>
-  <li><a href="#starting-from-type-i-and-type-ii-error-conditions" id="toc-starting-from-type-i-and-type-ii-error-conditions" class="nav-link" data-scroll-target="#starting-from-type-i-and-type-ii-error-conditions"><span class="header-section-number">6.6.2</span> Starting from Type I and Type II error conditions</a></li>
-  <li><a href="#starting-from-graphical-illustration" id="toc-starting-from-graphical-illustration" class="nav-link" data-scroll-target="#starting-from-graphical-illustration"><span class="header-section-number">6.6.3</span> Starting from graphical illustration</a></li>
+  <li><a href="#derivation-from-first-principles" id="toc-derivation-from-first-principles" class="nav-link" data-scroll-target="#derivation-from-first-principles"><span class="header-section-number">7.6.1</span> Derivation from first principles</a></li>
+  <li><a href="#starting-from-type-i-and-type-ii-error-conditions" id="toc-starting-from-type-i-and-type-ii-error-conditions" class="nav-link" data-scroll-target="#starting-from-type-i-and-type-ii-error-conditions"><span class="header-section-number">7.6.2</span> Starting from Type I and Type II error conditions</a></li>
+  <li><a href="#starting-from-graphical-illustration" id="toc-starting-from-graphical-illustration" class="nav-link" data-scroll-target="#starting-from-graphical-illustration"><span class="header-section-number">7.6.3</span> Starting from graphical illustration</a></li>
   </ul></li>
-  <li><a href="#old-notes" id="toc-old-notes" class="nav-link" data-scroll-target="#old-notes"><span class="header-section-number">6.7</span> Old notes</a></li>
-  <li><a href="#what-determines-power" id="toc-what-determines-power" class="nav-link" data-scroll-target="#what-determines-power"><span class="header-section-number">6.8</span> What determines power</a></li>
-  <li><a href="#how-to-increase-power" id="toc-how-to-increase-power" class="nav-link" data-scroll-target="#how-to-increase-power"><span class="header-section-number">6.9</span> How to increase power</a></li>
-  <li><a href="#how-to-choose-key-parameters" id="toc-how-to-choose-key-parameters" class="nav-link" data-scroll-target="#how-to-choose-key-parameters"><span class="header-section-number">6.10</span> How to choose key parameters</a>
+  <li><a href="#useful-rule-of-thumb" id="toc-useful-rule-of-thumb" class="nav-link" data-scroll-target="#useful-rule-of-thumb"><span class="header-section-number">7.7</span> Useful rule of thumb</a></li>
+  <li><a href="#old-notes" id="toc-old-notes" class="nav-link" data-scroll-target="#old-notes"><span class="header-section-number">7.8</span> Old notes</a></li>
+  <li><a href="#what-determines-power" id="toc-what-determines-power" class="nav-link" data-scroll-target="#what-determines-power"><span class="header-section-number">7.9</span> What determines power</a></li>
+  <li><a href="#how-to-increase-power" id="toc-how-to-increase-power" class="nav-link" data-scroll-target="#how-to-increase-power"><span class="header-section-number">7.10</span> How to increase power</a></li>
+  <li><a href="#how-to-choose-key-parameters" id="toc-how-to-choose-key-parameters" class="nav-link" data-scroll-target="#how-to-choose-key-parameters"><span class="header-section-number">7.11</span> How to choose key parameters</a>
   <ul class="collapse">
-  <li><a href="#mde" id="toc-mde" class="nav-link" data-scroll-target="#mde"><span class="header-section-number">6.10.1</span> MDE</a></li>
-  <li><a href="#significance-level" id="toc-significance-level" class="nav-link" data-scroll-target="#significance-level"><span class="header-section-number">6.10.2</span> Significance level</a></li>
-  <li><a href="#power" id="toc-power" class="nav-link" data-scroll-target="#power"><span class="header-section-number">6.10.3</span> Power</a></li>
+  <li><a href="#mde" id="toc-mde" class="nav-link" data-scroll-target="#mde"><span class="header-section-number">7.11.1</span> MDE</a></li>
+  <li><a href="#significance-level" id="toc-significance-level" class="nav-link" data-scroll-target="#significance-level"><span class="header-section-number">7.11.2</span> Significance level</a></li>
+  <li><a href="#power" id="toc-power" class="nav-link" data-scroll-target="#power"><span class="header-section-number">7.11.3</span> Power</a></li>
   </ul></li>
-  <li><a href="#problems-with-low-power" id="toc-problems-with-low-power" class="nav-link" data-scroll-target="#problems-with-low-power"><span class="header-section-number">6.11</span> Problems with low power</a></li>
-  <li><a href="#power-in-online-experiments" id="toc-power-in-online-experiments" class="nav-link" data-scroll-target="#power-in-online-experiments"><span class="header-section-number">6.12</span> Power in online experiments</a></li>
-  <li><a href="#rule-of-thumb-for-sample-size" id="toc-rule-of-thumb-for-sample-size" class="nav-link" data-scroll-target="#rule-of-thumb-for-sample-size"><span class="header-section-number">6.13</span> Rule of thumb for sample size</a></li>
-  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices"><span class="header-section-number">6.14</span> Best practices</a></li>
-  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">6.15</span> Useful resources</a></li>
-  <li><a href="#qa" id="toc-qa" class="nav-link" data-scroll-target="#qa"><span class="header-section-number">6.16</span> Q&amp;A</a></li>
+  <li><a href="#problems-with-low-power" id="toc-problems-with-low-power" class="nav-link" data-scroll-target="#problems-with-low-power"><span class="header-section-number">7.12</span> Problems with low power</a></li>
+  <li><a href="#power-in-online-experiments" id="toc-power-in-online-experiments" class="nav-link" data-scroll-target="#power-in-online-experiments"><span class="header-section-number">7.13</span> Power in online experiments</a></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices"><span class="header-section-number">7.14</span> Best practices</a></li>
+  <li><a href="#useful-resources" id="toc-useful-resources" class="nav-link" data-scroll-target="#useful-resources"><span class="header-section-number">7.15</span> Useful resources</a></li>
+  <li><a href="#qa" id="toc-qa" class="nav-link" data-scroll-target="#qa"><span class="header-section-number">7.16</span> Q&amp;A</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistics.html">Statistics</a></li><li class="breadcrumb-item"><a href="../chapters/power.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Power</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-power" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Power</span></span></h1>
+<h1 class="title"><span id="sec-power" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Power</span></span></h1>
 </div>
 
 
@@ -480,10 +450,9 @@ window.Quarto = {
   </div>
   
 
-
 </header>
 
-
+<p>todo: - Introduce separate symbol for MDES – sample size formula is very confusing otherwise</p>
 <p>Power is the probability that we reject the null hypothesis if it is false. It is a key component of experiment design because it determines the required sample size, which helps us determine how long we need to run an experiment for.</p>
 <p>In this section, I want to do the following:</p>
 <ul>
@@ -491,34 +460,34 @@ window.Quarto = {
 <li><p>Discuss implications of the formula for a number of experiment design aspects.</p></li>
 <li><p>…</p></li>
 </ul>
-<section id="understanding-the-formula-that-determines-sample-size" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="understanding-the-formula-that-determines-sample-size"><span class="header-section-number">6.1</span> Understanding the formula that determines sample size</h2>
+<section id="understanding-the-formula-that-determines-sample-size" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="understanding-the-formula-that-determines-sample-size"><span class="header-section-number">7.1</span> Understanding the formula that determines sample size</h2>
 <p>first explain all the elements …</p>
 <p>lh curve …this is sampling dist of tee, know shape from sampling theory reject h0 if value larger than za rhs is sampling distr under ha what is zk? now derive bloom formula…</p>
 </section>
-<section id="implications-of-the-formula" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="implications-of-the-formula"><span class="header-section-number">6.2</span> Implications of the formula</h2>
+<section id="implications-of-the-formula" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="implications-of-the-formula"><span class="header-section-number">7.2</span> Implications of the formula</h2>
 </section>
-<section id="rules-of-thumb-the-big-16-vs-32-confusion" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="rules-of-thumb-the-big-16-vs-32-confusion"><span class="header-section-number">6.3</span> Rules of thumb – the big 16 vs 32 confusion</h2>
+<section id="rules-of-thumb-the-big-16-vs-32-confusion" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="rules-of-thumb-the-big-16-vs-32-confusion"><span class="header-section-number">7.3</span> Rules of thumb – the big 16 vs 32 confusion</h2>
 <ul>
 <li><p>There is another way to express the variance, which has led to massive confusion.</p></li>
 <li><p>I’m pretty sure its the 1/N vs 1/(N/2) error that accounts for the wrong result, and nobody seems to derive this from first principles to check.</p></li>
 <li><p>Is original wrong? Check in book – access through WBS.</p></li>
 </ul>
 </section>
-<section id="different-types-of-metrics" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="different-types-of-metrics"><span class="header-section-number">6.4</span> Different types of metrics</h2>
+<section id="different-types-of-metrics" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="different-types-of-metrics"><span class="header-section-number">7.4</span> Different types of metrics</h2>
 </section>
-<section id="power-for-quasi-experimental-studies" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="power-for-quasi-experimental-studies"><span class="header-section-number">6.5</span> Power for quasi-experimental studies</h2>
+<section id="power-for-quasi-experimental-studies" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="power-for-quasi-experimental-studies"><span class="header-section-number">7.5</span> Power for quasi-experimental studies</h2>
 </section>
-<section id="deriving-the-sample-size-formula" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="deriving-the-sample-size-formula"><span class="header-section-number">6.6</span> Deriving the sample size formula</h2>
+<section id="deriving-the-sample-size-formula" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="deriving-the-sample-size-formula"><span class="header-section-number">7.6</span> Deriving the sample size formula</h2>
 <p>The power formula can be intimidating and abstract (all the more so, because there are many different versions floating around).</p>
 <p>The goal of this section is to demystify the formula. The best way to do that is to derive it from first principles, which will helps us understand where the formula comes from. In addition to the derivation from first principles, I’ll also show a couple other ways that are useful to understand it, and are a bit faster to use in practice.</p>
-<section id="derivation-from-first-principles" class="level3" data-number="6.6.1">
-<h3 data-number="6.6.1" class="anchored" data-anchor-id="derivation-from-first-principles"><span class="header-section-number">6.6.1</span> Derivation from first principles</h3>
+<section id="derivation-from-first-principles" class="level3" data-number="7.6.1">
+<h3 data-number="7.6.1" class="anchored" data-anchor-id="derivation-from-first-principles"><span class="header-section-number">7.6.1</span> Derivation from first principles</h3>
 <p>Power is the probability that we reject the null hypothesis if it is false:</p>
 <p><span class="math display">\[
 1 - \beta = P[\text{reject } H_0 | H_0 \text{ is false}].
@@ -533,7 +502,7 @@ H_A: \te &amp;= \tef \neq 0.
 \]</span></p>
 <p>We test the null hypothesis by constructing the test statistic</p>
 <p><span class="math display">\[
-Z = \frac{\tee}{\see}
+Z = \frac{\tee}{\se}
 \]</span></p>
 <p>and reject the null hypothesis if</p>
 <p><span class="math display">\[
@@ -541,86 +510,101 @@ Z = \frac{\tee}{\see}
 \]</span></p>
 <p>where <span class="math inline">\(z_{\alpha/2}\)</span> is the critical value of the standard normal distribution at the <span class="math inline">\(\alpha/2\)</span> percentile. We thus reject <span class="math inline">\(H_0\)</span> if</p>
 <p><span class="math display">\[
-|\tee| &gt; \see z_{\alpha/2}
+|\tee| &gt; \se z_{\alpha/2}
 \]</span></p>
 <p>The power of the test is the probability that the test statistic falls into the rejection region if <span class="math inline">\(H_A\)</span> is true, which is:</p>
 <p><span class="math display">\[
-1 - \beta = P\left[|\tee| &gt; \see z_{\alpha/2} | H_A \right].
+1 - \beta = P\left[|\tee| &gt; \se z_{\alpha/2} | H_A \right].
 \]</span></p>
 <p>The test statistic falling into the lower or upper rejection region are mutually exclusive events, so the above is equal to</p>
 <p><span class="math display">\[
-1 - \beta = P\left[\tee &gt; \see z_{\alpha/2} | H_A \right]
-+ P\left[\tee &lt; -\see z_{\alpha/2} | H_A \right].
+1 - \beta = P\left[\tee &gt; \se z_{\alpha/2} | H_A \right]
++ P\left[\tee &lt; -\se z_{\alpha/2} | H_A \right].
 \]</span></p>
 <p>Standardising, using the assumption that <span class="math inline">\(H_A\)</span> is true, we get</p>
 <p><span class="math display">\[
 \begin{align}
-1 - \beta &amp;= P\left[\frac{\tee - \te}{\see} &gt; \frac{\see z_{\alpha/2} - \te}{\see}\right]
-+ P\left[\frac{\tee - \te}{\see} &lt; \frac{- \see z_{\alpha/2} - \te}{\see}\right] \\
-&amp;= P\left[Z &gt; \frac{\see z_{\alpha/2} - \te}{\see}\right]
-+ P\left[Z &lt; \frac{- \see z_{\alpha/2} - \te}{\see}\right],
+1 - \beta &amp;= P\left[\frac{\tee - \te}{\se} &gt; \frac{\se z_{\alpha/2} - \te}{\se}\right]
++ P\left[\frac{\tee - \te}{\se} &lt; \frac{- \se z_{\alpha/2} - \te}{\se}\right] \\
+&amp;= P\left[Z &gt; \frac{\se z_{\alpha/2} - \te}{\se}\right]
++ P\left[Z &lt; \frac{- \se z_{\alpha/2} - \te}{\se}\right],
 \end{align}
 \]</span></p>
 <p>which, using the standard normal CDF, <span class="math inline">\(\Phi(z)\)</span>, we can rewrite as</p>
 <p><span class="math display">\[
-1 - \beta = \left[1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\see}\right)\right]
-+ \left[\Phi\left(-z_{\alpha/2} - \frac{\te}{\see}\right)\right].
+1 - \beta = \left[1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\se}\right)\right]
++ \left[\Phi\left(-z_{\alpha/2} - \frac{\te}{\se}\right)\right].
 \]</span></p>
 <p>The probability that we reject the null hypothesis for the wrong reason – because the test statistic falls below the lower critical value for a true positive effect or above the upper critical value for a true negative effect – is very small.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Hence, as the true effect size deviates from zero, one of the two terms in the expression above becomes vanishingly small and can be ignored. For the rest of this chapter, I assume we have a true positive effect and omit the second of the two terms. We thus have:</p>
 <p><span class="math display">\[
-1 - \beta = 1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\see}\right).
+1 - \beta = 1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\se}\right).
 \]</span></p>
 <p>Furthermore, using the symmetry of the standard normal distribution, which implies that <span class="math inline">\(1 - \Phi(k) = \Phi(-k)\)</span>, we can simplify this to</p>
 <p><span class="math display">\[
-1 - \beta = \Phi\left(\frac{\te}{\see} - z_{\alpha/2}\right).
+1 - \beta = \Phi\left(\frac{\te}{\se} - z_{\alpha/2}\right).
 \]</span></p>
 <p>For a simple experiment with two variants with equal population variance, the estimated standard error of the treatment effect is given by (see <span class="quarto-unresolved-ref">?sec-experiment-stats</span>)</p>
 <p><span class="math display">\[
-\see = \seefe = \seefep
+\se = \sefe = \sefep
 \]</span></p>
 <p>where <span class="math inline">\(\sev\)</span> is the pooled estimator of the population variance, <span class="math inline">\(\Nt\)</span> and <span class="math inline">\(\Nc\)</span> are the number of units in the treatment and control groups, respectively, <span class="math inline">\(\N = \Nt + \Nc\)</span> is total sample size, and <span class="math inline">\(P\)</span> is the proportion of units in the treatment group.</p>
 <p>For such an experiment, the power is thus given by</p>
 <p><span class="math display">\[
-1 - \beta = \Phi\left(\frac{\te}{\seefep} - z_{\alpha/2}\right),
+1 - \beta = \Phi\left(\frac{\te}{\sefep} - z_{\alpha/2}\right),
 \]</span></p>
 <p>which, with a bit of algebra (using <span class="math inline">\(1/\sqrt{1/x} = \sqrt{x}\)</span>), we can rewrite as</p>
 <p><span id="eq-power"><span class="math display">\[
 1 - \beta = \Phi\left(\frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2}\right).
-\tag{6.1}\]</span></span></p>
-<p>To calculate the required sample size for an experiment, we can rearrange <a href="#eq-power" class="quarto-xref">Equation&nbsp;<span>6.1</span></a> and solve for <span class="math inline">\(N\)</span>. To do this, we use the inverse of the CDS function <span class="math inline">\(\Phi(z)\)</span>. <span class="math inline">\(\Phi(z)\)</span> takes z-values and returns probabilities, so its inverse, <span class="math inline">\(\Phi(p)^{-1}\)</span>, takes probabilities and returns z-values. Using this, we get:</p>
-<p><span class="math display">\[
+\tag{7.1}\]</span></span></p>
+<p>To calculate the required sample size for an experiment, we can rearrange <a href="#eq-power">Equation&nbsp;<span>7.1</span></a> and solve for <span class="math inline">\(N\)</span>. To do this, we use the inverse of the CDS function <span class="math inline">\(\Phi(z)\)</span>. <span class="math inline">\(\Phi(z)\)</span> takes z-values and returns probabilities, so its inverse, <span class="math inline">\(\Phi(p)^{-1}\)</span>, takes probabilities and returns z-values. Using this, we get:</p>
+<p><span id="eq-sample-size"><span class="math display">\[
 \begin{align}
 \Phi(1 - \beta)^{-1} &amp;= \Phi\left(\Phi\left(\frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2}\right)\right)^{-1} \\
 z_{1 - \beta} &amp;= \frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2} \\
 \sqrt{P(1-P)N} &amp;= (z_{1 - \beta} + z_{\alpha/2})\left(\frac{\sev}{\te}\right) \\
 N &amp;= \frac{(z_{1 - \beta} + z_{\alpha/2})^2}{P(1-P)}\left(\frac{\sev}{\te}\right)^2.
 \end{align}
-\]</span></p>
+\tag{7.2}\]</span></span></p>
 </section>
-<section id="starting-from-type-i-and-type-ii-error-conditions" class="level3" data-number="6.6.2">
-<h3 data-number="6.6.2" class="anchored" data-anchor-id="starting-from-type-i-and-type-ii-error-conditions"><span class="header-section-number">6.6.2</span> Starting from Type I and Type II error conditions</h3>
-<p>Use <span class="citation" data-cites="list2011so">List, Sadoff, and Wagner (<a href="#ref-list2011so" role="doc-biblioref">2011</a>)</span></p>
+<section id="starting-from-type-i-and-type-ii-error-conditions" class="level3" data-number="7.6.2">
+<h3 data-number="7.6.2" class="anchored" data-anchor-id="starting-from-type-i-and-type-ii-error-conditions"><span class="header-section-number">7.6.2</span> Starting from Type I and Type II error conditions</h3>
+<p>Use <span class="citation" data-cites="list2011so">(<a href="#ref-list2011so" role="doc-biblioref"><strong>list2011so?</strong></a>)</span></p>
 </section>
-<section id="starting-from-graphical-illustration" class="level3" data-number="6.6.3">
-<h3 data-number="6.6.3" class="anchored" data-anchor-id="starting-from-graphical-illustration"><span class="header-section-number">6.6.3</span> Starting from graphical illustration</h3>
-<p><span class="citation" data-cites="bloom1995minimum">Bloom (<a href="#ref-bloom1995minimum" role="doc-biblioref">1995</a>)</span> introduces the notion of the MDE as a useful way to quantify power. In the process, he also uses an intuitive way to derive the power formula based on an illustration of a typical hypothesis-testing scenario.</p>
-<div id="fig-power" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-power-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../inputs/power.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-power-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.1: Source: <span class="citation" data-cites="duflo2007using">Duflo, Glennerster, and Kremer (<a href="#ref-duflo2007using" role="doc-biblioref">2007</a>)</span>, based on <span class="citation" data-cites="bloom1995minimum">Bloom (<a href="#ref-bloom1995minimum" role="doc-biblioref">1995</a>)</span>.
-</figcaption>
+<section id="starting-from-graphical-illustration" class="level3" data-number="7.6.3">
+<h3 data-number="7.6.3" class="anchored" data-anchor-id="starting-from-graphical-illustration"><span class="header-section-number">7.6.3</span> Starting from graphical illustration</h3>
+<p><span class="citation" data-cites="bloom1995minimum">(<a href="#ref-bloom1995minimum" role="doc-biblioref"><strong>bloom1995minimum?</strong></a>)</span> introduces the notion of the MDE as a useful way to quantify power. In the process, he also uses an intuitive way to derive the power formula based on an illustration of a typical hypothesis-testing scenario.</p>
+<div id="fig-power" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../inputs/power.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;7.1: Source: <span class="citation" data-cites="duflo2007using">Duflo, Glennerster, and Kremer (<a href="#ref-duflo2007using" role="doc-biblioref">2007</a>)</span>, based on <span class="citation" data-cites="bloom1995minimum">(<a href="#ref-bloom1995minimum" role="doc-biblioref"><strong>bloom1995minimum?</strong></a>)</span>.</figcaption>
 </figure>
 </div>
-<p>Let’s start by understanding <a href="#fig-power" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>, which visualises the setup of a one-sided hypothesis test where the true effect equals 0 under the null hypothesis and some positive constant <span class="math inline">\(\te\)</span> under the alternative hypothesis. Note that the curves are <em>not</em> the standard normal distribution, but the sampling distribution of our estimator <span class="math inline">\(\tee\)</span>. This means that the standard deviation of the curves is given by the standard error of <span class="math inline">\(\tee\)</span>, which is <span class="math inline">\(\see\)</span>. Under the assumption of a homogenous treatment effect, the standard error is identical under <span class="math inline">\(\hn\)</span> and <span class="math inline">\(\ha\)</span>, which is why the two curves have the same shape (see <span class="quarto-unresolved-ref">?sec-experiment-stats</span> for details).</p>
+<p>Let’s start by understanding <a href="#fig-power">Figure&nbsp;<span>7.1</span></a>, which visualises the setup of a one-sided hypothesis test where the true effect equals 0 under the null hypothesis and some positive constant <span class="math inline">\(\te\)</span> under the alternative hypothesis. Note that the curves are <em>not</em> the standard normal distribution, but the sampling distribution of our estimator <span class="math inline">\(\tee\)</span>. This means that the standard deviation of the curves is given by the standard error of <span class="math inline">\(\tee\)</span>, which is <span class="math inline">\(\se\)</span>. Under the assumption of a homogenous treatment effect, the standard error is identical under <span class="math inline">\(\hn\)</span> and <span class="math inline">\(\ha\)</span>, which is why the two curves have the same shape (see <span class="quarto-unresolved-ref">?sec-experiment-stats</span> for details).</p>
 <p>the distribution will be the same under both the null and the alternative hypothesis, with the center of each distribution given by our hypothesised value of <span class="math inline">\(\te\)</span> – zero under <span class="math inline">\(\hn\)</span> and a positive constant under <span class="math inline">\(\ha\)</span>.</p>
 <p>We reject <span class="math inline">\(\hn\)</span> if <span class="math inline">\(\tee\)</span> is to the right of the critical value <span class="math inline">\(\za\)</span>. Also, for a given level of power <span class="math inline">\(\beta\)</span>,</p>
 </section>
 </section>
-<section id="old-notes" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="old-notes"><span class="header-section-number">6.7</span> Old notes</h2>
+<section id="useful-rule-of-thumb" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="useful-rule-of-thumb"><span class="header-section-number">7.7</span> Useful rule of thumb</h2>
+<p>Popular experiment textbooks and countless sources on the internet often refer to the rule-of thumb for the total sample size calculation that is given by:</p>
+<p><span class="math display">\[
+\N \approx \frac{32\vpe}{\tee^2}.
+\]</span></p>
+<p>Using formula <a href="#eq-sample-size">Equation&nbsp;<span>7.2</span></a> we can see that the rule of thumb straightforwardly results from using the default parameters.</p>
+<p>Assuming equal sample size, so that <span class="math inline">\(P=0.5\)</span> gives us</p>
+<p><span class="math display">\[
+N = 4 (z_{1 - \beta} + z_{\alpha/2})^2\left(\frac{\sev}{\te}\right)^2.
+\]</span></p>
+<p>Setting the false positive rate to 5% and the false negative rate at 20% for a two-sided hypothesis test, as we commonly do, we get</p>
+<p><span class="math display">\[
+\begin{align}
+N &amp;= 4 (0.84 + 1.96)^2\left(\frac{\sev}{\te}\right)^2 \\
+&amp;\approx \left(\frac{32\sev}{\te}\right)^2
+\end{align}
+\]</span></p>
+</section>
+<section id="old-notes" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="old-notes"><span class="header-section-number">7.8</span> Old notes</h2>
 <!-- ## Theory -->
 <!-- - Largely based on @duflo2007randomization -->
 <p>Power basics</p>
@@ -653,8 +637,8 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 <li><p>SE(<span class="math inline">\(\beta\)</span>) also includes measurement error, so this is also a determinant of power.</p></li>
 </ul>
 </section>
-<section id="what-determines-power" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="what-determines-power"><span class="header-section-number">6.8</span> What determines power</h2>
+<section id="what-determines-power" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="what-determines-power"><span class="header-section-number">7.9</span> What determines power</h2>
 <ul>
 <li><p>Significance level</p></li>
 <li><p>Effect size</p></li>
@@ -666,8 +650,8 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ul></li>
 </ul>
 </section>
-<section id="how-to-increase-power" class="level2" data-number="6.9">
-<h2 data-number="6.9" class="anchored" data-anchor-id="how-to-increase-power"><span class="header-section-number">6.9</span> How to increase power</h2>
+<section id="how-to-increase-power" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="how-to-increase-power"><span class="header-section-number">7.10</span> How to increase power</h2>
 <ul>
 <li><p>Power can be increased trivially by lowering the significance level, which we often don’t want to do, or by increasing sample size, which we’re often trying to avoid.</p></li>
 <li><p>Increase effect size</p>
@@ -687,10 +671,10 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ul></li>
 </ul>
 </section>
-<section id="how-to-choose-key-parameters" class="level2" data-number="6.10">
-<h2 data-number="6.10" class="anchored" data-anchor-id="how-to-choose-key-parameters"><span class="header-section-number">6.10</span> How to choose key parameters</h2>
-<section id="mde" class="level3" data-number="6.10.1">
-<h3 data-number="6.10.1" class="anchored" data-anchor-id="mde"><span class="header-section-number">6.10.1</span> MDE</h3>
+<section id="how-to-choose-key-parameters" class="level2" data-number="7.11">
+<h2 data-number="7.11" class="anchored" data-anchor-id="how-to-choose-key-parameters"><span class="header-section-number">7.11</span> How to choose key parameters</h2>
+<section id="mde" class="level3" data-number="7.11.1">
+<h3 data-number="7.11.1" class="anchored" data-anchor-id="mde"><span class="header-section-number">7.11.1</span> MDE</h3>
 <ul>
 <li><p>What are you balancing here? The size of the effect you are able to identify and the time it takes to do it.</p></li>
 <li><p>All else equal, the smaller a change you want to be able to detect, the longer it will take for the experiment to run because you need more sample size.</p></li>
@@ -708,8 +692,8 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ul></li>
 </ul>
 </section>
-<section id="significance-level" class="level3" data-number="6.10.2">
-<h3 data-number="6.10.2" class="anchored" data-anchor-id="significance-level"><span class="header-section-number">6.10.2</span> Significance level</h3>
+<section id="significance-level" class="level3" data-number="7.11.2">
+<h3 data-number="7.11.2" class="anchored" data-anchor-id="significance-level"><span class="header-section-number">7.11.2</span> Significance level</h3>
 <ul>
 <li><p>What are you balancing here? The probabilities of making a type I and type II error.</p></li>
 <li><p>The higher significance level, the less likely we are to implement useless features (to make a Type I error) but the more likely we are to no implement useful features (to make a Type II error).</p></li>
@@ -727,8 +711,8 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ul></li>
 </ul>
 </section>
-<section id="power" class="level3" data-number="6.10.3">
-<h3 data-number="6.10.3" class="anchored" data-anchor-id="power"><span class="header-section-number">6.10.3</span> Power</h3>
+<section id="power" class="level3" data-number="7.11.3">
+<h3 data-number="7.11.3" class="anchored" data-anchor-id="power"><span class="header-section-number">7.11.3</span> Power</h3>
 <ul>
 <li><p>What are you balancing here? The risk of making a Type II error and the time you have to wait for your results.</p></li>
 <li><p>All else equal, the higher a level or power you want, the longer you’ll have to run the experiment to accumulate the requried sample size.</p></li>
@@ -739,35 +723,26 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ul>
 </section>
 </section>
-<section id="problems-with-low-power" class="level2" data-number="6.11">
-<h2 data-number="6.11" class="anchored" data-anchor-id="problems-with-low-power"><span class="header-section-number">6.11</span> Problems with low power</h2>
+<section id="problems-with-low-power" class="level2" data-number="7.12">
+<h2 data-number="7.12" class="anchored" data-anchor-id="problems-with-low-power"><span class="header-section-number">7.12</span> Problems with low power</h2>
 <ul>
 <li>Truth inflation: underpowered studies only find a significant effect it the effect size is larger than the true effect size, leading to inflated claims of effect sizes.</li>
 </ul>
 </section>
-<section id="power-in-online-experiments" class="level2" data-number="6.12">
-<h2 data-number="6.12" class="anchored" data-anchor-id="power-in-online-experiments"><span class="header-section-number">6.12</span> Power in online experiments</h2>
+<section id="power-in-online-experiments" class="level2" data-number="7.13">
+<h2 data-number="7.13" class="anchored" data-anchor-id="power-in-online-experiments"><span class="header-section-number">7.13</span> Power in online experiments</h2>
 <ul>
 <li><span class="citation" data-cites="kohavi2014seven">Kohavi et al. (<a href="#ref-kohavi2014seven" role="doc-biblioref">2014</a>)</span> point out (in rule 7) that while general advice suggets that the CLT provides a good approximation for n larger than 30, the large skew in online metrics often requires many moer users. They recomment 355 * (skewness coefficient)^2.</li>
 </ul>
 </section>
-<section id="rule-of-thumb-for-sample-size" class="level2" data-number="6.13">
-<h2 data-number="6.13" class="anchored" data-anchor-id="rule-of-thumb-for-sample-size"><span class="header-section-number">6.13</span> Rule of thumb for sample size</h2>
-<p>For alpha = 0.05, power = 0.8, and a two-sided test with equal allocation to two variants, required sample size per variant is approximately:</p>
-<p><span class="math display">\[
-n \approx \frac{16\sigma^2}{\tau^2},
-\]</span></p>
-<p>where <span class="math inline">\(\sigma^2\)</span> is the sample variance and <span class="math inline">\(\tau\)</span> is the tretment effect (this is not known, but we can use the MDES).</p>
-<p>The formula straighforwardly comes from <a href="#eq-power" class="quarto-xref">Equation&nbsp;<span>6.1</span></a>, using 1.96 for <span class="math inline">\(t_\alpha\)</span>, 0.84 for <span class="math inline">\(t_{1 - \beta}\)</span>, and 0.5 for <span class="math inline">\(P\)</span>.</p>
-</section>
-<section id="best-practices" class="level2" data-number="6.14">
-<h2 data-number="6.14" class="anchored" data-anchor-id="best-practices"><span class="header-section-number">6.14</span> Best practices</h2>
+<section id="best-practices" class="level2" data-number="7.14">
+<h2 data-number="7.14" class="anchored" data-anchor-id="best-practices"><span class="header-section-number">7.14</span> Best practices</h2>
 <ul>
 <li>When aiming to estimate a precise effect size rather than just being interested in statistical significance, use assurance instead of power: instead of choosing a sample size to attain a given level of power, choose sample size so that confidence interval will be suitably narrow 99 percent of the time (<a href="https://www3.nd.edu/~kkelley/publications/articles/Anderson_Kelley_Maxwell_Psychological_Science_2017.pdf">Sample-Size Planning for More Accurate Statistical Power: A Method Adjusting Sample Effect Sizes for Publication Bias and Uncertainty</a> and <a href="https://tandfbis.s3.amazonaws.com/rt-media/pp/common/sample-chapters/9780415879682.pdf">Understanding the new statistics</a>.)</li>
 </ul>
 </section>
-<section id="useful-resources" class="level2" data-number="6.15">
-<h2 data-number="6.15" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">6.15</span> Useful resources</h2>
+<section id="useful-resources" class="level2" data-number="7.15">
+<h2 data-number="7.15" class="anchored" data-anchor-id="useful-resources"><span class="header-section-number">7.15</span> Useful resources</h2>
 <ul>
 <li><span class="citation" data-cites="larsen2023statistical">Larsen et al. (<a href="#ref-larsen2023statistical" role="doc-biblioref">2023</a>)</span> for general overview</li>
 <li><span class="citation" data-cites="zhou2023all">Zhou, Lu, and Shallah (<a href="#ref-zhou2023all" role="doc-biblioref">2023</a>)</span> for comprehensive overview of how to calculate power</li>
@@ -775,8 +750,8 @@ n \approx \frac{16\sigma^2}{\tau^2},
 <li><span class="citation" data-cites="reich2012empirical">Reich et al. (<a href="#ref-reich2012empirical" role="doc-biblioref">2012</a>)</span> power calcs for cluster-randomised experiments</li>
 </ul>
 </section>
-<section id="qa" class="level2" data-number="6.16">
-<h2 data-number="6.16" class="anchored" data-anchor-id="qa"><span class="header-section-number">6.16</span> Q&amp;A</h2>
+<section id="qa" class="level2" data-number="7.16">
+<h2 data-number="7.16" class="anchored" data-anchor-id="qa"><span class="header-section-number">7.16</span> Q&amp;A</h2>
 <p>Questions:</p>
 <ol type="1">
 <li><p>Longer experiment duration generally increases power. Can you think of a scenario where this is not the case?</p></li>
@@ -789,10 +764,7 @@ n \approx \frac{16\sigma^2}{\tau^2},
 </ol>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-bloom1995minimum" class="csl-entry" role="listitem">
-Bloom, Howard S. 1995. <span>“Minimum Detectable Effects: A Simple Way to Report the Statistical Power of Experimental Designs.”</span> <em>Evaluation Review</em> 19 (5): 547–56.
-</div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-bojinov2023design" class="csl-entry" role="listitem">
 Bojinov, Iavor, David Simchi-Levi, and Jinglong Zhao. 2023. <span>“Design and Analysis of Switchback Experiments.”</span> <em>Management Science</em> 69 (7): 3759–77.
 </div>
@@ -804,9 +776,6 @@ Kohavi, Ron, Alex Deng, Roger Longbotham, and Ya Xu. 2014. <span>“Seven Rules 
 </div>
 <div id="ref-larsen2023statistical" class="csl-entry" role="listitem">
 Larsen, Nicholas, Jonathan Stallrich, Srijan Sengupta, Alex Deng, Ron Kohavi, and Nathaniel T Stevens. 2023. <span>“Statistical Challenges in Online Controlled Experiments: A Review of a/b Testing Methodology.”</span> <em>The American Statistician</em>, 1–15.
-</div>
-<div id="ref-list2011so" class="csl-entry" role="listitem">
-List, John A, Sally Sadoff, and Mathis Wagner. 2011. <span>“So You Want to Run an Experiment, Now What? Some Simple Rules of Thumb for Optimal Experimental Design.”</span> <em>Experimental Economics</em> 14: 439–57.
 </div>
 <div id="ref-reich2012empirical" class="csl-entry" role="listitem">
 Reich, Nicholas G, Jessica A Myers, Daniel Obeng, Aaron M Milstone, and Trish M Perl. 2012. <span>“Empirical Power and Sample Size Calculations for Cluster-Randomized and Cluster-Randomized Crossover Studies.”</span> <em>PloS One</em> 7 (4): e35564.
@@ -903,9 +872,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -915,17 +885,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -938,125 +899,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1100,7 +942,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1126,32 +967,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1213,18 +1028,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/testing_and_cis.html" class="pagination-link  aria-label=" &lt;span="" and="" confidence="" intervals&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Testing and confidence intervals</span></span>
+      <a href="../chapters/testing_and_cis.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Testing and confidence intervals</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/analysis.html" class="pagination-link" aria-label="<span class='chapter-number'>7</span>&nbsp; <span class='chapter-title'>Analysis</span>">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/analysis.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 

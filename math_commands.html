@@ -2,6 +2,14 @@
     \(
     \newcommand{\nc}{\newcommand}
 
+    %%%%%%%%%%%
+    % symbols %
+    %%%%%%%%%%%
+
+    \nc{stoe}{\alpha}
+    \nc{stte}{\beta}
+
+
     %%%%%%%%%%%%%%%%
     % sample sizes %
     %%%%%%%%%%%%%%%%
@@ -21,15 +29,16 @@
     % outcomes %
     %%%%%%%%%%%%
 
-    \nc{yio}{Y_i^{obs}}
-    \nc{ytp}{Y_i(1)}
-    \nc{ycp}{Y_i(0)}
-    \nc{\yto}{Y_t^{obs}}
-    \nc{\yco}{Y_c^{obs}}
-    \nc{ytpb}{\bar{Y}(1)}
-    \nc{ycpb}{\bar{Y}(0)}
-    \nc{\ytob}{\bar{Y}_t^{obs}}
-    \nc{\ycob}{\bar{Y}_c^{obs}}
+    \nc{\yo}{Y_i}
+    \nc{\ypt}{Y_i(1)}
+    \nc{\ypc}{Y_i(0)}
+
+    \nc{yptb}{\bar{Y}(1)}
+    \nc{ypcb}{\bar{Y}(0)}
+    
+    \nc{\ytob}{\bar{\yio}_t}
+    \nc{\ycob}{\bar{\yio}_c}
+    
     \nc{\ytobf}{\frac{1}{\Nt}\sum_{i:\ti_i=1} \yto}
     \nc{\ycobf}{\frac{1}{\Nc}\sum_{i:\ti_i=0} \yco}
 
@@ -91,9 +100,9 @@
     % naming convention as for variance but with se prefix
 
     \nc{\se}{\text{se}(\tee)}
-    \nc{\seefu}{\sqrt{\svefu}}
-    \nc{\seefe}{\sqrt{\frac{4\vpe}{\N}}}
-    \nc{\seefp}{\sqrt{\frac{\vpe}{P(1-P)N}}}
+    \nc{\sefu}{\sqrt{\svfu}}
+    \nc{\sefe}{\sqrt{\svfe}}
+    \nc{\sefep}{\sqrt{\frac{\vpe}{P(1-P)N}}}
 
 
     %%%%%%%%%%%%%%%%%%%%%%
@@ -102,8 +111,8 @@
 
     \nc{hn}{H_0}
     \nc{ha}{H_A}
-    \nc{za}{z_\alpha}
-    \nc{zk}{z{1 - \kappa}}
+    \nc{za}{z_\stoe}
+    \nc{zb}{z_{1 - \stte}}
 
 
     %%%%%%%%%%%%%%%%%%

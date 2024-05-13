@@ -84,7 +84,7 @@ As discussed above, the standard error is simply the standard deviation of the
 sampling distribution of $\tee$, defined as the square root of the sampling variance, and is thus defined as:
 
 $$
-\boxed{\se = \seefu}
+\boxed{\se = \sefu}
 $${#eq-se}
 
 We could work with this, and sometimes do. But in the context of online
@@ -101,7 +101,7 @@ $$
 Substituting all of the above in @eq-se results in 
 
 $$
-\se = \sqrt{\frac{\vpe + \vpe}{\N/2}} = \sqrt{\frac{4\vpe}{\N}} = \seefe
+\se = \sqrt{\frac{\vpe + \vpe}{\N/2}} = \sqrt{\frac{4\vpe}{\N}} = \sefe
 $$
 
 For most of the text, I'll use this expression for the standard error. In some
@@ -111,7 +111,7 @@ equal sample sizes, we use $P$ to denote that proportion and $\N$ to denote
 total sample size, while maintaining the assumption of equal variance. After a little algebraic manipulation we then get:
 
 $$
-\se = \sqrt{\frac{\vpe}{P\N} + \frac{\vpe}{(1-P)\N}} = \seefp.
+\se = \sqrt{\frac{\vpe}{P\N} + \frac{\vpe}{(1-P)\N}} = \sefep.
 $$
 
 Notice that for equal sample sizes, when $P=0.5$, this formulation is equivalent

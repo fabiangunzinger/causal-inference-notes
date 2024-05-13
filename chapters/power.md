@@ -1,5 +1,9 @@
 # Power {#sec-power}
 
+todo:
+- Introduce separate symbol for MDES -- sample size formula is very confusing otherwise
+
+
 Power is the probability that we reject the null hypothesis if it is false. It is a key component of experiment design because it determines the required sample size, which helps us determine how long we need to run an experiment for.
 
 In this section, I want to do the following:
@@ -76,7 +80,7 @@ $$
 We test the null hypothesis by constructing the test statistic
 
 $$
-Z = \frac{\tee}{\see}
+Z = \frac{\tee}{\se}
 $$
 
 and reject the null hypothesis if
@@ -88,40 +92,40 @@ $$
 where $z_{\alpha/2}$ is the critical value of the standard normal distribution at the $\alpha/2$ percentile. We thus reject $H_0$ if
 
 $$
-|\tee| > \see z_{\alpha/2}
+|\tee| > \se z_{\alpha/2}
 $$
 
 The power of the test is the probability that the test
 statistic falls into the rejection region if $H_A$ is true, which is:
 
 $$
-1 - \beta = P\left[|\tee| > \see z_{\alpha/2} | H_A \right].
+1 - \beta = P\left[|\tee| > \se z_{\alpha/2} | H_A \right].
 $$
 
 The test statistic falling into the lower or upper rejection region are mutually
 exclusive events, so the above is equal to
 
 $$
-1 - \beta = P\left[\tee > \see z_{\alpha/2} | H_A \right]
-+ P\left[\tee < -\see z_{\alpha/2} | H_A \right].
+1 - \beta = P\left[\tee > \se z_{\alpha/2} | H_A \right]
++ P\left[\tee < -\se z_{\alpha/2} | H_A \right].
 $$
 
 Standardising, using the assumption that $H_A$ is true, we get
 
 $$
 \begin{align}
-1 - \beta &= P\left[\frac{\tee - \te}{\see} > \frac{\see z_{\alpha/2} - \te}{\see}\right]
-+ P\left[\frac{\tee - \te}{\see} < \frac{- \see z_{\alpha/2} - \te}{\see}\right] \\
-&= P\left[Z > \frac{\see z_{\alpha/2} - \te}{\see}\right]
-+ P\left[Z < \frac{- \see z_{\alpha/2} - \te}{\see}\right], 
+1 - \beta &= P\left[\frac{\tee - \te}{\se} > \frac{\se z_{\alpha/2} - \te}{\se}\right]
++ P\left[\frac{\tee - \te}{\se} < \frac{- \se z_{\alpha/2} - \te}{\se}\right] \\
+&= P\left[Z > \frac{\se z_{\alpha/2} - \te}{\se}\right]
++ P\left[Z < \frac{- \se z_{\alpha/2} - \te}{\se}\right], 
 \end{align}
 $$
 
 which, using the standard normal CDF, $\Phi(z)$, we can rewrite as
 
 $$
-1 - \beta = \left[1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\see}\right)\right]
-+ \left[\Phi\left(-z_{\alpha/2} - \frac{\te}{\see}\right)\right].
+1 - \beta = \left[1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\se}\right)\right]
++ \left[\Phi\left(-z_{\alpha/2} - \frac{\te}{\se}\right)\right].
 $$
 
 The probability that we reject the null hypothesis for the wrong reason --
@@ -130,7 +134,7 @@ positive effect or above the upper critical value for a true negative effect --
 is very small.[^type3error] Hence, as the true effect size deviates from zero, one of the two terms in the expression above becomes vanishingly small and can be ignored. For the rest of this chapter, I assume we have a true positive effect and omit the second of the two terms. We thus have:
 
 $$
-1 - \beta = 1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\see}\right).
+1 - \beta = 1 - \Phi\left(z_{\alpha/2} - \frac{\te}{\se}\right).
 $$
 
 Furthermore, using the symmetry of the standard normal
@@ -138,14 +142,14 @@ distribution, which implies that $1 - \Phi(k) = \Phi(-k)$, we can simplify this
 to
 
 $$
-1 - \beta = \Phi\left(\frac{\te}{\see} - z_{\alpha/2}\right).
+1 - \beta = \Phi\left(\frac{\te}{\se} - z_{\alpha/2}\right).
 $$
 
 For a simple experiment with two variants with equal population variance, the
 estimated standard error of the treatment effect is given by (see @sec-experiment-stats) 
 
 $$
-\see = \seefe = \seefep
+\se = \sefe = \sefep
 $$
 
 where $\sev$ is the pooled estimator of the population variance, $\Nt$ and $\Nc$ are the number of units in the treatment and control groups, respectively, $\N = \Nt + \Nc$ is total sample size, and $P$ is the proportion of units in the treatment group.
@@ -153,7 +157,7 @@ where $\sev$ is the pooled estimator of the population variance, $\Nt$ and $\Nc$
 For such an experiment, the power is thus given by
 
 $$
-1 - \beta = \Phi\left(\frac{\te}{\seefep} - z_{\alpha/2}\right), 
+1 - \beta = \Phi\left(\frac{\te}{\sefep} - z_{\alpha/2}\right), 
 $$
 
 which, with a bit of algebra (using $1/\sqrt{1/x} = \sqrt{x}$),
@@ -173,7 +177,8 @@ z_{1 - \beta} &= \frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2} \\
 \sqrt{P(1-P)N} &= (z_{1 - \beta} + z_{\alpha/2})\left(\frac{\sev}{\te}\right) \\
 N &= \frac{(z_{1 - \beta} + z_{\alpha/2})^2}{P(1-P)}\left(\frac{\sev}{\te}\right)^2.
 \end{align}
-$$
+$$ {#eq-sample-size}
+
 
 
 ### Starting from Type I and Type II error conditions
@@ -194,7 +199,7 @@ one-sided hypothesis test where the true effect equals 0 under the null
 hypothesis and some positive constant $\te$ under the alternative hypothesis. Note that the curves are *not* the standard normal distribution,
 but the sampling distribution of our estimator $\tee$. This means that the standard
 deviation of the curves is given by the standard error of $\tee$, which is
-$\see$. Under the assumption of a homogenous treatment effect, the standard
+$\se$. Under the assumption of a homogenous treatment effect, the standard
 error is identical under $\hn$ and $\ha$, which is why the two curves have the
 same shape (see @sec-experiment-stats for details).
 
@@ -204,6 +209,36 @@ of $\te$ -- zero under $\hn$ and a positive constant under $\ha$.
 
 We reject $\hn$ if $\tee$ is to the right of the critical value $\za$. Also,
 for a given level of power $\beta$, 
+
+
+## Useful rule of thumb
+
+
+
+Popular experiment textbooks and countless sources on the internet often refer to the rule-of thumb for the total sample size calculation that is given by:
+
+$$
+\N \approx \frac{32\vpe}{\tee^2}.
+$$
+
+Using formula @eq-sample-size we can see that the rule of thumb straightforwardly results from using the default parameters.
+
+Assuming equal sample size, so that $P=0.5$ gives us
+
+$$
+N = 4 (z_{1 - \beta} + z_{\alpha/2})^2\left(\frac{\sev}{\te}\right)^2.
+$$
+
+Setting the false positive rate to 5% and the false negative rate at 20% for a two-sided hypothesis test, as we commonly do, we get
+
+$$
+\begin{align}
+N &= 4 (0.84 + 1.96)^2\left(\frac{\sev}{\te}\right)^2 \\
+&\approx \left(\frac{32\sev}{\te}\right)^2
+\end{align}
+$$
+
+
 
 
 ## Old notes
@@ -355,18 +390,6 @@ $$ N =  \frac{(t_a + t_{1-\kappa})^2}{P(1-P)}\left(\frac{\sigma}{\delta}\right)^
 
 - @kohavi2014seven point out (in rule 7) that while general advice suggets that the CLT provides a good approximation for n larger than 30, the large skew in online metrics often requires many moer users. They recomment 355 * (skewness coefficient)^2.
 
-## Rule of thumb for sample size
-
-For alpha = 0.05, power = 0.8, and a two-sided test with equal allocation to two variants, required sample size per variant is approximately:
-
-$$
-n \approx \frac{16\sigma^2}{\tau^2},
-$$
-
-where $\sigma^2$ is the sample variance and $\tau$ is the tretment effect (this is not known, but we can use the MDES).
-
-The formula straighforwardly comes from @eq-power, using 1.96 for $t_\alpha$,
-0.84 for $t_{1 - \beta}$, and 0.5 for $P$.
 
 
 ## Best practices

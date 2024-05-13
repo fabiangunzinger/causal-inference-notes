@@ -41,8 +41,7 @@ book:
         # # - chapters/decision_making.qmd
         - chapters/threats_to_validity.qmd
         - chapters/practical_issues.qmd
-        # - chapters/variance_reduction.qmd
-        # # - chapters/cuped.qmd
+        - chapters/variance_reduction.qmd
         - chapters/network_experiments.qmd
         # - chapters/switchbacks.qmd
         # - chapters/heterogeneous_treatment_effects.qmd
@@ -69,8 +68,8 @@ book:
       # - chapters/references.qmd
 
 
-bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
-# bibliography: /Users/fabian.gunzinger/.dotfiles/latex/fabib.bib
+# bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
+bibliography: /Users/fabian.gunzinger/.dotfiles/latex/fabib.bib
 
 format:
   html:
