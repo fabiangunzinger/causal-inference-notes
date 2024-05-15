@@ -26,12 +26,12 @@ Introduced by researchers at Microsoft in 2013, it has since become an industry 
 
 The key insight of CUPED is that, given the right data, it is possible to transform the raw outcome metric in a way that leaves the treatment effect estimator ($\tee$) unbiased while reducing its variance. @deng2013improving motivate the approach as follows using an insight from the Monte Carlo simulation literature. Spelling out clearly the logic of their paper we get the following:
 
-Assume that, in addition to our outcome variable $\yio$, we have access to another random variable, $X_i$ with known expectation $\mathbb{E}[X_i]$.
+Assume that, in addition to our outcome variable $\yoi$, we have access to another random variable, $X_i$ with known expectation $\mathbb{E}[X_i]$.
 
-We can then transform $\yio$ for each unit such that
+We can then transform $\yoi$ for each unit such that
 
 $$
-\yio^{cuped} = \yio - \theta\bar{X} + \theta\mathbb{E}[X_i].
+\y^{cuped}_i = \yoi - \theta\bar{X} + \theta\mathbb{E}[X_i].
 $$
 
 If we do this for all units in our experiment, we will get
