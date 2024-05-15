@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Causal inference notes",
+    "title": "Online experiments",
     "section": "",
-    "text": "In this space I want to collect my notes on causal inference.\nIf you find the notes helpful, find any errors, or have any suggestions, please get in touch by writing to fa.gunzinger@gmail.com.",
+    "text": "In this space I want to collect my notes on online experiments and causal inference.\nIf you find the notes helpful, find any errors, or have any suggestions, please get in touch by writing to fa.gunzinger@gmail.com.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>index.html</span>"
     ]
@@ -1152,22 +1152,34 @@
     "objectID": "chapters/introduction.html#why-causal-inference",
     "href": "chapters/introduction.html#why-causal-inference",
     "title": "2  Introduction",
-    "section": "2.1 Why causal inference?",
-    "text": "2.1 Why causal inference?\n\nBecause many thinks we think work don’t (look at list of refuted claims from Kohavi here)\n\nThe purpose:\n\nCreate a valid counterfactual outcome - the outcome of the treated if they had not been treated - in order to eliminate selection bias when estimating the treatment effect."
+    "section": "",
+    "text": "Because many thinks we think work don’t (look at list of refuted claims from Kohavi here)\n\n\n\nCreate a valid counterfactual outcome - the outcome of the treated if they had not been treated - in order to eliminate selection bias when estimating the treatment effect.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+    ]
   },
   {
     "objectID": "chapters/introduction.html#why-experiments",
     "href": "chapters/introduction.html#why-experiments",
     "title": "2  Introduction",
     "section": "2.2 Why experiments",
-    "text": "2.2 Why experiments\n\nThe randomisation of treatment eliminates selection bias.\nThe presence of a control group provides a counterfactual of what would have happened without treatment."
+    "text": "2.2 Why experiments\n\nThe randomisation of treatment eliminates selection bias.\nThe presence of a control group provides a counterfactual of what would have happened without treatment.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+    ]
   },
   {
     "objectID": "chapters/introduction.html#limitations-of-experiments",
     "href": "chapters/introduction.html#limitations-of-experiments",
     "title": "2  Introduction",
     "section": "2.3 Limitations of experiments",
-    "text": "2.3 Limitations of experiments\nLook at Deaton and Cartwright papers.\n\nThey cannot be used to study the past.\nThey can only estimate the effect of treatments that can be manipulated (“no causation without manipulation” Rubin).\nGuidance for policy limited by compliance issues, environmental dependence, and equilibrium effects.\nThere are ethical concerns.\n\n\nFor deeper discussion, see Stevenson (2024) and sources therein.\n\n\n\n\n\nStevenson, Megan T. 2024. “Cause, Effect, and the Structure of the Social World.” CrimRxiv."
+    "text": "2.3 Limitations of experiments\nLook at Deaton and Cartwright papers.\n\nThey cannot be used to study the past.\nThey can only estimate the effect of treatments that can be manipulated (“no causation without manipulation” Rubin).\nGuidance for policy limited by compliance issues, environmental dependence, and equilibrium effects.\nThere are ethical concerns.\n\n\nFor deeper discussion, see Stevenson (2024) and sources therein.\n\n\n\n\n\nStevenson, Megan T. 2024. “Cause, Effect, and the Structure of the Social World.” CrimRxiv.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+    ]
   },
   {
     "objectID": "chapters/fwl.html",
@@ -1185,7 +1197,10 @@
     "href": "chapters/statistics.html",
     "title": "Statistics",
     "section": "",
-    "text": "The goal of this part of the book is to collect all the statistical theory that underlies online experiments.\nMost online experiments are very simple; we split traffic into groups with different experiences and compare outcomes between groups—how much statistical theory could we possibly need?\nWell, to experiment effectively, you want, at a minimum, the following:\n\nA coherent definition of the causal effect you want to measure, a reliable way of estimating it, and a way to quantify the uncertainty around your estimate.\nA way to differentiate between estimates that signal the existence of a true effect and those that are the results of random noise in the data.\nA way to ensure your experiment has a good chance of picking up signals if there are any.\n\nFirst two are covered here. The third, which relates to the power of your experiment, is covered in Chapter 7."
+    "text": "The goal of this part of the book is to collect all the statistical theory that underlies online experiments.\nMost online experiments are very simple; we split traffic into groups with different experiences and compare outcomes between groups—how much statistical theory could we possibly need?\nWell, to experiment effectively, you want, at a minimum, the following:\n\nA coherent definition of the causal effect you want to measure, a reliable way of estimating it, and a way to quantify the uncertainty around your estimate.\nA way to differentiate between estimates that signal the existence of a true effect and those that are the results of random noise in the data.\nA way to ensure your experiment has a good chance of picking up signals if there are any.\n\nFirst two are covered here. The third, which relates to the power of your experiment, is covered in 7  Power.",
+    "crumbs": [
+      "Statistics"
+    ]
   },
   {
     "objectID": "chapters/outcomes.html",

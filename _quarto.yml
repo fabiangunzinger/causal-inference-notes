@@ -2,7 +2,7 @@ project:
   type: book
 
 book:
-  title: "Causal inference notes"
+  title: "Online experiments"
   author: "Fabian Gunzinger"
   date: "8/3/2024"
   chapters:

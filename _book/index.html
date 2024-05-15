@@ -9,7 +9,7 @@
 <meta name="author" content="Fabian Gunzinger">
 <meta name="dcterms.date" content="2024-08-03">
 
-<title>Causal inference notes</title>
+<title>Online experiments</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -99,12 +99,13 @@ ul.task-list li input[type="checkbox"] {
     \nc{\yptb}{\bar{\y}(1)}
     \nc{\ypcb}{\bar{\y}(0)}
     
-    \nc{\yo}{\y_i}
-    \nc{\yotb}{\bar{\yo}_t}
-    \nc{\yocb}{\bar{\yo}_c}
+    \nc{\yo}{\y^{obs}}
+    \nc{\yoi}{\y_i^{obs}}
+    \nc{\yotb}{\bar{\y}_t^{obs}}
+    \nc{\yocb}{\bar{\y}_c^{obs}}
     
-    \nc{\yotbf}{\frac{1}{\Nt}\sum_{i:\tii=1} \yot}
-    \nc{\yocbf}{\frac{1}{\Nc}\sum_{i:\tii=0} \yoc}
+    \nc{\yotbf}{\frac{1}{\Nt}\sum_{i:\tii=1} \yoi}
+    \nc{\yocbf}{\frac{1}{\Nc}\sum_{i:\tii=0} \yoi}
 
     %%%%%%%%%%%%%%%%%%%%
     % sums of outcomes %
@@ -116,9 +117,9 @@ ul.task-list li input[type="checkbox"] {
 
     \nc{\te}{\tau}
     \nc{\tee}{\hat{\te}}   
-    \nc{\tef}{\ytpb - \ycpb}
-    \nc{\teef}{\ytob - \ycob}
-    \nc{\tefs}{\frac{1}{\N}\sum_{i=1}^N\left(\ytp-\ycp\right)}
+    \nc{\tef}{\yptb - \ypcb}
+    \nc{\teef}{\yotb - \yocb}
+    \nc{\tefs}{\frac{1}{\N}\sum_{i=1}^N\left(\ypt-\ypc\right)}
 
     
     %%%%%%%%%%%%%%%%%%%%
@@ -134,10 +135,10 @@ ul.task-list li input[type="checkbox"] {
     \nc{\vte}{\sev^2_t}
     \nc{\vce}{\sev^2_c}
     \nc{\vpe}{\sev^2}
-    \nc{\vtf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ytp - \ytpb)^2}
-    \nc{\vcf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ycp - \ycpb)^2}
-    \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}\left(\yio - \ytob\right)^2}
-    \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}\left(\yio - \ycob\right)^2}
+    \nc{\vtf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ytp - \yptb)^2}
+    \nc{\vcf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ycp - \ypcb)^2}
+    \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}\left(\yoi - \yotb\right)^2}
+    \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}\left(\yoi - \yocb\right)^2}
     \nc{\vpef}{\frac{(\Nt - 1)\vte + (\Nc - 1)\vce}{\Nt + \Nc - 2}}
 
     %%%%%%%%%%%%%%%%%%%%%%
@@ -229,7 +230,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Causal inference notes</a> 
+      <a href="./">Online experiments</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -402,7 +403,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Causal inference notes</h1>
+<h1 class="title">Online experiments</h1>
 </div>
 
 
@@ -432,7 +433,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <!-- # Preface {.unnumbered} -->
-<p>In this space I want to collect my notes on causal inference.</p>
+<p>In this space I want to collect my notes on online experiments and causal inference.</p>
 <p>If you find the notes helpful, find any errors, or have any suggestions, please get in touch by writing to <a href="mailto:fa.gunzinger@gmail.com" class="email">fa.gunzinger@gmail.com</a>.</p>
 
 
