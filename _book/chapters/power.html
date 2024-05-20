@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 7&nbsp; Power</title>
+<title>Online experiments - 7&nbsp; Power</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,7 +24,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -67,13 +66,7 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -82,10 +75,8 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 </head><body class="nav-sidebar floating"><span class="math inline">
@@ -118,12 +109,13 @@ div.csl-indent {
     \nc{\yptb}{\bar{\y}(1)}
     \nc{\ypcb}{\bar{\y}(0)}
     
-    \nc{\yo}{\y_i}
-    \nc{\yotb}{\bar{\yo}_t}
-    \nc{\yocb}{\bar{\yo}_c}
+    \nc{\yo}{\y^{obs}}
+    \nc{\yoi}{\y_i^{obs}}
+    \nc{\yotb}{\bar{\y}_t^{obs}}
+    \nc{\yocb}{\bar{\y}_c^{obs}}
     
-    \nc{\yotbf}{\frac{1}{\Nt}\sum_{i:\tii=1} \yot}
-    \nc{\yocbf}{\frac{1}{\Nc}\sum_{i:\tii=0} \yoc}
+    \nc{\yotbf}{\frac{1}{\Nt}\sum_{i:\tii=1} \yoi}
+    \nc{\yocbf}{\frac{1}{\Nc}\sum_{i:\tii=0} \yoi}
 
     %%%%%%%%%%%%%%%%%%%%
     % sums of outcomes %
@@ -135,9 +127,9 @@ div.csl-indent {
 
     \nc{\te}{\tau}
     \nc{\tee}{\hat{\te}}   
-    \nc{\tef}{\ytpb - \ycpb}
-    \nc{\teef}{\ytob - \ycob}
-    \nc{\tefs}{\frac{1}{\N}\sum_{i=1}^N\left(\ytp-\ycp\right)}
+    \nc{\tef}{\yptb - \ypcb}
+    \nc{\teef}{\yotb - \yocb}
+    \nc{\tefs}{\frac{1}{\N}\sum_{i=1}^N\left(\ypt-\ypc\right)}
 
     
     %%%%%%%%%%%%%%%%%%%%
@@ -153,10 +145,10 @@ div.csl-indent {
     \nc{\vte}{\sev^2_t}
     \nc{\vce}{\sev^2_c}
     \nc{\vpe}{\sev^2}
-    \nc{\vtf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ytp - \ytpb)^2}
-    \nc{\vcf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ycp - \ycpb)^2}
-    \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}\left(\yio - \ytob\right)^2}
-    \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}\left(\yio - \ycob\right)^2}
+    \nc{\vtf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ytp - \yptb)^2}
+    \nc{\vcf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ycp - \ypcb)^2}
+    \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}\left(\yoi - \yotb\right)^2}
+    \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}\left(\yoi - \yocb\right)^2}
     \nc{\vpef}{\frac{(\Nt - 1)\vte + (\Nc - 1)\vce}{\Nt + \Nc - 2}}
 
     %%%%%%%%%%%%%%%%%%%%%%
@@ -224,33 +216,6 @@ div.csl-indent {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
 
 
 
@@ -259,13 +224,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistics.html">Statistics</a></li><li class="breadcrumb-item"><a href="../chapters/power.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Power</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistics.html">Statistics</a></li><li class="breadcrumb-item"><a href="../chapters/power.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Power</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -274,10 +239,10 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Causal inference notes</a> 
+      <a href="../">Online experiments</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -442,7 +407,7 @@ window.Quarto = {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -481,7 +446,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/statistics.html">Statistics</a></li><li class="breadcrumb-item"><a href="../chapters/power.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Power</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title"><span id="sec-power" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Power</span></span></h1>
 </div>
@@ -496,9 +461,7 @@ window.Quarto = {
   </div>
   
 
-
 </header>
-
 
 <p>todo: - Introduce separate symbol for MDES – sample size formula is very confusing otherwise</p>
 <p>Power is the probability that we reject the null hypothesis if it is false. It is a key component of experiment design because it determines the required sample size, which helps us determine how long we need to run an experiment for.</p>
@@ -604,7 +567,7 @@ Z = \frac{\tee}{\se}
 <p><span id="eq-power"><span class="math display">\[
 1 - \beta = \Phi\left(\frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2}\right).
 \tag{7.1}\]</span></span></p>
-<p>To calculate the required sample size for an experiment, we can rearrange <a href="#eq-power" class="quarto-xref">Equation&nbsp;<span>7.1</span></a> and solve for <span class="math inline">\(N\)</span>. To do this, we use the inverse of the CDS function <span class="math inline">\(\Phi(z)\)</span>. <span class="math inline">\(\Phi(z)\)</span> takes z-values and returns probabilities, so its inverse, <span class="math inline">\(\Phi(p)^{-1}\)</span>, takes probabilities and returns z-values. Using this, we get:</p>
+<p>To calculate the required sample size for an experiment, we can rearrange <a href="#eq-power">Equation&nbsp;<span>7.1</span></a> and solve for <span class="math inline">\(N\)</span>. To do this, we use the inverse of the CDS function <span class="math inline">\(\Phi(z)\)</span>. <span class="math inline">\(\Phi(z)\)</span> takes z-values and returns probabilities, so its inverse, <span class="math inline">\(\Phi(p)^{-1}\)</span>, takes probabilities and returns z-values. Using this, we get:</p>
 <p><span id="eq-sample-size"><span class="math display">\[
 \begin{align}
 \Phi(1 - \beta)^{-1} &amp;= \Phi\left(\Phi\left(\frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2}\right)\right)^{-1} \\
@@ -616,22 +579,18 @@ N &amp;= \frac{(z_{1 - \beta} + z_{\alpha/2})^2}{P(1-P)}\left(\frac{\sev}{\te}\r
 </section>
 <section id="starting-from-type-i-and-type-ii-error-conditions" class="level3" data-number="7.6.2">
 <h3 data-number="7.6.2" class="anchored" data-anchor-id="starting-from-type-i-and-type-ii-error-conditions"><span class="header-section-number">7.6.2</span> Starting from Type I and Type II error conditions</h3>
-<p>Use <span class="citation" data-cites="list2011so">List, Sadoff, and Wagner (<a href="#ref-list2011so" role="doc-biblioref">2011</a>)</span></p>
+<p>Use <span class="citation" data-cites="list2011so">(<a href="#ref-list2011so" role="doc-biblioref"><strong>list2011so?</strong></a>)</span></p>
 </section>
 <section id="starting-from-graphical-illustration" class="level3" data-number="7.6.3">
 <h3 data-number="7.6.3" class="anchored" data-anchor-id="starting-from-graphical-illustration"><span class="header-section-number">7.6.3</span> Starting from graphical illustration</h3>
-<p><span class="citation" data-cites="bloom1995minimum">Bloom (<a href="#ref-bloom1995minimum" role="doc-biblioref">1995</a>)</span> introduces the notion of the MDE as a useful way to quantify power. In the process, he also uses an intuitive way to derive the power formula based on an illustration of a typical hypothesis-testing scenario.</p>
-<div id="fig-power" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-power-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../inputs/power.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-power-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.1: Source: <span class="citation" data-cites="duflo2007using">Duflo, Glennerster, and Kremer (<a href="#ref-duflo2007using" role="doc-biblioref">2007</a>)</span>, based on <span class="citation" data-cites="bloom1995minimum">Bloom (<a href="#ref-bloom1995minimum" role="doc-biblioref">1995</a>)</span>.
-</figcaption>
+<p><span class="citation" data-cites="bloom1995minimum">(<a href="#ref-bloom1995minimum" role="doc-biblioref"><strong>bloom1995minimum?</strong></a>)</span> introduces the notion of the MDE as a useful way to quantify power. In the process, he also uses an intuitive way to derive the power formula based on an illustration of a typical hypothesis-testing scenario.</p>
+<div id="fig-power" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../inputs/power.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;7.1: Source: <span class="citation" data-cites="duflo2007using">Duflo, Glennerster, and Kremer (<a href="#ref-duflo2007using" role="doc-biblioref">2007</a>)</span>, based on <span class="citation" data-cites="bloom1995minimum">(<a href="#ref-bloom1995minimum" role="doc-biblioref"><strong>bloom1995minimum?</strong></a>)</span>.</figcaption>
 </figure>
 </div>
-<p>Let’s start by understanding <a href="#fig-power" class="quarto-xref">Figure&nbsp;<span>7.1</span></a>, which visualises the setup of a one-sided hypothesis test where the true effect equals 0 under the null hypothesis and some positive constant <span class="math inline">\(\te\)</span> under the alternative hypothesis. Note that the curves are <em>not</em> the standard normal distribution, but the sampling distribution of our estimator <span class="math inline">\(\tee\)</span>. This means that the standard deviation of the curves is given by the standard error of <span class="math inline">\(\tee\)</span>, which is <span class="math inline">\(\se\)</span>. Under the assumption of a homogenous treatment effect, the standard error is identical under <span class="math inline">\(\hn\)</span> and <span class="math inline">\(\ha\)</span>, which is why the two curves have the same shape (see <span class="quarto-unresolved-ref">?sec-experiment-stats</span> for details).</p>
+<p>Let’s start by understanding <a href="#fig-power">Figure&nbsp;<span>7.1</span></a>, which visualises the setup of a one-sided hypothesis test where the true effect equals 0 under the null hypothesis and some positive constant <span class="math inline">\(\te\)</span> under the alternative hypothesis. Note that the curves are <em>not</em> the standard normal distribution, but the sampling distribution of our estimator <span class="math inline">\(\tee\)</span>. This means that the standard deviation of the curves is given by the standard error of <span class="math inline">\(\tee\)</span>, which is <span class="math inline">\(\se\)</span>. Under the assumption of a homogenous treatment effect, the standard error is identical under <span class="math inline">\(\hn\)</span> and <span class="math inline">\(\ha\)</span>, which is why the two curves have the same shape (see <span class="quarto-unresolved-ref">?sec-experiment-stats</span> for details).</p>
 <p>the distribution will be the same under both the null and the alternative hypothesis, with the center of each distribution given by our hypothesised value of <span class="math inline">\(\te\)</span> – zero under <span class="math inline">\(\hn\)</span> and a positive constant under <span class="math inline">\(\ha\)</span>.</p>
 <p>We reject <span class="math inline">\(\hn\)</span> if <span class="math inline">\(\tee\)</span> is to the right of the critical value <span class="math inline">\(\za\)</span>. Also, for a given level of power <span class="math inline">\(\beta\)</span>,</p>
 </section>
@@ -642,7 +601,7 @@ Figure&nbsp;7.1: Source: <span class="citation" data-cites="duflo2007using">Dufl
 <p><span class="math display">\[
 \N \approx \frac{32\vpe}{\tee^2}.
 \]</span></p>
-<p>Using formula <a href="#eq-sample-size" class="quarto-xref">Equation&nbsp;<span>7.2</span></a> we can see that the rule of thumb straightforwardly results from using the default parameters.</p>
+<p>Using formula <a href="#eq-sample-size">Equation&nbsp;<span>7.2</span></a> we can see that the rule of thumb straightforwardly results from using the default parameters.</p>
 <p>Assuming equal sample size, so that <span class="math inline">\(P=0.5\)</span> gives us</p>
 <p><span class="math display">\[
 N = 4 (z_{1 - \beta} + z_{\alpha/2})^2\left(\frac{\sev}{\te}\right)^2.
@@ -816,10 +775,7 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ol>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-bloom1995minimum" class="csl-entry" role="listitem">
-Bloom, Howard S. 1995. <span>“Minimum Detectable Effects: A Simple Way to Report the Statistical Power of Experimental Designs.”</span> <em>Evaluation Review</em> 19 (5): 547–56.
-</div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-bojinov2023design" class="csl-entry" role="listitem">
 Bojinov, Iavor, David Simchi-Levi, and Jinglong Zhao. 2023. <span>“Design and Analysis of Switchback Experiments.”</span> <em>Management Science</em> 69 (7): 3759–77.
 </div>
@@ -831,9 +787,6 @@ Kohavi, Ron, Alex Deng, Roger Longbotham, and Ya Xu. 2014. <span>“Seven Rules 
 </div>
 <div id="ref-larsen2023statistical" class="csl-entry" role="listitem">
 Larsen, Nicholas, Jonathan Stallrich, Srijan Sengupta, Alex Deng, Ron Kohavi, and Nathaniel T Stevens. 2023. <span>“Statistical Challenges in Online Controlled Experiments: A Review of a/b Testing Methodology.”</span> <em>The American Statistician</em>, 1–15.
-</div>
-<div id="ref-list2011so" class="csl-entry" role="listitem">
-List, John A, Sally Sadoff, and Mathis Wagner. 2011. <span>“So You Want to Run an Experiment, Now What? Some Simple Rules of Thumb for Optimal Experimental Design.”</span> <em>Experimental Economics</em> 14: 439–57.
 </div>
 <div id="ref-reich2012empirical" class="csl-entry" role="listitem">
 Reich, Nicholas G, Jessica A Myers, Daniel Obeng, Aaron M Milstone, and Trish M Perl. 2012. <span>“Empirical Power and Sample Size Calculations for Cluster-Randomized and Cluster-Randomized Crossover Studies.”</span> <em>PloS One</em> 7 (4): e35564.
@@ -930,9 +883,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -942,17 +896,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -965,125 +910,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1127,7 +953,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1153,32 +978,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1240,18 +1039,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/testing_and_cis.html" class="pagination-link  aria-label=" &lt;span="" and="" confidence="" intervals&lt;="" span&gt;"="">
+      <a href="../chapters/testing_and_cis.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Testing and confidence intervals</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/analysis.html" class="pagination-link" aria-label="<span class='chapter-number'>8</span>&nbsp; <span class='chapter-title'>Analysis</span>">
+      <a href="../chapters/analysis.html" class="pagination-link">
         <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 

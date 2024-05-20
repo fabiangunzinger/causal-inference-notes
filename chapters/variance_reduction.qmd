@@ -24,7 +24,7 @@ Introduced by researchers at Microsoft in 2013, it has since become an industry 
 
 ### How does CUPED work
 
-The key insight of CUPED is that, given the right data, it is possible to transform the raw outcome metric in a way that leaves the treatment effect estimator ($\tee$) unbiased while reducing its variance. @deng2013improving motivate the approach as follows using an insight from the Monte Carlo simulation literature. Spelling out clearly the logic of their paper we get the following:
+The key insight of CUPED is that, given the right data, it is possible to transform the raw outcome metric in a way that leaves the treatment effect estimator ($\tee$) unbiased while reducing its variance. @deng2013improving motivate the approach using an insight from the Monte Carlo simulation literature. In the following, I want to spell out their approach step by step.
 
 Assume that, in addition to our outcome variable $\yoi$, we have access to another random variable, $X_i$ with known expectation $\mathbb{E}[X_i]$.
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Causal inference notes - 8&nbsp; Analysis</title>
+<title>Online experiments - 8&nbsp; Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,32 +68,35 @@ ul.task-list li input[type="checkbox"] {
     % sample sizes %
     %%%%%%%%%%%%%%%%
 
-    \nc{\Nt}{N_t}
-    \nc{\Nc}{N_c}
     \nc{\N}{N}
+    \nc{\Nt}{\N_t}
+    \nc{\Nc}{\N_c}
     
-    %%%%%%%%%%%%%%%%%%%%%%%%%
-    % treatment assignments %
-    %%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % sampling and treatment assignment %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    \nc{ti}{W}
-    
+    \nc{\ti}{W}                       % treatment indicator
+    \nc{\tii}{\ti_i}                  % treatment indicator for unit i
 
     %%%%%%%%%%%%
     % outcomes %
     %%%%%%%%%%%%
 
-    \nc{yio}{Y_i^{obs}}
-    \nc{ytp}{Y_i(1)}
-    \nc{ycp}{Y_i(0)}
-    \nc{\yto}{Y_t^{obs}}
-    \nc{\yco}{Y_c^{obs}}
-    \nc{ytpb}{\bar{Y}(1)}
-    \nc{ycpb}{\bar{Y}(0)}
-    \nc{\ytob}{\bar{Y}_t^{obs}}
-    \nc{\ycob}{\bar{Y}_c^{obs}}
-    \nc{\ytobf}{\frac{1}{\Nt}\sum_{i:\ti_i=1} \yto}
-    \nc{\ycobf}{\frac{1}{\Nc}\sum_{i:\ti_i=0} \yco}
+    \nc{\y}{Y}
+
+    \nc{\ypt}{\y_i(1)}
+    \nc{\ypc}{\y_i(0)}
+    \nc{\yptb}{\bar{\y}(1)}
+    \nc{\ypcb}{\bar{\y}(0)}
+    
+    \nc{\yo}{\y^{obs}}
+    \nc{\yoi}{\y_i^{obs}}
+    \nc{\yotb}{\bar{\y}_t^{obs}}
+    \nc{\yocb}{\bar{\y}_c^{obs}}
+    
+    \nc{\yotbf}{\frac{1}{\Nt}\sum_{i:\tii=1} \yoi}
+    \nc{\yocbf}{\frac{1}{\Nc}\sum_{i:\tii=0} \yoi}
 
     %%%%%%%%%%%%%%%%%%%%
     % sums of outcomes %
@@ -105,9 +108,9 @@ ul.task-list li input[type="checkbox"] {
 
     \nc{\te}{\tau}
     \nc{\tee}{\hat{\te}}   
-    \nc{\tef}{\ytpb - \ycpb}
-    \nc{\teef}{\ytob - \ycob}
-    \nc{\tefs}{\frac{1}{\N}\sum_{i=1}^N\left(\ytp-\ycp\right)}
+    \nc{\tef}{\yptb - \ypcb}
+    \nc{\teef}{\yotb - \yocb}
+    \nc{\tefs}{\frac{1}{\N}\sum_{i=1}^N\left(\ypt-\ypc\right)}
 
     
     %%%%%%%%%%%%%%%%%%%%
@@ -123,11 +126,11 @@ ul.task-list li input[type="checkbox"] {
     \nc{\vte}{\sev^2_t}
     \nc{\vce}{\sev^2_c}
     \nc{\vpe}{\sev^2}
-    \nc{\vtf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ytp - \ytpb)^2}
-    \nc{\vcf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ycp - \ycpb)^2}
-    \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}\left(\yio - \ytob\right)^2}
-    \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}\left(\yio - \ycob\right)^2}
-    \nc{vpef}{\frac{(\Nt - 1)\vte + (\Nc - 1)\vce}{\Nt + \Nc - 2}}
+    \nc{\vtf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ytp - \yptb)^2}
+    \nc{\vcf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ycp - \ypcb)^2}
+    \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}\left(\yoi - \yotb\right)^2}
+    \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}\left(\yoi - \yocb\right)^2}
+    \nc{\vpef}{\frac{(\Nt - 1)\vte + (\Nc - 1)\vce}{\Nt + \Nc - 2}}
 
     %%%%%%%%%%%%%%%%%%%%%%
     % sampling variances %
@@ -153,32 +156,40 @@ ul.task-list li input[type="checkbox"] {
     % naming convention as for variance but with se prefix
 
     \nc{\se}{\text{se}(\tee)}
-    \nc{\seefu}{\sqrt{\svefu}}
-    \nc{\seefe}{\sqrt{\frac{4\vpe}{\N}}}
-    \nc{\seefp}{\sqrt{\frac{\vpe}{P(1-P)N}}}
+    \nc{\sefu}{\sqrt{\svfu}}
+    \nc{\sefe}{\sqrt{\svfe}}
+    \nc{\sefep}{\sqrt{\frac{\vpe}{P(1-P)N}}}
 
 
     %%%%%%%%%%%%%%%%%%%%%%
     % hypothesis testing %
     %%%%%%%%%%%%%%%%%%%%%%
 
-    \nc{hn}{H_0}
-    \nc{ha}{H_A}
-    \nc{za}{z_\alpha}
-    \nc{zk}{z{1 - \kappa}}
+    \nc{\hn}{H_0}
+    \nc{\ha}{H_A}
+    \nc{\za}{z_\stoe}
+    \nc{\zb}{z_{1 - \stte}}
+
+
+    %%%%%%%%%%%%%%
+    % misc. math %
+    %%%%%%%%%%%%%%
+
+    \nc{\stoe}{\alpha}                % type one error
+    \nc{\stte}{\beta}                 % type two error
 
 
     %%%%%%%%%%%%%%%%%%
     % other commands %
     %%%%%%%%%%%%%%%%%%
 
-    \nc{mc}[1]{\text{\scriptsize(#1)}} %math inline comment
+    \nc{\mc}[1]{\text{\scriptsize(#1)}} %math inline comment
 
     <!-- These aren't working for some reason -->
-    <!-- \nc{lp}{\left(} -->
-    <!-- \nc{rp}{\right)} -->
-    <!-- \nc{lb}{\left[} -->
-    <!-- \nc{rb}{\right]} -->
+    <!-- \nc{\lp}{\left(} -->
+    <!-- \nc{\rp}{\right)} -->
+    <!-- \nc{\lb}{\left[} -->
+    <!-- \nc{\rb}{\right]} -->
 
     \)
 </span>
@@ -210,7 +221,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Causal inference notes</a> 
+      <a href="../">Online experiments</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -331,8 +342,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/variance_reduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
   </div>
 </li>
       </ul>
@@ -349,19 +366,19 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/fwl.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">FWL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">FWL</span></span></a>
   </div>
 </li>
       </ul>

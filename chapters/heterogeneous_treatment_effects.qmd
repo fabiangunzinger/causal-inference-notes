@@ -33,6 +33,13 @@
 
 ## Simpson's paradox
 
+todo:
+- What are the necessary and sufficient conditions for the paradox to occur (the test for us understanding this will be to be able to reproduce a simple example on the spot – as is done brilliantly in youtube video linked below)
+- Understand Wasserman's point that problem is imprecision in how we describe conditional statements with langauge
+
+
+
+
 - Simpson's paradox basically happens due to a kind of omitted variable bias.
 
 - It can occus if pooling data overlooks a confounding driver of the data generation that affects the data in specific ways.
@@ -51,6 +58,11 @@
 - For correlations, the below gif makes things very clear.
 
 ![Pace~svwiki, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons](../inputs/simpsons_paradox.gif)
+
+Useful resources
+- Excellent small example [https://www.youtube.com/watch?v=ebEkn-BiW5k](https://www.youtube.com/watch?v=ebEkn-BiW5k)
+- Relevant section in Wasserman's All of Statistics (where he points out that the key is really that language doesn't precisely express conditional statements)
+
 
 
 ## Resources
