@@ -502,7 +502,7 @@ N = \frac{(\zb + \za)^2}{P(1-P)}\frac{\vpe}{\te^2}.
 <section id="how-does-cuped-work" class="level3" data-number="14.2.1">
 <h3 data-number="14.2.1" class="anchored" data-anchor-id="how-does-cuped-work"><span class="header-section-number">14.2.1</span> How does CUPED work</h3>
 <p>The key insight of CUPED is that, given the right data, it is possible to transform the raw outcome metric in a way that leaves the treatment effect estimator (<span class="math inline">\(\tee\)</span>) unbiased while reducing its variance.</p>
-<p><strong>Treatment effect estimator</strong></p>
+<p><strong>CUPED estimator</strong></p>
 <p>Assume that, in addition to our outcome variable <span class="math inline">\(\yoi\)</span>, we have access to another random variable, <span class="math inline">\(X_i\)</span> with known expectation <span class="math inline">\(\mathbb{E}[X_i]\)</span>.</p>
 <p>We can then define adjusted outcomes for all treatment and control units as</p>
 <p><span class="math display">\[
@@ -527,7 +527,7 @@ N = \frac{(\zb + \za)^2}{P(1-P)}\frac{\vpe}{\te^2}.
 &amp;= \lp{\bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}} - \lp{\bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}}
 \end{align}
 \]</span></p>
-<p><strong>Unbiasedness of treatment effect estimator</strong></p>
+<p><strong>Unbiasedness of CUPED estimator</strong></p>
 <p>The CUPED estimator is unbiased because</p>
 <p><span class="math display">\[
 \begin{align}
@@ -540,8 +540,8 @@ N = \frac{(\zb + \za)^2}{P(1-P)}\frac{\vpe}{\te^2}.
 \end{align}
 \]</span></p>
 <p>which we know is unbiased from <a href="outcomes.html"><span>Chapter&nbsp;4</span></a>.</p>
-<p>If we do this for all units in our experiment, we will get</p>
-<p><span class="math display">\[
+<p>** CUPED estimator variance**</p>
+<p>If we do this for all units in our experiment, we will get gpl <span class="math display">\[
 \yt
 \]</span></p>
 <ul>

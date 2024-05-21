@@ -88,7 +88,7 @@ which we know is unbiased from @sec-outcomes.
 
 
 If we do this for all units in our experiment, we will get
-
+gpl
 $$
 \yt
 $$
