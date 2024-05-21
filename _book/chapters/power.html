@@ -429,7 +429,7 @@ div.csl-indent {
   <li><a href="#old-notes" id="toc-old-notes" class="nav-link" data-scroll-target="#old-notes"><span class="header-section-number">7.8</span> Old notes</a></li>
   <li><a href="#what-determines-power" id="toc-what-determines-power" class="nav-link" data-scroll-target="#what-determines-power"><span class="header-section-number">7.9</span> What determines power</a></li>
   <li><a href="#how-to-increase-power" id="toc-how-to-increase-power" class="nav-link" data-scroll-target="#how-to-increase-power"><span class="header-section-number">7.10</span> How to increase power</a></li>
-  <li><a href="#how-to-choose-key-parameters" id="toc-how-to-choose-key-parameters" class="nav-link" data-scroll-target="#how-to-choose-key-parameters"><span class="header-section-number">7.11</span> How to choose key parameters</a>
+  <li><a href="#sec-setting-key-parameters" id="toc-sec-setting-key-parameters" class="nav-link" data-scroll-target="#sec-setting-key-parameters"><span class="header-section-number">7.11</span> How to set key parameters</a>
   <ul class="collapse">
   <li><a href="#mde" id="toc-mde" class="nav-link" data-scroll-target="#mde"><span class="header-section-number">7.11.1</span> MDE</a></li>
   <li><a href="#significance-level" id="toc-significance-level" class="nav-link" data-scroll-target="#significance-level"><span class="header-section-number">7.11.2</span> Significance level</a></li>
@@ -573,7 +573,7 @@ Z = \frac{\tee}{\se}
 \Phi(1 - \beta)^{-1} &amp;= \Phi\left(\Phi\left(\frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2}\right)\right)^{-1} \\
 z_{1 - \beta} &amp;= \frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2} \\
 \sqrt{P(1-P)N} &amp;= (z_{1 - \beta} + z_{\alpha/2})\left(\frac{\sev}{\te}\right) \\
-N &amp;= \frac{(z_{1 - \beta} + z_{\alpha/2})^2}{P(1-P)}\left(\frac{\sev}{\te}\right)^2.
+N &amp;= \frac{(z_{1 - \beta} + z_{\alpha/2})^2}{P(1-P)}\frac{\vpe}{\te^2}.
 \end{align}
 \tag{7.2}\]</span></span></p>
 </section>
@@ -682,8 +682,8 @@ std = \sqrt{\frac{\sigma^2}{N_t} + \frac{\sigma^2}{N_c}} = \sqrt{\frac{\sigma^2}
 </ul></li>
 </ul>
 </section>
-<section id="how-to-choose-key-parameters" class="level2" data-number="7.11">
-<h2 data-number="7.11" class="anchored" data-anchor-id="how-to-choose-key-parameters"><span class="header-section-number">7.11</span> How to choose key parameters</h2>
+<section id="sec-setting-key-parameters" class="level2" data-number="7.11">
+<h2 data-number="7.11" class="anchored" data-anchor-id="sec-setting-key-parameters"><span class="header-section-number">7.11</span> How to set key parameters</h2>
 <section id="mde" class="level3" data-number="7.11.1">
 <h3 data-number="7.11.1" class="anchored" data-anchor-id="mde"><span class="header-section-number">7.11.1</span> MDE</h3>
 <ul>

@@ -62,6 +62,8 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 </head><body class="nav-sidebar floating"><span class="math inline">
     \(
+
+    \usepackage{mathtools}
     \newcommand{\nc}{\newcommand}
 
     %%%%%%%%%%%%%%%%
@@ -174,6 +176,18 @@ ul.task-list li input[type="checkbox"] {
     %%%%%%%%%%%%%%
     % misc. math %
     %%%%%%%%%%%%%%
+
+    \nc{vs}{\\[5pt]}                       % math mode extra vertical space
+
+
+    \nc{E}[1]{\mathbb{E}\left[#1\right]}    % expectation operator
+    \nc{lb}[1]{\left[#1\right]}             % large brackets
+    \nc{lp}[1]{\left(#1\right)}             % large parenthesis
+
+    \nc{sot}{\sum_{i:W_i=t}}                % sum over treatment units
+    \nc{soc}{\sum_{i:W_i=t}}                % sum over control units
+
+
 
     \nc{\stoe}{\alpha}                % type one error
     \nc{\stte}{\beta}                 % type two error
@@ -469,7 +483,7 @@ E[\ypc | \ti_i = 0] &amp;= E[\ypc]
 \]</span></p>
 <p>which says that we can express the true effect as the difference between the expected outcomes of treated and untreated untis – we have identified a way for expressing the treatment effect in quantities we can actually estimate based on available data. In particular, the above suggests the following estimation approach:</p>
 <p><span id="eq-ate-est"><span class="math display">\[
-\boxed{\tee = \teef}
+\tee = \teef
 \tag{4.3}\]</span></span></p>
 <p>where</p>
 <p><span class="math display">\[

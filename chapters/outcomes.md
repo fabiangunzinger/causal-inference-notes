@@ -84,7 +84,7 @@ available data. In particular, the above suggests the following
 estimation approach:
 
 $$
-\boxed{\tee = \teef}
+\tee = \teef
 $$ {#eq-ate-est}
 
 where

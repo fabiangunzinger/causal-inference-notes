@@ -81,6 +81,8 @@ div.csl-indent {
 }</script>
 </head><body class="nav-sidebar floating"><span class="math inline">
     \(
+
+    \usepackage{mathtools}
     \newcommand{\nc}{\newcommand}
 
     %%%%%%%%%%%%%%%%
@@ -193,6 +195,18 @@ div.csl-indent {
     %%%%%%%%%%%%%%
     % misc. math %
     %%%%%%%%%%%%%%
+
+    \nc{vs}{\\[5pt]}                       % math mode extra vertical space
+
+
+    \nc{E}[1]{\mathbb{E}\left[#1\right]}    % expectation operator
+    \nc{lb}[1]{\left[#1\right]}             % large brackets
+    \nc{lp}[1]{\left(#1\right)}             % large parenthesis
+
+    \nc{sot}{\sum_{i:W_i=t}}                % sum over treatment units
+    \nc{soc}{\sum_{i:W_i=t}}                % sum over control units
+
+
 
     \nc{\stoe}{\alpha}                % type one error
     \nc{\stte}{\beta}                 % type two error
@@ -469,25 +483,63 @@ div.csl-indent {
 
 <section id="why-reduce-variance" class="level2" data-number="14.1">
 <h2 data-number="14.1" class="anchored" data-anchor-id="why-reduce-variance"><span class="header-section-number">14.1</span> Why reduce variance?</h2>
-<p>We have seen in chapter <a href="power.html"><span>Chapter&nbsp;7</span></a> that if we want to control our Type I and Type II error rate, the required total sample size our experiment is given by:</p>
+<p>We have seen in chapter <a href="power.html"><span>Chapter&nbsp;7</span></a> that if we want to control our Type I and Type II error rate, the required total sample size for our experiment is given by:</p>
 <p><span class="math display">\[
-N = \frac{(z_{1 - \beta} + z_{\alpha/2})^2}{P(1-P)}\left(\frac{\sev}{\te}\right)^2.
+N = \frac{(\zb + \za)^2}{P(1-P)}\frac{\vpe}{\te^2}.
 \]</span></p>
-<p>Now, <span class="math inline">\(\za\)</span> and <span class="math inline">\(\zb\)</span> are fixed given …</p>
-<p>This makes clear that reducing <span class="math inline">\(\sev\)</span> is one of our main levers to reduce required sample size.</p>
+<p>However, in a typical experiment, all elements but the outcome metric variance, <span class="math inline">\(\vpe\)</span>, are usually pre-determined:</p>
+<ul>
+<li><p><span class="math inline">\(\za\)</span> and <span class="math inline">\(\zb\)</span> by the significance level and the level of power we need,</p></li>
+<li><p><span class="math inline">\(P\)</span> by how we choose to allocate traffic between variants (for two variants, it usually equalls 0.5),</p></li>
+<li><p>and the absolute minimum detectable effect, <span class="math inline">\(\te\)</span>, ideally by business rationale.</p></li>
+</ul>
+<p>This makes reducing variance one of the main levers we have to reduce required sample size and thus increase experiemnt speed, which is the reason why it is such a key topic in the online experimentation literature.</p>
 </section>
 <section id="cuped" class="level2" data-number="14.2">
 <h2 data-number="14.2" class="anchored" data-anchor-id="cuped"><span class="header-section-number">14.2</span> CUPED</h2>
-<p>CUPED stands for “<strong>C</strong>ontrolled experiments <strong>U</strong>sing <strong>P</strong>re-<strong>E</strong>xperiment <strong>D</strong>ata”, and reduces variance by partialling out outcome metric variance based on pre-experiment data.</p>
-<p>Introduced by researchers at Microsoft in 2013, it has since become an industry standard and is used by companies such as Booking.com, Netflix, and Meta, as well as commercial experimentation platforms such as Eppo and Statsig.</p>
+<p>CUPED stands for “<strong>C</strong>ontrolled experiments <strong>U</strong>sing <strong>P</strong>re-<strong>E</strong>xperiment <strong>D</strong>ata”. It uses data from the pre-experiment period to partial out the time-invariant component of the outcome metric variance, thus reducing total variance.</p>
+<p>Introduced by <span class="citation" data-cites="deng2013improving">(<a href="#ref-deng2013improving" role="doc-biblioref"><strong>deng2013improving?</strong></a>)</span>, it has since become an industry standard and is used by companies such as Booking.com, Netflix, and Meta, as well as commercial experimentation platforms such as Eppo and Statsig.</p>
 <section id="how-does-cuped-work" class="level3" data-number="14.2.1">
 <h3 data-number="14.2.1" class="anchored" data-anchor-id="how-does-cuped-work"><span class="header-section-number">14.2.1</span> How does CUPED work</h3>
-<p>The key insight of CUPED is that, given the right data, it is possible to transform the raw outcome metric in a way that leaves the treatment effect estimator (<span class="math inline">\(\tee\)</span>) unbiased while reducing its variance. <span class="citation" data-cites="deng2013improving">(<a href="#ref-deng2013improving" role="doc-biblioref"><strong>deng2013improving?</strong></a>)</span> motivate the approach using an insight from the Monte Carlo simulation literature. In the following, I want to spell out their approach step by step.</p>
+<p>The key insight of CUPED is that, given the right data, it is possible to transform the raw outcome metric in a way that leaves the treatment effect estimator (<span class="math inline">\(\tee\)</span>) unbiased while reducing its variance.</p>
+<p><strong>Treatment effect estimator</strong></p>
 <p>Assume that, in addition to our outcome variable <span class="math inline">\(\yoi\)</span>, we have access to another random variable, <span class="math inline">\(X_i\)</span> with known expectation <span class="math inline">\(\mathbb{E}[X_i]\)</span>.</p>
-<p>We can then transform <span class="math inline">\(\yoi\)</span> for each unit such that</p>
+<p>We can then define adjusted outcomes for all treatment and control units as</p>
 <p><span class="math display">\[
-\y^{cuped}_i = \yoi - \theta\bar{X} + \theta\mathbb{E}[X_i].
+\y^{cuped}_i = \yoi - \theta X_i + \theta\mathbb{E}[X_i].
 \]</span></p>
+<p>Calculating the average outcome for the treatment group, we get</p>
+<p><span class="math display">\[
+\begin{align}
+\bar{\y}^{cuped}_t &amp;= \frac{1}{\Nt}\sot Y^{cuped}_i \vs
+&amp;= \frac{1}{\Nt}\sot\lp{\yoi - \theta X_i + \theta\mathbb{E}[X_i]} \vs
+&amp;= \bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}.
+\end{align}
+\]</span></p>
+<p>Similarly, for the control group, we have</p>
+<p><span class="math display">\[
+\bar{\y}^{cuped}_c = \bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}.
+\]</span></p>
+<p>Our treatment effect estimator is now</p>
+<p><span class="math display">\[
+\begin{align}
+\hat{\tau}^{cuped} &amp;= \lp{\bar{\y}^{cuped}_t - \bar{\y}^{cuped}_c} \vs
+&amp;= \lp{\bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}} - \lp{\bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}}
+\end{align}
+\]</span></p>
+<p><strong>Unbiasedness of treatment effect estimator</strong></p>
+<p>The CUPED estimator is unbiased because</p>
+<p><span class="math display">\[
+\begin{align}
+\E{\hat{\tau}^{cuped}}
+&amp;= \E{\lp{\bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}} - \lp{\bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}}} \vs
+&amp;= \E{\bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}} - \E{\bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}} \vs
+&amp;= \lp{\E{\bar{Y}^{obs}_t} - \theta \E{\bar{X}_t} + \theta\E{X_i | \tii = 1}} - \lp{\E{\bar{Y}^{obs}_c} - \theta \E{\bar{X}_c} + \theta\E{X_i | \tii = 0}} \vs
+&amp;= \E{\bar{Y}^{obs}_t} - \E{\bar{Y}^{obs}_c} \vs
+&amp;= \E{\tee},
+\end{align}
+\]</span></p>
+<p>which we know is unbiased from <a href="outcomes.html"><span>Chapter&nbsp;4</span></a>.</p>
 <p>If we do this for all units in our experiment, we will get</p>
 <p><span class="math display">\[
 \yt

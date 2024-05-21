@@ -175,7 +175,7 @@ $$
 \Phi(1 - \beta)^{-1} &= \Phi\left(\Phi\left(\frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2}\right)\right)^{-1} \\
 z_{1 - \beta} &= \frac{\te}{\sev}\sqrt{P(1-P)N} - z_{\alpha/2} \\
 \sqrt{P(1-P)N} &= (z_{1 - \beta} + z_{\alpha/2})\left(\frac{\sev}{\te}\right) \\
-N &= \frac{(z_{1 - \beta} + z_{\alpha/2})^2}{P(1-P)}\left(\frac{\sev}{\te}\right)^2.
+N &= \frac{(z_{1 - \beta} + z_{\alpha/2})^2}{P(1-P)}\frac{\vpe}{\te^2}.
 \end{align}
 $$ {#eq-sample-size}
 
@@ -323,7 +323,7 @@ $$ N =  \frac{(t_a + t_{1-\kappa})^2}{P(1-P)}\left(\frac{\sigma}{\delta}\right)^
   - Only include triggered users
 
 
-## How to choose key parameters
+## How to set key parameters {#sec-setting-key-parameters}
 
 ### MDE
 

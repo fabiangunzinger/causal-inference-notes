@@ -2,37 +2,90 @@
 
 ## Why reduce variance?
 
-We have seen in chapter @sec-power that if we want to control our Type I and Type II error rate, the required total sample size our experiment is given by:
+We have seen in chapter @sec-power that if we want to control our Type I and Type II error rate, the required total sample size for our experiment is given by:
 
 $$
-N = \frac{(z_{1 - \beta} + z_{\alpha/2})^2}{P(1-P)}\left(\frac{\sev}{\te}\right)^2.
+N = \frac{(\zb + \za)^2}{P(1-P)}\frac{\vpe}{\te^2}.
 $$
 
-Now, $\za$ and $\zb$ are fixed given ...
+However, in a typical experiment, all elements but the outcome metric variance, $\vpe$, are usually pre-determined:
 
+- $\za$ and $\zb$ by the significance level and the level of power we need,
 
-This makes clear that reducing $\sev$ is one of our main levers to reduce required sample size.
+- $P$ by how we choose to allocate traffic between variants (for two variants, it usually equalls 0.5),
 
+- and the absolute minimum detectable effect, $\te$, ideally by business rationale.
+
+This makes reducing variance one of the main levers we have to reduce required sample size and thus increase experiemnt speed, which is the reason why it is such a key topic in the online experimentation literature.
 
 
 ## CUPED
 
-CUPED stands for "**C**ontrolled experiments **U**sing **P**re-**E**xperiment **D**ata", and reduces variance by partialling out outcome metric variance based on pre-experiment data.
+CUPED stands for "**C**ontrolled experiments **U**sing **P**re-**E**xperiment **D**ata". It uses data from the pre-experiment period to partial out the time-invariant component of the outcome metric variance, thus reducing total variance.
 
-Introduced by researchers at Microsoft in 2013, it has since become an industry standard and is used by companies such as Booking.com, Netflix, and Meta, as well as commercial experimentation platforms such as Eppo and Statsig.
+Introduced by @deng2013improving, it has since become an industry standard and is used by companies such as Booking.com, Netflix, and Meta, as well as commercial experimentation platforms such as Eppo and Statsig.
 
 
 ### How does CUPED work
 
-The key insight of CUPED is that, given the right data, it is possible to transform the raw outcome metric in a way that leaves the treatment effect estimator ($\tee$) unbiased while reducing its variance. @deng2013improving motivate the approach using an insight from the Monte Carlo simulation literature. In the following, I want to spell out their approach step by step.
+The key insight of CUPED is that, given the right data, it is possible to transform the raw outcome metric in a way that leaves the treatment effect estimator ($\tee$) unbiased while reducing its variance.
+
+**CUPED estimator**
 
 Assume that, in addition to our outcome variable $\yoi$, we have access to another random variable, $X_i$ with known expectation $\mathbb{E}[X_i]$.
 
-We can then transform $\yoi$ for each unit such that
+We can then define adjusted outcomes for all treatment and control units as
 
 $$
-\y^{cuped}_i = \yoi - \theta\bar{X} + \theta\mathbb{E}[X_i].
+\y^{cuped}_i = \yoi - \theta X_i + \theta\mathbb{E}[X_i].
 $$
+
+Calculating the average outcome for the treatment group, we get
+
+$$
+\begin{align}
+\bar{\y}^{cuped}_t &= \frac{1}{\Nt}\sot Y^{cuped}_i \vs
+&= \frac{1}{\Nt}\sot\lp{\yoi - \theta X_i + \theta\mathbb{E}[X_i]} \vs
+&= \bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}.
+\end{align}
+$$
+
+Similarly, for the control group, we have
+
+$$
+\bar{\y}^{cuped}_c = \bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}.
+$$
+
+
+Our treatment effect estimator is now
+
+$$
+\begin{align}
+\hat{\tau}^{cuped} &= \lp{\bar{\y}^{cuped}_t - \bar{\y}^{cuped}_c} \vs
+&= \lp{\bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}} - \lp{\bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}}
+\end{align}
+$$
+
+
+**Unbiasedness of CUPED estimator**
+
+The CUPED estimator is unbiased because
+
+$$
+\begin{align}
+\E{\hat{\tau}^{cuped}}
+&= \E{\lp{\bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}} - \lp{\bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}}} \vs
+&= \E{\bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}} - \E{\bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}} \vs
+&= \lp{\E{\bar{Y}^{obs}_t} - \theta \E{\bar{X}_t} + \theta\E{X_i | \tii = 1}} - \lp{\E{\bar{Y}^{obs}_c} - \theta \E{\bar{X}_c} + \theta\E{X_i | \tii = 0}} \vs
+&= \E{\bar{Y}^{obs}_t} - \E{\bar{Y}^{obs}_c} \vs
+&= \E{\tee},
+\end{align}
+$$
+
+which we know is unbiased from @sec-outcomes.
+
+** CUPED estimator variance**
+
 
 If we do this for all units in our experiment, we will get
 
