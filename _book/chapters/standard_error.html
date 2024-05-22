@@ -81,6 +81,7 @@ div.csl-indent {
 }</script>
 </head><body class="nav-sidebar floating"><span class="math inline">
     \(
+
     \newcommand{\nc}{\newcommand}
 
     %%%%%%%%%%%%%%%%
@@ -193,6 +194,22 @@ div.csl-indent {
     %%%%%%%%%%%%%%
     % misc. math %
     %%%%%%%%%%%%%%
+
+    \nc{vs}{\\[5pt]}                       % math mode extra vertical space
+
+
+    \nc{E}[1]{\mathbb{E}\left[#1\right]}    % expectation operator
+    \nc{V}[1]{\mathbb{V}\left(#1\right)}    % variance operator
+
+    \nc{lb}[1]{\left[#1\right]}             % large brackets
+    \nc{lp}[1]{\left(#1\right)}             % large parenthesis
+    \nc{llp}[1]{\biggl(#1\biggr)}           % large, large parenthesis
+
+
+    \nc{sot}{\sum_{i:W_i=t}}                % sum over treatment units
+    \nc{soc}{\sum_{i:W_i=t}}                % sum over control units
+
+
 
     \nc{\stoe}{\alpha}                % type one error
     \nc{\stte}{\beta}                 % type two error
@@ -447,7 +464,7 @@ div.csl-indent {
 </header>
 
 <p>In this section, we’ll derive the standard error of our treatment effect stimator <span class="math inline">\(\tee\)</span>.</p>
-<p>Our treatment effect estimate, <span class="math inline">\(\tee\)</span>, is a random variable because sampling and treatment assignment are random. This means that if we were to repeat the sampe experiment many times we’d get a slightly different value for <span class="math inline">\(\tee\)</span> each time. The distribution of all these values is called the sampling distribution of <span class="math inline">\(\tee\)</span>. We know a few things about that distribution. From the central limit theorem we know that its shape is Normal (see <span class="quarto-unresolved-ref">?sec-stats-foundations</span>). Above we have shown above that the distribution has mean <span class="math inline">\(\te\)</span>, which means our estimator is unbiased. Naturally, the distribution also has a standard deviation. Because it is a sampling distribution, that standard deviation is called the standard error. But it is still a standard deviation, and is thus defined as the square root of the variance. We’ll thus find the standard error as follows: we first derive the variance of the treatment estimate, then find a way to estimate that variance, and then take the square root of that estimate to get the standard error.</p>
+<p>Our treatment effect estimate, <span class="math inline">\(\tee\)</span>, is a random variable because sampling and treatment assignment are random. This means that if we were to repeat the sampe experiment many times we’d get a slightly different value for <span class="math inline">\(\tee\)</span> each time. The distribution of all these values is called the sampling distribution of <span class="math inline">\(\tee\)</span>. We know a few things about that distribution. From the central limit theorem we know that its shape is Normal (see <a href="stats_foundations.html"><span>Chapter&nbsp;16</span></a>). Above we have shown above that the distribution has mean <span class="math inline">\(\te\)</span>, which means our estimator is unbiased. Naturally, the distribution also has a standard deviation. Because it is a sampling distribution, that standard deviation is called the standard error. But it is still a standard deviation, and is thus defined as the square root of the variance. We’ll thus find the standard error as follows: we first derive the variance of the treatment estimate, then find a way to estimate that variance, and then take the square root of that estimate to get the standard error.</p>
 <section id="treatment-effect-estimate-variance" class="level3" data-number="5.0.1">
 <h3 data-number="5.0.1" class="anchored" data-anchor-id="treatment-effect-estimate-variance"><span class="header-section-number">5.0.1</span> Treatment effect estimate variance</h3>
 <p>The way we sample units into our experiment and assign them to treatment groups has important implications for the variance. For the estimation of the treatment effect above, the main implication of the simple random sample proceedure commonly used for online experiments (see chapter <a href="treatment_assignment.html"><span>Chapter&nbsp;3</span></a>) was that the expectation of potential ourcomes for treatment and control groups were identical. For the derivation of the variance and the standard error, the main implication is that sampling and treatment assignment between units are independent in the sense that one unit being sampled or assigned to a treatment condition doesn’t affect other units’ sampling or assignment probabilities.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>

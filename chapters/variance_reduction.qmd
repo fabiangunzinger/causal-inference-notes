@@ -44,7 +44,8 @@ Calculating the average outcome for the treatment group, we get
 
 $$
 \begin{align}
-\bar{\y}^{cuped}_t &= \frac{1}{\Nt}\sot Y^{cuped}_i \vs
+\bar{\y}^{cuped}_t
+&= \frac{1}{\Nt}\sot Y^{cuped}_i \vs
 &= \frac{1}{\Nt}\sot\lp{\yoi - \theta X_i + \theta\mathbb{E}[X_i]} \vs
 &= \bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}.
 \end{align}
@@ -57,12 +58,11 @@ $$
 $$
 
 
-Our treatment effect estimator is now
+We can now define the CUPED treatment effect estimator as
 
 $$
 \begin{align}
-\hat{\tau}^{cuped} &= \lp{\bar{\y}^{cuped}_t - \bar{\y}^{cuped}_c} \vs
-&= \lp{\bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}} - \lp{\bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}}
+\hat{\tau}^{cuped} &= \bar{\y}^{cuped}_t - \bar{\y}^{cuped}_c
 \end{align}
 $$
 
@@ -74,6 +74,7 @@ The CUPED estimator is unbiased because
 $$
 \begin{align}
 \E{\hat{\tau}^{cuped}}
+&= \E{\bar{\y}^{cuped}_t - \bar{\y}^{cuped}_c} \vs
 &= \E{\lp{\bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}} - \lp{\bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}}} \vs
 &= \E{\bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}} - \E{\bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}} \vs
 &= \lp{\E{\bar{Y}^{obs}_t} - \theta \E{\bar{X}_t} + \theta\E{X_i | \tii = 1}} - \lp{\E{\bar{Y}^{obs}_c} - \theta \E{\bar{X}_c} + \theta\E{X_i | \tii = 0}} \vs
@@ -82,16 +83,68 @@ $$
 \end{align}
 $$
 
-which we know is unbiased from @sec-outcomes.
+which we know to be unbiased from @sec-outcomes.
 
-** CUPED estimator variance**
+**CUPED estimator variance**
 
+What remains to be shown is that the variance of the CUPED estimator is smaller than the variance of the unadjusted treatment effect estimator, $\tee$. We derived that variance in @sec-standard-error; given our results there, we need to show that:
 
-If we do this for all units in our experiment, we will get
-gpl
 $$
-\yt
+\V{\tee^{cuped}} < \V{\tee} =\frac{\vt}{\Nt} + \frac{\vc}{\Nc}.
 $$
+
+Let's start by applying the variance operator as usual:
+
+$$
+\begin{align}
+\V{\hat{\tau}^{cuped}}
+&= \V{\bar{\y}^{cuped}_t - \bar{\y}^{cuped}_c} \vs
+\mc{Independent samples} &= \V{\bar{\y}^{cuped}_t} - \V{\bar{\y}^{cuped}_c} \vs
+&= \V{\bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}} - \V{\bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}} \vs
+&= \V{\bar{Y}^{obs}_t - \theta \bar{X}_t} - \V{\bar{Y}^{obs}_c - \theta \bar{X}_c} \vs
+\end{align}
+$$
+
+Focusing on the expression on the left-hand side:
+
+$$
+\begin{align}
+\V{\bar{Y}^{obs}_t - \theta \bar{X}_t}
+&= \V{\frac{1}{\Nt}\sot\yoi - \theta \frac{1}{\Nt}\sot X_i} \vs
+&= \frac{1}{\Nt^2}\V{\sot\yoi - \theta \sot X_i} \vs
+&= \frac{1}{\Nt^2}\V{\sot\lp{\yoi - \theta X_i}} \vs
+\mc{i.i.d sampling} &= \frac{1}{\Nt^2}{\sot\V{\yoi - \theta X_i}} \vs
+\mc{i.i.d sampling} &= \frac{1}{\Nt^2}\Nt\V{\yoi - \theta X_i | \tii = 1} \vs
+&= \frac{1}{\Nt}\V{\yoi - \theta X_i | \tii = 1} \vs
+&= \frac{1}{\Nt}\llp{\vt + \theta^2 \sigma_{X, t}^2 - 2\theta Cov_t(\yoi, X_i)},
+\end{align}
+$$
+
+where, to keep notation ligher, I define $\vt = \V{\yoi | \tii = 1}$, $\sigma_{X, t}^2 = \V{X_i | \tii = 1}$, and $Cov_t(\yoi, X_i) = Cov(\yoi, X_i | \tii = 1)$.
+
+Using this expression and the similar one for the control group, we can write
+
+$$
+\begin{align}
+\V{\hat{\tau}^{cuped}} = &\frac{1}{\Nt}\llp{\vt + \theta^2 \sigma_{X, t}^2 - 2\theta Cov_t(\yoi, X_i)} \vs
+&+ \frac{1}{\Nc}\llp{\vc + \theta^2 \sigma_{X, c}^2 - 2\theta Cov_c(\yoi, X_i)}.
+\end{align}
+$$
+
+The goal now is to choose $\theta$ such as to minimise that variance. Taking the derivative with respect to $\theta$, setting the result to zero and rearranging we get:
+
+$$
+\theta^* = \frac{\frac{1}{\Nt}Cov_t(\yoi, X_i) + \frac{1}{\Nc}Cov_c(\yoi, X_i)}{\frac{1}{\Nt}\sigma_{X, t}^2 + \frac{1}{\Nc}\sigma_{X, c}^2}.
+$$
+
+We could calculate that from the data. However, in practice we usually assume that $\Nt = \Nc$, 
+
+
+in the context of online experiments, where sample sizes are very large and treatment effects usually small, 
+
+
+
+
 
 
 
@@ -167,7 +220,8 @@ $\hat{\tau}^{cuped}$ has variance:
 
 $$
 \begin{align*}
-\mathbb{V}\left(\hat{\tau}^{cuped}\right) &= \mathbb{V}\left(\bar{Y}^{cuped}_t - \bar{Y}^{cuped}_c\right) \\
+\mathbb{V}\left(\hat{\tau}^{cuped}\right)
+&= \mathbb{V}\left(\bar{Y}^{cuped}_t - \bar{Y}^{cuped}_c\right) \\
 &= \mathbb{V}\left(\bar{Y}^{cuped}_t\right) + \mathbb{V}\left(\bar{Y}^{cuped}_c\right) \\
 &= \mathbb{V}\left(\bar{Y}_t - \theta \bar{X}_t + \theta \mathbb{E}X\right) + \mathbb{V}\left(\bar{Y}_c - \theta \bar{X}_c + \theta
 \mathbb{E}X\right) \\

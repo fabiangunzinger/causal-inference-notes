@@ -63,7 +63,6 @@ ul.task-list li input[type="checkbox"] {
 </head><body class="nav-sidebar floating"><span class="math inline">
     \(
 
-    \usepackage{mathtools}
     \newcommand{\nc}{\newcommand}
 
     %%%%%%%%%%%%%%%%
@@ -181,8 +180,12 @@ ul.task-list li input[type="checkbox"] {
 
 
     \nc{E}[1]{\mathbb{E}\left[#1\right]}    % expectation operator
+    \nc{V}[1]{\mathbb{V}\left(#1\right)}    % variance operator
+
     \nc{lb}[1]{\left[#1\right]}             % large brackets
     \nc{lp}[1]{\left(#1\right)}             % large parenthesis
+    \nc{llp}[1]{\biggl(#1\biggr)}           % large, large parenthesis
+
 
     \nc{sot}{\sum_{i:W_i=t}}                % sum over treatment units
     \nc{soc}{\sum_{i:W_i=t}}                % sum over control units

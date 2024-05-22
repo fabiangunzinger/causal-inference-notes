@@ -14,6 +14,18 @@ from statsmodels.api import ProbPlot
 sns.set_style("whitegrid")
 ``` -->
 
+
+## Properties of variances
+
+$$
+\begin{align}
+Var(X + c) = Var(X) \vs
+Var(X + Y + c) = Var(X + Y)
+\begin{end}
+$$ {#eq-var-properties}
+
+
+
 ## Important moments of random variables
 
 In general, the kth uncentered moment of a discrete random variable X is defined by
