@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Fabian Gunzinger">
+<meta name="dcterms.date" content="2024-05-28">
+
+<title>CUPED</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="cuped_files/libs/clipboard/clipboard.min.js"></script>
+<script src="cuped_files/libs/quarto-html/quarto.js"></script>
+<script src="cuped_files/libs/quarto-html/popper.min.js"></script>
+<script src="cuped_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="cuped_files/libs/quarto-html/anchor.min.js"></script>
+<link href="cuped_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="cuped_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="cuped_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="cuped_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="cuped_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="cuped.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">CUPED</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Fabian Gunzinger </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 28, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="what-is-cuped" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-cuped">What is CUPED?</h2>
+<ul>
+<li><p>CUPED stands for <strong>C</strong>ontrolled experiments <strong>U</strong>sing <strong>P</strong>re-<strong>E</strong>xperiment <strong>D</strong>ata</p></li>
+<li><p>It is a statistical method to make experiments faster by reducing outcome metric variance</p></li>
+<li><p>It was introduced by researchers at Microsoft in 2013 and is an industry standard</p></li>
+<li><p>We’ve recently deployed it in our experimentation evaluation pipeline</p></li>
+</ul>
+</section>
+<section id="the-plan-for-the-next-hour" class="level2">
+<h2 class="anchored" data-anchor-id="the-plan-for-the-next-hour">The plan for the next hour</h2>
+<ol type="1">
+<li><p>Why reduce variance?</p></li>
+<li><p>How does CUPED do it?</p></li>
+<li><p>The road to CUPED at JET</p></li>
+</ol>
+</section>
+<section id="why-reduce-variance" class="level1">
+<h1>Why reduce variance?</h1>
+<section id="experiment-setup" class="level2">
+<h2 class="anchored" data-anchor-id="experiment-setup">Experiment setup</h2>
+<ul>
+<li><p>We randomly sample <span class="math inline">\(N\)</span> units from a larger population (e.g.&nbsp;UK customers) — the proportion of units we sample is our <strong>audience percentage</strong> on JETFM</p></li>
+<li><p>For a two-variant experiment, we then randomly allocate each unit to either the treatment group (<span class="math inline">\(W_i = 1)\)</span> or control group (<span class="math inline">\(W_i = 0\)</span>)</p></li>
+<li><p>For each unit <span class="math inline">\(i\)</span>, we observe an outcome <span class="math inline">\(Y_i\)</span> — this is <span class="math inline">\(i\)</span>’s value for a given outcome metric</p></li>
+</ul>
+</section>
+<section id="defining-causal-effects" class="level2">
+<h2 class="anchored" data-anchor-id="defining-causal-effects">Defining causal effects</h2>
+<ul>
+<li><p>Each unit has an outcome <span class="math inline">\(Y(1)_i\)</span> if they’re assigned to treatment and outcome <span class="math inline">\(Y(0)_i\)</span> if they’re assigned to control</p></li>
+<li><p>We can’t observe both, and before the beginning of the experiment, we don’t know which one we’ll observe — so they’re called <strong>potential outcomes</strong></p></li>
+<li><p>The <strong>unit-level causal effect</strong> of the treatment — the true effect of our feature on unit <span class="math inline">\(i\)</span> is</p></li>
+</ul>
+<p><span class="math display">\[
+Y(1)_i - Y(0)_i
+\]</span></p>
+<ul>
+<li>The <strong>average treatment effect (ATE)</strong> across all units is</li>
+</ul>
+<p><span class="math display">\[
+\tau = \frac{1}{N}\sum_{i=1}^N \left(Y(1)_i - Y(0)_i \right) = \bar{Y}(1)_t - \bar{Y}(0)_c
+\]</span></p>
+<ul>
+<li><p>The ATE is simple the average individual-level causal effect</p></li>
+<li><p>Hence, potential outcomes provide a coherent way to think about causal effects</p></li>
+</ul>
+</section>
+<section id="estimating-the-average-treatment-effect" class="level2">
+<h2 class="anchored" data-anchor-id="estimating-the-average-treatment-effect">Estimating the average treatment effect</h2>
+<ul>
+<li><p>That true effect is unobservable (why?)</p></li>
+<li><p>We estimate is using the difference in average observed outcomes in the treatment and control groups</p></li>
+</ul>
+<p><span class="math display">\[
+\hat{\tau} = \bar{Y}_t - \bar{Y}_c
+\]</span></p>
+<p><span class="math inline">\(\qquad\)</span> where</p>
+<p><span class="math display">\[
+\bar{Y}_t = \frac{1}{N_t}\sum_{i:W_i = 1} Y_i \qquad \qquad \bar{Y}_c = \frac{1}{N_c}\sum_{i:W_i = 0} Y_i
+\]</span></p>
+<ul>
+<li>One reason <span class="math inline">\(\bar{\tau}\)</span> is a good estimator of <span class="math inline">\(\tau\)</span> is because it is <strong>unbiased</strong>—on average, we get the right answer</li>
+</ul>
+</section>
+<section id="variance-of-treatment-effect-estimator" class="level2">
+<h2 class="anchored" data-anchor-id="variance-of-treatment-effect-estimator">Variance of treatment effect estimator</h2>
+<ul>
+<li><p>Because we randomly draw units from the population and randomly assign them to variants, all the <span class="math inline">\(Y_i\)</span> values we observe are random</p></li>
+<li><p><span class="math inline">\(\bar{Y}_t\)</span> and <span class="math inline">\(\bar{Y}_c\)</span> are constructed from these random values, so they are also random</p></li>
+<li><p><span class="math inline">\(\hat{\tau}\)</span> is thus constructed from random values, and is also random</p></li>
+<li><p>For <span class="math inline">\(\hat{\tau}\)</span> to be random means that if we were to rerun the experiment many times, we’d get a different value of <span class="math inline">\(\hat{\tau}\)</span> every time</p></li>
+<li><p>That variation is captured by the variance of <span class="math inline">\(\hat{\tau}\)</span>, which — for a typical experiment — is given by</p></li>
+</ul>
+<p><span class="math display">\[
+\mathbb{V}(\hat{\tau}) = \frac{4\sigma^2}{N},
+\]</span></p>
+<p><span class="math inline">\(\qquad\)</span> where <span class="math inline">\(\sigma^2\)</span> is the variance of all the <span class="math inline">\(Y_i\)</span> values in the overall population</p>
+</section>
+<section id="testing-for-significance" class="level2">
+<h2 class="anchored" data-anchor-id="testing-for-significance">Testing for significance</h2>
+<ul>
+<li><p>To determine if the <span class="math inline">\(\hat{\tau}\)</span> value from our experiment is due to randomness or a true underlying effect, we perform an hypothesis test</p></li>
+<li><p>We define our hypotheses</p></li>
+</ul>
+<p><span class="math display">\[
+\begin{align}
+H_0: \tau = 0 \qquad H_A: \tau \neq 0
+\end{align}
+\]</span></p>
+<ul>
+<li><p>We define our significance level, <span class="math inline">\(\alpha\)</span>, and get the associated critical value, <span class="math inline">\(z_{\alpha/2}\)</span></p></li>
+<li><p>We calculate the test statistic</p></li>
+</ul>
+<p><span class="math display">\[
+Z = \frac{\hat{\tau} - \tau_{H_0}}{\sqrt{\frac{4\sigma^2}{N}}}
+\]</span></p>
+<ul>
+<li>We reject <span class="math inline">\(H_0\)</span> if <span class="math inline">\(|Z| &gt; z_{\alpha/2}\)</span></li>
+</ul>
+</section>
+<section id="errors" class="level2">
+<h2 class="anchored" data-anchor-id="errors">Errors</h2>
+<table class="table">
+<caption>Types of errors</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong><span class="math inline">\(\mathbf{H_0}\)</span></strong></th>
+<th><strong><span class="math inline">\(\mathbf{H_A}\)</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><span class="math inline">\(\mathbf{H_0}\)</span> not rejected</strong></td>
+<td>Correct decision</td>
+<td><strong>Type II error</strong></td>
+</tr>
+<tr class="even">
+<td><strong><span class="math inline">\(\mathbf{H_0}\)</span> rejected</strong></td>
+<td><strong>Type I error</strong></td>
+<td>Correct decision</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Commonly, we define</li>
+</ul>
+<p><span class="math display">\[
+\begin{align}
+P(\text{Type I error}) &amp;= P(\text{reject $H_0$} \,|\, \text{$H_0$}) = \alpha \\[5pt]
+P(\text{Type II error}) &amp;= P(\text{not reject $H_0$} \,|\, \text{$H_A$}) = \beta\\[5pt]
+&amp;\text{and}\\[5pt]
+\text{Power} &amp;= P(\text{reject $H_0$} \,|\, \text{$H_A$}) = 1 - \beta
+\end{align}
+\]</span></p>
+<ul>
+<li><p>Setting <span class="math inline">\(\alpha = 0.05\)</span> and <span class="math inline">\(\text{Power} = 0.8\)</span>, as we typically do, means that over the long run</p>
+<ul>
+<li>we reject <span class="math inline">\(H_0\)</span> in 5% of the cases where it is true</li>
+<li>we fail to reject <span class="math inline">\(H_0\)</span> in 20% of cases where it is false</li>
+</ul></li>
+</ul>
+</section>
+<section id="controlling-error-rates" class="level2">
+<h2 class="anchored" data-anchor-id="controlling-error-rates">Controlling error rates</h2>
+<ul>
+<li><p>How do we control the two error rates?</p></li>
+<li><p>We control Type I error rate by rejecting <span class="math inline">\(H_0\)</span> if <span class="math inline">\(|Z| &gt; z_{\alpha/2}\)</span></p></li>
+<li><p>Given that <span class="math inline">\(\text{Power} = P(\text{reject $H_0$} | \text{$H_A$})\)</span> we can control it setting</p></li>
+</ul>
+<p><span class="math display">\[
+\begin{align}
+P(|Z| &gt; z_{\alpha/2} \, |\,\text{$H_A$}) &amp;= \text{Power} \\
+P\left(\left|\frac{\hat{\tau} - \tau_{H_0}}{\sqrt{\frac{4\sigma^2}{N}}}\right| &gt; z_{\alpha/2} \, |\,\text{$H_A$}\right) &amp;= \text{Power} \\
+\end{align}
+\]</span></p>
+<ul>
+<li>Rearranging this, and doing (lots of!) algebra, we get</li>
+</ul>
+<p><span class="math display">\[
+N = \frac{(z_{\alpha/2} + z_{1-\beta})^2}{P(1-P)}\frac{\sigma^2}{\tau^2}.
+\]</span></p>
+</section>
+<section id="why-reduce-variance-finally" class="level2">
+<h2 class="anchored" data-anchor-id="why-reduce-variance-finally">Why reduce variance (finally!)?</h2>
+<ul>
+<li><p>Experiment duration is determined by how long it takes to reach required sample size</p></li>
+<li><p>We can control Type I and Type II error rates by calculating required sample size as</p></li>
+</ul>
+<p><span class="math display">\[
+N = \frac{(z_{\alpha/2} + z_{1-\beta})^2}{P(1-P)}\frac{\sigma^2}{\tau^2}.
+\]</span></p>
+<ul>
+<li><p>Typically, all elements but <span class="math inline">\(\hat{\sigma}^2\)</span> are pre-determined</p></li>
+<li><p>Hence: reducing <span class="math inline">\(\hat{\sigma}^2\)</span> is our main lever to reduce sample size and reduce duration</p></li>
+</ul>
+</section>
+</section>
+<section id="how-cuped-reduces-variance" class="level1">
+<h1>How CUPED reduces variance</h1>
+<section id="the-key-insight" class="level2">
+<h2 class="anchored" data-anchor-id="the-key-insight">The key insight</h2>
+<ul>
+<li><p>Assume that in addition to <span class="math inline">\(Y_i^{obs}\)</span>, we also have <span class="math inline">\(X_i^{obs}\)</span>,</p></li>
+<li><p><span class="math inline">\(X_i\)</span> can be any variable that is (i) correlated with <span class="math inline">\(Y_i\)</span> and (ii) independent of treatment allocation</p></li>
+<li><p>We can then define a new adjusted variable, <span class="math inline">\(Y_i^{cuped}\)</span>, as</p></li>
+</ul>
+<p><span class="math display">\[
+Y^{cuped}_i = Y_i - \theta X_i
+\]</span></p>
+<ul>
+<li>Using <span class="math inline">\(Y^{cuped}_i\)</span> instead of <span class="math inline">\(Y_i\)</span> for experiment evaluation leaves <span class="math inline">\(\hat{\tau}\)</span> unbiased but reduces its variance</li>
+</ul>
+</section>
+<section id="the-cuped-estimator" class="level2">
+<h2 class="anchored" data-anchor-id="the-cuped-estimator">The CUPED estimator</h2>
+<ul>
+<li>The estimator using the unadjusted data was</li>
+</ul>
+<p><span class="math display">\[
+\hat{\tau} = \bar{Y}_t - \bar{Y}_c
+\]</span></p>
+<ul>
+<li>Naturally, the CUPED estimator is</li>
+</ul>
+<p><span class="math display">\[
+\begin{align}
+\hat{\tau}^{cuped}
+&amp;= \bar{Y}^{cuped}_t - \bar{Y}^{cuped}_c
+\end{align}
+\]</span></p>
+</section>
+<section id="unbiasedness-of-the-cuped-estimator" class="level2">
+<h2 class="anchored" data-anchor-id="unbiasedness-of-the-cuped-estimator">Unbiasedness of the CUPED estimator</h2>
+<ul>
+<li>Using our adjusted variable, we have</li>
+</ul>
+<p><span class="math display">\[
+\begin{align}
+\bar{Y}^{cuped}_t
+&amp;= \frac{1}{N_t}\sum_{i:W_i = 1} Y^{cuped}_i
+= \frac{1}{N_t}\sum_{i:W_i = 1}\left(Y_i - \theta X_i\right)
+= \bar{Y}^{obs}_t - \theta \bar{X}_t \\[5pt]
+\bar{Y}^{cuped}_c
+&amp;= \frac{1}{N_c}\sum_{i:W_i = 0} Y^{cuped}_i
+= \frac{1}{N_c}\sum_{i:W_i = 0}\left(Y_i - \theta X_i\right)
+= \bar{Y}^{obs}_c - \theta \bar{X}_c
+\end{align}
+\]</span></p>
+<ul>
+<li>So we can rewrite the CUPED estimator as</li>
+</ul>
+<p><span class="math display">\[
+\begin{align}
+\hat{\tau}^{cuped}
+&amp;= \bar{Y}^{cuped}_t - \bar{Y}^{cuped}_c \\[5pt]
+&amp;= \left(\bar{Y}^{obs}_t - \theta \bar{X}_t\right)
+- \left(\bar{Y}^{obs}_c - \theta \bar{X}_c\right)
+\end{align}
+\]</span></p>
+</section>
+<section id="unbiasedness-of-the-cuped-estimator-cont." class="level2">
+<h2 class="anchored" data-anchor-id="unbiasedness-of-the-cuped-estimator-cont.">Unbiasedness of the CUPED estimator (cont.)</h2>
+<ul>
+<li>To show that <span class="math inline">\(\hat{\tau}\)</span> is unbiased, we have to show that</li>
+</ul>
+<!-- 
+
+
+
+Calculating the average outcome for the treatment group, we get
+
+
+Similarly, for the control group, we have
+
+$$
+\bar{\y}^{cuped}_c = \bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}.
+$$
+
+
+We can now define the CUPED treatment effect estimator as
+
+$$
+\begin{align}
+\hat{\tau}^{cuped} &= \bar{\y}^{cuped}_t - \bar{\y}^{cuped}_c
+\end{align}
+$$
+
+
+**Unbiasedness of CUPED estimator**
+
+The CUPED estimator is unbiased because
+
+$$
+\begin{align}
+\E{\hat{\tau}^{cuped}}
+&= \E{\bar{\y}^{cuped}_t - \bar{\y}^{cuped}_c} \vs
+&= \E{\lp{\bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}} - \lp{\bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}}} \vs
+&= \E{\bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}} - \E{\bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}} \vs
+&= \lp{\E{\bar{Y}^{obs}_t} - \theta \E{\bar{X}_t} + \theta\E{X_i | \tii = 1}} - \lp{\E{\bar{Y}^{obs}_c} - \theta \E{\bar{X}_c} + \theta\E{X_i | \tii = 0}} \vs
+&= \E{\bar{Y}^{obs}_t} - \E{\bar{Y}^{obs}_c} \vs
+&= \E{\tee},
+\end{align}
+$$
+
+which we know to be unbiased from @sec-outcomes.
+
+**CUPED estimator variance**
+
+What remains to be shown is that the variance of the CUPED estimator is smaller than the variance of the unadjusted treatment effect estimator, $\tee$. We derived that variance in @sec-standard-error; given our results there, we need to show that:
+
+$$
+\V{\tee^{cuped}} < \V{\tee} =\frac{\vt}{\Nt} + \frac{\vc}{\Nc}.
+$$
+
+Let's start by applying the variance operator as usual:
+
+$$
+\begin{align}
+\V{\hat{\tau}^{cuped}}
+&= \V{\bar{\y}^{cuped}_t - \bar{\y}^{cuped}_c} \vs
+\mc{Independent samples} &= \V{\bar{\y}^{cuped}_t} - \V{\bar{\y}^{cuped}_c} \vs
+&= \V{\bar{Y}^{obs}_t - \theta \bar{X}_t + \theta\E{X_i | \tii = 1}} - \V{\bar{Y}^{obs}_c - \theta \bar{X}_c + \theta\E{X_i | \tii = 0}} \vs
+&= \V{\bar{Y}^{obs}_t - \theta \bar{X}_t} - \V{\bar{Y}^{obs}_c - \theta \bar{X}_c} \vs
+\end{align}
+$$
+
+Focusing on the expression on the left-hand side:
+
+$$
+\begin{align}
+\V{\bar{Y}^{obs}_t - \theta \bar{X}_t}
+&= \V{\frac{1}{\Nt}\sot\yoi - \theta \frac{1}{\Nt}\sot X_i} \vs
+&= \frac{1}{\Nt^2}\V{\sot\yoi - \theta \sot X_i} \vs
+&= \frac{1}{\Nt^2}\V{\sot\lp{\yoi - \theta X_i}} \vs
+\mc{i.i.d sampling} &= \frac{1}{\Nt^2}{\sot\V{\yoi - \theta X_i}} \vs
+\mc{i.i.d sampling} &= \frac{1}{\Nt^2}\Nt\V{\yoi - \theta X_i | \tii = 1} \vs
+&= \frac{1}{\Nt}\V{\yoi - \theta X_i | \tii = 1} \vs
+&= \frac{1}{\Nt}\llp{\vt + \theta^2 \sigma_{X, t}^2 - 2\theta Cov_t(\yoi, X_i)},
+\end{align}
+$$
+
+where, to keep notation ligher, I define $\vt = \V{\yoi | \tii = 1}$, $\sigma_{X, t}^2 = \V{X_i | \tii = 1}$, and $Cov_t(\yoi, X_i) = Cov(\yoi, X_i | \tii = 1)$.
+
+Using this expression and the similar one for the control group, we can write
+
+$$
+\begin{align}
+\V{\hat{\tau}^{cuped}} = &\frac{1}{\Nt}\llp{\vt + \theta^2 \sigma_{X, t}^2 - 2\theta Cov_t(\yoi, X_i)} \vs
+&+ \frac{1}{\Nc}\llp{\vc + \theta^2 \sigma_{X, c}^2 - 2\theta Cov_c(\yoi, X_i)}.
+\end{align}
+$$
+
+The goal now is to choose $\theta$ such as to minimise that variance. Taking the derivative with respect to $\theta$, setting the result to zero and rearranging we get:
+
+$$
+\theta^* = \frac{\frac{1}{\Nt}Cov_t(\yoi, X_i) + \frac{1}{\Nc}Cov_c(\yoi, X_i)}{\frac{1}{\Nt}\sigma_{X, t}^2 + \frac{1}{\Nc}\sigma_{X, c}^2}.
+$$
+
+We could calculate that from the data. However, in practice we usually assume that $\Nt = \Nc$, 
+
+
+in the context of online experiments, where sample sizes are very large and treatment effects usually small, 
+
+
+
+
+
+
+
+
+- We can then define $\bar{Y}^{cuped} = \bar{Y} - \theta \bar{X} + \theta \mathbb{E}X$ for both treatment and control groups, and compare avearge outcomes in this adjusted metric.
+
+- Our new estimator is: $\hat{\tau}^{cuped} = \bar{Y}^{cuped}_t - \bar{Y}^{cuped}_c$.
+
+- $\hat{\tau}^{cuped}$ is unbiased since $\mathbb{E}\left[\hat{\tau}^{cuped}\right] = \bar{Y}_t - \bar{Y}_c = \tau$ (proof in appendix below).
+
+- If treatment effects are small (which, in practice, they usually are) and for an optimal choice of $\theta$: $\mathbb{V}\left(\hat{\tau}^{cuped}\right) \simeq \left(\frac{s_t}{N_t} + \frac{s_c}{N_c}\right)\left(1 - \rho^2\right)$, where $\rho$ is the correlation coefficient of $Y$ and $X$.
+
+- Hence: $\frac{\mathbb{V}(\hat{\tau}^{cuped})}{\mathbb{V}(\hat{\tau}^{dif})} = 1 - \rho^2$ -- the higher the correlation between $Y$ and $X$, the more CUPED reduces the variance of our treatment estimate.
+
+
+
+
+$$
+Y_i^{cuped} = Y_i - \frac{Cov(Y, X)}{Var(X)} X_i
+$$
+
+
+### How does CUPED work?
+
+
+CUPED supposes that in addition to an outcome metric $y$, we also have access to another variable, $x$, which is correlated with $y$ but uncorrelated with the treatment assignment of our experiment. Pre-experiment data of the outcome metric is a good candidate for $x$ when it is available -- it's what's commonly used, and where the method gets its name from. With that in hand, notice that we can write
+
+ -- the most obvious candidate that has been found to work well is pre-experiment data of the metric of interest.
+
+We can then create a new variable 
+
+$$
+\tilde{y} = y - \theta x,
+$$
+
+where -- it turns out -- the optimal choice for $\theta$ is $\frac{cov(y, x)}{var(x)}$, which we can easily calculate from the available data.
+
+This is useful because it can be shown that if we now evaluate our experiment using $\tilde{y}$ instead of $y$, the treatment estimate will be the same but it's standard error will be lower, which will increase power. The standard error of the treatment effect estimate is lower because the variance of $\tilde{y}$ is lower than that of $y$ whenever $cov(y, x) \neq 0$, that is, whenever $x$ and $y$ are indeed correlated. To be precise, we have:
+
+$$
+var(\tilde{y}) = var(y)(1 - \rho^2),
+$$
+
+where $\rho$ is the Pearson correlation between $x$ and $y$:
+
+$$
+\rho = \frac{cov(y, x)}{var(x)var(y)}.
+$$
+
+
+
+Presentation notes:
+
+
+$\hat{\tau}^{cuped}$ is unbiased:
+
+$$
+\begin{align*}
+\mathbb{E}\left[\hat{\tau}^{cuped}\right] &= \mathbb{E}\left[\bar{Y}^{cuped}_t - \bar{Y}^{cuped}_c\right] \\
+&= \mathbb{E}\left[\left(\bar{Y}_t - \theta \bar{X}_t + \theta \mathbb{E}X\right) - \left(\bar{Y}_c - \theta \bar{X}_c + \theta \mathbb{E}X\right)\right] \\
+&= \mathbb{E}\left[\left(\bar{Y}_t - \theta \bar{X}_t\right) - \left(\bar{Y}_c - \theta \bar{X}_c\right)\right] \\
+&= \mathbb{E}\left[\bar{Y}_t - \bar{Y}_c\right] \\
+&= \mathbb{E}\left[\frac{1}{N_t}\sum_{\text{i:T=1}}Y_i- \frac{1}{N_c}\sum_{\text{i:T=0}}Y_i\right] \\
+&= \frac{1}{N_t} N_t \mathbb{E}Y_t - \frac{1}{N_c} N_c \mathbb{E}Y_c \\
+&= \mathbb{E}Y_t - \mathbb{E}Y_c \\
+&= \bar{Y}_t - \bar{Y}_c \\
+&= \tau
+\end{align*}
+$$
+
+
+$\hat{\tau}^{cuped}$ has variance:
+
+$$
+\begin{align*}
+\mathbb{V}\left(\hat{\tau}^{cuped}\right)
+&= \mathbb{V}\left(\bar{Y}^{cuped}_t - \bar{Y}^{cuped}_c\right) \\
+&= \mathbb{V}\left(\bar{Y}^{cuped}_t\right) + \mathbb{V}\left(\bar{Y}^{cuped}_c\right) \\
+&= \mathbb{V}\left(\bar{Y}_t - \theta \bar{X}_t + \theta \mathbb{E}X\right) + \mathbb{V}\left(\bar{Y}_c - \theta \bar{X}_c + \theta
+\mathbb{E}X\right) \\
+&= \mathbb{V}\left(\bar{Y}_t - \theta \bar{X}_t\right) + \mathbb{V}\left(\bar{Y}_c - \theta \bar{X}_c\right) \\
+&= \frac{1}{N_t}\mathbb{V}\left(Y_t - \theta X_t\right) + \frac{1}{N_c}\mathbb{V}\left(Y_c - \theta X_c\right) \\
+&= \frac{1}{N_t}\left[\mathbb{V}(Y_t) + \theta^2 \mathbb{V}(X_t) - 2\theta Cov(Y_t, X_t)\right] + \frac{1}{N_c}\left[\mathbb{V}(Y_c) + \theta^2 \mathbb{V}(X_c) - 2\theta Cov(Y_c, X_c)\right]
+\end{align*}
+$$
+
+This is minimised for:
+
+$$
+\theta^* = \frac{Cov(Y_t, X_t) + Cov(Y_c, X_c)}{\mathbb{V}(X_t) + \mathbb{V}(X_c)}
+$$
+
+In practice, a common approach is to pool the data to get:
+
+$$
+\begin{align*}
+\theta^*_p &= \frac{Cov(Y, X) + Cov(Y, X)}{\mathbb{V}(X) + \mathbb{V}(X)}\\
+&= \frac{Cov(Y, X)}{\mathbb{V}(X)},
+\end{align*}
+$$
+
+and to assume that $\mathbb{V}(X_t) \simeq \mathbb{V}(X_t)$, and $Cov(Y_t, X_t) \simeq Cov(Y_c, X_c)$, which is reasonable as long as the treatment effect is not too large (see discussion towards the end [here](https://alexdeng.github.io/causal/sensitivity.html#vrreg)). If, in addition, we let $\rho = Cor(X, Y)$, then we have
+
+$$
+\begin{align*}
+\mathbb{V}\left(\hat{\tau}^{cuped}\right) &\simeq \frac{1}{N_t}\left[\mathbb{V}(Y_t) + (\theta^*_p)^2 \mathbb{V}(X) - 2 \theta^*_p Cov(Y, X)\right] + \frac{1}{N_c}\left[\mathbb{V}(Y_c) + (\theta^*_p)^2 \mathbb{V}(X) - 2 \theta^*_p Cov(Y, X)\right]\\
+&= \frac{1}{N_t}\left[\mathbb{V}(Y_t) + \left(\frac{Cov(Y, X)}{\mathbb{V}(X)}\right)^2 \mathbb{V}(X) - 2 \left(\frac{Cov(Y, X)}{\mathbb{V}(X)}\right) Cov(Y, X)\right] + \frac{1}{N_c}\left[\mathbb{V}(Y_c) + \left(\frac{Cov(Y, X)}{\mathbb{V}(X)}\right)^2 \mathbb{V}(X) - 2 \left(\frac{Cov(Y, X)}{\mathbb{V}(X)}\right) Cov(Y, X)\right]\\
+&= \frac{1}{N_t}\left[\mathbb{V}(Y_t) - \frac{Cov(Y, X)^2}{\mathbb{V}(X)}\right] + \frac{1}{N_c}\left[\mathbb{V}(Y_c) - \frac{Cov(Y, X)^2}{\mathbb{V}(X)}\right]\\
+&= \frac{1}{N_t}\left[\mathbb{V}(Y_t) - \frac{\left(\rho\sqrt{\mathbb{V}(X)}\sqrt{\mathbb{V}(Y)}\right)^2}{\mathbb{V}(X)}\right] + \frac{1}{N_c}\left[\mathbb{V}(Y_c) - \frac{\left(\rho\sqrt{\mathbb{V}(X)}\sqrt{\mathbb{V}(Y)}\right)^2}{\mathbb{V}(X)}\right]\\
+&= \frac{1}{N_t}\left[\mathbb{V}(Y_t) - \rho^2\mathbb{V}(Y)\right] + \frac{1}{N_c}\left[\mathbb{V}(Y_c) - \rho^2\mathbb{V}(Y)\right]\\
+&= \frac{\mathbb{V}(Y_t)}{N_t}(1 - \rho^2) + \frac{\mathbb{V}(Y_c)}{N_c}(1 - \rho^2)\\
+&= \left[\frac{\mathbb{V}(Y_t)}{N_t} + \frac{\mathbb{V}(Y_c)}{N_c}\right]\left(1 - \rho^2\right)
+\end{align*}
+$$
+
+
+In practice, we use the sample variances $s_t = \frac{1}{N_t - 1}\sum_{\text{i:T=1}}\left(Y_i - \bar{Y}_t^{obs}\right)^2$ and $s_c = \frac{1}{N_c - 1}\sum_{\text{i:T=0}}\left(Y_i - \bar{Y}_c^{obs}\right)^2$ as unbiased estimators for the variances of treatment and control outcomes, and a sample estimate of the correlation coefficient, $\rho$.
+
+
+**Things to notice**
+
+- The main "trick" CUPED relies on for unbiasedness is the fact that we don't actually have to know $\mathbb{E}X$ to obtain an unbiased estimator since it cancels out when we take the difference of two CUPED-adjusted variables.
+
+- Any fixed value of $\theta$ will give us an unbiased estimator of $\tau$, so pooling the data and assuming equal variances and covariances in the treatment and control groups, as we did to calculate the variance, effect the degree of variance reduction only. If we didn't make these assumptions, the factor by which CUPED reduces variance would be a more complicated term than $\left(1 - \rho^2\right)$, involving separte variances and covariances from the treatment and control groups.
+
+
+### What does effect of CUPED depend on?
+
+
+### Features
+
+- Also permits non-linear adjustments (i.e. not reliant on linearity assumptions in OLS)
+
+- Reduces biase (see statsic post)
+
+
+### Questions
+
+Questions:
+
+- [ ] Why does fillna(y) not increase variance
+- [ ] What happens if pre and post perfectly correlated
+- [ ] How much do actual metric values change due to adjustment
+
+
+### Implementation challenges
+
+### Is CUPED regression adjustment?
+
+todo:
+- Incorporate Rice content on prediction and MSE (chapter 4.4 and ipad notes), which exactly gets us the CUPED result, again showing that CUPED is a re-invention of linear regression and standard stats 
+
+- Is CUPED regression adjustment? Identical to regression only in simple case (show FWL link -- have separate post on understanding FWL with relevant regression examples)
+
+- Take inclusion of constant into accound (centering variables, but doesn't change correlations)
+
+- Show that in multiple regression, var(Y_adjusted) = var(y_unadjusted)(1 - R^2) -- so, CUPED result is just a specieal case where k = 1, in which case R^2 = rho. 
+
+- I think it really is. CUPED can be extended to (make notation consistent with CUPED)
+
+$$
+y' = y - \theta \bar{f(X)} + \theta E(f(X))
+$$
+
+- In above, it can be shown that optimal $f(X) = E(Y|X)$ (show this). CUPED uses best linear predictor. CUPAC extends this to non-linear predictors, generating $\hat{y} = g(X) = E(Y|X)$. This is an example of using a non-linear function of X as Deng points out is possible. But if you do this, theta is still the OLS coefficient, so it's still equivalent to just sticking g(X) into the regression as a covariate.
+
+- The motivation for CUPED seems to be a bit of a strawman: that regression adjustment relies on assumption that expectation of Y conditional on X is linear. Imbens and Rubin in 7.5 show that this is not required. Neither is homoskedasticity, or, rather, this should hold anyways given randomisation. Study chapter 7.
+
+- As pointed out in @tang2000control, the Deng argument that you don't need linear assumptions in CUPED seems to be inspired by the Friedman critique of OLS for experiments. 
+
+- So the CUPED motivation might not be a strawem as much as a result of the debate in statistics about whether you should use OLS for experiment analysis or not. This is probs the way I want to frame the entire issue -- review debate (key point of Friedman critique, Lin's repsonse, Imbens and Rubin's take, and then discuss cuped and regression adjustment in that light). Basically, if you follow Lin, then cuped is just regression adjustment. If you follow Friedman, then you shouldn't do regression adjustment and use cuped. But then do practical comparisons and show that you get the same results in practice, which seems to show that using linear regression clearly works.
+
+
+It turns out that in the simple cases discussed above, it doesn't -- the two approaches are identical! Seeing why requires a few steps.
+
+First, we know (from the Frisch-Waugh-Lowell [theorem](https://en.wikipedia.org/wiki/Frisch%E2%80%93Waugh%E2%80%93Lovell_theorem)) that if we were to estimate the alternative model 
+
+$$
+\tilde{y}_i = \alpha + \beta_1^* \tilde{d}_i + \epsilon_i,
+$$
+
+where $\tilde{y}_i$ is the residual from regressing $y$ on $x$, and $\tilde{d}_i$ the residual from regressing $d$ on $x$, we would find that $\beta_1^* = \beta_1$. That is, the two models are identical.
+
+Second, to obtain $\tilde{y}$, we first estimate
+
+$$
+y = \alpha + \delta x_i + u_i,
+$$
+
+and then calculate $\tilde{y} = y - \delta x$ (the calculation of $\tilde{d}_i$ works analogously). Given that this is a simple regression model, we know that $\delta = \frac{cov(y, x)}{var(x)}$ so that 
+
+$$
+\tilde{y} = y - \frac{cov(y, x)}{var(x)}x.
+$$
+
+Finally, above in our discussion of CUPED we have seen that the CUPED-adjusted outcome metric $\tilde{y}$ is defined in exactly the same way. Hence, to evaluate an experiment with a CUPED-adjusted outcome, we would estimate the model:
+
+$$
+\tilde{y}_i = \alpha + \beta^* d_i + \epsilon_i^*,
+$$
+
+Notice that the only difference to model (2) is that we don't adjust the treatment assignment -- we use $d_i$ instead of $\tilde{d}_i$. But if the treatment assignment is random, then $cov(d, x) = 0$ so that the adjustment has no effect and we have $\tilde{d}_i = d_i$. Hence, the two approaches are the same.
+
+In general, regression adjustment and CUPED are identical if two conditions hold: (1) the treatment indicator is independent of $x$, and (2) we use a linear CUPED adjustment. In the context of experimentation, where treatment is random, and with the classical (linear) CUPED adjustment discussed above, this is always the case.
+
+The reason why in practice we get a don't get the exact same result is that the covariance of $d$ and $x$ is only approximately 0, hence providing very similar, but not identical results.
+
+
+
+### Is CUPED DiD?
+
+- Is CUPED DiD? (based on Courthoud) -- same if theta = 1
+
+
+### Non-linear extensions
+
+
+### Blog post notes
+
+CUPED is a re-invention of multiple linear regression. Evan Miller ([here](https://www.evanmiller.org/you-cant-spell-cuped-without-frisch-waugh-lovell.html)) and Matteo Courthoud ([here](https://towardsdatascience.com/understanding-cuped-a822523641af)) make similar points in their excellent posts on the topic, but -- given my starting point -- neither quite helped me fully understand what is going on. This post is my attempt to do that.
+
+In particular, I think that to really understand the connection between multiple linear regression and CUPED, you have to understand the linear algebra of the Frisch-Waugh-Lowell theorem (FWL) rather than just knowing that that theorem says, and to understand that, you have to understand the concept of a projection.
+
+
+
+
+### Useful resources
+
+- [The original CUPED paper](https://www.exp-platform.com/Documents/2013-02-CUPED-ImprovingSensitivityOfControlledExperiments.pdf) -- the original paper
+
+- [Variance reduction section of Deng's causal inference book](https://alexdeng.github.io/causal/sensitivity.html#vrreg) -- more in-depth discussion of some aspects of CUPED and its link to regression adjustment
+
+- [Improving the Sensitivity of Online Controlled
+Experiments: Case Studies at Netflix](https://www.kdd.org/kdd2016/papers/files/adp0945-xieA.pdf)
+
+- [How Booking.com increases the power of online experiments with CUPED](https://booking.ai/how-booking-com-increases-the-power-of-online-experiments-with-cuped-995d186fff1d)
+
+- [You can't spell CUPED without Frisch-Waugh-Lovell](https://www.evanmiller.org/you-cant-spell-cuped-without-frisch-waugh-lovell.html) -- good post exploring link to FWL theorem
+
+- [Understanding CUPED](https://towardsdatascience.com/understanding-cuped-a822523641af) -- good post exploring link to multiple regression (also using FWL theorem) and DiD.
+
+- [Reducing variance in A/B testing with CUPED](https://bytepawn.com/reducing-variance-in-ab-testing-with-cuped.html#reducing-variance-in-ab-testing-with-cuped)
+
+- [CUPED on Statsig](https://blog.statsig.com/cuped-on-statsig-d57f23122d0e)
+
+
+
+
+
+
+## Stratification
+
+TODO
+
+### Useful resources
+
+- [Deng et al. 2013 -- original CUPED paper](https://www.exp-platform.com/Documents/2013-02-CUPED-ImprovingSensitivityOfControlledExperiments.pdf) -- the original paper
+
+- [Five ways to reduce variance in A/B testing](https://bytepawn.com/five-ways-to-reduce-variance-in-ab-testing.html#five-ways-to-reduce-variance-in-ab-testing)
+
+
+
+## Regression adjustment
+
+Regression adjustment reduces variance by adding additional regressors to the regression model used to evaluate an experiment in order to reduce residual variance.
+
+**How it works**
+
+To evaluate an experiment where we have, for each unit $i$, an outcome metric $y_i$ and a treatment assignment indicator $d_i$ we would estimate the following linear regression model using OLS:
+
+$$
+y_i = \alpha + \beta d_i + \epsilon_i,
+$$
+
+where $\epsilon_i$ is the error term, and where the estimate of $\beta$ is the estimate of our average treatment effect. If we have an additional variable, $x_i$, that is correlated with $y_i$ but uncorrelated with $d_i$, we can add that to the right hand side of our regression model and estimate:
+
+$$
+y_i = \alpha + \beta_1 d_i + \beta_2 x_i + \mu_i.
+$$
+
+If $x$ is uncorrelated with the treatment assignment then $\beta = \beta_1$, so the average treatment effect estimate will remain unchanged, which is good. And if $x$ is correlated with $y$, then the standard error of the average treatment effect estimate will again be lower, which increases power.
+
+### Useful resources
+
+- Imbens & Rubin, Causal Inference for Statistics, Social, and Biomedical Sciences, Chapter 7 [link](https://www.cambridge.org/core/books/causal-inference-for-statistics-social-and-biomedical-sciences/71126BE90C58F1A431FE9B2DD07938AB)
+
+
+## CUPAC
+
+- CUPED was designed by folks at Doordash [@tang2000control] to reduce the duration of their switchback experiments, which -- according to their paper -- it did by about 25 percent.
+
+- CUPED can be extended to (make notation consistent with CUPED)
+
+$$
+y' = y - \theta \bar{f(X)} + \theta E(f(X))
+$$
+
+- In above, it can be shown that optimal $f(X) = E(Y|X)$ (show this).
+
+- CUPED, which is effectively regression adjustment, uses best linear predictor.
+
+- CUPAC extends this to non-linear predictors, generating $\hat{y} = g(X) = E(Y|X)$.
+
+### Advantages
+
+- Can be used for metrics that have no pre-experiment data (if you have variables that correlate with the metric and are unaffected by the treatment)
+
+### Thoughts
+
+- There are two approaches: predict the experiment-time outcome or predict the pre-experiment value.
+
+- If you do the former, then you need features that are unaffected by the treatment. This means that for reach metric and each experiment, you need to collect features that meet this requirement. This will be different for each metric and experiment because for many features, whether or not the feature is impacted by the treatment depends on the specific experiment (i.e. where in the funnel the feature is active). This could be solved by finding, for each metric of interest, a set of features that are always independent of the treatment (such as distance between restaurant and customer, or the type of browser used by a customer), but it's not at all clear that finding a set of features with good predictive properties is possible for all our metrics. Hence, building this into a pipeline in an automated way would be an enormous endeavour, if it's possible at all.
+
+- This approach is thus really only viable in a very specialised setting where you keep running the same type of experiment, and thus have to build and train the model manually and only once (this is how it's being used for courier experiments).
+
+- To ensure that features really are independent of treatment condition, they actively monitor correlations for each running experiment.
+
+- @tang2000control gives the example of reducing average daily delivery time, where a delivery-level covariate that is unaffected by treatment is distance between restaurant and customer. 
+
+
+### Useful resources
+
+- [Control Using Predictions as Covariates in Switchback Experiments]([file:///Users/fabian.gunzinger/Downloads/code_final_draft1.pdf](https://www.researchgate.net/publication/345698207_Control_Using_Predictions_as_Covariates_in_Switchback_Experiments))
+
+
+## Other methods
+
+- [Variance Reduction Using In-Experiment Data: Efficient and Targeted Online Measurement for Sparse and Delayed Outcomes](https://alexdeng.github.io/public/files/kdd2023-inexp.pdf)
+
+
+## Useful resources
+
+- [Five ways to reduce variance in A/B testing](https://bytepawn.com/five-ways-to-reduce-variance-in-ab-testing.html#five-ways-to-reduce-variance-in-ab-testing)
+
+- [Online Experiments Tricks — Variance Reduction](https://towardsdatascience.com/online-experiments-tricks-variance-reduction-291b6032dcd7)
+
+- [CUPED, CUPAC, and Other Ways to Reduce Variance in an Experiment](https://j-sephb-lt-n.github.io/exploring_statistics/cuped_cupac_and_other_variance_reduction_techniques.html)
+
+- [Don't use a t-test for A/B testing](https://towardsdatascience.com/dont-use-a-t-test-for-a-b-testing-e4d2ef7ab9b6)
+
+- [Variance Reduction in Experiments — Part 1: Intuition -- see also part 2](https://towardsdatascience.com/variance-reduction-in-experiments-part-1-intuition-68b270a0df71)
+
+
+
+ -->
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

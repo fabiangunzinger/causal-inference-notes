@@ -582,8 +582,10 @@ N = \frac{(\zb + \za)^2}{P(1-P)}\frac{\vpe}{\te^2}.
 \]</span></p>
 <p>The goal now is to choose <span class="math inline">\(\theta\)</span> such as to minimise that variance. Taking the derivative with respect to <span class="math inline">\(\theta\)</span>, setting the result to zero and rearranging we get:</p>
 <p><span class="math display">\[
-\theta^* = \frac{\frac{1}{\Nt}Cov_t(\yoi, X_i) + \frac{1}{\Nc}Cov_c(\yoi, X_i)}{\frac{1}{\Nt}\sigma_{X, t}^2 + \frac{1}{\Nc}\sigma_{X, c}^2}
+\theta^* = \frac{\frac{1}{\Nt}Cov_t(\yoi, X_i) + \frac{1}{\Nc}Cov_c(\yoi, X_i)}{\frac{1}{\Nt}\sigma_{X, t}^2 + \frac{1}{\Nc}\sigma_{X, c}^2}.
 \]</span></p>
+<p>We could calculate that from the data. However, in practice we usually assume that <span class="math inline">\(\Nt = \Nc\)</span>,</p>
+<p>in the context of online experiments, where sample sizes are very large and treatment effects usually small,</p>
 <ul>
 <li><p>We can then define <span class="math inline">\(\bar{Y}^{cuped} = \bar{Y} - \theta \bar{X} + \theta \mathbb{E}X\)</span> for both treatment and control groups, and compare avearge outcomes in this adjusted metric.</p></li>
 <li><p>Our new estimator is: <span class="math inline">\(\hat{\tau}^{cuped} = \bar{Y}^{cuped}_t - \bar{Y}^{cuped}_c\)</span>.</p></li>
