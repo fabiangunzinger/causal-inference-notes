@@ -1,10 +1,12 @@
 ---
 title: "CUPED"
 author: "Fabian Gunzinger"
-date: "28 May 2024"
+date: 28 May 2024
+date-format: D MMM YYYY
+slide-number: true
 format:
   revealjs:
-    smaller: true
+    smaller: true  
 ---
 
 ## What is CUPED?
@@ -25,6 +27,22 @@ format:
 2. How does CUPED reduce variance?
 
 3. The road to CUPED at JET
+
+## My goal
+
+Everyone
+
+- Understand how all the formulae and terms (alpha, etc.) hang together
+
+People with stats background 
+
+- get deeper understanding...
+
+
+People without 
+
+- get good sense of how experimetation works at high-level, how CUPED works, 
+- that math needn't be scary
 
 
 # Why reduce variance?
@@ -370,6 +388,16 @@ $$
 
 
 # The road to CUPED at JET
+
+## The road to CUPED at JET
+
+1. Pilot: OneWeb Ireland (H1 2023)
+
+2. Change in metric computation pipeline (Q3 2023)
+
+3. Option appraisal (Q4 2023)
+
+4. Implementation (Q1 2024)
 
 
 # Useful resources
