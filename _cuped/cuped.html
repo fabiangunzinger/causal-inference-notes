@@ -508,8 +508,16 @@ N = 32\frac{\mathbb{V}(Y_i)^2}{\text{MDE}^2}.
 <h2>How does CUPED reduce variance and speed up experiments?</h2>
 </section>
 <section id="the-key-insight" class="slide level2">
-<h2>The key insight</h2>
-<p><em>With suitable extra data, we can <strong>adjust our outcome metric</strong> such that the <strong>treatment estimate remains unchanged</strong> while the variable’s <strong>variance is lower</strong>, which reduces experiment duration</em></p>
+<h2>The key insight<br><br></h2>
+<p><em>With suitable extra data, we can <strong>adjust our outcome metric</strong> such that the <strong>treatment estimate remains unbiased</strong> while the variable’s <strong>variance is lower</strong>, which reduces experiment duration</em> <br><br></p>
+<div class="fragment">
+<p>So, we’ll now see:</p>
+<ol type="1">
+<li><p>How to perform the adjustment</p></li>
+<li><p>Why the treatment estimate remains unbiased</p></li>
+<li><p>Why the outcome metric variance is lower</p></li>
+</ol>
+</div>
 </section>
 <section id="adjusting-the-outcome-metric" class="slide level2">
 <h2>Adjusting the outcome metric</h2>
@@ -538,8 +546,8 @@ Y^{cuped}_i = Y_i - \theta X_i
 </ul>
 </div>
 </section>
-<section id="treatment-effect-estimate-remains-unchanged" class="slide level2">
-<h2>Treatment effect estimate remains unchanged</h2>
+<section id="treatment-effect-estimate-remains-unbiased" class="slide level2">
+<h2>Treatment effect estimate remains unbiased</h2>
 <ul>
 <li>The true causal effect – the true effect of our feature – is unobservable (we’ll see why in part 2), and we refer to it as <span class="math inline">\(\tau\)</span> (Greek “tau” – think “treatment effect”)</li>
 </ul>
@@ -562,17 +570,12 @@ Y^{cuped}_i = Y_i - \theta X_i
 </div>
 <div class="fragment">
 <ul>
-<li>We can proof (but won’t) that on average, <span class="math inline">\(\hat{\tau}\)</span> equals the true effect, meaning that <span class="math inline">\(\mathbb{E}[\hat{\tau}] = \tau\)</span></li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>Because of this, we say that <span class="math inline">\(\hat{\tau}\)</span> is an unbiased estimator</li>
+<li>We can proof (but won’t) that on average, <span class="math inline">\(\hat{\tau}\)</span> equals the true effect, meaning that <span class="math inline">\(\mathbb{E}[\hat{\tau}] = \tau\)</span>. We say that <span class="math inline">\(\hat{\tau}\)</span> is an <strong>unbiased estimator</strong> of <span class="math inline">\(\tau\)</span></li>
 </ul>
 </div>
 </section>
-<section id="treatment-effect-estimate-remains-unchanged-cont." class="slide level2">
-<h2>Treatment effect estimate remains unchanged (cont.)</h2>
+<section id="treatment-effect-estimate-remains-unbiased-cont." class="slide level2">
+<h2>Treatment effect estimate remains unbiased (cont.)</h2>
 <ul>
 <li>When we use the CUPED-adjusted outcome metric values, a natural way to estimate the true effect is:</li>
 </ul>
@@ -582,27 +585,29 @@ Y^{cuped}_i = Y_i - \theta X_i
 &amp;= \bar{Y}^{cuped}_t - \bar{Y}^{cuped}_c
 \end{align}
 \]</span></p>
-<p><span class="math inline">\(\quad\)</span> where, instead of using unadjusted values <span class="math inline">\(Y_i\)</span>, we simply use <span class="math inline">\(Y_i^{cuped}\)</span></p>
+<p><span class="math inline">\(\quad\)</span> where</p>
+<p><span class="math display">\[
+\bar{Y}_t^{cuped} = \frac{1}{N_t}\sum_{\text{if }T_i = 1} Y_i^{cuped} \qquad \qquad \bar{Y}_c^{cuped} = \frac{1}{N_c}\sum_{\text{if }T_i = 0} Y_i^{cuped}
+\]</span></p>
 <div class="fragment">
 <ul>
-<li>We’ll show next that this approach, too, returns the true effect on average, and is thus also unbiased</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>Hence, when we say that CUPED doesn’t change the treatment effect estimate, what we mean is <em>not</em> that the estimate is exactly the same, but that CUPED, too, gives us the correct result on average</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>In practice, for large sample sizes, this means that the CUPED estimate will be very similar to the unadjusted estimate</li>
+<li>We’ll show now that <span class="math inline">\(\hat{\tau}^{cuped}\)</span> is also unbiased, so that <span class="math inline">\(\mathbb{E}[\hat{\tau}^{cuped}] = \tau\)</span></li>
 </ul>
 </div>
 </section>
-<section id="unbiasedness-of-the-cuped-estimator" class="slide level2">
-<h2>Unbiasedness of the CUPED estimator</h2>
+<section id="treatment-effect-estimate-remains-unbiased-cont.-1" class="slide level2">
+<h2>Treatment effect estimate remains unbiased (cont.)</h2>
 <ul>
-<li>Using our adjusted variable, we can write the average treatment group outcome as (similarly for control group):</li>
+<li>We know (from above), that <span class="math inline">\(\hat{\tau}\)</span> is unbiased, meaning that <span class="math inline">\(\mathbb{E}[\hat{\tau}] = \tau\)</span></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>A simple way to show that <span class="math inline">\(\hat{\tau}^{cuped}\)</span> is unbiased is to show that <span class="math inline">\(\mathbb{E}[\hat{\tau}^{cuped}] = \mathbb{E}[\hat{\tau}]\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>First, note that we can write the average treatment group outcome as (similarly for control group):</li>
 </ul>
 <p><span class="math display">\[
 \begin{align*}
@@ -613,33 +618,12 @@ Y^{cuped}_i = Y_i - \theta X_i
 &amp;= \bar{Y}_t - \theta \bar{X}_t
 \end{align*}
 \]</span></p>
-<div class="fragment">
-<ul>
-<li>So we can rewrite the CUPED estimator as</li>
-</ul>
-<p><span class="math display">\[
-\begin{align}
-\hat{\tau}^{cuped}
-&amp;= \bar{Y}^{cuped}_t - \bar{Y}^{cuped}_c \\[5pt]
-&amp;= \left(\bar{Y}_t - \theta \bar{X}_t\right)
-- \left(\bar{Y}_c - \theta \bar{X}_c\right)
-\end{align}
-\]</span></p>
 </div>
 </section>
-<section id="unbiasedness-of-the-cuped-estimator-cont." class="slide level2">
-<h2>Unbiasedness of the CUPED estimator (cont.)</h2>
+<section id="treatment-effect-estimate-remains-unbiased-cont.-2" class="slide level2">
+<h2>Treatment effect estimate remains unbiased (cont.)</h2>
 <ul>
-<li>We know (from above), that <span class="math inline">\(\hat{\tau}\)</span> is unbiased, meaning that <span class="math inline">\(\mathbb{E}[\hat{\tau}] = \tau\)</span></li>
-</ul>
-<div class="fragment">
-<ul>
-<li>A simple way to show that on average, <span class="math inline">\(\hat{\tau}^{cuped}\)</span> equals <span class="math inline">\(\hat{\tau}\)</span>, so that <span class="math inline">\(\mathbb{E}[\hat{\tau}^{cuped}] = \mathbb{E}[\hat{\tau}] = \tau\)</span></li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>We can do this as follows</li>
+<li>Then:</li>
 </ul>
 <p><span class="math display">\[
 \begin{align}
@@ -647,8 +631,6 @@ Y^{cuped}_i = Y_i - \theta X_i
 &amp;= \bar{Y}^{cuped}_t - \bar{Y}^{cuped}_c \\[5pt]
 &amp;= \mathbb{E}\left[\left(\bar{Y}_t - \theta \bar{X}_t\right)
 - \left(\bar{Y}_c - \theta \bar{X}_c\right)\right] \\[5pt]
-&amp;= \mathbb{E}[\bar{Y}_t] - \theta \mathbb{E}[\bar{X}_t]
-- \mathbb{E}[\bar{Y}_c] + \theta \mathbb{E}[\bar{X}_c] \\[5pt]
 &amp;= \mathbb{E}[\bar{Y}_t] - \mathbb{E}[\bar{Y}_c] - \theta \mathbb{E}[\bar{X}_t] + \theta \mathbb{E}[\bar{X}_c] \\[5pt]
 (X_i \text{ independent of treatment}) &amp;= \mathbb{E}[\bar{Y}_t] - \mathbb{E}[\bar{Y}_c] \\[5pt]
 &amp;= \mathbb{E}[\bar{Y}_t - \bar{Y}_c] \\[5pt]
@@ -656,33 +638,28 @@ Y^{cuped}_i = Y_i - \theta X_i
 &amp;= \tau
 \end{align}
 \]</span></p>
+<div class="fragment">
+<p><strong>Key insight</strong>: For the CUPID estimator to be unbiased, <span class="math inline">\(X_i\)</span> needs to be independent of treatment, so that <span class="math inline">\(\mathbb{E}[\bar{X}_t] = \mathbb{E}[\bar{X}_c]\)</span></p>
 </div>
 </section>
-<section id="outcome-metric-variance-is-smaller" class="slide level2">
-<h2>Outcome metric variance is smaller</h2>
+<section id="outcome-metric-variance-is-lower" class="slide level2">
+<h2>Outcome metric variance is lower</h2>
+<ul>
+<li>Above, we’ve defined the variance of our (unadjusted) outcome metric as <span class="math inline">\(\mathbb{V}(Y_i)\)</span></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Naturally, the variance of our CUPED-adjusted outcome metric is <span class="math inline">\(\mathbb{V}(Y_i^{cuped})\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>We’re now going to show why <span class="math inline">\(\mathbb{V}(Y_i^{cuped}) \leq \mathbb{V}(Y_i)\)</span></li>
+</ul>
+</div>
 </section>
-<section id="variance-of-the-cuped-estimator" class="slide level2">
-<h2>Variance of the CUPED estimator</h2>
-<ul>
-<li>We have seen above that the variance of our standard treatment estimator, <span class="math inline">\(\hat{\tau}\)</span>, is given by</li>
-</ul>
-<p><span class="math display">\[
-\mathbb{V}(\hat{\tau}) = \frac{4\sigma^2}{N},
-\]</span></p>
-<p><span class="math inline">\(\qquad\)</span> where <span class="math inline">\(\sigma^2\)</span> is the population variance of the outcome metric values — the <span class="math inline">\(Y_i\)</span>s</p>
-<ul>
-<li>Hence, the variance of the CUPED estimator is given by</li>
-</ul>
-<p><span class="math display">\[
-\mathbb{V}(\hat{\tau}^{cuped}) = \frac{4\sigma^2_{cuped}}{N},
-\]</span></p>
-<p><span class="math inline">\(\qquad\)</span> where <span class="math inline">\(\sigma^2_{cuped}\)</span> is the population variance of the adjusted outcome metric values — the <span class="math inline">\(Y_i^{cuped}\)</span>s</p>
-<ul>
-<li>To find <span class="math inline">\(\mathbb{V}(\hat{\tau}^{cuped})\)</span>, we need to find <span class="math inline">\(\sigma^2_{cuped}\)</span></li>
-</ul>
-</section>
-<section id="variance-of-the-cuped-estimator-cont." class="slide level2">
-<h2>Variance of the CUPED estimator (cont.)</h2>
+<section id="outcome-metric-variance-is-lower-cont." class="slide level2">
+<h2>Outcome metric variance is lower (cont.)</h2>
 <ul>
 <li>The variance of CUPED-adjusted values is given by</li>
 </ul>
@@ -693,38 +670,119 @@ Y^{cuped}_i = Y_i - \theta X_i
 &amp;= \mathbb{V}(Y_i) + \theta^2\mathbb{V}(X_i) - 2\theta Cov(Y_i, X_i)
 \end{align}
 \]</span></p>
+<div class="fragment">
 <ul>
-<li>This is minimised for</li>
+<li>The optimal value of <span class="math inline">\(\theta\)</span> to minimise this variance is:</li>
 </ul>
 <p><span class="math display">\[
 \theta^* = \frac{Cov(Y_i, X_i)}{\mathbb{V}(X_i)}
 \]</span></p>
-</section>
-<section id="variance-of-the-cuped-estimator-cont.-1" class="slide level2">
-<h2>Variance of the CUPED estimator (cont.)</h2>
+</div>
+<div class="fragment">
 <ul>
-<li>Using <span class="math inline">\(\theta^*\)</span> in the above expression, rearranging and substituting (see appendix for all steps) gives</li>
+<li>Using this optimal value we have:</li>
 </ul>
 <p><span class="math display">\[
-\sigma^2_{cuped} = \sigma^2(1 - \rho^2)
+\mathbb{V}\left(Y^{cuped}_i\right) = \mathbb{V}\left(Y_i\right)\Bigl(1 - Corr(X, Y)^2\Bigr)
 \]</span></p>
-<p><span class="math inline">\(\quad\)</span> where <span class="math inline">\(\rho = \frac{Cov(Y_i, X_i)}{\sqrt{\mathbb{V}(Y_i)\mathbb{V}(X_i)}}\)</span>, <span class="math inline">\(\sigma^2 = \mathbb{V}(Y_i)\)</span>, and <span class="math inline">\(\sigma^2_{cuped} = \mathbb{V}(Y^{cuped}_i)\)</span></p>
-<ul>
-<li><p>The correlation coefficient is between -1 and 1</p></li>
-<li><p>As long as there is some correlation between <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(X_i\)</span>, <span class="math inline">\(\sigma^2_{cuped} &lt; \sigma^2\)</span></p></li>
-<li><p>The stronger the correlation, the smaller <span class="math inline">\(\sigma^2_{cuped}\)</span></p></li>
-<li><p>If there is no correlation, <span class="math inline">\(\sigma^2_{cuped} = \sigma^2\)</span></p></li>
-</ul>
+</div>
 </section>
-<section id="variance-of-the-cuped-estimator-cont.-2" class="slide level2">
-<h2>Variance of the CUPED estimator (cont.)</h2>
+<section id="outcome-metric-variance-is-lower-cont.-1" class="slide level2">
+<h2>Outcome metric variance is lower (cont.)</h2>
 <ul>
-<li>The CUPED estimator variance is thus</li>
+<li>What is <span class="math inline">\(Corr(X, Y)\)</span>?</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>The variance captures in a single number how strongly a single variable varies</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>The correlation captures in a single number how two variables co-relate (move together)</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>It lies between -1 and 1, with 0 indicating no (linear) relation between the variables</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Examples:</li>
+</ul>
+<p><img data-src="corr.png"></p>
+</div>
+</section>
+<section id="outcome-metric-variance-is-lower-cont.-2" class="slide level2">
+<h2>Outcome metric variance is lower (cont.)</h2>
+<ul>
+<li>We just saw that</li>
 </ul>
 <p><span class="math display">\[
-\mathbb{V}(\hat{\tau}^{cuped}) = \frac{4\sigma^2_{cuped}}{N} = \frac{4\sigma^2(1 - \rho^2)}{N} &lt; \frac{4\sigma^2}{N} = \mathbb{V}(\hat{\tau})
+\mathbb{V}\left(Y^{cuped}_i\right) = \mathbb{V}\left(Y_i\right)\Bigl(1 - Corr(X, Y)^2\Bigr)
 \]</span></p>
-<p><span class="math inline">\(\quad\)</span> as long is there some correlation between <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(X_i\)</span></p>
+<div class="fragment">
+<ul>
+<li>As long as there is some correlation between <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(X_i\)</span>, <span class="math inline">\(\mathbb{V}\left(Y^{cuped}_i\right) &lt; \mathbb{V}\left(Y_i\right)\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>The stronger the correlation, the smaller <span class="math inline">\(\mathbb{V}\left(Y^{cuped}_i\right)\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>If there is no correlation, <span class="math inline">\(\mathbb{V}\left(Y^{cuped}_i\right) = \mathbb{V}\left(Y_i\right)\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Hence:</li>
+</ul>
+<p><span class="math display">\[
+\mathbb{V}(Y_i^{cuped}) \leq \mathbb{V}(Y_i)
+\]</span></p>
+</div>
+</section>
+<section id="outcome-metric-variance-is-lower-cont.-3" class="slide level2">
+<h2>Outcome metric variance is lower (cont.)</h2>
+<ul>
+<li>Okay,</li>
+</ul>
+<p><span class="math display">\[
+\mathbb{V}\left(Y^{cuped}_i\right) = \mathbb{V}\left(Y_i\right)\Bigl(1 - Corr(X, Y)^2\Bigr)
+\]</span></p>
+<div class="fragment">
+<ul>
+<li>But why?</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><p>We can think of <span class="math inline">\(\mathbb{V}\left(Y^{cuped}_i\right)\)</span> as having two components:</p>
+<ul>
+<li>Variation from inherent differences among experiment units</li>
+<li>Variation that is experiment-period specific</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Variation from inherent differences among users is also present in <span class="math inline">\(X_i\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>That shared variation is captured in <span class="math inline">\(Corr(Y_i, X_i)\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Hence: CUPED lowers variance by removing the first of the two components</li>
+</ul>
+</div>
 </section>
 <section id="effect-on-required-sample-size-and-experiment-duration" class="slide level2">
 <h2>Effect on required sample size and experiment duration</h2>
@@ -732,20 +790,33 @@ Y^{cuped}_i = Y_i - \theta X_i
 <li>The reduction in required sample size from CUPED is given by</li>
 </ul>
 <p><span class="math display">\[
+\begin{align}
 \frac{N^{cuped}}{N}
-= \frac{\frac{(z_{\alpha/2} + z_{1-\beta})^2}{P(1-P)}\frac{\sigma^2_{cuped}}{\tau^2}}{\frac{(z_{\alpha/2} + z_{1-\beta})^2}{P(1-P)}\frac{\sigma^2}{\tau^2}}
-= \frac{\sigma^2_{cuped}}{\sigma^2}
-= \frac{\sigma^2(1 - \rho^2)}{\sigma^2}
-= (1 - \rho^2)
+&amp;= \frac{32\frac{\mathbb{V}\left(Y_i^{cuped}\right)}{\text{MDE}^2}}{32\frac{\mathbb{V}\left(Y_i\right)}{\text{MDE}^2}}
+= \frac{\mathbb{V}\left(Y_i^{cuped}\right)}{\mathbb{V}\left(Y_i\right)}\\[5pt]
+&amp;= \frac{\mathbb{V}\left(Y_i\right)(1 - Corr(Y_i, X_i)^2)}{\mathbb{V}\left(Y_i\right)}
+= (1 - Corr(Y_i, X_i)^2)
+\end{align}
 \]</span></p>
+<div class="fragment">
 <ul>
-<li>For example, if <span class="math inline">\(\rho = 0.45\)</span>, we’d have</li>
+<li>For example, if <span class="math inline">\(Corr(Y_i, X_i) = 0.45\)</span>, we’d have</li>
 </ul>
 <p><span class="math display">\[
-\frac{N^{cuped}}{N} = (1 - \rho^2) = (1 - 0.45^2) \approx 0.8
+\frac{N^{cuped}}{N} = (1 - Corr(Y_i, X_i)^2) = (1 - 0.45^2) \approx 0.8
 \]</span></p>
 <ul>
 <li>CUPED would reduce the required sample size by 20%, about what we get on average at JET</li>
+</ul>
+</div>
+</section>
+<section id="so-how-and-why-does-cuped-work" class="slide level2">
+<h2>So, how and why does CUPED work?</h2>
+<p>If we have a variable <span class="math inline">\(X_i\)</span> that is correlated with <span class="math inline">\(Y_i\)</span> and independent of treatment, then CUPED works because:</p>
+<ul>
+<li><p>Our estimated treatment effect still gives us the correct result on average (because <span class="math inline">\(X_i\)</span> is independent of treatment)</p></li>
+<li><p>The outcome metric variance is smaller (because <span class="math inline">\(X_i\)</span> is correlated with <span class="math inline">\(Y_i\)</span>)</p></li>
+<li><p>The lower variance means smaller required samples sizes, which means shorter experiment duration</p></li>
 </ul>
 </section>
 <section id="why-reduce-variance-a-quick-tour-of-the-statistics-of-experimentation" class="slide level2">
@@ -1004,6 +1075,58 @@ N = \frac{(z_{\alpha/2} + z_{1-\beta})^2}{P(1-P)}\frac{\sigma^2}{\tau^2}.
 <li><p><a href="https://towardsdatascience.com/dont-use-a-t-test-for-a-b-testing-e4d2ef7ab9b6">Don’t use a t-test for A/B testing</a></p></li>
 <li><p><a href="https://towardsdatascience.com/variance-reduction-in-experiments-part-1-intuition-68b270a0df71">Variance Reduction in Experiments — Part 1: Intuition – see also part 2</a></p></li>
 </ul>
+</section>
+<section id="appendix" class="slide level2">
+<h2>Appendix</h2>
+<ul>
+<li>Add in later</li>
+</ul>
+</section>
+<section id="outcome-metric-variance-is-lower-1" class="slide level2">
+<h2>Outcome metric variance is lower</h2>
+<ul>
+<li>We have seen above that the variance of our standard treatment estimator, <span class="math inline">\(\hat{\tau}\)</span>, is given by</li>
+</ul>
+<p><span class="math display">\[
+\mathbb{V}(\hat{\tau}) = \frac{4\mathbb{V}(Y_i)^2}{N},
+\]</span></p>
+<p><span class="math inline">\(\quad\)</span> where <span class="math inline">\(\mathbb{V}(Y_i)\)</span> is the population variance of the outcome metric values — the <span class="math inline">\(Y_i\)</span>s</p>
+<ul>
+<li>Hence, the variance of the CUPED estimator is given by</li>
+</ul>
+<p><span class="math display">\[
+\mathbb{V}(\hat{\tau}^{cuped}) = \frac{4\mathbb{V}(Y_i^{cuped})^2}{N},
+\]</span></p>
+<p><span class="math inline">\(\quad\)</span> where <span class="math inline">\(\mathbb{V}(Y_i^{cuped})\)</span> is the population variance of the adjusted outcome metric values — the <span class="math inline">\(Y_i^{cuped}\)</span>s</p>
+<ul>
+<li>To find <span class="math inline">\(\mathbb{V}(\hat{\tau}^{cuped})\)</span>, we need to find <span class="math inline">\(\sigma^2_{cuped}\)</span></li>
+</ul>
+</section>
+<section id="variance-of-the-cuped-estimator-cont." class="slide level2">
+<h2>Variance of the CUPED estimator (cont.)</h2>
+<ul>
+<li>Using <span class="math inline">\(\theta^*\)</span> in the above expression, rearranging and substituting (see appendix for all steps) gives</li>
+</ul>
+<p><span class="math display">\[
+\sigma^2_{cuped} = \sigma^2(1 - \rho^2)
+\]</span></p>
+<p><span class="math inline">\(\quad\)</span> where <span class="math inline">\(\rho = \frac{Cov(Y_i, X_i)}{\sqrt{\mathbb{V}(Y_i)\mathbb{V}(X_i)}}\)</span>, <span class="math inline">\(\sigma^2 = \mathbb{V}(Y_i)\)</span>, and <span class="math inline">\(\sigma^2_{cuped} = \mathbb{V}(Y^{cuped}_i)\)</span></p>
+<ul>
+<li><p>The correlation coefficient is between -1 and 1</p></li>
+<li><p>As long as there is some correlation between <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(X_i\)</span>, <span class="math inline">\(\sigma^2_{cuped} &lt; \sigma^2\)</span></p></li>
+<li><p>The stronger the correlation, the smaller <span class="math inline">\(\sigma^2_{cuped}\)</span></p></li>
+<li><p>If there is no correlation, <span class="math inline">\(\sigma^2_{cuped} = \sigma^2\)</span></p></li>
+</ul>
+</section>
+<section id="variance-of-the-cuped-estimator-cont.-1" class="slide level2">
+<h2>Variance of the CUPED estimator (cont.)</h2>
+<ul>
+<li>The CUPED estimator variance is thus</li>
+</ul>
+<p><span class="math display">\[
+\mathbb{V}(\hat{\tau}^{cuped}) = \frac{4\sigma^2_{cuped}}{N} = \frac{4\sigma^2(1 - \rho^2)}{N} &lt; \frac{4\sigma^2}{N} = \mathbb{V}(\hat{\tau})
+\]</span></p>
+<p><span class="math inline">\(\quad\)</span> as long is there some correlation between <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(X_i\)</span></p>
 <div class="footer footer-default">
 
 </div>
