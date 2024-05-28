@@ -12,7 +12,7 @@
 
   <meta name="author" content="Fabian Gunzinger">
   <meta name="dcterms.date" content="2024-05-28">
-  <title>CUPED</title>
+  <title>Understanding CUPED</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -326,7 +326,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">CUPED</h1>
+  <h1 class="title">Understanding CUPED</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -340,12 +340,8 @@ Fabian Gunzinger
 </section>
 <section id="what-cuped-is-not" class="slide level2">
 <h2>What CUPED is not…</h2>
-<ul>
-<li>cupid image and wiki quote – what it is not about …</li>
-</ul>
-<p><a href="/cupid.jpg">a</a></p>
-<p>Cupid is the Roman god of love and desire. The bow and arrow represent his source of power; a person who is shot by Cupid’s arrow is filled with uncontrollable desire. (Wikipedia).</p>
-</section>
+
+<img data-src="cupid.png" class="r-stretch quarto-figure-center"><p class="caption"><em>Cupid is the Roman god of love and desire. The bow and arrow represent his source of power; a person who is shot by Cupid’s arrow is filled with uncontrollable desire. (<a href="https://en.wikipedia.org/wiki/Cupid">Wikipedia</a>).</em></p></section>
 <section id="so-what-is-cuped" class="slide level2">
 <h2>So, what <em>is</em> CUPED?</h2>
 <ul>
@@ -390,7 +386,7 @@ Fabian Gunzinger
 <section id="demystifying-math-notation-index-variables" class="slide level2">
 <h2>Demystifying math notation – index variables</h2>
 <ul>
-<li>We have outcome metric values for <span class="math inline">\(N_c\)</span> (think “<strong>N</strong>umber of <strong>C</strong>ontrol customers”) customers in our control group</li>
+<li>We have outcome metric values for <span class="math inline">\(N_c\)</span> customers in our control group (think “<strong>N</strong>umber of <strong>C</strong>ontrol customers”)</li>
 </ul>
 <div class="fragment">
 <ul>
@@ -414,7 +410,23 @@ Fabian Gunzinger
 </div>
 <div class="fragment">
 <ul>
-<li>So, we can say that we have outcome metric values <span class="math inline">\(Y_i\)</span> for <span class="math inline">\(i = 1, 2, ..., N_c\)</span> customers</li>
+<li>So, we can say that we have outcome metric values <span class="math inline">\(Y_i\)</span> for <span class="math inline">\(i = 1, 2, ..., N_c\)</span></li>
+</ul>
+</div>
+</section>
+<section id="index-variables-cont." class="slide level2">
+<h2>index variables (cont.)</h2>
+<ul>
+<li>We use the same index variable approach for the variable that tells us whether a certain customer is in the treatment or control group</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>The treatment status for customer <em>i</em> is <span class="math inline">\(T_i\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>And we set <span class="math inline">\(T_i = 1\)</span> if customer <em>i</em> is in the treatment group and <span class="math inline">\(T_i = 0\)</span> if they’re in the control group</li>
 </ul>
 </div>
 </section>
@@ -425,12 +437,12 @@ Fabian Gunzinger
 </ul>
 <div class="fragment">
 <ul>
-<li>We could write <span class="math inline">\(Y_1 + Y_2 + Y_3\)</span> up to <span class="math inline">\(N_c\)</span> — but given that <span class="math inline">\(N_c\)</span> is typically in the 1000s, it’s obvious why we’d not want to do that</li>
+<li>We could write <span class="math inline">\(Y_1 + Y_2 + Y_3 + \ldots\)</span> up to <span class="math inline">\(N_c\)</span> — but given that <span class="math inline">\(N_c\)</span> is typically in the 1000s, we don’t really want to do that</li>
 </ul>
 </div>
 <div class="fragment">
 <ul>
-<li>We could write “sum of all <span class="math inline">\(N_c\)</span> outcomes” — but still takes some work, can be ambiguous, and is just a “blob” of text we can’t do math with</li>
+<li>We could write “sum of all <span class="math inline">\(N_c\)</span> outcomes” — but that still takes some work, can be ambiguous, and is just a “blob” of text we can’t do math with</li>
 </ul>
 </div>
 <div class="fragment">
@@ -488,8 +500,7 @@ N = 32\frac{\mathbb{V}(Y_i)^2}{\text{MDE}^2}.
 </div>
 <div class="fragment">
 <ul>
-<li><p>(We’ll see where the 32 comes from in part 2)</p></li>
-<li><p>ho</p></li>
+<li>(We’ll see where the 32 comes from in part 2)</li>
 </ul>
 </div>
 </section>
@@ -498,7 +509,7 @@ N = 32\frac{\mathbb{V}(Y_i)^2}{\text{MDE}^2}.
 </section>
 <section id="the-key-insight" class="slide level2">
 <h2>The key insight</h2>
-<p><em>With suitable extra data, we can <strong>adjust our outcome metric</strong> such that it has <strong>lower variance</strong> while leaving the <strong>treatment estimate unchanged</strong></em></p>
+<p><em>With suitable extra data, we can <strong>adjust our outcome metric</strong> such that the <strong>treatment estimate remains unchanged</strong> while the variable’s <strong>variance is lower</strong>, which reduces experiment duration</em></p>
 </section>
 <section id="adjusting-the-outcome-metric" class="slide level2">
 <h2>Adjusting the outcome metric</h2>
@@ -509,11 +520,19 @@ N = 32\frac{\mathbb{V}(Y_i)^2}{\text{MDE}^2}.
 </ul>
 <div class="fragment">
 <ul>
+<li>For example, if <span class="math inline">\(Y_i\)</span> is visit conversion, we could calculate for each customer the visit conversion over the 60 days prior to the experiment start, and use that as <span class="math inline">\(X_i\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li>We can then define a new, adjusted, variable, <span class="math inline">\(Y_i^{cuped}\)</span>, as</li>
 </ul>
 <p><span class="math display">\[
 Y^{cuped}_i = Y_i - \theta X_i
 \]</span></p>
+<p><span class="math inline">\(\quad\)</span> where <span class="math inline">\(\theta\)</span> is some number we’ll come back to</p>
+</div>
+<div class="fragment">
 <ul>
 <li>Using <span class="math inline">\(Y^{cuped}_i\)</span> instead of <span class="math inline">\(Y_i\)</span> for experiment evaluation leaves the treatment effect estimate unchanged but reduces its variance</li>
 </ul>
@@ -522,23 +541,40 @@ Y^{cuped}_i = Y_i - \theta X_i
 <section id="treatment-effect-estimate-remains-unchanged" class="slide level2">
 <h2>Treatment effect estimate remains unchanged</h2>
 <ul>
-<li><p>Let’s denote the true, unobservable effect we’re trying to estimate as <span class="math inline">\(\tau\)</span></p></li>
-<li><p>In a typical experiment, we estimate <span class="math inline">\(\tau\)</span> as the difference in the average outcome in the treatment and control groups</p></li>
+<li>The true causal effect – the true effect of our feature – is unobservable (we’ll see why in part 2), and we refer to it as <span class="math inline">\(\tau\)</span> (Greek “tau” – think “treatment effect”)</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>In a typical experiment, we use the difference in the average outcomes in the treatment and control groups to estimate it</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Using the unadjusted outcome metric, we have:</li>
 </ul>
 <p><span class="math display">\[
 \hat{\tau} = \bar{Y}_t - \bar{Y}_c
 \]</span></p>
+<p><span class="math inline">\(\quad\)</span> where</p>
+<p><span class="math display">\[
+\bar{Y}_t = \frac{1}{N_t}\sum_{\text{if }T_i = 1} Y_i \qquad \qquad \bar{Y}_c = \frac{1}{N_c}\sum_{\text{if }T_i = 0} Y_i
+\]</span></p>
+</div>
+<div class="fragment">
 <ul>
-<li><p>We can proof (but won’t) that on average, <span class="math inline">\(\hat{\tau}\)</span> gives us the right solution. That is, <span class="math inline">\(\mathbb{E}(\hat{\tau}) = \tau\)</span></p></li>
-<li><p>Because of this, we say that <span class="math inline">\(\hat{\tau}\)</span> is an unbiased estimator of <span class="math inline">\(\tau\)</span></p></li>
+<li>We can proof (but won’t) that on average, <span class="math inline">\(\hat{\tau}\)</span> equals the true effect, meaning that <span class="math inline">\(\mathbb{E}[\hat{\tau}] = \tau\)</span></li>
 </ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Because of this, we say that <span class="math inline">\(\hat{\tau}\)</span> is an unbiased estimator</li>
+</ul>
+</div>
 </section>
 <section id="treatment-effect-estimate-remains-unchanged-cont." class="slide level2">
 <h2>Treatment effect estimate remains unchanged (cont.)</h2>
 <ul>
-<li><p>So, when we say that CUPED doesn’t change our treatment effect estimates, what we mean is that</p></li>
-<li><p>Because this is the case, we say that</p></li>
-<li><p>Naturally, the CUPED estimator is</p></li>
+<li>When we use the CUPED-adjusted outcome metric values, a natural way to estimate the true effect is:</li>
 </ul>
 <p><span class="math display">\[
 \begin{align}
@@ -546,27 +582,38 @@ Y^{cuped}_i = Y_i - \theta X_i
 &amp;= \bar{Y}^{cuped}_t - \bar{Y}^{cuped}_c
 \end{align}
 \]</span></p>
+<p><span class="math inline">\(\quad\)</span> where, instead of using unadjusted values <span class="math inline">\(Y_i\)</span>, we simply use <span class="math inline">\(Y_i^{cuped}\)</span></p>
+<div class="fragment">
 <ul>
-<li>We’ll now see that it’s indeed unbiased and has lower variance than the standard estimator</li>
+<li>We’ll show next that this approach, too, returns the true effect on average, and is thus also unbiased</li>
 </ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Hence, when we say that CUPED doesn’t change the treatment effect estimate, what we mean is <em>not</em> that the estimate is exactly the same, but that CUPED, too, gives us the correct result on average</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>In practice, for large sample sizes, this means that the CUPED estimate will be very similar to the unadjusted estimate</li>
+</ul>
+</div>
 </section>
 <section id="unbiasedness-of-the-cuped-estimator" class="slide level2">
 <h2>Unbiasedness of the CUPED estimator</h2>
 <ul>
-<li>Using our adjusted variable, we have</li>
+<li>Using our adjusted variable, we can write the average treatment group outcome as (similarly for control group):</li>
 </ul>
 <p><span class="math display">\[
-\begin{align}
+\begin{align*}
 \bar{Y}^{cuped}_t
-&amp;= \frac{1}{N_t}\sum_{i:W_i = 1} Y^{cuped}_i
-= \frac{1}{N_t}\sum_{i:W_i = 1}\left(Y_i - \theta X_i\right)
-= \bar{Y}_t - \theta \bar{X}_t \\[5pt]
-\bar{Y}^{cuped}_c
-&amp;= \frac{1}{N_c}\sum_{i:W_i = 0} Y^{cuped}_i
-= \frac{1}{N_c}\sum_{i:W_i = 0}\left(Y_i - \theta X_i\right)
-= \bar{Y}_c - \theta \bar{X}_c
-\end{align}
+&amp;= \frac{1}{N_t}\sum_{\text{if }T_i = 1} Y^{cuped}_i \\[5pt]
+&amp;= \frac{1}{N_t}\sum_{\text{if }T_i = 1}\left(Y_i - \theta X_i\right) \\[5pt]
+&amp;= \frac{1}{N_t}\sum_{\text{if }T_i = 1}Y_i - \theta \frac{1}{N_t}\sum_{\text{if }T_i = 1}X_i \\[5pt]
+&amp;= \bar{Y}_t - \theta \bar{X}_t
+\end{align*}
 \]</span></p>
+<div class="fragment">
 <ul>
 <li>So we can rewrite the CUPED estimator as</li>
 </ul>
@@ -578,12 +625,21 @@ Y^{cuped}_i = Y_i - \theta X_i
 - \left(\bar{Y}_c - \theta \bar{X}_c\right)
 \end{align}
 \]</span></p>
+</div>
 </section>
 <section id="unbiasedness-of-the-cuped-estimator-cont." class="slide level2">
 <h2>Unbiasedness of the CUPED estimator (cont.)</h2>
 <ul>
-<li><p>To show that <span class="math inline">\(\hat{\tau}\)</span> is unbiased, we have to show that on average <span class="math inline">\(\hat{\tau}\)</span> equals <span class="math inline">\(\tau\)</span>—that <span class="math inline">\(\mathbb{E}[\hat{\tau}^{cuped}] = \tau\)</span></p></li>
-<li><p>We can do this as follows</p></li>
+<li>We know (from above), that <span class="math inline">\(\hat{\tau}\)</span> is unbiased, meaning that <span class="math inline">\(\mathbb{E}[\hat{\tau}] = \tau\)</span></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>A simple way to show that on average, <span class="math inline">\(\hat{\tau}^{cuped}\)</span> equals <span class="math inline">\(\hat{\tau}\)</span>, so that <span class="math inline">\(\mathbb{E}[\hat{\tau}^{cuped}] = \mathbb{E}[\hat{\tau}] = \tau\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>We can do this as follows</li>
 </ul>
 <p><span class="math display">\[
 \begin{align}
@@ -593,12 +649,14 @@ Y^{cuped}_i = Y_i - \theta X_i
 - \left(\bar{Y}_c - \theta \bar{X}_c\right)\right] \\[5pt]
 &amp;= \mathbb{E}[\bar{Y}_t] - \theta \mathbb{E}[\bar{X}_t]
 - \mathbb{E}[\bar{Y}_c] + \theta \mathbb{E}[\bar{X}_c] \\[5pt]
-\text{\scriptsize($X_i$ independent of treatment assignment)} &amp;= \mathbb{E}[\bar{Y}_t] - \mathbb{E}[\bar{Y}_c] \\[5pt]
+&amp;= \mathbb{E}[\bar{Y}_t] - \mathbb{E}[\bar{Y}_c] - \theta \mathbb{E}[\bar{X}_t] + \theta \mathbb{E}[\bar{X}_c] \\[5pt]
+(X_i \text{ independent of treatment}) &amp;= \mathbb{E}[\bar{Y}_t] - \mathbb{E}[\bar{Y}_c] \\[5pt]
 &amp;= \mathbb{E}[\bar{Y}_t - \bar{Y}_c] \\[5pt]
 &amp;= \mathbb{E}[\hat{\tau}] \\[5pt]
-\text{\scriptsize(stated above)} &amp;= \tau
+&amp;= \tau
 \end{align}
 \]</span></p>
+</div>
 </section>
 <section id="outcome-metric-variance-is-smaller" class="slide level2">
 <h2>Outcome metric variance is smaller</h2>
@@ -700,7 +758,7 @@ Y^{cuped}_i = Y_i - \theta X_i
 </ul>
 <div class="fragment">
 <ul>
-<li>We randomly allocate each unit to either the treatment group (<span class="math inline">\(W_i = 1)\)</span> or control group (<span class="math inline">\(W_i = 0\)</span>)</li>
+<li>We randomly allocate each unit to either the treatment group (<span class="math inline">\(T_i = 1)\)</span> or control group (<span class="math inline">\(T_i = 0\)</span>)</li>
 </ul>
 </div>
 <div class="fragment">
@@ -758,7 +816,7 @@ Y(1)_i - Y(0)_i
 \]</span></p>
 <p><span class="math inline">\(\qquad\)</span> where</p>
 <p><span class="math display">\[
-\bar{Y}_t = \frac{1}{N_t}\sum_{i:W_i = 1} Y_i \qquad \qquad \bar{Y}_c = \frac{1}{N_c}\sum_{i:W_i = 0} Y_i
+\bar{Y}_t = \frac{1}{N_t}\sum_{i:T_i = 1} Y_i \qquad \qquad \bar{Y}_c = \frac{1}{N_c}\sum_{i:T_i = 0} Y_i
 \]</span></p>
 </div>
 <div class="fragment">

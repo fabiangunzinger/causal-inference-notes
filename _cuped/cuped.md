@@ -1,5 +1,5 @@
 ---
-title: "CUPED"
+title: "Understanding CUPED"
 author: "Fabian Gunzinger"
 date: 28 May 2024
 date-format: D MMM YYYY
@@ -11,11 +11,9 @@ format:
 
 ## What CUPED is not...
 
-- cupid image and wiki quote -- what it is not about ...
+![*Cupid is the Roman god of love and desire. The bow and arrow represent his source of power; a person who is shot by Cupid's arrow is filled with uncontrollable desire. ([Wikipedia](https://en.wikipedia.org/wiki/Cupid)).*](cupid.png)
 
-[a](/cupid.jpg)
 
-Cupid is the Roman god of love and desire. The bow and arrow represent his source of power; a person who is shot by Cupid's arrow is filled with uncontrollable desire. (Wikipedia).
 
 
 ## So, what *is* CUPED?
@@ -64,10 +62,9 @@ Cupid is the Roman god of love and desire. The bow and arrow represent his sourc
 
 I'd sincerely appreciate if you let me know whether I succeeded!
 
-
 ## Demystifying math notation -- index variables
 
-- We have outcome metric values for $N_c$ (think "**N**umber of **C**ontrol customers") customers in our control group
+- We have outcome metric values for $N_c$ customers in our control group (think "**N**umber of **C**ontrol customers")
 
 . . . 
 
@@ -87,7 +84,19 @@ I'd sincerely appreciate if you let me know whether I succeeded!
 
 . . . 
 
-- So, we can say that we have outcome metric values $Y_i$ for $i = 1, 2, ..., N_c$ customers
+- So, we can say that we have outcome metric values $Y_i$ for $i = 1, 2, ..., N_c$
+
+## index variables (cont.)
+
+- We use the same index variable approach for the variable that tells us whether a certain customer is in the treatment or control group
+
+. . . 
+
+- The treatment status for customer *i* is $T_i$
+
+. . . 
+
+- And we set $T_i = 1$ if customer *i* is in the treatment group and $T_i = 0$ if they're in the control group
 
 
 
@@ -97,11 +106,11 @@ I'd sincerely appreciate if you let me know whether I succeeded!
 
 . . . 
 
-- We could write $Y_1 + Y_2 + Y_3$ up to $N_c$ --- but given that $N_c$ is typically in the 1000s, it's obvious why we'd not want to do that
+- We could write $Y_1 + Y_2 + Y_3 + \ldots$ up to $N_c$ --- but given that $N_c$ is typically in the 1000s, we don't really want to do that
 
 . . . 
 
-- We could write "sum of all $N_c$ outcomes" --- but still takes some work, can be ambiguous, and is just a "blob" of text we can't do math with
+- We could write "sum of all $N_c$ outcomes" --- but that still takes some work, can be ambiguous, and is just a "blob" of text we can't do math with
 
 . . . 
 
@@ -162,14 +171,12 @@ $$
 
 - (We'll see where the 32 comes from in part 2)
 
-- ho
-
 
 ## How does CUPED reduce variance and speed up experiments?
 
 ## The key insight
 
-*With suitable extra data, we can **adjust our outcome metric** such that it has **lower variance** while leaving the **treatment estimate unchanged***
+*With suitable extra data, we can **adjust our outcome metric** such that the **treatment estimate remains unchanged** while the variable's **variance is lower**, which reduces experiment duration*
 
 
 ## Adjusting the outcome metric
@@ -182,41 +189,57 @@ $$
 
 . . . 
 
+- For example, if $Y_i$ is visit conversion, we could calculate for each customer the visit conversion over the 60 days prior to the experiment start, and use that as $X_i$
+
+. . . 
+
 - We can then define a new, adjusted, variable, $Y_i^{cuped}$, as
 
 $$
 Y^{cuped}_i = Y_i - \theta X_i
 $$
 
+$\quad$ where $\theta$ is some number we'll come back to
+
+. . . 
+
 - Using $Y^{cuped}_i$ instead of $Y_i$ for experiment evaluation leaves the treatment effect estimate unchanged but reduces its variance
 
 
 ## Treatment effect estimate remains unchanged
 
-- Let's denote the true, unobservable effect we're trying to estimate as $\tau$
+- The true causal effect -- the true effect of our feature -- is unobservable (we'll see why in part 2), and we refer to it as $\tau$ (Greek "tau" -- think "treatment effect")
 
-- In a typical experiment, we estimate $\tau$ as the difference in the average outcome in the treatment and control groups
+. . .
+
+- In a typical experiment, we use the difference in the average outcomes in the treatment and control groups to estimate it
+
+. . . 
+
+- Using the unadjusted outcome metric, we have:
 
 $$
 \hat{\tau} = \bar{Y}_t - \bar{Y}_c
 $$
 
-- We can proof (but won't) that on average, $\hat{\tau}$ gives us the right solution. That is, $\mathbb{E}(\hat{\tau}) = \tau$
+$\quad$ where
 
-- Because of this, we say that $\hat{\tau}$ is an unbiased estimator of $\tau$
+$$
+\bar{Y}_t = \frac{1}{N_t}\sum_{\text{if }T_i = 1} Y_i \qquad \qquad \bar{Y}_c = \frac{1}{N_c}\sum_{\text{if }T_i = 0} Y_i
+$$
+
+. . . 
+
+- We can proof (but won't) that on average, $\hat{\tau}$ equals the true effect, meaning that $\mathbb{E}[\hat{\tau}] = \tau$
+
+. . . 
+
+- Because of this, we say that $\hat{\tau}$ is an unbiased estimator
 
 
 ## Treatment effect estimate remains unchanged (cont.)
 
-
-
-
-
-- So, when we say that CUPED doesn't change our treatment effect estimates, what we mean is that 
-
-- Because this is the case, we say that 
-
-- Naturally, the CUPED estimator is
+- When we use the CUPED-adjusted outcome metric values, a natural way to estimate the true effect is:
 
 $$
 \begin{align}
@@ -225,24 +248,36 @@ $$
 \end{align}
 $$
 
-- We'll now see that it's indeed unbiased and has lower variance than the standard estimator
+$\quad$ where, instead of using unadjusted values $Y_i$, we simply use $Y_i^{cuped}$
+
+. . . 
+
+- We'll show next that this approach, too, returns the true effect on average, and is thus also unbiased
+
+. . . 
+
+- Hence, when we say that CUPED doesn't change the treatment effect estimate, what we mean is *not* that the estimate is exactly the same, but that CUPED, too, gives us the correct result on average
+
+. . . 
+
+- In practice, for large sample sizes, this means that the CUPED estimate will be very similar to the unadjusted estimate
+
 
 ## Unbiasedness of the CUPED estimator
 
-- Using our adjusted variable, we have
+- Using our adjusted variable, we can write the average treatment group outcome as (similarly for control group):
 
 $$
-\begin{align}
+\begin{align*}
 \bar{Y}^{cuped}_t 
-&= \frac{1}{N_t}\sum_{i:W_i = 1} Y^{cuped}_i
-= \frac{1}{N_t}\sum_{i:W_i = 1}\left(Y_i - \theta X_i\right)
-= \bar{Y}_t - \theta \bar{X}_t \\[5pt]
-\bar{Y}^{cuped}_c
-&= \frac{1}{N_c}\sum_{i:W_i = 0} Y^{cuped}_i
-= \frac{1}{N_c}\sum_{i:W_i = 0}\left(Y_i - \theta X_i\right)
-= \bar{Y}_c - \theta \bar{X}_c
-\end{align}
+&= \frac{1}{N_t}\sum_{\text{if }T_i = 1} Y^{cuped}_i \\[5pt]
+&= \frac{1}{N_t}\sum_{\text{if }T_i = 1}\left(Y_i - \theta X_i\right) \\[5pt]
+&= \frac{1}{N_t}\sum_{\text{if }T_i = 1}Y_i - \theta \frac{1}{N_t}\sum_{\text{if }T_i = 1}X_i \\[5pt]
+&= \bar{Y}_t - \theta \bar{X}_t
+\end{align*}
 $$
+
+. . . 
 
 - So we can rewrite the CUPED estimator as
 
@@ -258,7 +293,13 @@ $$
 
 ## Unbiasedness of the CUPED estimator (cont.)
 
-- To show that $\hat{\tau}$ is unbiased, we have to show that on average $\hat{\tau}$ equals $\tau$---that $\mathbb{E}[\hat{\tau}^{cuped}] = \tau$
+- We know (from above), that $\hat{\tau}$ is unbiased, meaning that $\mathbb{E}[\hat{\tau}] = \tau$
+
+. . . 
+
+- A simple way to show that on average, $\hat{\tau}^{cuped}$ equals $\hat{\tau}$, so that $\mathbb{E}[\hat{\tau}^{cuped}] = \mathbb{E}[\hat{\tau}] = \tau$
+
+. . . 
 
 - We can do this as follows
 
@@ -270,16 +311,16 @@ $$
 - \left(\bar{Y}_c - \theta \bar{X}_c\right)\right] \\[5pt]
 &= \mathbb{E}[\bar{Y}_t] - \theta \mathbb{E}[\bar{X}_t] 
 - \mathbb{E}[\bar{Y}_c] + \theta \mathbb{E}[\bar{X}_c] \\[5pt]
-\text{\scriptsize($X_i$ independent of treatment assignment)} &= \mathbb{E}[\bar{Y}_t] - \mathbb{E}[\bar{Y}_c] \\[5pt]
+&= \mathbb{E}[\bar{Y}_t] - \mathbb{E}[\bar{Y}_c] - \theta \mathbb{E}[\bar{X}_t] + \theta \mathbb{E}[\bar{X}_c] \\[5pt]
+(X_i \text{ independent of treatment}) &= \mathbb{E}[\bar{Y}_t] - \mathbb{E}[\bar{Y}_c] \\[5pt]
 &= \mathbb{E}[\bar{Y}_t - \bar{Y}_c] \\[5pt]
 &= \mathbb{E}[\hat{\tau}] \\[5pt]
-\text{\scriptsize(stated above)} &= \tau
+&= \tau
 \end{align}
 $$
 
 
 ## Outcome metric variance is smaller
-
 
 ## Variance of the CUPED estimator
 
@@ -383,7 +424,7 @@ $$
 
 . . . 
 
-- We randomly allocate each unit to either the treatment group ($W_i = 1)$ or control group ($W_i = 0$)
+- We randomly allocate each unit to either the treatment group ($T_i = 1)$ or control group ($T_i = 0$)
 
 . . . 
 
@@ -440,7 +481,7 @@ $$
 $\qquad$ where
 
 $$
-\bar{Y}_t = \frac{1}{N_t}\sum_{i:W_i = 1} Y_i \qquad \qquad \bar{Y}_c = \frac{1}{N_c}\sum_{i:W_i = 0} Y_i
+\bar{Y}_t = \frac{1}{N_t}\sum_{i:T_i = 1} Y_i \qquad \qquad \bar{Y}_c = \frac{1}{N_c}\sum_{i:T_i = 0} Y_i
 $$
 
 . . . 
