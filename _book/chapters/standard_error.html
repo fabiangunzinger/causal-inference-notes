@@ -447,12 +447,8 @@ div.csl-indent {
   <li><a href="#treatment-effect-estimate-variance" id="toc-treatment-effect-estimate-variance" class="nav-link active" data-scroll-target="#treatment-effect-estimate-variance"><span class="header-section-number">5.0.1</span> Treatment effect estimate variance</a></li>
   <li><a href="#estimating-the-treatment-effect-estimate-variance" id="toc-estimating-the-treatment-effect-estimate-variance" class="nav-link" data-scroll-target="#estimating-the-treatment-effect-estimate-variance"><span class="header-section-number">5.0.2</span> Estimating the treatment effect estimate variance</a></li>
   <li><a href="#standard-error-of-treatment-effect-estimate" id="toc-standard-error-of-treatment-effect-estimate" class="nav-link" data-scroll-target="#standard-error-of-treatment-effect-estimate"><span class="header-section-number">5.0.3</span> Standard error of treatment effect estimate</a></li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">5.1</span> Assumptions</a>
-  <ul class="collapse">
-  <li><a href="#stable-unit-treatment-value-assumption-sutva" id="toc-stable-unit-treatment-value-assumption-sutva" class="nav-link" data-scroll-target="#stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">5.1.1</span> Stable unit treatment value assumption (SUTVA)</a></li>
-  </ul></li>
-  <li><a href="#how-does-randomisation-help-us-estimate-ates" id="toc-how-does-randomisation-help-us-estimate-ates" class="nav-link" data-scroll-target="#how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">5.2</span> How does randomisation help us estimate ATEs?</a></li>
-  <li><a href="#finite-sample-vs-super-population-perspective" id="toc-finite-sample-vs-super-population-perspective" class="nav-link" data-scroll-target="#finite-sample-vs-super-population-perspective"><span class="header-section-number">5.3</span> Finite sample vs super-population perspective</a></li>
+  <li><a href="#how-does-randomisation-help-us-estimate-ates" id="toc-how-does-randomisation-help-us-estimate-ates" class="nav-link" data-scroll-target="#how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">5.1</span> How does randomisation help us estimate ATEs?</a></li>
+  <li><a href="#finite-sample-vs-super-population-perspective" id="toc-finite-sample-vs-super-population-perspective" class="nav-link" data-scroll-target="#finite-sample-vs-super-population-perspective"><span class="header-section-number">5.2</span> Finite sample vs super-population perspective</a></li>
   </ul>
 </nav>
     </div>
@@ -533,34 +529,13 @@ V\left(\tee\right) &amp;= V\left(\teef\right) \\
 \]</span></p>
 <p>Notice that for equal sample sizes, when <span class="math inline">\(P=0.5\)</span>, this formulation is equivalent to the one above as expected.</p>
 </section>
-<section id="assumptions" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">5.1</span> Assumptions</h2>
-<section id="stable-unit-treatment-value-assumption-sutva" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="stable-unit-treatment-value-assumption-sutva"><span class="header-section-number">5.1.1</span> Stable unit treatment value assumption (SUTVA)</h3>
-<ul>
-<li>SUTVA has two components: no interference, and no hidden variations of treatments.</li>
-</ul>
-<p><strong>No interference</strong></p>
-<ul>
-<li><p>The no interference assumption states that a unit’s potential outcumes are independent of the treatment assignment of all other units.</p></li>
-<li><p>This will be violated if there are network effects: if the behaviour of units is mutually dependent. For instance: if my wife and I both use an online photo-sharing service and my wife sees a new feature that we both like while I’m in the control group, we might stil share the same number of family photos but start sharing them all on her account instead of mine. This creates an artificial treatment effect because if I had also had access to the new feature, we might not have changed our behaviour at all, while, during the experiment, her sharing volume went up while mine went down, suggesting the existent of a positive effect.</p></li>
-<li><p>Another case where the no interference assumption can be violated is in the form of general equilibrium effects. A classic example is the effect of further education: the effect of my doing a PhD in statistics on my earnings while nobody else changes their behaviour (the partial-equilibrium effect) is surely different from the outcome of my earnings if suddenly everyone decided to do a PhD in statistics (the general-equilibrium effect).</p></li>
-<li><p>The two violations capture the two different ways interference can lead to incorrect results: interference can happen and bias our results either during the experiment or once the feature is fully rolled out. In either case, the treatment of some unit has an externality on other units.</p></li>
-</ul>
-<p><strong>No hidden treatment variations</strong></p>
-<ul>
-<li><p>The second component, no hidden treatment variation, states that a unit receiving a specific treatment level cannot receive different forms of that treatment level. This does <em>not</em> mean that the form of the treatment level has to be the same for each unit, but only that a given treatment level is well specified for a given unit. To use Imbens and Rubin’s aspirin example: suppose we test the effect of aspirin on reducing headaches but have old and new aspirins which vary in strength, so that we effectively have three possible treatment statuses: no aspirin (control), weak aspirin, and strong aspirin. SUTVA does <em>not</em> require that all treatment units either get the weak or the strong aspirin, but requires that each unit can only receive one or the other in case they are treated, so that there is no ambiguity what form of the treatment a given unit will receive in case it is treated. (It would be permissible to have the treatment be randomly weak or strong, but this is not relevant in my world.)</p></li>
-<li><p>Essentially, both parts of SUTVA ensure the same thing: that <span class="math inline">\(Y_i(w)\)</span> is well defined: that it does not depend on the treatment status of other units, and that, for each possible treatment level, <span class="math inline">\(w\)</span>, the precise form of that treatment level is well specified.</p></li>
-</ul>
-</section>
-</section>
-<section id="how-does-randomisation-help-us-estimate-ates" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">5.2</span> How does randomisation help us estimate ATEs?</h2>
+<section id="how-does-randomisation-help-us-estimate-ates" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="how-does-randomisation-help-us-estimate-ates"><span class="header-section-number">5.1</span> How does randomisation help us estimate ATEs?</h2>
 <p>By ensuring that the treatment - the causal variable of interest - is independent of potential outcomes, so that control and treatment group are comparable.</p>
 <p>More technically, it ensures that expected outcomes are the same in both groups, which means that the selection bias - the difference of expected potential outcomes without treatment - disappears. When using regression, this is equivalent to the error term being uncorrelated with treatment status.</p>
 </section>
-<section id="finite-sample-vs-super-population-perspective" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="finite-sample-vs-super-population-perspective"><span class="header-section-number">5.3</span> Finite sample vs super-population perspective</h2>
+<section id="finite-sample-vs-super-population-perspective" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="finite-sample-vs-super-population-perspective"><span class="header-section-number">5.2</span> Finite sample vs super-population perspective</h2>
 <p>There are two ways to perform inference:</p>
 <ul>
 <li><p>When using the finite sample perspective, the <span class="math inline">\(N\)</span> units in the experiment sample are treated as the entire population of interest. Hence, there is no notion of randomisation due to sampling from a larger population, and all the randomness in the outcomes is due to randomness generates by the assignment mechanism.</p></li>

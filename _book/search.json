@@ -1076,15 +1076,15 @@
     "objectID": "chapters/standard_error.html#how-does-randomisation-help-us-estimate-ates",
     "href": "chapters/standard_error.html#how-does-randomisation-help-us-estimate-ates",
     "title": "5  Standard error",
-    "section": "5.2 How does randomisation help us estimate ATEs?",
-    "text": "5.2 How does randomisation help us estimate ATEs?\nBy ensuring that the treatment - the causal variable of interest - is independent of potential outcomes, so that control and treatment group are comparable.\nMore technically, it ensures that expected outcomes are the same in both groups, which means that the selection bias - the difference of expected potential outcomes without treatment - disappears. When using regression, this is equivalent to the error term being uncorrelated with treatment status."
+    "section": "5.1 How does randomisation help us estimate ATEs?",
+    "text": "5.1 How does randomisation help us estimate ATEs?\nBy ensuring that the treatment - the causal variable of interest - is independent of potential outcomes, so that control and treatment group are comparable.\nMore technically, it ensures that expected outcomes are the same in both groups, which means that the selection bias - the difference of expected potential outcomes without treatment - disappears. When using regression, this is equivalent to the error term being uncorrelated with treatment status."
   },
   {
     "objectID": "chapters/standard_error.html#finite-sample-vs-super-population-perspective",
     "href": "chapters/standard_error.html#finite-sample-vs-super-population-perspective",
     "title": "5  Standard error",
-    "section": "5.3 Finite sample vs super-population perspective",
-    "text": "5.3 Finite sample vs super-population perspective\nThere are two ways to perform inference:\n\nWhen using the finite sample perspective, the \\(N\\) units in the experiment sample are treated as the entire population of interest. Hence, there is no notion of randomisation due to sampling from a larger population, and all the randomness in the outcomes is due to randomness generates by the assignment mechanism.\nWhen treating the \\(N\\) units in the sample as a random sample from a larger super-population, then in addition to randomness from the randomisation, we also have randomness from the sampling.\n\n\n\n\n\nImbens, Guido W, and Donald B Rubin. 2015. Causal Inference in Statistics, Social, and Biomedical Sciences. Cambridge University Press."
+    "section": "5.2 Finite sample vs super-population perspective",
+    "text": "5.2 Finite sample vs super-population perspective\nThere are two ways to perform inference:\n\nWhen using the finite sample perspective, the \\(N\\) units in the experiment sample are treated as the entire population of interest. Hence, there is no notion of randomisation due to sampling from a larger population, and all the randomness in the outcomes is due to randomness generates by the assignment mechanism.\nWhen treating the \\(N\\) units in the sample as a random sample from a larger super-population, then in addition to randomness from the randomisation, we also have randomness from the sampling.\n\n\n\n\n\nImbens, Guido W, and Donald B Rubin. 2015. Causal Inference in Statistics, Social, and Biomedical Sciences. Cambridge University Press."
   },
   {
     "objectID": "chapters/standard_error.html#footnotes",
