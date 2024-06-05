@@ -211,15 +211,10 @@ div.csl-indent {
 
 
 
-    \nc{\stoe}{\alpha}                % type one error
-    \nc{\stte}{\beta}                 % type two error
+    \nc{\stoe}{\alpha}                      % type one error
+    \nc{\stte}{\beta}                       % type two error
 
-
-    %%%%%%%%%%%%%%%%%%
-    % other commands %
-    %%%%%%%%%%%%%%%%%%
-
-    \nc{\mc}[1]{\text{\scriptsize(#1)}} %math inline comment
+    \nc{\mc}[1]{\text{\scriptsize(#1)}}     %math inline comment
 
     <!-- These aren't working for some reason -->
     <!-- \nc{\lp}{\left(} -->
@@ -368,26 +363,44 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/decision_making.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Decision-making</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/threats_to_validity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Threats to validity</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/practical_issues.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Practical issues</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/variance_reduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Variance reduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/network_experiments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Network experiments</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/heterogeneous_treatment_effects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Heterogeneous treatment effects</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/triggered_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Triggered analysis</span></span></a>
   </div>
 </li>
       </ul>
@@ -404,19 +417,19 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/stats_foundations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Statistics foundation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/projection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Projection</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/fwl.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">FWL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">FWL</span></span></a>
   </div>
 </li>
       </ul>
@@ -463,7 +476,7 @@ div.csl-indent {
 
 </header>
 
-<p>In this section, we’ll derive the standard error of our treatment effect stimator <span class="math inline">\(\tee\)</span>.</p>
+<p>In this section, we’ll derive the standard error of our treatment effect estimator <span class="math inline">\(\tee\)</span>.</p>
 <p>Our treatment effect estimate, <span class="math inline">\(\tee\)</span>, is a random variable because sampling and treatment assignment are random. This means that if we were to repeat the sampe experiment many times we’d get a slightly different value for <span class="math inline">\(\tee\)</span> each time. The distribution of all these values is called the sampling distribution of <span class="math inline">\(\tee\)</span>. We know a few things about that distribution. From the central limit theorem we know that its shape is Normal (see <a href="stats_foundations.html"><span>Chapter&nbsp;16</span></a>). Above we have shown above that the distribution has mean <span class="math inline">\(\te\)</span>, which means our estimator is unbiased. Naturally, the distribution also has a standard deviation. Because it is a sampling distribution, that standard deviation is called the standard error. But it is still a standard deviation, and is thus defined as the square root of the variance. We’ll thus find the standard error as follows: we first derive the variance of the treatment estimate, then find a way to estimate that variance, and then take the square root of that estimate to get the standard error.</p>
 <section id="treatment-effect-estimate-variance" class="level3" data-number="5.0.1">
 <h3 data-number="5.0.1" class="anchored" data-anchor-id="treatment-effect-estimate-variance"><span class="header-section-number">5.0.1</span> Treatment effect estimate variance</h3>

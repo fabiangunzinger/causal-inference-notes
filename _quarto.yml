@@ -38,14 +38,14 @@ book:
         - chapters/experiment_design.md
         # - chapters/experiment_stats.qmd
         - chapters/metrics.md
-        # # - chapters/decision_making.qmd
+        - chapters/decision_making.qmd
         - chapters/threats_to_validity.qmd
         - chapters/practical_issues.qmd
         - chapters/variance_reduction.qmd
         - chapters/network_experiments.qmd
         # - chapters/switchbacks.qmd
-        # - chapters/heterogeneous_treatment_effects.qmd
-        # - chapters/triggered_analysis.md
+        - chapters/heterogeneous_treatment_effects.qmd
+        - chapters/triggered_analysis.md
 
     - part: "Appendices"
       chapters:

@@ -1,7 +1,6 @@
 # Standard error {#sec-standard-error}
 
-In this section, we'll derive the standard error of our treatment effect
-stimator $\tee$.
+In this section, we'll derive the standard error of our treatment effect estimator $\tee$.
 
 Our treatment effect estimate, $\tee$, is a random variable because sampling and
 treatment assignment are random. This means that if we were to repeat the sampe
@@ -117,27 +116,6 @@ Notice that for equal sample sizes, when $P=0.5$, this formulation is equivalent
 to the one above as expected.
 
 
-## Assumptions 
-
-### Stable unit treatment value assumption (SUTVA)
-
-- SUTVA has two components: no interference, and no hidden variations of treatments.
-
- **No interference**
-
-- The no interference assumption states that a unit's potential outcumes are independent of the treatment assignment of all other units.
-
-- This will be violated if there are network effects: if the behaviour of units is mutually dependent. For instance: if my wife and I both use an online photo-sharing service and my wife sees a new feature that we both like while I'm in the control group, we might stil share the same number of family photos but start sharing them all on her account instead of mine. This creates an artificial treatment effect because if I had also had access to the new feature, we might not have changed our behaviour at all, while, during the experiment, her sharing volume went up while mine went down, suggesting the existent of a positive effect.
-
-- Another case where the no interference assumption can be violated is in the form of general equilibrium effects. A classic example is the effect of further education: the effect of my doing a PhD in statistics on my earnings while nobody else changes their behaviour (the partial-equilibrium effect) is surely different from the outcome of my earnings if suddenly everyone decided to do a PhD in statistics (the general-equilibrium effect).
-
-- The two violations capture the two different ways interference can lead to incorrect results: interference can happen and bias our results either during the experiment or once the feature is fully rolled out. In either case, the treatment of some unit has an externality on other units.
-
-**No hidden treatment variations**
-
-- The second component, no hidden treatment variation, states that a unit receiving a specific treatment level cannot receive different forms of that treatment level. This does *not* mean that the form of the treatment level has to be the same for each unit, but only that a given treatment level is well specified for a given unit. To use Imbens and Rubin's aspirin example: suppose we test the effect of aspirin on reducing headaches but have old and new aspirins which vary in strength, so that we effectively have three possible treatment statuses: no aspirin (control), weak aspirin, and strong aspirin. SUTVA does *not* require that all treatment units either get the weak or the strong aspirin, but requires that each unit can only receive one or the other in case they are treated, so that there is no ambiguity what form of the treatment a given unit will receive in case it is treated. (It would be permissible to have the treatment be randomly weak or strong, but this is not relevant in my world.)
-
-- Essentially, both parts of SUTVA ensure the same thing: that $Y_i(w)$ is well defined: that it does not depend on the treatment status of other units, and that, for each possible treatment level, $w$, the precise form of that treatment level is well specified.
 
 ## How does randomisation help us estimate ATEs?
 

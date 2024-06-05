@@ -63,6 +63,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 </head><body class="nav-sidebar floating fullcontent"><span class="math inline">
     \(
+
     \newcommand{\nc}{\newcommand}
 
     %%%%%%%%%%%%%%%%
@@ -176,15 +177,26 @@ ul.task-list li input[type="checkbox"] {
     % misc. math %
     %%%%%%%%%%%%%%
 
-    \nc{\stoe}{\alpha}                % type one error
-    \nc{\stte}{\beta}                 % type two error
+    \nc{vs}{\\[5pt]}                       % math mode extra vertical space
 
 
-    %%%%%%%%%%%%%%%%%%
-    % other commands %
-    %%%%%%%%%%%%%%%%%%
+    \nc{E}[1]{\mathbb{E}\left[#1\right]}    % expectation operator
+    \nc{V}[1]{\mathbb{V}\left(#1\right)}    % variance operator
 
-    \nc{\mc}[1]{\text{\scriptsize(#1)}} %math inline comment
+    \nc{lb}[1]{\left[#1\right]}             % large brackets
+    \nc{lp}[1]{\left(#1\right)}             % large parenthesis
+    \nc{llp}[1]{\biggl(#1\biggr)}           % large, large parenthesis
+
+
+    \nc{sot}{\sum_{i:W_i=t}}                % sum over treatment units
+    \nc{soc}{\sum_{i:W_i=t}}                % sum over control units
+
+
+
+    \nc{\stoe}{\alpha}                      % type one error
+    \nc{\stte}{\beta}                       % type two error
+
+    \nc{\mc}[1]{\text{\scriptsize(#1)}}     %math inline comment
 
     <!-- These aren't working for some reason -->
     <!-- \nc{\lp}{\left(} -->

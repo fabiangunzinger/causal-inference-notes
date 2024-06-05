@@ -70,3 +70,5 @@ $$
 - @bojinov2019time
 
 - [Experiment Rigor for Switchback Experiment Analysis](https://doordash.engineering/2019/02/20/experiment-rigor-for-switchback-experiment-analysis/)
+
+- [Analyzing Switchback Experiments by Cluster Robust Standard Error to Prevent False Positive Results](https://doordash.engineering/2019/09/11/cluster-robust-standard-error-in-switchback-experiments/)
