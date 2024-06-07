@@ -62,7 +62,7 @@ todo
 
 - The main guardrail to ensure internal validity is smaple ratio mismatch (SRM). Others are discussed in chapter 21 in @kohavi2020trustworthy
 
-- Guardrails that protect the business ensure that improving one part of the platform don't come at the cost of quality/experience/something else -- they basically try to guard against unintended consequences (an example would be site latency)
+- Guardrails that protect the business ensure that improving one part of the platform don't come at the cost of quality/experience/something else -- they basically try to guard against unintended consequences (an example would be site latency, but could also be cross-pillar effects such as when a change to customer experience affects restaurant metrics)
 
 - @deng2016data argue that the main feature of a good guardrail metric should be directionality, so that we can be sure that if we get a signal, it points in the right direction in terms of user experience (in contrast to debug metrics, which should have good sensitivity)
 

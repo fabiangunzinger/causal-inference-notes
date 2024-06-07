@@ -1,5 +1,10 @@
 # Useful resources
 
+
+- [Causal Inference for The Brave and True#
+](https://matheusfacure.github.io/python-causality-handbook/landing-page.html)
+
+
 People that produce relevant work
 
 - [Iavor Bojinov](https://www.hbs.edu/faculty/Pages/profile.aspx?facId=1199332&view=publications)

@@ -57,16 +57,16 @@ faster to use in practice.
 
 ### Derivation from first principles
 
-Power is the probability that we reject the null hypothesis if it is false:
+- Power is the probability that we reject the null hypothesis if it is false:
 
 $$
 1 - \beta = P[\text{reject } H_0 | H_0 \text{ is false}].
 $$
 
-To derive the formula for power, we thus have to start with testing proceedure
+- To derive the formula for power, we thus have to start with testing proceedure
 that determines whether or not we reject $H_0$.
 
-The null hypothesis asserts that there is no difference between treatment and
+- The null hypothesis asserts that there is no difference between treatment and
 control group, while the alternative hypothesis asserts that there is:
 
 $$
@@ -77,13 +77,13 @@ H_A: \te &= \tef \neq 0.
 $$
 
 
-We test the null hypothesis by constructing the test statistic
+- We test the null hypothesis by constructing the test statistic
 
 $$
 Z = \frac{\tee}{\se}
 $$
 
-and reject the null hypothesis if
+- and reject the null hypothesis if
 
 $$
 |Z| > z_{\alpha/2},
@@ -397,13 +397,27 @@ $$ N =  \frac{(t_a + t_{1-\kappa})^2}{P(1-P)}\left(\frac{\sigma}{\delta}\right)^
 - When aiming to estimate a precise effect size rather than just being interested in statistical significance, use assurance instead of power: instead of choosing a sample size to attain a given level of power, choose sample size so that confidence interval will be suitably narrow 99 percent of the time ([Sample-Size Planning for More Accurate Statistical Power: A Method Adjusting Sample Effect Sizes for Publication Bias and Uncertainty](https://www3.nd.edu/~kkelley/publications/articles/Anderson_Kelley_Maxwell_Psychological_Science_2017.pdf) and [Understanding the new statistics](https://tandfbis.s3.amazonaws.com/rt-media/pp/common/sample-chapters/9780415879682.pdf).)
 
 
+
+
+## Experiment duration
+
+- We usually care about power because it determines experiment runtime.
+
+- There we walk about how to translate required N into runtime.
+
+- [Simon Johnson -- Four Customer Characteristics That Should Change Your Experiment Runtime](https://www.geteppo.com/blog/four-customer-characteristics-that-should-change-your-experiment-runtime)
+
+
+
+
+
+
 ## Useful resources
 
 - @larsen2023statistical for general overview
 - @zhou2023all for comprehensive overview of how to calculate power
 - @bojinov2023design, section 5, for simulation results for switchbacks and generally good approach to simulation to emulate
 - @reich2012empirical power calcs for cluster-randomised experiments
-
 
 ## Q&A
 

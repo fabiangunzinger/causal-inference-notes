@@ -33,7 +33,7 @@ book:
     
     - part: "Practical issues"
       chapters:
-        # - chapters/guiding_principles.qmd
+        - chapters/guiding_principles.qmd
         - chapters/ethics.qmd
         - chapters/experiment_design.md
         # - chapters/experiment_stats.qmd
@@ -43,9 +43,17 @@ book:
         - chapters/practical_issues.qmd
         - chapters/variance_reduction.qmd
         - chapters/network_experiments.qmd
-        # - chapters/switchbacks.qmd
+        - chapters/switchbacks.qmd
         - chapters/heterogeneous_treatment_effects.qmd
         - chapters/triggered_analysis.md
+        - chapters/multiple_hypothesis_correction.qmd
+
+    - part: "Quasi-experiments"
+      chapters:
+        - chapters/quasi_experiments.qmd
+        - chapters/matching.qmd
+        - chapters/regression_discontinuity.qmd
+
 
     - part: "Appendices"
       chapters:
@@ -55,14 +63,9 @@ book:
       - chapters/fwl.qmd
       # - chapters/dags.qmd
 
-      # Quasi-experiments in practice
-      # - chapters/quasi_experiments.qmd
-      # - chapters/matching.qmd
-      # - chapters/regression_discontinuity.qmd
 
       # Misc.
       # - chapters/causal_estimands.md
-      # - chapters/multiple_hypothesis_correction.qmd
       # - chapters/misc_topics.qmd
       # - chapters/useful_resources.qmd
       # - chapters/references.qmd

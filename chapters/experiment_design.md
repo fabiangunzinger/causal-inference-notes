@@ -29,6 +29,10 @@ What's the difference between a "between-subjects design" and a "within-subjects
 - The strength of a between design is that it protects against confounding factors, that of a within design that it improves precision (because we have baseline data).
 - A mixed design is where we have a control group and baseline data. If we use that baseline, the estimator is then a difference-in-difference estimator, which is statistically more efficient.
 
+Interleaving
+
+- [Innovating Faster on Personalization Algorithms at Netflix Using Interleaving](https://netflixtechblog.com/interleaving-in-online-experiments-at-netflix-a04ee392ec55)
+
 
 ## Choosing unit of randomisation 
 
