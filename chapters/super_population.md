@@ -165,6 +165,29 @@ $$
 $$
 
 
+**Variance of $\hat{\tau}$**
 
-**Variance of \hat{\tau}**
+- Using the law of total variance, we can write $\V{\hat{\tau}}$ as
+
+$$
+\begin{align}
+\V{\hat{\tau}}
+&= \Esp{\VW{\hat{\tau} | R}} + \Vsp{\EW{\hat{\tau} | R}}
+\end{align}
+$$
+
+::: {.callout-note collapse=true}
+
+## Law of total variance
+
+- ...
+$$
+\begin{align}
+
+\end{align}
+$$
+
+- The law also works for V(Y|X), ...
+
+:::
 
