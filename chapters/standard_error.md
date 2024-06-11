@@ -1,21 +1,17 @@
 # Standard error {#sec-standard-error}
 
-In this section, we'll derive the standard error of our treatment effect estimator $\tee$.
+- In this section, we'll derive the standard error of our treatment effect estimator $\tee$.
 
-Our treatment effect estimate, $\tee$, is a random variable because sampling and
-treatment assignment are random. This means that if we were to repeat the sampe
-experiment many times we'd get a slightly different value for $\tee$ each time.
-The distribution of all these values is called the sampling distribution of
-$\tee$. We know a few things about that distribution. From the central limit
-theorem we know that its shape is Normal (see @sec-stats-foundations). Above we
-have shown above that the distribution has mean $\te$, which means our estimator
-is unbiased. Naturally, the distribution also has a standard deviation. Because it
-is a sampling distribution, that standard deviation is called the standard
-error. But it is still a standard deviation, and is thus defined as the square
-root of the variance. We'll thus find the standard error as follows: we first
-derive the variance of the treatment estimate, then find a way to estimate that
-variance, and then take the square root of that estimate to get the standard
-error.
+- Our treatment effect estimate, $\hat{\tau}$, is a random variable because sampling and
+treatment assignment are random.
+
+- This means that if we were to repeat the same experiment many times we'd get a slightly different value for $\hat{\tau}$ each time.
+
+- The distribution of all these values is called the sampling distribution of $\tee$. 
+
+- We know a few things about that distribution. From the central limit theorem we know that its shape is Normal (see @sec-stats-foundations). Above we have shown above that the distribution has mean $\te$, which means our estimator is unbiased. Naturally, the distribution also has a standard deviation. Because it is a sampling distribution, that standard deviation is called the standard error. But it is still a standard deviation, and is thus defined as the square root of the variance. 
+
+- We'll thus find the standard error as follows: we first derive the variance of the treatment estimate, then find a way to estimate that variance, and then take the square root of that estimate to get the standard error.
 
 
 ### Treatment effect estimate variance

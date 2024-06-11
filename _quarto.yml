@@ -28,6 +28,7 @@ book:
       - chapters/testing_and_cis.md
       - chapters/power.md
       - chapters/analysis.md
+      - chapters/super_population.md
       # - chapters/regression.qmd
       # - chapters/regression_for_experiments.qmd
     
