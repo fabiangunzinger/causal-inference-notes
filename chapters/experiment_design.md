@@ -1,7 +1,9 @@
 # Experiment design
 
-
 ## Designs
+
+- Check cox2000theory book. It's the bible.
+
 - See BIT blue book section 5
 
 Classic RCT
