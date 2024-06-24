@@ -1,6 +1,12 @@
 # Useful resources
 
 
+There are lots of great resources out there for causal inference and experimentation. I collect a list of those resources [here](https://github.com/fabiangunzinger/awesome-resources)
+
+
+
+
+
 - [Causal Inference for The Brave and True#
 ](https://matheusfacure.github.io/python-causality-handbook/landing-page.html)
 

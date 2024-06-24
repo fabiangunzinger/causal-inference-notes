@@ -6,7 +6,7 @@
 
 ## Perl
 
-## Directed Acyclic Graphs
+Directed Acyclic Graphs
 
 - A *confounder* is a variable that simultaneously affects the treatment indicator and the outcome (the same as an omitted variable).
 - A *collider* is a variable that is simultaneously affected by the treatment indicator and the outcome.

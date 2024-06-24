@@ -1,4 +1,4 @@
-# Experiment design
+# Experiment designs
 
 - Have separate page for how to think about design -- how to approach it -- a checklist for good design (based on Meta interview prep)
 

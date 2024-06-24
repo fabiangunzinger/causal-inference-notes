@@ -1,7 +1,18 @@
 # Analysis {#sec-analysis}
 
-- Discuss analysis for each major case of a 3 x 3 table: method of analysis (Fisher, Neyman, Regression), and source of uncertainty (Sampling, Randomisation, Both)
+todo
+- Neyman approach
+- Fisher sharp null
+- Regression
+- ML approaches
 
+- Consider producing table for each major case of a 3 x 3 table: method of analysis (Fisher, Neyman, Regression), and source of uncertainty (Sampling, Randomisation, Both)
+
+
+## Regression for experiment evaluation
+- Start with abadie2020sampling
+- See @athey2017econometrics
+- See also Friedman critique, Lin response, and Imbens Rubin book response
 
 Why would we want to include covariates in a randomised experiment analysis?
 
