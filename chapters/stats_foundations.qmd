@@ -286,6 +286,7 @@ Limitations of reliying on pvap
 
 - Multiple hypothesis testing (potential [Gelman post](https://statmodeling.stat.columbia.edu/2016/03/07/29212/))
 
+- MHT: family-wise error rate vs false discovery rate
 
 ## False positive rate vs false discovery rate
 

@@ -100,6 +100,10 @@ Consider the outcome of a large sample size (e.g. 10K subjects) A/B test that yi
 
 A researcher runs an experiment, gets a p-value of 0.033, and concludes that his false positive rate is 3.3 percent. Is that correct? Why or why not?
 
+**4.**
+
+Why don't we include MDE in our hypothesis statement (i.e. "a will increase b by at least MDE for target population")? Wouldn't that be a good idea in a business context where we strongly care about an MDE? Don't we just not do that because academics, who developed the methods, don't usually care about an effect being of a certain size but only about learning what the effect is?
+
 
 Answers
 
@@ -117,3 +121,7 @@ print(f"p-value is: {p:.3f}")
 **3**
 
 No. An individual experiment doesn't have a false positive rate. The false positive rate is determined by the proceedure used for experiments over the long run. For example, if you consistently use a p-value of 0.05, then you are guaranteed to have a false positive rate of 5 percent in the long run. This is the main insight underlying the Neyman-Pearson hypothesis testing framework.
+
+**4.**
+
+Including the MDE's in the hypothesis would be incorrect. Why? Because what we formulate is the alternative hypothesis. Without altering the null hypothesis, which traditionally states the effect is zero, our two hypotheses would not be complete (H0 testing effect different from 0, HA asserting that effect is at least MDE means rejecting H0 would not imply support of HA). So why not adapt H0, too? Because the hypothesis is the thing we test when we calculate our test statistic (duh!), and so if included the MDE in the hypothesis formulation, then we'd have to include it in the calculation of the test statistic (subtract it from the observed difference), which would be incorrect. Why? The question confused the MDE with the effect size under the Null hypothesis, which are conceptually different things: the MDE is the smallest effect size we want to detect -- we are interested in effects that are as large or larger than the MDES, we're not testing whether the observed difference is significantly different from it, which is what the null hypothesis value is.

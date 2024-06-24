@@ -15,6 +15,30 @@
   - Segment key markets (e.g. build versions of the product suitable for particular needs -- e.g. LinkedIn Light built to cater for Indian users on slower 3G networks).
 
 
+## Basic approach -- compare outcomes by subgroup
+
+- Analyse results separately for pre-defined subgroups (e.g. platforms) using same approach as for stratified randomisation design (but instead of calculating weighted averages from groups, calculate ATEs)
+
+- Once concern is that if there are mutliple subgroups, we have multiple testing problem (if there are 100 binary covariates, we'll expect to find 5 significant differences even if covariates are unrelated to treatment effects)
+
+- Possible solutions:
+
+  - Pre-analysis plans (for social science)
+
+  - MHT correction
+
+## Testing for treatment effect heterogeneity
+
+- See athey2017econometrics 10.2
+
+- Can also test, for each covariate, whether they are associated with treatment effect (e.g. different ATE for below and above median valuse). To do this correctly, though, need to pre-specify the set of hypothesis tests, which makes exploring all possible interactions between covariates and ways to discretise them difficult.
+
+
+
+## Machine-learning approaches
+
+- Discussed in @athey2017state: Two main approaches: causal trees and LASSO
+
 ## Good segments
 
 - Market or country
@@ -66,6 +90,9 @@ Useful resources
 
 
 ## Resources
+
+- athey2017econometrics (Chapter 10)
+- imai2010heterogeneous for very succinct summary of athey2017econometrics content
 
 - @bojinov2020avoid
 

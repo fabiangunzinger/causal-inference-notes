@@ -14,6 +14,10 @@ In this section, I want to do the following:
 
 - ...
 
+Blog post on 16 or 32 power confusion:
+- Reliably looking posts who get it wrong: (https://towardsdatascience.com/probing-into-minimum-sample-size-formula-derivation-and-usage-8db9a556280b --- starts with the wrong std error with N for total instead of variant sample size), there is also Kohavi book or paper that gets it wrong
+
+
 
 ## Understanding the formula that determines sample size
 
@@ -418,6 +422,8 @@ $$ N =  \frac{(t_a + t_{1-\kappa})^2}{P(1-P)}\left(\frac{\sigma}{\delta}\right)^
 - @zhou2023all for comprehensive overview of how to calculate power
 - @bojinov2023design, section 5, for simulation results for switchbacks and generally good approach to simulation to emulate
 - @reich2012empirical power calcs for cluster-randomised experiments
+
+- [Power Analysis for Experiments with Clustered Data, Ratio Metrics, and Regression for Covariate Adjustment](https://arxiv.org/pdf/2406.06834)
 
 ## Q&A
 

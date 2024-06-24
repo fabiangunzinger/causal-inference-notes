@@ -30,3 +30,16 @@ Look at Deaton and Cartwright papers.
 4) There are ethical concerns.
 
 - For deeper discussion, see @stevenson2024cause and sources therein.
+
+
+
+## Thinking about causality
+
+
+- [Milton Friedman thermostat example](https://www.mercatus.org/macro-musings/nick-rowe-monetary-basics-milton-friedmans-thermostat-and-more)
+
+## Interpretation
+
+- We often think of experiment as answering: "Does the intervention work?", but what it really answers is "What is the average effect of the intervention with this specific implementation for this particular population at this time?"
+
+- When we have multiple treatments or analyse subgroups separately, we need to test whether different estimates are significantly different from each other (can't just look at whether some are significantly different from zero while some aren't) 

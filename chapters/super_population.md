@@ -72,9 +72,14 @@ $$ {#eq-yi}
 
 Check:
 - duflo2006randomization
+- Mostly harmless metrics
 - Field experiments book
 - Kohavi papers/book
 - Imbens and Rubins
+
+Question:
+- You randomise at customer level. For analysis, you do the following: you calculate metrics at a restaurant level, then calculate variant level averages from the restaurant-level averages. Is there a problem? What is it? What assumptions are being violated? 
+
 
 
 **Estimator**
@@ -164,13 +169,14 @@ $$
 $$
 \begin{align}
 \EW{\hat{\tau} | R}
-&= \EW{\frac{1}{N_t}\sum_{i=1}^{N_{sp}} R_i W_i Y_i - \frac{1}{N_c}\sum_{i=1}^{N_{sp}} R_i (1 - W_i) Y_i} \\
-&= \EW{\frac{1}{N_t}\sum_{i=1}^{N_{sp}} R_i W_i Y_i(1) - \frac{1}{N_c}\sum_{i=1}^{N_{sp}} R_i (1 - W_i) Y_i(0)} \\
-&= \EW{\frac{1}{N_t}\sum_{i=1}^{N_{sp}} R_i W_i Y_i(1)} - \EW{\frac{1}{N_c}\sum_{i=1}^{N_{sp}} R_i (1 - W_i) Y_i(0)} \\
-&= \frac{1}{\EW{N_t}}\sum_{i=1}^{N_{sp}} R_i \EW{W_i} Y_i(1) - \frac{1}{\EW{N_c}}\sum_{i=1}^{N_{sp}} R_i (1 - \EW{W_i}) Y_i(0) \\
-&= \frac{1}{Nq}\sum_{i=1}^{N_{sp}} R_i (q) Y_i(1) - \frac{1}{N(1-q)}\sum_{i=1}^{N_{sp}} R_i (1-q) Y_i(0) \\
-&= \frac{1}{N}\sum_{i=1}^{N_{sp}} R_i Y_i(1) - \frac{1}{N}\sum_{i=1}^{N_{sp}} R_i Y_i(0) \\
-&= \frac{1}{N}\sum_{i=1}^{N_{sp}} R_i \Bigl(Y_i(1) - Y_i(0)\Bigr) \\
+&= \EW{\frac{1}{N_t}\sum_{i=1}^{N_{sp}} R_i W_i Y_i - \frac{1}{N_c}\sum_{i=1}^{N_{sp}} R_i (1 - W_i) Y_i \>\Bigg|\> R} \vs
+&= \EW{\frac{1}{N_t}\sum_{i=1}^{N_{sp}} R_i W_i Y_i(1) - \frac{1}{N_c}\sum_{i=1}^{N_{sp}} R_i (1 - W_i) Y_i(0) \>\Bigg|\> R} \vs
+&= \EW{\sum_{i=1}^{N_{sp}} R_i \Biggl(\frac{W_i Y_i(1)}{N_t} - \frac{(1 - W_i) Y_i(0)}{N_c}\Biggr)\>\Bigg|\> R} \vs
+&= \sum_{i=1}^{N_{sp}} R_i \EW{\frac{W_i Y_i(1)}{N_t} - \frac{(1 - W_i) Y_i(0)}{N_c}} \vs
+&= \sum_{i=1}^{N_{sp}} R_i \Biggl(\frac{\EW{W_i} Y_i(1)}{\EW{N_t}} - \frac{(1 - \EW{W_i}) Y_i(0)}{\EW{N_c}}\Biggr) \vs
+&= \sum_{i=1}^{N_{sp}} R_i \Biggl(\frac{q Y_i(1)}{Nq} - \frac{(1 - q) Y_i(0)}{N(1-q)}\Biggr) \vs
+&= \sum_{i=1}^{N_{sp}} R_i \Biggl(\frac{Y_i(1)}{N} - \frac{Y_i(0)}{N}\Biggr) \vs
+&= \frac{1}{N}\sum_{i=1}^{N_{sp}} R_i \bigl(Y_i(1) - Y_i(0)\bigr) \vs
 &= \tau_{fs}
 \end{align}
 $$
@@ -182,10 +188,10 @@ $$
 \E{\hat{\tau}} 
 &= \Esp{\EW{\hat{\tau}|R}} \\
 &= \Esp{\tau_{fs}} \\
-&= \Esp{\frac{1}{N}\sum_{i=1}^{N_{sp}} R_i \Bigl(Y_i(1) - Y_i(0)\Bigr)} \\
-&= \frac{1}{\Esp{N}}\sum_{i=1}^{N_{sp}} \Esp{R_i} \Bigl(Y_i(1) - Y_i(0)\Bigr) \\
-&= \frac{1}{N_{sp}p}\sum_{i=1}^{N_{sp}} (p) \Bigl(Y_i(1) - Y_i(0)\Bigr) \\
-&= \frac{1}{N_{sp}}\sum_{i=1}^{N_{sp}}\Bigl(Y_i(1) - Y_i(0)\Bigr) \\
+&= \Esp{\frac{1}{N}\sum_{i=1}^{N_{sp}} R_i \bigl(Y_i(1) - Y_i(0)\bigr)} \\
+&= \frac{1}{\Esp{N}}\sum_{i=1}^{N_{sp}} \Esp{R_i} \bigl(Y_i(1) - Y_i(0)\bigr) \\
+&= \frac{1}{N_{sp}p}\sum_{i=1}^{N_{sp}} p \bigl(Y_i(1) - Y_i(0)\bigr) \\
+&= \frac{1}{N_{sp}}\sum_{i=1}^{N_{sp}}\bigl(Y_i(1) - Y_i(0)\bigr) \\
 &= \tau_{sp}
 \end{align}
 $$

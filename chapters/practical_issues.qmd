@@ -3,6 +3,8 @@
 todo:
 - Look at @kohavi2009controlled and @kohavi2007practical (a shorter version of the former)
 
+- Selection [bias](https://medium.com/airbnb-engineering/selection-bias-in-online-experimentation-c3d67795cceb)
+
 
 ## What if you want to implement a feature right away?
 

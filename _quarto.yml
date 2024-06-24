@@ -44,8 +44,8 @@ book:
         - chapters/practical_issues.qmd
         - chapters/variance_reduction.qmd
         - chapters/network_experiments.qmd
-        - chapters/switchbacks.qmd
         - chapters/heterogeneous_treatment_effects.qmd
+        - chapters/long_term_effects.md
         - chapters/triggered_analysis.md
         - chapters/multiple_hypothesis_correction.qmd
 
@@ -66,7 +66,7 @@ book:
 
 
       # Misc.
-      # - chapters/causal_estimands.md
+      # - chapters/treatment_effects.md
       # - chapters/misc_topics.qmd
       # - chapters/useful_resources.qmd
       # - chapters/references.qmd

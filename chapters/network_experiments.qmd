@@ -73,15 +73,14 @@ Effect on power
 
   - The effect depends on the number of clusters (the more the more power we have) and on the intra-cluster correlation (the less correlation the higher the power).
 
-A
-
-
 
 #### Ego-clusters
 
 - Instead of traditional clusters, create much smaller, unit-based clusters. See @saint2019using
 
 - Basically: you create clusters based on a central node (the ego) and its direct links (the alters), and randomise egos and alters seprately.
+
+- If your user-base is large enough, then this has the advantage that you can create many more clusters than with traditional clustering (e.g. city-level clusters), which means you can limit spillovers without suffering from low power.
 
 
 #### Switchback experiments
