@@ -32,22 +32,23 @@ book:
       # - chapters/regression.qmd
       # - chapters/regression_for_experiments.qmd
     
-    - part: "Practical issues"
-      chapters:
-        - chapters/guiding_principles.qmd
-        - chapters/ethics.qmd
-        - chapters/experiment_design.md
+    # - part: "Practical issues"
+      # chapters:
+        # - chapters/guiding_principles.qmd
+        # - chapters/ethics.qmd
+        # - chapters/experiment_designs.md
         # - chapters/experiment_stats.qmd
-        - chapters/metrics.md
-        - chapters/decision_making.qmd
-        - chapters/threats_to_validity.qmd
-        - chapters/practical_issues.qmd
-        - chapters/variance_reduction.qmd
-        - chapters/network_experiments.qmd
-        - chapters/heterogeneous_treatment_effects.qmd
-        - chapters/long_term_effects.md
-        - chapters/triggered_analysis.md
-        - chapters/multiple_hypothesis_correction.qmd
+        # - chapters/metrics.md
+        # - chapters/decision_making.qmd
+        # - chapters/threats_to_validity.qmd
+        # - chapters/practical_issues.qmd
+        # - chapters/variance_reduction.qmd
+        # - chapters/network_experiments.qmd
+        # - chapters/heterogeneous_treatment_effects.qmd
+        # - chapters/long_term_effects.md
+        # - chapters/triggered_analysis.md
+        # - chapters/multiple_hypothesis_correction.qmd
+        # - chapters/multi_arm_bandits.md
 
     - part: "Quasi-experiments"
       chapters:

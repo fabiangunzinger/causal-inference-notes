@@ -1,5 +1,10 @@
 # Super population perspective
 
+todo
+- https://web.stanford.edu/~swager/index.html
+
+
+
 **Setup**
 
 - We have a (super) population of $N_{sp}$ units.
@@ -56,14 +61,28 @@ $$
 Y_i = W_iY_i(1) + (1 - W_i)Y_i(0)
 $$ {#eq-yi}
 
+- Individual causal effects ... 
+
 
 **Estimand**
 
-- ... Randomisation solves selection bias problem and allows us to identify treatment effect
+- We are generally interested in the effect of a universal policy -- a comparison between a state of the world where everyone is exposed to the treatment and one where nobody is. Also, while we can capture the difference between these two states of the world in many different ways, we typically focus on the difference in average outcomes.
+
+- Hence, the estimand of interest (the theoretical quantity we try to estimate) is:
+
+$$
+\tau = \bar{Y}(1) - \bar{Y}(0),
+$$
+
+  where ...
 
 
 
 **Identification**
+
+- ... Randomisation solves selection bias problem and allows us to identify treatment effect
+
+- Use content from outcomes (expectations and show how randomisation eliminates selection bias)
 
 - Randomisation
 - SUTVA
@@ -81,10 +100,9 @@ Question:
 - You randomise at customer level. For analysis, you do the following: you calculate metrics at a restaurant level, then calculate variant level averages from the restaurant-level averages. Is there a problem? What is it? What assumptions are being violated? 
 
 
-
 **Estimator**
 
-- ... 
+- A natural estimator is ...
 
 - We can write our treatment effect estimator, $\hat{\tau}$ in terms of the super-population as
 
@@ -147,24 +165,11 @@ $$
 
 :::
 
-- In both of these steps, we implicitly also condition on the vectors of potential outcomes in the super population, $Y_{sp}(0), Y_{sp}(1)$, which we consider fixed and take as given. I don't condition on these explicitly to keep the notation light.
+- In both of these steps, we implicitly also condition on the vectors of potential outcomes in the super population, $Y_{sp}(0), Y_{sp}(1)$, which we consider fixed and take as given. I don't condition on these explicitly to keep the notation light.[^condition_on_pot_outcomes]
 
-::: {.callout-note collapse=true}
+- TODO: condition on $Y$, as a shorthand. Adapt notation below. Also, consider using bf for vectors and matrices for clarity. Probably do it!
 
-## Explicitly conditioning on potential outcomes
-
-- If we were to explicitly condition on potential outcomes, we'd get:
-
-$$
-\begin{align}
-\E{\hat{\tau}}
-&=\Esp{\EW{\hat{\tau}|R, Y_{sp}(0), Y_{sp}(1)} | Y_{sp}(0), Y_{sp}(1)}
-\end{align}
-$$
-
-:::
-
-- The first step gives us
+- The inner expectation is equal to:
 
 $$
 \begin{align}
@@ -181,7 +186,7 @@ $$
 \end{align}
 $$
 
-- The second step gives us:
+- The outer expectation is equal to:
 
 $$
 \begin{align}
@@ -192,14 +197,14 @@ $$
 &= \frac{1}{\Esp{N}}\sum_{i=1}^{N_{sp}} \Esp{R_i} \bigl(Y_i(1) - Y_i(0)\bigr) \\
 &= \frac{1}{N_{sp}p}\sum_{i=1}^{N_{sp}} p \bigl(Y_i(1) - Y_i(0)\bigr) \\
 &= \frac{1}{N_{sp}}\sum_{i=1}^{N_{sp}}\bigl(Y_i(1) - Y_i(0)\bigr) \\
-&= \tau_{sp}
+&= \tau
 \end{align}
 $$
 
 
 **Variance of $\hat{\tau}$**
 
-- Using the law of total variance, we can write $\V{\hat{\tau}}$ as
+- Using the law of total variance[^law_of_total_variance], we can write $\V{\hat{\tau}}$ as
 
 $$
 \begin{align}
@@ -208,30 +213,29 @@ $$
 \end{align}
 $$
 
-::: {.callout-note collapse=true}
-
-## Law of total variance
-
-- In general, the [Law of total variance](https://en.wikipedia.org/wiki/Law_of_total_variance) states that:
-
-$$
-\begin{align}
-\V{Y} = \E{\V{Y|X}} + \V{\E{Y|X}}
-\end{align}
-$$
-
-- In our case here, conditioning on $R$ means that we take the expectation or variance over the randomisation distribution, which I make explicit with the subscript $W$. The unconditional expectation or variance is taken over the randomisation distribution, which I make explicit using the subscript $sp$.
-
-- As in the unbiasedness proof above, we are also implicitly conditioning on potential outcomes and I omit making this explicit to keep the notation lighter. Making the conditioning explicit would mean we apply the law to a conditional variance, for which the logic would still hold, and we'd write:
-
-$$
-\begin{align}
-\V{\hat{\tau} | Y_{sp}(0), Y_{sp}(1)}
-&= \Esp{\VW{\hat{\tau} | R, Y_{sp}(0), Y_{sp}(1)} | Y_{sp}(0), Y_{sp}(1)} \\
-&+ \Vsp{\EW{\hat{\tau} | R, Y_{sp}(0), Y_{sp}(1)} | Y_{sp}(0), Y_{sp}(1)}
-\end{align}
-$$
-:::
 
 
 
+[^condition_on_pot_outcomes]: If we were to explicitly condition on potential outcomes, we'd get:
+  $$
+  \begin{align}
+  \E{\hat{\tau}}
+  &=\Esp{\EW{\hat{\tau}|R, Y_{sp}(0), Y_{sp}(1)} | Y_{sp}(0), Y_{sp}(1)}
+  \end{align}
+  $$
+
+
+[^law_of_total_variance]: In general, the [Law of total variance](https://en.wikipedia.org/wiki/Law_of_total_variance) states that:
+  $$
+  \begin{align}
+  \V{Y} = \E{\V{Y|X}} + \V{\E{Y|X}}
+  \end{align}
+  $$
+  In our case here, conditioning on $R$ means that we take the expectation or variance over the randomisation distribution, which I make explicit with the subscript $W$. The unconditional expectation or variance is taken over the randomisation distribution, which I make explicit using the subscript $sp$. As in the unbiasedness proof above, we are also implicitly conditioning on potential outcomes and I omit making this explicit to keep the notation lighter. Making the conditioning explicit would mean we apply the law to a conditional variance, for which the logic would still hold, and we'd write:
+  $$
+  \begin{align}
+  \V{\hat{\tau} | Y_{sp}(0), Y_{sp}(1)}
+  &= \Esp{\VW{\hat{\tau} | R, Y_{sp}(0), Y_{sp}(1)} | Y_{sp}(0), Y_{sp}(1)} \\
+  &+ \Vsp{\EW{\hat{\tau} | R, Y_{sp}(0), Y_{sp}(1)} | Y_{sp}(0), Y_{sp}(1)}
+  \end{align}
+  $$

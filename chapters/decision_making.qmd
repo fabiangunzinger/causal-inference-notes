@@ -62,6 +62,10 @@
 
 
 
+## How to get that info in practice?
+
+- Think about the [Expected Value of Information](https://www.linkedin.com/pulse/concept-evi-expected-value-information-ronny-kohavi/): basically: investing a little bit of research (expert consultation, querying data) reduces uncertainty a lot while costing little.
+
 ## Ship or no ship decision
 
 - Decide in advance: have amber, red, green system for different possible cases (see Kohavi possibilities with 0 and MDE graphs)
