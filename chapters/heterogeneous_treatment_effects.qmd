@@ -39,6 +39,8 @@
 
 - Discussed in @athey2017state: Two main approaches: causal trees and LASSO
 
+- See QuantCo post on metalearners: https://tech.quantco.com/blog/metalearners
+
 ## Good segments
 
 - Market or country
@@ -59,7 +61,10 @@
 
 todo:
 - What are the necessary and sufficient conditions for the paradox to occur (the test for us understanding this will be to be able to reproduce a simple example on the spot – as is done brilliantly in youtube video linked below)
+
 - Understand Wasserman's point that problem is imprecision in how we describe conditional statements with langauge
+
+- see deng2023 p.11 for graphical representation
 
 
 

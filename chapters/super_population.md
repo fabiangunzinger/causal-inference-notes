@@ -80,13 +80,21 @@ $$
 
 **Identification**
 
+- See Wagner notes for 4 assumptions: https://web.stanford.edu/~swager/stats361.pdf 
+
 - ... Randomisation solves selection bias problem and allows us to identify treatment effect
 
 - Use content from outcomes (expectations and show how randomisation eliminates selection bias)
 
 - Randomisation
+
 - SUTVA
+  - No interference
+  - Consistency
+  - See deng2023first for reference to Rubin 1980 original article on precise assumption and other great Rubin references
+
 - Solely and itself (excludability and non-interference)
+
 - Ignorability
 
 Check:
