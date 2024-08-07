@@ -1,4 +1,9 @@
-# Sampling and treatment assignment {#sec-treatment-assignment}
+# Setup {#setup}
+
+
+
+
+
 
 - Whether sampling and treatment assignment are independent across units impacts the standard error ouf our treatment effect estimator.
 
