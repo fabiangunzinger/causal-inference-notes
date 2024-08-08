@@ -22,13 +22,13 @@ book:
       # - chapters/fisher.qmd
       # - chapters/neyman.md
       # - chapters/sampling_vs_randomisation_uncertainty.qmd
+      - chapters/stats_of_online_experiments.md
       - chapters/setup.md
       - chapters/outcomes.md
       - chapters/standard_error.md
       - chapters/testing_and_cis.md
       - chapters/power.md
       - chapters/analysis.md
-      - chapters/super_population.md
       # - chapters/regression.qmd
       # - chapters/regression_for_experiments.qmd
     
