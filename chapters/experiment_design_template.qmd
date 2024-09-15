@@ -1,0 +1,65 @@
+# Experiment design template
+
+- A step-by-step process to design good experiment
+
+
+## Background
+
+- Define key term
+- Understand the product
+  - How does it work?
+  - What's its purpose? 
+  - What are it's values? 
+  - What constitutes success?
+- Clarify experiment objective
+
+
+## Pre-design
+- Intervention
+  - What is change?
+  - What problem does it solve?
+  - How is it being implemented?
+  - What are treatment and control experiences?
+
+- Metrics
+  - See metrics.md
+
+- Target audience
+  - Market segments?
+  - UX funnel trigger?
+
+- Hypothesis
+  - [Change] will [direction] [OEC] for [target audience]
+
+- Decision making-process
+  - RAG for ship, continue, iterate/discard
+
+## Design
+
+- Key parametes
+  - Power
+  - Confidence
+  - MDE
+  - (See decision_making.md)
+
+- Randomisation
+  - Unit
+  - Mechanism
+  - Variant allocation
+
+- Sample size / duration
+  - Power calculation
+  - Adjusted by trigger stage
+  - Traffic share
+  - Internal validity considerations (e.g. 1 week min)
+
+- Risks
+  - Internal validity
+  - External validity
+  - Project management
+  - Ethical
+
+## Analysis
+- Strategy
+- Results
+

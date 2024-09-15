@@ -1,4 +1,5 @@
-# Statistics foundation
+# Statistics foundation {#sec-stats-foundations}
+
 <!-- 
 ```{python}
 import matplotlib.pyplot as plt
@@ -12,6 +13,18 @@ from statsmodels.api import ProbPlot
 
 sns.set_style("whitegrid")
 ``` -->
+
+
+## Properties of variances
+
+$$
+\begin{align}
+Var(X + c) = Var(X) \vs
+Var(X + Y + c) = Var(X + Y)
+\begin{end}
+$$ {#eq-var-properties}
+
+
 
 ## Important moments of random variables
 
@@ -273,6 +286,7 @@ Limitations of reliying on pvap
 
 - Multiple hypothesis testing (potential [Gelman post](https://statmodeling.stat.columbia.edu/2016/03/07/29212/))
 
+- MHT: family-wise error rate vs false discovery rate
 
 ## False positive rate vs false discovery rate
 

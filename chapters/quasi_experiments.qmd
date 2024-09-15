@@ -1,12 +1,38 @@
 # Quasi-experiments
 
+
+
+
+
+## QE at Netflix
+
+- [Quasi Experimentation at Netflix](https://netflixtechblog.com/quasi-experimentation-at-netflix-566b57d2e362)
+
+- [Key Challenges with Quasi Experiments at Netflix](https://netflixtechblog.com/key-challenges-with-quasi-experiments-at-netflix-89b4f234b852)
+
+
+- At design stage:
+
+  - Re-randomise until they have decent balance on observables
+
+- At analysis stage:
+
+  - Diff-in-diffs with multiple interventions and other advanced techniques
+
+
+
+## QE at Booking.com 
+
+- [Booking.com -- There’s more to experimentation than A/B](https://booking.ai/theres-more-to-experimentation-than-a-b-223fba846876)
+  
+- Describes Bayesian structural time-series model
+
+
 ## Limits of quasi-experiments
 
 - @kohavi2020trustworthy in sidebar on p. 147 cite a number of great studies that comper obervational causal studies to experiments and generally find that the former perform poorly.
 
 - There is also a useful list [here](https://experimentguide.com/refuted_observational_studies/)
-
-
 
 
 ## How to decide when to use QEs in practice?
@@ -16,8 +42,25 @@
 
 ## QE methods overview tabls
 
+- [This](https://medium.com/data-shopify/how-to-use-quasi-experiments-and-counterfactuals-to-build-great-products-487193794da) post provides a useful categorisation of methods:
+
+    - Experiments (control exists and treatment randomly assigned)
+
+    - Quasi-experimental methods (contorl exists but treatment not random)
+
+    - Counterfactuals (control doesn't exist -- e.g. synthethic diff-in-diffs, Causalimpact)
+
+
+
+
 - Complete once notes on methods are drafted
 
 | Method | Assumptions | Data requirements | Comparison group |  Power  | Other |
 |--- |--- |--- |--- |--- | --- |
 | Matching | ... | ... | ... | ... | ... |
+
+
+## Useful resources
+
+- [Shopify -- How to Use Quasi-experiments and Counterfactuals to Build Great Products](https://medium.com/data-shopify/how-to-use-quasi-experiments-and-counterfactuals-to-build-great-products-487193794da)
+

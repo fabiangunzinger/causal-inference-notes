@@ -2,66 +2,84 @@ project:
   type: book
 
 book:
-  title: "Causal inference notes"
+  title: "Online experiments"
   author: "Fabian Gunzinger"
   date: "8/3/2024"
   chapters:
     - index.qmd
 
+<<<<<<< HEAD
     # Intro
     # - chapters/introduction.qmd
     # - chapters/history.qmd
     # - chapters/stats_for_business.qmd
     # - chapters/approaches_to_causal_inference.qmd
     # - chapters/limitations_of_experiments.md
+=======
+    - part: "Introduction"
+      chapters:
+      - chapters/introduction.qmd
+      # - chapters/history.qmd
+      # - chapters/stats_for_business.qmd
+      # - chapters/approaches_to_causal_inference.qmd
+      # - chapters/epistemology.qmd
+      # - chapters/fundamental_problem.qmd
+>>>>>>> dev
 
-    # Statistics foundations
-    - chapters/stats_foundations.qmd
-    # - chapters/stats_details_like_lln_and_clt.qmd
-    - chapters/projection.md
-    # - chapters/fwl.qmd
-    - chapters/regression.qmd
+    - part: chapters/statistics.md
+      chapters:
+      # - chapters/fisher.qmd
+      # - chapters/neyman.md
+      # - chapters/sampling_vs_randomisation_uncertainty.qmd
+      - chapters/setup.md
+      - chapters/outcomes.md
+      - chapters/standard_error.md
+      - chapters/testing_and_cis.md
+      - chapters/power.md
+      - chapters/analysis.md
+      - chapters/super_population.md
+      # - chapters/regression.qmd
+      # - chapters/regression_for_experiments.qmd
+    
+    # - part: "Practical issues"
+      # chapters:
+        # - chapters/guiding_principles.qmd
+        # - chapters/ethics.qmd
+        # - chapters/experiment_designs.md
+        # - chapters/experiment_stats.qmd
+        # - chapters/metrics.md
+        # - chapters/decision_making.qmd
+        # - chapters/threats_to_validity.qmd
+        # - chapters/practical_issues.qmd
+        # - chapters/variance_reduction.qmd
+        # - chapters/network_experiments.qmd
+        # - chapters/heterogeneous_treatment_effects.qmd
+        # - chapters/long_term_effects.md
+        # - chapters/triggered_analysis.md
+        # - chapters/multiple_hypothesis_correction.qmd
+        # - chapters/multi_arm_bandits.md
 
-    # # Causal inference foundations
-    # # - chapters/epistemology.qmd
-    # - chapters/fundamental_problem.qmd
-    - chapters/neyman_rubin_causal_model.qmd
-    - chapters/fisher.qmd
-    - chapters/neyman.md
-    # - chapters/regression_for_experiments.qmd
-    # # - chapters/sampling_vs_randomisation_uncertainty.qmd
-    - chapters/experiment_stats.qmd
-    - chapters/experiment_analysis.qmd
-    # # - chapters/dags.qmd
-
-    # Experiments in practice
-    # - chapters/guiding_principles.qmd
-    # - chapters/experiment_design.qmd
-    # - chapters/experiment_stats.qmd
-    - chapters/metrics.md
-    # # - chapters/decision_making.qmd
-    - chapters/power.qmd
-    - chapters/threats_to_validity.qmd
-    - chapters/practical_issues.qmd
-    # - chapters/variance_reduction.qmd
-    # # - chapters/cuped.qmd
-    - chapters/network_experiments.qmd
-    # - chapters/switchbacks.qmd
-    # - chapters/heterogeneous_treatment_effects.qmd
-    # - chapters/triggered_analysis.md
+    - part: "Quasi-experiments"
+      chapters:
+        - chapters/quasi_experiments.qmd
+        - chapters/matching.qmd
+        - chapters/regression_discontinuity.qmd
 
 
-    # Quasi-experiments in practice
-    # - chapters/quasi_experiments.qmd
-    # - chapters/matching.qmd
-    # - chapters/regression_discontinuity.qmd
+    - part: "Appendices"
+      chapters:
+      - chapters/stats_foundations.qmd
+      # - chapters/stats_details_like_lln_and_clt.qmd
+      - chapters/projection.md
+      - chapters/fwl.qmd
+      # - chapters/dags.qmd
 
-    # Misc.
-    # - chapters/multiple_hypothesis_correction.qmd
-    # - chapters/misc_topics.qmd
-    - chapters/ethics.qmd
-    # - chapters/useful_resources.qmd
-    # - chapters/references.qmd
+
+      # Misc.
+      # - chapters/treatment_effects.md
+      # - chapters/misc_topics.qmd
+      # - chapters/useful_resources.qmd
+      # - chapters/references.qmd
 
 
 <<<<<<< HEAD
@@ -75,13 +93,19 @@ book:
 bibliography: /Users/fabian.gunzinger/.dotfiles/latex/fabib.bib
 =======
 bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
+<<<<<<< HEAD
+>>>>>>> dev
+=======
+# bibliography: /Users/fabian.gunzinger/.dotfiles/latex/fabib.bib
 >>>>>>> dev
 
 format:
   html:
     theme: cosmo
+    include-in-header: "math_commands.html"
   pdf:
     documentclass: scrreprt
+    include-in-header: "math_commands.tex"
 jupyter: python3
 callout-icon: false
 

@@ -1,11 +1,76 @@
 # Metrics {#sec-metrics}
 
+These are evolving notes on my own thinking of choosing and defining metrics as I learn from my own experience and that of others.
+
+todo
+- Look at: https://www.statsig.com/blog/picking-metrics-101
+  
 
 ## Why good metrics matter
 
 - Good metrics ensure that everyone works towards the same goal in a way that is reliable, transparent, and provides accountability -- they ensure coherence across the company.
 
 - Good metrics increase the probability that our evaluations detect a change if there is one -- they have high sensitivity.
+
+
+## Picking metrics for an experiment
+
+### [Jorden Lentze](https://www.linkedin.com/feed/update/urn:li:activity:7221726292608479232?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A7221726292608479232%2C7221902878142050305%29&dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287221902878142050305%2Curn%3Ali%3Aactivity%3A7221726292608479232%29) from Booking: 
+
+Primary metric = business metric
+Supporting metric = close to your change
+Both need to be significant before you can go fullon (=ship)
+
+Every change you make should be aligned with your business objectives. Only focussing on things like "items added to cart" or "searches made?" will be bad for customers because you are optimising for metrics which are too easy to change and are not aligned with the goals of your customers (they did not come to your platform to stuff to their shopping cart 😀 )
+
+
+### [Sebastian Honores Espejo](https://www.youtube.com/live/YWvotan2zZc?t=3314)
+
+- Your metric of success impacts the success of your product more than any feature you'll ever ship!
+
+3 step process to define metrics
+
+1. Define organisation-wide end goal (e.g. have as many customers as possible who are as loyal as possible -- this is equivalent to maximising customer equity, which is the sum of customer lifetime values).
+ 
+   - This metric is directly connected to the value the business creates, but has very long feedback cycles since it might take months or years until we can measure the full effect of a feature on it.
+
+   - Customer equity has two components: number of customers and customer lifetime values. Hence, we can focus on two things:
+     - Understand what brings in new customers and how we can do more of that
+     - Understand what makes customers loyal and how we can do more of that
+
+2. Define your focus
+
+- The company as a whole might want to both bring in more customers and make them more loyal
+
+- But as a product domain, you might have to focus on one of them (depending on maturity of product, ...)
+
+3. Define KPIs
+
+Example if your focus in on customer acquisition:
+
+- Customer acquisition has two steps: visits to the site and conversion. You could focus on either or both depending on your need.
+
+  - KPIs for visits: visits themselves, but also drivers such as: referrals, shares, net-promoter-scores NPS ("how likely are you to recommend product")
+  - KPIs for conversion: conversion, CTR
+
+Example if you focus on customer lifetime value
+
+- Two components: number of value-generating transactions, and average value per value-generating transaction
+
+  - KPIs for number of value-generating transactions: conversion rate, ratings, NPS
+  - KPIs for avg value per vgt: order value, basket size, etc.
+
+
+Guidelines for finding good KPIs
+
+- Does it help the customer? (i.e. "revenue per metric" might solve company rather than customer problem, while basket size might indicate that customer finds more of what they were looking for).
+
+- Understand tradeoffs and correlations (e.g. is referrals or shares more correlated to visits?)
+
+- Use binary KPIs for experimentation whenever possible (higher power, forces you to better understand the problem -- e.g. aim to reduce loading time to below relevant threshold rather than reducing avg loading time)
+
+
+
 
 
 ## Metric taxonomy
@@ -59,7 +124,7 @@
 
 - The main guardrail to ensure internal validity is smaple ratio mismatch (SRM). Others are discussed in chapter 21 in @kohavi2020trustworthy
 
-- Guardrails that protect the business ensure that improving one part of the platform don't come at the cost of quality/experience/something else -- they basically try to guard against unintended consequences (an example would be site latency)
+- Guardrails that protect the business ensure that improving one part of the platform don't come at the cost of quality/experience/something else -- they basically try to guard against unintended consequences (an example would be site latency, but could also be cross-pillar effects such as when a change to customer experience affects restaurant metrics)
 
 - @deng2016data argue that the main feature of a good guardrail metric should be directionality, so that we can be sure that if we get a signal, it points in the right direction in terms of user experience (in contrast to debug metrics, which should have good sensitivity)
 
@@ -98,13 +163,13 @@ Key:
 
 - Sensitive and timely: ensures we can detect a change in a timely manner (check that metric variance is low, and that we have historically observed change in the metric)
 
-- Trustworthy: is the metric reliable for what we want to measure (is data collection reliable? is it not gameable[^goodhartslaw]?)
+- Trustworthy: is the metric reliable for what we want to measure (is data collection reliable? is it not gameable[^goodhartslaw]? change in metric is driven by chance in customer behaviour -- e.g. change in NPS could be driven by question appearing in a different place on website)
 
 - Interpretable and actionable: do we know what a change in the metric means? can we easily interpret it?
 
-- Directionality: does the measure consitently go in the same direction for a change that means the same?
+- Directionality: does the measure consistently go in the same direction for a change that means the same?
 
-Further conserns:
+Further concerns:
 
 - Efficient: can we use the metric at scale? (check cost of metric use)
 
@@ -421,6 +486,16 @@ $$
 
 
 - Advantage of user level is that they are more robust to outliers, since each user has weight 1, instead of weight being proportional to their number of sessions (both total and successful).
+
+
+## Resources
+
+- Very good [LinkedIn discussion on metric selection](https://www.linkedin.com/posts/drsimonj_experimentation-gurus-whats-going-on-with-activity-7221726292608479232-QrO8?utm_source=share&utm_medium=member_desktop)
+
+30min
+
+
+
 
 
 [^goodhartslaw]: A metric that isn't gameable defies [Goodhart's law](https://en.wikipedia.org/wiki/Goodhart's_law), which is what we want.

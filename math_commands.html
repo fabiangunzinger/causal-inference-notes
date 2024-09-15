@@ -1,0 +1,155 @@
+<span class="math inline">
+    \(
+
+    \newcommand{\nc}{\newcommand}
+
+    %%%%%%%%%%%%%%%%
+    % sample sizes %
+    %%%%%%%%%%%%%%%%
+
+    \nc{\N}{N}
+    \nc{\Nt}{\N_t}
+    \nc{\Nc}{\N_c}
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % sampling and treatment assignment %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    \nc{\ti}{W}                       % treatment indicator
+    \nc{\tii}{\ti_i}                  % treatment indicator for unit i
+
+    %%%%%%%%%%%%
+    % outcomes %
+    %%%%%%%%%%%%
+
+    \nc{\y}{Y}
+
+    \nc{\ypt}{\y_i(1)}
+    \nc{\ypc}{\y_i(0)}
+    \nc{\yptb}{\bar{\y}(1)}
+    \nc{\ypcb}{\bar{\y}(0)}
+    
+    \nc{\yo}{\y^{obs}}
+    \nc{\yoi}{\y_i^{obs}}
+    \nc{\yotb}{\bar{\y}_t^{obs}}
+    \nc{\yocb}{\bar{\y}_c^{obs}}
+    
+    \nc{\yotbf}{\frac{1}{\Nt}\sum_{i:\tii=1} \yoi}
+    \nc{\yocbf}{\frac{1}{\Nc}\sum_{i:\tii=0} \yoi}
+
+    %%%%%%%%%%%%%%%%%%%%
+    % sums of outcomes %
+    %%%%%%%%%%%%%%%%%%%%
+
+    %%%%%%%%%%%%%%%%%%%%%
+    % treatment effects %
+    %%%%%%%%%%%%%%%%%%%%%
+
+    \nc{\te}{\tau}
+    \nc{\tee}{\hat{\te}}   
+    \nc{\tef}{\yptb - \ypcb}
+    \nc{\teef}{\yotb - \yocb}
+    \nc{\tefs}{\frac{1}{\N}\sum_{i=1}^N\left(\ypt-\ypc\right)}
+
+    
+    %%%%%%%%%%%%%%%%%%%%
+    % sample variances %
+    %%%%%%%%%%%%%%%%%%%%
+
+    \nc{\spv}{\sigma}   %symbol pop var
+    \nc{\sev}{\hat{\sigma}}   %symbol estimated var
+
+    \nc{\vt}{\spv^2_t}
+    \nc{\vc}{\spv^2_c}
+    \nc{\vp}{\spv^2}
+    \nc{\vte}{\sev^2_t}
+    \nc{\vce}{\sev^2_c}
+    \nc{\vpe}{\sev^2}
+    \nc{\vtf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ytp - \yptb)^2}
+    \nc{\vcf}{\frac{1}{\N-1}\sum_{i=1}^{N}(\ycp - \ypcb)^2}
+    \nc{\vtef}{\frac{1}{\Nt-1}\sum_{i:W_i=t}\left(\yoi - \yotb\right)^2}
+    \nc{\vcef}{\frac{1}{\Nc-1}\sum_{i:W_i=c}\left(\yoi - \yocb\right)^2}
+    \nc{\vpef}{\frac{(\Nt - 1)\vte + (\Nc - 1)\vce}{\Nt + \Nc - 2}}
+
+    %%%%%%%%%%%%%%%%%%%%%%
+    % sampling variances %
+    %%%%%%%%%%%%%%%%%%%%%%
+
+    % sv[Estimate][Formula][Equal/Unequal][with treat Proportion]
+
+    \nc{\sv}{V\left(\tee\right)}
+    \nc{\sve}{\hat{V}(\tee)}
+
+    \nc{\svfe}{\vp\left(\frac{1}{\Nt} + \frac{1}{\Nc}\right)}
+    \nc{\svfu}{\frac{\vt}{\Nt} + \frac{\vc}{\Nc}}
+    \nc{\svefe}{\vpe\left(\frac{1}{\Nt} + \frac{1}{\Nc}\right)}
+    \nc{\svefu}{\frac{\vte}{\Nt} + \frac{\vce}{\Nc}}
+
+    \nc{\svefep}{\vpe\left(\frac{1}{P(1-P)\N\right)}}
+
+
+    %%%%%%%%%%%%%%%%%%%
+    % standard errors %
+    %%%%%%%%%%%%%%%%%%%
+
+    % naming convention as for variance but with se prefix
+
+    \nc{\se}{\text{se}(\tee)}
+    \nc{\sefu}{\sqrt{\svfu}}
+    \nc{\sefe}{\sqrt{\svfe}}
+    \nc{\sefep}{\sqrt{\frac{\vpe}{P(1-P)N}}}
+
+
+    %%%%%%%%%%%%%%%%%%%%%%
+    % hypothesis testing %
+    %%%%%%%%%%%%%%%%%%%%%%
+
+    \nc{\hn}{H_0}
+    \nc{\ha}{H_A}
+    \nc{\za}{z_\stoe}
+    \nc{\zb}{z_{1 - \stte}}
+
+
+    %%%%%%%%%%%%%%
+    % misc. math %
+    %%%%%%%%%%%%%%
+
+    \nc{vs}{\\[5pt]}                       % math mode extra vertical space
+
+
+    \nc{E}[1]{\mathbb{E}\left[#1\right]}    % expectation operator
+    \nc{EW}[1]{\mathbb{E}_W\left[#1\right]} % expectation operator over W
+    \nc{Esp}[1]{\mathbb{E}_{sp}\left[#1\right]} % expectation operator over sp
+
+
+    \nc{V}[1]{\mathbb{V}\left(#1\right)} % variance operator
+    \nc{VW}[1]{\mathbb{V}_{W}\left(#1\right)} % variance operator
+    \nc{Vsp}[1]{\mathbb{V}_{sp}\left(#1\right)}    % variance operator
+
+    \nc{lb}[1]{\left[#1\right]}             % large brackets
+    \nc{lp}[1]{\left(#1\right)}             % large parenthesis
+    \nc{llp}[1]{\biggl(#1\biggr)}           % large, large parenthesis
+
+
+    \nc{sot}{\sum_{i:W_i=t}}                % sum over treatment units
+    \nc{soc}{\sum_{i:W_i=t}}                % sum over control units
+
+
+
+    \nc{\stoe}{\alpha}                      % type one error
+    \nc{\stte}{\beta}                       % type two error
+
+    \nc{\mc}[1]{\text{\scriptsize(#1)}}     %math inline comment
+
+    \nc{\ind}{\perp\!\!\!\!\perp}
+
+
+
+    <!-- These aren't working for some reason -->
+    <!-- \nc{\lp}{\left(} -->
+    <!-- \nc{\rp}{\right)} -->
+    <!-- \nc{\lb}{\left[} -->
+    <!-- \nc{\rb}{\right]} -->
+
+    \)
+</span>

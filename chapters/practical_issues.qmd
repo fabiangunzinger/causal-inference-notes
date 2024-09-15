@@ -3,6 +3,8 @@
 todo:
 - Look at @kohavi2009controlled and @kohavi2007practical (a shorter version of the former)
 
+- Selection [bias](https://medium.com/airbnb-engineering/selection-bias-in-online-experimentation-c3d67795cceb)
+
 
 ## What if you want to implement a feature right away?
 
@@ -20,3 +22,10 @@ todo:
 ## Overlapping vs isoldated experiments
 
 - Useful post here: https://blog.statsig.com/embracing-overlapping-a-b-tests-and-the-danger-of-isolating-experiments-cb0a69e09d3
+
+
+## Useful resources
+
+- [Aleksander Fabijan papers](https://www.microsoft.com/en-us/research/people/alfabija/publications/)
+
+- [Under the Hood of Uber’s Experimentation Platform](https://www.uber.com/en-GB/blog/xp/#:~:text=Uber's%20Experimentation%20Platform%20team%20conducts,user%20satisfaction%20with%20Uber's%20platform)

@@ -1,4 +1,0 @@
-# Treatment effects
-
-## ATE
-
