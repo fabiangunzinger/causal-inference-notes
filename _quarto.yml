@@ -59,6 +59,10 @@ book:
         # - chapters/multiple_hypothesis_correction.qmd
         # - chapters/multi_arm_bandits.md
 
+    - part: "Experimenta platforms"
+      chapter:
+        - chapters/platform_architecture_at_jet.md
+
     - part: "Quasi-experiments"
       chapters:
         - chapters/quasi_experiments.qmd

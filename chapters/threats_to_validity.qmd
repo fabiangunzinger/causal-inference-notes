@@ -83,8 +83,7 @@ Possible scenarios:
 
   - Estimate dynamic treatment effects to see the evolution of the treatment effect
 
-### Sample ration mismatch
-
+### Sample ratio mismatch
 
 ## Treats to external validity
 
