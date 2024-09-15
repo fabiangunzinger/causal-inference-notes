@@ -1,6 +1,7 @@
 # Regression
 
 todo:
+- consult ding2024linear
 - Use DAaidson and MacKinnon metrics book: nicely separates mechanics of ols with statistical interpretation. Do the same. 
 - Include intro on regression from [here](https://people.duke.edu/~rnau/regintro.htm)
 

@@ -1,7 +1,7 @@
 # The stats of online experiments
 
 Conventions:
-- I use users instead of the more generic users
+- I use users instead of the more generic units
 
 - I discuss the case with one treatment and one control group.
 

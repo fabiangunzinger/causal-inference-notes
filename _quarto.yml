@@ -23,7 +23,7 @@ book:
       # - chapters/neyman.md
       # - chapters/sampling_vs_randomisation_uncertainty.qmd
       - chapters/stats_of_online_experiments.md
-      - chapters/setup.md
+      # - chapters/setup.md
       - chapters/outcomes.md
       - chapters/standard_error.md
       - chapters/testing_and_cis.md
@@ -50,21 +50,19 @@ book:
         # - chapters/multiple_hypothesis_correction.qmd
         # - chapters/multi_arm_bandits.md
 
-    - part: "Quasi-experiments"
-      chapters:
-        - chapters/quasi_experiments.qmd
-        - chapters/matching.qmd
-        - chapters/regression_discontinuity.qmd
+    # - part: "Quasi-experiments"
+    #   chapters:
+    #     - chapters/quasi_experiments.qmd
+    #     - chapters/matching.qmd
+    #     - chapters/regression_discontinuity.qmd
 
 
-    - part: "Appendices"
-      chapters:
-      - chapters/stats_foundations.qmd
-      # - chapters/stats_details_like_lln_and_clt.qmd
-      - chapters/projection.md
-      - chapters/fwl.qmd
-      # - chapters/dags.qmd
-
+    # - part: "Appendices"
+    #   chapters:
+    #   - chapters/stats_foundations.qmd
+    #   - chapters/projection.md
+    #   - chapters/fwl.qmd
+    #   - chapters/dags.qmd
 
       # Misc.
       # - chapters/treatment_effects.md
