@@ -50,11 +50,15 @@ book:
         # - chapters/multiple_hypothesis_correction.qmd
         # - chapters/multi_arm_bandits.md
 
-    # - part: "Quasi-experiments"
-    #   chapters:
-    #     - chapters/quasi_experiments.qmd
-    #     - chapters/matching.qmd
-    #     - chapters/regression_discontinuity.qmd
+    - part: "Experimenta platforms"
+      chapter:
+        - chapters/platform_architecture_at_jet.md
+
+    - part: "Quasi-experiments"
+      chapters:
+        - chapters/quasi_experiments.qmd
+        - chapters/matching.qmd
+        - chapters/regression_discontinuity.qmd
 
 
     # - part: "Appendices"
@@ -71,9 +75,14 @@ book:
       # - chapters/references.qmd
 
 
-bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
-# bibliography: /Users/fabian.gunzinger/.dotfiles/latex/fabib.bib
+    # Appendix (math details)
+    # - chapters/stats_details_like_lln_and_clt.qmd
+    - chapters/projection.md
+    # - chapters/fwl.qmd
 
+
+
+bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
 format:
   html:
     theme: cosmo

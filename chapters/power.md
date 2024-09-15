@@ -3,6 +3,8 @@
 todo:
 - Introduce separate symbol for MDES -- sample size formula is very confusing otherwise
 
+- Look at this for power for ratio metrics: https://arxiv.org/abs/2406.06834
+
 
 Power is the probability that we reject the null hypothesis if it is false. It is a key component of experiment design because it determines the required sample size, which helps us determine how long we need to run an experiment for.
 

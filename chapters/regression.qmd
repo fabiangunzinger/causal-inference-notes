@@ -4,6 +4,7 @@ todo:
 - consult ding2024linear
 - Use DAaidson and MacKinnon metrics book: nicely separates mechanics of ols with statistical interpretation. Do the same. 
 - Include intro on regression from [here](https://people.duke.edu/~rnau/regintro.htm)
+- Check thetruthaboutlinearregression book saved in library and available [here](https://www.stat.cmu.edu/~cshalizi/TALR/TALR.pdf?utm_campaign=Data_Elixir&utm_source=Data_Elixir_495)
 
 
 Linear regression is by far the most often used method to estimate relationships between outcomes and explanatory variables in applied econometrics and -- probably -- all of applied social science. In this article I want to to two things: define the related terminology that is often used but not defined (OLS, linear equation, etc.) and -- mainly -- explain a less frequently taught and understand way to think about linear regression, that in terms of its linear algebra.
