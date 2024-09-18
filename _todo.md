@@ -1,62 +1,37 @@
 # todo
 
-- [ ] Complete rest of the outline (i.e. testing, power, analysis)
+- Read relevant sections from the beginning in imbens2015causal and take notes
+- Do the same for athey2017econometrics and integrate
+- [ ] Full derivations of unbiasedness and variance of diff-in-means estimator
+for online experiment setup (this is BRE, which is not straightforward. So I
+first do CRE, and then adapt).
 
-- [ ] Work out derivation for unbiasedness and variance of diff in means estimator for simple randomised experiment
+    - [ ] CRE finite sample case
+    - [ ] CRE super-population case
+    - [ ] BRE finite sample case
+    - [ ] BRE super-population case
 
-	- [ ] Follow derivations for completely randomised experiment in Imbens and Rubin
-		- [x] Complete derivation
-		- [ ] Move causal inference notes content to Obsidian so I can develop each topic in depth without having to worry about putting it in coherent shape just yet
-			- [ ] Move setup
-			- [ ] Move Outcomes
-			- [ ] ...
-		- [ ] Move derivations from Moleskin to Obsidian
-	- [ ] Adapt derivations for simple randomised experiment
-	- [ ] Finite sample vs super-population perspectives
-		- [ ] Understand difference
-		- [ ] Write out above derivations for both and discuss differences
-		- [ ] Decide which one to use for book (at the moment, my instinct is that because they lead to the same result, I'll not make the distinction in the main text, but just present a single case and refer interested readers to more detailed appendices where derivations for both cases are presented)
-- [x] Start moving content to Obsidian
-- [x] Complete single-page outline for book
-
-
-- [ ] Stats of online experiments
-    - [x] Clean assignment
-    - [x] Outcomes
-    - [x] Standard error
-    - [ ] Use super population perspective throughout
-        - [x] Read ding2017bridging to see whether it helps resolve my fs vs sp questions -- it does.
-        - [ ] Work through ding2017bridging
-        - [ ] One I understand difference between fs and sp, decide how to frame
-          issue in my notes: if they lead to the same variance, then I could
-        just ignore the difference in the main text and discuss it in a
-        footnotes. If they have different implications, I might want to
-        introduce them early -- as I currently do in the setup section -- and
-        discuss them separately. If I can, I want to do the first: just discuss
-        fs case (the relevant one for rull ramp) and mention that during ramp
-        up, we strictly speaking use sp approach but that results are the same.
-
-        - [ ] Completely derive and understand fs approach in chapter 6
-        - [ ] Completely derive and understand sp approach in chapter 6
+- [ ] Have a look at aronow2013class and integrate relevant material
+- [ ] Write stats of online experiments drawing on relevant material from above
 
 
 
-    - [ ] Superpopulation e2e — book page, but also paper (check with Max for outlet)
-    - [ ] Unbalanced sample — refer to my notes
+
+- [ ] Above derivations — book page, but also paper (check with Max for outlet)
+
+- [ ] Testing and CI
+- [ ] Power
     - [ ] Incorporate all metrics types to power calculation
-    - [ ] Build power calculator (check statsic one — but add unbalanced samples option), build beautiful visualisations
-
-    - [ ] Testing and CI
-    - [ ] Power
-        - [ ] Differentiate between relative and abs MDES (default is abs)
-        - [ ] Derive power formula
-            - [x] From first princples
-            - [ ] Starting from alpha and beta
-            - [ ] Visual Bloom approach
-        - Derive shortcut formulas
-            - [ ] Section on 16 vs 32 confusion
-        - [ ] Clean up rest of chapter
-        - [ ] Power for different metric types (define continuous, proportion, ratio, etc. metrics -- how do they affect calculations?)
+    - [ ] Differentiate between relative and abs MDES (default is abs)
+    - [ ] Derive power formula
+        - [x] From first princples
+        - [ ] Starting from alpha and beta
+        - [ ] Visual Bloom approach
+    - Derive shortcut formulas
+        - [ ] Section on 16 vs 32 confusion
+    - [ ] Clean up rest of chapter
+    - [ ] Power for different metric types (define continuous, proportion, ratio, etc. metrics -- how do they affect calculations?)
+    - [ ] Build power calculator (check Statsig one — but add unbalanced samples option), build beautiful visualisations (use uv for package mgt)
 
 - [ ] Produce clean up version on master and publish before continuing
 

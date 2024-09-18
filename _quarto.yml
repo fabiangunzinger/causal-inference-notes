@@ -63,10 +63,11 @@ book:
 
     # - part: "Appendices"
     #   chapters:
-    #   - chapters/stats_foundations.qmd
-    #   - chapters/projection.md
-    #   - chapters/fwl.qmd
-    #   - chapters/dags.qmd
+      # - chapters/completely_randomised_experiment.md
+      # - chapters/stats_foundations.qmd
+      # - chapters/projection.md
+      # - chapters/fwl.qmd
+      # - chapters/dags.qmd
 
       # Misc.
       # - chapters/treatment_effects.md
