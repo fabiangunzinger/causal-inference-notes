@@ -22,13 +22,13 @@ book:
       # - chapters/fisher.qmd
       # - chapters/neyman.md
       # - chapters/sampling_vs_randomisation_uncertainty.qmd
-      - chapters/setup.md
+      - chapters/stats_of_online_experiments.md
+      # - chapters/setup.md
       - chapters/outcomes.md
       - chapters/standard_error.md
       - chapters/testing_and_cis.md
       - chapters/power.md
       - chapters/analysis.md
-      - chapters/super_population.md
       # - chapters/regression.qmd
       # - chapters/regression_for_experiments.qmd
     
@@ -61,14 +61,13 @@ book:
         - chapters/regression_discontinuity.qmd
 
 
-    - part: "Appendices"
-      chapters:
-      - chapters/stats_foundations.qmd
-      # - chapters/stats_details_like_lln_and_clt.qmd
-      - chapters/projection.md
-      - chapters/fwl.qmd
+    # - part: "Appendices"
+    #   chapters:
+      # - chapters/completely_randomised_experiment.md
+      # - chapters/stats_foundations.qmd
+      # - chapters/projection.md
+      # - chapters/fwl.qmd
       # - chapters/dags.qmd
-
 
       # Misc.
       # - chapters/treatment_effects.md
@@ -80,6 +79,8 @@ book:
 # bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
 bibliography: /Users/fabian.gunzinger/.dotfiles/latex/fabib.bib
 
+
+bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
 format:
   html:
     theme: cosmo

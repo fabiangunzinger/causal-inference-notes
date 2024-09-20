@@ -64,7 +64,9 @@ todo:
 
 - Understand Wasserman's point that problem is imprecision in how we describe conditional statements with langauge
 
-- see deng2023 p.11 for graphical representation
+- see ding2023 p.11 for graphical representation
+
+
 
 
 
