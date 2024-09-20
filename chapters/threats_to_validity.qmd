@@ -1,10 +1,14 @@
 # Threats to validity
 
+todo:
+- Integrate Shadish, Cook, and Campbell (2002) Experimental and quasi-experimental designs for causal inference... (cited in athey2017econometrics)
+
+
 - For experiment results to be trustworthy, they need to be reliable, have high internal validity, and high external validity across time.
 
 - Reliability is about reproducibility of our results and the extent to which a rerun of the exact same experiment would lead to the same result. It's about the stability of measurements and the replicability of the work.
 
-- Internal validity is about the extent to which the treatment effect estimate of our experiment reflects the cause and effect relationship of interest instead of being influenced by other factors. This is all about the design of the experiment.
+- Internal validity is aboout the extent to which the treatment effect estimate of our experiment reflects the cause and effect relationship of interest instead of being influenced by other factors. This is all about the design of the experiment.
 
 - External validity is about the extent to which our experiment results generalise both across different populations and across time. Results don't usually generalise across populations (a feature may work well in one country but not in another), which isn't a problem because we can (and usually should!) just run the experiment separately for different markets. Traditional experiments do, howerver, assume that experiments generalise over time, in that we think that the effect we estimate during the experiment period will be persistent -- i.e. we think that the long-term effect of a change will be the same as the short-term effect.
 
@@ -15,6 +19,7 @@
 
 ## Threats to internal validity
 
+- Internal validity refers to the ability of a study to measure the causal effect within the study population.
 
 ### Misc effects (some of them relevant only for field experiments)
 
@@ -63,11 +68,13 @@ Possible scenarios:
 
 - Solution: run experiments for longer (thought this comes with opportunity costs, and will increase cookie churn)
 
+
 ### Survivor bias
 
 - This is really just a version of the above: if you select only users that have used the product for some time, your sample is not representative of all users. The classic demonstration of survivor bias is [Abraham Wald's](https://en.wikipedia.org/wiki/Abraham_Wald) insight in WWII that you want to put extra armour where returning plans got hit the least, since it's presumable the planes that got hit there that didn't make it back.
 
 <!-- ![Where would you put extra armour? By Martin Grandjean (vector), McGeddon (picture), Cameron Moll (concept) - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=102017718](../inputs/survivorship-bias.svg){width=50%} -->
+
 
 ### Novelty and learning effects
 
@@ -83,9 +90,64 @@ Possible scenarios:
 
   - Estimate dynamic treatment effects to see the evolution of the treatment effect
 
+
 ### Sample ratio mismatch
 
+### Attrition
+
+Attrition is when, for some reason, we cannot collect endline data on some units.
+
+It's a problem because when it's systematic rather than random, treatment and control group are no longer comparable, which is a threat to internal validity. (Even if the same number of people drop out, if they are different type, the problem is the same.) Also, it reduces sample size and thus power.
+
+We can limit it if we promise access to the program to everyone (phase-in design), change the level of randomisation, and improve data collection.
+
+In our analysis we should 1. Report the extent of attrition, 2. Check for differential attrition (between groups, and within groups based on observable characteristics), and 3. Determine the range of estimates given attrition using a selection model or bounds.
+
+One method is to use Heckman's selection model: we look at the characteristics of those who attrite, assume that they have the same outcomes as those with the same characteristics for which we have data, and then fill in their outcome variables accordingly.
+
+Another method is to use bounds. There are two types.
+
+Manski-Horowitz bounds: Lower bound: replace all missing values in treatment with the least favourable outcome value from the observed sample and replace all missing values in control with most favourable value in the observed sample. Upper bound created in a reverse way. Unless attrition is low and the outcome variable is tightly bounded, this tends to lead to very large bounds.
+
+Lee bounds: We treat the estimate from the available data as an upper bound, and construct the lower bound by trimming from the sample with less attrition the observations that most contribute to the treatment effect.
+
+### ## Imperfect compliance
+
+Partial complience
+
+- Partial compliance occurs if, for some reason, some people in the treatment group are not treated or some people in the control group are.
+
+- It's problematic because it reduces the difference in treatment exposure between treatment and control group (in the extreme, if they are equal, we learn nothing), and because they might make treatment takeup non-random.
+
+- A few things can help to limit the problem: make takeup easy and/or incentivise it, randomise at a higher level, and provide a treatment to everyone.
+
+- We can adjust our analysis by calculating LATE, either using the Wald estimator (ITT / difference in take-up between treatment and control groups) or 2SLS where we instrument the behaviour we want to encourage with the treatment dummy (and possibly other covariates).
+
+- Do not drop non-compliers or re-assign them to the control group -- compliers and non-compliers are different so that dropping or reclassifying non-compliers would re-introduce self-selection into out two samples, which defeats the whole point of the randomisation.
+
+
+Defiers
+
+- They are the opposite of compliers: they either take up the treatment because they were assigned to control or the other way around.
+
+- They might occur in an encouragement design if they overestimated the benefit of treatment and got discouraged by the information provided in the treatment.
+
+- They might make us significantly misinterpret the true effect (RRE page 303, or, better, MHE p 156).
+
+- We can deal with them only if they form an identifiable subgroup, in which case we can estimate the treatment effect on defiers and compliers separately and calculate an average treatment effect.
+
+In an experiment with one-sided non-compliance what does IV estimate 1. if there are no always-takers and 2. if there are not never-takers?
+
+- In general, IV estimates LATE, the effect on compliers, and the treated consist of compliers and always-takers, while the non-treated consist of compliers and never-takers.
+
+- If there are no always-takers, the population of compliers is the same as the population of the treated, so that LATE = ATET.
+
+- If there are no never-takers, the population of compliers is the same as that of the untreated, so LATE = average treatment effect of the untreated.
+
+
 ## Treats to external validity
+
+- External validity is concerned with whether the results from a study generalise to other contexts.
 
 ### Budget effects in Ads
 
@@ -113,72 +175,17 @@ Possible scenarios:
 
 - What to take into account depends on your context. So understand the relevant seasonality for you (if you're a travel app, consider seasonality of travel demand, if you're an e-commerce site, consider seasonality of shopping behaviour)
 
-## Differences in time-to-action between users
+### Differences in time-to-action between users
 
 - Some users may engage with a new features immediately, others might take a while and then react differently to it.
 
 - When running experiments for a very short time, we might thus get a biased picture of the overall effect of the feature.
 
+- With this one, one could argue that it's a threat to internal validity, too. But that depends on what whether we set out to measure the short or long-term causal effect in our study
 
+### Consent
 
-
-## Integrate: from social science literature
-
-## Imperfect compliance
-
-Partial complience
-
-- Partial compliance occurs if, for some reason, some people in the treatment group are not treated or some people in the control group are.
-
-- It's problematic because it reduces the difference in treatment exposure between treatment and control group (in the extreme, if they are equal, we learn nothing), and because they might make treatment takeup non-random.
-
-- A few things can help to limit the problem: make takeup easy and/or incentivise it, randomise at a higher level, and provide a treatment to everyone.
-
-- We can adjust our analysis by calculating LATE, either using the Wald estimator (ITT / difference in take-up between treatment and control groups) or 2SLS where we instrument the behaviour we want to encourage with the treatment dummy (and possibly other covariates).
-
-- Do not drop non-compliers or re-assign them to the control group -- compliers and non-compliers are different so that dropping or reclassifying non-compliers would re-introduce self-selection into out two samples, which defeats the whole point of the randomisation.
-
-
-Defiers
-
-- They are the opposite of compliers: they either take up the treatment because they were assigned to control or the other way around.
-
-- They might occur in an encouragement design if they overestimated the benefit of treatment and got discouraged by the information provided in the treatment.
-
-- They might make us significantly misinterpret the true effect (RRE page 303, or, better, MHE p 156).
-
-- We can deal with them only if they form an identifiable subgroup, in which case we can estimate the treatment effect on defiers and compliers separately and calculate an average treatment effect.
-
-
-
-In an experiment with one-sided non-compliance what does IV estimate 1. if there are no always-takers and 2. if there are not never-takers?
-
-- In general, IV estimates LATE, the effect on compliers, and the treated consist of compliers and always-takers, while the non-treated consist of compliers and never-takers.
-
-- If there are no always-takers, the population of compliers is the same as the population of the treated, so that LATE = ATET.
-
-- If there are no never-takers, the population of compliers is the same as that of the untreated, so LATE = average treatment effect of the untreated.
-
-
-## Attrition
-
-Attrition is when, for some reason, we cannot collect endline data on some units.
-
-It's a problem because when it's systematic rather than random, treatment and control group are no longer comparable, which is a threat to internal validity. (Even if the same number of people drop out, if they are different type, the problem is the same.) Also, it reduces sample size and thus power.
-
-We can limit it if we promise access to the program to everyone (phase-in design), change the level of randomisation, and improve data collection.
-
-In our analysis we should 1. Report the extent of attrition, 2. Check for differential attrition (between groups, and within groups based on observable characteristics), and 3. Determine the range of estimates given attrition using a selection model or bounds.
-
-One method is to use Heckman's selection model: we look at the characteristics of those who attrite, assume that they have the same outcomes as those with the same characteristics for which we have data, and then fill in their outcome variables accordingly.
-
-Another method is to use bounds. There are two types.
-
-Manski-Horowitz bounds: Lower bound: replace all missing values in treatment with the least favourable outcome value from the observed sample and replace all missing values in control with most favourable value in the observed sample. Upper bound created in a reverse way. Unless attrition is low and the outcome variable is tightly bounded, this tends to lead to very large bounds.
-
-Lee bounds: We treat the estimate from the available data as an upper bound, and construct the lower bound by trimming from the sample with less attrition the observations that most contribute to the treatment effect.
-
-
+- If consent for experiment participation is required, then people who give consent may be different from those who don't. 
 
 
 
