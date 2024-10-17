@@ -1,6 +1,7 @@
 # todo
 
-- Read relevant sections from the beginning in imbens2015causal and take notes
+- [ ] Read relevant sections from the beginning in imbens2015causal and take notes
+
 - Do the same for athey2017econometrics and integrate
 - [ ] Full derivations of unbiasedness and variance of diff-in-means estimator
 for online experiment setup (this is BRE, which is not straightforward. So I
@@ -21,7 +22,7 @@ first do CRE, and then adapt).
 
 - [ ] Testing and CI
 - [ ] Power
-    - [ ] Incorporate all metrics types to power calculation
+    - [ ] Incorporate all metrics types to power calculation (see hesterberg2024power)
     - [ ] Differentiate between relative and abs MDES (default is abs)
     - [ ] Derive power formula
         - [x] From first princples

@@ -31,3 +31,8 @@ The purpose:
 - When we have multiple treatments or analyse subgroups separately, we need to test whether different estimates are significantly different from each other (can't just look at whether some are significantly different from zero while some aren't) 
 
 
+## Conventions used throughout
+
+- I use users instead of the more generic units
+
+- I discuss the case with one treatment and one control group.
