@@ -188,6 +188,10 @@ In an experiment with one-sided non-compliance what does IV estimate 1. if there
 - If consent for experiment participation is required, then people who give consent may be different from those who don't. 
 
 
+### Heterogeneous treatment effects
+
+- Consent above is a specific manifestation of the underlying problem: heterogeneous treatment effects. Often, it is plausible that participants of an experiment are different from non-participants, since -- in real life -- sampling into the experiment population doesn't happen at random. So, clearly defining who the full population of interest is, what population we can make inferences about from our experiment population, and understanding hte difference between the two is crucial.
+
 
 
 ## Resources

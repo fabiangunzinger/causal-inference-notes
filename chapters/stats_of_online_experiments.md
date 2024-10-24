@@ -1,5 +1,34 @@
 # The stats of online experiments
 
+## Modes of inference
+
+Sampling based:
+
+- Also model-based (why?)
+
+- This is the classical mode of inference in statistics and observational studies 
+
+- Randomness results from random sampling.
+
+- We assume that the population at hand is a random subsample of a (much) larger population, so that individual values are random.
+
+- For instance, in $\bar{X} = \frac{1}{n}\sum_{i=1}^{n}X_i$ we treat each $X_i$ as a random variable.
+
+- In the context of experimentation, where we can write the treatment group mean as $\bar{Y}_t = \frac{1}{n_t}\sum_{i=1}^{n}W_iY_i$, we treat the $W_i$s as fixed and $Y_i$s as random ("for each reserved slot in the treatment group, what is the value of the unit we randomly selected for that slot?")
+
+Randomisation based:
+
+- Randomness results from random treatment assignment.
+
+- In the context of experimentation, where we can write the treatment group mean as $\bar{Y}_t = \frac{1}{n_t}\sum_{i=1}^{n}W_iY_i$, we treat the $W_i$s as random and $Y_i$s as fixed ("Out of all $n$ units with fixed potential outcomes that we have in our experiment sample, which ones got randomly allocated to the treatment group?")
+
+
+## The special role of randomisation
+
+Randomisation is special because it gives the researcher unique control over the assignment mechanisms and thus offers the possibility to eliminate selection bias when comparing treatment and control group (randomisation eliminates selection bias on observables and unobservables). Read about this more in depth. Start with articles cited in athey2017econometrics section 2.1, and then also read Deaton & Cartwright article(s).
+
+
+
 
 ## Setup
 
@@ -33,9 +62,6 @@ social science, but also medical experiments. There, we typically recruit a
 pre-determined number of units into our experiment, so that the inclusion of any
 given unit lowers the probability of inclusion for all others. Similarly, for
 treatment assignment, we would often use a completely randomised assignment, whereby we ensure that exactly $N_t$ units end up in the treatment group. This, again means that assigning any given unit to treatment lowers the probability of receiving the treatment for all other units.
-
-
-
 
 
 - The total number of users in the sample is $n = \sum_{i = 1}^{N}R_i$.
@@ -74,9 +100,7 @@ $$
 **Potential outcomes**
 
 - ...
-
-$$
-Y_i = W_iY_i(1) + (1 - W_i)Y_i(0)
+$$ Y_i = W_iY_i(1) + (1 - W_i)Y_i(0)
 $$ {#eq-yi}
 
 - Individual causal effects ... 

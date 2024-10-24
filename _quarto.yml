@@ -1,5 +1,7 @@
 project:
   type: book
+  preview:
+    browser: false
 
 book:
   title: "Online experiments"
@@ -11,27 +13,19 @@ book:
     - part: "Introduction"
       chapters:
       - chapters/introduction.qmd
-      # - chapters/history.qmd
-      # - chapters/stats_for_business.qmd
-      # - chapters/approaches_to_causal_inference.qmd
-      # - chapters/epistemology.qmd
-      # - chapters/fundamental_problem.qmd
 
     - part: chapters/statistics.md
       chapters:
-      # - chapters/fisher.qmd
-      # - chapters/neyman.md
-      # - chapters/sampling_vs_randomisation_uncertainty.qmd
       - chapters/stats_of_online_experiments.md
       # - chapters/setup.md
-      - chapters/outcomes.md
-      - chapters/standard_error.md
-      - chapters/testing_and_cis.md
-      - chapters/power.md
-      - chapters/analysis.md
-      # - chapters/regression.qmd
-      # - chapters/regression_for_experiments.qmd
-    
+      # - chapters/outcomes.md
+      # - chapters/standard_error.md
+      # - chapters/testing_and_cis.md
+      # - chapters/power.md
+      # - chapters/analysis.md
+      # - chapters/threats_to_validity.qmd
+
+      
     # - part: "Practical issues"
       # chapters:
         # - chapters/guiding_principles.qmd
@@ -61,39 +55,36 @@ book:
     #     - chapters/regression_discontinuity.qmd
 
 
-    - part: "Appendices"
-      chapters:
-      - chapters/experiment_details.md
+    # - part: "Appendices"
+    #   chapters:
       # - chapters/stats_foundations.qmd
       # - chapters/projection.md
       # - chapters/fwl.qmd
-      # - chapters/dags.qmd
       # - chapters/stats_details_like_lln_and_clt.qmd
 
-      # Misc.
+      # - chapters/regression.qmd
+      # - chapters/regression_for_experiments.qmd
+      
+      # - chapters/fisher.qmd
+      # - chapters/neyman.md
       # - chapters/treatment_effects.md
-      # - chapters/misc_topics.qmd
+
+
+      # - chapters/history.qmd
+      # - chapters/alternative_approaches.qmd
       # - chapters/useful_resources.qmd
       # - chapters/references.qmd
 
-
-<<<<<<< HEAD
-=======
-# bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
-bibliography: /Users/fabian.gunzinger/.dotfiles/latex/fabib.bib
-
->>>>>>> 3ebbea328a6bf6e6208af6dd5838f921dafbdab4
-
 bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
-format:
-  html:
-    theme: cosmo
-    include-in-header: "math_commands.html"
-  pdf:
-    documentclass: scrreprt
-    include-in-header: "math_commands.tex"
-jupyter: python3
-callout-icon: false
+# format:
+#   html:
+#     theme: cosmo
+#     include-in-header: "math_commands.html"
+#   pdf:
+#     documentclass: scrreprt
+#     include-in-header: "math_commands.tex"
+# jupyter: python3
+# callout-icon: false
 
 
 
