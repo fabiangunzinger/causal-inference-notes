@@ -75,7 +75,10 @@ book:
       # - chapters/useful_resources.qmd
       # - chapters/references.qmd
 
-bibliography: /Users/fgunzinger/.dotfiles/latex/fabib.bib
+# Use env variable with path to fabib.bib created in .zsh.general
+bibliography: !expr "Sys.getenv('FABIB', '')"
+
+
 # format:
 #   html:
 #     theme: cosmo
