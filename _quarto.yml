@@ -75,7 +75,7 @@ book:
       # - chapters/useful_resources.qmd
       # - chapters/references.qmd
 
-bibliography: /Users/fgu/.dotfiles/latex/fabib.bib
+bibliography: /Users/fgunzinger/.dotfiles/latex/fabib.bib
 # format:
 #   html:
 #     theme: cosmo
