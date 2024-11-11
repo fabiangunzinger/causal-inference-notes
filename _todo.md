@@ -1,16 +1,15 @@
 # todo
 
 
-- [ ] Complete reboot of mac (if works well after, keep, else buy new macbook)
-- [ ] Get internal preview to work
+- Write appendix files to summarise relevant content from each of the following (get info from as many sources as I need in order to have all I need for stats of experiments):
 
-- [ ] Collect all relevant theory in `experiment_theory.md`
-  - [ ] Integrate imbens2015causal
-  - [ ] Integrate athey2017econometrics
-  - [ ] Integrate aronow2013class as relevant
-  - [ ] Integrate abadie2020sampling as relevant
+  - [ ] athey2017econometrics
+  - [ ] imbens2015causal
+  - [ ] aronow2013class as relevant
+  - [ ] abadie2020sampling as relevant
+  - [ ] freedman2008statistical
 
-- [ ] Unbiasedness and variance of diff-in-means estimator for online experiments based on full theory. The relevant framework for derivations of unbiasedness and variance of diff-in-means estimator for online experiment is BRE, which is not straightforward. So I first do CRE, and then adapt. 
+- Based on appendix files, create stats of online experiment. Start with unbiasedness and variance of diff-in-means estimator for online experiments. The relevant framework for derivations of unbiasedness and variance of diff-in-means estimator for online experiment is BRE, which is not straightforward. So I first do CRE, and then adapt. 
     - [ ] CRE finite sample case
     - [ ] CRE super-population case
     - [ ] BRE finite sample case
@@ -35,7 +34,12 @@
 
 Later:
 
-- [ ] Read and integrate seminal Rubin papers
+- [ ] Read and integrate seminal papers
+
+  - holland1986statistics
+  - See athey2017econometrics chapter 3 for list of references
+
+
 
 - Integrate Kohavi advanced topics into book: https://docs.google.com/document/d/12iy35z_aM5r76gqgq5f-mzVRwZoHjz4kBjv3rMULSEw/edit?tab=t.0#heading=h.3qu16rq6g769 
 - Integrate alternative experiment designs from Matheus Facure: https://docs.google.com/presentation/d/1cyRKkxvOAosMzlIVnSIGfZf63nq7PwZ9zaL5NZEn19c/edit?pli=1#slide=id.g1e5c694a008_0_52, and discussion here: https://www.linkedin.com/posts/matheus-facure-7b0099117_alternative-experiment-designs-activity-7247577102797938688-s31_?utm_source=share&utm_medium=member_desktop
@@ -101,7 +105,8 @@ Stuff to consider
 - [ ] bojinov2023design section 5 for cool approach to experiment simulation that I might want to add to rosalie.
 
 ## Done
-
+- [x] Get internal preview to work
+- [x] Complete reboot of mac (if works well after, keep, else buy new macbook)
 - [x] CI notes on effect of below on experiments (for meta interview prep)
     - [x] Seasonality
     - [x] Network effects

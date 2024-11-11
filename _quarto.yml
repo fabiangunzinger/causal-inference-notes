@@ -69,13 +69,12 @@ book:
       # - chapters/neyman.md
       # - chapters/treatment_effects.md
 
-
       # - chapters/history.qmd
       # - chapters/alternative_approaches.qmd
       # - chapters/useful_resources.qmd
       # - chapters/references.qmd
 
-# Use env variable with path to fabib.bib created in .zsh.general
+# Env variable with path to fabib.bib created in .zsh.general
 bibliography: !expr "Sys.getenv('FABIB', '')"
 
 

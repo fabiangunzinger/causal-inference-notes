@@ -3,12 +3,11 @@
 todo:
 - Integrate Shadish, Cook, and Campbell (2002) Experimental and quasi-experimental designs for causal inference... (cited in athey2017econometrics)
 
-
 - For experiment results to be trustworthy, they need to be reliable, have high internal validity, and high external validity across time.
 
 - Reliability is about reproducibility of our results and the extent to which a rerun of the exact same experiment would lead to the same result. It's about the stability of measurements and the replicability of the work.
 
-- Internal validity is aboout the extent to which the treatment effect estimate of our experiment reflects the cause and effect relationship of interest instead of being influenced by other factors. This is all about the design of the experiment.
+- Internal validity is about the extent to which the treatment effect estimate of our experiment reflects the cause and effect relationship of interest instead of being influenced by other factors. This is all about the design of the experiment.
 
 - External validity is about the extent to which our experiment results generalise both across different populations and across time. Results don't usually generalise across populations (a feature may work well in one country but not in another), which isn't a problem because we can (and usually should!) just run the experiment separately for different markets. Traditional experiments do, howerver, assume that experiments generalise over time, in that we think that the effect we estimate during the experiment period will be persistent -- i.e. we think that the long-term effect of a change will be the same as the short-term effect.
 
