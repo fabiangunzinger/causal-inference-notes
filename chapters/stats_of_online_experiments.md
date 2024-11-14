@@ -112,7 +112,7 @@ $$
 - Ignorability
 
 Check:
-- duflo2006randomization
+- duflo2006randomizationd
 - Mostly harmless metrics
 - Field experiments book
 - Kohavi papers/book
@@ -138,7 +138,7 @@ $$
 - First, note that using @eq-yi we can write:
 
 $$
-\begin{align}
+\begin{align}#
 \frac{1}{n_t}\sum_{i=1}^{N} R_i W_i Y_i &= \frac{1}{n_t}\sum_{i=1}^{N} R_i W_i Y_i(1) \\
 \frac{1}{n_c}\sum_{i=1}^{N} R_i (1 - W_i) Y_i &= \frac{1}{n_t}\sum_{i=1}^{N} R_i(1 - W_i) Y_i(0)
 \end{align}

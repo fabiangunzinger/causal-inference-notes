@@ -51,4 +51,51 @@
 
 ## The potential outcomes framework
 
+- The framework has three key features:
+
+  1. Causal effects are associated with potential outcomes
+  2. Studying causal effects required multiple units
+  3. Central role of the assignment mechanism
+
+
+- We have a population of $i = 1, \dots, N$ units.
+
+- For each unit, $i$, the binary treatment indicator $W_i \in \{0, 1\}$ indicates whether the individual is in treatment ($W_i = 1$) or control ($W_i = 0$).
+
+- There is a potential outcome for each possible treatment: $Y_i(1)$ is the outcome for $i$ if they are assigned to treatment; $Y_i(0)$, if they are assigned to control.
+
+- The causal effect of the treatment for individual $i$ is a comparison of the two potential outcomes such as the difference $Y_i(1) - Y_i(0)$ or the ration $Y_i(1)/Y_i(0)$.
+
+- Once treatment is assigned, we observe
+
+$$
+Y_i^{obs} = Y_i(W_i) = \begin{cases} 
+   Y_i(1) & \text{if } W_i = 1 \\
+   Y_i(0)       & \text{if } W_i = 0
+  \end{cases}
+$$
+
+
+- We can only ever observe one potential outcomes, which means that drawing inferences about the causal effect is impossible without additional assumptions.
+
+// I'm here: read holland1986statistics and integrate
+
+- In the context of all $N$ units, we have an N-vector $\mathbf{W}$ of assignments, with typical element $W_i$.
+
+- In principle, the potential outcomes can depend on the treatments for all units, so that for each unit, we have $2^N$ potential outcomes $Y_i(\mathbf{W})$.
+
+
+
+
+
+
+
+
+
+
+- 
+- Each unit in the population can be exposed to one of two treatments, which are identical across units. Each unit $i$ has potential outcomes $\ypc$ and $\ypt$ corresponding to each of the two possible treatments. $\ypc$ is the outcome unit $i$ would experience if they received the control treatment; $\ypt$, the outcome they would experience if they received the active treatment.
+
+
+Each unit is either assigned to treatment or control, so we'll only ever observe one of their potential outcomes. We denote the observed outcome for unit $i$ as $\yo$. This observed outcome equals $\ypt$ if the unit was assigned to treatment and $\ypc$ if they were assigned control. That is, if we write $\ti_i = 1$ if unit $i$ is allocated to treatment and $\ti_i = 0$ if they are allocated to control, then we can express the **observed outcome** for unit $i$ as
 

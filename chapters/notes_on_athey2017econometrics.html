@@ -120,6 +120,36 @@ window.Quarto = {
 </section>
 <section id="the-potential-outcomes-framework" class="level2">
 <h2 class="anchored" data-anchor-id="the-potential-outcomes-framework">The potential outcomes framework</h2>
+<ul>
+<li><p>The framework has three key features:</p>
+<ol type="1">
+<li>Causal effects are associated with potential outcomes</li>
+<li>Studying causal effects required multiple units</li>
+<li>Central role of the assignment mechanism</li>
+</ol></li>
+<li><p>We have a population of <span class="math inline">\(i = 1, \dots, N\)</span> units.</p></li>
+<li><p>For each unit, <span class="math inline">\(i\)</span>, the binary treatment indicator <span class="math inline">\(W_i \in \{0, 1\}\)</span> indicates whether the individual is in treatment (<span class="math inline">\(W_i = 1\)</span>) or control (<span class="math inline">\(W_i = 0\)</span>).</p></li>
+<li><p>There is a potential outcome for each possible treatment: <span class="math inline">\(Y_i(1)\)</span> is the outcome for <span class="math inline">\(i\)</span> if they are assigned to treatment; <span class="math inline">\(Y_i(0)\)</span>, if they are assigned to control.</p></li>
+<li><p>The causal effect of the treatment for individual <span class="math inline">\(i\)</span> is a comparison of the two potential outcomes such as the difference <span class="math inline">\(Y_i(1) - Y_i(0)\)</span> or the ration <span class="math inline">\(Y_i(1)/Y_i(0)\)</span>.</p></li>
+<li><p>Once treatment is assigned, we observe</p></li>
+</ul>
+<p><span class="math display">\[
+Y_i^{obs} = Y_i(W_i) = \begin{cases}
+   Y_i(1) &amp; \text{if } W_i = 1 \\
+   Y_i(0)       &amp; \text{if } W_i = 0
+  \end{cases}
+\]</span></p>
+<ul>
+<li>We can only ever observe one potential outcomes, which means that drawing inferences about the causal effect is impossible without additional assumptions.</li>
+</ul>
+<p>// I’m here: read holland1986statistics and integrate</p>
+<ul>
+<li><p>In the context of all <span class="math inline">\(N\)</span> units, we have an N-vector <span class="math inline">\(\mathbf{W}\)</span> of assignments, with typical element <span class="math inline">\(W_i\)</span>.</p></li>
+<li><p>In principle, the potential outcomes can depend on the treatments for all units, so that for each unit, we have <span class="math inline">\(2^N\)</span> potential outcomes <span class="math inline">\(Y_i(\mathbf{W})\)</span>.</p></li>
+<li></li>
+<li><p>Each unit in the population can be exposed to one of two treatments, which are identical across units. Each unit <span class="math inline">\(i\)</span> has potential outcomes <span class="math inline">\(\ypc\)</span> and <span class="math inline">\(\ypt\)</span> corresponding to each of the two possible treatments. <span class="math inline">\(\ypc\)</span> is the outcome unit <span class="math inline">\(i\)</span> would experience if they received the control treatment; <span class="math inline">\(\ypt\)</span>, the outcome they would experience if they received the active treatment.</p></li>
+</ul>
+<p>Each unit is either assigned to treatment or control, so we’ll only ever observe one of their potential outcomes. We denote the observed outcome for unit <span class="math inline">\(i\)</span> as <span class="math inline">\(\yo\)</span>. This observed outcome equals <span class="math inline">\(\ypt\)</span> if the unit was assigned to treatment and <span class="math inline">\(\ypc\)</span> if they were assigned control. That is, if we write <span class="math inline">\(\ti_i = 1\)</span> if unit <span class="math inline">\(i\)</span> is allocated to treatment and <span class="math inline">\(\ti_i = 0\)</span> if they are allocated to control, then we can express the <strong>observed outcome</strong> for unit <span class="math inline">\(i\)</span> as</p>
 </section>
 </section>
 

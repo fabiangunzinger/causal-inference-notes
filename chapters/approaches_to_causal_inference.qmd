@@ -1,4 +1,4 @@
-# Alternative approaches
+# Approaches to causal inference
 
 ## Perl
 
