@@ -1,5 +1,20 @@
 # Variance reduction
 
+
+From Gelman [blog](https://statmodeling.stat.columbia.edu/2024/11/18/5-different-reasons-why-its-important-to-include-a-pre-treatment-variable-when-designing-and-analyzing-a-randomized-experiment/):
+
+For general non-experimental settings, there are five reasons for including pre-treatment predictors:
+
+1. Adjust for bias in non-randomized design
+2. Adjust for random imbalances in randomized design (and for nonrandom imbalances because of imperfect randomization, dropout, etc.)
+3. Reduce the standard error of the estimated effect
+4. Check for imbalance and lack of overlap between treatment and control groups
+5. Generalizing to population with a different distribution of x.
+
+In online experiments, it's about 3 mainly. Only, though? This section focuses on 3.
+
+
+
 ## Why reduce variance?
 
 We have seen in chapter @sec-power that if we want to control our Type I and Type II error rate, the required total sample size for our experiment is given by:

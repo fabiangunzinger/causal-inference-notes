@@ -76,9 +76,13 @@ Y_i^{obs} = Y_i(W_i) = \begin{cases}
 $$
 
 
-- We can only ever observe one potential outcomes, which means that drawing inferences about the causal effect is impossible without additional assumptions.
+- We can only ever observe one potential outcomes, which means that drawing inferences about the causal effect is impossible without additional assumptions. @holland1986statistics called this the fundamental problem of causal inference.
 
-// I'm here: read holland1986statistics and integrate
+
+
+
+
+// I'm here: read holland1986statistics and integrate 
 
 - In the context of all $N$ units, we have an N-vector $\mathbf{W}$ of assignments, with typical element $W_i$.
 

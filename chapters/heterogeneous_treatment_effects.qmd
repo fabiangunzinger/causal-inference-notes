@@ -1,5 +1,9 @@
 # Heterogeneous treatment effects
 
+todo: 
+- Look at Athey and Wagner 2017 causal forrest approach: https://www.tandfonline.com/doi/full/10.1080/01621459.2017.1319839#d1e2336
+
+
 - Focusing only on mean outcomes can be detrimental in the long-term, especially in contexts where metrics are driven heavily by a small subset of superusers [@bojinov2020avoid]
 
 - In such cases, focusing on the average effectively builds products for superusers, which can be a missed opportunity because increasing the engagement of infrequent users and ensuring they don't churn is often one of the largest opportunities for growth.
