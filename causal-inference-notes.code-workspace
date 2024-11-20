@@ -7,5 +7,7 @@
 			"path": "../../../.dotfiles/latex"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"cSpell.enabled": true
+	}
 }

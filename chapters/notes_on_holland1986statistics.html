@@ -77,14 +77,42 @@ window.Quarto = {
 
 <section id="notes-on-holland1986statistics" class="level1">
 <h1>Notes on holland1986statistics</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <ul>
 <li><p>Wants to make the point that statistics has a lot to say about causal inference and thus needn’t limit itself to associational inference.</p></li>
 <li><p>Also wants to show fundamental differences between causal and associational inference.</p></li>
 <li><p>Overall layout:</p>
 <ul>
 <li><p>Introduce associational and causal inference approaches and compare the two.</p></li>
-<li><p>Compare them</p></li>
+<li><p>Apply them to various ideas and philosophies about causal inference</p></li>
 </ul></li>
+</ul>
+</section>
+<section id="model-for-associational-inference" class="level2">
+<h2 class="anchored" data-anchor-id="model-for-associational-inference">Model for associational inference</h2>
+<ul>
+<li><p>A population <span class="math inline">\(U\)</span> of units with individual unit <span class="math inline">\(i\)</span></p></li>
+<li><p>A variable is a real-valued function defined on every <span class="math inline">\(i\)</span></p></li>
+<li><p>The value of a variable for <span class="math inline">\(i\)</span> is the number assigned by some measurement process to <span class="math inline">\(i\)</span></p></li>
+<li><p><span class="math inline">\(Y\)</span> is the response variable of interest, and there is a value <span class="math inline">\(Y_i\)</span> associated with each <span class="math inline">\(i\)</span></p></li>
+<li><p>Define <span class="math inline">\(X\)</span> as another variable defined on <span class="math inline">\(U\)</span>, and call <span class="math inline">\(X\)</span> an attribute of the units, with a value <span class="math inline">\(X_i\)</span> associated with each <span class="math inline">\(i\)</span></p></li>
+<li><p>Logically, however, <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> are on equal footing: they are both variables defined on <span class="math inline">\(U\)</span></p></li>
+<li><p>For associational inference, we are satisfied to understand <em>how</em> <span class="math inline">\(Y\)</span> varies with <span class="math inline">\(X\)</span></p></li>
+<li><p>A probability is a proportion of units in <span class="math inline">\(U\)</span></p></li>
+<li><p>The expected value the average over <span class="math inline">\(U\)</span></p></li>
+<li><p>Conditional expected values the average over a subset of <span class="math inline">\(U\)</span> where subsets are defined on the value of a variable</p></li>
+<li><p>It’s in the above senses that the model described in the paper is a population model</p></li>
+<li><p>The role of time, in associational inference, is merely to define the population of units and to specify the operational meaning of the particular variables (for causal inference, time will be more important)</p></li>
+<li><p>The <em>joint distribution</em> of <span class="math inline">\(Y\)</span> and <span class="math inline">\(A\)</span> over <span class="math inline">\(U\)</span> is specified by <span class="math inline">\(P(Y = y, X = x)\)</span>, which is the proportion of units in <span class="math inline">\(U\)</span> for which <span class="math inline">\(Y_i = y\)</span> and <span class="math inline">\(X_i = x\)</span>.</p></li>
+<li><p>The <em>associational parameters</em> are described by this joint distribution. As an example, the conditional distribution of <span class="math inline">\(Y\)</span> given <span class="math inline">\(A\)</span> is specified as <span class="math inline">\(P(Y = y | X = x)\)</span>, which equals <span class="math inline">\(P(Y = y, X = x) / P(X = x)\)</span>. This conditional distribution describes how the distribution of <span class="math inline">\(Y\)</span> over <span class="math inline">\(U\)</span> changes as <span class="math inline">\(X\)</span> varies.</p></li>
+<li><p>Another typical associational value is the regression of <span class="math inline">\(Y\)</span> on <span class="math inline">\(X\)</span>, which calculates the conditional expectation <span class="math inline">\(\mathbb{E}[Y | X = x]\)</span>.</p></li>
+<li><p>“Associational inference consists of making statistical inferences (estimates, tests, posterior distributions) about associational parameters relating <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> on the basis of data gathers about <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> from units in <span class="math inline">\(U\)</span>. In this sense, associational statistics is simply descriptive statistics.”</p></li>
+</ul>
+</section>
+<section id="rubins-model-for-causal-inference" class="level2">
+<h2 class="anchored" data-anchor-id="rubins-model-for-causal-inference">Rubin’s Model for causal inference</h2>
+<ul>
 <li><p>We have potential outcomes <span class="math inline">\(Y_i(1)\)</span> and <span class="math inline">\(Y_i(0)\)</span>.</p></li>
 <li><p>The individual-level causal effect is a comparison of the two, usually <span class="math inline">\(Y_i(1) - Y_i(0)\)</span>.</p></li>
 <li><p>The Fundamental Problem of Causal Inference is that for any individual we can every only observe one of the two potential outcomes. This means that we cannot observe the individual-level causal effect.</p></li>
@@ -94,6 +122,7 @@ window.Quarto = {
 <li><p>The statistical solution is to rely on information from the entire experiment population and focus on the average treatment effect <span class="math inline">\(\mathbb{E}[Y(1) - Y(0)] = \mathbb{E}[Y(1)] - \mathbb{E}[Y(0)]\)</span>. The last two terms can be estimated from an experiment where some units are exposed to treatment and others to control. The key insight here is that the statistical approach makes it possible to replace the <em>impossible to observe</em> individual-level causal effect with the <em>possible to estimate</em> average causal effect over a population of units.</p></li>
 </ul></li>
 </ul>
+</section>
 </section>
 
 </main>
