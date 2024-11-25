@@ -77,6 +77,9 @@ window.Quarto = {
 
 <section id="notes-on-holland1986statistics" class="level1">
 <h1>Notes on holland1986statistics</h1>
+<ul>
+<li>This paper coins the “Rubin Model” – not the model itself, the name for it.</li>
+</ul>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <ul>
@@ -113,15 +116,67 @@ window.Quarto = {
 <section id="rubins-model-for-causal-inference" class="level2">
 <h2 class="anchored" data-anchor-id="rubins-model-for-causal-inference">Rubin’s Model for causal inference</h2>
 <ul>
+<li><p>Treatment and cause are used interchangeably.</p></li>
+<li><p>The effect of a cause is always relative to another cause (e.g.&nbsp;“A causes B” means A causes B relative to another cause that includes “not A” – if the coffee cup fell over because I moved my hand then that is relative to a state of the world where I didn’t move my hand).</p></li>
+<li><p>The key notion of causal inference in this framework is the potential for exposing each unit to cause or treatment (regardless of whether it’s possible in practice) –– each unit needs to be potentially exposable to any of the causes.</p></li>
+<li><p>Let <span class="math inline">\(W_i\)</span> be the treatment indicator, with <span class="math inline">\(W_i = 1\)</span> indicating that <span class="math inline">\(i\)</span> is exposed to treatment and <span class="math inline">\(W_i = 0\)</span> that <span class="math inline">\(i\)</span> is exposed to control. The key to our notion of causal inference is that <span class="math inline">\(W_i\)</span> could have been different.</p></li>
+<li><p><span class="math inline">\(W_i\)</span> is analogous to <span class="math inline">\(X_i\)</span> above, but with the difference that <span class="math inline">\(W_i\)</span> indicates what cause <span class="math inline">\(i\)</span> is exposed to, which could have been different, while <span class="math inline">\(X_i\)</span> represents a characteristic of <span class="math inline">\(i\)</span>, which could not have been different.</p></li>
+<li><p>For each unit, we observe <span class="math inline">\(Y_i^{obs}\)</span> and <span class="math inline">\(W_i\)</span>.</p></li>
+<li><p>Time becomes relevant because exposure to a cause must occur at a particular time or during a particular time period. Variables thus divide into two groups: pre-exposure and post-exposure.</p></li>
 <li><p>We have potential outcomes <span class="math inline">\(Y_i(1)\)</span> and <span class="math inline">\(Y_i(0)\)</span>.</p></li>
 <li><p>The individual-level causal effect is a comparison of the two, usually <span class="math inline">\(Y_i(1) - Y_i(0)\)</span>.</p></li>
-<li><p>The Fundamental Problem of Causal Inference is that for any individual we can every only observe one of the two potential outcomes. This means that we cannot observe the individual-level causal effect.</p></li>
+<li><p>The Fundamental Problem of Causal Inference is that for any individual we can ever only observe one of the two potential outcomes. This means that we cannot observe the individual-level causal effect.</p></li>
 <li><p>There are two general solutions to the fundamental problem:</p>
 <ul>
-<li><p>The scientific solution uses homogeneity or invariance assumptions (e.g.&nbsp;time has no effect on measurements – this is what we informally use in everyday life).</p></li>
+<li><p>The scientific solution uses homogeneity or invariance assumptions, which allows us to measure treatment and control values at different points in time and assume that the only difference in measurement is due to treatment (e.g.&nbsp;time has no effect on measurements – this is what we informally use in everyday life).</p></li>
 <li><p>The statistical solution is to rely on information from the entire experiment population and focus on the average treatment effect <span class="math inline">\(\mathbb{E}[Y(1) - Y(0)] = \mathbb{E}[Y(1)] - \mathbb{E}[Y(0)]\)</span>. The last two terms can be estimated from an experiment where some units are exposed to treatment and others to control. The key insight here is that the statistical approach makes it possible to replace the <em>impossible to observe</em> individual-level causal effect with the <em>possible to estimate</em> average causal effect over a population of units.</p></li>
 </ul></li>
+<li><p>The truth of either solution depends on the truth of a set of untestable assumptions.</p></li>
 </ul>
+</section>
+<section id="special-cases-of-causal-inference" class="level2">
+<h2 class="anchored" data-anchor-id="special-cases-of-causal-inference">Special cases of causal inference</h2>
+<ul>
+<li>This section shows how simple assumptions allow for causal inference either using the scientific of statistical solution to the Fundamental Problem.</li>
+</ul>
+<section id="temporal-stability-and-causal-transience" class="level3">
+<h3 class="anchored" data-anchor-id="temporal-stability-and-causal-transience">Temporal stability and causal transience</h3>
+<ul>
+<li><p>If <span class="math inline">\(Y_i(0)\)</span> is stable regardless when it is measured (temporal stability) and <span class="math inline">\(Y_i(1)\)</span> is unaffected by prior exposure to and measurement of effect of control (causal transience), then we can measure individual-level causal effects using the scientific solution by exposing units first to control and then the treatment.</p></li>
+<li><p>These two assumptions are often used in Physics, as well as in everyday life (causal effect of my turning on the light switch).</p></li>
+</ul>
+</section>
+<section id="unit-homogeneity" class="level3">
+<h3 class="anchored" data-anchor-id="unit-homogeneity">Unit Homogeneity</h3>
+<ul>
+<li><p>If potential outcomes are identical for different units, then we can apply the scientific solution by calculating <span class="math inline">\(Y_i(1) - Y_j(0)\)</span>.</p></li>
+<li><p>This approach, too, is often used in everyday life.</p></li>
+</ul>
+</section>
+<section id="independence" class="level3">
+<h3 class="anchored" data-anchor-id="independence">Independence</h3>
+<ul>
+<li>The statistical solution to the Fundamental Problem relies on estimating</li>
+</ul>
+<p><span class="math display">\[
+\mathbb{E}[Y(1) - Y(0)] = \mathbb{E}[Y(1)] - \mathbb{E}[Y(0)].
+\]</span></p>
+<ul>
+<li>We do this by assigning a “large” number of units to treatment and control each, which allows us to observe</li>
+</ul>
+<p><span class="math display">\[
+\begin{align}
+\mathbb{E}[Y^{obs} | W = 1] &amp;- \mathbb{E}[Y^{obs} | W = 0] \\
+= \mathbb{E}[Y(1) | W = 1] &amp;- \mathbb{E}[Y(0) | W = 0].
+\end{align}
+\]</span></p>
+<ul>
+<li>In general, these two expressions needn’t be the same, as it is possible that potential outcomes are systematically different between groups with different treatment assignment</li>
+</ul>
+</section>
+<section id="constant-effect" class="level3">
+<h3 class="anchored" data-anchor-id="constant-effect">Constant effect</h3>
+</section>
 </section>
 </section>
 

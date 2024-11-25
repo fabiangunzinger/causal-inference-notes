@@ -34,7 +34,8 @@
 
 Later:
 
-- [ ] Read and integrate seminal papers
+- [ ] Read and integrate Holland and Rubin 1983 on Lord paradox
+- [ ] Read and integrate seminal papers by Rubin as mentioned in holland1986statistics
 
   - holland1986statistics
   - See athey2017econometrics chapter 3 for list of references
