@@ -77,7 +77,7 @@
 
     - The scientific solution uses homogeneity or invariance assumptions, which allows us to measure treatment and control values at different points in time and assume that the only difference in measurement is due to treatment (e.g. time has no effect on measurements – this is what we informally use in everyday life).
 
-    - The statistical solution is to rely on information from the entire experiment population and focus on the average treatment effect $\mathbb{E}[Y(1) - Y(0)] = \mathbb{E}[Y(1)] - \mathbb{E}[Y(0)]$. The last two terms can be estimated from an experiment where some units are exposed to treatment and others to control. The key insight here is that the statistical approach makes it possible to replace the *impossible to observe* individual-level causal effect with the *possible to estimate* average causal effect over a population of units.
+    - The statistical solution is to rely on information from the entire experiment population and focus on the average treatment effect $\tau = \mathbb{E}[Y(1) - Y(0)] = \mathbb{E}[Y(1)] - \mathbb{E}[Y(0)]$. The last two terms can be estimated from an experiment where some units are exposed to treatment and others to control. The key insight here is that the statistical approach makes it possible to replace the *impossible to observe* individual-level causal effect with the *possible to estimate* average causal effect over a population of units.
 
 - The truth of either solution depends on the truth of a set of untestable assumptions.
 
@@ -106,19 +106,67 @@
 - The statistical solution to the Fundamental Problem relies on estimating
 
 $$
-\mathbb{E}[Y(1) - Y(0)] = \mathbb{E}[Y(1)] - \mathbb{E}[Y(0)].
+\begin{align}
+\tau 
+&= \mathbb{E}[Y(1) - Y(0)] \\
+&= \mathbb{E}[Y(1)] - \mathbb{E}[Y(0)].
+\end{align}
 $$
 
 - We do this by assigning a "large" number of units to treatment and control each, which allows us to observe
 
 $$
 \begin{align}
-\mathbb{E}[Y^{obs} | W = 1] &- \mathbb{E}[Y^{obs} | W = 0] \\
-= \mathbb{E}[Y(1) | W = 1] &- \mathbb{E}[Y(0) | W = 0].
+\hat{\tau}
+&= \mathbb{E}[Y^{obs} | W = 1] - \mathbb{E}[Y^{obs} | W = 0] \\
+&= \mathbb{E}[Y(1) | W = 1] - \mathbb{E}[Y(0) | W = 0].
 \end{align}
 $$
 
-- In general, these two expressions needn't be the same, as it is possible that potential outcomes are systematically different between groups with different treatment assignment 
+- In general, $\hat{\tau}$ needn't equal $\tau$: it's possible that the average potential outcomes conditional on treatment assignment are different from unconditional averages. In particular, this can be the case if $W$ is statistically dependent on potential outcomes (the classic example being self-selection).
+
+- The *independence* assumption, if plausible, eliminates this statistical dependence. Independence can be achieved by assigning treatments randomly using a credible randomisation mechanism. If the treatment a unit is exposed to is completely random, then it will also be independent of potential outcomes. We then have:
+
+$$
+\begin{align}
+\hat{\tau}
+&=\mathbb{E}[Y^{obs} | W = 1] - \mathbb{E}[Y^{obs} | W = 0] \\
+&= \mathbb{E}[Y(1) | W = 1] - \mathbb{E}[Y(0) | W = 0] \\
+&= \mathbb{E}[Y(1)] - \mathbb{E}[Y(0)] \\
+&= \mathbb{E}[Y(1) - Y(0)] \\
+&= \tau.
+\end{align}
+$$
+
 
 ### Constant effect
+
+- $\tau$ is the average treatment effect and thus may or may not be relevant for individual $i$.
+
+- Under the *constant effect assumption*, we have $Y_i(1) - Y_i(0) = \tau$ for all units *i*. In this case, $\tau$ is also the individual-level treatment effect.
+
+- The assumption is also called *additivity* in statistics because it adds a constant amount $\tau$ to the control reponse for each unit.
+
+- The assumption can be partially checked by dividing the population into different subpopulations, and checking whether the estimated ATEs are the same in all subpopulations; if they are, then the assumption is plausible, otherwise it isn't.
+
+- The constant effect assumption is implied by the unit homogeneity assumption, and is thus a weaker version of it.
+
+
+## Comments on selected philosophies
+
+## Comments from a few statisticians
+
+## What can be a cause?
+
+## Comments on the causal inferences in various disciplines
+
+
+## Notation
+
+- I use modern causal inference notation instead of Holland's original notation, which requires the following changes:
+
+| Holland notation | Modern notation |
+| - | - |
+| $Y_S$ | $Y^{obs}$ |
+
 

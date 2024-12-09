@@ -4,9 +4,9 @@ project:
     browser: false
 
 book:
-  title: "Online experiments"
+  title: "Statistics and practice of online experiments"
   author: "Fabian Gunzinger"
-  date: "8/3/2024"
+  date: "2/12/2024"
   chapters:
     - index.qmd
 
@@ -17,16 +17,15 @@ book:
     - part: chapters/statistics.md
       chapters:
       - chapters/stats_of_online_experiments.md
-      # - chapters/setup.md
-      # - chapters/outcomes.md
-      # - chapters/standard_error.md
-      # - chapters/testing_and_cis.md
-      # - chapters/power.md
-      # - chapters/analysis.md
-      # - chapters/threats_to_validity.qmd
+      - chapters/outcomes.md
+      - chapters/standard_error.md
+      - chapters/testing_and_cis.md
+      - chapters/power.md
+      - chapters/analysis.md
+      - chapters/threats_to_validity.qmd
 
       
-    # - part: "Practical issues"
+    - part: "Practice"
       # chapters:
         # - chapters/guiding_principles.qmd
         # - chapters/ethics.qmd
@@ -55,8 +54,9 @@ book:
     #     - chapters/regression_discontinuity.qmd
 
 
-    # - part: "Appendices"
-    #   chapters:
+    - part: "Appendices"
+      chapters:
+        - chapters/notes_on_athey2017econometrics.md
       # - chapters/stats_foundations.qmd
       # - chapters/projection.md
       # - chapters/fwl.qmd
@@ -74,8 +74,7 @@ book:
       # - chapters/useful_resources.qmd
       # - chapters/references.qmd
 
-# Env variable with path to fabib.bib created in .zsh.general
-bibliography: !expr "Sys.getenv('FABIB', '')"
+bibliography: /Users/fgunzinger/.dotfiles/latex/fabib.bib
 
 
 # format:

@@ -1,4 +1,4 @@
-# Threats to validity
+# Threats to validity {#sec-threats-to-validity}
 
 todo:
 - Integrate Shadish, Cook, and Campbell (2002) Experimental and quasi-experimental designs for causal inference... (cited in athey2017econometrics)
@@ -12,6 +12,23 @@ todo:
 - External validity is about the extent to which our experiment results generalise both across different populations and across time. Results don't usually generalise across populations (a feature may work well in one country but not in another), which isn't a problem because we can (and usually should!) just run the experiment separately for different markets. Traditional experiments do, howerver, assume that experiments generalise over time, in that we think that the effect we estimate during the experiment period will be persistent -- i.e. we think that the long-term effect of a change will be the same as the short-term effect.
 
 - In my mind, some of the threats listed below, such as learning effects, could be listed as threats to either internal or external validity. I list them where I think they make most sense given the definitions, but one could argue about that and some authors make different choices -- what matters is that you think about them when designing an experiment!
+
+
+
+**Violations of SUTVA**
+
+- SUTVA  will be violated if there are network effects: if the behaviour of units is mutually dependent. For instance: if my wife and I both use an online photo-sharing service and my wife sees a new feature that we both like while I'm in the control group, we might stil share the same number of family photos but start sharing them all on her account instead of mine. This creates an artificial treatment effect because if I had also had access to the new feature, we might not have changed our behaviour at all, while, during the experiment, her sharing volume went up while mine went down, suggesting the existent of a positive effect.
+
+- Another case where the no interference assumption can be violated is in the form of general equilibrium effects. A classic example is the effect of further education: the effect of my doing a PhD in statistics on my earnings while nobody else changes their behaviour (the partial-equilibrium effect) is surely different from the outcome of my earnings if suddenly everyone decided to do a PhD in statistics (the general-equilibrium effect).
+
+- The two violations capture the two different ways interference can lead to incorrect results: interference can happen and bias our results either during the experiment (threat to internal validity) or once the feature is fully rolled out (threat to external validity). In either case, the treatment of some unit has an externality on other units.
+
+- Another way in which this aspect of SUTVA can be violated is when treatments are administered in different ways, e.g. by either giving patients medication or asking them to take the medication themselves.
+
+
+
+
+
 
 
 ## Threats to reliability
