@@ -64,17 +64,25 @@ $$
 
   - The no hidden treatment variation states that a unit receiving a specific treatment level cannot receive different forms of that treatment level. This does *not* mean that the form of the treatment level has to be the same for each unit, but only that a given treatment level is well specified for a given unit. To use Imbens and Rubin's aspirin example: suppose we test the effect of aspirin on reducing headaches but have old and new aspirins which vary in strength, so that we effectively have three possible treatment statuses: no aspirin (control), weak aspirin, and strong aspirin. SUTVA does *not* require that all treatment units either get the weak or the strong aspirin, but requires that each unit can only receive one or the other in case they are treated, so that there is no ambiguity what form of the treatment a given unit will receive in case it is treated. (It would be permissible to have the treatment be randomly weak or strong, but this is not relevant in my world.) Remembering that what we want is the effect of a universal policy makes clear why this is important: we want to know what happened if we rolled out our policy to everyone compared to if we didn't roll it out to anyone. To have any hope of estimating this we can't have treatment level's vary over time or depending on circumstances, but need them to be pinned down for each unit. (In the context of Tech, this would mean that the experience of a feature for a given user is pinned down by, say, the size of their phone screen and the app version they use, which, by and large, is plausible.)
 
-- Essentially, both parts of SUTVA ensure the same thing: that $Y_i(W_i)$ is well defined: that it does not depend on the treatment status of other units, and that, for each possible treatment level, $W_i$, the precise form of that treatment level is well specified: that it is very clear what treatment $i$ receives if $W_i = 0$ and if $W_i = 1$.
+- Both parts of SUTVA ensure that the potential outcomes, $Y_i(W_i)$, are well defined for each individual (the "treatment value" in SUTVA refers to "potential outcomes"). The no interference part ensures that these outcomes do not depend on the assignment of other units, while the no hidden treatment variation ensures that the precise form of each treatment level that any given unit receives is clear, which then ensures that the potential outcome for that treatment is also well defined (in the aspirin example: if it weren't clear whether treatment meant weak or strong aspirin for unit $i$, then the value for $Y_i(1)$ may vary depending on which aspirin $i$ ends up receiving, which means that potential outcome isn't well defined).
 
 - SUTVA is a strong assumption and can be violated in a number of ways. I'll discuss these, together with solutions, in @sec-threats-to-validity.
 
 - If SUTVA holds, however, then instead of $Y_i(\mathbf{W})$ we have $Y_i(W_i)$, which allows us to write:
 
-$$ Y_i = W_iY_i(1) + (1 - W_i)Y_i(0)
+$$ Y_i^{obs} = W_iY_i(1) + (1 - W_i)Y_i(0)
 $$ {#eq-yi}
 
+- This is progress because now each unit's potential outcome is a function only of the unit's treatment assignment. As a result, the outcome we observe once the unit has been assigned, too, is a function of that unit's treatment assignment only.
 
-- Assignment mechanism: **I'M HERE!**
+- This is the precondition that allows us to compare outcomes of treated and untreated units to estimate the two quantities needed for the statistical solution to the Fundamental Problem: $\mathbb{E}[Y(1)] - \mathbb{E}[Y(0)]$.
+
+- In order for these estimates to be valid estimates of the two quantities we need, it is critically important how units receive the treatment they receive.
+
+- This is the role of the assignment mechanism: the mechanism that determines how units are allocated into different treatment conditions.
+
+- **I'm here: chapt 3 and 4 in Imbens and Rubin**
+
 
 
 

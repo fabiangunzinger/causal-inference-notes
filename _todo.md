@@ -36,6 +36,7 @@ Later:
 
 - [ ] Read and integrate Holland and Rubin 1983 on Lord paradox
 - [ ] Read and integrate seminal papers by Rubin as mentioned in holland1986statistics
+- [ ] Integrate: https://dspace.mit.edu/bitstream/handle/1721.1/84065/Yamamoto_Unpacking%20the%20Black.pdf?sequence=1&isAllowed=y
 
   - holland1986statistics
   - See athey2017econometrics chapter 3 for list of references
