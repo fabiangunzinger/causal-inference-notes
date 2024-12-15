@@ -1,5 +1,11 @@
 # Approaches to causal inference
 
+
+- See holland1986statistics
+- See also https://www.the100.ci/2024/06/26/sometimes-a-causal-effect-is-just-a-causal-effect-regardless-of-how-its-mediated-or-moderated/
+
+
+
 ## Perl
 
 Directed Acyclic Graphs

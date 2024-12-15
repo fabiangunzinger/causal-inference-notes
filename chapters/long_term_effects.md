@@ -83,6 +83,8 @@ Limitations:
 
 ### Surrogacy
 
+- Kohavi on surrogates: https://www.linkedin.com/posts/ronnyk_abtest-experimentguide-surrogate-activity-7268755332112228352-4Qpe/?utm_source=share&utm_medium=member_desktop
+
 - See SM2 in Appendix of @larsen2023statistical for good basic primer and literature review
 
 Motivation

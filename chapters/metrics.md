@@ -271,7 +271,7 @@ Further concerns:
 
 - Goal is to have an automated process that ensures that no change as a negative impact on another part of the product without there having been an explicit discussion about it
 
-- Select guardrails for each experiement (based on types of guardrails above, and find balance between protecting all teams and moving fast -- remember, as pointed out in the post, if you have 50 guardrail metrics and alert any significant degradation, then you have at least one false alert in 92% percent of experiments -- given that $1 - (1-0.05)^50 = 0.92$)
+- Select guardrails for each experiemen. Based on types of guardrails above, and find balance between protecting all teams and moving fast -- remember, as pointed out in the post, if you have 50 guardrail metrics and alert any significant degradation, then you have at least one false alert in 92% percent of experiments -- given that $1 - (1-0.05)^{50} = 0.92$.
 
 - For each metric, have three types of guardrals: impact guardrail (catch experiments with high negative impact on metric), power guardrail (ensure impact guardrail has adequate significance and power levels) and stat. sig guardrail (catch even small impacts on key metrics if statsig)
 
