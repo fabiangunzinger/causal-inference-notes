@@ -19,8 +19,6 @@ Well, to experiment effectively, you want, at a minimum, the following:
 3. A way to ensure your experiment has a good chance of picking up signals if
    there are any.
 
-
-
 First two are covered here. The third, which relates to the power of your
 experiment, is covered in @sec-power.
 

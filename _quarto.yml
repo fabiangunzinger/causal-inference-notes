@@ -58,6 +58,7 @@ book:
 
     - part: "Appendices"
       chapters:
+        - chapters/assignment_mechanism.md
         - chapters/notes_on_athey2017econometrics.md
       # - chapters/stats_foundations.qmd
       # - chapters/projection.md
