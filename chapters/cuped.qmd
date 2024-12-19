@@ -4,6 +4,8 @@ todo:
 
 - Incorporate Rice content on prediction and MSE (chapter 4.4 and ipad notes), which exactly gets us the CUPED result, again showing that CUPED is a re-invention of linear regression and standard stats 
 
+- Practical implementation at (Meta)[https://medium.com/@AnalyticsAtMeta/how-meta-scaled-regression-adjustment-to-improve-power-across-hundreds-of-thousands-of-experiments-624e08aaf560]
+
 
 Questions:
 - [ ] Why does fillna(y) not increase variance

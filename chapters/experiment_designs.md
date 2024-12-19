@@ -289,6 +289,28 @@ What's the difference between a "between-subjects design" and a "within-subjects
 - A mixed design is where we have a control group and baseline data. If we use that baseline, the estimator is then a difference-in-difference estimator, which is statistically more efficient.
 
 
+### Simple A/B test vs factorial designs:
+Based on kohavi2007practical
+- Factorial designs allow for testing interactions between treatment variables.
+- In practice, interactions are rarer than people assume, and negative interactions can be avoided by being aware of the issue and not running obviously conflicting tests overlapping.
+
+General advice
+- Run single-treatment tests to test and compare new designs
+- Run factorial designs when you believe that multiple factors interact strongly
+
+
+### Multiple arms vs multiple experiments
+Situation
+- You have 3 ideas to solve a single problem. So each user will only see one of the solutions. Treatments are thus independent (cannot have an interaction effect because they can’t interact).
+Recommendation	
+- Run a single test with multiple arms
+Reason
+- Direct comparison of variants (use multiple-pairwise-testing and correct for MHT)
+- Less overhead
+- dMore power (one instead of multiple control groups).
+
+
+
 ### Choosing unit of randomisation 
 
 Factors to consider: 

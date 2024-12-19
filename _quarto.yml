@@ -25,7 +25,7 @@ book:
       - chapters/threats_to_validity.qmd
 
       
-    - part: "Practice"
+    - part: chapters/practice.md
       chapters:
         # - chapters/important_topics.md
         # - chapters/guiding_principles.qmd
@@ -42,8 +42,9 @@ book:
         # - chapters/heterogeneous_treatment_effects.qmd
         # - chapters/long_term_effects.md
         # - chapters/triggered_analysis.md
+        # - chapters/sequential_testing.md
         # - chapters/multiple_hypothesis_correction.qmd
-        # - chapters/multi_arm_bandits.md
+        - chapters/multi_arm_bandits.md
 
     # - part: "Experiment platforms"
     #   chapter:

@@ -1,5 +1,9 @@
 # Sequential testing
 
+- kohavi2023peeking is a good starting point into the literature.
+
+
+
 ## Deliveroo 
 
 Based on [this](https://deliveroo.engineering/2018/10/22/how-to-experiment-rapidly-without-losing-rigour.html) blog post from deliveroo engineering and [this](https://www.analytics-toolkit.com/pdf/Efficient_AB_Testing_in_Conversion_Rate_Optimization_-_The_AGILE_Statistical_Method_2017.pdf) paper referenced therein.

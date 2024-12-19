@@ -44,7 +44,9 @@ Later:
 Experiment design
 - [ ] Incorporate box1978statistics
 - [ ] Incorporate cox2000theory
-
+- Susan Athey, designing complex experiments
+  - [Lecture on complex experiments (incl. MABs)](https://www.youtube.com/watch?v=I6GyDWh8kfw)
+  - athey2024designing, slides to the above lecture
 
 - Integrate Kohavi advanced topics into book: https://docs.google.com/document/d/12iy35z_aM5r76gqgq5f-mzVRwZoHjz4kBjv3rMULSEw/edit?tab=t.0#heading=h.3qu16rq6g769 
 - Integrate alternative experiment designs from Matheus Facure: https://docs.google.com/presentation/d/1cyRKkxvOAosMzlIVnSIGfZf63nq7PwZ9zaL5NZEn19c/edit?pli=1#slide=id.g1e5c694a008_0_52, and discussion here: https://www.linkedin.com/posts/matheus-facure-7b0099117_alternative-experiment-designs-activity-7247577102797938688-s31_?utm_source=share&utm_medium=member_desktop
