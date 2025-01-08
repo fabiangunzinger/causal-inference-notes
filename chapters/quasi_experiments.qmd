@@ -1,5 +1,8 @@
 # Quasi-experiments
 
+This book focuses on online experiments. However, if you work in industry you are likely to come across quasi-experimental methods that are being used whenever online experiments can't be.
+
+This section summarises in a paragraph the most common methods and then links to good resources that help you learn more about these methods.
 
 
 

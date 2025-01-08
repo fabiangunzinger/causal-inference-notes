@@ -46,19 +46,27 @@ book:
         # - chapters/multiple_hypothesis_correction.qmd
         - chapters/multi_arm_bandits.md
 
+    # - part: "Designs"
+    # Discussion of experiment designs used in practice
+
+    # - part: "Philosophy"
+    # Discussion of epistemology, philosophy of causality, arguments around limits of experiments, etc.
+
     # - part: "Experiment platforms"
     #   chapter:
     #     - chapters/platform_architecture_at_jet.md
 
-    # - part: "Quasi-experiments"
-    #   chapters:
-    #     - chapters/quasi_experiments.qmd
-    #     - chapters/matching.qmd
-    #     - chapters/regression_discontinuity.qmd
 
 
     - part: "Appendices"
       chapters:
+
+        - chapters/quasi_experiments.qmd
+    # move this to above chapter    
+     #     - chapters/matching.qmd
+    #     - chapters/regression_discontinuity.qmd
+
+
         - chapters/assignment_mechanism.md
         - chapters/notes_on_athey2017econometrics.md
       # - chapters/stats_foundations.qmd
