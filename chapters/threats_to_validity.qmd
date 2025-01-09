@@ -109,6 +109,7 @@ Possible scenarios:
 
 ### Sample ratio mismatch
 
+
 ### Attrition
 
 Attrition is when, for some reason, we cannot collect endline data on some units.

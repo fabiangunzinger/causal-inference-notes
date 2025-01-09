@@ -1,22 +1,13 @@
 # todo
 
-- Write appendix files to summarise relevant content from each of the following (get info from as many sources as I need in order to have all I need for stats of experiments):
-
-  - [ ] athey2017econometrics
-  - [ ] imbens2015causal
-  - [ ] aronow2013class as relevant
-  - [ ] abadie2020sampling as relevant
-  - [ ] freedman2008statistical
-
 - Based on appendix files, create stats of online experiment. Start with unbiasedness and variance of diff-in-means estimator for online experiments. The relevant framework for derivations of unbiasedness and variance of diff-in-means estimator for online experiment is BRE, which is not straightforward. So I first do CRE, and then adapt. 
     - [ ] CRE finite sample case
-    - [ ] CRE super-population case
     - [ ] BRE finite sample case
-    - [ ] BRE super-population case
     - [ ] Use the derivations for book, but also think about paper (check with Max for relevant outlet if needed)
 
-- [ ] Add section on testing and CI
+- [ ] Discuss why we need potential outcomes framework in the first place. Why not just compare means? (start with rubin1974estimating)
 
+- [ ] Add section on testing and CI
 - [ ] Add section on power calculations
     - [ ] Incorporate all metrics types to power calculation (see hesterberg2024power)
     - [ ] Differentiate between relative and abs MDES (default is abs)
@@ -33,13 +24,14 @@
 
 
 Later:
+- [ ] Add super population case for ramp-up experiments (start with wager2024causal)
 - [ ] Read and integrate Holland and Rubin 1983 on Lord paradox
 - [ ] Read and integrate seminal papers by Rubin as mentioned in holland1986statistics
 - [ ] Integrate: https://dspace.mit.edu/bitstream/handle/1721.1/84065/Yamamoto_Unpacking%20the%20Black.pdf?sequence=1&isAllowed=y
 
-  - holland1986statistics
-  - See athey2017econometrics chapter 3 for list of references
-
+- [ ] Read and integrate aronow2013class as relevant
+- [ ] Read and integrate abadie2020sampling as relevant
+- [ ] Read and integrate freedman2008statistical
 
 Experiment design
 - [ ] Incorporate box1978statistics
@@ -112,6 +104,9 @@ Stuff to consider
 - [ ] bojinov2023design section 5 for cool approach to experiment simulation that I might want to add to rosalie.
 
 ## Done
+- [x] Write appendix files to summarise relevant content from each of the following (get info from as many sources as I need in order to have all I need for stats of experiments):
+  - [x] athey2017econometrics
+  - [x] imbens2015causal
 - [x] Get internal preview to work
 - [x] Complete reboot of mac (if works well after, keep, else buy new macbook)
 - [x] CI notes on effect of below on experiments (for meta interview prep)

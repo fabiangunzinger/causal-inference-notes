@@ -1,6 +1,6 @@
 # The stats of online experiments
 
-## The potential outcomes framework
+## The potential outcomes framework and the fundamental problem of causal inference
 
 - The framework has three key features:
 
@@ -29,7 +29,6 @@ Y_i^{obs} = Y_i(W_i) = \begin{cases}
    Y_i(0)       & \text{if } W_i = 0
   \end{cases}
 $$
-
 
 - We can only ever observe one potential outcomes, which means that drawing inferences about the causal effect is impossible without additional assumptions. @holland1986statistics called this the fundamental problem of causal inference.
 
@@ -60,7 +59,7 @@ $$
 
 - SUTVA is a strong assumption and can be violated in a number of ways. I'll discuss these, together with solutions, in @sec-threats-to-validity.
 
-- If SUTVA holds, however, then instead of $Y_i(\mathbf{W})$ we have $Y_i(W_i)$, which allows us to write:
+- If SUTVA holds, however, then instead of $Y_i = Y_i(\mathbf{W})$ we have $Y_i = Y_i(W_i)$, which allows us to write:
 
 $$ Y_i^{obs} = W_iY_i(1) + (1 - W_i)Y_i(0)
 $$ {#eq-yi}
@@ -73,53 +72,7 @@ $$ {#eq-yi}
 
 - This is the role of the assignment mechanism: the mechanism that determines how units are allocated into different treatment conditions.
 
-- In online experiments, 
-
-
-## Assignment mechanism
-
-### Definitions
-
-- Formally, the assignment mechanism is a function $P(\mathbf{W} | \mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0))$ that determines the probability of all $2^n$ possible assignment vectors given all covariates and potential outcomes and satisfies:
-
-$$
-\sum_{\mathbf{W} \in [0, 1]^n} P(\mathbf{W} | \mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0)) = 1.
-$$
-
-- The unit-level assignment probability for unit $i$ is
-
-$$
-p_i(\mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0)) = 
-\sum_{\mathbf{W}: W_i = 1} P(\mathbf{W} | \mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0))
-$$
-
-- The propensity score at x is the average unit assignment probability for units with $X_i = x$:
-
-$$
-e(x) = \frac{1}{N(x)} \sum_{i:X_i = x} p_i(\mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0)),
-$$
-
-- where $N(x)$ is the number of units with $X_i = x$.
-
-### Restrictions on the assignment mechanism:
-
-- In an individualistic assignment, a units's assignment probability is independent of the covariates and potential outcomes of other units so that
-
-$$
-p_i(\mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0)) = p_i(X_i, Y_i(1), Y_i(0))
-$$
-
-- In a probabilistic assignment, each unit has non-zero probability for each treatment value for each unit so that
-
-$$
-0 < p_i(\mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0)) < 1
-$$
-
-- In an unconfounded assignment, the assignment mechanism is independent of potential outcomes
-
-$$
-p_i(\mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0)) = p_i(\mathbf{X})
-$$
+## Assignment in online experiments
 
 
 ### Bernoulli randomised experiment (BRE)
@@ -129,6 +82,53 @@ $$
 $$
 P(\mathbf{W} | \mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0)) = P(\mathbf{W}) = q^{n_t} (1-q)^{n_c}
 $$
+
+****I'm here****
+
+- Reading Wager, it seems there are two relevant factors for inference: he just conditions on n to get a CRE, and then there is the question of whether to take a finite sample or super-population perspective. 
+
+- The additional assumption (discussed in population asymptotics) of random sampling from super population holds for online experiments.
+
+- He does use Bernoulli sampling, which is what I need for online experiments. I just don'f fully understand how his perspective fits into the Imbens Rubin book / Athey Imbens one. 
+
+
+## Assumptions
+
+- The key assumption is SUTVA
+
+- Then we also require randomised assignments. In online experiments, as least, this is not an assumption if we properly test the randomisation proceedure (see discussion of SRM in @sec-threats-to-validity)
+
+- In addition, we also require the following assumptions:
+
+**Identification**
+
+- See Wagner notes for 4 assumptions: https://web.stanford.edu/~swager/stats361.pdf 
+
+- ... Randomisation solves selection bias problem and allows us to identify treatment effect
+
+- Use content from outcomes (expectations and show how randomisation eliminates selection bias)
+
+- Randomisation
+
+- SUTVA
+  - No interference
+  - Consistency
+  - See deng2023first for reference to Rubin 1980 original article on precise assumption and other great Rubin references
+
+- Solely and itself (excludability and non-interference)
+
+- Ignorability
+
+Check:
+- duflo2006randomizationd
+- Mostly harmless metrics
+- Field experiments book
+- Kohavi papers/book
+- Imbens and Rubins
+
+Question:
+- You randomise at customer level. For analysis, you do the following: you calculate metrics at a restaurant level, then calculate variant level averages from the restaurant-level averages. Is there a problem? What is it? What assumptions are being violated? 
+
 
 
 ## Estimand
@@ -241,35 +241,6 @@ There are other estimators, but $\hat{\mathbb{V}}^{neyman}$ is the most commonly
 
 
 
-**Identification**
-
-- See Wagner notes for 4 assumptions: https://web.stanford.edu/~swager/stats361.pdf 
-
-- ... Randomisation solves selection bias problem and allows us to identify treatment effect
-
-- Use content from outcomes (expectations and show how randomisation eliminates selection bias)
-
-- Randomisation
-
-- SUTVA
-  - No interference
-  - Consistency
-  - See deng2023first for reference to Rubin 1980 original article on precise assumption and other great Rubin references
-
-- Solely and itself (excludability and non-interference)
-
-- Ignorability
-
-Check:
-- duflo2006randomizationd
-- Mostly harmless metrics
-- Field experiments book
-- Kohavi papers/book
-- Imbens and Rubins
-
-Question:
-- You randomise at customer level. For analysis, you do the following: you calculate metrics at a restaurant level, then calculate variant level averages from the restaurant-level averages. Is there a problem? What is it? What assumptions are being violated? 
-
 
 ## Excludability
 
@@ -294,6 +265,8 @@ $$
 
 
 **Unbiasedness of $\hat{\tau}$**
+
+- Use derivation in wager2024causal page 6, which is very transparent!
 
 - First, note that using @eq-yi we can write:
 
@@ -471,6 +444,54 @@ W_i \sim \text{Bernoulli}(q) \quad &\text{with} \quad \E{W_i} = q
 $$
 
 :::
+
+
+
+
+## Assignment mechanism background material
+
+### Definitions
+
+- Formally, the assignment mechanism is a function $P(\mathbf{W} | \mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0))$ that determines the probability of all $2^n$ possible assignment vectors given all covariates and potential outcomes and satisfies:
+
+$$
+\sum_{\mathbf{W} \in [0, 1]^n} P(\mathbf{W} | \mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0)) = 1.
+$$
+
+- The unit-level assignment probability for unit $i$ is
+
+$$
+p_i(\mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0)) = 
+\sum_{\mathbf{W}: W_i = 1} P(\mathbf{W} | \mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0))
+$$
+
+- The propensity score at x is the average unit assignment probability for units with $X_i = x$:
+
+$$
+e(x) = \frac{1}{N(x)} \sum_{i:X_i = x} p_i(\mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0)),
+$$
+
+- where $N(x)$ is the number of units with $X_i = x$.
+
+### Restrictions on the assignment mechanism:
+
+- In an individualistic assignment, a units's assignment probability is independent of the covariates and potential outcomes of other units so that
+
+$$
+p_i(\mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0)) = p_i(X_i, Y_i(1), Y_i(0))
+$$
+
+- In a probabilistic assignment, each unit has non-zero probability for each treatment value so that
+
+$$
+0 < p_i(\mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0)) < 1
+$$
+
+- In an unconfounded assignment, the assignment mechanism is independent of potential outcomes
+
+$$
+p_i(\mathbf{X}, \mathbf{Y}(1), \mathbf{Y}(0)) = p_i(\mathbf{X})
+$$
 
 
 
