@@ -1,11 +1,6 @@
 # todo
 
-today
-- Clean up files and commit
-- Set up work env in obsidian
 - Move obsidian experiment notes in other vault over
-
-
 - Based on appendix files, create stats of online experiment. Start with unbiasedness and variance of diff-in-means estimator for online experiments. The relevant framework for derivations of unbiasedness and variance of diff-in-means estimator for online experiment is BRE, which is not straightforward. So I first do CRE, and then adapt. 
     - [ ] CRE finite sample case
     - [ ] BRE finite sample case
