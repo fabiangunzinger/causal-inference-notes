@@ -1,3 +1,3 @@
-# Causal inference notes
+# Online experiments
 
-Personal notes on causal inference.
+Personal notes on on the statistics and practice of online experiments.
