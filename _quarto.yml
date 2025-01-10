@@ -8,7 +8,7 @@ book:
   author: "Fabian Gunzinger"
   date: "2/12/2024"
   chapters:
-    - index.qmd
+    - index.md
 
     - part: "Introduction"
       chapters:
