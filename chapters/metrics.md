@@ -1,10 +1,6 @@
 # Metrics {#sec-metrics}
 
-These are evolving notes on my own thinking of choosing and defining metrics as I learn from my own experience and that of others.
-
-todo
-- Look at: https://www.statsig.com/blog/picking-metrics-101
-  
+These are evolving notes on my own thinking of choosing and defining metrics as I learn from my own experience and that of others.  
 
 ## Why good metrics matter
 
@@ -21,7 +17,12 @@ Primary metric = business metric
 Supporting metric = close to your change
 Both need to be significant before you can go fullon (=ship)
 
-Every change you make should be aligned with your business objectives. Only focussing on things like "items added to cart" or "searches made?" will be bad for customers because you are optimising for metrics which are too easy to change and are not aligned with the goals of your customers (they did not come to your platform to stuff to their shopping cart 😀 )
+Every change you make should be aligned with your business objectives. Only focussing on things like "items added to cart" or "searches made?" will be bad for customers because you are optimising for metrics which are too easy to change and are not aligned with the goals of your customers (they did not come to your platform to add stuff to their shopping cart 😀 )
+
+
+From Christophe Perrin in the same discussion (Jorden agrees)
+I agree, the general rule should be to use a business metric as primary decision metric but I think this can be the right approach in some cases, I would say it really depends on the maturity of the product. I know some teams at booking stopped using the main business metrics as their primary metric. The reason was that the product they were experimenting on made it very hard to get meaningful learning (using the top level business metric) in a time which made sense to the business and the product life cycle. Instead they picked 1 or 2 metrics (related to user behaviours) which they knew were good proxy for the main business KPI. This allowed them to move much faster in validating ideas. Of course you need to keep validating those proxies and run blackout experiments every now and then to make sure you are actually moving the needle in the right direction overall. I think this can work well if you careful choose and stick to relevant proxy metrics, what you should not do is start picking different metrics for each experiments just because it’s closer to the change you are making. 
+
 
 
 ### [Sebastian Honores Espejo](https://www.youtube.com/live/YWvotan2zZc?t=3314)

@@ -91,6 +91,8 @@ $$
 
 - He does use Bernoulli sampling, which is what I need for online experiments. I just don'f fully understand how his perspective fits into the Imbens Rubin book / Athey Imbens one. 
 
+- Also, use my notes in Obsidian. There is a lot there.
+
 
 ## Assumptions
 

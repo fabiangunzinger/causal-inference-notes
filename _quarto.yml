@@ -30,12 +30,10 @@ book:
         # - chapters/important_topics.md
         # - chapters/guiding_principles.qmd
         # - chapters/ethics.qmd
-        # - chapters/experiment_designs.md
-        # - chapters/experiment_stats.qmd
         - chapters/metrics.md
         - chapters/experiment_configuration.md
         - chapters/decision_making.qmd
-        # - chapters/threats_to_validity.qmd
+        - chapters/threats_to_validity.qmd
         # - chapters/practical_issues.qmd
         # - chapters/variance_reduction.qmd
         # - chapters/network_experiments.qmd
@@ -48,6 +46,7 @@ book:
 
     # - part: "Designs"
     # Discussion of experiment designs used in practice
+        # - chapters/experiment_designs.md
 
     # - part: "Philosophy"
     # Discussion of epistemology, philosophy of causality, arguments around limits of experiments, etc.
