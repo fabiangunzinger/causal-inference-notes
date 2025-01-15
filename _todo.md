@@ -1,13 +1,23 @@
-# todo
 
-- Move obsidian experiment notes in other vault over
-- Based on appendix files, create stats of online experiment. Start with unbiasedness and variance of diff-in-means estimator for online experiments. The relevant framework for derivations of unbiasedness and variance of diff-in-means estimator for online experiment is BRE, which is not straightforward. So I first do CRE, and then adapt. 
-    - [ ] CRE finite sample case
-    - [ ] BRE finite sample case
-    - [ ] Use the derivations for book, but also think about paper (check with Max for relevant outlet if needed)
+**I've got lot of great content here. I just need to keep going! Keep going!**
 
-- [ ] Discuss why we need potential outcomes framework in the first place. Why not just compare means? (start with rubin1974estimating)
+**Resources to draw on**
+- Files in `_notes` contain lots of valuable content. E.g. online experiment setup, experiment setup, Power, – check all of them and integrate either into main text or appendix 
+- `stats_of_online_experiments` are my old notes and contains important building blocks (I could split them up but, for now, don't worry about this)
 
+Next
+- [x] Clean up stats of online experiments note
+- [ ] Add bday derivation notes to Neyman chapter (use Imbens and Rubin book notes as starting point and move neyman and bday derivation there so I still have neyman chapter)
+- [ ] Understand and discuss different cases (super-population, etc) and discuss which ones I'm gonna talk about in the book and which ones are most relevant for online-experiments context. To consider, FS vs SP, CRE vs BRE, etc. Neyman is good starting point (I think it is, since it's the case where audience percentage is 100%), copy completed chapter from above and use as basis for stats notes (adapt notation: change N to n, consider using wager2024causal notation).
+- [ ] Write basic version of this chapter
+- [ ] Then
+	- [ ] Discuss why we need causal framework at all (what if we just do naive derivations treating t and c as independent samples)? What error are we making? (start with rubin1974estimating)
+	- [ ] Do BRE derivation for FS
+	- [ ] Possibly do SP derivations
+- [ ] Turn into paper in addition to book only (check with Max for relevant outlet if needed)
+
+
+Later
 - [ ] Add section on testing and CI
 - [ ] Add section on power calculations
     - [ ] Incorporate all metrics types to power calculation (see hesterberg2024power)
@@ -22,9 +32,7 @@
     - [ ] Power for different metric types (define continuous, proportion, ratio, etc. metrics -- how do they affect calculations?)
     - [ ] Build power calculator (check Statsig one — but add unbalanced samples option), build beautiful visualisations (use uv for package mgt)
 
-
-
-Later:
+Even later:
 - [ ] Add super population case for ramp-up experiments (start with wager2024causal)
 - [ ] Read and integrate Holland and Rubin 1983 on Lord paradox
 - [ ] Read and integrate seminal papers by Rubin as mentioned in holland1986statistics
@@ -124,4 +132,3 @@ Stuff to consider
     - [x] Solve math limitations -- rmd works (10 theorems, so quarto should, too) -- use quarto book
     - [x] Run cells in quarto book
     - [x] Projection in general
-

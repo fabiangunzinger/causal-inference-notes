@@ -1,6 +1,14 @@
 # Testing and confidence intervals {#sec-cis}
 
 
+todo:
+- See ding2023first pdf page 72 for proof and derivation
+- See Rice 7.3.3
+- See Rice 6.2 on why this follows t distribution
+- For complete treatment and derivation of sampling distributions (incl. discussion of all the approximations and sample corrections), see Rice sampling chapter and my ipad notes.
+
+
+
 ## Hypothesis testing
 
 To test whether the observed treatment effect is significantly different from zero, we test:
@@ -18,9 +26,4 @@ $$
 
 where $N_t + N_c - 2$ is number of degrees of freedom[^tdetails].
 
-todo:
-
-- See Rice 7.3.3
-- See Rice 6.2 on why this follows t distribution
-- For complete treatment and derivation of sampling distributions (incl. discussion of all the approximations and sample corrections), see Rice sampling chapter and my ipad notes.
 

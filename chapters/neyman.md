@@ -1,6 +1,6 @@
 # Neyman's repeated sampling approach {#sec-neyman}
 
-These are my notes from reading chapter 6 in @imbens2015causal.
+Based on chapter 6 in @imbens2015causal.
 
 ## Estimator for the average treatment effect
 
