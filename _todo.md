@@ -7,7 +7,7 @@
 
 Next
 - [x] Clean up stats of online experiments note
-- [ ] Add bday derivation notes to Neyman chapter (use Imbens and Rubin book notes as starting point and move neyman and bday derivation there so I still have neyman chapter)
+- [ ] Add bday derivation notes to Neyman chapter (use Imbens and Rubin book notes as starting point and move neyman and bday derivation there so I still have neyman chapter`)
 - [ ] Understand and discuss different cases (super-population, etc) and discuss which ones I'm gonna talk about in the book and which ones are most relevant for online-experiments context. To consider, FS vs SP, CRE vs BRE, etc. Neyman is good starting point (I think it is, since it's the case where audience percentage is 100%), copy completed chapter from above and use as basis for stats notes (adapt notation: change N to n, consider using wager2024causal notation).
 - [ ] Write basic version of this chapter
 - [ ] Then

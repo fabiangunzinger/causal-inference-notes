@@ -11,7 +11,7 @@ todo
 
 - Technically, this type of experiment is called a [[Bernoulli randomised experiment]].
 
-- If we are treating $n$ as known, then the setting becomes equivalent to a [[Imbens and Rubin book notes to be split into separate notes]] (see discussion in [[Bernoulli randomised experiment]] for more detail)
+- If we are treating $n$ as known, then the setting becomes equivalent to a [[Neyman's ATE estimator]] (see discussion in [[Bernoulli randomised experiment]] for more detail)
 
 
 ## Setup notes 2 (online experiments)
