@@ -12,4 +12,4 @@
 
 - @deng2015diluted recommend using triggered analysis for features with coverage of less than 20 percent
 
-- 
+- See also [this](https://docs.google.com/document/d/1IoVeNMB3d9CLvEJuavVdyVQS6eVRPwfN-GJAg7NFfGk/edit?tab=t.0#heading=h.9l3n24jvrd27) post for interesting discussion of what happens when you add data – dilute further

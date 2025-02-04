@@ -25,7 +25,6 @@ $$
 
 This is our estimand of interest.
 
-
 ## Estimator
 
 If we have data from a completely randomised experiment (CRE) in which a fixed number of $n_t = \sum_{i=1}^n W_i$ units are allocated to treatment and the remaining $n_c = \sum_{i=1}^n (1-W_i)$ to control, then a natural estimator for @eq-neyman-estimand is the difference in the means of the treatment and control units:
@@ -40,13 +39,10 @@ $$
 \bar{Y}_t = \frac{1}{n_t}\sum_{i:W_i=1} Y_i \qquad \bar{Y}_c = \frac{1}{n_c}\sum_{i:W_i=0} Y_i
 $$
 
-This estimator is unbiased (see Proof of Theorem 6.1 in @imbens2015causal for the proof).
-
-
 
 ## Unbiasedness
 
-This section contains a (small) step-by-step version of the derivation covered in Appendix A of chapter 6 in @imbens2015causal. Their derivation is complete but some steps can take a while to understand. The solution presented here, while remaining tedious, aims to be easy to follow.
+This section contains a step-by-step version of the derivation covered in Appendix A of chapter 6 in @imbens2015causal. Their derivation is complete but can be hard to follow. The derivation here remains tedious but should be easy to follow.
 
 We start with the difference-in-means estimator as defined above
 $$
@@ -63,7 +59,7 @@ $$
 &= \frac{1}{n}\sum_{i=1}^{n}\left(\frac{n}{n_\text{t}}W_iY_i - \frac{n}{n_\text{c}}(1-W_i)Y_i\right) \\
 \end{align}
 $$
-Imbens and Rubin suggest working with a centered treatment indicator to simplify the variance calculation. Se let's define
+Imbens and Rubin suggest working with a centered treatment indicator to simplify the variance calculation. So let's define
 $$
 D_i = W_i - \frac{n_t}{n} = 
 \begin{cases}
@@ -83,20 +79,74 @@ and
 $$
 \begin{align}
 \mathbb{V}(D_i) 
-&= \mathbb{E}\left[D_i - \mathbb{E}[D_i]\right]^2 \\
-&= \mathbb{E}[D_i - 0]^2 \\
-&= \mathbb{E}[D_i]^2 \\
-&= \mathbb{E}\left[W_i^2 - 2W_i\frac{n_t}{n} + \frac{n_t^2}{n^2}\right] \\
-&= \mathbb{E}[W_i^2] - 2\mathbb{E}[W_i]\frac{n_t}{n} + \frac{n_t^2}{n^2} \\
-&= \frac{n_t}{n} - 2\frac{n_t^2}{n^2} + \frac{n_t^2}{n^2} \\
-&= \frac{n_t}{n} - \frac{n_t^2}{n^2} \\
-&= \frac{n_t n - n_t^2}{n^2} \\
-&= \frac{n_t(n - n_t)}{n^2} \\
-&= \frac{n_t n_c}{n^2} \\
+&= \mathbb{E}\left[D_i - \mathbb{E}[D_i]\right]^2 \\[5pt]
+&= \mathbb{E}[D_i - 0]^2 \\[5pt]
+&= \mathbb{E}[D_i]^2 \\[5pt]
+&= \mathbb{E}\left[W_i^2 - 2W_i\frac{n_t}{n} + \frac{n_t^2}{n^2}\right] \\[5pt]
+&= \mathbb{E}[W_i^2] - 2\mathbb{E}[W_i]\frac{n_t}{n} + \frac{n_t^2}{n^2} \\[5pt]
+&= \frac{n_t}{n} - 2\frac{n_t^2}{n^2} + \frac{n_t^2}{n^2} \\[5pt]
+&= \frac{n_t}{n} - \frac{n_t^2}{n^2} \\[5pt]
+&= \frac{n_t n - n_t^2}{n^2} \\[5pt]
+&= \frac{n_t(n - n_t)}{n^2} \\[5pt]
+&= \frac{n_t n_c}{n^2} \\[5pt]
 \end{align}
 $$
 
-**I'm here –– verify above and give details to non-obvious steps**
+The cross-product distribution is:
+
+$$
+P_{W} = (D_{i} \times D_{j}) =
+\begin{cases} 
+\frac{n_t (n_t - 1)}{n(n-1)} & 
+\text{if } d = \frac{n_c^2}{n^2} \Leftrightarrow W_i = W_j = 1\\[5pt]
+2\frac{n_t n_c}{n(n-1)} & 
+\text{if } d = -\frac{n_t n_c}{n^2} \Leftrightarrow W_i = 1, W_j = 0\\[5pt]
+\frac{n_c (n_c - 1)}{n(n-1)} & 
+\text{if } d = \frac{n_t^2}{n^2} \Leftrightarrow W_i = W_j = 0\\[5pt]
+0 & 
+\text{otherwise,}
+\end{cases}
+$$
+
+leading to:
+
+$$ 
+E_W[D_i \times D_j] = 
+\begin{cases} 
+\frac{n_t n_c}{n^2} & \text{if } i = j\\[5pt]
+-\frac{n_t n_c}{n^2 (n-1)} & \text{if } i \neq j\\[5pt]
+\end{cases}
+$$
+
+We can derive these expected values as follows:
+
+For $i = j$ we have:
+$$
+\begin{array}{rl}
+E_W[D_i \times D_i]
+&= E_W[D_i^2] & \\[5pt]
+&= V(D_i) & \text{since $\mathbb{E}[D_i] = 0$} \\[5pt]
+&= \frac{n_t n_c}{n^2} & \text{from derivation of $\mathbb{V}(D_i)
+$}
+\end{array}
+$$
+
+
+For $i \neq j$ we have:
+
+$$
+\begin{align}
+E_W[D_i \times D_j]
+&= P(d_{W_i = W_j = 1}) d_{W_i = W_j = 1}
++ P(d_{W_i = 1, W_j = 0}) d_{W_i =1,  W_j = 0}
++ P(d_{W_i = W_j = 0}) d_{W_i = W_j = 0} \\[5pt]
+&= \frac{n_t (n_t - 1)}{n(n-1)} \frac{n_c^2}{n^2}
+- 2\frac{n_t n_c}{n(n-1)} \frac{n_t n_c}{n^2}
++ \frac{n_c (n_c - 1)}{n(n-1)} \frac{n_t^2}{n^2}\\[5pt]
+\end{align}
+$$
+
+** == I'm here == **
 
 
 
