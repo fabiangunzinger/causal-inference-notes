@@ -42,23 +42,37 @@ $$
 
 ## Unbiasedness
 
-This section contains a step-by-step version of the derivation covered in Appendix A of chapter 6 in @imbens2015causal. Their derivation is complete but can be hard to follow. The derivation here remains tedious but should be easy to follow.
+todo:
+Something we'll frequently use:
+$$
+1 - \frac{n_t}{n} = \frac{n}{n} - \frac{n_t}{n} = \frac{n - n_t}{n} = \frac{n_c}{n}
+$$
 
-We start with the difference-in-means estimator as defined above
-$$
-\hat{\tau}^{\text{dm}} 
-= \bar{Y}_t - \bar{Y}_c 
-= \frac{1}{n_t}\sum_{i:W_i=1} Y_i - \frac{1}{n_c}\sum_{i:W_i=0} Y_i.
-$$
-Using the definitions of $n_t$ and $n_c$ in terms of $W_i$ from above, we can rewrite this as
+
+This section contains a step-by-step version of the derivation covered in Appendix A of chapter 6 in @imbens2015causal. Their derivation is complete but can be hard to follow. This version here fills in the missing steps to make it easier to follow along, but it remains tedious.
+
+We start with the difference-in-means estimator as defined above and rewrite it in a form that will be more convenient to work with later
 
 $$
 \begin{align}
 \hat{\tau}^{\text{dm}}
-&= \frac{1}{n_\text{t}}\sum_{i=1}^{n}W_iY_i - \frac{1}{n_\text{c}}\sum_{i=1}^{n}(1-W_i)Y_i \\
-&= \frac{1}{n}\sum_{i=1}^{n}\left(\frac{n}{n_\text{t}}W_iY_i - \frac{n}{n_\text{c}}(1-W_i)Y_i\right) \\
+&= \bar{Y}_t - \bar{Y}_c & \\[5pt]
+
+&= \frac{1}{n_t}\sum_{i:W_i=1} Y_i - \frac{1}{n_c}\sum_{i:W_i=0} Y_i & \\[5pt]
+
+&= \frac{1}{n_\text{t}}\sum_{i=1}^{n}W_iY_i - \frac{1}{n_\text{c}}\sum_{i=1}^{n}(1-W_i)Y_i
+&\\[5pt]
+
+&= \frac{1}{n}\sum_{i=1}^{n}\left(\frac{n}{n_\text{t}}W_iY_i - \frac{n}{n_\text{c}}(1-W_i)Y_i\right) 
+& \text{multiply by }\frac{n}{n}\\[5pt]
+
+&= \frac{1}{n}\sum_{i=1}^{n}\left(\frac{n}{n_\text{t}}W_iY_i(1) - \frac{n}{n_\text{c}}(1-W_i)Y_i(0)\right) 
+& \text{SUTVA}\\[5pt]
+
 \end{align}
 $$
+
+
 Imbens and Rubin suggest working with a centered treatment indicator to simplify the variance calculation. So let's define
 $$
 D_i = W_i - \frac{n_t}{n} = 
@@ -108,7 +122,9 @@ P_{W} = (D_{i} \times D_{j}) =
 \end{cases}
 $$
 
-leading to:
+How can we calculate the elements of $P_W$? For the first case where $W_i = W_j = 1$, we know from the definition that $D_i = \frac{n_c}{n}$ and $D_j = \frac{n_c}{n}$, which gives us $d = D_i \times D_j = \frac{n_c^2}{n^2}$. To find the probability, remember that $n_t$ is fixed, so that $P(W_i = 1) = \frac{n_t}{n}$ and $P(W_j = 1|W_i = 1) = \frac{n_t - 1}{n-1}$ (because with $i$ allocated to treatment, there is now one less slot). Multiplying gives us the result.
+
+The expected values of the cross-product distribution are: 
 
 $$ 
 E_W[D_i \times D_j] = 
@@ -143,13 +159,52 @@ E_W[D_i \times D_j]
 &= \frac{n_t (n_t - 1)}{n(n-1)} \frac{n_c^2}{n^2}
 - 2\frac{n_t n_c}{n(n-1)} \frac{n_t n_c}{n^2}
 + \frac{n_c (n_c - 1)}{n(n-1)} \frac{n_t^2}{n^2}\\[5pt]
+&= \frac{n_t(n_t - 1)n_c^2 - 2n_t^2 n_c^2 + n_c(n_c-1) n_t^2}{n^3(n-1)} \\[5pt]
+&= \frac{n_t^2 n_c^2 - n_t n_c^2 - 2n_t^2 n_c^2 + n_c^2 n_t^2 - n_c n_t^2}{n^3(n-1)} \\[5pt]
+&= \frac{- n_t n_c^2 - n_c n_t^2}{n^3(n-1)} \\[5pt]
+&= \frac{- n_t n_c (n_c + n_t)}{n^3(n-1)} \\[5pt]
+&= \frac{- n_t n_c n}{n^3(n-1)} \\[5pt]
+&= \frac{- n_t n_c}{n^2(n-1)} \\[5pt]
 \end{align}
 $$
 
-** == I'm here == **
+
+Expressing our difference-in-means estimator in terms of $D_i$ gives us:
 
 
 
+$$
+\begin{align}
+\hat{\tau}^{\text{dm}}
+
+&= \frac{1}{n}\sum_{i=1}^{n}\left(\frac{n}{n_\text{t}}W_iY_i(1) - \frac{n}{n_\text{c}}(1-W_i)Y_i(0)\right) 
+& \\[5pt]
+
+&= \frac{1}{n}\sum_{i=1}^{n}\left(\frac{n}{n_\text{t}}\left(D_i + \frac{n_t}{n}\right)Y_i(1) - \frac{n}{n_\text{c}}\left(1 - D_i - \frac{n_t}{n}\right))Y_i(0)\right)
+& \text{using } W_i = D_i + \frac{n_t}{n} \\[5pt]
+
+&= \frac{1}{n}\sum_{i=1}^{n}\left(\frac{n}{n_\text{t}}\left(D_i + \frac{n_t}{n}\right)Y_i(1) - \frac{n}{n_\text{c}}\left(\frac{n_c}{n} - D_i\right)Y_i(0)\right)
+& \\[5pt]
+
+&= \frac{1}{n}\sum_{i=1}^{n}\left(\left[Y_i(1) + \frac{n}{n_t}D_iY_i(1)\right] - \left[Y_i(0) - \frac{n}{n_c}D_iY_i(0)\right]\right)
+& \\[5pt]
+
+&= \frac{1}{n}\sum_{i=1}^{n}\left(Y_i(1) + \frac{n}{n_t}D_iY_i(1) - Y_i(0) + \frac{n}{n_c}D_iY_i(0)\right)
+& \\[5pt]
+
+&= \frac{1}{n}\sum_{i=1}^{n}\left(Y_i(1) - Y_i(0) + \frac{n}{n_t}D_iY_i(1)  + \frac{n}{n_c}D_iY_i(0)\right)
+& \\[5pt]
+
+&= \frac{1}{n}\sum_{i=1}^{n}\left(Y_i(1) - Y_i(0)\right) + \frac{1}{n}\sum_{i=1}^{n}D_i\left(\frac{n}{n_t}Y_i(1)  + \frac{n}{n_c}Y_i(0)\right)
+& \\[5pt]
+
+&= \tau + \frac{1}{n}\sum_{i=1}^{n}D_i\left(\frac{n}{n_t}Y_i(1)  + \frac{n}{n_c}Y_i(0)\right)
+& \\[5pt]
+
+\end{align}
+$$
+
+**I'm here -- check above and continue **
 
 Unbiasedness...
 
