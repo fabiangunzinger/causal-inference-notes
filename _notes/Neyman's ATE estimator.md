@@ -3,6 +3,8 @@
 
 - [[Mode of inference]] used throughout is randomisation-based rather than sampling-based: inference is directly justified by randomisation, not by assumption that sample of units in our experiment is a random sample of a larger population.
 
+This section contains a step-by-step version of the derivation covered in Appendix A of chapter 6 in @imbens2015causal. Their derivation is complete but can be hard to follow. This version here fills in the missing steps to make it easier to follow along, but it remains tedious.
+
 
 ## Estimand
 
@@ -40,16 +42,14 @@ $$
 $$
 
 
+
+To evaluate how useful an estimator is we generally have two questions: first, can we expect it to give us the right answer and, second, how precise is the answer we get. We tackle these in turn.
 ## Unbiasedness
 
-todo:
 Something we'll frequently use:
 $$
 1 - \frac{n_t}{n} = \frac{n}{n} - \frac{n_t}{n} = \frac{n - n_t}{n} = \frac{n_c}{n}
 $$
-
-
-This section contains a step-by-step version of the derivation covered in Appendix A of chapter 6 in @imbens2015causal. Their derivation is complete but can be hard to follow. This version here fills in the missing steps to make it easier to follow along, but it remains tedious.
 
 We start with the difference-in-means estimator as defined above and rewrite it in a form that will be more convenient to work with later
 
@@ -171,8 +171,6 @@ $$
 
 Expressing our difference-in-means estimator in terms of $D_i$ gives us:
 
-
-
 $$
 \begin{align}
 \hat{\tau}^{\text{dm}}
@@ -204,8 +202,25 @@ $$
 \end{align}
 $$
 
-**I'm here -- check above and continue **
+An estimator is unbiased if, in expectation, it equals the estimand of interest. To show that  $\hat{\tau}^{\text{dm}}$ is unbiased we thus need to show that  $\hat{\tau}^{\text{dm}} = \tau$.  Given that the potential outcomes are fixed (see @sec-modeofinference) and given that $E[D_i] = 0$ (as shown above), taking the expectation of the last expression above is all we need to do for this:
 
-Unbiasedness...
+$$
+\begin{align}
+\mathbb{E}\left[\hat{\tau}^{\text{dm}}\right]
+&= \mathbb{E}\left[\tau + \frac{1}{n}\sum_{i=1}^{n}D_i\left(\frac{n}{n_t}Y_i(1)  + \frac{n}{n_c}Y_i(0)\right)\right]\\[5pt]
+&= \mathbb{E}\left[\tau\right] + \mathbb{E}\left[\frac{1}{n}\sum_{i=1}^{n}D_i\left(\frac{n}{n_t}Y_i(1)  + \frac{n}{n_c}Y_i(0)\right)\right]
+& \text{Linearity of } \mathbb{E}\\[5pt]
+&= \tau + \mathbb{E}[D_i]\left[\frac{1}{n}\sum_{i=1}^{n}\left(\frac{n}{n_t}Y_i(1)  + \frac{n}{n_c}Y_i(0)\right)\right]
+& \tau, n, n_t, n_c, Y_i(1), Y_i(0) \text{ are fixed} \\[5pt]
+&= \tau
+& \mathbb{E}[D_i] = 0
+\end{align}
+$$
 
-Variance ... (app 6.A)
+
+The above result reassures us that we get the right result on average, and that our estimates will not be systematically wrong (or *biased*).
+
+The next question is how precise our estimate it.
+
+## Variance
+
