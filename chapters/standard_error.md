@@ -1,15 +1,14 @@
 # Standard error {#sec-standard-error}
 
-- In this section, we'll derive the standard error of our treatment effect estimator $\tee$.
+- In this section, we'll derive the standard error of our treatment effect estimator $\hat{\tau}$.
 
-- Our treatment effect estimate, $\hat{\tau}$, is a random variable because sampling and
-treatment assignment are random.
+- Our treatment effect estimate, $\hat{\tau}$, is a random variable because treatment assignment is random.
 
-- This means that if we were to repeat the same experiment many times we'd get a slightly different value for $\hat{\tau}$ each time.
+- This means that if we were to repeat the same experiment many times we'd get a different value for $\hat{\tau}$ each time.
 
-- The distribution of all these values is called the sampling distribution of $\tee$. 
+- The distribution of all these values is called the randomisation distribution of $\hat{\tau}$. 
 
-- We know a few things about that distribution. From the central limit theorem we know that its shape is Normal (see @sec-stats-foundations). Above we have shown above that the distribution has mean $\te$, which means our estimator is unbiased. Naturally, the distribution also has a standard deviation. Because it is a sampling distribution, that standard deviation is called the standard error. But it is still a standard deviation, and is thus defined as the square root of the variance. 
+- We know a few things about that distribution. From the central limit theorem we know that its shape is Normal (see @sec-stats-foundations). Above we have shown that the distribution has mean $\te$, which means our estimator is unbiased. Naturally, the distribution also has a standard deviation. Because it is a sampling distribution, that standard deviation is called the standard error. But it is still a standard deviation, and is thus defined as the square root of the variance. 
 
 - We'll thus find the standard error as follows: we first derive the variance of the treatment estimate, then find a way to estimate that variance, and then take the square root of that estimate to get the standard error.
 

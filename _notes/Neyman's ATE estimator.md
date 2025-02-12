@@ -41,15 +41,9 @@ $$
 \bar{Y}_t = \frac{1}{n_t}\sum_{i:W_i=1} Y_i \qquad \bar{Y}_c = \frac{1}{n_c}\sum_{i:W_i=0} Y_i
 $$
 
+To evaluate how useful an estimator is we generally have two questions: whether we can expect the right answer on average and how precise that answer is. We tackle these in turn.
 
-
-To evaluate how useful an estimator is we generally have two questions: first, can we expect it to give us the right answer and, second, how precise is the answer we get. We tackle these in turn.
-## Unbiasedness
-
-Something we'll frequently use:
-$$
-1 - \frac{n_t}{n} = \frac{n}{n} - \frac{n_t}{n} = \frac{n - n_t}{n} = \frac{n_c}{n}
-$$
+To do this, we rewrite the estimator in a form that will be more convenient to work with later.
 
 We start with the difference-in-means estimator as defined above and rewrite it in a form that will be more convenient to work with later
 
@@ -72,6 +66,11 @@ $$
 \end{align}
 $$
 
+
+Something we'll frequently use:
+$$
+1 - \frac{n_t}{n} = \frac{n}{n} - \frac{n_t}{n} = \frac{n - n_t}{n} = \frac{n_c}{n}
+$$
 
 Imbens and Rubin suggest working with a centered treatment indicator to simplify the variance calculation. So let's define
 $$
@@ -202,7 +201,11 @@ $$
 \end{align}
 $$
 
-An estimator is unbiased if, in expectation, it equals the estimand of interest. To show that  $\hat{\tau}^{\text{dm}}$ is unbiased we thus need to show that  $\hat{\tau}^{\text{dm}} = \tau$.  Given that the potential outcomes are fixed (see @sec-modeofinference) and given that $E[D_i] = 0$ (as shown above), taking the expectation of the last expression above is all we need to do for this:
+{#eq-neyman-two-parts}
+
+## Unbiasedness
+
+An estimator is unbiased if, in expectation, it equals the estimand of interest. To show that  $\hat{\tau}^{\text{dm}}$ is unbiased we thus need to show that  $\hat{\tau}^{\text{dm}} = \tau$.  Given that the potential outcomes are fixed (see @sec-modeofinference) and given that $E[D_i] = 0$ (as shown above), taking the expectation of @eq-neyman-two-parts is all we need to do for this:[^fixed_values]
 
 $$
 \begin{align}
@@ -216,11 +219,89 @@ $$
 & \mathbb{E}[D_i] = 0
 \end{align}
 $$
-
+{#eq-neyman-unbiased}
 
 The above result reassures us that we get the right result on average, and that our estimates will not be systematically wrong (or *biased*).
 
 The next question is how precise our estimate it.
 
 ## Variance
+
+We again start from @eq-neyman-two-parts:
+
+$$
+\begin{align}
+\hat{\tau}^{\text{dm}} 
+&= \tau + \frac{1}{n}\sum_{i=1}^{n}D_i\left(\frac{n}{n_t}Y_i(1)  + \frac{n}{n_c}Y_i(0)\right)
+\end{align}
+$$
+The only random element is $D_i$, the variance is equal to the second term. To simplify the notation, we define:
+
+$$
+Y_i^+ = \frac{n}{n_t}Y_i(1)  + \frac{n}{n_c}Y_i(0) 
+$$
+So that we can write:
+
+$$
+\begin{align}
+\mathbb{V}\left(\hat{\tau}^{\text{dm}}\right)
+&= \mathbb{V}\left(\tau + \frac{1}{n}\sum_{i=1}^{n}D_i\left(\frac{n}{n_t}Y_i(1)  + \frac{n}{n_c}Y_i(0)\right)\right)\\[5pt]
+&= \mathbb{V}\left(\frac{1}{n}\sum_{i=1}^{n}D_i\left(\frac{n}{n_t}Y_i(1)  + \frac{n}{n_c}Y_i(0)\right)\right)\\[5pt]
+&= \mathbb{V}\left(\frac{1}{n}\sum_{i=1}^{n}D_iY_i^+\right)\\[5pt]
+&= \frac{1}{n^2}\mathbb{V}\left(\sum_{i=1}^{n}D_iY_i^+\right)\\[5pt]
+&= \frac{1}{n^2}\mathbb{E}\left[\left(\sum_{i=1}^{n}D_iY_i^+ - \mathbb{E}\left[\sum_{i=1}^{n}D_iY_i^+\right]\right)^2\right] & \mathbb{V}(X) = E[(X - E[X])^2]\\[5pt]
+&= \frac{1}{n^2}\mathbb{E}\left[\left(\sum_{i=1}^{n}D_iY_i^+\right)^2\right] & \mathbb{E}\left[\sum_{i=1}^{n}D_iY_i^+\right]=0 \\[5pt]
+\end{align}
+$$
+
+
+This is our starting point. Expanding the expression and doing a lot of algebra, we get:
+
+$$
+\begin{align}
+\mathbb{V}\left(\hat{\tau}^{\text{dm}}\right)
+
+&= \frac{1}{n^2}\mathbb{E}\left[\left(\sum_{i=1}^{n}D_iY_i^+\right)^2\right] \\[5pt]
+
+&= \frac{1}{n^2}\mathbb{E}\left[\left(\sum_{i=1}^{n}D_iY_i^+\right)\left(\sum_{j=1}^{n}D_jY_j^+\right)\right] \\[5pt]
+
+&= \frac{1}{n^2}\mathbb{E}\left[\sum_{i=1}^{n}\sum_{j=1}^{n}D_iY_i^+D_jY_j^+\right] & \text{distributive property of sum}\\[5pt]
+
+&= \frac{1}{n^2}\mathbb{E}\left[\sum_{i=1}^{n}D_i^2(Y_i^+)^2\right]
++ \frac{1}{n^2}\mathbb{E}\left[\sum_{i=1}^{n}\sum_{i\neq j}D_iY_i^+D_jY_j^+\right] \\[5pt]
+
+&= \frac{1}{n^2}\sum_{i=1}^{n}(Y_i^+)^2\mathbb{E}\left[D_i^2\right]
++ \frac{1}{n^2}\sum_{i=1}^{n}\sum_{i\neq j}Y_i^+Y_j^+\mathbb{E}\left[D_iD_j\right] \\[5pt]
+
+&= \frac{1}{n^2}\sum_{i=1}^{n}(Y_i^+)^2\left(\frac{n_t n_c}{n^2}\right)
++ \frac{1}{n^2}\sum_{i=1}^{n}\sum_{i\neq j}Y_i^+Y_j^+
+\left( -\frac{n_t n_c}{n^2 (n-1)}\right) & \text{properties of } D_i\\[5pt]
+
+&= \frac{n_t n_c}{n^4}\sum_{i=1}^{n}(Y_i^+)^2
+- \frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}\sum_{i\neq j}Y_i^+Y_j^+
+ \\[5pt]
+
+
+&= \frac{n_t n_c}{n^4}\sum_{i=1}^{n}(Y_i^+)^2
+
+- \frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}\sum_{i\neq j}Y_i^+Y_j^+  \\[5pt]
+
+ 
+&\qquad +\left(\frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}\sum_{i=j}Y_i^+Y_j^+\right)
+
+- \left(\frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}\sum_{i=j}Y_i^+Y_j^+\right)
+ 
+ 
+
+
+
+\end{align}
+$$
+
+
+
+
+
+
+[^fixed_values]: We need sample sized and potential outcomes to be fixed so that $\mathbb{E}[D_i n] = \mathbb{E}[D_i]\mathbb{E}[n]$, which is not true in general. It is true if $D_i$ and $n$ are independent, and one way to ensure they are independent is for $n$ and all other variables within the sum to be constants.
 
