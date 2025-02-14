@@ -279,27 +279,88 @@ $$
 
 &= \frac{n_t n_c}{n^4}\sum_{i=1}^{n}(Y_i^+)^2
 - \frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}\sum_{i\neq j}Y_i^+Y_j^+
- \\[5pt]
+\end{align}
+$$
 
+The next step requires some involved manipulation of both terms on the right hand side, which we're going to do step-by-step, focusing on one term at a time.
 
-&= \frac{n_t n_c}{n^4}\sum_{i=1}^{n}(Y_i^+)^2
+We start with the first of those terms. The complement of the second term on the right is $\left(\frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}\sum_{i=j}Y_i^+Y_j^+\right)$, which we now add and subtract to get
 
-- \frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}\sum_{i\neq j}Y_i^+Y_j^+  \\[5pt]
-
- 
-&\qquad +\left(\frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}\sum_{i=j}Y_i^+Y_j^+\right)
-
-- \left(\frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}\sum_{i=j}Y_i^+Y_j^+\right)
- 
- 
-
-
-
+$$
+\begin{align}
+\mathbb{V}\left(\hat{\tau}^{\text{dm}}\right)
+&= \underbrace{\frac{n_t n_c}{n^4}\sum_{i=1}^{n}(Y_i^+)^2}_\text{A}
+- \underbrace{\frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}\sum_{i\neq j}Y_i^+Y_j^+}_\text{B}  \\[5pt]
+&\qquad 
++\underbrace{\left(\frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}\sum_{i=j}Y_i^+Y_j^+\right)}_\text{C}
+- \underbrace{\left(\frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}\sum_{i=j}Y_i^+Y_j^+\right)}_\text{D}.
 \end{align}
 $$
 
 
+Now, using the fact that
+$$
+\sum_{i=1}^{n}\sum_{i=j}Y_i^+Y_j^+ = \sum_{i=1}^{n}(Y_i^+)^2,
+$$
+we replace $C$ we artificially added above, add it to $A$, and bring the fractions to a common denominator to get:
 
+$$
+\begin{align}
+\mathbb{V}\left(\hat{\tau}^{\text{dm}}\right)
+&= \underbrace{\frac{n_t n_c}{n^4}\sum_{i=1}^{n}(Y_i^+)^2}_\text{A}
++\underbrace{\left(\frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}\sum_{i=j}Y_i^+Y_j^+\right)}_\text{C}
+- \text{B} - \text{D} \\[5pt]
+
+&= \underbrace{\frac{n_t n_c}{n^4}\sum_{i=1}^{n}(Y_i^+)^2}_\text{A}
++\underbrace{\left(\frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}(Y_i^+)^2\right)}_\text{C}
+- \text{B} - \text{D} \\[5pt]
+
+&= \left(\frac{n_t n_c}{n^4} + \frac{n_t n_c}{n^4 (n-1)}\right)\sum_{i=1}^{n}(Y_i^+)^2
+- \text{B} - \text{D} \\[5pt]
+
+&= \left(\frac{(n-1) n_t n_c + n_t n_c}{n^4 (n-1)}\right)\sum_{i=1}^{n}(Y_i^+)^2
+- \text{B} - \text{D} \\[5pt]
+
+&= \left(\frac{n_t n_c}{n^3 (n-1)}\right)\sum_{i=1}^{n}(Y_i^+)^2
+- \text{B} - \text{D} \\[5pt]
+\end{align}
+$$
+
+
+That gives us the new version of the first term we need.
+
+**Next, the second term, B above -- I'm here**
+
+
+Finally, using the fact that 
+
+$$
+\sum_{i=1}^{n}\sum_{i\neq j}Y_i^+Y_j^+ 
++ \sum_{i=1}^{n}\sum_{i=j}Y_i^+Y_j^+
+= \sum_{i=1}^{n}\sum_{j=1}^{n}Y_i^+Y_j^+,
+$$
+we rewrite combine the last two terms to get:
+
+
+
+
+
+$$
+\begin{align}
+\mathbb{V}\left(\hat{\tau}^{\text{dm}}\right)
+
+
+
+&= \left(\frac{n_t n_c}{n^4} + \frac{n_t n_c}{n^4 (n-1)}\right)\sum_{i=1}^{n}(Y_i^+)^2
+- \frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}\sum_{j=1}^{n}Y_i^+Y_j^+  \\[5pt]
+
+&=\frac{(n-1)n_t n_c + n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}(Y_i^+)^2
+- \frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}\sum_{j=1}^{n}Y_i^+Y_j^+  \\[5pt]
+
+&=\frac{n_t n_c}{n^3 (n-1)}\sum_{i=1}^{n}(Y_i^+)^2
+- \frac{n_t n_c}{n^4 (n-1)}\sum_{i=1}^{n}\sum_{j=1}^{n}Y_i^+Y_j^+  \\[5pt]
+\end{align}
+$$
 
 
 
